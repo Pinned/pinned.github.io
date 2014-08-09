@@ -1,0 +1,9 @@
+highlighter: pygments
+markdown: redcarpet
+redcarpet:
+    extensions: ["fenced_code_blocks", "tables", "highlight", "strikethrough"]
+author: knero
+pygments: true
+safe: true
+paginate: 16
+auto: true
