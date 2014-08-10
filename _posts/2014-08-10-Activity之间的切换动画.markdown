@@ -68,7 +68,7 @@ Animation 是提供给Android UI界面实现动画效果的一系统的API，And
 
 在看到[环信](http://www.easemob.com/)提供的Demo过后，我才发现动画还可以通过Style来配置，
 具体写法如下：
-```xml
+```html
     <style name="AnimFade" parent="@android:style/Animation.Activity">
         <item name="android:activityOpenEnterAnimation">@anim/slide_in_from_right</item>
         <item name="android:activityOpenExitAnimation">@anim/slide_out_to_left</item>
