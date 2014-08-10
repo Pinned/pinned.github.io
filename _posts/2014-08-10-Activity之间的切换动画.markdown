@@ -1,0 +1,78 @@
+---
+layout: post
+styles: [syntax]
+title: Activity之间的切换动画
+category: Android
+---
+
+## 动画Animation
+---
+Animation 是提供给Android UI界面实现动画效果的一系统的API，Android 提供了一系列的动画：
+> - Tweened Animation
+
+> - Frame Animation
+
+> - Property Animation
+
+具体有关Animation的信息可以去看这位大神写的 -> [传送门](http://blog.csdn.net/singwhatiwanna/article/details/9270275)
+
+他一共写了四篇文章，可以详细阅读一下。
+
+## Activity切换
+---
+当我们要从一个Activity跳转到另一个Activity的时候，我们会使用如下代码来完成我们想要的功能：
+
+```java
+    Intent intent = new Intent(AActivity.this,BActivity.class);
+    //在这个地方写你要传递的参数
+    this.startActivity(intent);
+```
+
+按上面的方法写出来的代码，Activity之间的切换是按照系统默认的方式来进行切换的。
+那我们要如何来使用自己想要的动画来进行不同界面之间的切换呢？当然，Android给我们提供了方法的。
+我们来看下面的代码：
+
+```java
+    /** 
+     * 对下面这个方法的官方解释如下，版本从2.0后开始哦 
+     * Call immediately after one of the flavors of startActivity(Intent) or finish()  
+     * to specify an explicit transition animation to perform next. 
+     * 用工具查到解释为： 
+     *   在startActivity(Intent)或finish()之法之后调用后，会立即用一个指定的描述动画的XML文件来执行 
+     *   下一个Activity  
+     *  
+     * 下面两句是对这个方法两个参数的解释,在此之前小马也看了下别人讲的， 
+     * 其实是错的，看官方的解释肯定没错，不懂英语的用工具查下 
+     * 小马一直都说的，我英语很烂，我能查的你一定也能查得到 
+     * 1.enterAnim  A resource ID of the animation resource  
+     *              to use for the incoming activity. Use 0 for no animation. 
+     * 2.exitAnim   A resource ID of the animation resource  
+     *              to use for the outgoing activity. Use 0 for no animation. 
+     * 一：进入动画  一个动画资源，用于目标Activity 进入屏幕时的动画，此处写0代表无动画 
+     * 二：退出动画  一个动画资源，用于当前Activity 退出屏幕时的动画，此处写0代表无动画 
+     *  
+     * 这个目标、当前怎么理解？比如：startActivity( A（当前）--> B（目标）) 《finish()一样》 
+     * 下面参数中有一个为0，就表示A退出时无动画...一定把参数搞清楚，不然动画就搞晕了 
+     * overridePendingTransition(R.anim.zoom_enter, 0);   
+     * 方法两个参数与目标、当前Activity对应关系如效果下方绿色图所示 
+     */ 
+    overridePendingTransition(R.anim.zoom_enter, R.anim.zoom_exit); 
+```
+
+就是把上面这句话放到`startActivity(intent)`这句话后面就可以实现动画了.
+
+## Activity动画切换的另一种方式
+
+上面的方法固然可以来进行动画切换，但是在Java代码中进行控制，我感觉不怎么优雅，并且经常会忘记
+写这句话，动画效果就没有了。
+
+在看到[环信](http://www.easemob.com/)提供的Demo过后，我才发现动画还可以通过Style来配置，
+具体写法如下：
+```xml
+    <style name="AnimFade" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/slide_in_from_right</item>
+        <item name="android:activityOpenExitAnimation">@anim/slide_out_to_left</item>
+        <item name="android:activityCloseExitAnimation">@anim/slide_out_to_right</item>
+        <item name="android:activityCloseEnterAnimation">@anim/slide_in_from_left</item>
+    </style>
+```
