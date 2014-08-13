@@ -2,7 +2,7 @@
 layout: post
 styles: [syntax]
 title: Activity之间的切换动画
-categories: android
+category: android
 ---
 
 ## 动画Animation
