@@ -28,11 +28,12 @@ Fiddler 要比其他的网络调试器要更加简单，因为它仅仅暴露htt
    上面这个是模拟器设置，如果你用的是Genymotion的模拟器，便和真机设置一样;
 
    > PS：如果用真机，要保证真机和PC在同一个局域网类（在这里，我用的是Wifi）
-    
-    ![step 6](../../../assets/img/2014-08-13/step_06.png)
-    ![step 7](../../../assets/img/2014-08-13/step_07.png)
 
-    ![step 8](../../../assets/img/2014-08-13/step_08.png)
+
+  ![step 6](../../../assets/img/2014-08-13/step_06.png)
+  ![step 7](../../../assets/img/2014-08-13/step_07.png)
+
+  ![step 8](../../../assets/img/2014-08-13/step_08.png)
 
 3. 设置Fiddler
 	这一步是非常重要的一步，打开Fiddler, 选择`Tools -> Fiddler Options...` ，然后选择`Connections`选项卡,勾选`Allow remote computers to connect`,
