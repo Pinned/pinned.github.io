@@ -2,6 +2,7 @@
 layout: post
 styles: [syntax]
 title: Andorid JUnit 单元测试
+category: android
 ---
 
 ## Andorid JUnit单元测试
