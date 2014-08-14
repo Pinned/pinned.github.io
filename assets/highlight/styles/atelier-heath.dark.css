@@ -4,6 +4,7 @@
 /* https://github.com/jmblog/color-themes-for-highlightjs */
 
 /* Atelier Heath Dark Comment */
+
 .hljs-comment,
 .hljs-title {
   color: #9e8f9e;
@@ -91,4 +92,8 @@
 .xml .css,
 .xml .hljs-cdata {
   opacity: 0.5;
+}
+
+.hljs {
+  font-size: 13px;
 }
