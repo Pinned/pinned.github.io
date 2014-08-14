@@ -92,3 +92,6 @@
 .xml .hljs-cdata {
   opacity: 0.5;
 }
+.hljs {
+  font-size: 13px;
+}
