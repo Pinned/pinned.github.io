@@ -28,7 +28,7 @@ category: android
 
 如下图所式：
 
-![step](../../../assets/img/2014-08-18/step.jpg)
+![step](../../../../assets/img/2014-08-18/step.jpg)
 
 ## .9 图中使用的注意事项
 
