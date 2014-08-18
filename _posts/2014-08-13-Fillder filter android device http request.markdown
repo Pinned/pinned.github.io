@@ -18,16 +18,19 @@ Fiddler 要比其他的网络调试器要更加简单，因为它仅仅暴露htt
 1. 当然，第一件事情就是要确保你电脑上安装了Fiddler,如没有，请下载安装.[下载地址](http://www.telerik.com/download/fiddler)
 
 2. 打开你的Android模拟器，依次点击 Setting -> More... -> Mobile networks -> Access Point Name
-    ![step 1](../../../assets/img/2014-08-13/step_01.png)
-    ![step 2](../../../assets/img/2014-08-13/step_02.png)
-    ![step 3](../../../assets/img/2014-08-13/step_03.png)
-    ![step 4](../../../assets/img/2014-08-13/step_04.png)
-    ![step 5](../../../assets/img/2014-08-13/step_05.png)
+    
+    ![step 1](../../../../assets/img/2014-08-13/step_01.png)
+    ![step 2](../../../../assets/img/2014-08-13/step_02.png)
+    ![step 3](../../../../assets/img/2014-08-13/step_03.png)
+    ![step 4](../../../../assets/img/2014-08-13/step_04.png)
+    ![step 5](../../../../assets/img/2014-08-13/step_05.png)
 
    上面这个是模拟器设置，如果你用的是Genymotion的模拟器，便和真机设置一样;
-   ![step 6](../../../assets/img/2014-08-13/step_06.png)
-   ![step 7](../../../assets/img/2014-08-13/step_07.png)
-   ![step 8](../../../assets/img/2014-08-13/step_08.png)
+   
+   ![step 6](../../../../assets/img/2014-08-13/step_06.png)
+   ![step 7](../../../../assets/img/2014-08-13/step_07.png)
+   ![step 7](../../../../assets/img/2014-08-13/step_07.png)
+   ![step 8](../../../../assets/img/2014-08-13/step_08.png)
    
    > PS：如果用真机，要保证真机和PC在同一个局域网类（在这里，我用的是Wifi）
 
