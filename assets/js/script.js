@@ -13,7 +13,7 @@ if ($(window).width() <= 1280) {
 // Variables
     tag1       = $('.pl__all'),
     tag2       = $('.android'),
-    tag3       = $('.place_your_tag_name_here'),
+    tag3       = $('.tools_using'),
     tag4       = $('.place_your_tag_name_here'),
     tag5       = $('.place_your_tag_name_here'),
     tag6       = $('.place_your_tag_name_here');
