@@ -42,7 +42,7 @@ title: 在windos下面使用多个ssh_key
 
 上面配置完成，便可以测试一下是否配置成功：
 
-    `ssh -T github.com`
+    `ssh -T git@github.com`
     
 如果你连接成功，则可以看到:
     Hi Pinned! You've successfully authenticated, but GitHub does not provide shell access.
