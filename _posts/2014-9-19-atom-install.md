@@ -11,22 +11,22 @@ category: tools_using
 所以装了一个Atom。用了一下，还可以。
 
 1. Clone the Atom repository:
-  ```shell
+  ```xml
   git clone https://github.com/atom/atom
   cd atom
   ```
 2. Build Atom
-  ```shell
+  ```xml
   script/build
   ```
   This will create the atom application at $TMPDIR/atom-build/Atom.
 
 3. Install the atom and apm commands to /usr/local/bin by executing:
-  ```shell
+  ```xml
   sudo script/grunt install
   ```
 4. Optionally, you may generate a .deb package at $TMPDIR/atom-build:
-  ```shell
+  ```xml
   script/grunt mkdeb
   ```
 
@@ -45,6 +45,6 @@ category: tools_using
 Nodejs的位置的问题。
 
 解决办法：
-```shell
+```xml
 ln -s /usr/local/node/bin/node /usr/bin/node
 ```
