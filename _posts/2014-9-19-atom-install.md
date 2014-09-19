@@ -1,7 +1,7 @@
 ---
 layout: post
 styles: [syntax]
-title: 安装Ubuntu单系统
+title: Ubuntu 14.04 安装Atom编辑器
 category: tools_using
 ---
 
