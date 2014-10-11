@@ -4,21 +4,21 @@ layout: nil
 <?xml version="1.0"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>place_your_blog_title_here</title>
-    <link>place_your_blog_url_here</link>
-    <atom:link href="place_your_blog_url_here/rss.xml" rel="self" type="application/rss+xml" />
-    <description>place_your_blog_description_here</description>
-    <language>place_your_blog_language_here</language>
+    <title>事必躬行</title>
+    <link>http://pinned.github.io</link>
+    <atom:link href="http://pinned.github.io/rss.xml" rel="self" type="application/rss+xml" />
+    <description>记录自己的一个bug，</description>
+    <language>中文</language>
     <pubDate>{{ site.time | date: "%a, %d %b %Y %H:%M:%S %z" }}</pubDate>
     <lastBuildDate>{{ site.time | date: "%a, %d %b %Y %H:%M:%S %z" }}</lastBuildDate>
 
     {% for post in site.posts limit:10 %}
     <item>
       <title>{{ post.title }}</title>
-      <link>place_your_blog_url_here{{ post.url }}</link>
+      <link>http://pinned.github.io/{{ post.url }}</link>
       <pubDate>{{ post.date | date_to_string }}</pubDate>
-      <author>place_your_name_here</author>
-      <guid>place_your_blog_url_here{{ post.id }}</guid>
+      <author>pinned</author>
+      <guid>http://pinned.github.io/{{ post.id }}</guid>
       <description>{{ post.content | xml_escape }}</description>
     </item>
     {% endfor %}
