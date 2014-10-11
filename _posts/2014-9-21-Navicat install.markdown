@@ -31,7 +31,7 @@ Navicat来使用。
 
 然后执行命令:
 
-```shell
+```xml
 sudo apt-get install libgtk2.0-0:i386
 sudo apt-get -f install
 sudo apt-get install wine
