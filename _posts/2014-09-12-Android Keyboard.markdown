@@ -14,10 +14,13 @@ category: android
 只需要在`AndroidMainfest.xml`的对应Activity中加入对应的参数：
 
 1. 显示：
+
 ```xml
 android:windowSoftInputMode = "stateVisible"
 ```  
+
 2. 不显示:
+
 ```xml
 android:windowSoftInputMode = "stateHidden"
 ```  
