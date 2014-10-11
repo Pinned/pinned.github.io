@@ -37,14 +37,14 @@ notificationManager.notify(notificationId, notification);
 
 可是问题来了，在做点击事件的时候，跳转出现了问题。
 
-** 问题描述 **
+**问题描述**
 
 因为没一个Notification的NotificationId都不一样，所以，每一次都会添加一个Notification到状态栏。
 从上面的代码可以看出，所有的Notification的点击事件都指向了`OtherActivity`。
 当状态栏上有多个Notification的时候并且我们退出了应用程序，这时候，点击其中一条Notification，会
 启动`OtherActivity`, 问题来了，我在点击其它的Notification的时候,就没有任何响应。
 
-** 解决办法 **
+**解决办法**
 
 经过一番查找过后，还是没有找到解决办法。最后问了一下同事，解决方法简单的出乎我的意料。如下代码：
 
@@ -58,7 +58,7 @@ intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
 贴上我的代码地址:[下载地址](https://github.com/Pinned/NotificationDemo)
 
-** 注意事项 **
+**注意事项**
 
  + 当有多个Notification的时候，Notification的跳转事件被最新的一个Notification覆盖了。
     - **原因**
@@ -91,7 +91,7 @@ intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
     > ps: LED 显示只有在熄屏的时候才有效果， 一定要给震动加上权限
 
 
-** 参考资料 **
+**参考资料**
 
 1. [intent.setFlags方法中的参数值含义](http://blog.csdn.net/berber78/article/details/7278408)
 2. [同时显示多个Notification时PendingIntent的Intent被覆盖？](http://univasity.iteye.com/blog/1390445)
