@@ -1,7 +1,7 @@
 ---
 layout: post
 styles: [syntax]
-title: Eclipse中快速打开文件夹
+title: Ubuntu 下安装Navicat
 category: tools_using
 ---
 
