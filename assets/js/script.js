@@ -130,3 +130,7 @@ function afterPjax() {
   });
 }
 afterPjax();
+
+window.onload= function() {
+    hljs.initHighlightingOnLoad();
+}
