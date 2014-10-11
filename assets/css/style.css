@@ -408,7 +408,7 @@ h1, h2, h3, h4, h5, h6 {
 #post__content li > p {
   margin: 0; }
 #post__content a {
-  color: #7d8b99;
+  color: #5BA4E5;
   word-break: break-all; }
   #post__content a:hover {
     text-decoration: underline; }
@@ -424,7 +424,7 @@ strong {
 blockquote {
   margin: 1.5em 0 1.5em 2em;
   padding-left: .5em;
-  border-left: 5px solid #e5e8ec; }
+  border-left: 10px solid #D6DBDF; }
 
 kbd {
   padding: .2em .3em .1em;
