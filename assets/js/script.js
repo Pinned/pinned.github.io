@@ -79,7 +79,7 @@ $(document).on({
     content.css({'opacity':1}).removeClass('fadeOut').addClass('fadeIn');
     afterPjax();
     hljs.initHighlighting.called = false;
-    hljs.initHighlightingOnLoad();
+    hljs.initHighlighting();
   }
 });
 
