@@ -93,5 +93,13 @@
   opacity: 0.5;
 }
 .hljs {
-  font-size: 13px;
+  border-radius: 0px;
+}
+code {
+  border: 0;
+  background-color: #D6DBDF;
+  border-radius: 4px;
+  color: #2C3E50;
+  font-size: 80%;
+  padding: 2px 4px;
 }
