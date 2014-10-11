@@ -90,10 +90,9 @@ var CodePenEmbed={width:"100%",init:function(){this.showCodePenEmbeds(),this.lis
 function afterPjax() {
   // Open links in new tab
   $('#post__content a').attr('target','_blank');
-
+  hljs.initHighlightingOnLoad();
   // Embed codepen after pjax
   CodePenEmbed.init();
-
   // Generate post TOC for h1 h2 and h3
   var toc = $('#post__toc-ul');
   // Empty TOC and generate an entry for h1
