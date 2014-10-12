@@ -32,6 +32,7 @@ category: ubuntu
  + 安装显卡驱动和配置
 
  > 开机启动，在输入密码的界面停住，按`ctrl + alt + F2`进入控制台中：
+ >
  > 1. 重新安装fgirx
  >
  > `sudo apt-get install fglrx`
