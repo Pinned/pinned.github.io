@@ -1,11 +1,11 @@
 ---
 layout: post
 styles: [syntax]
-title: Android之Notification的使用
+title: Android之Notification的使用(一)
 category: android
 ---
 
-## Android之Notification的使用
+## Android之Notification的使用（一）
 
 
 在通知栏展示一些及时消息是一件非常常见的事情，相对来说，使用Notification也是一件很
@@ -56,7 +56,7 @@ intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 加`android:launchMode="singleTask"`就行了。
 
 
-贴上我的代码地址:[下载地址](https://github.com/Pinned/NotificationDemo)
+贴上我的代码地址:[下载地址NotificationDemo_01](https://github.com/Pinned/NotificationDemo)
 
 **注意事项**
 
