@@ -33,7 +33,7 @@ category: ubuntu
 
  > 开机启动，在输入密码的界面停住，按`ctrl + alt + F2`进入控制台中：
  >
- > 1. 重新安装fgirx
+ > + 重新安装fgirx
  >
  > `sudo apt-get install fglrx`
  >
@@ -42,7 +42,7 @@ category: ubuntu
  > 或者 `sudo apt-get install --reinstall ubuntu-desktop`
  > 重启过后，无效。继续后面的方法
  >
- > 2. 桌面文件授权
+ > + 桌面文件授权
  >
  > ` sudo chown lightdm:lightdm -R /var/lib/lightdm`
  >
@@ -52,7 +52,7 @@ category: ubuntu
  >
  > 使用无效
  >
- > 3. 重装显示驱动
+ > + 重装显示驱动
  >
  > 对于新的Nvidia二进制驱动：
  >
