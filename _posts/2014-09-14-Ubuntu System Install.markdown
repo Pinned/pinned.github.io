@@ -35,34 +35,34 @@ category: ubuntu
  >
  > + 重新安装fgirx
  >
- > `sudo apt-get install fglrx`
- >
- > `sudo reboot`
- >
- > 或者 `sudo apt-get install --reinstall ubuntu-desktop`
- > 重启过后，无效。继续后面的方法
+ > > `sudo apt-get install fglrx`
+ > >
+ > > `sudo reboot`
+ > >
+ > > 或者 `sudo apt-get install --reinstall ubuntu-desktop`
+ > > 重启过后，无效。继续后面的方法
  >
  > + 桌面文件授权
  >
- > ` sudo chown lightdm:lightdm -R /var/lib/lightdm`
- >
- > ` sudo chown avahi-autoipd:avahi-autoipd -R /var/lib/avahi-autoipd`
- >
- > ` sudo chown colord:colord -R /var/lib/colord`
- >
- > 使用无效
+ > > ` sudo chown lightdm:lightdm -R /var/lib/lightdm`
+ > >
+ > > ` sudo chown avahi-autoipd:avahi-autoipd -R /var/lib/avahi-autoipd`
+ > >
+ > > ` sudo chown colord:colord -R /var/lib/colord`
+ > >
+ > > 使用无效
  >
  > + 重装显示驱动
  >
- > 对于新的Nvidia二进制驱动：
- >
- > `sudo add-apt-repository ppa:ubuntu-x-swat/x-updates`
- >
- > `sudo apt-get update `
- >
- > `sudo apt-get install nvidia-current nvidia-settings`
- >
- > 重启，系统成功运行，无卡顿现象
+ > > 对于新的Nvidia二进制驱动：
+ > >
+ > > `sudo add-apt-repository ppa:ubuntu-x-swat/x-updates`
+ > >
+ > > `sudo apt-get update `
+ > >
+ > > `sudo apt-get install nvidia-current nvidia-settings`
+ > >
+ > > 重启，系统成功运行，无卡顿现象
 
 ### 记录
 + 对于新的ATI/AMD二进制驱动：
