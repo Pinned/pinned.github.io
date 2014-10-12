@@ -55,6 +55,7 @@ notificationManager.notify(notificationId, notification);
 虽然不知道是什么原因造成了这个问题，但是最终还是找到了解决方案：
 
 解决方法如下：
+
 ```java
 @Override
 protected void onNewIntent(Intent intent) {
