@@ -19,11 +19,12 @@ category: ubuntu
 
 + 系统重装到了13.04,我什么事情都没干，直接一个劲的把系统升级到14.04了。又出现了一个大大的问题。非常的严重。还好找到了解决办法。
  + 问题： 升级到了14.04后，开机卡屏，连鼠标都不能动，这怎么能行呢。然后我重启进了recovy模式，有一个选项好像是`图形安全模式`，进去看了一下，报了个`显卡驱动`的错误。查找百度，最后还是找到了解决方案。
- + 添加swap: 
+ + 添加swap:
+
  > + ` sudo dd if=/dev/zero of=/swap bs=1024 count=8`(从/分区中分出8×1024M大小的空间，挂在/swap分区中)
  > + ` mkswap /swap` (格式化成/swap格式)
  > + ` swapon /swap` (激活/swap，加入到swap分区中)
- > 
+ >
  > 执行以上步骤只会在这一次生效配置，如果要永久生效还须进行修改
  > + ` sudo vim /etc/fstab`(添加swap分区到开机启动中)
  >  --> `/swap swap swap defaults  0 0 ` (添加到文件中的语句)
@@ -32,7 +33,7 @@ category: ubuntu
  > 1. 重新安装fgirx
  > `sudo apt-get install fglrx`
  > `sudo reboot`
- > 或者 `sudo apt-get install --reinstall ubuntu-desktop` 
+ > 或者 `sudo apt-get install --reinstall ubuntu-desktop`
  > 重启过后，无效。继续后面的方法
  > 2. 桌面文件授权
  > ` sudo chown lightdm:lightdm -R /var/lib/lightdm`
@@ -48,11 +49,13 @@ category: ubuntu
 
 ### 记录
 + 对于新的ATI/AMD二进制驱动：
+
  > `sudo add-apt-repository ppa:ubuntu-x-swat/x-updates`
  > `sudo apt-get update `
  > `sudo apt-get install fglrx`
 
 + 如果机器上之前有一个老版本，请按如下来做
+
  > Nvidia 和 ATI/AMD 显卡的命令都一样：
  > `sudo add-apt-repository ppa:ubuntu-x-swat/x-updates`
  > `sudo apt-get update `
