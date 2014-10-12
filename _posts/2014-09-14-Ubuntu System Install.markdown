@@ -26,37 +26,57 @@ category: ubuntu
  > + ` swapon /swap` (激活/swap，加入到swap分区中)
  >
  > 执行以上步骤只会在这一次生效配置，如果要永久生效还须进行修改
- > + ` sudo vim /etc/fstab`(添加swap分区到开机启动中)
- >  --> `/swap swap swap defaults  0 0 ` (添加到文件中的语句)
+ > ` sudo vim /etc/fstab`(添加swap分区到开机启动中)
+ > --> `/swap swap swap defaults  0 0 ` (添加到文件中的语句)
+
  + 安装显卡驱动和配置
+
  > 开机启动，在输入密码的界面停住，按`ctrl + alt + F2`进入控制台中：
  > 1. 重新安装fgirx
+ >
  > `sudo apt-get install fglrx`
+ >
  > `sudo reboot`
+ >
  > 或者 `sudo apt-get install --reinstall ubuntu-desktop`
  > 重启过后，无效。继续后面的方法
+ >
  > 2. 桌面文件授权
+ >
  > ` sudo chown lightdm:lightdm -R /var/lib/lightdm`
+ >
  > ` sudo chown avahi-autoipd:avahi-autoipd -R /var/lib/avahi-autoipd`
+ >
  > ` sudo chown colord:colord -R /var/lib/colord`
+ >
  > 使用无效
+ >
  > 3. 重装显示驱动
+ >
  > 对于新的Nvidia二进制驱动：
+ >
  > `sudo add-apt-repository ppa:ubuntu-x-swat/x-updates`
+ >
  > `sudo apt-get update `
+ >
  > `sudo apt-get install nvidia-current nvidia-settings`
+ >
  > 重启，系统成功运行，无卡顿现象
 
 ### 记录
 + 对于新的ATI/AMD二进制驱动：
-
  > `sudo add-apt-repository ppa:ubuntu-x-swat/x-updates`
+ >
  > `sudo apt-get update `
+ >
  > `sudo apt-get install fglrx`
+ >
 
 + 如果机器上之前有一个老版本，请按如下来做
-
  > Nvidia 和 ATI/AMD 显卡的命令都一样：
+ >
  > `sudo add-apt-repository ppa:ubuntu-x-swat/x-updates`
+ >
  > `sudo apt-get update `
+ >
  > `sudo apt-get upgrade`
