@@ -158,7 +158,7 @@ navigator.geolocation.clearWatch(watch_position_id)
 
 **参考资料**
 
-【1】 [Android WebView常见问题及解决方案汇总](http://blog.csdn.net/t12x3456/article/details/13769731)
-【2】 [android webview geolocation](http://stackoverflow.com/questions/5329662/android-webview-geolocation)
-【3】 [利用HTML5开发Android](http://blog.csdn.net/eagelangel/article/details/8807723)
-【4】 [Android WebView](http://dev.wo.com.cn/docportal/doc_queryMdocDetail.action?mdoc.docindex=6130)
+1. [Android WebView常见问题及解决方案汇总](http://blog.csdn.net/t12x3456/article/details/13769731)
+2. [android webview geolocation](http://stackoverflow.com/questions/5329662/android-webview-geolocation)
+3. [利用HTML5开发Android](http://blog.csdn.net/eagelangel/article/details/8807723)
+4. [Android WebView](http://dev.wo.com.cn/docportal/doc_queryMdocDetail.action?mdoc.docindex=6130)
