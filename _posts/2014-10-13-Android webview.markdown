@@ -154,7 +154,7 @@ navigator.geolocation.clearWatch(watch_position_id)
 
 **最后结果**
 
-![result](./img-2014-10-13/device-2014-10-13-200631.png)
+![result](../../../../assets/posts/img-2014-10-13/device-2014-10-13-200631.png)
 
 **参考资料**
 
