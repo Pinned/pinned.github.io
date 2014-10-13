@@ -97,17 +97,17 @@ private void showLocalRemidPopupWindow(final String title, final GeoListener cal
 ```javascript
 //通过navigator.geolocation对象获取地理位置信息
 //常用的navigator.geolocation对象有以下三种方法：
-//获取当前地理位置   
+//获取当前地理位置
 navigator.geolocation.getCurrentPosition(
-        success_callback_function, 
-        error_callback_function, 
-        position_options)   
-//持续获取地理位置   
+        success_callback_function,
+        error_callback_function,
+        position_options)
+//持续获取地理位置
 navigator.geolocation.watchPosition(
-        success_callback_function, 
-        error_callback_function, 
-        position_options)   
-//清除持续获取地理位置事件   
+        success_callback_function,
+        error_callback_function,
+        position_options)
+//清除持续获取地理位置事件
 navigator.geolocation.clearWatch(watch_position_id)  
 ```
 
@@ -154,11 +154,11 @@ navigator.geolocation.clearWatch(watch_position_id)
 
 **最后结果**
 
-    ![result](./img-2014-10-13/device-2014-10-13-200631)
+![result](./img-2014-10-13/device-2014-10-13-200631.png)
 
 **参考资料**
 
-【1】 [Android WebView常见问题及解决方案汇总](http://blog.csdn.net/t12x3456/article/details/13769731) 
+【1】 [Android WebView常见问题及解决方案汇总](http://blog.csdn.net/t12x3456/article/details/13769731)
 【2】 [android webview geolocation](http://stackoverflow.com/questions/5329662/android-webview-geolocation)
 【3】 [利用HTML5开发Android](http://blog.csdn.net/eagelangel/article/details/8807723)
 【4】 [Android WebView](http://dev.wo.com.cn/docportal/doc_queryMdocDetail.action?mdoc.docindex=6130)
