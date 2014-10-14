@@ -912,12 +912,14 @@ iframe {
   -o-animation: spin 400ms linear infinite;
   animation: spin 400ms linear infinite; }
 
-/*!-------------------------------------
- * Syntax Colours
- * https://gist.github.com/edwardhotchkiss/2005058
- *
- * Theme based on prism.js Coy theme for JavaScript, CoffeeScript, CSS and HTML
- * @author Tim  Shedor
- * ------------------------------------- */
-/*! Modified by Peiwen Lu @ 30 Nov 2013 */
-/* Code blocks */
+
+/* blog page categories and postime */
+.link_categories {
+  float: left;
+}
+.article_manage {
+  padding: 5px 0;
+  color: #999;
+  font: normal 12px/24px Arial;
+  text-align: right;
+}

@@ -4,6 +4,12 @@ layout: index
 
 <article id="post__content">
   <h1 id="post__title" data-identifier="{{ page.date | date: "%Y%m%d" }}">{{ page.title }}</h1>
+  <div class="article_manage">
+        <span class="link_categories">
+        分类：<a href="">{{page.category}}</a>
+        </span>
+    <span class="link_postdate">{{ page.date | date: "%Y-%m-%d" }}</span>
+  </div>
   {{ content }}
 </article> <!-- end #post__content -->
 
