@@ -124,20 +124,22 @@ pre {
 }
 
 code.has-numbering {
-    margin-left: 21px;
+    margin-left: 30px;
 }
 
 .pre-numbering {
     position: absolute;
     top: 0;
     left: 0;
-    width: 20px;
-    padding: 12px 2px 12px 0;
     border-right: 1px solid #C3CCD0;
     border-radius: 3px 0 0 3px;
     background-color: #EEE;
     text-align: right;
     font-family: Menlo, monospace;
-    font-size: 0.8em;
+    width: 30px;
+    font-size: 80%;
+    list-style-type: none;
+    padding: 0.5em 0.5em 0 0;
+    margin:0;
     color: #AAA;
 }
