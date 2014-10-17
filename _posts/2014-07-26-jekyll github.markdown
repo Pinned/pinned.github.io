@@ -43,6 +43,7 @@ $ git commit -a -m 'init commit.'
 $ git remote add origin
 $ git push origin master
 ```
+
 现在你打开 username.github.com 就可以看到刚才新建的页面了，就是这么简单。当然也可以为你的Blog仓库绑定独立域名，具体做法就是：
 
 1. 在你的仓库中新建内容为 www.youdomain.com 的 CNAME 文件；
@@ -53,7 +54,6 @@ $ git push origin master
 接下来我们只需要按照自己的喜好设计页面。首先认识下Jekyll的文件及目录配置:
 
 ```shell
-  .
   |-- _includes
   |-- _plugins
   |-- _layout
@@ -64,7 +64,7 @@ $ git push origin master
   |   `-- yyyy-mm-dd-title.markdown
   |-- _site
   |-- _config.yml
-  `-- index.html
+  |-- index.html
 ```
 
 ## _includes
