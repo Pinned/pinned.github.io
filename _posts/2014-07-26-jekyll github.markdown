@@ -89,3 +89,50 @@ Jekyll自动生成的，所以可以忽略，如果你有在本地安装Jekyll�
 所有的HTML/Markdown/Textile文件都可以包含 YAML 配置，这类文件都会被Jekyll解析。
 
 现在你可以在自己的仓库中配置好你自己的目录及文件，也可以clone我的仓库，然后修改。
+
+```shell
+$ git clone https://github.com/taberhuang/taberhuang.github.com.git
+```
+
+修改完后就可以push你的代码到Github上，看到结果了。刚才有说到本地预览，如果你想在本地预览后，确保没错误再push的话，就需要在本地安装Jekyll，下面介绍下Jekyll的安装方法。
+
+一、安装Ruby运行环境和RubyGem:Windows用户只要下载 [RubyInstaller](http://rubyforge.org/frs/download.php/74298/rubyinstaller-1.9.2-p180.exe '点击下载')。下载安装后请手动升级gem.
+
+```shell
+$ gem update --system
+```
+
+二、安装DevKit。DevKit是windows平台编译和使用本地C/C++扩展包工具。用来模拟Linux平台下的 `make,gcc,sh` 进行编译。下载文件后，解压到 `C:\DevKit'，再通过命令行安装:
+
+```shell
+$ cd C:\DevKit
+$ ruby dk.rb init
+$ ruby dk.rb install
+```
+
+三、安装并检查刚才的DevKit安装是否成功。如果成功安装，则DevKit也就安装成功，如果不成功，请重新安装DevKit。
+
+```shell
+$ gem install jekyll
+```
+
+四、安装Rdiscount，这个是用来解析Markdown标记的解析包。如果你使用Textile的话，就是安装Kramdown。
+
+```shell
+$ gem install rdiscount
+```
+
+所有的环境和依赖包都安装成功后，进入你的仓库目录，用下面的命令便可启动Jekyll，并在本地预览了，预览地址默认为 `127.0.0.1:4000`，当然你也可以通过 _config.yml 配置:
+
+```shell
+jekyll --server
+```
+
+是不是很爽?
+
+#####参考及相关资料：
+
+- <http://pages.github.com/>
+- <https://github.com/mojombo/jekyll/wiki>
+- <http://blog.envylabs.com/2009/08/publishing-a-blog-with-github-pages-and-jekyll/>
+- <http://daringfireball.net/projects/markdown/syntax>
