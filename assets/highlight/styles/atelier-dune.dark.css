@@ -131,9 +131,9 @@ code.has-numbering {
     position: absolute;
     top: 0;
     left: 0;
-    border-right: 1px solid #C3CCD0;
+    border-right: 1px solid #CCCCD0;
     border-radius: 3px 0 0 3px;
-    background-color: #CCCCD0;
+    background-color: #292824;
     text-align: right;
     font-family: Menlo, monospace;
     width: 30px;
