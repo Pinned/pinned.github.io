@@ -11,7 +11,7 @@ Jekyll是一个使用Ruby编写的静态站点生成工具，使用Liquid模板�
 
 首先，创建你的 Blog 仓库 username(请确保跟你的账号名相同).github.com:
 
-```shell
+```xml
 $ mkdir username.github.com
 $ cd username.github.com
 ```
