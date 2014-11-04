@@ -1,7 +1,7 @@
 ---
 layout: post
 styles: [syntax]
-title: Android 项目中出现的奇葩bug, 数据NullPointExcption 
+title: Android 项目中出现的奇葩bug, 数据NullPointExcption
 category: android
 ---
 
@@ -41,9 +41,9 @@ private List<CityNode> mCitys;
 Class<? extends BaseFormElement> clazz = model.getType().getValue();
 BaseFormElement element = null;
 try {
-    Class[] parameterTypes = { Context.class, FormElementModel.class }; 
+    Class[] parameterTypes = { Context.class, FormElementModel.class };
     //根据参数类型获取相应的构造函数
-    Constructor<? extends BaseFormElement> constructor 
+    Constructor<? extends BaseFormElement> constructor
     		= clazz.getConstructor(parameterTypes);
     //参数数组
     Object[] parameters = { mContext, model };
@@ -65,7 +65,7 @@ try {
 根本就没有进行强制转换。
 
 + 构造方法的执行顺序
- 
+
 还是抱着局域变量的初始化被执行了两次，打印了一下日志，终于发现了问题的所在。
 在初始化一个对象的时候，首先是执行父类的构造方法，如果还有父类，继续向上查找。
 
@@ -119,9 +119,10 @@ B constructor method excute
 
 ### 写在最后
 
-代码木有上传上来，如果你想看看这个丑陋的代码是怎么写的，你可以邮件联系我：
-lovecluo@nightweaver.org
+~~代码木有上传上来，如果你想看看这个丑陋的代码是怎么写的，你可以邮件联系我：
+lovecluo@nightweaver.org~~
 
+更新代码地址：
 
-
-
+ + [Bug版代码](http://pinned.github.io/posts/file-2014-11-4/NullPointProject-bug.tar.gz)
+ + [修改版本](http://pinned.github.io/posts/file-2014-11-4/NullPointProject-更改.rar)
