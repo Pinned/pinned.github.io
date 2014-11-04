@@ -124,5 +124,5 @@ lovecluo@nightweaver.org~~
 
 更新代码地址：
 
- + [Bug版代码](http://pinned.github.io/posts/file-2014-11-4/NullPointProject-bug.tar.gz)
- + [修改版本](http://pinned.github.io/posts/file-2014-11-4/NullPointProject-更改.rar)
+ + [Bug版代码](http://pinned.github.io/assets/posts/file-2014-11-4/NullPointProject-bug.tar.gz)
+ + [修改版本](http://pinned.github.io/assets/posts/file-2014-11-4/NullPointProject-更改.rar)
