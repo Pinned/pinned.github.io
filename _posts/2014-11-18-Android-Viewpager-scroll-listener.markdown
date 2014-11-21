@@ -19,8 +19,11 @@ ViewPager的滑动事件，是使用的OnPageChangeListener，他有三个方法
  ```
  
  其中arg0这个参数有三种状态（0，1，2）
- + arg0 ==1的时辰默示正在滑动 
+
+ + arg0==1的时辰默示正在滑动 
+
  + arg0==2的时辰默示滑动完毕了
+ 
  + arg0==0的时辰默示什么都没做。
 
 2. **onPageScrolled**
@@ -46,3 +49,42 @@ ViewPager的滑动事件，是使用的OnPageChangeListener，他有三个方法
  ```
  
  此方法是页面跳转完后得到调用，arg0是你当前选中的页面的Position（位置编号）
+
+
+
+ **最佳实践**
+ 
+  ```java
+    @Override  
+    public void onPageScrolled(int position, float positionOffset,  int positionOffsetPixels) {  
+        if (positionOffset > 0) {  
+            ChangeColorIconWithTextView left = mTabIndicator.get(position);  
+            ChangeColorIconWithTextView right = mTabIndicator.get(position + 1);  
+  
+            left.setIconAlpha(1 - positionOffset);  
+            right.setIconAlpha(positionOffset);  
+        }  
+    } 
+     @Override  
+    public void onClick(View v) {  
+        resetOtherTabs();  
+        switch (v.getId()) {  
+        case R.id.id_indicator_one:  
+            mTabIndicator.get(0).setIconAlpha(1.0f);  
+            mViewPager.setCurrentItem(0, false);  
+            break;  
+        case R.id.id_indicator_two:  
+            mTabIndicator.get(1).setIconAlpha(1.0f);  
+            mViewPager.setCurrentItem(1, false);  
+            break;  
+        case R.id.id_indicator_three:  
+            mTabIndicator.get(2).setIconAlpha(1.0f);  
+            mViewPager.setCurrentItem(2, false);  
+            break;  
+        case R.id.id_indicator_four:  
+            mTabIndicator.get(3).setIconAlpha(1.0f);  
+            mViewPager.setCurrentItem(3, false);  
+            break;  
+        }  
+    }  
+  ```
