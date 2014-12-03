@@ -36,7 +36,7 @@ category: system
 
 启动过后，他进入了最高权限的bash中,然后使用如下命令解决：
 
-```shell
+```xml
 fsck -fy 
 mount -uw /
 rm /var/db/.AppleSetupDone
@@ -50,14 +50,14 @@ reboot
 
 给文件修改权限（chmod）：
 
-```shell
+```xml
 chmod 777 file/Folder
 chmod -R 777 Folder
 ```
 
 修改文件owner/group（chown）:
 
-```shell
+```xml
 chown username file
 chown -R username Folder
 ```
