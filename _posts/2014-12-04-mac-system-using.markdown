@@ -5,7 +5,7 @@ title: Mac系统使用记录（一）
 category: system
 ---
 
-1. Mac用户
+### Mac用户
 
 本人小屌丝一个，装了个黑苹果，用的是类似Ghost一样的版本，只接还原就可以用，
 什么也没有改。
@@ -16,7 +16,7 @@ category: system
 
 如下：
 
-![step1](http://pinned.github.io/assets/posts/img-2014-12-04/mac_clear_root_3.png)
+
 
 ![step2](http://pinned.github.io/assets/posts/img-2014-12-04/mac_clear_root_1.png)
 
@@ -24,11 +24,13 @@ category: system
 
 ![step4](http://pinned.github.io/assets/posts/img-2014-12-04/mac_clear_root_4.png)
 
+![step1](http://pinned.github.io/assets/posts/img-2014-12-04/mac_clear_root_3.png)
+
 这样子设置到是没有什么问题，当我重启的时候，我发现问题来了。
 因为本机只有一个ROOT账号，root账号被我禁用了。就没有可以登陆的账号
 心中有千万只草泥马奔腾而过，不过也没有办法，出问题了总得解决才行。
 
-2. 解决办法
+### 解决办法
 
 我们首先要做的事，用单用户登陆。
 
@@ -46,7 +48,7 @@ reboot
 正常重启过后，他会让你重新创建一个用户，创建成功过后，便可以登陆了。
 
 
-3. 其他
+### 其他
 
 给文件修改权限（chmod）：
 
