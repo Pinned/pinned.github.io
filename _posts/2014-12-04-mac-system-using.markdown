@@ -18,13 +18,14 @@ category: system
 
 
 
-![step2](http://pinned.github.io/assets/posts/img-2014-12-04/mac_clear_root_1.png)
+![step1](http://pinned.github.io/assets/posts/img-2014-12-04/mac_clear_root_1.png)
 
-![step3](http://pinned.github.io/assets/posts/img-2014-12-04/mac_clear_root_2.png)
+![step2](http://pinned.github.io/assets/posts/img-2014-12-04/mac_clear_root_2.png)
+
+![step3](http://pinned.github.io/assets/posts/img-2014-12-04/mac_clear_root_3.png)
 
 ![step4](http://pinned.github.io/assets/posts/img-2014-12-04/mac_clear_root_4.png)
 
-![step1](http://pinned.github.io/assets/posts/img-2014-12-04/mac_clear_root_3.png)
 
 这样子设置到是没有什么问题，当我重启的时候，我发现问题来了。
 因为本机只有一个ROOT账号，root账号被我禁用了。就没有可以登陆的账号
