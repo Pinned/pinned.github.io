@@ -20,7 +20,7 @@ category: system
 + 依次选择「Packages」、「Reload」。
 
 如下图：
-![Alt text](/setting.png)
+![Alt text](/assets/posts/img-2014-12-05/setting.png)
 
 
 **参考资料**
