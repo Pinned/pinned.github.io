@@ -13,7 +13,7 @@ category: tools_using
 
 + **原理**
 
- 说起原理，这个东西很简单，就是更改路由，修改电脑的路由表，只能切换你访问的方式 
+ 说起原理，这个东西很简单，就是更改路由，修改电脑的路由表，智能切换你访问的方式 
  
 + **使用步骤**
 
@@ -50,10 +50,13 @@ vpndown.bat // 清理路由表的脚本
 测试一下：
 
 打开你的百度，输入ip，看下地址
+
 在打开google，输入ip，在看下地址 
 
 + 参考资料
 
 [https://github.com/GutenYe/chnroutes](https://github.com/GutenYe/chnroutes)
+
 [openvpn使用方法](https://code.google.com/p/chnroutes/wiki/Usage)
 
+[VPN智能翻墙](http://www.lingbaoboy.com/archives/85.html)
