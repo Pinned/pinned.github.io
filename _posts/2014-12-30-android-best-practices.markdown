@@ -1,7 +1,7 @@
 ---
 layout: post
 styles: [syntax]
-title: [转]Best practices in Android development
+title: Best practices in Android development
 category: tools_using
 ---
 
@@ -510,6 +510,6 @@ Creative Commons Attribution 4.0 International (CC BY 4.0)
 
 
 
----
+----------
 
 **原文地址** [https://github.com/futurice/android-best-practices](https://github.com/futurice/android-best-practices)
