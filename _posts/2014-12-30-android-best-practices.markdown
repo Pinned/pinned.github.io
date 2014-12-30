@@ -7,8 +7,6 @@ category: tools_using
 
 Lessons learned from Android developers in [Futurice](http://www.futurice.com). Avoid reinventing the wheel by following these guidelines. If you are interested in iOS or Windows Phone development, be sure to check also our [**iOS Good Practices**](https://github.com/futurice/ios-good-practices) and [**Windows client Good Practices**](https://github.com/futurice/win-client-dev-good-practices) documents.
 
-[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-android--best--practices-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/1091)
-
 ## Summary
 
 #### Use Gradle and its recommended project structure
