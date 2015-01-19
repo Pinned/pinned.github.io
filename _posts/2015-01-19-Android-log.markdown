@@ -7,7 +7,7 @@ category: android
 
 For Android applications, logging is handled by the android.util.Log class, which is a basic logging class that stores the logs in a circular buffer for the whole device. All logs for the device can be seen in the LogCat tab in Eclipse, or read using the logcat command. Here is a standard log output for the LogCat tab in Eclipse :
 
-![Eclipse Image](/assets/posts//image.png)
+![Eclipse Image](/assets/posts/img-2015-01-19/image.png)
 
 There are five levels of logs you can use in your application, for the most verbose to the least verbose :
 
