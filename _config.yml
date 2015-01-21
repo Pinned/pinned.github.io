@@ -38,6 +38,7 @@ active: 安卓
 # 首页除了最新文章外显示分类
 cates: 
   - Android
+  - Tools
 
 # 中文本地化
 locals:
