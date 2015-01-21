@@ -1,7 +1,49 @@
-highlighter: pygments
-markdown: redcarpet
-redcarpet:
-    extensions: ["fenced_code_blocks", "tables", "highlight", "strikethrough"]
-author: knero
-safe: true
-paginate: 16
+# highlighter: pygments
+# markdown: redcarpet
+# redcarpet:
+#     extensions: ["fenced_code_blocks", "tables", "highlight", "strikethrough"]
+# author: knero
+# safe: true
+# paginate: 16
+
+permalink: /:year/:month/:day/:title.html
+paginate: 10
+markdown: kramdown
+
+kramdown:
+  input: GFM
+
+# 作者信息
+author: 
+  name: knero
+  email: lovecluo@nightweaver.org
+  link: http://pinned.github.io
+  github: http://github.com/pinned
+
+# 站点信息
+title: 博客 
+description: 纸上学来终觉浅，觉知此事要躬行
+url: http://pinned.github.io
+rss_url: /pages/atom.xml
+
+# gavatar头像及Favicon
+gavatar: /public/avator/avator.jpg
+favicon: /public/avator/avator.jpg
+
+# disqus 设置
+disqus:
+  shortname: pinned
+# 主题设置，自动激活某个标签
+active: android
+
+# 首页除了最新文章外显示分类
+cates: 
+  - android
+
+# 中文本地化
+locals:
+  tags: 标签
+  about: 关于
+  newest: 最新文章
+  archive: 归档
+  content: 目录
