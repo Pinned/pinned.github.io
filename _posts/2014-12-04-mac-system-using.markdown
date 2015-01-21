@@ -2,7 +2,8 @@
 layout: post
 styles: [syntax]
 title: Mac系统使用记录（一）
-category: system
+category: 系统
+tags: Systems
 ---
 
 ### Mac用户

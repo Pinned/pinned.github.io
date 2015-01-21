@@ -2,7 +2,8 @@
 layout: post
 styles: [syntax]
 title: Google Volley 网络请求框架(一)
-category: android
+category: 安卓
+tags: Android
 ---
 
 Volley是在Google I/O 2013上发布的，说来惭愧，都快一年了，才知道有这么个东西。

@@ -2,7 +2,8 @@
 layout: post
 styles: [syntax]
 title: 使用Fidder来拦截Android发送的HTTP请求
-category: android
+category: 安卓
+tags: Android
 ---
 
 ### Fidder  

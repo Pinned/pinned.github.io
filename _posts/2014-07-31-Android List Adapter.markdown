@@ -2,7 +2,8 @@
 layout: post
 styles: [syntax]
 title: Android ListView中Adapter的使用
-category: android
+category: 安卓
+tags: Android
 ---
 
 在Android开发过程中，在一个小小的屏幕上要展示很多的东西，不能像Web网站上那样来展示。在Android中会经常使用到ListView，一个非常灵活的东西。有一些开源的组件，是基于ListView来修改的，可以很容易的使用。用的比较多的有下拉刷新，这是一个很常用的组件，在Github上，搜索一下，排在前面的就是了。在这里我也就不贴他的地址。

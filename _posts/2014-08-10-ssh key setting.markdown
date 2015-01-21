@@ -2,6 +2,8 @@
 layout: post
 styles: [syntax]
 title: 在windos下面使用多个ssh_key
+category: 工具
+tags: SSH
 ---
 
 ### SSH Key 

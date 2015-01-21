@@ -2,7 +2,8 @@
 layout: post
 styles: [syntax]
 title: Andorid UI注入工具的使用(ButterKnife)
-category: android
+category: 安卓
+tags: Android
 ---
 
 一个Android项目中，必不可少有很多UI，并且`Activity`要控制这些UI，当然，我们会用到以下代码:

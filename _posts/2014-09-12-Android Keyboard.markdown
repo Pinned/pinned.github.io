@@ -2,7 +2,8 @@
 layout: post
 styles: [syntax]
 title: Android Keyboard Show&Hiden
-category: android
+category: 安卓
+tags: Android
 ---
 
 ## Android 中打开新的Activity,虚拟键盘的弹出与不弹出

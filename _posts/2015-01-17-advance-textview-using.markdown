@@ -2,7 +2,8 @@
 layout: post
 styles: [syntax]
 title: Advanced Android TextView
-category: android
+category: 安卓
+tags: Android
 ---
 
 TextView是一个经常使用的组件，但是你并不一定完全知道他的

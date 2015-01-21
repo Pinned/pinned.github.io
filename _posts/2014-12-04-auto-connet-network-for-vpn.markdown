@@ -2,7 +2,8 @@
 layout: post
 styles: [syntax]
 title: 科学上网（方便查资料）
-category: tools_using
+category: 工具
+tags: Tools
 ---
 
 

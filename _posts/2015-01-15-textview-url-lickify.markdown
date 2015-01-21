@@ -2,7 +2,8 @@
 layout: post
 styles: [syntax]
 title: TextView 高亮URL地址，并实现跳转
-category: android
+category: 安卓
+tags: Android
 ---
 
 # Android TextView 使用

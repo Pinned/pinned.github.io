@@ -2,7 +2,8 @@
 layout: post
 styles: [syntax]
 title: Android Sdk Manager无法更新问题解决办法
-category: system
+category: 系统
+tags: Systems
 ---
 
 每次要更新Android SDK等信息的时候，总是非常蛋疼。

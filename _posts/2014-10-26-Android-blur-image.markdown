@@ -2,7 +2,8 @@
 layout: post
 styles: [syntax]
 title: Android 图片的毛玻璃效果
-category: android
+category: 安卓
+tags: Android
 ---
 
 + **上效果图**

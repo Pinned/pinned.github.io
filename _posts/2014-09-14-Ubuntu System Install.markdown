@@ -2,7 +2,8 @@
 layout: post
 styles: [syntax]
 title: 安装Ubuntu单系统
-category: system
+category: 系统
+tags: Systems
 ---
 
 ## 安装Ubuntu单系统

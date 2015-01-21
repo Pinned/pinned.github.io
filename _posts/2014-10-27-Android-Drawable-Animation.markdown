@@ -2,7 +2,8 @@
 layout: post
 styles: [syntax]
 title: Android Drawable Animation
-category: android
+category: 安卓
+tags: Android
 ---
 
 ProgressBar是一个经常使用的组件，但很多时候，它的外观看起来并不能满足我们的需求。

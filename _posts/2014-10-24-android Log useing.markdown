@@ -2,7 +2,8 @@
 layout: post
 styles: [syntax]
 title: Android之使用Log打印日志
-category: android
+category: 安卓
+tags: Android
 ---
 
 1. 使用

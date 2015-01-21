@@ -2,7 +2,8 @@
 layout: post
 styles: [syntax]
 title: Android之Notification的使用(一)
-category: android
+category: 安卓
+tags: Android
 ---
 
 ## Android之Notification的使用（一）

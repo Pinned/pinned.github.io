@@ -2,7 +2,8 @@
 layout: post
 styles: [syntax]
 title: Android中使用.9.png
-category: android
+category: 安卓
+tags: Android
 ---
 
 ## .9图

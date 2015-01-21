@@ -2,7 +2,8 @@
 layout: post
 styles: [syntax]
 title: Eclipse中快速打开文件夹
-category: tools_using
+category: 工具
+tags: Tools
 ---
 
 Android开发的过程中，使用了Git版本控制工具，但是没有使用Eclipse集成的控制工具，

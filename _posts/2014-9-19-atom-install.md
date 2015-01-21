@@ -2,7 +2,8 @@
 layout: post
 styles: [syntax]
 title: Ubuntu 14.04 安装Atom编辑器
-category: tools_using
+category: 工具
+tags: Tools
 ---
 
 ## Ubuntu下安装Atom编辑器

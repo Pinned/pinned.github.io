@@ -2,7 +2,8 @@
 layout: post
 styles: [syntax]
 title: Ubuntu 下安装Navicat
-category: tools_using
+category: 工具
+tags: Tools
 ---
 
 ## Navicat的安装

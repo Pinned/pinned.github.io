@@ -34,11 +34,11 @@ favicon: /public/avator/avator.jpg
 disqus:
   shortname: pinned
 # 主题设置，自动激活某个标签
-active: android
+active: 安卓
 
 # 首页除了最新文章外显示分类
 cates: 
-  - android
+  - Android
 
 # 中文本地化
 locals:

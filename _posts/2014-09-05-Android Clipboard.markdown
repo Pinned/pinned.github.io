@@ -2,7 +2,8 @@
 layout: post
 styles: [syntax]
 title: Android 粘贴板的使用
-category: android
+category: 安卓
+tags: Android
 ---
 
 ## Android 粘贴板的使用

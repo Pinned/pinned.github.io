@@ -2,7 +2,8 @@
 layout: post
 styles: [syntax]
 title: Creating logs in Android applications
-category: android
+category: 安卓
+tags: Android
 ---
 
 For Android applications, logging is handled by the android.util.Log class, which is a basic logging class that stores the logs in a circular buffer for the whole device. All logs for the device can be seen in the LogCat tab in Eclipse, or read using the logcat command. Here is a standard log output for the LogCat tab in Eclipse :

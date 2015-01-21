@@ -2,7 +2,8 @@
 layout: post
 styles: [syntax]
 title: Eclipse中重构使用
-category: tools_using
+category: 工具
+tags: Tools
 ---
 
 

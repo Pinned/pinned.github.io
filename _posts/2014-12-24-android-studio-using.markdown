@@ -2,7 +2,8 @@
 layout: post
 styles: [syntax]
 title: Android Studio 使用记录（一）
-category: tools_using
+category: 工具
+tags: Tools
 ---
 
 

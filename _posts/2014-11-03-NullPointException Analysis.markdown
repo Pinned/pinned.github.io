@@ -2,7 +2,8 @@
 layout: post
 styles: [syntax]
 title: Android 项目中出现的奇葩bug, 数据NullPointExcption
-category: android
+category: 安卓
+tags: Android
 ---
 
 ### 问题描述

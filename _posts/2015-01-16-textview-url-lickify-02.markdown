@@ -2,7 +2,8 @@
 layout: post
 styles: [syntax]
 title: TextView高亮URL地址解析 
-category: android
+category: 安卓
+tags: Android
 ---
 
 #TextView 高亮实现

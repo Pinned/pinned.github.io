@@ -2,7 +2,8 @@
 layout: post
 styles: [syntax]
 title: Android ViewPager滑动事件
-category: android
+category: 安卓
+tags: Android
 ---
 
 ViewPager的滑动事件，是使用的OnPageChangeListener，他有三个方法:

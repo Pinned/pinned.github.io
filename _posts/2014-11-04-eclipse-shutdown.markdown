@@ -2,7 +2,8 @@
 layout: post
 styles: [syntax]
 title: Ubuntu-14.04下Eclipse闪退解决办法
-category: tools_using
+category: 工具
+tags: Tools
 ---
 
 ### 问题描述

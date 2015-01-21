@@ -2,7 +2,8 @@
 layout: post
 styles: [syntax]
 title: git checkout 的使用（一）
-category: tools_using
+category: 工具
+tags: Tools
 ---
 
 在使用git的过程中，有很多好的点
