@@ -8,10 +8,9 @@
 
 permalink: /:year/:month/:day/:title.html
 paginate: 10
-markdown: kramdown
-
-kramdown:
-  input: GFM
+markdown: redcarpet
+redcarpet:
+    extensions: ["fenced_code_blocks", "tables", "highlight", "strikethrough"]
 
 # 作者信息
 author: 
