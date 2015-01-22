@@ -54,7 +54,22 @@ function content_effects() {
   } else {
     $('#content_btn').hide();
   }
+  add_linenumber();
 }
+
+function add_linenumber (){
+  $('pre code').each(function(){
+    var lines = $(this).text().split('\n').length - 1;
+    var $numbering = $('<ul/>').addClass('pre-numbering');
+    $(this)
+        .addClass('has-numbering')
+        .parent()
+        .prepend($numbering);
+    for(i=1;i<=lines;i++){
+        $numbering.append($('<li/>').text(i));
+    }
+  });
+};
 
 $(document).ready(function() {
   /* 控制左侧 aside 的动作 */
@@ -93,15 +108,4 @@ $(document).ready(function() {
     });
   });
   content_effects();
-  $('pre code').each(function(){
-    var lines = $(this).text().split('\n').length - 1;
-    var $numbering = $('<ul/>').addClass('pre-numbering');
-    $(this)
-        .addClass('has-numbering')
-        .parent()
-        .prepend($numbering);
-    for(i=1;i<=lines;i++){
-        $numbering.append($('<li/>').text(i));
-    }
-  });
 });
