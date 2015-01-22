@@ -59,15 +59,16 @@ function content_effects() {
 
 function add_linenumber (){
   $('pre code').each(function(){
-    var lines = $(this).text().split('\n').length - 1;
+    //var lines = $(this).text().split('\n').length - 1;
     var $numbering = $('<ul/>').addClass('pre-numbering');
     $(this)
         .addClass('has-numbering')
         .parent()
         .prepend($numbering);
-    if(lines==0 && $.trim($(this).text())!=""){
-      lines=1;
-    }
+    //if(lines==0 && $.trim($(this).text())!=""){
+    //  lines=1;
+    //}
+    var lines=Math.round(($(this).height()+3)/18);
     for(i=1;i<=lines;i++){
         $numbering.append($('<li/>').text(i));
     }
