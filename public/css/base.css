@@ -91,3 +91,6 @@ pre code{
   margin-left: 30px;
   display: inline-block;
 }
+pre.prettyprint{
+  overflow: hidden;
+}
