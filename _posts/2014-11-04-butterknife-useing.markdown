@@ -2,7 +2,7 @@
 layout: post
 styles: [syntax]
 title: Andorid UI注入工具的使用(ButterKnife)
-category: 安卓
+category: 开源项目
 tags: Android
 ---
 
