@@ -82,3 +82,12 @@ ul.pre-numbering,
   line-height: 8px;
   margin-top: -4px;
 }
+#content ul.pre-numbering li,
+ul.pre-numbering li,
+.pre-numbering li{
+  text-align: right;
+}
+pre code{
+  margin-left: 30px;
+  display: inline-block;
+}
