@@ -69,3 +69,13 @@ a:hover {text-decoration:none;}
 }
 /* 显示评论按钮 */
 .show-commend {width: 100%; margin-bottom: 40px;}
+.pre-numbering{list-style-type: none;
+  float: left;
+  display: inline-block;
+  width: 15px;
+  color: yellow;
+  padding: 0;
+  margin: 0;
+  line-height: 8px;
+  margin-top: -4px;
+}
