@@ -65,6 +65,9 @@ function add_linenumber (){
         .addClass('has-numbering')
         .parent()
         .prepend($numbering);
+    if(lines==0 && $.trim($(this).text())!=""){
+      lines=1;
+    }
     for(i=1;i<=lines;i++){
         $numbering.append($('<li/>').text(i));
     }
