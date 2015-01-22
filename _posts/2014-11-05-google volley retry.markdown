@@ -2,7 +2,7 @@
 layout: post
 styles: [syntax]
 title: Google Volley 网络请求框架(一)
-category: 安卓
+category: 开源项目
 tags: Android
 ---
 
