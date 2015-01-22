@@ -88,8 +88,9 @@ ul.pre-numbering li,
   text-align: right;
 }
 pre code{
-  margin-left: 30px;
+  margin-left: 10px;
   display: inline-block;
+  margin-right: 30px;
 }
 pre.prettyprint{
   overflow: hidden;
