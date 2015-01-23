@@ -298,6 +298,7 @@ public <T> Request<T> add(Request<T> request) {
 
     直接遍历整个文件夹，将其加入内存，也是蛮拼的。
 
+
 2. 缓存队列的执行
     
     ```java
