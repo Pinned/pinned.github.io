@@ -3,15 +3,13 @@
   $(document).on("pjax:end", function() {
       var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
       var date = new Date();
-      var src = cnzz_protocol+"s4.cnzz.com/z_stat.php?id=1254126949"+"&timeversion="+date.getTime();
+      var src = cnzz_protocol+"s4.cnzz.com/z_stat.php%3Fid=1254126949"+"%3Dtimeversion="+date.getTime();
       var $countScript = $("#cnzz_stat_icon_1254126949")
-      //if($countScript.length>0){
-      //  $countScript.attr("src",src);
-      //}else{
-      //  console.log(src);
-      //  console.log("<script id='cnzz_stat_icon_1254126949' type='text/javascript' src='"+src+"'></script>");
-      //  $("body").append("<script id='cnzz_stat_icon_1254126949' type='text/javascript' src='"+src+"'></script>");
-      //}
+      if($countScript.length>0){
+        $countScript.attr("src",src);
+      }else{
+        $("body").append(unescape("%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1254126949' id='cnzz_stat_icon_1254126949' type='text/javascript'%3E%3C/script%3E"));
+      }
   });
 })();
 </script>
