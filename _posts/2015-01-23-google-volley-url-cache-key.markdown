@@ -256,115 +256,114 @@ public <T> Request<T> add(Request<T> request) {
 
  1. 首先是读取当前已经存在的缓存文件
 
- 
- ```java
-   /**
-   * Initializes the DiskBasedCache by scanning for all files currently in the
-   * specified root directory. Creates the root directory if necessary.
-   */
-  @Override
-  public synchronized void initialize() {
-      if (!mRootDirectory.exists()) {
-          if (!mRootDirectory.mkdirs()) {
-              VolleyLog.e("Unable to create cache dir %s", mRootDirectory.getAbsolutePath());
-          }
-          return;
-      }
+    ```java
+     /**
+     * Initializes the DiskBasedCache by scanning for all files currently in the
+     * specified root directory. Creates the root directory if necessary.
+     */
+    @Override
+    public synchronized void initialize() {
+        if (!mRootDirectory.exists()) {
+            if (!mRootDirectory.mkdirs()) {
+                VolleyLog.e("Unable to create cache dir %s", mRootDirectory.getAbsolutePath());
+            }
+            return;
+        }
 
-      File[] files = mRootDirectory.listFiles();
-      if (files == null) {
-          return;
-      }
-      for (File file : files) {
-          BufferedInputStream fis = null;
-          try {
-              fis = new BufferedInputStream(new FileInputStream(file));
-              CacheHeader entry = CacheHeader.readHeader(fis);
-              entry.size = file.length();
-              putEntry(entry.key, entry);
-          } catch (IOException e) {
-              if (file != null) {
-                 file.delete();
-              }
-          } finally {
-              try {
-                  if (fis != null) {
-                      fis.close();
-                  }
-              } catch (IOException ignored) { }
-          }
-      }
-  }
- ```
-
-直接遍历整个文件夹，将其加入内存，也是蛮拼的。
-
-2. 缓存队列的执行
-
-```java
-final Request<?> request = mCacheQueue.take();
-request.addMarker("cache-queue-take");
-
-// If the request has been canceled, don't bother dispatching it.
-if (request.isCanceled()) {
-    request.finish("cache-discard-canceled");
-    continue;
-}
-
-// Attempt to retrieve this item from cache.
-Cache.Entry entry = mCache.get(request.getCacheKey());
-if (entry == null) {
-    request.addMarker("cache-miss");
-    // Cache miss; send off to the network dispatcher.
-    mNetworkQueue.put(request);
-    continue;
-}
-
-// If it is completely expired, just send it to the network.
-if (entry.isExpired()) {
-    request.addMarker("cache-hit-expired");
-    request.setCacheEntry(entry);
-    mNetworkQueue.put(request);
-    continue;
-}
-
-// We have a cache hit; parse its data for delivery back to the request.
-request.addMarker("cache-hit");
-Response<?> response = request.parseNetworkResponse(
-        new NetworkResponse(entry.data, entry.responseHeaders));
-request.addMarker("cache-hit-parsed");
-
-if (!entry.refreshNeeded()) {
-    // Completely unexpired cache hit. Just deliver the response.
-    mDelivery.postResponse(request, response);
-} else {
-    // Soft-expired cache hit. We can deliver the cached response,
-    // but we need to also send the request to the network for
-    // refreshing.
-    request.addMarker("cache-hit-refresh-needed");
-    request.setCacheEntry(entry);
-
-    // Mark the response as intermediate.
-    response.intermediate = true;
-
-    // Post the intermediate response back to the user and have
-    // the delivery then forward the request along to the network.
-    mDelivery.postResponse(request, response, new Runnable() {
-        @Override
-        public void run() {
+        File[] files = mRootDirectory.listFiles();
+        if (files == null) {
+            return;
+        }
+        for (File file : files) {
+            BufferedInputStream fis = null;
             try {
-                mNetworkQueue.put(request);
-            } catch (InterruptedException e) {
-                // Not much we can do about this.
+                fis = new BufferedInputStream(new FileInputStream(file));
+                CacheHeader entry = CacheHeader.readHeader(fis);
+                entry.size = file.length();
+                putEntry(entry.key, entry);
+            } catch (IOException e) {
+                if (file != null) {
+                   file.delete();
+                }
+            } finally {
+                try {
+                    if (fis != null) {
+                        fis.close();
+                    }
+                } catch (IOException ignored) { }
             }
         }
-    });
-}
-```
+    }
+    ```
 
-从内存中找对应的`cache`,如果`entry == null`，将`Request`加入`Network Queue`。
-如果`entry.isExpired`，将`Request`加入到`Network Queue`。
-当然，如果读取到数据是需要刷新的，也是要加入到`Network Queue`。
+    直接遍历整个文件夹，将其加入内存，也是蛮拼的。
+
+2. 缓存队列的执行
+    
+    ```java
+    final Request<?> request = mCacheQueue.take();
+    request.addMarker("cache-queue-take");
+
+    // If the request has been canceled, don't bother dispatching it.
+    if (request.isCanceled()) {
+        request.finish("cache-discard-canceled");
+        continue;
+    }
+
+    // Attempt to retrieve this item from cache.
+    Cache.Entry entry = mCache.get(request.getCacheKey());
+    if (entry == null) {
+        request.addMarker("cache-miss");
+        // Cache miss; send off to the network dispatcher.
+        mNetworkQueue.put(request);
+        continue;
+    }
+
+    // If it is completely expired, just send it to the network.
+    if (entry.isExpired()) {
+        request.addMarker("cache-hit-expired");
+        request.setCacheEntry(entry);
+        mNetworkQueue.put(request);
+        continue;
+    }
+
+    // We have a cache hit; parse its data for delivery back to the request.
+    request.addMarker("cache-hit");
+    Response<?> response = request.parseNetworkResponse(
+            new NetworkResponse(entry.data, entry.responseHeaders));
+    request.addMarker("cache-hit-parsed");
+
+    if (!entry.refreshNeeded()) {
+        // Completely unexpired cache hit. Just deliver the response.
+        mDelivery.postResponse(request, response);
+    } else {
+        // Soft-expired cache hit. We can deliver the cached response,
+        // but we need to also send the request to the network for
+        // refreshing.
+        request.addMarker("cache-hit-refresh-needed");
+        request.setCacheEntry(entry);
+
+        // Mark the response as intermediate.
+        response.intermediate = true;
+
+        // Post the intermediate response back to the user and have
+        // the delivery then forward the request along to the network.
+        mDelivery.postResponse(request, response, new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    mNetworkQueue.put(request);
+                } catch (InterruptedException e) {
+                    // Not much we can do about this.
+                }
+            }
+        });
+    }
+    ```
+
+    从内存中找对应的`cache`,如果`entry == null`，将`Request`加入`Network Queue`。
+    如果`entry.isExpired`，将`Request`加入到`Network Queue`。
+    当然，如果读取到数据是需要刷新的，也是要加入到`Network Queue`。
 
 当然，还有最后一个问题，这尼玛，这个`Entry`到底是怎么来的。
 
