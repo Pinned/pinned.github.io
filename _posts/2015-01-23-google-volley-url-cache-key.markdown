@@ -298,20 +298,11 @@ public <T> Request<T> add(Request<T> request) {
 
 直接遍历整个文件夹，将其加入内存，也是蛮拼的。
 
-<<<<<<< HEAD
 + 缓存队列的执行
 
 ```java
 final Request<?> request = mCacheQueue.take();
 request.addMarker("cache-queue-take");
-=======
-2. 缓存队列的执行
-    
-    ```java
-    final Request<?> request = mCacheQueue.take();
-    request.addMarker("cache-queue-take");
->>>>>>> parent of 185a18b... update format
-
 // If the request has been canceled, don't bother dispatching it.
 if (request.isCanceled()) {
     request.finish("cache-discard-canceled");
