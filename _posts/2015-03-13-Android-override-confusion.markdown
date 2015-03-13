@@ -92,4 +92,6 @@ public void showText(View view) {
 >
 > 4. 受保护的，以protected修饰符指定，对同一包内的类和所有子类可见。
 
-上面例子中，应该是这两个的交叉点，Android 5.0和Android 4.4中的执行策略不一样而引起的问题
+上面例子中，应该是这两个的交叉点，Android 5.0和Android 4.4中的执行策略不一样而引起的问题.
+
+经测试，是因为Dalvik与Art在运行的时候，运行机制是不同的。
