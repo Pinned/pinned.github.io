@@ -34,7 +34,21 @@ public static String formatSize(long size) {
 
 + Android String 中的占位符
 
-```java
+```xml
 <!-- .2f表示的是保留三位小数的浮点数  -->    
 <string name="book">书名 (字符串)%1$s,作者(字符串)%2$s,编号(整数)%3$d,价格(浮点型)：%4$.2f</string>
+```
+
++ 文字颜色选择器
+
+```xml
+//在这个地方，应该使用
+//android:textColor="@drawable/text_color"
+
+// text_color.xml
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true" android:color="@color/click_blue_color"></item>
+    <item android:color="@color/blue_color"></item>
+</selector>
 ```
