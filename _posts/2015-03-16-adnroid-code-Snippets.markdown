@@ -35,7 +35,7 @@ public static String formatSize(long size) {
 + Android String 中的占位符
 
 ```xml
-<!-- .2f表示的是保留三位小数的浮点数  -->    
+<!-- .2f表示的是保留三位小数的浮点数  -->
 <string name="book">书名 (字符串)%1$s,作者(字符串)%2$s,编号(整数)%3$d,价格(浮点型)：%4$.2f</string>
 ```
 
@@ -51,4 +51,13 @@ public static String formatSize(long size) {
     <item android:state_pressed="true" android:color="@color/click_blue_color"></item>
     <item android:color="@color/blue_color"></item>
 </selector>
+```
+
++ 给TextView设置`DrawableLeft`
+
+```java
+Drawable drawable = getResources().getDrawable(R.drawable.drawable);  
+/// 这一步必须要做,否则不会显示.  
+drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());  
+myTextview.setCompoundDrawables(drawable,null,null,null);
 ```
