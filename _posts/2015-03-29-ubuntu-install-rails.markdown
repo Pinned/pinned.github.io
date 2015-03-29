@@ -9,7 +9,7 @@ tags: Tools Ruby
 > Rails 是使用 Ruby 语言编写的网页程序开发框架，目的是为开发者提供常用组件，简化网页程序的开发。
 > 只需编写较少的代码，就能实现其他编程语言或框架难以企及的功能。
 
-+ 安装Ruby
+## 安装Ruby
 
 在Ubuntu系统中，默认已经安装了Ruby， 但是其版本很低，要装`Ruby for rails`，就必须得装Ruby
 升级到1.9.3及以上
@@ -30,7 +30,7 @@ ruby 2.2.0p0 (2014-12-25 revision 49005) [x86_64-linux-gnu]
 ~$ gem -v
 2.4.5
 ```
-+ 安装SQLite3
+## 安装SQLite3
 
 在这里，我使用的是`LinuxBrew`来进行安装的
 
@@ -64,7 +64,7 @@ LinuxBrew安装完成过后，你就可以直接安装`Sqlite3`
 brew install sqlite3
 ```
 
-+ 安装Rails
+## 安装Rails
 
 首先，修改ruby的源到taobao的源上去
 
