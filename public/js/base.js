@@ -112,4 +112,12 @@ $(document).ready(function() {
     });
   });
   content_effects();
+
+
+  $(".js-mynav").on("click",function(e){
+    var parent = $(this).parent();
+    parent.parent().find("li").removeClass("active");
+    parent.addClass("active");
+  });
+
 });
