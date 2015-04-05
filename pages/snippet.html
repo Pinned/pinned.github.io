@@ -4,11 +4,44 @@ title: 代码片段
 comments: false
 ---
 
-{% for post in site.posts  %}
-    {% if post.type == "snippet"%}
-        <h1 class="panel-heading">{{ post.title }}</h1>
-        <div class="panel-body">
-          {{ post.content }}
+<style media="screen">
+  .js-sinippet-pager {
+    text-align: center;
+  }
+  .js-sinippet-pager ul {
+    list-style:none;
+    margin:0;
+    padding:0;
+    display:inline-block;
+  }
+
+  .js-sinippet-pager ul li {
+    display:inline-block;
+    border: 1px solid #ddd;
+    background:#eee;
+    color:blue;
+    margin: 0 10px;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+
+  .js-sinippet-pager ul li.curr {
+    color:#666;
+    cursor: default;
+  }
+
+</style>
+<div id="js-snippet">
+  {% for post in site.posts %}
+      {% if post.type == "snippet"%}
+        <div class="js-snippet-item">
+          <h1 class="panel-heading">{{ post.title }}</h1>
+          <div class="panel-body">
+            {{ post.content }}
+          </div>
         </div>
-    {% endif %}
-{% endfor %}
+      {% endif %}
+  {% endfor %}
+<div class="js-sinippet-pager">
+</div>
+</div>
