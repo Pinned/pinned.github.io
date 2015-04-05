@@ -1,0 +1,18 @@
+---
+layout: page
+title: 代码片段
+comments: false
+---
+
+{% for post in site.posts  %}
+    {% if post.type == "snippet"%}
+      <div class="col-md-12">
+        <div class="panel panel-primary">
+          <div class="panel-heading">{{ post.title }}</div>
+          <div class="panel-body">
+            {{ post.content }}
+          </div>
+        </div>
+      </div>
+    {% endif %}
+{% endfor %}

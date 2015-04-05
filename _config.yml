@@ -13,14 +13,14 @@ redcarpet:
     extensions: ["fenced_code_blocks", "tables", "highlight", "strikethrough"]
 
 # 作者信息
-author: 
+author:
   name: knero
   email: lovecluo@nightweaver.org
   link: http://blog.knero.cn
   github: http://github.com/pinned
 
 # 站点信息
-title: 博客 
+title: 博客
 description: 纸上学来终觉浅，觉知此事要躬行
 url: http://blog.knero.cn
 rss_url: /pages/atom.xml
@@ -36,7 +36,7 @@ disqus:
 active: 安卓
 
 # 首页除了最新文章外显示分类
-cates: 
+cates:
   - Android
   - Tools
 
@@ -47,3 +47,4 @@ locals:
   newest: 最新文章
   archive: 归档
   content: 目录
+  snippet: 代码片段
