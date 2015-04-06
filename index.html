@@ -10,7 +10,7 @@ title: 首页
       <div class="panel-heading">{{ site.locals.newest }}</div>
       
       {% for post in site.posts %}
-        {% if post.type != "snippet" and increment num <= 5%}
+        {% if post.type != "snippet" %}
           <a  href='{{ post.url }}' class="list-group-item pjaxlink clearfix">
             {{post.title}}
             <span class="badge">{{ post.date | date:"%Y年%m月%d日" }}</span>
