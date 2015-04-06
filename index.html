@@ -8,13 +8,15 @@ title: 首页
   <div class="col-md-12">
     <div class="panel panel-primary">
       <div class="panel-heading">{{ site.locals.newest }}</div>
-      {% for post in paginator.posts %}
-        {% if post.type != "snippet" %}
+      {% assign index = 5 %}
+      {% for post in site.posts %}
+        {% if post.type != "snippet" and index <= 5%}
           <a  href='{{ post.url }}' class="list-group-item pjaxlink clearfix">
             {{post.title}}
             <span class="badge">{{ post.date | date:"%Y年%m月%d日" }}</span>
           </a>
-        {% endif %}
+          {% index = index + 1 %}          
+        % endif %}
       {% endfor %}
     </div>
   </div>
