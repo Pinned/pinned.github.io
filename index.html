@@ -8,12 +8,16 @@ title: 首页
   <div class="col-md-12">
     <div class="panel panel-primary">
       <div class="panel-heading">{{ site.locals.newest }}</div>
+      <span style="display:none;">{% increment variable %}</span>
       {% for post in site.posts %}
-        {% if post.type != "snippet"%}
-          <a  href='{{ post.url }}' class="list-group-item pjaxlink clearfix">
-            {{post.title}}
-            <span class="badge">{{ post.date | date:"%Y年%m月%d日" }}</span>
-          </a>
+        {% if post.type != "snippet" %}
+          {% if variable <= 5 %}
+            <span style="display:none;">{% increment variable %}</span>
+            <a  href='{{ post.url }}' class="list-group-item pjaxlink clearfix">
+              {{post.title}}
+              <span class="badge">{{ post.date | date:"%Y年%m月%d日" }}</span>
+            </a>
+          {% endif %}
         {% endif %}
       {% endfor %}
     </div>
