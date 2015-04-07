@@ -84,3 +84,7 @@ sudo gem install rails --verbose
 # 查看rails版本
 rails -v
 ```
+
+## 参考资料
+
+1. [Ubuntu 上安装 Ruby 最新版的最佳方法](http://chloerei.com/2014/07/13/the-best-way-to-install-the-latest-version-of-ruby-on-ubuntu/): http://chloerei.com/2014/07/13/the-best-way-to-install-the-latest-version-of-ruby-on-ubuntu/
