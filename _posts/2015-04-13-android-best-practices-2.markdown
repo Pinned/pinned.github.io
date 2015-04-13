@@ -1,12 +1,10 @@
 ---
 layout: post
 styles: [syntax]
-title: [转]Android 开发最佳实践
+title: Android最佳实践
 category: 安卓
 tags: Android
 ---
-
-# Android 开发最佳实践
  
 从[Futurice](http://www.futurice.com)公司Android开发者中学到的经验。
 遵循以下准则，避免重复发明轮子。若您对开发iOS或Windows Phone 有兴趣，
