@@ -2,7 +2,7 @@
 layout: post
 styles: [syntax]
 title: Android 5.0设备中，Notification小图标是白色的
-category: 工具
+category: 安卓
 tags: Tools Android
 ---
 
@@ -40,3 +40,4 @@ defaultConfig {
     targetSdkVersion 20
 }
 ```
+
