@@ -3,7 +3,7 @@ layout: post
 styles: [syntax]
 title: Mac Iterm2 zsh使用
 category: 工具
-tags: Android
+tags: Tools, Systems
 ---
 
 ## 安装zsh
