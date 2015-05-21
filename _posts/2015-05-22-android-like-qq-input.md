@@ -20,7 +20,7 @@ tags: Android
 
   ```java
    private boolean showKeyboard() {
-      InputMethodManager imm = (InputMethodManager)mInputText.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+      InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
       boolean result = imm.showSoftInput(mInputText, 0);
       return result;
    }
