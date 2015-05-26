@@ -1,7 +1,7 @@
 ---
 layout: post
 styles: [syntax]
-title: [转]Android打开与关闭软键盘
+title: 【转】Android打开与关闭软键盘
 category: 安卓
 tags: Android
 ---
