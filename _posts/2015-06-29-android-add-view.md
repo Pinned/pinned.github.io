@@ -127,5 +127,4 @@ private void addViewInner(View child, int index, LayoutParams params,
     }
 }
 ``` 
-
-s
+就是如此的Easy，就把View添加到视图中去了。
