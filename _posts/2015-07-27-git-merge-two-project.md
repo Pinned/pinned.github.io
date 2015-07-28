@@ -1,7 +1,7 @@
 ---
 layout: post
 styles: [syntax]
-title: Git 合并两个
+title: Git 合并两个Project
 category: 工具
 tags: Git
 ---
