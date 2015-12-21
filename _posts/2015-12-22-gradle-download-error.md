@@ -2,7 +2,7 @@
 layout: post
 styles: [syntax]
 title: Android 中方法重载遇到的问题
-category: 安卓, 工具
+category: 安卓 工具
 tags: Android Gradle
 ---
 
