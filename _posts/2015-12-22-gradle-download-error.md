@@ -1,7 +1,7 @@
 ---
 layout: post
 styles: [syntax]
-title: Android 中方法重载遇到的问题
+title: Android Studio Gradle Download Error
 category: 安卓
 tags: Android Gradle
 ---
