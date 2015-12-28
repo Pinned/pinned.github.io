@@ -45,10 +45,10 @@ so，我们先来看一下，布局代码是怎么写的：
 ```
 代码很简单，那我们在来看一下他的运行效果：
 
-![效果图](https://code.hiroz.cn/g_yuanying/yuanxing_server/uploads/9d42933bc4d0346484933cf0d6ec44c9/image.png)
+![效果图](https://cloud.githubusercontent.com/assets/8403321/12022795/46c90190-adce-11e5-8cfd-f39a8d1fd4a1.png)
 
 我那个擦，为什么下面那个TextView上的文字内容显示不完整，这尼玛什么情况，于是乎，我调整了一个`RelativeLayout`的高度，让他变高一点，改成`android:layout_height="125dp"`, run了一下，居然正常了，如下图：
-![效果图](https://code.hiroz.cn/g_githuber/githubexplorer/uploads/4c750c3b69dc3f3f4b5795e4044758f9/image.png)
+![效果图](https://cloud.githubusercontent.com/assets/8403321/12022788/299ea278-adce-11e5-93c7-104e82cbf6fb.png)
 
 我特么的惊呆了，内心中一万只草泥马奔腾而过，上面那个图中，RelativeLayout中明明还有空白，为什么会导致下面的TextView的高度不够呢。
 
