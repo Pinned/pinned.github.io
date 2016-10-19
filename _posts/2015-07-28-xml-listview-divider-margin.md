@@ -2,6 +2,7 @@
 title: XML 实现 ListView divider margin
 type: snippet
 ---
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <inset xmlns:android="http://schemas.android.com/apk/res/android"
     android:insetLeft="50dp"
