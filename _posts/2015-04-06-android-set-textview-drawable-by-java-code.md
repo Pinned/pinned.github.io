@@ -1,5 +1,5 @@
 ---
-title: TextView之代码设置`DrawableLeft`
+title: TextView之代码设置DrawableLeft
 type: snippet
 ---
 

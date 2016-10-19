@@ -35,7 +35,7 @@ comments: false
   {% for post in site.posts %}
       {% if post.type == "snippet"%}
         <div class="js-snippet-item">
-          <h1 class="panel-heading">{{ post.title }}--{{ post.date | date:"%Y年%m月%d日" }}</h1>
+          <h1 class="panel-heading">{{ post.title }} —— {{ post.date | date:"%Y年%m月%d日" }}</h1>
           <div class="panel-body">
             {{ post.content }}
           </div>
