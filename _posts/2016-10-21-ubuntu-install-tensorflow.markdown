@@ -10,13 +10,13 @@ tags: Python
 
 安装步骤：
 
-1. 安装python
++ 安装python
 
 ```shell
 sudo apt-get install python-pip python-dev
 ```
 
-2. 按电脑配置环境变量
++ 按电脑配置环境变量
 
 ```shell
 // Ubuntu/Linux 64-bit, CPU only, Python 2.7
@@ -24,7 +24,7 @@ export TF_BINARY_URL=https://storage.googleapis.com/tensorflow/linux/cpu/tensorf
 ```
 因为我使用的是虚拟机，所以就下了这个。
 
-3. 安装Tensorflow
++ 安装Tensorflow
 
 ```shell
 sudo pip install --upgrade $TF_BINARY_URL
