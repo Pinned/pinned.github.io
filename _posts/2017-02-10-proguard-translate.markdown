@@ -207,3 +207,10 @@ tags: Proguard
 
 **-dump** [_filename_]
 标准输出类文件的内部结构到给定的文件中。例如，你可能要输出一个 jar 文件的内容而不需要进行任何处理。
+
+
+---
+
+使用参考：
+
+[传送门](https://www.guardsquare.com/en/proguard/manual/examples)
