@@ -1,0 +1,19 @@
+<div class="post-main">
+
+    <% if (is_post()) { %>
+        <div class="post-meta">
+            <a class='author' href="<%- url_for() %>"><%= config.author %></a> <%- date(page.date, "YYYY年MM月DD日") %>
+        </div>
+        <div class="post-md">
+            <%- page.content %>
+        </div>
+
+    <% } else { %>
+
+        <div class="post-md">
+            <%- page.content %>
+        </div>
+
+    <% } %>
+
+</div>

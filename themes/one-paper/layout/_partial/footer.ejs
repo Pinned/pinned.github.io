@@ -1,0 +1,15 @@
+<div class="footer">
+    <span>Copyright © <%- new Date().getFullYear();%> <%= config.title %></span>
+</div>
+
+<!-- <%- css('css/highlight.default.css') %> -->
+<%- css('css/atom-one-dark.css') %>
+<%- css('css/code-theme.css') %>
+<%- js('js/highlight.min.js') %>
+<%- js('js/highlightjs-line-numbers.js') %>
+
+<script>
+    hljs.initHighlightingOnLoad();
+    hljs.initLineNumbersOnLoad();
+    hljs.highlightAll();
+</script>
