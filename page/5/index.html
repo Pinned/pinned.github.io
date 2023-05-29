@@ -1,930 +1,235 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  
-  
-  <title>大罗说事</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="Talk is cheap, show me the code.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="大罗说事">
-<meta property="og:url" content="http://pinned.github.io/page/5/index.html">
-<meta property="og:site_name" content="大罗说事">
-<meta property="og:description" content="Talk is cheap, show me the code.">
-<meta property="og:locale" content="zh_CN">
-<meta property="article:author" content="罗昭成">
-<meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="大罗说事" type="application/atom+xml">
-  
-  
-    <link rel="shortcut icon" href="/favicon.png">
-  
-  
-  
+    <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+    <link rel="alternate icon" type="image/png" href="/img/favicon.png">
+    <title>大罗说事 | </title>
+    
+<link rel="stylesheet" href="/css/reset.css">
+
+    
 <link rel="stylesheet" href="/css/style.css">
 
-  
     
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+<link rel="stylesheet" href="/css/markdown.css">
 
-  
-  
+    
+<link rel="stylesheet" href="/css/fonts.css">
+
 <meta name="generator" content="Hexo 6.3.0"></head>
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="header">
+    <a class="logo" href="/">大罗说事</a>
+    <ul class="nav">
+        
+        <li><a href="/">首页</a></li>
+        
+        <li><a href="/archives">归档</a></li>
+        
+        <li><a href="/about">关于</a></li>
+        
+    </ul>
+</div>
+                
+                <div class="post-list">
+    
+    <div class="post">
+        <a class="post-title" href="/2023/05/29/2015-03-13-Android-override-confusion/">Android 中方法重载遇到的问题</a>
+        <div class="post-except">
+            问题描述 今天在使用的一个第三方库，执行的是一个异步下载，有一个封装DownloadInfo的类，在下载的Task中，通过DownloadInfo 获取真实的下载地址。但是由于粗心，库中的getRealUrl方法，没有加任何方法修饰词。我在使用的时候，重写了DownloadInfo 和getRealUrl方法。在测试中出现了一个问题，在Android 4.4中按照预期的执行，但是在Android 5.0中，却没有按照预期的 效果执行。
+详细代码
+DownloadInfo
 
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">大罗说事</a>
-      </h1>
-      
+p
+            <a class="read-more" href="/2023/05/29/2015-03-13-Android-override-confusion/"> ... </a>
+        </div>
+        <div class="post-date">2023.05.29</div>
     </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-        
-          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
-        
-        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://pinned.github.io"></form>
-      </div>
-    </div>
-  </div>
-</header>
+    
+    <div class="post">
+        <a class="post-title" href="/2023/05/29/2015-03-16-adnroid-code-Snippets/">Android代码片段</a>
+        <div class="post-except">
+            
+SD Card的大小和容量
 
-      <div class="outer">
-        <section id="main">
-  
-    <article id="post-2015-03-16-adnroid-code-Snippets" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/05/29/2015-03-16-adnroid-code-Snippets/" class="article-date">
-  <time class="dt-published" datetime="2023-05-29T02:54:52.141Z" itemprop="datePublished">2023-05-29</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%AE%89%E5%8D%93/">安卓</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/05/29/2015-03-16-adnroid-code-Snippets/">Android代码片段</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <ul>
-<li>SD Card的大小和容量</li>
-</ul>
-<pre><code class="java">StatFs stat = new StatFs(Environment.getExternalStorageDirectory().getPath());
+StatFs stat = new StatFs(Environment.getExternalStorageDirectory().getPath());
 long sdAvailSize = (long)stat.getAvailableBlocks()
                * (long)stat.getBlockSize();
 long sdTotalSize =  (long)stat.getBlockCount()
-                * (long)stat.getBlockSize()
-</code></pre>
-<p>格式化容量代码:</p>
-<pre><code class="java">public static String formatSize(long size) &#123;
-    if (size &lt; 1024) &#123;
-        return String.format(&quot;%dByte&quot;, size);
-    &#125; else if (size &lt; 1024 * 1024) &#123;
-        return String.format(&quot;%.2fKb&quot;, size / 1024f);
-    &#125; else if (size &lt; 1024 * 1024 * 1024) &#123;
-        return String.format(&quot;%.2fMb&quot;, size / 1024f / 1024f);
-    &#125; else &#123;
-        return String.format(&quot;%.2fGb&quot;, size / 1024f / 1024f / 1024f);
-    &#125;
-&#125;
-</code></pre>
-<ul>
-<li>Android String 中的占位符</li>
-</ul>
-<pre><code class="xml">&lt;!-- .2f表示的是保留三位小数的浮点数  --&gt;
-&lt;string name=&quot;book&quot;&gt;书名 (字符串)%1$s,作者(字符串)%2$s,编号(整数)%3$d,价格(浮点型)：%4$.2f&lt;/string&gt;
-</code></pre>
-<ul>
-<li>文字颜色选择器</li>
-</ul>
-<pre><code class="xml">//在这个地方，应该使用
-//android:textColor=&quot;@drawable/text_color&quot;
-
-// text_color.xml
-&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;selector xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;
-    &lt;item android:state_pressed=&quot;true&quot; android:color=&quot;@color/click_blue_color&quot;&gt;&lt;/item&gt;
-    &lt;item android:color=&quot;@color/blue_color&quot;&gt;&lt;/item&gt;
-&lt;/selector&gt;
-</code></pre>
-<ul>
-<li>给TextView设置<code>DrawableLeft</code></li>
-</ul>
-<pre><code class="java">Drawable drawable = getResources().getDrawable(R.drawable.drawable);  
-/// 这一步必须要做,否则不会显示.  
-drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());  
-myTextview.setCompoundDrawables(drawable,null,null,null);
-</code></pre>
-<ul>
-<li><p>在<code>values</code>中定义id</p>
-<p>在<code>values</code>文件夹中创建<code>ids.xml</code>文件， 文件目录为：<code>values/ids.xml</code></p>
-<p>我们有时候，会在代码中定义一个组件，如<code>TextView</code>,但是我们想给他设置一个Id，又不知道该设置一个<br>什么值比较好，就可以用上术方法来定义一个<code>id</code>, 具体代码如下:</p>
-<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;values&gt;
-  &lt;item name=&quot;custom_item_id&quot; type=&quot;id&quot;&gt;&lt;/item&gt;
-&lt;/values&gt;
-</code></pre>
-</li>
-<li><p>Andorid打开或关闭软键盘</p>
-</li>
-</ul>
-<pre><code class="java">
-// 打开软键盘
-InputMethodManager inputMethodManager =
-        (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-inputMethodManager.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
-
-// 关闭软键盘
-InputMethodManager imm =
-        (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-imm.hideSoftInputFromWindow(mTextView.getWindowToken(), 0);
-</code></pre>
-<ul>
-<li>Android 按两次返回键退出应用程序</li>
-</ul>
-<pre><code class="java">public boolean onKeyDown(int keyCode, KeyEvent event) &#123;
-    if (keyCode == KeyEvent.KEYCODE_BACK) &#123;
-        if ((System.currentTimeMillis() - mExitTime) &gt; 2000) &#123;
-            Object mHelperUtils;
-            Toast.makeText(this, &quot;再按一次退出程序&quot;, Toast.LENGTH_SHORT).show();
-            mExitTime = System.currentTimeMillis();
-
-        &#125; else &#123;
-            finish();
-        &#125;
-        return true;
-    &#125;
-    return super.onKeyDown(keyCode, event);
-&#125;
-</code></pre>
-<ul>
-<li>gradle打包的时候，自动重命名APK文件</li>
-</ul>
-<pre><code class="bash">android.applicationVariants.all &#123; variant -&gt;
-    variant.outputs.each &#123; output -&gt;
-        def outputFile = output.outputFile
-        if (outputFile != null &amp;&amp; outputFile.name.endsWith(&#39;.apk&#39;)) &#123;
-            def fileName = outputFile.name.replace(&quot;.apk&quot;, &quot;-$&#123;defaultConfig.versionName&#125;-$&#123; defaultConfig.versionCode&#125;.apk&quot;)
-            output.outputFile = new File(outputFile.parent, fileName)
-        &#125;
-    &#125;
-&#125;
-</code></pre>
-<ul>
-<li>Android 去掉Activtiy之间的切换动画</li>
-</ul>
-<pre><code class="xml">&lt;style name=&quot;NoAnimationTheme&quot;&gt;
-    &lt;item name=&quot;android:windowAnimationStyle&quot;&gt;@style/Animation&lt;/item&gt;
-&lt;/style&gt;
-&lt;style name=&quot;Animation&quot;&gt;
-    &lt;item name=&quot;android:activityOpenEnterAnimation&quot;&gt;@null&lt;/item&gt;
-    &lt;item name=&quot;android:activityOpenExitAnimation&quot;&gt;@null&lt;/item&gt;
-    &lt;item name=&quot;android:activityCloseEnterAnimation&quot;&gt;@null&lt;/item&gt;
-    &lt;item name=&quot;android:activityCloseExitAnimation&quot;&gt;@null&lt;/item&gt;
-    &lt;item name=&quot;android:taskOpenEnterAnimation&quot;&gt;@null&lt;/item&gt;
-    &lt;item name=&quot;android:taskOpenExitAnimation&quot;&gt;@null&lt;/item&gt;
-    &lt;item name=&quot;android:taskCloseEnterAnimation&quot;&gt;@null&lt;/item&gt;
-    &lt;item name=&quot;android:taskCloseExitAnimation&quot;&gt;@null&lt;/item&gt;
-    &lt;item name=&quot;android:taskToFrontEnterAnimation&quot;&gt;@null&lt;/item&gt;
-    &lt;item name=&quot;android:taskToFrontExitAnimation&quot;&gt;@null&lt;/item&gt;
-    &lt;item name=&quot;android:taskToBackEnterAnimation&quot;&gt;@null&lt;/item&gt;
-    &lt;item name=&quot;android:taskToBackExitAnimation&quot;&gt;@null&lt;/item&gt;
-&lt;/style&gt;
-</code></pre>
-<p>在使用的时候，只需将不需要动画的Activity的<code>style</code>设置成这个就可以了</p>
-
-      
+   
+            <a class="read-more" href="/2023/05/29/2015-03-16-adnroid-code-Snippets/"> ... </a>
+        </div>
+        <div class="post-date">2023.05.29</div>
     </div>
-    <footer class="article-footer">
-      <a data-url="http://pinned.github.io/2023/05/29/2015-03-16-adnroid-code-Snippets/" data-id="cli8yhxga002hd9278ilshnm7" data-title="Android代码片段" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ubuntu-Systems-Tools/" rel="tag">Ubuntu Systems Tools</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-2015-03-16-ubuntu-unzip-encode" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/05/29/2015-03-16-ubuntu-unzip-encode/" class="article-date">
-  <time class="dt-published" datetime="2023-05-29T02:54:52.141Z" itemprop="datePublished">2023-05-29</time>
-</a>
     
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/05/29/2015-03-16-ubuntu-unzip-encode/">Ubuntu 解压zip，文件乱码</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>在windows上压缩的文件，是以系统默认编码中文来压缩文件。由于zip文件中没有声明其编码，所以linux上的unzip一般以默认编码解压，中文文件名会出现乱码。</p>
-<p>解决方式：</p>
-<pre><code class="bash">unzip -O CP936 xxx.zip
+    <div class="post">
+        <a class="post-title" href="/2023/05/29/2015-03-16-ubuntu-unzip-encode/">Ubuntu 解压zip，文件乱码</a>
+        <div class="post-except">
+            在windows上压缩的文件，是以系统默认编码中文来压缩文件。由于zip文件中没有声明其编码，所以linux上的unzip一般以默认编码解压，中文文件名会出现乱码。
+解决方式：
+unzip -O CP936 xxx.zip
 // 用GBK, GB18030也可以
-</code></pre>
 
-      
+
+            <a class="read-more" href="/2023/05/29/2015-03-16-ubuntu-unzip-encode/"> ... </a>
+        </div>
+        <div class="post-date">2023.05.29</div>
     </div>
-    <footer class="article-footer">
-      <a data-url="http://pinned.github.io/2023/05/29/2015-03-16-ubuntu-unzip-encode/" data-id="cli8yhxgb002kd9278dgqhgj7" data-title="Ubuntu 解压zip，文件乱码" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ubuntu-Systems-Tools/" rel="tag">Ubuntu Systems Tools</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-2015-04-03-android-studio-load-so-files" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/05/29/2015-04-03-android-studio-load-so-files/" class="article-date">
-  <time class="dt-published" datetime="2023-05-29T02:54:52.141Z" itemprop="datePublished">2023-05-29</time>
-</a>
     
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>
-  </div>
+    <div class="post">
+        <a class="post-title" href="/2023/05/29/2015-03-29-ubuntu-install-rails/">Ubuntu 下安装Rails</a>
+        <div class="post-except">
+            
+Rails 是使用 Ruby 语言编写的网页程序开发框架，目的是为开发者提供常用组件，简化网页程序的开发。只需编写较少的代码，就能实现其他编程语言或框架难以企及的功能。
 
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/05/29/2015-04-03-android-studio-load-so-files/">Android Studio 中加载so库文件</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>在使用第三方库的时候，经常会遇到一些第三方的so库文件。</p>
-<p>以前在<code>Eclipse</code>中，只需要将<code>*.so</code> 的文件放到<code>libs</code>文件目录下就行了。</p>
-<p>可是在使用<code>Android Studio</code>的时候，却出了点小问题。记录一下，以备后面查阅:</p>
-<p>首先，还是将<code>*.so</code>文件导入到<code>libs</code>文件目录下面。Android Studio使用的是<code>gradle</code>进行编译的。在<code>bulid.gradle</code>文件里面，你可以很清晰的看到如下代码：</p>
-<pre><code class="html">dependencies &#123;
-    compile fileTree(include: [&#39;*.jar&#39;], dir: &#39;libs&#39;)
-&#125;
-</code></pre>
-<p>所以我很直觉的加入so库的编译依赖，如下:</p>
-<pre><code class="html">    compile fileTree(include: [&#39;*.so&#39;], dir: &#39;libs&#39;)
-</code></pre>
-<p>可是，这样子并不能正确的执行so的加载。运行的时候会报错。</p>
-<p>经查阅，在<code>gradle</code>中编译<code>.so</code>只有在特定目录下才能生效，所以我们进行如下配置:</p>
-<pre><code class="html">sourceSets &#123;
-    main &#123;
-        jniLibs.srcDirs = [&#39;libs&#39;]
-    &#125;
-&#125;
-</code></pre>
-<p>将上述代码放到</p>
-<pre><code class="html">android&#123;
-    sourceSets &#123;
-        main &#123;
-            jniLibs.srcDirs = [&#39;libs&#39;]
-        &#125;
-    &#125;
-&#125;
-</code></pre>
-
-      
+安装Ruby在Ubuntu系统中，默认已经安装了Ruby， 但是其版本很低，要装Ruby for rails，就必须得装Ruby升级到1.9.3及以上
+安装Ruby, 使用Brightbox 维护的 Ruby PPA
+sudo apt-add-repository ppa:brightbox/ruby-n
+            <a class="read-more" href="/2023/05/29/2015-03-29-ubuntu-install-rails/"> ... </a>
+        </div>
+        <div class="post-date">2023.05.29</div>
     </div>
-    <footer class="article-footer">
-      <a data-url="http://pinned.github.io/2023/05/29/2015-04-03-android-studio-load-so-files/" data-id="cli8yhxgb002od927bt7mfopj" data-title="Android Studio 中加载so库文件" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tools-Android/" rel="tag">Tools Android</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-2015-03-02-android-studio-using-2" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/05/29/2015-03-02-android-studio-using-2/" class="article-date">
-  <time class="dt-published" datetime="2023-05-29T02:54:52.141Z" itemprop="datePublished">2023-05-29</time>
-</a>
     
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>
-  </div>
+    <div class="post">
+        <a class="post-title" href="/2023/05/29/2015-04-05-keystore-file-options/">Android Keystore 文件的密码修改</a>
+        <div class="post-except">
+            #修改keystore密码的命令(keytool为JDK带的命令行工具)
+# my.keysotre 是你的签名文件
+keytool -storepasswd -keystore my.keystore
 
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/05/29/2015-03-02-android-studio-using-2/">Android Studio 使用 -- 最佳实践</a>
-    </h1>
-  
+#修改keystore的alias的密码
+# my.keystore 是你的签名文件，debugalias为你alias名字
+keytool -keypasswd -keystore my.keystore -alias debugalias
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="修改为Darcula主题"><a href="#修改为Darcula主题" class="headerlink" title="修改为Darcula主题"></a>修改为Darcula主题</h2><p>File –&gt; Settings –&gt; Appearance ; 找到Theme， 选择<code>Darcula</code>， 重启Android Studio即可</p>
-<h2 id="快速注释"><a href="#快速注释" class="headerlink" title="快速注释"></a>快速注释</h2><p>File –&gt; Setting –&gt; Keymap ；然后搜索<code>Fix doc comment</code>， 添加快捷键<code>Alt + Shift + D</code></p>
-<h2 id="局域变量前缀加m"><a href="#局域变量前缀加m" class="headerlink" title="局域变量前缀加m"></a>局域变量前缀加m</h2><p>在使用Android编写代码的时候，会有一个习惯，就是在定义的变量前面加上前缀上加<code>m</code>，使用<code>Alt + Insert</code>的时候，生成的构造方法和get，set方法会在参数和方法名上加上<code>m</code>， 很是不爽。解决办法：</p>
-<p>File –&gt; Setting –&gt; Code Style –&gt; Java –&gt; Code Generation ; 然后在 <code>Field</code> 那一行的<code>Name Prefix</code>上写上<code>m</code>。就这么简单</p>
 
-      
+            <a class="read-more" href="/2023/05/29/2015-04-05-keystore-file-options/"> ... </a>
+        </div>
+        <div class="post-date">2023.05.29</div>
     </div>
-    <footer class="article-footer">
-      <a data-url="http://pinned.github.io/2023/05/29/2015-03-02-android-studio-using-2/" data-id="cli8yhxgc002rd9279k3p881m" data-title="Android Studio 使用 -- 最佳实践" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tools/" rel="tag">Tools</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-2015-04-06-activity-animation" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/05/29/2015-04-06-activity-animation/" class="article-date">
-  <time class="dt-published" datetime="2023-05-29T02:54:52.141Z" itemprop="datePublished">2023-05-29</time>
-</a>
     
-  </div>
-  <div class="article-inner">
+    <div class="post">
+        <a class="post-title" href="/2023/05/29/2015-04-03-android-studio-load-so-files/">Android Studio 中加载so库文件</a>
+        <div class="post-except">
+            在使用第三方库的时候，经常会遇到一些第三方的so库文件。
+以前在Eclipse中，只需要将*.so 的文件放到libs文件目录下就行了。
+可是在使用Android Studio的时候，却出了点小问题。记录一下，以备后面查阅:
+首先，还是将*.so文件导入到libs文件目录下面。Android Studio使用的是gradle进行编译的。在bulid.gradle文件里面，你可以很清晰的看到如下代码：
+dependencies &#123;
+    compile fileTr
+            <a class="read-more" href="/2023/05/29/2015-04-03-android-studio-load-so-files/"> ... </a>
+        </div>
+        <div class="post-date">2023.05.29</div>
+    </div>
     
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/05/29/2015-04-06-activity-animation/">Android 去掉Activtiy之间的切换动画</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <pre><code class="xml">&lt;style name=&quot;NoAnimationTheme&quot;&gt;
+    <div class="post">
+        <a class="post-title" href="/2023/05/29/2015-04-06-activity-animation/">Android 去掉Activtiy之间的切换动画</a>
+        <div class="post-except">
+            &lt;style name=&quot;NoAnimationTheme&quot;&gt;
     &lt;item name=&quot;android:windowAnimationStyle&quot;&gt;@style/Animation&lt;/item&gt;
 &lt;/style&gt;
 &lt;style name=&quot;Animation&quot;&gt;
-    &lt;item name=&quot;android:activityOpenEnterAnimation&quot;&gt;@null&lt;/item&gt;
-    &lt;item name=&quot;android:activityOpenExitAnimation&quot;&gt;@null&lt;/item&gt;
-    &lt;item name=&quot;android:activityCloseEnterAnimation&quot;&gt;@null&lt;/item&gt;
-    &lt;item name=&quot;android:activityCloseExitAnimation&quot;&gt;@null&lt;/item&gt;
-    &lt;item name=&quot;android:taskOpenEnterAnimation&quot;&gt;@null&lt;/item&gt;
-    &lt;item name=&quot;android:taskOpenExitAnimation&quot;&gt;@null&lt;/item&gt;
-    &lt;item name=&quot;android:taskCloseEnterAnimation&quot;&gt;@null&lt;/item&gt;
-    &lt;item name=&quot;android:taskCloseExitAnimation&quot;&gt;@null&lt;/item&gt;
-    &lt;item name=&quot;android:taskToFrontEnterAnimation&quot;&gt;@null&lt;/item&gt;
-    &lt;item name=&quot;android:taskToFrontExitAnimation&quot;&gt;@null&lt;/item&gt;
-    &lt;item name=&quot;android:taskToBackEnterAnimation&quot;&gt;@null&lt;/item&gt;
-    &lt;item name=&quot;android:taskToBackExitAnimation&quot;&gt;@null&lt;/item&gt;
-&lt;/style&gt;
-</code></pre>
-<p>在使用的时候，只需将不需要动画的Activity的<code>style</code>设置成这个就可以了</p>
-
-      
+    &lt;item name=&quot;android:activityOpen
+            <a class="read-more" href="/2023/05/29/2015-04-06-activity-animation/"> ... </a>
+        </div>
+        <div class="post-date">2023.05.29</div>
     </div>
-    <footer class="article-footer">
-      <a data-url="http://pinned.github.io/2023/05/29/2015-04-06-activity-animation/" data-id="cli8yhxgc002ud927b6me9gbi" data-title="Android 去掉Activtiy之间的切换动画" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-2015-04-06-android-set-textview-drawable-by-java-code" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/05/29/2015-04-06-android-set-textview-drawable-by-java-code/" class="article-date">
-  <time class="dt-published" datetime="2023-05-29T02:54:52.141Z" itemprop="datePublished">2023-05-29</time>
-</a>
     
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/05/29/2015-04-06-android-set-textview-drawable-by-java-code/">TextView之代码设置DrawableLeft</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <pre><code class="java">Drawable drawable = getResources().getDrawable(R.drawable.drawable);  
+    <div class="post">
+        <a class="post-title" href="/2023/05/29/2015-04-06-android-set-textview-drawable-by-java-code/">TextView之代码设置DrawableLeft</a>
+        <div class="post-except">
+            Drawable drawable = getResources().getDrawable(R.drawable.drawable);  
 /// 这一步必须要做,否则不会显示.  
 drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());  
 myTextview.setCompoundDrawables(drawable,null,null,null);
-</code></pre>
 
-      
+
+            <a class="read-more" href="/2023/05/29/2015-04-06-android-set-textview-drawable-by-java-code/"> ... </a>
+        </div>
+        <div class="post-date">2023.05.29</div>
     </div>
-    <footer class="article-footer">
-      <a data-url="http://pinned.github.io/2023/05/29/2015-04-06-android-set-textview-drawable-by-java-code/" data-id="cli8yhxgc002yd927g4blggol" data-title="TextView之代码设置DrawableLeft" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-2015-03-29-ubuntu-install-rails" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/05/29/2015-03-29-ubuntu-install-rails/" class="article-date">
-  <time class="dt-published" datetime="2023-05-29T02:54:52.141Z" itemprop="datePublished">2023-05-29</time>
-</a>
     
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>
-  </div>
+    <div class="post">
+        <a class="post-title" href="/2023/05/29/2014-12-24-git-checkout/">git checkout 的使用（一）</a>
+        <div class="post-except">
+            在使用git的过程中，有很多好的点
+其中，我们使用git-flow模型
+我的小伙伴创建了一个branch
 
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/05/29/2015-03-29-ubuntu-install-rails/">Ubuntu 下安装Rails</a>
-    </h1>
-  
+feature&#x2F;branch_test
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>Rails 是使用 Ruby 语言编写的网页程序开发框架，目的是为开发者提供常用组件，简化网页程序的开发。<br>只需编写较少的代码，就能实现其他编程语言或框架难以企及的功能。</p>
-</blockquote>
-<h2 id="安装Ruby"><a href="#安装Ruby" class="headerlink" title="安装Ruby"></a>安装Ruby</h2><p>在Ubuntu系统中，默认已经安装了Ruby， 但是其版本很低，要装<code>Ruby for rails</code>，就必须得装Ruby<br>升级到1.9.3及以上</p>
-<p>安装Ruby, 使用<a target="_blank" rel="noopener" href="https://www.brightbox.com/docs/ruby/ubuntu/">Brightbox 维护的 Ruby PPA</a></p>
-<pre><code class="bash">sudo apt-add-repository ppa:brightbox/ruby-ng
-sudo apt-get update
-sudo apt-get install ruby2.2 ruby2.2-dev
-</code></pre>
-<p>安装完毕过后，可以查看Ruby的版本和Gem的版本,如下：</p>
-<pre><code class="bash">~$ ruby -v
-ruby 2.2.0p0 (2014-12-25 revision 49005) [x86_64-linux-gnu]
-~$ gem -v
-2.4.5
-</code></pre>
-<h2 id="安装SQLite3"><a href="#安装SQLite3" class="headerlink" title="安装SQLite3"></a>安装SQLite3</h2><p>在这里，我使用的是<code>LinuxBrew</code>来进行安装的</p>
-<blockquote>
-<p><strong>LinuxBrew</strong>: Linuxbrew is a fork of Homebrew, the Mac OS package manager, for Linux.<br>地址：<a target="_blank" rel="noopener" href="https://github.com/Homebrew/linuxbrew">https://github.com/Homebrew/linuxbrew</a></p>
-</blockquote>
-<p>我直接将安装方法贴在这里来：</p>
-<pre><code class="html">1. 先安装依赖
+在这个地方，我想切换到branch_test分支
+我使用如下命令：
+ git checkout remotes/origin/feature/branch_test
+ 
+ git checkout origin/feature/branch_test
+ 
 
-sudo apt-get install build-essential curl git m4 ruby texinfo libbz2-dev libcurl4-openssl-dev libexpat-dev libncurses-dev zlib1g-dev
+使用上面两句命令都不得行，都只创建了一个临时分支。输出如下：
 
-2. 下载LinuxBrew的源码
-
-ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/linuxbrew/go/install)&quot;
-OR
-git clone https://github.com/Homebrew/linuxbrew.git ~/.linuxbrew
-
-3. 配置环境变量
-
-添加到你的.bashrc文件中
-export PATH=&quot;$HOME/.linuxbrew/bin:$PATH&quot;
-export MANPATH=&quot;$HOME/.linuxbrew/share/man:$MANPATH&quot;
-export INFOPATH=&quot;$HOME/.linuxbrew/share/info:$INFOPATH&quot;
-</code></pre>
-<p>LinuxBrew安装完成过后，你就可以直接安装<code>Sqlite3</code></p>
-<pre><code class="bash">brew install sqlite3
-</code></pre>
-<h2 id="安装Rails"><a href="#安装Rails" class="headerlink" title="安装Rails"></a>安装Rails</h2><p>首先，修改ruby的源到taobao的源上去</p>
-<pre><code class="bash">gem sources --remove http://rubygems.org/
-gem sources -a http://ruby.taobao.org/
-gem sources -l
-# 请确保只有 ruby.taobao.org
-</code></pre>
-<p>然后安装Rails</p>
-<pre><code class="bash"># 添加verbose会在控制台显示安装
-sudo gem install rails --verbose
-
-# 查看rails版本
-rails -v
-</code></pre>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ol>
-<li><a target="_blank" rel="noopener" href="http://chloerei.com/2014/07/13/the-best-way-to-install-the-latest-version-of-ruby-on-ubuntu/">Ubuntu 上安装 Ruby 最新版的最佳方法</a>: <a target="_blank" rel="noopener" href="http://chloerei.com/2014/07/13/the-best-way-to-install-the-latest-version-of-ruby-on-ubuntu/">http://chloerei.com/2014/07/13/the-best-way-to-install-the-latest-version-of-ruby-on-ubuntu/</a></li>
-</ol>
-
-      
+            <a class="read-more" href="/2023/05/29/2014-12-24-git-checkout/"> ... </a>
+        </div>
+        <div class="post-date">2023.05.29</div>
     </div>
-    <footer class="article-footer">
-      <a data-url="http://pinned.github.io/2023/05/29/2015-03-29-ubuntu-install-rails/" data-id="cli8yhxgk005md9271y9tdlns" data-title="Ubuntu 下安装Rails" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tools-Ruby/" rel="tag">Tools Ruby</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-2015-04-05-keystore-file-options" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/05/29/2015-04-05-keystore-file-options/" class="article-date">
-  <time class="dt-published" datetime="2023-05-29T02:54:52.141Z" itemprop="datePublished">2023-05-29</time>
-</a>
     
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>
-  </div>
+    <div class="post">
+        <a class="post-title" href="/2023/05/29/2014-9-19-atom-install/">Ubuntu 14.04 安装Atom编辑器</a>
+        <div class="post-except">
+            Ubuntu下安装Atom编辑器重装了Ubuntu系统，没得什么好的文本编辑器。又不喜欢使用默认的编辑器。所以装了一个Atom。用了一下，还可以。
 
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/05/29/2015-04-05-keystore-file-options/">Android Keystore 文件的密码修改</a>
-    </h1>
-  
+Clone the Atom repository:
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>#修改keystore密码的命令(keytool为JDK带的命令行工具)</p>
-<pre><code class="bash"># my.keysotre 是你的签名文件
-keytool -storepasswd -keystore my.keystore
-</code></pre>
-<p>#修改keystore的alias的密码</p>
-<pre><code class="bash"># my.keystore 是你的签名文件，debugalias为你alias名字
-keytool -keypasswd -keystore my.keystore -alias debugalias
-</code></pre>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pinned.github.io/2023/05/29/2015-04-05-keystore-file-options/" data-id="cli8yhxgk005pd927brbr1r20" data-title="Android Keystore 文件的密码修改" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tools-Android/" rel="tag">Tools Android</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-2014-9-19-atom-install" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/05/29/2014-9-19-atom-install/" class="article-date">
-  <time class="dt-published" datetime="2023-05-29T02:54:52.140Z" itemprop="datePublished">2023-05-29</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/05/29/2014-9-19-atom-install/">Ubuntu 14.04 安装Atom编辑器</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="Ubuntu下安装Atom编辑器"><a href="#Ubuntu下安装Atom编辑器" class="headerlink" title="Ubuntu下安装Atom编辑器"></a>Ubuntu下安装Atom编辑器</h2><p>重装了Ubuntu系统，没得什么好的文本编辑器。又不喜欢使用默认的编辑器。<br>所以装了一个Atom。用了一下，还可以。</p>
-<ol>
-<li>Clone the Atom repository:</li>
-</ol>
-<pre><code class="xml">git clone https://github.com/atom/atom
+git clone https://github.com/atom/atom
 cd atom
-</code></pre>
-<ol start="2">
-<li>Build Atom</li>
-</ol>
-<pre><code class="xml">script/build
-</code></pre>
-<p>  This will create the atom application at $TMPDIR&#x2F;atom-build&#x2F;Atom.</p>
-<ol start="3">
-<li>Install the atom and apm commands to &#x2F;usr&#x2F;local&#x2F;bin by executing:</li>
-</ol>
-<pre><code class="xml">sudo script/grunt install
-</code></pre>
-<ol start="4">
-<li>Optionally, you may generate a .deb package at $TMPDIR&#x2F;atom-build:</li>
-</ol>
-<pre><code class="xml">script/grunt mkdeb
-</code></pre>
-<p>安装过程有一点小波折，但最终还是搞定了。</p>
-<p>遇到了一个错误，信息如下：</p>
-<p><code>/usr/bin/env: node: No such file or directory</code></p>
-<hr>
-<p><strong>官方的方案</strong></p>
-<hr>
-<blockquote>
-<p>If you get this notice when attempting to script&#x2F;build, you either do not have Node.js installed, or node isn’t identified as Node.js on your machine. If it’s the latter, entering sudo ln -s &#x2F;usr&#x2F;bin&#x2F;nodejs &#x2F;usr&#x2F;bin&#x2F;node into your terminal may fix the issue.</p>
-</blockquote>
-<p>但是我还是没有解决，并且安装了Nodejs。后面才发现，原来是我安装的<br>Nodejs的位置的问题。</p>
-<p>解决办法：</p>
-<pre><code class="xml">ln -s /usr/local/node/bin/node /usr/bin/node
-</code></pre>
 
-      
+
+Build Atom
+
+script/build
+
+  This will create the atom application at $TMPDIR&#x2F;atom-b
+            <a class="read-more" href="/2023/05/29/2014-9-19-atom-install/"> ... </a>
+        </div>
+        <div class="post-date">2023.05.29</div>
     </div>
-    <footer class="article-footer">
-      <a data-url="http://pinned.github.io/2023/05/29/2014-9-19-atom-install/" data-id="cli8yhxg8001gd9273wtm1309" data-title="Ubuntu 14.04 安装Atom编辑器" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tools/" rel="tag">Tools</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-2014-9-21-Navicat install" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/05/29/2014-9-21-Navicat%20install/" class="article-date">
-  <time class="dt-published" datetime="2023-05-29T02:54:52.140Z" itemprop="datePublished">2023-05-29</time>
-</a>
     
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>
-  </div>
+</div>
 
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/05/29/2014-9-21-Navicat%20install/">Ubuntu 下安装Navicat</a>
-    </h1>
-  
+<div class="paginator">
+    <a class="extend prev" rel="prev" href="/page/4/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/6/">下一页</a>
+</div>
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="Navicat的安装"><a href="#Navicat的安装" class="headerlink" title="Navicat的安装"></a>Navicat的安装</h2><p>在使用Mysql的时候，一开始就喜欢使用Navicat，所以就想安装一个<br>Navicat来使用。</p>
-<p>很简单，去Navicat官网下一个下来，解压就可以用了。</p>
-<p>步骤如下：</p>
-<ol>
-<li>解压文件<br> <code>tar -xzvf navicat_xxx.tar.gz</code></li>
-<li>进入到解压好的文件夹中，运行就可以了<code>./start_navicat</code></li>
-</ol>
-<p>但是不知道为什么，运行没有任何反应。</p>
-<p>在google上查找了一下，才知道是没有安装32位库和wine环境</p>
-<p>打开<strong>synaptic</strong>,然后在<strong>Setting-&gt;Repros</strong>，打开界面中</p>
-<p>选择其它软件源，添加:<br><code>deb http://old-releases.ubuntu.com/ubuntu/ raring main restricted universe multiverse</code></p>
-<p>保存，退出。</p>
-<p>然后执行命令:</p>
-<pre><code class="xml">sudo apt-get install libgtk2.0-0:i386
-sudo apt-get -f install
-sudo apt-get install wine
-</code></pre>
+                <!--  -->
+                <div class="footer">
+    <span>Copyright © 2023 大罗说事</span>
+</div>
 
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pinned.github.io/2023/05/29/2014-9-21-Navicat%20install/" data-id="cli8yhxg8001jd927d9yk4ki4" data-title="Ubuntu 下安装Navicat" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tools/" rel="tag">Tools</a></li></ul>
+<!-- 
+<link rel="stylesheet" href="/css/highlight.default.css">
+ -->
 
-    </footer>
-  </div>
-  
-</article>
+<link rel="stylesheet" href="/css/atom-one-dark.css">
 
 
-
-  
-
-
-  <nav id="page-nav">
-    
-    <a class="extend prev" rel="prev" href="/page/4/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/6/">下一页 &raquo;</a>
-  </nav>
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">分类</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E5%8D%93/">安卓</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/">开源项目</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6/">读书</a></li></ul>
-    </div>
-  </div>
+<link rel="stylesheet" href="/css/code-theme.css">
 
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Camera/" rel="tag">Android Camera</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Gradle/" rel="tag">Android Gradle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Network/" rel="tag">Android Network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Proguard/" rel="tag">Proguard</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ruby-Ubuntu/" rel="tag">Ruby Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/" rel="tag">Shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Systems/" rel="tag">Systems</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools/" rel="tag">Tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools-Android/" rel="tag">Tools Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools-Ruby/" rel="tag">Tools Ruby</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools-Ruby-Rails/" rel="tag">Tools Ruby Rails</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools-SVN-Git/" rel="tag">Tools SVN Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools-Systems/" rel="tag">Tools Systems</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu-Systems-Tools/" rel="tag">Ubuntu Systems Tools</a></li></ul>
-    </div>
-  </div>
+<script src="/js/highlight.min.js"></script>
 
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签云</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Android-Camera/" style="font-size: 10px;">Android Camera</a> <a href="/tags/Android-Gradle/" style="font-size: 12.5px;">Android Gradle</a> <a href="/tags/Android-Network/" style="font-size: 12.5px;">Android Network</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Proguard/" style="font-size: 10px;">Proguard</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/Ruby-Ubuntu/" style="font-size: 10px;">Ruby Ubuntu</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/Systems/" style="font-size: 12.5px;">Systems</a> <a href="/tags/Tools/" style="font-size: 17.5px;">Tools</a> <a href="/tags/Tools-Android/" style="font-size: 15px;">Tools Android</a> <a href="/tags/Tools-Ruby/" style="font-size: 10px;">Tools Ruby</a> <a href="/tags/Tools-Ruby-Rails/" style="font-size: 10px;">Tools Ruby Rails</a> <a href="/tags/Tools-SVN-Git/" style="font-size: 10px;">Tools SVN Git</a> <a href="/tags/Tools-Systems/" style="font-size: 10px;">Tools Systems</a> <a href="/tags/Ubuntu-Systems-Tools/" style="font-size: 12.5px;">Ubuntu Systems Tools</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">归档</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">五月 2023</a></li></ul>
-    </div>
-  </div>
+<script src="/js/highlightjs-line-numbers.js"></script>
 
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">最新文章</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2023/05/29/2017-02-10-proguard-translate/">Proguard 翻译</a>
-          </li>
-        
-          <li>
-            <a href="/2023/05/29/2017-10-15-gradlew%20source%20analyze/">gradlew 源码分析</a>
-          </li>
-        
-          <li>
-            <a href="/2023/05/29/2019-05-21-Android-camera-preview/">Android Camera Preview</a>
-          </li>
-        
-          <li>
-            <a href="/2023/05/29/2019-08-10-Android-network-Configuration/">Android 网络配置</a>
-          </li>
-        
-          <li>
-            <a href="/2023/05/29/2019-08-10-Android-network-security-configuration/">Android Network security configuration</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
+<script>
+    hljs.initHighlightingOnLoad();
+    hljs.initLineNumbersOnLoad();
+    hljs.highlightAll();
+</script>
 
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      
-      &copy; 2023 罗昭成<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
-
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
-
-
-<script src="/js/jquery-3.6.4.min.js"></script>
-
-
-
-  
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
-
-
-
-
-
-  </div>
-</body>
+            </div>
+        </div>
+    </body>
 </html>

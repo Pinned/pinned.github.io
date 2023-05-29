@@ -1,961 +1,225 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  
-  
-  <title>大罗说事</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="Talk is cheap, show me the code.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="大罗说事">
-<meta property="og:url" content="http://pinned.github.io/page/2/index.html">
-<meta property="og:site_name" content="大罗说事">
-<meta property="og:description" content="Talk is cheap, show me the code.">
-<meta property="og:locale" content="zh_CN">
-<meta property="article:author" content="罗昭成">
-<meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="大罗说事" type="application/atom+xml">
-  
-  
-    <link rel="shortcut icon" href="/favicon.png">
-  
-  
-  
+    <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+    <link rel="alternate icon" type="image/png" href="/img/favicon.png">
+    <title>大罗说事 | </title>
+    
+<link rel="stylesheet" href="/css/reset.css">
+
+    
 <link rel="stylesheet" href="/css/style.css">
 
-  
     
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+<link rel="stylesheet" href="/css/markdown.css">
 
-  
-  
+    
+<link rel="stylesheet" href="/css/fonts.css">
+
 <meta name="generator" content="Hexo 6.3.0"></head>
-
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">大罗说事</a>
-      </h1>
-      
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="header">
+    <a class="logo" href="/">大罗说事</a>
+    <ul class="nav">
+        
+        <li><a href="/">首页</a></li>
+        
+        <li><a href="/archives">归档</a></li>
+        
+        <li><a href="/about">关于</a></li>
+        
+    </ul>
+</div>
+                
+                <div class="post-list">
+    
+    <div class="post">
+        <a class="post-title" href="/2023/05/29/2015-12-29-Android-RelativeLayout-Gravity/">Android RelativeLayout 之 Gravity 的使用</a>
+        <div class="post-except">
+            在xml中，ViewGroup用来控制view布局位置，我们可以使用android:gravity=&quot;center&quot;来实现。但是很少会在RelativeLayout中使用，今天碰到了一个项目中的布局使用了这个属性。但是在印象中这个属性在RelativeLayout是不生效的。但是，在项目中，这个属性生效了，并且引起了一个问题。去百度了一下，好多人在博客里面写的这个属性在RelativeLayout不生效，在这里，我在强调一下，RelativeLayout中
+            <a class="read-more" href="/2023/05/29/2015-12-29-Android-RelativeLayout-Gravity/"> ... </a>
+        </div>
+        <div class="post-date">2023.05.29</div>
     </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-        
-          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
-        
-        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://pinned.github.io"></form>
-      </div>
-    </div>
-  </div>
-</header>
-
-      <div class="outer">
-        <section id="main">
-  
-    <article id="post-2015-12-22-gradle-download-error" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/05/29/2015-12-22-gradle-download-error/" class="article-date">
-  <time class="dt-published" datetime="2023-05-29T02:54:52.144Z" itemprop="datePublished">2023-05-29</time>
-</a>
     
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%AE%89%E5%8D%93/">安卓</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/05/29/2015-12-22-gradle-download-error/">Android Studio Gradle Download Error</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>自从使用Android Studio 开始，就一直存在一个问题，那就是Gradle下载不下来。不仅如此，JCtener 与 mavenCentral 也是被墙了。</p>
-<ol>
-<li><p>我们先来解决gradle 下载的问题</p>
-<p>用浏览器挂上vpn， 将你需要的<a target="_blank" rel="noopener" href="https://services.gradle.org/distributions/gradle-2.8-all.zip">gralde-version.zip</a>文件下载下来，放到本地。打开你的项目，找到当前目录下 <code>gradle -&gt; wrapper -&gt; gradle-wrapper.properties</code> , 打开这个文件，将最后一行的地址修改为如下：<code>distributionUrl=file:///Users/pinned/Downloads/gradle-2.7-all.zip</code></p>
-<p>然后在同步一下，就可以正常使用Gradle</p>
-</li>
-<li><p>下载lib库</p>
-<p>这个得感谢网友<a target="_blank" rel="noopener" href="http://www.j99.io/">henjue</a>给我们提供的服务, 具体使用参考：[向大家提供一个jcenter镜像</p>
-</li>
-</ol>
-<p>](<a target="_blank" rel="noopener" href="http://www.j99.io/2015/06/19/%E5%90%91%E5%A4%A7%E5%AE%B6%E6%8F%90%E4%BE%9B%E4%B8%80%E4%B8%AAjcenter%E9%95%9C%E5%83%8F/">http://www.j99.io/2015/06/19/%E5%90%91%E5%A4%A7%E5%AE%B6%E6%8F%90%E4%BE%9B%E4%B8%80%E4%B8%AAjcenter%E9%95%9C%E5%83%8F/</a>)</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pinned.github.io/2023/05/29/2015-12-22-gradle-download-error/" data-id="cli8yhxgh004hd9278e9lakdt" data-title="Android Studio Gradle Download Error" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android-Gradle/" rel="tag">Android Gradle</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-2015-12-29-Android-RelativeLayout-Gravity" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/05/29/2015-12-29-Android-RelativeLayout-Gravity/" class="article-date">
-  <time class="dt-published" datetime="2023-05-29T02:54:52.144Z" itemprop="datePublished">2023-05-29</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%AE%89%E5%8D%93/">安卓</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/05/29/2015-12-29-Android-RelativeLayout-Gravity/">Android RelativeLayout 之 Gravity 的使用</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>在xml中，ViewGroup用来控制view布局位置，我们可以使用<code>android:gravity=&quot;center&quot;</code>来实现。但是很少会在RelativeLayout中使用，今天碰到了一个项目中的布局使用了这个属性。但是在印象中这个属性在RelativeLayout是不生效的。但是，在项目中，这个属性生效了，并且引起了一个问题。去百度了一下，好多人在博客里面写的这个属性在RelativeLayout不生效，在这里，我在强调一下，<strong>RelativeLayout中andorid:gravity属性是<font color='red'>生效</font>的</strong></p>
-<p>so，我们先来看一下，布局代码是怎么写的：</p>
-<p><strong>activity_main.xml</strong></p>
-<pre><code class="xml">&lt;RelativeLayout
-    xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
-    xmlns:tools=&quot;http://schemas.android.com/tools&quot;
-    android:layout_width=&quot;match_parent&quot;
-    android:layout_height=&quot;100dp&quot;
-    android:background=&quot;@android:color/holo_blue_bright&quot;
-    android:gravity=&quot;center&quot;
-    tools:context=&quot;.MainActivity&quot;&gt;
-
-    &lt;TextView
-        android:id=&quot;@+id/center_view&quot;
-        android:layout_width=&quot;100dp&quot;
-        android:layout_height=&quot;50dp&quot;
-        android:background=&quot;@android:color/holo_green_light&quot;
-        android:gravity=&quot;center&quot;
-        android:layout_centerInParent=&quot;true&quot;
-        android:text=&quot;@string/hello_world&quot;/&gt;
-
-    &lt;TextView
-        android:layout_width=&quot;wrap_content&quot;
-        android:layout_height=&quot;wrap_content&quot;
-        android:background=&quot;@android:color/holo_orange_light&quot;
-        android:layout_below=&quot;@id/center_view&quot;
-        android:layout_centerHorizontal=&quot;true&quot;
-        android:layout_marginTop=&quot;6dp&quot;
-        android:padding=&quot;6dp&quot;
-        android:text=&quot;下面的文本&quot;/&gt;
-
-&lt;/RelativeLayout&gt;
-</code></pre>
-<p>代码很简单，那我们在来看一下他的运行效果：</p>
-<p><img src="https://cloud.githubusercontent.com/assets/8403321/12022795/46c90190-adce-11e5-8cfd-f39a8d1fd4a1.png" alt="效果图"></p>
-<p>我那个擦，为什么下面那个TextView上的文字内容显示不完整，这尼玛什么情况，于是乎，我调整了一个<code>RelativeLayout</code>的高度，让他变高一点，改成<code>android:layout_height=&quot;125dp&quot;</code>, run了一下，居然正常了，如下图：<br><img src="https://cloud.githubusercontent.com/assets/8403321/12022788/299ea278-adce-11e5-93c7-104e82cbf6fb.png" alt="效果图"></p>
-<p>我特么的惊呆了，内心中一万只草泥马奔腾而过，上面那个图中，RelativeLayout中明明还有空白，为什么会导致下面的TextView的高度不够呢。</p>
-<p>带着疑惑，我去看了一下Android RelativeLayout的源码，才发现，RelativeLayout 先按照不写gravity属性的时候来计算子View的高度：</p>
-<pre><code class="html">在Nexcus下调试，得到控件的高度：
-1.首先得到RelativeLayout的高度为200px
-2.写Hello World!的TextView的height为100px
-3.可以得到最下面的那个TextView 的高度为：
-  height &lt;= 200px / 2 - 100px / 2 - marginTop(12px) = 48px = 24dp
-  很明显，24个dp不够显示TextView的内容
-  
-那加了gravity属性过后，RelativeLayout将所有的Content作为一个整体，作了个居中，如下：
-得到两个了控件的高度过后，就得到RelativeLayout 的contentHeight:
-
-contentHeight = 100px + 12px + 48px = 160px
-就可以得到上下的宽度分别为20px
-</code></pre>
-<p>RelativeLayout中源码实现：</p>
-<pre><code class="java">@Override
-protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) &#123;
-    
-    // 1. 判断是否有水平gravity与垂直gravity属性
-    // 2. 排序子View，并计算子View的大小
-    if (horizontalGravity || verticalGravity) &#123; //如果有
-        final Rect selfBounds = mSelfBounds;
-        selfBounds.set(mPaddingLeft, mPaddingTop, width - mPaddingRight,
-                height - mPaddingBottom);
-
-        final Rect contentBounds = mContentBounds;
-        Gravity.apply(mGravity, right - left, bottom - top, selfBounds, contentBounds,
-                layoutDirection);
-
-        final int horizontalOffset = contentBounds.left - left;
-        final int verticalOffset = contentBounds.top - top;
-        if (horizontalOffset != 0 || verticalOffset != 0) &#123;
-            for (int i = 0; i &lt; count; i++) &#123;
-                final View child = views[i];
-                if (child.getVisibility() != GONE &amp;&amp; child != ignore) &#123;
-                    final LayoutParams params = (LayoutParams) child.getLayoutParams();
-                    if (horizontalGravity) &#123;
-                        params.mLeft += horizontalOffset;
-                        params.mRight += horizontalOffset;
-                    &#125;
-                    if (verticalGravity) &#123;
-                        params.mTop += verticalOffset;
-                        params.mBottom += verticalOffset;
-                    &#125;
-                &#125;
-            &#125;
-        &#125;
-    &#125;
-&#125;
-</code></pre>
-<p>所以，虽然下面有空隙，TextView 也拿到到足够的空间进行展示，导致TextView中的内容显示不完整</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pinned.github.io/2023/05/29/2015-12-29-Android-RelativeLayout-Gravity/" data-id="cli8yhxgh004nd927400m47j7" data-title="Android RelativeLayout 之 Gravity 的使用" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-2016-10-10-Shell-Sub-String" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/05/29/2016-10-10-Shell-Sub-String/" class="article-date">
-  <time class="dt-published" datetime="2023-05-29T02:54:52.144Z" itemprop="datePublished">2023-05-29</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/05/29/2016-10-10-Shell-Sub-String/">Shell脚本8种字符串截取方法</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>假设有变量： <code>var=http://blog.knero.cn/test.html</code></p>
-<h2 id="号截取，删除左边字符，保留右边字符"><a href="#号截取，删除左边字符，保留右边字符" class="headerlink" title="#号截取，删除左边字符，保留右边字符"></a><code>#</code>号截取，删除左边字符，保留右边字符</h2><p><strong>示例</strong></p>
-<pre><code class="shell">var=http://blog.knero.cn/test.html
+    <div class="post">
+        <a class="post-title" href="/2023/05/29/2016-10-10-Shell-Sub-String/">Shell脚本8种字符串截取方法</a>
+        <div class="post-except">
+            假设有变量： var=http://blog.knero.cn/test.html
+#号截取，删除左边字符，保留右边字符示例
+var=http://blog.knero.cn/test.html
 sub=$&#123;var#*/&#125;
 echo $sub
-</code></pre>
-<p><strong>输出结果</strong></p>
-<pre><code class="shell">/blog.knero.cn/test.html
-</code></pre>
-<p>其中<strong>var</strong>是变量名，**#<strong>号是运算符，</strong><em>&#x2F;</em>* 表示从左边开始删除第一个**&#x2F;<strong>号及左边的所有字符<br>即删除</strong>http:&#x2F;**<br>结果是 ：&#x2F;blog.knero.cn&#x2F;test.html</p>
-<p><strong>示例</strong></p>
-<pre><code class="shell">var=http://blog.knero.cn/test.html
-sub=$&#123;var##*/&#125;
-echo $sub
-</code></pre>
-<p><strong>输出结果</strong></p>
-<pre><code class="shell">test.html
-</code></pre>
-<p>其中<strong>var</strong>是变量名，**##<strong>号是运算符，</strong><em>&#x2F;</em>* 表示从左边开始删除最后一个**&#x2F;<strong>号及左边的所有字符<br>即删除</strong><a target="_blank" rel="noopener" href="http://blog.knero.cn/">http://blog.knero.cn/</a>**<br>结果是 ：test.html</p>
-<h2 id="号截取，删除右边字符，保留左边字符"><a href="#号截取，删除右边字符，保留左边字符" class="headerlink" title="%号截取，删除右边字符，保留左边字符"></a><code>%</code>号截取，删除右边字符，保留左边字符</h2><p><strong>示例</strong></p>
-<pre><code class="shell">var=http://blog.knero.cn/test.html
-sub=$&#123;var%/*&#125;
-echo $sub
-</code></pre>
-<p><strong>输出结果</strong></p>
-<pre><code class="shell">http://blog.knero.cn
-</code></pre>
-<p>其中<strong>var</strong>是变量名，**%<strong>号是运算符，</strong>&#x2F;*** 表示从右边开始删除第一个**&#x2F;<strong>号及右边的所有字符<br>即删除</strong>test.html**<br>结果是 ：<a target="_blank" rel="noopener" href="http://blog.knero.cn/">http://blog.knero.cn</a></p>
-<p><strong>示例</strong></p>
-<pre><code class="shell">var=http://blog.knero.cn/test.html
-sub=$&#123;var%%/*&#125;
-echo $sub
-</code></pre>
-<p><strong>输出结果</strong></p>
-<pre><code class="shell">http:
-</code></pre>
-<p>其中<strong>var</strong>是变量名，**%%<strong>号是运算符，</strong>&#x2F;*** 表示从右边开始删除最后一个**&#x2F;<strong>号及右边的所有字符<br>即删除</strong>&#x2F;&#x2F;blog.knero.cn&#x2F;test.html**<br>结果是 ：http:</p>
-<h2 id="从左边指定第几个字符开始截取"><a href="#从左边指定第几个字符开始截取" class="headerlink" title="从左边指定第几个字符开始截取"></a>从左边指定第几个字符开始截取</h2><p><strong>示例</strong></p>
-<pre><code class="shell">var=http://blog.knero.cn/test.html
-sub=$&#123;var:0:5&#125;
-echo $sub
-sub=$&#123;var:7&#125;
-echo $sub
-</code></pre>
-<p><strong>输出结果</strong></p>
-<pre><code class="shell">http:
-blog.knero.cn/test.html
-</code></pre>
-<p><code>$&#123;var:0:5&#125;</code>其中的<strong>0</strong>表示左边第一个字符开始, <strong>5</strong>表示字符的总个数。<br>结果是：<strong>http:</strong></p>
-<p><code>$&#123;var:7&#125;</code>指从左边index第几个字符开始到结束</p>
-<h2 id="从右边第几个字符开始截取"><a href="#从右边第几个字符开始截取" class="headerlink" title="从右边第几个字符开始截取"></a>从右边第几个字符开始截取</h2><p><strong>示例</strong></p>
-<pre><code class="shell">var=http://blog.knero.cn/test.html
-sub=$&#123;var:0-9:4&#125;
-echo $sub
-sub=$&#123;var:0-9&#125;
-echo $sub
-</code></pre>
-<p><strong>输出结果</strong></p>
-<pre><code class="shell">test
-test.html
-</code></pre>
-<p><code>$&#123;var:0-9:4&#125;</code>其中的<strong>0-9</strong>表示左边第9个字符开始, <strong>4</strong>表示截取字符个数，如果没有就是到结束</p>
 
-      
+输出结果
+/blog.knero.cn/test.html
+
+其中var是变量名，**#号是运算符，&#x2F;* 表示从左边开始删除第一个**&#x2F;号及左边的所有字符即删除http:&#x2F;**结果是 
+            <a class="read-more" href="/2023/05/29/2016-10-10-Shell-Sub-String/"> ... </a>
+        </div>
+        <div class="post-date">2023.05.29</div>
     </div>
-    <footer class="article-footer">
-      <a data-url="http://pinned.github.io/2023/05/29/2016-10-10-Shell-Sub-String/" data-id="cli8yhxgi004pd927fg5i5pjv" data-title="Shell脚本8种字符串截取方法" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Shell/" rel="tag">Shell</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-2016-10-17-ubuntu-ruby-install" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/05/29/2016-10-17-ubuntu-ruby-install/" class="article-date">
-  <time class="dt-published" datetime="2023-05-29T02:54:52.144Z" itemprop="datePublished">2023-05-29</time>
-</a>
     
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/05/29/2016-10-17-ubuntu-ruby-install/">Ubuntu中安装Ruby的一些注意事项</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="使用RVM安装Ruby"><a href="#使用RVM安装Ruby" class="headerlink" title="使用RVM安装Ruby"></a>使用RVM安装Ruby</h2><p>安装RVM</p>
-<pre><code class="shell">curl -L get.rvm.io | bash -s stable
+    <div class="post">
+        <a class="post-title" href="/2023/05/29/2016-10-17-ubuntu-ruby-install/">Ubuntu中安装Ruby的一些注意事项</a>
+        <div class="post-except">
+            使用RVM安装Ruby安装RVM
+curl -L get.rvm.io | bash -s stable
 //若提示找不到公钥，执行下边语句
 gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
-//然后，重新执行，安装完rvm之后，需配置终端，以便下次打开终端能直接只用rvm。更改终端配置方法：参见https://rvm.io/integration/gnome-terminal
-curl -L get.rvm.io | bash -s stable
-//至此，rvm安装完成，下边我们手动为终端配置rvm环境，否则以后在终端中可能每次都要手动加载rvm环境
-//更改终端配置方法：工具栏--编辑--配置文件首选项--标题和命令--命令--选中“以登录shell方式运行命令”
-//然后，我们手动加载rvm环境，将服务器资源改为淘宝的
-///////$ source ~/.rvm/scripts/rvm 官方的加载rvm环境命令，我们就不执行了
-//临时加载rvm环境，参考：https://rvm.io/integration/gnome-terminal
-source ~/.bashrc
-source ~/.bash_profile
-</code></pre>
-<p>使用RVM安装Ruby:</p>
-<pre><code class="shell">rvm install 2.2.1
-</code></pre>
-<h2 id="设置GEM-Sources"><a href="#设置GEM-Sources" class="headerlink" title="设置GEM Sources"></a>设置GEM Sources</h2><p>以前使用淘宝的Gem sources, 但是现在以经停止维护了。现在可以使用: <a target="_blank" rel="noopener" href="http://gems.ruby-china.org/">http://gems.ruby-china.org/</a></p>
-<p>使用见官网。</p>
-
-      
+//然后，重新执行，安装完rvm之后，需配置终端，以便下次打开终端能直接只用rvm。更改终端配置方法：参见https://rvm.io/integration
+            <a class="read-more" href="/2023/05/29/2016-10-17-ubuntu-ruby-install/"> ... </a>
+        </div>
+        <div class="post-date">2023.05.29</div>
     </div>
-    <footer class="article-footer">
-      <a data-url="http://pinned.github.io/2023/05/29/2016-10-17-ubuntu-ruby-install/" data-id="cli8yhxgi004sd92796bwa1q1" data-title="Ubuntu中安装Ruby的一些注意事项" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ruby-Ubuntu/" rel="tag">Ruby Ubuntu</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-2016-10-18-android-dynamic-create-menu" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/05/29/2016-10-18-android-dynamic-create-menu/" class="article-date">
-  <time class="dt-published" datetime="2023-05-29T02:54:52.144Z" itemprop="datePublished">2023-05-29</time>
-</a>
     
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%AE%89%E5%8D%93/">安卓</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/05/29/2016-10-18-android-dynamic-create-menu/">Android 动态修改菜单</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>在一个Android创建菜单menu时，需要重写Activity的<code>onCreateOptionsMenu(Menu menu)</code>方法，这个方法只在第一次创建的时候调用一次，所以如果之后想对menu进行动态的修改，那么就不要再对<code>onCreateOptionsMenu</code>做什么手脚了。</p>
-<p>动态修改菜单就要用到<code>onPrepareOptionsMenu(Menu menu)</code>方法了。<code>onPrepareOptionsMenu</code>与<code>onCreateOptionsMenu</code>不同的是，他在每次按下menu硬键之前会被调用，所以可以在这里动态的改变menu。如果需要创建一个全新的菜单,如下：</p>
-<pre><code class="java">public boolean onPrepareOptionsMenu(Menu menu) &#123;
-    super.onPrepareOptionsMenu(menu);
-    menu.clear();
-    // create new menu code     
-    return true;
-&#125;
-</code></pre>
-
-      
+    <div class="post">
+        <a class="post-title" href="/2023/05/29/2016-10-18-android-dynamic-create-menu/">Android 动态修改菜单</a>
+        <div class="post-except">
+            在一个Android创建菜单menu时，需要重写Activity的onCreateOptionsMenu(Menu menu)方法，这个方法只在第一次创建的时候调用一次，所以如果之后想对menu进行动态的修改，那么就不要再对onCreateOptionsMenu做什么手脚了。
+动态修改菜单就要用到onPrepareOptionsMenu(Menu menu)方法了。onPrepareOptionsMenu与onCreateOptionsMenu不同的是，他在每次按下menu硬
+            <a class="read-more" href="/2023/05/29/2016-10-18-android-dynamic-create-menu/"> ... </a>
+        </div>
+        <div class="post-date">2023.05.29</div>
     </div>
-    <footer class="article-footer">
-      <a data-url="http://pinned.github.io/2023/05/29/2016-10-18-android-dynamic-create-menu/" data-id="cli8yhxgi004wd927foa02tri" data-title="Android 动态修改菜单" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-2016-10-18-set-textview-textsize-big" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/05/29/2016-10-18-set-textview-textsize-big/" class="article-date">
-  <time class="dt-published" datetime="2023-05-29T02:54:52.144Z" itemprop="datePublished">2023-05-29</time>
-</a>
     
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/05/29/2016-10-18-set-textview-textsize-big/">Android TextView setTextSize</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>Android TextView 在设置TextSize 值很大的时候，会报如下错误<code>Font size too large to fit in cache</code>。 修改方法如下：</p>
-<pre><code class="java">TextView bigText = (TextView) findViewById(R.id.bigtext);
+    <div class="post">
+        <a class="post-title" href="/2023/05/29/2016-10-18-set-textview-textsize-big/">Android TextView setTextSize</a>
+        <div class="post-except">
+            Android TextView 在设置TextSize 值很大的时候，会报如下错误Font size too large to fit in cache。 修改方法如下：
+TextView bigText = (TextView) findViewById(R.id.bigtext);
 bigText.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
-</code></pre>
 
-      
+
+            <a class="read-more" href="/2023/05/29/2016-10-18-set-textview-textsize-big/"> ... </a>
+        </div>
+        <div class="post-date">2023.05.29</div>
     </div>
-    <footer class="article-footer">
-      <a data-url="http://pinned.github.io/2023/05/29/2016-10-18-set-textview-textsize-big/" data-id="cli8yhxgi004yd9274nhg0q6i" data-title="Android TextView setTextSize" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-2016-10-21-ubuntu-install-tensorflow" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/05/29/2016-10-21-ubuntu-install-tensorflow/" class="article-date">
-  <time class="dt-published" datetime="2023-05-29T02:54:52.144Z" itemprop="datePublished">2023-05-29</time>
-</a>
     
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a>
-  </div>
+    <div class="post">
+        <a class="post-title" href="/2023/05/29/2015-07-27-git-merge-two-project/">Git 合并两个Project</a>
+        <div class="post-except">
+            问题： 公司开始使用的是SVN进行项目管理的，现在有一个项目，有两个Project，其中一个是Application， 另一个是Library。现在要把SVN上面的项目迁移到Git服务器上去。但是Git服务器上面只有一个Proj，也就是说，现在需要将两个项目和在一起。想想，本来也应该把两个项目合在一起，不然，版本管理必然也会是一个大的问题。
+解决方式
+如果不需要保存SVN上的提交日志，那直接复制提交就行了。
 
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/05/29/2016-10-21-ubuntu-install-tensorflow/">Ubuntu 安装 Tensorflow</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>首先贴一下官方<strong>GET STARTED</strong>地址： <a target="_blank" rel="noopener" href="https://www.tensorflow.org/versions/r0.11/get_started/os_setup.html#pip-installation">传送门</a></p>
-<p>安装步骤：</p>
-<ul>
-<li>安装python</li>
-</ul>
-<pre><code class="shell">sudo apt-get install python-pip python-dev
-</code></pre>
-<ul>
-<li>按电脑配置环境变量</li>
-</ul>
-<pre><code class="shell">// Ubuntu/Linux 64-bit, CPU only, Python 2.7
-export TF_BINARY_URL=https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-0.11.0rc0-cp27-none-linux_x86_64.whl
-</code></pre>
-<p>因为我使用的是虚拟机，所以就下了这个。</p>
-<ul>
-<li>安装Tensorflow</li>
-</ul>
-<pre><code class="shell">sudo pip install --upgrade $TF_BINARY_URL
-</code></pre>
-<p>我安装的时候一直提示<strong>网络错误</strong>。</p>
-<p>我的解决方案：</p>
-<ol>
-<li>翻墙下载<a target="_blank" rel="noopener" href="https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-0.11.0rc0-cp27-none-linux_x86_64.whl">tensorflow的安装文件</a></li>
-<li>配置pip国内镜像, 我使用的是<a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/help/pypi/">清华大学的源</a>, 按照文档自行配置</li>
-</ol>
-<p>安装使用如下命令：</p>
-<pre><code class="shell">// 后面的whl地址，直接指向本地地址
-sudo pip install --upgrade tensorflow-0.11.0rc0-cp27-none-linux_x86_64.whl
-</code></pre>
-
-      
+要保存提交日志
+首先要将SVN的项目迁移到GIT服务器上。我在本地
+            <a class="read-more" href="/2023/05/29/2015-07-27-git-merge-two-project/"> ... </a>
+        </div>
+        <div class="post-date">2023.05.29</div>
     </div>
-    <footer class="article-footer">
-      <a data-url="http://pinned.github.io/2023/05/29/2016-10-21-ubuntu-install-tensorflow/" data-id="cli8yhxgi0050d9270rq58ssu" data-title="Ubuntu 安装 Tensorflow" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-2016-12-23-android-get-logcat" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/05/29/2016-12-23-android-get-logcat/" class="article-date">
-  <time class="dt-published" datetime="2023-05-29T02:54:52.144Z" itemprop="datePublished">2023-05-29</time>
-</a>
     
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/05/29/2016-12-23-android-get-logcat/">获取Logcat信息</a>
-    </h1>
-  
+    <div class="post">
+        <a class="post-title" href="/2023/05/29/2016-10-21-ubuntu-install-tensorflow/">Ubuntu 安装 Tensorflow</a>
+        <div class="post-except">
+            首先贴一下官方GET STARTED地址： 传送门
+安装步骤：
 
-      </header>
+安装python
+
+sudo apt-get install python-pip python-dev
+
+
+按电脑配置环境变量
+
+// Ubuntu/Linux 64-bit, CPU only, Python 2.7
+export TF_BINARY_URL=https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-0.11.0rc0-cp
+            <a class="read-more" href="/2023/05/29/2016-10-21-ubuntu-install-tensorflow/"> ... </a>
+        </div>
+        <div class="post-date">2023.05.29</div>
+    </div>
     
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <pre><code class="java">private void getLogcat( final LogcatListener listener ) &#123;
+    <div class="post">
+        <a class="post-title" href="/2023/05/29/2016-12-23-android-get-logcat/">获取Logcat信息</a>
+        <div class="post-except">
+            private void getLogcat( final LogcatListener listener ) &#123;
 
     new Thread() &#123;
         @Override
         public void run() &#123;
             try &#123;
-                String processId = Integer.toString( android.os.Process.myPid() );
-                String[] command = new String[]&#123;
-                        &quot;logcat&quot;,
-                        &quot;-d&quot;,
-                        &quot;-v&quot;,
-                        &quot;threadtime&quot;
-                &#125;;
-                Process process = Runtime.getRuntime().exec( command );
-                BufferedReader bufferedReader = new BufferedReader( new InputStreamReader( process
-                        .getInputStream() ) );
-
-                StringBuilder log = new StringBuilder();
-                String line;
-                while ( ( line = bufferedReader.readLine() ) != null ) &#123;
-                    if ( line.contains( processId ) ) &#123;
-                        int lineColor = verboseColor;
-
-                        if ( line.contains( &quot; I &quot; ) ) &#123;
-                            lineColor = infoColor;
-                        &#125; else if ( line.contains( &quot; E &quot; ) ) &#123;
-                            lineColor = errorColor;
-                        &#125; else if ( line.contains( &quot; D &quot; ) ) &#123;
-                            lineColor = debugColor;
-                        &#125; else if ( line.contains( &quot; W &quot; ) ) &#123;
-                            lineColor = warningColor;
-                        &#125;
-
-                        log.append( &quot;&lt;font color=\&quot;#&quot; + Integer.toHexString( lineColor )
-                                .toUpperCase()
-                                .substring( 2 ) + &quot;\&quot;&gt;&quot; + line + &quot;&lt;/font&gt;&lt;br&gt;&lt;br&gt;&quot; );
-                    &#125;
-                &#125;
-                listener.onLogcatCaptured( log.toString() );
-            &#125; catch ( Exception e ) &#123;
-                e.printStackTrace();
-            &#125;
-        &#125;
-    &#125;.start();
-&#125;
-
-```java
-</code></pre>
-
-      
+                String processId = Integer.toString( android.os.Process.myPid(
+            <a class="read-more" href="/2023/05/29/2016-12-23-android-get-logcat/"> ... </a>
+        </div>
+        <div class="post-date">2023.05.29</div>
     </div>
-    <footer class="article-footer">
-      <a data-url="http://pinned.github.io/2023/05/29/2016-12-23-android-get-logcat/" data-id="cli8yhxgj0054d9271hkjbq35" data-title="获取Logcat信息" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-2015-04-17-android-notification-small-icon" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/05/29/2015-04-17-android-notification-small-icon/" class="article-date">
-  <time class="dt-published" datetime="2023-05-29T02:54:52.143Z" itemprop="datePublished">2023-05-29</time>
-</a>
     
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%AE%89%E5%8D%93/">安卓</a>
-  </div>
+    <div class="post">
+        <a class="post-title" href="/2023/05/29/2015-04-17-android-notification-small-icon/">Android 5.0设备中，Notification小图标是白色的</a>
+        <div class="post-except">
+            问题描述在使用消息推送，在通知栏中展示通知，我们会有两个图标，一个是在状态栏展示的小图标，一个是打开通知中心，展示的大图标我在我自己的测试设备中，小图标始终显示为一个白色的空白图标。
+问题解决
+原文地址：Notification bar icon turns white in Android 5 Lollipop
 
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/05/29/2015-04-17-android-notification-small-icon/">Android 5.0设备中，Notification小图标是白色的</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>在使用消息推送，在通知栏中展示通知，我们会有两个图标，一个是在状态栏展示的小图标，一个是打开通知中心，展示的大图标<br>我在我自己的测试设备中，小图标始终显示为一个白色的空白图标。</p>
-<h2 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h2><blockquote>
-<p>原文地址：<a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/28387602/notification-bar-icon-turns-white-in-android-5-lollipop?answertab=active#tab-top">Notification bar icon turns white in Android 5 Lollipop</a></p>
-</blockquote>
-<p>在这里，我把文章中说的东西抄一遍：</p>
-<p>在Android中用来展示Notification图标的代码如下：</p>
-<pre><code class="java">// android_frameworks_base/packages/SystemUI/src/com/android/systemui/
-//   statusbar/BaseStatusBar.java
-
-if (entry.targetSdk &gt;= Build.VERSION_CODES.LOLLIPOP) &#123;
-    entry.icon.setColorFilter(mContext.getResources().getColor(android.R.color.white));
-&#125; else &#123;
-    entry.icon.setColorFilter(null);
-&#125;
-</code></pre>
-<p>所以，我们将target sdk 的版本设置成<code>&lt;21</code>的就可以了 </p>
-<p>在<code>build.gradle</code>中修改成如下：</p>
-<pre><code class="bash">defaultConfig &#123;
-    targetSdkVersion 20
-&#125;
-</code></pre>
-
-      
+在这里，我把文章中说的东西抄一遍：
+在Android中用来展示Notification图标的代码如下：
+// android_frameworks_base/pa
+            <a class="read-more" href="/2023/05/29/2015-04-17-android-notification-small-icon/"> ... </a>
+        </div>
+        <div class="post-date">2023.05.29</div>
     </div>
-    <footer class="article-footer">
-      <a data-url="http://pinned.github.io/2023/05/29/2015-04-17-android-notification-small-icon/" data-id="cli8yhxge003id92700mg2sej" data-title="Android 5.0设备中，Notification小图标是白色的" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-2015-04-21-android-textview-size" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/05/29/2015-04-21-android-textview-size/" class="article-date">
-  <time class="dt-published" datetime="2023-05-29T02:54:52.143Z" itemprop="datePublished">2023-05-29</time>
-</a>
     
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/05/29/2015-04-21-android-textview-size/">Android TextView 设置字体大小</a>
-    </h1>
-  
+    <div class="post">
+        <a class="post-title" href="/2023/05/29/2015-04-27-android-reflect-inner-class/">java反射内部类</a>
+        <div class="post-except">
+            
+在java中反射加载类的方法如下
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <pre><code class="java">/**
- * Set the default text size to the given value, interpreted as &quot;scaled
- * pixel&quot; units.  This size is adjusted based on the current density and
- * user font size preference.
- *
- * @param size The scaled pixel size.
- *
- * @attr ref android.R.styleable#TextView_textSize
- */
-@android.view.RemotableViewMethod
-public void setTextSize(float size) &#123;
-    setTextSize(TypedValue.COMPLEX_UNIT_SP, size);
-&#125;
+Class rClass = Class.forName(&quot;android.R&quot;);
 
-/**
- * Set the default text size to a given unit and value.  See &#123;@link
- * TypedValue&#125; for the possible dimension units.
- *
- * @param unit The desired dimension unit.
- * @param size The desired size in the given units.
- *
- * @attr ref android.R.styleable#TextView_textSize
- */
-public void setTextSize(int unit, float size) &#123;
-    Context c = getContext();
-    Resources r;
 
-    if (c == null)
-        r = Resources.getSystem();
-    else
-        r = c.getResources();
+加载android.R.attr
 
-    setRawTextSize(TypedValue.applyDimension(
-            unit, size, r.getDisplayMetrics()));
-&#125;
+Class attrClass = Class.forName(&quot;android.R$attr&quot;);
 
-private void setRawTextSize(float size) &#123;
-    if (size != mTextPaint.getTextSize()) &#123;
-        mTextPaint.setTextSize(size);
 
-        if (mLayout != null) &#123;
-            nullLayouts();
-            requestLayout();
-            invalidate();
-        &#125;
-    &#125;
-&#125;
-</code></pre>
-<p>以上代码是<code>Android TextView</code>设置字体的源码。可以看出来，使用<code>setTextSize(float size)</code>的时候，默认单位为<code>sp</code></p>
-<p>如果你自己从<code>xml</code>中读的时候，最好使用<code>setTextSize(int unit, float size)</code>这个方法。</p>
+内部类并不是像调用那样，使用., 而是使用$
 
-      
+
+            <a class="read-more" href="/2023/05/29/2015-04-27-android-reflect-inner-class/"> ... </a>
+        </div>
+        <div class="post-date">2023.05.29</div>
     </div>
-    <footer class="article-footer">
-      <a data-url="http://pinned.github.io/2023/05/29/2015-04-21-android-textview-size/" data-id="cli8yhxge003kd9278vkn7pgj" data-title="Android TextView 设置字体大小" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-
-
-  <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/3/">下一页 &raquo;</a>
-  </nav>
+</div>
 
-</section>
-        
-          <aside id="sidebar">
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">分类</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E5%8D%93/">安卓</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/">开源项目</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6/">读书</a></li></ul>
-    </div>
-  </div>
+<div class="paginator">
+    <a class="extend prev" rel="prev" href="/">上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/3/">下一页</a>
+</div>
 
+                <!--  -->
+                <div class="footer">
+    <span>Copyright © 2023 大罗说事</span>
+</div>
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Camera/" rel="tag">Android Camera</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Gradle/" rel="tag">Android Gradle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Network/" rel="tag">Android Network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Proguard/" rel="tag">Proguard</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ruby-Ubuntu/" rel="tag">Ruby Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/" rel="tag">Shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Systems/" rel="tag">Systems</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools/" rel="tag">Tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools-Android/" rel="tag">Tools Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools-Ruby/" rel="tag">Tools Ruby</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools-Ruby-Rails/" rel="tag">Tools Ruby Rails</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools-SVN-Git/" rel="tag">Tools SVN Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools-Systems/" rel="tag">Tools Systems</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu-Systems-Tools/" rel="tag">Ubuntu Systems Tools</a></li></ul>
-    </div>
-  </div>
+<!-- 
+<link rel="stylesheet" href="/css/highlight.default.css">
+ -->
+
+<link rel="stylesheet" href="/css/atom-one-dark.css">
 
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签云</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Android-Camera/" style="font-size: 10px;">Android Camera</a> <a href="/tags/Android-Gradle/" style="font-size: 12.5px;">Android Gradle</a> <a href="/tags/Android-Network/" style="font-size: 12.5px;">Android Network</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Proguard/" style="font-size: 10px;">Proguard</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/Ruby-Ubuntu/" style="font-size: 10px;">Ruby Ubuntu</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/Systems/" style="font-size: 12.5px;">Systems</a> <a href="/tags/Tools/" style="font-size: 17.5px;">Tools</a> <a href="/tags/Tools-Android/" style="font-size: 15px;">Tools Android</a> <a href="/tags/Tools-Ruby/" style="font-size: 10px;">Tools Ruby</a> <a href="/tags/Tools-Ruby-Rails/" style="font-size: 10px;">Tools Ruby Rails</a> <a href="/tags/Tools-SVN-Git/" style="font-size: 10px;">Tools SVN Git</a> <a href="/tags/Tools-Systems/" style="font-size: 10px;">Tools Systems</a> <a href="/tags/Ubuntu-Systems-Tools/" style="font-size: 12.5px;">Ubuntu Systems Tools</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">归档</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">五月 2023</a></li></ul>
-    </div>
-  </div>
+<link rel="stylesheet" href="/css/code-theme.css">
 
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">最新文章</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2023/05/29/2017-02-10-proguard-translate/">Proguard 翻译</a>
-          </li>
-        
-          <li>
-            <a href="/2023/05/29/2017-10-15-gradlew%20source%20analyze/">gradlew 源码分析</a>
-          </li>
-        
-          <li>
-            <a href="/2023/05/29/2019-05-21-Android-camera-preview/">Android Camera Preview</a>
-          </li>
-        
-          <li>
-            <a href="/2023/05/29/2019-08-10-Android-network-Configuration/">Android 网络配置</a>
-          </li>
-        
-          <li>
-            <a href="/2023/05/29/2019-08-10-Android-network-security-configuration/">Android Network security configuration</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      
-      &copy; 2023 罗昭成<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
-
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
+<script src="/js/highlight.min.js"></script>
 
 
-<script src="/js/jquery-3.6.4.min.js"></script>
+<script src="/js/highlightjs-line-numbers.js"></script>
 
 
+<script>
+    hljs.initHighlightingOnLoad();
+    hljs.initLineNumbersOnLoad();
+    hljs.highlightAll();
+</script>
 
-  
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
-
-
-
-
-
-  </div>
-</body>
+            </div>
+        </div>
+    </body>
 </html>
