@@ -1,0 +1,1367 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>大罗说事</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Talk is cheap, show me the code.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="大罗说事">
+<meta property="og:url" content="http://pinned.github.io/index.html">
+<meta property="og:site_name" content="大罗说事">
+<meta property="og:description" content="Talk is cheap, show me the code.">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="罗昭成">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="大罗说事" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">大罗说事</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://pinned.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-2017-10-15-gradlew source analyze" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/05/29/2017-10-15-gradlew%20source%20analyze/" class="article-date">
+  <time class="dt-published" datetime="2023-05-29T02:54:52.145Z" itemprop="datePublished">2023-05-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/05/29/2017-10-15-gradlew%20source%20analyze/">gradlew 源码分析</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="gradlew-源码分析"><a href="#gradlew-源码分析" class="headerlink" title="gradlew 源码分析"></a>gradlew 源码分析</h1><p>使用Android Studio 新建一个项目，会默认使用gradle编译项目。在编译的时候可以使用：<code>gradle assembleRelease</code>, 当然，如果没有安装<code>gradle</code>的时候，也可以使用项目文件夹下面的<code>gradlew</code>进行编译。</p>
+<p>可以看到<code>gradlew</code>是一个shell脚本，他读取了系统的一些环境变量，并运行了<strong>gradle&#x2F;wrapper&#x2F;gradle-wrapper.jar</strong>文件的<code>org.gradle.wrapper.GradleWrapperMain</code>。执行编译。</p>
+<h2 id="gradle-wrapper-jar"><a href="#gradle-wrapper-jar" class="headerlink" title="gradle-wrapper.jar"></a>gradle-wrapper.jar</h2><p>在<strong>org.gradle.wrapper.GradleWrapperMain</strong>的main如下：</p>
+<pre><code class="java">public static void main(String[] args) throws Exception &#123;
+    // 第一步
+    File wrapperJar = wrapperJar();  // gradle-wrapper.jar 文件
+    File propertiesFile = wrapperProperties(wrapperJar); // gradle-wrapper.properties
+    File rootDir = rootDir(wrapperJar); // 项目根目录
+
+    // 第二步
+    CommandLineParser parser = new CommandLineParser();
+    parser.allowUnknownOptions();
+    parser.option(GRADLE_USER_HOME_OPTION, GRADLE_USER_HOME_DETAILED_OPTION).hasArgument();
+    parser.option(GRADLE_QUIET_OPTION, GRADLE_QUIET_DETAILED_OPTION);
+
+    SystemPropertiesCommandLineConverter converter = new SystemPropertiesCommandLineConverter();
+    converter.configure(parser);
+    // 读取gradlew assembleRelease [args]
+    ParsedCommandLine options = parser.parse(args);
+
+    Properties systemProperties = System.getProperties();
+    systemProperties.putAll(converter.convert(options, new HashMap&lt;String, String&gt;()));
+    // 第三步
+    File gradleUserHome = gradleUserHome(options); // gradle 所在的文件夹
+
+    addSystemProperties(gradleUserHome, rootDir);
+
+    Logger logger = logger(options);
+
+    // 第四步
+    WrapperExecutor wrapperExecutor = WrapperExecutor.forWrapperPropertiesFile(propertiesFile, logger);
+    wrapperExecutor.execute(
+            args,
+            new Install(logger, new Download(logger, &quot;gradlew&quot;, wrapperVersion()), new PathAssembler(gradleUserHome)),
+            new BootstrapMainStarter());
+&#125;
+</code></pre>
+<ol>
+<li>先根据 <strong>GradleWrapperMain</strong> 这个类找到<code>gradle-wrapper.jar</code>,<code>gradle-wrapper.properties</code>,<code>root dir</code></li>
+<li>读取系统环境的配置</li>
+<li>读取系统的gradle 配置的路径<code>gradle user home</code></li>
+<li>检测gradle-launcher-version.jar（如果不存在，先下载）, 并运行<code>org.gradle.launcher.GradleMain</code></li>
+</ol>
+<h2 id="读取系统的配置文件"><a href="#读取系统的配置文件" class="headerlink" title="读取系统的配置文件"></a>读取系统的配置文件</h2><ol>
+<li>如果在使用<code>gradlew</code>编译的时候，参数中包含<code>g</code>, 则使用这个参数的值来作为<code>gradle user home</code></li>
+<li>如果不存在<code>g</code>这个参数， 先读取<code>gradle.user.home</code>, 如果没有，读取环境变量中的<code>GRADLE_USER_HOME</code>，如果依然不存在，使用默认值<code>~/.gradle/</code></li>
+</ol>
+<pre><code class="java">public class GradleUserHomeLookup &#123;
+    public static final String DEFAULT_GRADLE_USER_HOME = System.getProperty(&quot;user.home&quot;) + &quot;/.gradle&quot;;
+    public static final String GRADLE_USER_HOME_PROPERTY_KEY = &quot;gradle.user.home&quot;;
+    public static final String GRADLE_USER_HOME_ENV_KEY = &quot;GRADLE_USER_HOME&quot;;
+
+    public static File gradleUserHome() &#123;
+        String gradleUserHome;
+        if ((gradleUserHome = System.getProperty(GRADLE_USER_HOME_PROPERTY_KEY)) != null) &#123;
+            return new File(gradleUserHome);
+        &#125;
+        if ((gradleUserHome = System.getenv(GRADLE_USER_HOME_ENV_KEY)) != null) &#123;
+            return new File(gradleUserHome);
+        &#125;
+        return new File(DEFAULT_GRADLE_USER_HOME);
+    &#125;
+&#125;
+</code></pre>
+<h2 id="gradle的检测与下载"><a href="#gradle的检测与下载" class="headerlink" title="gradle的检测与下载"></a>gradle的检测与下载</h2><p>从<code>gradle-wrapper.properties</code>中读取到<code>distributionUrl</code>,使用md5作为hash值，找到<code>gradleUserHome/gradle_dest_name/gradle_hash</code>的文件夹下</p>
+<pre><code class="java">final File markerFile = new File(localZipFile.getParentFile(), localZipFile.getName() + &quot;.ok&quot;);
+if (distDir.isDirectory() &amp;&amp; markerFile.isFile()) &#123;
+    return getAndVerifyDistributionRoot(distDir, distDir.getAbsolutePath());
+&#125;
+</code></pre>
+<p>如果文件夹下面有<code>.ok</code>文件，说明下载成功，直接使用。<br>如果不存在，则执行下载任务，下载完成，解压，在使用。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pinned.github.io/2023/05/29/2017-10-15-gradlew%20source%20analyze/" data-id="cli8ygt7n005g9y276hnifcsk" data-title="gradlew 源码分析" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android-Gradle/" rel="tag">Android Gradle</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2017-02-10-proguard-translate" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/05/29/2017-02-10-proguard-translate/" class="article-date">
+  <time class="dt-published" datetime="2023-05-29T02:54:52.145Z" itemprop="datePublished">2023-05-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/05/29/2017-02-10-proguard-translate/">Proguard 翻译</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="译-ProGuard-选项"><a href="#译-ProGuard-选项" class="headerlink" title="[译] ProGuard 选项"></a>[译] ProGuard 选项</h1><blockquote>
+<p>注：只针对 Android 平台翻译了 ProGuard 选项的相关用法，更多信息请查看<a target="_blank" rel="noopener" href="http://proguard.sourceforge.net/">官方原文</a>。</p>
+</blockquote>
+<h2 id="Input-x2F-Output-Options"><a href="#Input-x2F-Output-Options" class="headerlink" title="Input&#x2F;Output Options"></a>Input&#x2F;Output Options</h2><p><strong>@filename</strong><br>简短版 <code>-include filename</code></p>
+<p><strong>-include</strong> <em>filename</em><br>读取指定文件的配置参数</p>
+<p><strong>-basedirectory</strong> <em>directoryname</em><br>指定当前配置文件中所有相对文件路径的基础目录</p>
+<p><strong>-injars</strong> <em>class_path</em><br>指定需要处理的 jar&#x2F;aar&#x2F;war&#x2F;ear&#x2F;zip&#x2F;apk&#x2F;dir。文件(目录)内的类文件会被处理并写入到输出的文件(目录)。默认情况下，非类文件会直接复制而不会被修改。在 <em>class_path</em> 中的内容可以过滤，在 filters 部分会详细说明。为了更好的可读性，建议使用多个 <strong>-injars</strong> 来指定多个 <em>class_path</em></p>
+<p><strong>-outjars</strong> <em>class_path</em><br>指定处理完后输出的 jar&#x2F;aar&#x2F;war&#x2F;ear&#x2F;zip&#x2F;apk&#x2F;dir 名字。前面指定的 <strong>-injars</strong> 会在处理后写入到该文件(目录)中。可以过滤输出内容，在 filters 部分会详细说明。<br>需要避免输出文件覆盖输入文件。没有 <strong>-outjars</strong> 配置时，不会有输出文件。</p>
+<p><strong>-libraryjars</strong> <em>class_path</em><br>指定相关必需的 jar&#x2F;aar&#x2F;war&#x2F;ear&#x2F;zip&#x2F;apk&#x2F;dir 类库。这些文件不会包含在输出的文件中。在 <em>class_path</em> 中的内容可以过滤，在 filters 部分会详细说明。为了更好的可读性，建议使用多个 <strong>-libraryjars</strong> 来指定多个 <em>class_path</em></p>
+<p><strong>-skipnonpubliclibraryclasses</strong><br>指定读取类库时跳过非公有类，该操作可以加快处理及减少 ProGuard 的内存使用。默认情况下 ProGuard 会读取非公有类。然而，大多时候非公有类不会与 injars 有关联，如果它不会影响到 injars 的文件，建议使用该选项。如果使用该选项导致找不到类，ProGuard 会输出相应的警告信息。</p>
+<p><strong>-dontskipnonpubliclibraryclasses</strong><br>指定不忽略非公有的 library 类。4.5 版后，该选项默认开启。</p>
+<p><strong>-dontskipnonpubliclibraryclassmembers</strong><br>指定不忽略包内可见的 library 类的成员(字段及方法)。默认情况下，ProGuard 解析类库时会跳过这些成员，因为 injars 一般不会使用它们。然而有时 injars 与 library 的类同属一个包，并且 jnjars 的类使用了这些包内可见成员。在这种情况下，这些类成员是有用的。</p>
+<p><strong>-keepdirectories</strong> [<em>directory_filter</em>]<br>指定要保留在输出文件内的目录。默认情况下，目录会被移除。这会减少输出文件的大小，但如果你的代码引用到它们时可能会导致程序崩溃（例：<code>mypackage.MyCalss.class.getResource(&quot;&quot;)</code>）。这时就需要指定 <code>-keepdirectories mypackage</code>。如果没有指定过滤器，所有目录会被保留。例如，<code>-keepdirectories mydirectory</code> 匹配 mydirectory 目录；<code>-keepdirectories mydirectory/*</code> 匹配 mydirectory 的直接子目录；<code>-keepdirectorie mydirectory/**</code> 匹配所有子目录。</p>
+<p><strong>-target</strong> <em>version</em><br>指定类文件的版本号。版本号可以是 1.0，1.1，1.2，1.3，1.4，1.5(or 5)，1.6(or 6)，1.7(or 7)，1.8(or 8)。默认情况下，类文件的版本号保持不变。一般不应降低类文件的版本号，因为可能包含部分旧版本不支持的代码。</p>
+<p><strong>-forceprocessing</strong><br>指定即使输出是一样的，也强制处理 injars。一致性判断是基于指定的输入，输出和配置文件或配置文件夹的时间戳比较的。</p>
+<h2 id="Keep-Options"><a href="#Keep-Options" class="headerlink" title="Keep Options"></a><a href="#Keep-Options" title="Keep Options"></a>Keep Options</h2><p><strong>-keep</strong> [,<em>modifier</em>,…] <em>class_specification</em><br>保留指定的类及类成员</p>
+<p><strong>-keepclassmembers</strong> [,<em>modifier</em>,…] <em>class_specification</em><br>保留指定的类的成员</p>
+<p><strong>-keepclasseswithmembers</strong> [,<em>modifier</em>,…] <em>class_specification</em><br>保留满足指定条件的类和类成员</p>
+<p><strong>-keepnames</strong> <em>class_specification</em><br>简短版 <code>-keep,allowshrinking class_specification</code><br>如果指定的类和类成员在压缩期没被移除，则保留它们的名称。只有开启混淆时可用。</p>
+<p><strong>-keepclassmembernames</strong> <em>class_specification</em><br>简短版 <code>-keepclassmembers,allowshrinking class_specification</code><br>如果指定的类的成员在压缩期没被移除，则保留它们的名称。只有开启混淆时可用。</p>
+<p><strong>-keepclasseswithmembernames</strong> <em>class_specification</em><br>简短版 <code>-keepclasseswithmembers,allowshrinking class_specification</code><br>如果满足指定条件的类和类成员在压缩期没被移除，则保留它们的名称。只有开启混淆时可用。</p>
+<p><strong>-printseeds</strong> [<em>filename</em>]<br>详尽地列出类和类成员匹配的 -keep 选项清单，标准输出到指定的文件中。该清单可用于验证预期的类和类成员是否真正被找到，特别是使用了通配符的情况下。</p>
+<h2 id="Keep-Option-Modifiers"><a href="#Keep-Option-Modifiers" class="headerlink" title="Keep Option Modifiers"></a><a href="#Keep-Option-Modifiers" title="Keep Option Modifiers"></a>Keep Option Modifiers</h2><p><strong>includedescriptorclasses</strong><br>指定保留 -keep 选项保留的方法、字段的类型描述符对应的类。通常用于保留 Native 方法。</p>
+<p><strong>allowshrinking</strong><br>允许压缩</p>
+<p><strong>allowoptimization</strong><br>允许优化</p>
+<p><strong>allowobfuscation</strong><br>允许混淆</p>
+<h2 id="Shrinking-Options"><a href="#Shrinking-Options" class="headerlink" title="Shrinking Options"></a><a href="#Shrinking-Options" title="Shrinking Options"></a>Shrinking Options</h2><p><strong>-dontshrink</strong><br>指定不压缩输入的类文件，默认开启。被指定 -keep 选项的及其直接或简直依赖的类和类成员外均会被移除。压缩也会发生在优化阶段后，因为优化后可能会使类和类成员存在压缩的可能性。</p>
+<p><strong>-printusage</strong> [<em>filename</em>]<br>列出没有被使用的类和类成员，标准输出到指定的文件中。只有开启压缩时可用。</p>
+<p><strong>-whyareyoukeeping</strong> <em>class_specification</em><br>输出指定的类和类成员在压缩步骤被保留的原因。一般情况下，可能会存在多个原因。该选项会输出到目标的最短方法链。如果开启了 -verbose 选项，最短链会包含字段及方法签名。只有开启压缩时可用。</p>
+<h2 id="Optimization-Options"><a href="#Optimization-Options" class="headerlink" title="Optimization Options"></a><a href="#Optimization-Options" title="Optimization Options"></a>Optimization Options</h2><p><strong>-dontoptimize</strong><br>指定不优化输入的类文件，默认开启。所有的方法进行字节码级优化。</p>
+<p><strong>-optimizations</strong> <em>optimization_filter</em><br>开启或关闭更细粒度的优化。只有开启优化时可用。高级选项。</p>
+<p><strong>-optimizationpasses</strong> <em>n</em><br>指定优化次数，默认执行一次优化。多次优化可能会得到更好的结果。如果某次优化后没有变化，优化会自动结束。只有开启优化时可用。</p>
+<p><strong>-assumenosideeffects</strong> <em>class_specification</em><br>假定某些方法可以移除。在优化步骤，如果可以确定返回值没被使用，ProGuard 会移除这些方法。ProGuard 会分析你的代码以查找相关调用。例如：指定 <code>System.currentTimeMillis()</code>，任何返回值没有被使用的调用均会删除。某些情况下，你可以使用该选项删除日志代码。只有开启优化时可用。一般情况下该操作比较危险，可能轻易导致程序崩溃，<strong>请明确该操作的影响时使用该选项</strong></p>
+<p><strong>-allowaccessmodification</strong><br>优化时允许扩大类和类成员的访问修饰符。该选项可以改善优化的结果。例如，内联公有 getter 可能需要将字段也改成公有。只有开启优化（并开启了 <code>-repackageclasses</code>）。</p>
+<p><strong>-mergeinterfacesaggressively</strong><br>指定接口可以合并，即使实现类没实现所有的方法。该选项可以通过减少类的总数减少输出文件的大小。只有开启优化时可用。</p>
+<h2 id="Obfuscation-Options"><a href="#Obfuscation-Options" class="headerlink" title="Obfuscation Options"></a><a href="#Obfuscation-Options" title="Obfuscation Options"></a>Obfuscation Options</h2><p><strong>-dontobfuscate</strong><br>指定不混淆类文件，默认开启。</p>
+<p><strong>-printmapping</strong> [<em>filename</em>]<br>输出类和类成员新旧名字之间的映射到指定文件中。只有开启混淆时可用。</p>
+<p><strong>-applymapping</strong> <em>filename</em><br>重用映射，映射文件未列出的类和类成员会使用随机的名称。如果代码结构从根本上发生变化，ProGuard 可能会输出映射会引起冲突警告。你可以通过添加 <code>-useuniqueclassmembernames</code> 选项来降低风险。只能指定一个映射文件。只有开启混淆时可用。</p>
+<p><strong>-obfuscationdictionary</strong> <em>filename</em><br>使用文件中的关键字作为方法及字段混淆后的名称。默认使用 ‘a’，’b’ 等短名称作为混淆后的名称。你可以指定保留关键字或不相关的标识符。文件中的空格、标点符号、重复的单词及注释会被忽略。只有开启混淆时可用。</p>
+<p><strong>-classobfuscationdictionary</strong> <em>filename</em><br>使用文件中的关键字作为类混淆后的名称，类似于 <code>-obfuscationdictionary</code>。只有开启混淆时可用。</p>
+<p><strong>-packageobfuscationdictionary</strong> <em>filename</em><br>使用文件中的关键字作为包混淆后的名称，类似于 <code>-obfuscationdictionary</code>。只有开启混淆时可用。</p>
+<p><strong>-overloadaggressively</strong><br>开启侵入性重载混淆。多个字段及方法允许同名，只要它们的参数及返回值类型不同。该选项可使处理后的代码更小（及更难阅读）。只有开启混淆时可用。<br>注：Dalvik 不能处理重载的静态字段</p>
+<p><strong>-useuniqueclassmembernames</strong><br>方法同名混淆后亦同名，方法不同名混淆后亦不同名。不使用该选项时，类成员可被映射到相同的名称。因此该选项会增加些许输出文件的大小。只有开启混淆时可用。</p>
+<p><strong>-dontusemixedcaseclassnames</strong><br>混淆时不会产生大小写混合的类名。默认混淆后的类名可以包含大写及小写。如果 jar 被解压到非大小写敏感的系统（比如 Windows），解压工具可能会将命名类似的文件覆盖另一个文件。只有开启混淆时可用。</p>
+<p><strong>-keeppackagenames</strong> [<em>package_filter</em>]<br>不混淆指定的包名。过滤器是由逗号分隔的包名列表。包名可以包含 ？、<em>、</em>* 通配符，并且可以在包名前加上 ! 否定符。只有开启混淆时可用。</p>
+<p><strong>-flattenpackagehierarchy</strong> [<em>package_name</em>]<br>重新打包所有重命名的包到给定的包中。如果没参数或字符串为空，包移动到根包下。该选项是进一步混淆包名的例子，可以使处理后的代码更小更难阅读。只有开启混淆时可用。</p>
+<p><strong>-repackageclasses</strong> [<em>package_name</em>]<br>重新打包所有重命名的类到给定的包中。如果没参数或字符串为空，类的包会被完全移除。该选项覆盖 <code>-flattenpackagehierarchy</code> ，是进一步混淆包名的另一个例子，可以使处理后的代码更小更难阅读。曾用名为 <code>-defaultpackage</code>。只有开启混淆时可用。</p>
+<p><strong>-keepattributes</strong> [<em>attribute_filter</em>]<br>保留任何可选属性。过滤器是由逗号分隔的 JVM 及 ProGuard 支持的属性列表。属性名可以包含 ？、<em>、</em>* 通配符，并且可以在属性名前加上 ! 否定符。例如：处理库文件时应该加上 <code>Exceptions</code>,<code>InnerClasses</code>,<code>Signature</code> 属性。同时保留 <code>SourceFile</code> 及 <code>LineNumberTable</code> 属性使混淆后仍能获取准确的堆栈信息。同时如果你的代码有使用注解你可能会保留 <code>annotations</code> 属性。只有开启混淆时可用。</p>
+<p><strong>-keepparameternames</strong><br>保留已保留方法的参数的名称及类型。只有开启混淆时可用。</p>
+<p><strong>-renamesourcefileattribute</strong> [<em>string</em>]<br>指定一个常量字符串作为 <code>SourceFile</code>（和 <code>SourceDir</code>）属性的值。需要被 <code>-keepattributes</code> 选项指定保留。只有开启混淆时可用。</p>
+<p><strong>-adaptclassstrings</strong> [<em>class_filter</em>]<br>混淆与完整类名一致的字符串。没指定过滤器时，所有符合现有类的完整类名的字符串常量均会混淆。只有开启混淆时可用。</p>
+<p><strong>-adaptresourcefilenames</strong> [<em>file_filter</em>]<br>以混淆后的类文件作为样本重命名指定的源文件。没指定过滤器时，所有源文件都会重命名。只有开启混淆时可用。</p>
+<p><strong>-adaptresourcefilecontents</strong> [<em>file_filter</em>]<br>以混淆后的类文件作为样本混淆指定的源文件中与完整类名一致的内容。没指定过滤器时，所有源文件中与完整类名一致的内容均会混淆。只有开启混淆时可用。</p>
+<h2 id="Preverification-Options"><a href="#Preverification-Options" class="headerlink" title="Preverification Options"></a><a href="#Preverification-Options" title="Preverification Options"></a>Preverification Options</h2><p><strong>-dontpreverify</strong><br>指定不对处理后的类文件进行预校验。默认情况下如果类文件的目标平台是 Java Micro Edition 或 Java 6 或更高时会进行预校验。目标平台是 Android 时没必要开启，关闭可减少处理时间。</p>
+<p><strong>-microedition</strong><br>指定处理后的类文件目标平台是 Java Micro Edition。</p>
+<h2 id="General-Options"><a href="#General-Options" class="headerlink" title="General Options"></a><a href="#General-Options" title="General Options"></a>General Options</h2><p><strong>-verbose</strong><br>指定处理期间打印更多相关信息。</p>
+<p><strong>-dontnote</strong> [<em>class_filter</em>]<br>指定配置中潜在错误或遗漏时不打印相关信息。类名错误或遗漏选项时这些信息可能会比较有用。<em>class_filter</em> 是一个可选的正则表达式。类名匹配时 ProGuard 不会输出这些类的相关信息。</p>
+<p><strong>-dontwarn</strong> [<em>class_filter</em>]<br>指定找不到引用或其他重要问题时不打印警告信息。<em>class_filter</em> 是一个可选的正则表达式。类名匹配时 ProGuard 不会输出这些类的相关信息。<br>注意：如果找不到引用的类或方法在处理过程中是必须的，处理后的代码将会无法正常运行。<strong>请明确该操作的影响时使用该选项</strong>。</p>
+<p><strong>-ignorewarnings</strong><br>打印找不到引用或其他重要问题的警告信息，但继续处理代码。<br>注意：如果找不到引用的类或方法在处理过程中是必须的，处理后的代码将会无法正常运行。<strong>请明确该操作的影响时使用该选项</strong>。</p>
+<p><strong>-printconfiguration</strong> [<em>filename</em>]<br>将已解析过的配置标准输出到指定的文件。该选项可用于调试配置。</p>
+<p><strong>-dump</strong> [<em>filename</em>]<br>标准输出类文件的内部结构到给定的文件中。例如，你可能要输出一个 jar 文件的内容而不需要进行任何处理。</p>
+<hr>
+<p>使用参考：</p>
+<p><a target="_blank" rel="noopener" href="https://www.guardsquare.com/en/proguard/manual/examples">传送门</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pinned.github.io/2023/05/29/2017-02-10-proguard-translate/" data-id="cli8ygt7n005j9y27f71r5jx3" data-title="Proguard 翻译" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Proguard/" rel="tag">Proguard</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2019-05-21-Android-camera-preview" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/05/29/2019-05-21-Android-camera-preview/" class="article-date">
+  <time class="dt-published" datetime="2023-05-29T02:54:52.145Z" itemprop="datePublished">2023-05-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AE%89%E5%8D%93/">安卓</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/05/29/2019-05-21-Android-camera-preview/">Android Camera Preview</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="Android-Camera-Preview"><a href="#Android-Camera-Preview" class="headerlink" title="Android Camera Preview"></a>Android Camera Preview</h3><p>现如今，每一台Android设备基本都有多个摄像头，基本可以分为两类，前置摄像头与后置摄像头。在API中，每一个摄像头硬件，称之为一个 CameraDevice。我们开发者关心的是，每一个 CameraDevice 同时会输出多个数据流。</p>
+<p><img src="/2019-05-21-Android-camera-preview.assets/0*ugRv8BWWMigxK03S.png" alt="0*ugRv8BWWMigxK03S"></p>
+<p>此图来源于 Google I&#x2F;O 2018， 从图中，可以看到，摄像头获取到的数据流会转换不同的数据流来交由不同的逻辑模块进行处理。为什么会这样子做呢？在不用的场景中，数据可能会有不同的优化策略，用来更好的适应对应的场景。</p>
+<h3 id="SurfaceView"><a href="#SurfaceView" class="headerlink" title="SurfaceView"></a>SurfaceView</h3><p> 顾名思义，SurfaceView 是一个视图，继承自 View。同时内嵌 Surface 。SurfaceView 可以通过 SurfaceHolder 去访问对应的 Surface。</p>
+<p>SurfaceView 的生命周期：</p>
+<ul>
+<li>当 SurfaceView 可见时， Surface 就会被创建</li>
+<li>当SufaceView 不可见时， Surface 就会被销毁</li>
+</ul>
+<p>我们可以通过实现 <code>SurfaceHolder.Callback</code>可以获得对应生命周期的回调：</p>
+<pre><code class="java">public interface Callback &#123;
+    /**
+     * 在Surface第一次创建后，立即回调到这个方法中
+     */
+    public void surfaceCreated(SurfaceHolder holder);
+
+    /**
+     * 当Surface的结构（格式/大小）发生变化时，立即回调，此方法至少会被调用一次
+     */
+    public void surfaceChanged(SurfaceHolder holder, int format, int width, int height);
+
+    /**
+     * 当 Surface 被销毁的时候，会立即回调到这个方法中。
+     */
+    public void surfaceDestroyed(SurfaceHolder holder);
+&#125;
+</code></pre>
+<h3 id="Surface"><a href="#Surface" class="headerlink" title="Surface"></a>Surface</h3><p>在使用摄像头的过程中，我们使用 SurfaceView 来实现摄像头数据的预览。其中用来绘制图像的就是 Surface。它是原始图像缓冲区（Raw Buffer）的一个句柄，也可以这样子理解，相当于C++中的一块内存句柄。通过句柄 surface 可获取对应的原始图像缓冲区, 原始图像缓冲区（raw buffer）中存储的即是图像的原始像素数据。</p>
+<p>Surface不仅使用在 CameraView 中， 我们正常的View绘制到屏幕上也是使用的 Surface。 </p>
+<p>在来看一下，Camera启动代码：</p>
+<pre><code class="java">mCamera = Camera.open(cameraId); // 启动相机
+mCamera.setPreviewDisplay(surfaceView.getHolder()); // 设置 Preview 的View
+// mCamera.setPreviewTexture(SurfaceTexture); 使用surfaceTexture 来显示 
+mCamera.startPreview();
+</code></pre>
+<p>在上述代码中，就可以实现相机启动，并且在 <code>surfaceView</code> 中显示预览。</p>
+<pre><code class="java">/**
+ * Sets the &#123;@link Surface&#125; to be used for live preview.
+ * Either a surface or surface texture is necessary for preview, and
+ * preview is necessary to take pictures.  The same surface can be re-set
+ * without harm.  Setting a preview surface will un-set any preview surface
+ * texture that was set via &#123;@link #setPreviewTexture&#125;.
+ *
+ * &lt;p&gt;The &#123;@link SurfaceHolder&#125; must already contain a surface when this
+ * method is called.  If you are using &#123;@link android.view.SurfaceView&#125;,
+ * you will need to register a &#123;@link SurfaceHolder.Callback&#125; with
+ * &#123;@link SurfaceHolder#addCallback(SurfaceHolder.Callback)&#125; and wait for
+ * &#123;@link SurfaceHolder.Callback#surfaceCreated(SurfaceHolder)&#125; before
+ * calling setPreviewDisplay() or starting preview.
+ *
+ * &lt;p&gt;This method must be called before &#123;@link #startPreview()&#125;.  The
+ * one exception is that if the preview surface is not set (or set to null)
+ * before startPreview() is called, then this method may be called once
+ * with a non-null parameter to set the preview surface.  (This allows
+ * camera setup and surface creation to happen in parallel, saving time.)
+ * The preview surface may not otherwise change while preview is running.
+ *
+ */
+public final void setPreviewDisplay(SurfaceHolder holder) throws IOException &#123;
+    if (holder != null) &#123;
+        setPreviewSurface(holder.getSurface());
+    &#125; else &#123;
+        setPreviewSurface((Surface)null);
+    &#125;
+&#125;
+
+/**
+ * @hide
+ */
+public native final void setPreviewSurface(Surface surface) throws IOException;
+</code></pre>
+<h3 id="SurfaceHolder"><a href="#SurfaceHolder" class="headerlink" title="SurfaceHolder"></a>SurfaceHolder</h3><p>它是用来控制surface的一个抽象接口。可以通过SurfaceHolder来控制surface的尺寸和格式，修改surface的像素格式，监视surface的变化等等，SurfaceHolder是SurfaceView的典型接口。<br>使用SurfaceHolder来修改surface 与直接控制SurfaceView来修改surface不同之处是，前者需要使用 lockCanvas()。</p>
+<h3 id="GLSurfaceView"><a href="#GLSurfaceView" class="headerlink" title="GLSurfaceView"></a>GLSurfaceView</h3><p>与 SurfaceView 是 Surface 和 View 的结合类似, GLSurfaceView是将SurfaceTexture 是 Surface 和 GLES texture 的结合。<br>SurfaceTexture 提供了 onFrameAvailable,　updateTexImage方法来方便生产者与消费者来使用与该 SurfaceTexture 绑定的　texture。<br>一般使用逻辑:　</p>
+<ul>
+<li>首先app 层创建一个　GLES texture, 并利用该　GLES texture id　创建一个 SurfaceTexture 。</li>
+<li>然后app层将该 SurfaceTexture 设置给内容的生产者(如 Camera), 当生产者产生了对应的 buffer 时，会通过 onFrameAvailable() 通知app 层。</li>
+<li>最后app 层通过 updateTexImage 消费掉一个　buffer, 并将内容更新至创建 SurfaceTexture 对应的 texture ID。</li>
+</ul>
+<p>SurfaceTexture 在创建时即会创建作为消费者的 BufferQueue,后面的 updateTexImage 即从 BufferQueue 中取出一个 buffer。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pinned.github.io/2023/05/29/2019-05-21-Android-camera-preview/" data-id="cli8ygt7n005m9y27g8c3b4w5" data-title="Android Camera Preview" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android-Camera/" rel="tag">Android Camera</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2019-08-10-Android-network-Configuration" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/05/29/2019-08-10-Android-network-Configuration/" class="article-date">
+  <time class="dt-published" datetime="2023-05-29T02:54:52.145Z" itemprop="datePublished">2023-05-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AE%89%E5%8D%93/">安卓</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/05/29/2019-08-10-Android-network-Configuration/">Android 网络配置</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="HTTP-与-HTTPS"><a href="#HTTP-与-HTTPS" class="headerlink" title="HTTP 与 HTTPS"></a>HTTP 与 HTTPS</h1><p>自2017年1月1日开始，苹果要求所有的APP都要使用 HTTPS 进行网络请求，否则无法上架。但是 HTTPS 在 2000 年就已经确定下来。10多年过去，现在依然还有很多网站使用着 HTTP 协议。</p>
+<p>HTTP协议以明文方式发送内容，不提供任何方式的数据加密，如果攻击者截取了Web浏览器和网站服务器之间的传输报文，就可以直接读懂其中的信息。为了数据传输的安全，HTTPS在HTTP的基础上加入了SSL协议，SSL依靠证书来验证服务器的身份，并为浏览器和服务器之间的通信加密。</p>
+<p>Android 也从 Android 9.0 开始限制 HTTP 的网路请求。</p>
+<h1 id="Android-网络安全配置"><a href="#Android-网络安全配置" class="headerlink" title="Android 网络安全配置"></a>Android 网络安全配置</h1><p>在 Android App 的开发过程中，测试服务器部署到内网服务器，没有配置 HTTPS 证书，导致我们的 APP 在 Android 9.0 上进行运行测试。</p>
+<p><strong>解决方案</strong></p>
+<ol>
+<li><p>在 res&#x2F;xml 文件中创建 <code>network_security_config.xml</code> (文件名可修改)，并按如下写入</p>
+<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;network-security-config&gt;
+    &lt;base-config cleartextTrafficPermitted=&quot;true&quot;&gt;
+        &lt;trust-anchors&gt;
+            &lt;certificates src=&quot;system&quot; /&gt;
+            &lt;certificates src=&quot;user&quot; /&gt;
+        &lt;/trust-anchors&gt;
+    &lt;/base-config&gt;
+&lt;/network-security-config&gt;
+</code></pre>
+</li>
+<li><p>在 <code>AndroidManifest.xml</code> 的 <strong>application</strong> 标签中添加网络设置</p>
+<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;manifest xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    package=&quot;com.knero.network.example&quot;&gt;
+&lt;application xmlns:tools=&quot;http://schemas.android.com/tools&quot;
+        android:networkSecurityConfig=&quot;@xml/network_security_config&quot;&gt;
+&lt;/application&gt;
+</code></pre>
+</li>
+</ol>
+<p>到此，在Android 9.0 上，所有的 HTTP 网络请求都可以进行访问了。</p>
+<h1 id="Android-默认网络配置"><a href="#Android-默认网络配置" class="headerlink" title="Android 默认网络配置"></a>Android 默认网络配置</h1><p>在 Android 9.0（API Level 28）或者更高的版本，网络配置默认如下：</p>
+<pre><code class="xml">&lt;base-config cleartextTrafficPermitted=&quot;false&quot;&gt;
+    &lt;trust-anchors&gt;
+        &lt;certificates src=&quot;system&quot; /&gt;
+    &lt;/trust-anchors&gt;
+&lt;/base-config&gt;
+</code></pre>
+<p>在 Android 7.0 (API level 24) 到 Android 8.1 (API level 27) 中，网络默认配置如下：</p>
+<pre><code class="xml">&lt;base-config cleartextTrafficPermitted=&quot;true&quot;&gt;
+    &lt;trust-anchors&gt;
+        &lt;certificates src=&quot;system&quot; /&gt;
+    &lt;/trust-anchors&gt;
+&lt;/base-config&gt;
+</code></pre>
+<p>在 Android 6.0（API Level 23）或者以下版本，网络默认配置如下： </p>
+<pre><code class="xml">&lt;base-config cleartextTrafficPermitted=&quot;true&quot;&gt;
+    &lt;trust-anchors&gt;
+        &lt;certificates src=&quot;system&quot; /&gt;
+        &lt;certificates src=&quot;user&quot; /&gt;
+    &lt;/trust-anchors&gt;
+&lt;/base-config&gt;
+</code></pre>
+<blockquote>
+<p>PS: 在 Android 7.0 （API level 24）以上， 手机系统安装第三方证书也不能抓包，就是因为 trust-anchors 配置了只支持系统的，如果要实现抓包，可修改配置为 Android 6.0 的版本。</p>
+</blockquote>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://developer.android.com/training/articles/security-config#CleartextTrafficPermitted">Network security configuration</a></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pinned.github.io/2023/05/29/2019-08-10-Android-network-Configuration/" data-id="cli8ygt7n005q9y27ff9tathn" data-title="Android 网络配置" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android-Network/" rel="tag">Android Network</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2019-08-10-Android-network-security-configuration" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/05/29/2019-08-10-Android-network-security-configuration/" class="article-date">
+  <time class="dt-published" datetime="2023-05-29T02:54:52.145Z" itemprop="datePublished">2023-05-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AE%89%E5%8D%93/">安卓</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/05/29/2019-08-10-Android-network-security-configuration/">Android Network security configuration</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>The Network Security Configuration feature lets apps customize their network security settings in a safe, declarative configuration file without modifying app code. These settings can be configured for specific domains and for a specific app. The key capabilities of this feature are as follows:</p>
+<ul>
+<li><strong>Custom trust anchors:</strong> Customize which Certificate Authorities (CA) are trusted for an app’s secure connections. For example, trusting particular self-signed certificates or restricting the set of public CAs that the app trusts.</li>
+<li><strong>Debug-only overrides:</strong> Safely debug secure connections in an app without added risk to the installed base.</li>
+<li><strong>Cleartext traffic opt-out:</strong> Protect apps from accidental usage of cleartext traffic.</li>
+<li><strong>Certificate pinning:</strong> Restrict an app’s secure connection to particular certificates.</li>
+</ul>
+<h2 id="Add-a-Network-Security-Configuration-file"><a href="#Add-a-Network-Security-Configuration-file" class="headerlink" title="Add a Network Security Configuration file"></a>Add a Network Security Configuration file</h2><p>The Network Security Configuration feature uses an XML file where you specify the settings for your app. You must include an entry in the manifest of your app to point to this file. The following code excerpt from a manifest demonstrates how to create this entry:</p>
+<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;manifest ... &gt;
+    &lt;application android:networkSecurityConfig=&quot;@xml/network_security_config&quot;
+                    ... &gt;
+        ...
+    &lt;/application&gt;
+&lt;/manifest&gt;
+</code></pre>
+<h2 id="Customize-trusted-CAs"><a href="#Customize-trusted-CAs" class="headerlink" title="Customize trusted CAs"></a>Customize trusted CAs</h2><p>An app may want to trust a custom set of CAs instead of the platform default. The most common reasons of this are:</p>
+<ul>
+<li>Connecting to a host with a custom certificate authority, such as a CA that is self-signed or is issued internally within a company.</li>
+<li>Limiting the set of CAs to only the CAs you trust instead of every pre-installed CA.</li>
+<li>Trusting additional CAs not included in the system.</li>
+</ul>
+<p>By default, secure connections (using protocols like TLS and HTTPS) from all apps trust the pre-installed system CAs, and apps targeting Android 6.0 (API level 23) and lower also trust the user-added CA store by default. An app can customize its own connections using <code>base-config</code> (for app-wide customization) or <code>domain-config</code> (for per-domain customization).</p>
+<h3 id="Configure-a-custom-CA"><a href="#Configure-a-custom-CA" class="headerlink" title="Configure a custom CA"></a>Configure a custom CA</h3><p>Assume you want to connect to your host which uses a self-signed SSL certificate or to a host whose SSL certificate is issued by a non-public CA which you trust, such as your company’s internal CA.</p>
+<p><code>res/xml/network_security_config.xml</code>:</p>
+<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;network-security-config&gt;
+    &lt;domain-config&gt;
+        &lt;domain includeSubdomains=&quot;true&quot;&gt;example.com&lt;/domain&gt;
+        &lt;trust-anchors&gt;
+            &lt;certificates src=&quot;@raw/my_ca&quot;/&gt;
+        &lt;/trust-anchors&gt;
+    &lt;/domain-config&gt;
+&lt;/network-security-config&gt;
+</code></pre>
+<p>Add the self-signed or non-public CA certificate, in PEM or DER format, to <code>res/raw/my_ca</code>.</p>
+<h3 id="Limit-the-set-of-trusted-CAs"><a href="#Limit-the-set-of-trusted-CAs" class="headerlink" title="Limit the set of trusted CAs"></a>Limit the set of trusted CAs</h3><p>An app that does not want to trust all CAs trusted by system can instead specify its own reduced set of CAs to trust. This protects the app from fraudulent certificates issued by any of the other CAs.</p>
+<p>The configuration to limit the set of trusted CAs is similar to <a target="_blank" rel="noopener" href="https://developer.android.com/training/articles/security-config#ConfigCustom">trusting a custom CA</a> for a specific domain except that multiple CAs are provided in the resource.</p>
+<p><code>res/xml/network_security_config.xml</code>:</p>
+<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;network-security-config&gt;
+    &lt;domain-config&gt;
+        &lt;domain includeSubdomains=&quot;true&quot;&gt;secure.example.com&lt;/domain&gt;
+        &lt;domain includeSubdomains=&quot;true&quot;&gt;cdn.example.com&lt;/domain&gt;
+        &lt;trust-anchors&gt;
+            &lt;certificates src=&quot;@raw/trusted_roots&quot;/&gt;
+        &lt;/trust-anchors&gt;
+    &lt;/domain-config&gt;
+&lt;/network-security-config&gt;
+</code></pre>
+<p>Add the trusted CAs, in PEM or DER format, to <code>res/raw/trusted_roots</code>. Note that if using PEM format the file must contain <em>only</em> PEM data and no extra text. You can also provide multiple <a target="_blank" rel="noopener" href="https://developer.android.com/training/articles/security-config#certificates">&#96;&#96;</a> elements instead of one.</p>
+<h3 id="Trust-additional-CAs"><a href="#Trust-additional-CAs" class="headerlink" title="Trust additional CAs"></a>Trust additional CAs</h3><p>An app may want to trust additional CAs not trusted by the system, this could be due to the system not yet including the CA or a CA that does not meet the requirements for inclusion into the Android system. An app can do this by specifying multiple certificate sources for a configuration.</p>
+<p><code>res/xml/network_security_config.xml</code>:</p>
+<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;network-security-config&gt;
+    &lt;base-config&gt;
+        &lt;trust-anchors&gt;
+            &lt;certificates src=&quot;@raw/extracas&quot;/&gt;
+            &lt;certificates src=&quot;system&quot;/&gt;
+        &lt;/trust-anchors&gt;
+    &lt;/base-config&gt;
+&lt;/network-security-config&gt;
+</code></pre>
+<h2 id="Configure-CAs-for-debugging"><a href="#Configure-CAs-for-debugging" class="headerlink" title="Configure CAs for debugging"></a>Configure CAs for debugging</h2><p>When debugging an app that connects over HTTPS, you may want to connect to a local development server, which does not have the SSL certificate for your production server. In order to support this without any modification to your app’s code, you can specify debug-only CAs, which are trusted <em>only</em> when <a target="_blank" rel="noopener" href="https://developer.android.com/guide/topics/manifest/application-element.html#debug">android:debuggable</a> is <code>true</code>, by using <code>debug-overrides</code>. Normally, IDEs and build tools set this flag automatically for non-release builds.</p>
+<p>This is safer than the usual conditional code because, as a security precaution, app stores do not accept apps which are marked debuggable.</p>
+<p><code>res/xml/network_security_config.xml</code>:</p>
+<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;network-security-config&gt;
+    &lt;debug-overrides&gt;
+        &lt;trust-anchors&gt;
+            &lt;certificates src=&quot;@raw/debug_cas&quot;/&gt;
+        &lt;/trust-anchors&gt;
+    &lt;/debug-overrides&gt;
+&lt;/network-security-config&gt;
+</code></pre>
+<h2 id="Opt-out-of-cleartext-traffic"><a href="#Opt-out-of-cleartext-traffic" class="headerlink" title="Opt out of cleartext traffic"></a>Opt out of cleartext traffic</h2><blockquote>
+<p> <strong>Note:</strong> The guidance in this section applies only to apps that target Android 8.1 (API level 27) or lower. Starting with Android 9 (API level 28), cleartext support is disabled by default.</p>
+</blockquote>
+<p>Applications intending to connect to destinations using only secure connections can opt-out of supporting cleartext (using the unencrypted HTTP protocol instead of HTTPS) to those destinations. This option helps prevent accidental regressions in apps due to changes in URLs provided by external sources such as backend servers. See <code>NetworkSecurityPolicy.isCleartextTrafficPermitted()</code> for more details.</p>
+<p>For example, an app may want to ensure that all connections to <code>secure.example.com</code> are always done over HTTPS to protect sensitive traffic from hostile networks.</p>
+<p><code>res/xml/network_security_config.xml</code>:</p>
+<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;network-security-config&gt;
+    &lt;domain-config cleartextTrafficPermitted=&quot;false&quot;&gt;
+        &lt;domain includeSubdomains=&quot;true&quot;&gt;secure.example.com&lt;/domain&gt;
+    &lt;/domain-config&gt;
+&lt;/network-security-config&gt;
+</code></pre>
+<h2 id="Pin-certificates"><a href="#Pin-certificates" class="headerlink" title="Pin certificates"></a>Pin certificates</h2><p>Normally, an app trusts all pre-installed CAs. If any of these CAs were to issue a fraudulent certificate, the app would be at risk from a man-in-the-middle attack. Some apps choose to limit the set of certificates they accept by either limiting the set of CAs they trust or by certificate pinning.</p>
+<p>Certificate pinning is done by providing a set of certificates by hash of the public key (<code>SubjectPublicKeyInfo</code> of the X.509 certificate). A certificate chain is then valid only if the certificate chain contains at least one of the pinned public keys.</p>
+<p>Note that, when using certificate pinning, you should always include a backup key so that if you are forced to switch to new keys or change CAs (when pinning to a CA certificate or an intermediate of that CA), your app’s connectivity is unaffected. Otherwise, you must push out an update to the app to restore connectivity.</p>
+<p>Additionally, it is possible to set an expiration time for pins after which pinning is not performed. This helps prevent connectivity issues in apps which have not been updated. However, setting an expiration time on pins may enable pinning bypass.</p>
+<p><code>res/xml/network_security_config.xml</code>:</p>
+<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;network-security-config&gt;
+    &lt;domain-config&gt;
+        &lt;domain includeSubdomains=&quot;true&quot;&gt;example.com&lt;/domain&gt;
+        &lt;pin-set expiration=&quot;2018-01-01&quot;&gt;
+            &lt;pin digest=&quot;SHA-256&quot;&gt;7HIpactkIAq2Y49orFOOQKurWxmmSFZhBCoQYcRhJ3Y=&lt;/pin&gt;
+            &lt;!-- backup pin --&gt;
+            &lt;pin digest=&quot;SHA-256&quot;&gt;fwza0LRMXouZHRC8Ei+4PyuldPDcf3UKgO/04cDM1oE=&lt;/pin&gt;
+        &lt;/pin-set&gt;
+    &lt;/domain-config&gt;
+&lt;/network-security-config&gt;
+</code></pre>
+<h2 id="Configuration-inheritance-behavior"><a href="#Configuration-inheritance-behavior" class="headerlink" title="Configuration inheritance behavior"></a>Configuration inheritance behavior</h2><p>Values not set in a specific configuration are inherited. This behavior allows more complex configurations while keeping the configuration file readable.</p>
+<p>If a value is not set in a specific entry, then the value from the more general entry is used. For example, values not set in a <code>domain-config</code> are taken from the parent <code>domain-config</code>, if nested, or from the <code>base-config</code> if not. Values not set in the <code>base-config</code> use the platform default values.</p>
+<p>For example, consider where all connections to subdomains of <code>example.com</code> must use a custom set of CAs. Additonally, cleartext traffic to these domains is permitted <em>except</em> when connecting to <code>secure.example.com</code>. By nesting the configuration for <code>secure.example.com</code> inside the configuration for <code>example.com</code>, the <code>trust-anchors</code> does not need to be duplicated.</p>
+<p><code>res/xml/network_security_config.xml</code>:</p>
+<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;network-security-config&gt;
+    &lt;domain-config&gt;
+        &lt;domain includeSubdomains=&quot;true&quot;&gt;example.com&lt;/domain&gt;
+        &lt;trust-anchors&gt;
+            &lt;certificates src=&quot;@raw/my_ca&quot;/&gt;
+        &lt;/trust-anchors&gt;
+        &lt;domain-config cleartextTrafficPermitted=&quot;false&quot;&gt;
+            &lt;domain includeSubdomains=&quot;true&quot;&gt;secure.example.com&lt;/domain&gt;
+        &lt;/domain-config&gt;
+    &lt;/domain-config&gt;
+&lt;/network-security-config&gt;
+</code></pre>
+<h2 id="Configuration-file-format"><a href="#Configuration-file-format" class="headerlink" title="Configuration file format"></a>Configuration file format</h2><p>The Network Security Configuration feature uses an XML file format. The overall structure of the file is shown in the following code sample:</p>
+<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;network-security-config&gt;
+    &lt;base-config&gt;
+        &lt;trust-anchors&gt;
+            &lt;certificates src=&quot;...&quot;/&gt;
+            ...
+        &lt;/trust-anchors&gt;
+    &lt;/base-config&gt;
+
+    &lt;domain-config&gt;
+        &lt;domain&gt;android.com&lt;/domain&gt;
+        ...
+        &lt;trust-anchors&gt;
+            &lt;certificates src=&quot;...&quot;/&gt;
+            ...
+        &lt;/trust-anchors&gt;
+        &lt;pin-set&gt;
+            &lt;pin digest=&quot;...&quot;&gt;...&lt;/pin&gt;
+            ...
+        &lt;/pin-set&gt;
+    &lt;/domain-config&gt;
+    ...
+    &lt;debug-overrides&gt;
+        &lt;trust-anchors&gt;
+            &lt;certificates src=&quot;...&quot;/&gt;
+            ...
+        &lt;/trust-anchors&gt;
+    &lt;/debug-overrides&gt;
+&lt;/network-security-config&gt;
+</code></pre>
+<p>The following sections describe the syntax and other details of the file format.</p>
+<h3 id="lt-network-security-config-gt"><a href="#lt-network-security-config-gt" class="headerlink" title="&lt;network-security-config&gt;"></a>&lt;network-security-config&gt;</h3><ul>
+<li><p>can contain:</p>
+<p>0 or 1 of <code>&lt;base-config&gt;</code> Any number of <code>&lt;domain-config&gt;</code> 0 or 1 of <code>&lt;debug-overrides&gt;</code></p>
+</li>
+</ul>
+<h3 id="lt-base-config-gt"><a href="#lt-base-config-gt" class="headerlink" title="&lt;base-config&gt;"></a>&lt;base-config&gt;</h3><ul>
+<li>syntax:</li>
+</ul>
+<pre><code class="xml">&lt;base-config cleartextTrafficPermitted=[&quot;true&quot; | &quot;false&quot;]&gt;
+    ...
+&lt;/base-config&gt;
+</code></pre>
+<ul>
+<li><p>can contain:</p>
+<p><code>&lt;trust-anchors&gt;</code></p>
+</li>
+<li><p>description:</p>
+<p>The default configuration used by all connections whose destination is not covered by a <a target="_blank" rel="noopener" href="https://developer.android.com/training/articles/security-config#domain-config"><code>domain-config</code></a>.Any values that are not set use the platform default values.The default configuration for apps targeting Android 9 (API level 28) and higher is as follows:<code>&lt;base-config cleartextTrafficPermitted=&quot;false&quot;&gt;    &lt;trust-anchors&gt;        &lt;certificates src=&quot;system&quot; /&gt;    &lt;/trust-anchors&gt;&lt;/base-config&gt;</code>The default configuration for apps targeting Android 7.0 (API level 24) to Android 8.1 (API level 27) is as follows:<code>&lt;base-config cleartextTrafficPermitted=&quot;true&quot;&gt;    &lt;trust-anchors&gt;        &lt;certificates src=&quot;system&quot; /&gt;    &lt;/trust-anchors&gt;&lt;/base-config&gt;</code>The default configuration for apps targeting Android 6.0 (API level 23) and lower is as follows:<code>&lt;base-config cleartextTrafficPermitted=&quot;true&quot;&gt;    &lt;trust-anchors&gt;        &lt;certificates src=&quot;system&quot; /&gt;        &lt;certificates src=&quot;user&quot; /&gt;    &lt;/trust-anchors&gt;&lt;/base-config&gt;</code></p>
+</li>
+</ul>
+<h3 id="lt-domain-config-gt"><a href="#lt-domain-config-gt" class="headerlink" title="&lt;domain-config&gt;"></a>&lt;domain-config&gt;</h3><ul>
+<li><p>syntax:</p>
+<p><code>&lt;domain-config cleartextTrafficPermitted=[&quot;true&quot; | &quot;false&quot;]&gt;    ...&lt;/domain-config&gt;</code></p>
+</li>
+<li><p>Can Contain:</p>
+<p>1 or more <code>&lt;domain&gt;</code>  0 or 1 <code>&lt;trust-anchors&gt;</code>  0 or 1 <code>&lt;pin-set&gt;</code>  Any number of nested <code>&lt;domain-config&gt;</code></p>
+</li>
+<li><p>Description</p>
+<p>Configuration used for connections to specific destinations, as defined by the <code>domain</code> elements.Note that if multiple <code>domain-config</code> elements cover a destination, the configuration with the most specific (longest) matching domain rule is used.</p>
+</li>
+</ul>
+<h3 id="lt-domain-gt"><a href="#lt-domain-gt" class="headerlink" title="&lt;domain&gt;"></a>&lt;domain&gt;</h3><ul>
+<li><p>syntax:</p>
+<p><code>&lt;domain includeSubdomains=[&quot;true&quot; | &quot;false&quot;]&gt;example.com&lt;/domain&gt;</code></p>
+</li>
+<li><p>Attributes:</p>
+<p><code>includeSubdomains</code>If <code>&quot;true&quot;</code>, then this domain rule matches the domain and all subdomains, including subdomains of subdomains. Otherwise, the rule only applies to exact matches.</p>
+</li>
+<li><p>Description:</p>
+</li>
+</ul>
+<h3 id="lt-debug-overrides-gt"><a href="#lt-debug-overrides-gt" class="headerlink" title="&lt;debug-overrides&gt;"></a>&lt;debug-overrides&gt;</h3><ul>
+<li><p>syntax:</p>
+<p><code>&lt;debug-overrides&gt;    ...&lt;/debug-overrides&gt;</code></p>
+</li>
+<li><p>Can Contain:</p>
+<p>0 or 1 <code>&lt;trust-anchors&gt;</code></p>
+</li>
+<li><p>Description:</p>
+<p>Overrides to be applied when <a target="_blank" rel="noopener" href="https://developer.android.com/guide/topics/manifest/application-element.html#debug">android:debuggable</a> is <code>&quot;true&quot;</code>, which is normally the case for non-release builds generated by IDEs and build tools. Trust anchors specified in <code>debug-overrides</code> are added to all other configurations, and certificate pinning is not performed when the server’s certificate chain uses one of these debug-only trust anchors. If <a target="_blank" rel="noopener" href="https://developer.android.com/guide/topics/manifest/application-element.html#debug">android:debuggable</a> is <code>&quot;false&quot;</code>, then this section is completely ignored.</p>
+</li>
+</ul>
+<h3 id="lt-trust-anchors-gt"><a href="#lt-trust-anchors-gt" class="headerlink" title="&lt;trust-anchors&gt;"></a>&lt;trust-anchors&gt;</h3><ul>
+<li><p>syntax:</p>
+<p><code>&lt;trust-anchors&gt;...&lt;/trust-anchors&gt;</code></p>
+</li>
+<li><p>Can Contain:</p>
+<p>Any number of <code>&lt;certificates&gt;</code></p>
+</li>
+<li><p>Description:</p>
+<p>Set of trust anchors for secure connections.</p>
+</li>
+</ul>
+<h3 id="lt-certificates-gt"><a href="#lt-certificates-gt" class="headerlink" title="&lt;certificates&gt;"></a>&lt;certificates&gt;</h3><ul>
+<li><p>syntax:</p>
+<p><code>&lt;certificates src=[&quot;system&quot; | &quot;user&quot; | &quot;*raw resource*&quot;]              overridePins=[&quot;true&quot; | &quot;false&quot;] /&gt;</code></p>
+</li>
+<li><p>description:</p>
+<p>Set of X.509 certificates for <code>trust-anchors</code> elements.</p>
+</li>
+<li><p>attributes:</p>
+<p><code>src</code>The source of CA certificates. Each certificate can be one of the following:a raw resource ID pointing to a file containing X.509 certificates. Certificates must be encoded in DER or PEM format. In the case of PEM certificates, the file <em>must not</em> contain extra non-PEM data such as comments.<code>&quot;system&quot;</code> for the pre-installed system CA certificates<code>&quot;user&quot;</code> for user-added CA certificates<code>overridePins</code>Specifies if the CAs from this source bypass certificate pinning. If <code>&quot;true&quot;</code>, then pinning is not performed on certificate chains which are signed by one of the CAs from this source. This can be useful for debugging CAs or for testing man-in-the-middle attacks on your app’s secure traffic.Default is <code>&quot;false&quot;</code> unless specified in a <code>debug-overrides</code> element, in which case the default is <code>&quot;true&quot;</code>.</p>
+</li>
+</ul>
+<h3 id="lt-pin-set-gt"><a href="#lt-pin-set-gt" class="headerlink" title="&lt;pin-set&gt;"></a>&lt;pin-set&gt;</h3><ul>
+<li><p>syntax:</p>
+<p><code>&lt;pin-set expiration=&quot;date&quot;&gt;...&lt;/pin-set&gt;</code></p>
+</li>
+<li><p>Can Contain:</p>
+<p>Any number of <code>&lt;pin&gt;</code></p>
+</li>
+<li><p>Description:</p>
+<p>A set of public key pins. For a secure connection to be trusted, one of the public keys in the chain of trust must be in the set of pins. See <code>&lt;pin&gt;</code> for the format of pins.</p>
+</li>
+<li><p>Attributes:</p>
+<p><code>expiration</code>The date, in <code>yyyy-MM-dd</code> format, on which the pins expire, thus disabling pinning. If the attribute is not set, then the pins do not expire.Expiration helps prevent connectivity issues in apps which do not get updates to their pin set, such as when the user disables app updates.</p>
+</li>
+</ul>
+<h3 id="lt-pin-gt"><a href="#lt-pin-gt" class="headerlink" title="&lt;pin&gt;"></a>&lt;pin&gt;</h3><ul>
+<li><p>syntax:</p>
+<p><code>&lt;pin digest=[&quot;SHA-256&quot;]&gt;base64 encoded digest of X.509    SubjectPublicKeyInfo (SPKI)&lt;/pin&gt;</code></p>
+</li>
+<li><p>Attributes:</p>
+<p><code>digest</code>The digest algorithm used to generate the pin. Currently, only <code>&quot;SHA-256&quot;</code> is supported.</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pinned.github.io/2023/05/29/2019-08-10-Android-network-security-configuration/" data-id="cli8ygt7o005t9y274e9vb1go" data-title="Android Network security configuration" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android-Network/" rel="tag">Android Network</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2015-05-25-android-soft-keyboard" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/05/29/2015-05-25-android-soft-keyboard/" class="article-date">
+  <time class="dt-published" datetime="2023-05-29T02:54:52.144Z" itemprop="datePublished">2023-05-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AE%89%E5%8D%93/">安卓</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/05/29/2015-05-25-android-soft-keyboard/">【转】Android打开与关闭软键盘</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <ol>
+<li>方法一(如果输入法在窗口上已经显示，则隐藏，反之则显示)</li>
+</ol>
+<pre><code class="java">InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS); 
+</code></pre>
+<ol start="2">
+<li>方法二(View为接受软键盘输入的视图)</li>
+</ol>
+<pre><code class="java">InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+imm.showSoftInput(view,InputMethodManager.SHOW_FORCED);  
+
+imm.hideSoftInputFromWindow(view.getWindowToken(), 0); //强制隐藏键盘  
+</code></pre>
+<ol start="3">
+<li>调用隐藏系统默认的输入法</li>
+</ol>
+<pre><code class="java">((InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(WidgetSearchActivity.this.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);  //(WidgetSearchActivity是当前的Activity)
+</code></pre>
+<ol start="4">
+<li>获取输入法打开的状态</li>
+</ol>
+<pre><code class="java">InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+boolean isOpen=imm.isActive();//isOpen若返回true，则表示输入法打开  
+</code></pre>
+<hr>
+<p> <strong>转载地址：</strong> <a target="_blank" rel="noopener" href="http://blog.csdn.net/h7870181/article/details/8332991">Android 手动显示和隐藏软键盘</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pinned.github.io/2023/05/29/2015-05-25-android-soft-keyboard/" data-id="cli8ygt7j004e9y27eofoamsn" data-title="【转】Android打开与关闭软键盘" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2015-06-29-android-add-view" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/05/29/2015-06-29-android-add-view/" class="article-date">
+  <time class="dt-published" datetime="2023-05-29T02:54:52.144Z" itemprop="datePublished">2023-05-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AE%89%E5%8D%93/">安卓</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/05/29/2015-06-29-android-add-view/">Android加载子View</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>Android的一个View界面都是通过ViewGroup 加上很多子View来实现的，即<code>viewGroup.addView(view)</code>。</p>
+<p>让我一起来看看源码是如何执行的。</p>
+<p><strong>addView(view)</strong></p>
+<pre><code class="java">public void addView(View child) &#123;
+    addView(child, -1);
+&#125;
+public void addView(View child, int index) &#123;
+    if (child == null) &#123;
+        throw new IllegalArgumentException(&quot;Cannot add a null child view to a ViewGroup&quot;);
+    &#125;
+    LayoutParams params = child.getLayoutParams();
+    if (params == null) &#123;
+        params = generateDefaultLayoutParams();
+        if (params == null) &#123;
+            throw new IllegalArgumentException(&quot;generateDefaultLayoutParams() cannot return null&quot;);
+        &#125;
+    &#125;
+    addView(child, index, params);
+&#125;
+</code></pre>
+<p>从上面的代码可以看出，如果我们直接执行的<code>addView</code>将会设置默认<code>index</code>为 -1。然后读取子View的<code>LayoutParams</code>。如果子View没有设置相应的LayoutParams,则生成一个默认的LayoutParams来使用</p>
+<p>接着往下面看：</p>
+<pre><code class="java">public void addView(View child, int index, LayoutParams params) &#123;
+    if (DBG) &#123;
+        System.out.println(this + &quot; addView&quot;);
+    &#125;
+
+    if (child == null) &#123;
+        throw new IllegalArgumentException(&quot;Cannot add a null child view to a ViewGroup&quot;);
+    &#125;
+
+    // addViewInner() will call child.requestLayout() when setting the new LayoutParams
+    // therefore, we call requestLayout() on ourselves before, so that the child&#39;s request
+    // will be blocked at our level
+    requestLayout();
+    invalidate(true);
+    addViewInner(child, index, params, false);
+&#125;
+private void addViewInner(View child, int index, LayoutParams params,
+        boolean preventRequestLayout) &#123;
+
+    if (mTransition != null) &#123;
+        // Don&#39;t prevent other add transitions from completing, but cancel remove
+        // transitions to let them complete the process before we add to the container
+        mTransition.cancel(LayoutTransition.DISAPPEARING);
+    &#125;
+
+    if (child.getParent() != null) &#123;
+        throw new IllegalStateException(&quot;The specified child already has a parent. &quot; +
+                &quot;You must call removeView() on the child&#39;s parent first.&quot;);
+    &#125;
+
+    if (mTransition != null) &#123;
+        mTransition.addChild(this, child);
+    &#125;
+
+    if (!checkLayoutParams(params)) &#123;
+        params = generateLayoutParams(params);
+    &#125;
+
+    if (preventRequestLayout) &#123;
+        child.mLayoutParams = params;
+    &#125; else &#123;
+        child.setLayoutParams(params);
+    &#125;
+
+    if (index &lt; 0) &#123;
+        index = mChildrenCount;
+    &#125;
+
+    addInArray(child, index);
+
+    // tell our children
+    if (preventRequestLayout) &#123;
+        child.assignParent(this);
+    &#125; else &#123;
+        child.mParent = this;
+    &#125;
+
+    if (child.hasFocus()) &#123;
+        requestChildFocus(child, child.findFocus());
+    &#125;
+
+    AttachInfo ai = mAttachInfo;
+    if (ai != null &amp;&amp; (mGroupFlags &amp; FLAG_PREVENT_DISPATCH_ATTACHED_TO_WINDOW) == 0) &#123;
+        boolean lastKeepOn = ai.mKeepScreenOn;
+        ai.mKeepScreenOn = false;
+        child.dispatchAttachedToWindow(mAttachInfo, (mViewFlags&amp;VISIBILITY_MASK));
+        if (ai.mKeepScreenOn) &#123;
+            needGlobalAttributesUpdate(true);
+        &#125;
+        ai.mKeepScreenOn = lastKeepOn;
+    &#125;
+
+    if (child.isLayoutDirectionInherited()) &#123;
+        child.resetRtlProperties();
+    &#125;
+
+    onViewAdded(child);
+
+    if ((child.mViewFlags &amp; DUPLICATE_PARENT_STATE) == DUPLICATE_PARENT_STATE) &#123;
+        mGroupFlags |= FLAG_NOTIFY_CHILDREN_ON_DRAWABLE_STATE_CHANGE;
+    &#125;
+
+    if (child.hasTransientState()) &#123;
+        childHasTransientStateChanged(child, true);
+    &#125;
+
+    if (child.getVisibility() != View.GONE) &#123;
+        notifySubtreeAccessibilityStateChangedIfNeeded();
+    &#125;
+&#125;
+</code></pre>
+<p>就是如此的Easy，就把View添加到视图中去了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pinned.github.io/2023/05/29/2015-06-29-android-add-view/" data-id="cli8ygt7j004g9y27aw7cc7ap" data-title="Android加载子View" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2015-07-27-git-merge-two-project" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/05/29/2015-07-27-git-merge-two-project/" class="article-date">
+  <time class="dt-published" datetime="2023-05-29T02:54:52.144Z" itemprop="datePublished">2023-05-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/05/29/2015-07-27-git-merge-two-project/">Git 合并两个Project</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="问题："><a href="#问题：" class="headerlink" title="问题："></a>问题：</h3><p> 公司开始使用的是SVN进行项目管理的，现在有一个项目，有两个Project，其中一个是Application， 另一个是Library。现在要把SVN上面的项目迁移到Git服务器上去。但是Git服务器上面只有一个Proj，也就是说，现在需要将两个项目和在一起。想想，本来也应该把两个项目合在一起，不然，版本管理必然也会是一个大的问题。</p>
+<h3 id="解决方式"><a href="#解决方式" class="headerlink" title="解决方式"></a>解决方式</h3><ul>
+<li><p>如果不需要保存SVN上的提交日志，那直接复制提交就行了。</p>
+</li>
+<li><p>要保存提交日志</p>
+<p>首先要将SVN的项目迁移到GIT服务器上。我在本地搭了一个Git服务器。</p>
+<p>使用 <code>git clone svn svn://location/project1</code></p>
+<p>将两个项目都迁移到git服务器上去。</p>
+<p>然后先将要合并后的那个proj clone 到本地。</p>
+<p>使用<code>git subtree</code> 将原来的两个工程添加到新的工程中，然后提交到服务器就可以了。</p>
+</li>
+</ul>
+<h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3><ul>
+<li><p><a target="_blank" rel="noopener" href="http://cssor.com/git-subtree-usage.html">git subtree 的用法</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="http://blog.163.com/pjt_ren/blog/static/188250602013101102615844/">SVN 迁移到 GIT</a></p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pinned.github.io/2023/05/29/2015-07-27-git-merge-two-project/" data-id="cli8ygt7k004j9y27av5251yy" data-title="Git 合并两个Project" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/" rel="tag">Git</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2015-05-22-android-like-qq-input" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/05/29/2015-05-22-android-like-qq-input/" class="article-date">
+  <time class="dt-published" datetime="2023-05-29T02:54:52.144Z" itemprop="datePublished">2023-05-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AE%89%E5%8D%93/">安卓</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/05/29/2015-05-22-android-like-qq-input/">Android EditText软键盘显示隐藏以及“监听”</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>起因</li>
+</ul>
+<p>本人在做类似于微信、易信等这样的输入框时，遇到了一个问题。聊天界面最下面一般有输入文字的EditText和表情按钮等。</p>
+<ol>
+<li><p>点击表情会在这下面显示表情选择，如图2，如果之前点击输入框弹出了软键盘，那么还需要隐藏软键盘；</p>
+</li>
+<li><p>点击输入框，弹出软键盘，如果之前显示了表情选择，则还需要隐藏表情选择。</p>
+</li>
+</ol>
+<ul>
+<li>解决办法</li>
+</ul>
+<ol>
+<li>隐藏输入法</li>
+</ol>
+<pre><code class="java"> private boolean showKeyboard() &#123;
+    InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+    boolean result = imm.showSoftInput(mInputText, 0);
+    return result;
+ &#125;
+</code></pre>
+<ol start="2">
+<li>点击输入框，隐藏表情选择框，使用<code>OnTouchEvent</code></li>
+</ol>
+<pre><code>  mInputText.setOnTouchListener(new View.OnTouchListener() &#123;
+      @Override
+      public boolean onTouch(View view, MotionEvent motionEvent) &#123;
+          if (motionEvent.getAction() == MotionEvent.ACTION_UP) &#123;
+              boolean result = showKeyboard();
+              if (result) &#123;
+                  // TODO 隐藏表情选择框
+              &#125;
+          &#125;
+          return false;
+      &#125;
+  &#125;);
+</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pinned.github.io/2023/05/29/2015-05-22-android-like-qq-input/" data-id="cli8ygt7k004m9y279cct4kpq" data-title="Android EditText软键盘显示隐藏以及“监听”" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2015-12-22-gradle-download-error" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/05/29/2015-12-22-gradle-download-error/" class="article-date">
+  <time class="dt-published" datetime="2023-05-29T02:54:52.144Z" itemprop="datePublished">2023-05-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AE%89%E5%8D%93/">安卓</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/05/29/2015-12-22-gradle-download-error/">Android Studio Gradle Download Error</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>自从使用Android Studio 开始，就一直存在一个问题，那就是Gradle下载不下来。不仅如此，JCtener 与 mavenCentral 也是被墙了。</p>
+<ol>
+<li><p>我们先来解决gradle 下载的问题</p>
+<p>用浏览器挂上vpn， 将你需要的<a target="_blank" rel="noopener" href="https://services.gradle.org/distributions/gradle-2.8-all.zip">gralde-version.zip</a>文件下载下来，放到本地。打开你的项目，找到当前目录下 <code>gradle -&gt; wrapper -&gt; gradle-wrapper.properties</code> , 打开这个文件，将最后一行的地址修改为如下：<code>distributionUrl=file:///Users/pinned/Downloads/gradle-2.7-all.zip</code></p>
+<p>然后在同步一下，就可以正常使用Gradle</p>
+</li>
+<li><p>下载lib库</p>
+<p>这个得感谢网友<a target="_blank" rel="noopener" href="http://www.j99.io/">henjue</a>给我们提供的服务, 具体使用参考：[向大家提供一个jcenter镜像</p>
+</li>
+</ol>
+<p>](<a target="_blank" rel="noopener" href="http://www.j99.io/2015/06/19/%E5%90%91%E5%A4%A7%E5%AE%B6%E6%8F%90%E4%BE%9B%E4%B8%80%E4%B8%AAjcenter%E9%95%9C%E5%83%8F/">http://www.j99.io/2015/06/19/%E5%90%91%E5%A4%A7%E5%AE%B6%E6%8F%90%E4%BE%9B%E4%B8%80%E4%B8%AAjcenter%E9%95%9C%E5%83%8F/</a>)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pinned.github.io/2023/05/29/2015-12-22-gradle-download-error/" data-id="cli8ygt7k004q9y27845neskn" data-title="Android Studio Gradle Download Error" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android-Gradle/" rel="tag">Android Gradle</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/2/">下一页 &raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E5%8D%93/">安卓</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/">开源项目</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6/">读书</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Camera/" rel="tag">Android Camera</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Gradle/" rel="tag">Android Gradle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Network/" rel="tag">Android Network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Proguard/" rel="tag">Proguard</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ruby-Ubuntu/" rel="tag">Ruby Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/" rel="tag">Shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Systems/" rel="tag">Systems</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools/" rel="tag">Tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools-Android/" rel="tag">Tools Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools-Ruby/" rel="tag">Tools Ruby</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools-Ruby-Rails/" rel="tag">Tools Ruby Rails</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools-SVN-Git/" rel="tag">Tools SVN Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools-Systems/" rel="tag">Tools Systems</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu-Systems-Tools/" rel="tag">Ubuntu Systems Tools</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Android-Camera/" style="font-size: 10px;">Android Camera</a> <a href="/tags/Android-Gradle/" style="font-size: 12.5px;">Android Gradle</a> <a href="/tags/Android-Network/" style="font-size: 12.5px;">Android Network</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Proguard/" style="font-size: 10px;">Proguard</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/Ruby-Ubuntu/" style="font-size: 10px;">Ruby Ubuntu</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/Systems/" style="font-size: 12.5px;">Systems</a> <a href="/tags/Tools/" style="font-size: 17.5px;">Tools</a> <a href="/tags/Tools-Android/" style="font-size: 15px;">Tools Android</a> <a href="/tags/Tools-Ruby/" style="font-size: 10px;">Tools Ruby</a> <a href="/tags/Tools-Ruby-Rails/" style="font-size: 10px;">Tools Ruby Rails</a> <a href="/tags/Tools-SVN-Git/" style="font-size: 10px;">Tools SVN Git</a> <a href="/tags/Tools-Systems/" style="font-size: 10px;">Tools Systems</a> <a href="/tags/Ubuntu-Systems-Tools/" style="font-size: 12.5px;">Ubuntu Systems Tools</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">五月 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/05/29/2017-10-15-gradlew%20source%20analyze/">gradlew 源码分析</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/29/2017-02-10-proguard-translate/">Proguard 翻译</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/29/2019-05-21-Android-camera-preview/">Android Camera Preview</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/29/2019-08-10-Android-network-Configuration/">Android 网络配置</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/29/2019-08-10-Android-network-security-configuration/">Android Network security configuration</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 罗昭成<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

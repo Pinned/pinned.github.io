@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Android之Notification的使用(一) | 大罗说事</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Android之Notification的使用（一）在通知栏展示一些及时消息是一件非常常见的事情，相对来说，使用Notification也是一件很简单的事情。 一个简单的事情，做起来也会遇到bug，先贴代码： Intent intent &#x3D; new Intent(this, OtherActivity.class); String currentTime &#x3D;  DateTimeUtil.forma">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android之Notification的使用(一)">
+<meta property="og:url" content="http://pinned.github.io/2023/05/29/2014-10-11-Android%20Notification%20blog%20one/index.html">
+<meta property="og:site_name" content="大罗说事">
+<meta property="og:description" content="Android之Notification的使用（一）在通知栏展示一些及时消息是一件非常常见的事情，相对来说，使用Notification也是一件很简单的事情。 一个简单的事情，做起来也会遇到bug，先贴代码： Intent intent &#x3D; new Intent(this, OtherActivity.class); String currentTime &#x3D;  DateTimeUtil.forma">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-05-29T02:54:52.138Z">
+<meta property="article:modified_time" content="2023-05-29T02:54:52.138Z">
+<meta property="article:author" content="罗昭成">
+<meta property="article:tag" content="Android">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="大罗说事" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">大罗说事</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://pinned.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-2014-10-11-Android Notification blog one" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/05/29/2014-10-11-Android%20Notification%20blog%20one/" class="article-date">
+  <time class="dt-published" datetime="2023-05-29T02:54:52.138Z" itemprop="datePublished">2023-05-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AE%89%E5%8D%93/">安卓</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Android之Notification的使用(一)
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="Android之Notification的使用（一）"><a href="#Android之Notification的使用（一）" class="headerlink" title="Android之Notification的使用（一）"></a>Android之Notification的使用（一）</h2><p>在通知栏展示一些及时消息是一件非常常见的事情，相对来说，使用Notification也是一件很<br>简单的事情。</p>
+<p>一个简单的事情，做起来也会遇到bug，先贴代码：</p>
+<pre><code class="java">Intent intent = new Intent(this, OtherActivity.class);
+String currentTime =  DateTimeUtil.formatDateDefault(Calendar.getInstance().getTime());
+intent.putExtra(&quot;time&quot;, currentTime);
+int notificationId = (int) System.currentTimeMillis();
+PendingIntent pendingIntent= PendingIntent.getActivity(
+    this, notificationId, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this)
+        .setSmallIcon(R.drawable.ic_launcher)
+        .setContentTitle(currentTime)
+        .setContentText(&quot;text&quot;)
+        .setTicker(&quot;tricker&quot;)
+        .setStyle(new NotificationCompat.BigTextStyle().bigText(&quot;big text&quot;))
+        .setAutoCancel(true)
+        .setContentIntent(pendingIntent);
+NotificationManager notificationManager = (NotificationManager)this.getSystemService(Context.NOTIFICATION_SERVICE);
+Notification notification = mBuilder.build();
+notificationManager.notify(notificationId, notification);
+</code></pre>
+<p>就按照上述的样子，就可以展示出一条Notification到状态栏了。很easy.</p>
+<p>可是问题来了，在做点击事件的时候，跳转出现了问题。</p>
+<p><strong>问题描述</strong></p>
+<p>因为没一个Notification的NotificationId都不一样，所以，每一次都会添加一个Notification到状态栏。<br>从上面的代码可以看出，所有的Notification的点击事件都指向了<code>OtherActivity</code>。<br>当状态栏上有多个Notification的时候并且我们退出了应用程序，这时候，点击其中一条Notification，会<br>启动<code>OtherActivity</code>, 问题来了，我在点击其它的Notification的时候,就没有任何响应。</p>
+<p><strong>解决办法</strong></p>
+<p>经过一番查找过后，还是没有找到解决办法。最后问了一下同事，解决方法简单的出乎我的意料。如下代码：</p>
+<pre><code class="java">intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+</code></pre>
+<p>只需要设置一下Flag就行了，如果你只需要启动一个Activity，可以在<strong>Mainfest.xml</strong>中添<br>加<code>android:launchMode=&quot;singleTask&quot;</code>就行了。</p>
+<p>贴上我的代码地址:<a target="_blank" rel="noopener" href="https://github.com/Pinned/NotificationDemo">下载地址NotificationDemo_01</a></p>
+<p><strong>注意事项</strong></p>
+<ul>
+<li><p>当有多个Notification的时候，Notification的跳转事件被最新的一个Notification覆盖了。</p>
+<ul>
+<li><strong>原因</strong><br>  问题主要出在<code>PendingIntent.getActivity();</code>的第二个参数，API文档里虽然说是未被使用的参数<br> (给出的例子也直接写0的)，实际上是通过该参数来区别不同的Intent的，如果id相同，就会覆盖<br> 掉之前的Intent了。所以总是获取到最后一个Intent。</li>
+<li><strong>解决办法</strong><br>  <code>PendingIntent.getActivity();</code>的第二个参数传入不同的id</li>
+</ul>
+</li>
+<li><p>Notification 声音，震动，LED灯</p>
+<pre><code class="java">// 震动
+notification.vibrate = new long[] &#123;100,400,100,400&#125;;
+// 要添加震动权限：&lt;uses-permission android:name=&quot;android.permission.VIBRATE&quot;&gt;&lt;/uses-permission&gt;
+</code></pre>
+<pre><code class="java">// 声音
+notification.sound=Uri.parse(&quot;android.resource://&quot;+R.class.getPackage().getName()+&quot;/&quot; +R.raw.ring);
+</code></pre>
+<pre><code class="java">notification.ledARGB=Color.GREEN;//led灯颜色
+notification.ledOffMS=1000;//关闭时间 毫秒
+notification.ledOnMS=1000;//开启时间 毫秒
+notification.flags|=Notification.FLAG_SHOW_LIGHTS;
+</code></pre>
+<blockquote>
+<p>ps: LED 显示只有在熄屏的时候才有效果， 一定要给震动加上权限</p>
+</blockquote>
+</li>
+</ul>
+<p><strong>参考资料</strong></p>
+<ol>
+<li><a target="_blank" rel="noopener" href="http://blog.csdn.net/berber78/article/details/7278408">intent.setFlags方法中的参数值含义</a></li>
+<li><a target="_blank" rel="noopener" href="http://univasity.iteye.com/blog/1390445">同时显示多个Notification时PendingIntent的Intent被覆盖？</a></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pinned.github.io/2023/05/29/2014-10-11-Android%20Notification%20blog%20one/" data-id="cli8ygt6x00019y27ffyw862n" data-title="Android之Notification的使用(一)" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/05/29/2014-12-05-Android-SDK-Manager-Update-Method/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          Android Sdk Manager无法更新问题解决办法
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/05/29/2014-10-13-Android%20webview/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">Android之Webview使用</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E5%8D%93/">安卓</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/">开源项目</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6/">读书</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Camera/" rel="tag">Android Camera</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Gradle/" rel="tag">Android Gradle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Network/" rel="tag">Android Network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Proguard/" rel="tag">Proguard</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ruby-Ubuntu/" rel="tag">Ruby Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/" rel="tag">Shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Systems/" rel="tag">Systems</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools/" rel="tag">Tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools-Android/" rel="tag">Tools Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools-Ruby/" rel="tag">Tools Ruby</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools-Ruby-Rails/" rel="tag">Tools Ruby Rails</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools-SVN-Git/" rel="tag">Tools SVN Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools-Systems/" rel="tag">Tools Systems</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu-Systems-Tools/" rel="tag">Ubuntu Systems Tools</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Android-Camera/" style="font-size: 10px;">Android Camera</a> <a href="/tags/Android-Gradle/" style="font-size: 12.5px;">Android Gradle</a> <a href="/tags/Android-Network/" style="font-size: 12.5px;">Android Network</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Proguard/" style="font-size: 10px;">Proguard</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/Ruby-Ubuntu/" style="font-size: 10px;">Ruby Ubuntu</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/Systems/" style="font-size: 12.5px;">Systems</a> <a href="/tags/Tools/" style="font-size: 17.5px;">Tools</a> <a href="/tags/Tools-Android/" style="font-size: 15px;">Tools Android</a> <a href="/tags/Tools-Ruby/" style="font-size: 10px;">Tools Ruby</a> <a href="/tags/Tools-Ruby-Rails/" style="font-size: 10px;">Tools Ruby Rails</a> <a href="/tags/Tools-SVN-Git/" style="font-size: 10px;">Tools SVN Git</a> <a href="/tags/Tools-Systems/" style="font-size: 10px;">Tools Systems</a> <a href="/tags/Ubuntu-Systems-Tools/" style="font-size: 12.5px;">Ubuntu Systems Tools</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">五月 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/05/29/2017-10-15-gradlew%20source%20analyze/">gradlew 源码分析</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/29/2017-02-10-proguard-translate/">Proguard 翻译</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/29/2019-05-21-Android-camera-preview/">Android Camera Preview</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/29/2019-08-10-Android-network-Configuration/">Android 网络配置</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/29/2019-08-10-Android-network-security-configuration/">Android Network security configuration</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 罗昭成<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

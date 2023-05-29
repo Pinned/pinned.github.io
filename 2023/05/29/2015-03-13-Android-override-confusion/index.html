@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Android 中方法重载遇到的问题 | 大罗说事</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="问题描述 今天在使用的一个第三方库，执行的是一个异步下载，有一个封装DownloadInfo的类，在下载的Task中，通过DownloadInfo 获取真实的下载地址。但是由于粗心，库中的getRealUrl方法，没有加任何方法修饰词。我在使用的时候，重写了DownloadInfo 和getRealUrl方法。在测试中出现了一个问题，在Android 4.4中按照预期的执行，但是在Android">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android 中方法重载遇到的问题">
+<meta property="og:url" content="http://pinned.github.io/2023/05/29/2015-03-13-Android-override-confusion/index.html">
+<meta property="og:site_name" content="大罗说事">
+<meta property="og:description" content="问题描述 今天在使用的一个第三方库，执行的是一个异步下载，有一个封装DownloadInfo的类，在下载的Task中，通过DownloadInfo 获取真实的下载地址。但是由于粗心，库中的getRealUrl方法，没有加任何方法修饰词。我在使用的时候，重写了DownloadInfo 和getRealUrl方法。在测试中出现了一个问题，在Android 4.4中按照预期的执行，但是在Android">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-05-29T02:54:52.141Z">
+<meta property="article:modified_time" content="2023-05-29T02:54:52.141Z">
+<meta property="article:author" content="罗昭成">
+<meta property="article:tag" content="Android">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="大罗说事" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">大罗说事</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://pinned.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-2015-03-13-Android-override-confusion" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/05/29/2015-03-13-Android-override-confusion/" class="article-date">
+  <time class="dt-published" datetime="2023-05-29T02:54:52.141Z" itemprop="datePublished">2023-05-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AE%89%E5%8D%93/">安卓</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Android 中方法重载遇到的问题
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p> 今天在使用的一个第三方库，执行的是一个异步下载，有一个封装<code>DownloadInfo</code>的类，在下载的<code>Task</code>中，通过<code>DownloadInfo</code><br> 获取真实的下载地址。但是由于粗心，库中的<code>getRealUrl</code>方法，没有加任何方法修饰词。我在使用的时候，重写了<code>DownloadInfo</code><br> 和<code>getRealUrl</code>方法。在测试中出现了一个问题，在Android 4.4中按照预期的执行，但是在Android 5.0中，却没有按照预期的<br> 效果执行。</p>
+<h2 id="详细代码"><a href="#详细代码" class="headerlink" title="详细代码"></a>详细代码</h2><ol>
+<li>DownloadInfo</li>
+</ol>
+<pre><code class="java">package com.testoverloading.net;
+public class DownloadInfo &#123;
+    String getRealUrl() &#123;
+        return &quot;DownloadInfo real url&quot;;
+    &#125;
+&#125;
+</code></pre>
+<ol start="2">
+<li>实现类:CustomDownloadInfo</li>
+</ol>
+<pre><code class="java">import com.testoverloading.net.DownloadInfo;
+public class CustomDownloadInfo extends DownloadInfo&#123;
+//    加不加修饰词都一样，在Android 4.4都是执行的这个类的方法，而在Andorid 5.0却是执行的是父类的方法
+//    String getRealUrl() &#123;
+//        return &quot;customDownloadInfo real url&quot;;
+//    &#125;
+    public String getRealUrl() &#123;
+        return &quot;customDownloadInfo real url&quot;;
+    &#125;
+&#125;
+</code></pre>
+<ol start="3">
+<li>Task</li>
+</ol>
+<pre><code class="java">package com.testoverloading.net;
+public class Task &#123;
+
+    private DownloadInfo mInfo;
+
+    public Task(DownloadInfo info) &#123;
+        mInfo = info;
+    &#125;
+
+    public String excute() &#123;
+        return mInfo.getRealUrl();
+    &#125;
+&#125;
+</code></pre>
+<ol start="4">
+<li>MainActivity</li>
+</ol>
+<pre><code class="java">package com.testoverloading;
+// button 的点击事件
+public void showText(View view) &#123;
+    CustomDownloadInfo downloadInfo = new CustomDownloadInfo();
+    this.mShow.setText(new Task(downloadInfo).excute());
+&#125;
+</code></pre>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><strong>重写</strong></p>
+<blockquote>
+<p>Method overriding, in object oriented programming, is a language feature that allows a subclass or child class to provide a specific implementation of a method that is already provided by one of its superclasses or parent classes. The implementation in the subclass overrides (replaces) the implementation in the superclass by providing a method that has same name, same parameters or signature, and same return type as the method in the parent class. The version of a method that is executed will be determined by the object that is used to invoke it. If an object of a parent class is used to invoke the method, then the version in the parent class will be executed, but if an object of the subclass is used to invoke the method, then the version in the child class will be executed. Some languages allow a programmer to prevent a method from being overridden.</p>
+</blockquote>
+<p>上面是<a target="_blank" rel="noopener" href="http://en.wikipedia.org/wiki/Method_overriding#Java">Wikipedia</a>上给出的文档。</p>
+<blockquote>
+<p>个人理解，子类中定义某方法与其父类有相同的名称和参数，我们说该方法被重写 (Overriding）</p>
+</blockquote>
+<p><strong>访问访问控制修饰符</strong></p>
+<blockquote>
+<p>Java中，可以使用访问控制符来保护对类、变量、方法和构造方法的访问。Java支持4种不同的访问权限。</p>
+<ol>
+<li><p>默认的，也称为default，在同一包内可见，不使用任何修饰符。</p>
+</li>
+<li><p>私有的，以private修饰符指定，在同一类内可见。</p>
+</li>
+<li><p>共有的，以public修饰符指定，对所有类可见。</p>
+</li>
+<li><p>受保护的，以protected修饰符指定，对同一包内的类和所有子类可见。</p>
+</li>
+</ol>
+</blockquote>
+<p>上面例子中，应该是这两个的交叉点，Android 5.0和Android 4.4中的执行策略不一样而引起的问题.</p>
+<p>经测试，是因为Dalvik与Art在运行的时候，运行机制是不同的。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pinned.github.io/2023/05/29/2015-03-13-Android-override-confusion/" data-id="cli8ygt7c002e9y277it86m8w" data-title="Android 中方法重载遇到的问题" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/05/29/2015-03-11-ListView&RecyclerView/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          ListView &amp; RecyclerView
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/05/29/2015-03-16-ubuntu-unzip-encode/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">Ubuntu 解压zip，文件乱码</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E5%8D%93/">安卓</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/">开源项目</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6/">读书</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Camera/" rel="tag">Android Camera</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Gradle/" rel="tag">Android Gradle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Network/" rel="tag">Android Network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Proguard/" rel="tag">Proguard</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ruby-Ubuntu/" rel="tag">Ruby Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/" rel="tag">Shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Systems/" rel="tag">Systems</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools/" rel="tag">Tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools-Android/" rel="tag">Tools Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools-Ruby/" rel="tag">Tools Ruby</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools-Ruby-Rails/" rel="tag">Tools Ruby Rails</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools-SVN-Git/" rel="tag">Tools SVN Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools-Systems/" rel="tag">Tools Systems</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu-Systems-Tools/" rel="tag">Ubuntu Systems Tools</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Android-Camera/" style="font-size: 10px;">Android Camera</a> <a href="/tags/Android-Gradle/" style="font-size: 12.5px;">Android Gradle</a> <a href="/tags/Android-Network/" style="font-size: 12.5px;">Android Network</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Proguard/" style="font-size: 10px;">Proguard</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/Ruby-Ubuntu/" style="font-size: 10px;">Ruby Ubuntu</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/Systems/" style="font-size: 12.5px;">Systems</a> <a href="/tags/Tools/" style="font-size: 17.5px;">Tools</a> <a href="/tags/Tools-Android/" style="font-size: 15px;">Tools Android</a> <a href="/tags/Tools-Ruby/" style="font-size: 10px;">Tools Ruby</a> <a href="/tags/Tools-Ruby-Rails/" style="font-size: 10px;">Tools Ruby Rails</a> <a href="/tags/Tools-SVN-Git/" style="font-size: 10px;">Tools SVN Git</a> <a href="/tags/Tools-Systems/" style="font-size: 10px;">Tools Systems</a> <a href="/tags/Ubuntu-Systems-Tools/" style="font-size: 12.5px;">Ubuntu Systems Tools</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">五月 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/05/29/2017-10-15-gradlew%20source%20analyze/">gradlew 源码分析</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/29/2017-02-10-proguard-translate/">Proguard 翻译</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/29/2019-05-21-Android-camera-preview/">Android Camera Preview</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/29/2019-08-10-Android-network-Configuration/">Android 网络配置</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/29/2019-08-10-Android-network-security-configuration/">Android Network security configuration</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 罗昭成<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

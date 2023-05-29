@@ -1,0 +1,1467 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>大罗说事</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Talk is cheap, show me the code.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="大罗说事">
+<meta property="og:url" content="http://pinned.github.io/page/7/index.html">
+<meta property="og:site_name" content="大罗说事">
+<meta property="og:description" content="Talk is cheap, show me the code.">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="罗昭成">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="大罗说事" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">大罗说事</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://pinned.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-2014-11-18-Android-Viewpager-scroll-listener" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/05/29/2014-11-18-Android-Viewpager-scroll-listener/" class="article-date">
+  <time class="dt-published" datetime="2023-05-29T02:54:52.139Z" itemprop="datePublished">2023-05-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AE%89%E5%8D%93/">安卓</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/05/29/2014-11-18-Android-Viewpager-scroll-listener/">Android ViewPager滑动事件</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>ViewPager的滑动事件，是使用的OnPageChangeListener，他有三个方法:</p>
+<p><code>onPageScrollStateChanged</code>, <code>onPageScrolled</code>,<code>onPageSelected</code></p>
+<p>下面来解释一下这三个方法：</p>
+<ol>
+<li><strong>onPageScrollStateChanged</strong></li>
+</ol>
+<pre><code class="java">public void onPageScrollStateChanged(int arg0) &#123;
+&#125;
+</code></pre>
+<p> 其中arg0这个参数有三种状态（0，1，2）</p>
+<ul>
+<li><p>arg0&#x3D;&#x3D;1的时辰默示正在滑动 </p>
+</li>
+<li><p>arg0&#x3D;&#x3D;2的时辰默示滑动完毕了</p>
+</li>
+<li><p>arg0&#x3D;&#x3D;0的时辰默示什么都没做。</p>
+</li>
+</ul>
+<ol start="2">
+<li><strong>onPageScrolled</strong></li>
+</ol>
+<pre><code class="java">public void onPageScrolled(int arg0, float arg1, int arg2) &#123;
+&#125;
+</code></pre>
+<p> 其中三个参数的含义分别为：</p>
+<ul>
+<li>arg0 :当前页面，及你点击滑动的页面</li>
+<li>arg1:当前页面偏移的百分比</li>
+<li>arg2:当前页面偏移的像素位置</li>
+</ul>
+<blockquote>
+<p>arg0 是滑动过程中的较小那一页的下标<br>即，如果是从左往右滑动，arg0为将要出现那一页的下标，也就是说页码小的那一页的下标<br>如果是从右往左滑动，arg0为滑动前显示的那一页的下标，也就是页码小的那一页的下标</p>
+</blockquote>
+<ol start="3">
+<li><strong>onPageSelected</strong></li>
+</ol>
+<pre><code class="java">public void onPageSelected(int arg0) &#123;
+&#125;
+</code></pre>
+<p> 此方法是页面跳转完后得到调用，arg0是你当前选中的页面的Position（位置编号）</p>
+<p> <strong>最佳实践</strong></p>
+<pre><code class="java">  @Override  
+  public void onPageScrolled(int position, float positionOffset,  int positionOffsetPixels) &#123;  
+      if (positionOffset &gt; 0) &#123;  
+          ChangeColorIconWithTextView left = mTabIndicator.get(position);  
+          ChangeColorIconWithTextView right = mTabIndicator.get(position + 1);  
+
+          left.setIconAlpha(1 - positionOffset);  
+          right.setIconAlpha(positionOffset);  
+      &#125;  
+  &#125; 
+   @Override  
+  public void onClick(View v) &#123;  
+      resetOtherTabs();  
+      switch (v.getId()) &#123;  
+      case R.id.id_indicator_one:  
+          mTabIndicator.get(0).setIconAlpha(1.0f);  
+          mViewPager.setCurrentItem(0, false);  
+          break;  
+      case R.id.id_indicator_two:  
+          mTabIndicator.get(1).setIconAlpha(1.0f);  
+          mViewPager.setCurrentItem(1, false);  
+          break;  
+      case R.id.id_indicator_three:  
+          mTabIndicator.get(2).setIconAlpha(1.0f);  
+          mViewPager.setCurrentItem(2, false);  
+          break;  
+      case R.id.id_indicator_four:  
+          mTabIndicator.get(3).setIconAlpha(1.0f);  
+          mViewPager.setCurrentItem(3, false);  
+          break;  
+      &#125;  
+  &#125;  
+</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pinned.github.io/2023/05/29/2014-11-18-Android-Viewpager-scroll-listener/" data-id="cli8ygt77000q9y275qgm2wly" data-title="Android ViewPager滑动事件" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2014-11-04-eclipse-shutdown" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/05/29/2014-11-04-eclipse-shutdown/" class="article-date">
+  <time class="dt-published" datetime="2023-05-29T02:54:52.139Z" itemprop="datePublished">2023-05-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/05/29/2014-11-04-eclipse-shutdown/">Ubuntu-14.04下Eclipse闪退解决办法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>打开Eclipse，有时候还可以使用一下，有时候使用都不行。</p>
+<p>当Eclipse闪退的时候，还会在Eclipse 文件夹下生成一个<code>hs_err_pidxxxx.log</code>的文件，<br>内容如下:</p>
+<pre><code class="html">#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  SIGSEGV (0xb) at pc=0x00007ffd09a902a1, pid=5291, tid=140726369949440
+#
+# JRE version: 7.0_25-b15
+# Java VM: Java HotSpot(TM) 64-Bit Server VM (23.25-b01 mixed mode linux-amd64 compressed oops)
+# Problematic frame:
+# C  [libsoup-2.4.so.1+0x6c2a1]  soup_session_feature_detach+0x11
+#
+# Failed to write core dump. Core dumps have been disabled. To enable core dumping, try &quot;ulimit -c unlimited&quot; before starting Java again
+#
+# If you would like to submit a bug report, please visit:
+#   http://bugreport.sun.com/bugreport/crash.jsp
+# The crash happened outside the Java Virtual Machine in native code.
+# See problematic frame for where to report the bug.
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x00007ffd60009800):  JavaThread &quot;main&quot; [_thread_in_native, id=5292, stack(0x00007ffd693a9000,0x00007ffd694aa000)]
+
+siginfo:si_signo=SIGSEGV: si_errno=0, si_code=1 (SEGV_MAPERR), si_addr=0x0000000000000000
+
+Registers:
+RAX=0x00007ffd61c3a580, RBX=0x0000000000000000, RCX=0x0000000000000001, RDX=0x00007ffd694cf968
+RSP=0x00007ffd694a7290, RBP=0x00007ffd60df46a0, RSI=0x00007ffd60df46a0, RDI=0x0000000000000000
+R8 =0x0000000000000000, R9 =0x00007ffd61a1b0e0, R10=0x00007ffd694a6e70, R11=0x00007ffd694a6f70
+R12=0x0000000000000000, R13=0x00000000b52f7250, R14=0x00007ffd694a7370, R15=0x00007ffd60009800
+RIP=0x00007ffd09a902a1, EFLAGS=0x0000000000010202, CSGSFS=0x0000000000000033, ERR=0x0000000000000004
+  TRAPNO=0x000000000000000e
+
+Top of Stack: (sp=0x00007ffd694a7290)
+0x00007ffd694a7290:   00007ffd61a202b0 00007ffd60df46a0
+0x00007ffd694a72a0:   0000000000000000 00007ffd12430aa9
+0x00007ffd694a72b0:   00007ffd694a7338 00000000b52f7250
+0x00007ffd694a72c0:   00007ffd694a7338 00007ffd5d011f90
+0x00007ffd694a72d0:   0000000000000000 00007ffd0c0c83f0
+0x00007ffd694a72e0:   00007ffd60009800 00007ffd694a72e8
+0x00007ffd694a72f0:   00007ffd60009800 00007ffd694a72f8
+0x00007ffd694a7300:   00000000b52f7250 00007ffd694a7370
+0x00007ffd694a7310:   00000000b5300340 0000000000000000
+0x00007ffd694a7320:   00000000b52f7250 0000000000000000
+0x00007ffd694a7330:   00007ffd694a7358 00007ffd694a73b8
+0x00007ffd694a7340:   00007ffd5d006158 00000000edb807b0
+0x00007ffd694a7350:   00007ffd5d00edd8 00007ffd60df46a0
+0x00007ffd694a7360:   00007ffd60009800 0000000000000000
+0x00007ffd694a7370:   0000000000000001 00007ffd694a7378
+0x00007ffd694a7380:   00000000b52f7359 00007ffd694a73e8
+0x00007ffd694a7390:   00000000b5300340 0000000000000000
+0x00007ffd694a73a0:   00000000b52f7398 00007ffd694a7358
+0x00007ffd694a73b0:   00007ffd694a73d0 00007ffd694a7430
+0x00007ffd694a73c0:   00007ffd5d006158 0000000000000000
+0x00007ffd694a73d0:   00007ffd60df46a0 0000000000000000
+0x00007ffd694a73e0:   0000000000000000 0000000000000000
+0x00007ffd694a73f0:   00007ffd694a73f0 00000000b52e2cd0
+0x00007ffd694a7400:   00007ffd694a74b8 00000000b52eb978
+0x00007ffd694a7410:   0000000000000000 00000000b52e2f70
+0x00007ffd694a7420:   00007ffd694a73d0 00007ffd694a74a8
+0x00007ffd694a7430:   00007ffd694a7500 00007ffd5d006158
+0x00007ffd694a7440:   0000000000000000 0000000000000000
+0x00007ffd694a7450:   0000000000000000 0000000000000000
+0x00007ffd694a7460:   0000000000000000 0000000000000000
+0x00007ffd694a7470:   0000000000000000 00007ffd60df46a0
+0x00007ffd694a7480:   0000000000000000 00000000edbd1e68 
+
+Instructions: (pc=0x00007ffd09a902a1)
+0x00007ffd09a90281:   83 c4 08 48 89 df 5b 48 89 ee 5d ff e0 66 90 55
+0x00007ffd09a90291:   48 89 f5 53 48 89 fb 48 83 ec 08 e8 2f fd ff ff
+0x00007ffd09a902a1:   48 8b 3b 48 89 c6 e8 84 b5 fc ff 48 8b 40 18 48
+0x00007ffd09a902b1:   83 c4 08 48 89 df 5b 48 89 ee 5d ff e0 66 90 55 
+
+Register to memory mapping:
+
+RAX=0x00007ffd61c3a580 is an unknown value
+RBX=0x0000000000000000 is an unknown value
+RCX=0x0000000000000001 is an unknown value
+RDX=0x00007ffd694cf968: _rtld_global+0x908 in /lib64/ld-linux-x86-64.so.2 at 0x00007ffd692ac000
+RSP=0x00007ffd694a7290 is pointing into the stack for thread: 0x00007ffd60009800
+RBP=0x00007ffd60df46a0 is an unknown value
+RSI=0x00007ffd60df46a0 is an unknown value
+RDI=0x0000000000000000 is an unknown value
+R8 =0x0000000000000000 is an unknown value
+R9 =0x00007ffd61a1b0e0 is an unknown value
+R10=0x00007ffd694a6e70 is pointing into the stack for thread: 0x00007ffd60009800
+R11=0x00007ffd694a6f70 is pointing into the stack for thread: 0x00007ffd60009800
+R12=0x0000000000000000 is an unknown value
+R13=0x00000000b52f7250 is an oop
+&#123;method&#125; 
+ - klass: &#123;other class&#125;
+R14=0x00007ffd694a7370 is pointing into the stack for thread: 0x00007ffd60009800
+R15=0x00007ffd60009800 is a thread
+
+
+Stack: [0x00007ffd693a9000,0x00007ffd694aa000],  sp=0x00007ffd694a7290,  free space=1016k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+C  [libsoup-2.4.so.1+0x6c2a1]  soup_session_feature_detach+0x11
+
+Java frames: (J=compiled Java code, j=interpreted, Vv=VM code)
+j  org.eclipse.swt.internal.webkit.WebKitGTK._soup_session_feature_detach(JJ)V+0
+j  org.eclipse.swt.internal.webkit.WebKitGTK.soup_session_feature_detach(JJ)V+9
+j  org.eclipse.swt.browser.WebKit.create(Lorg/eclipse/swt/widgets/Composite;I)V+920
+j  org.eclipse.swt.browser.Browser.&lt;init&gt;(Lorg/eclipse/swt/widgets/Composite;I)V+81
+j  org.eclipse.jface.internal.text.html.BrowserInformationControl.isAvailable(Lorg/eclipse/swt/widgets/Composite;)Z+12
+j  org.eclipse.jdt.internal.ui.text.java.AbstractJavaCompletionProposal.getInformationControlCreator()Lorg/eclipse/jface/text/IInformationControlCreator;+9
+j  org.eclipse.jface.text.contentassist.AdditionalInfoController.computeInformation()V+18
+j  org.eclipse.jface.text.AbstractInformationControlManager.doShowInformation()V+11
+j  org.eclipse.jface.text.AbstractInformationControlManager.showInformation()V+8
+j  org.eclipse.jface.text.contentassist.AdditionalInfoController.showInformation(Lorg/eclipse/jface/text/contentassist/ICompletionProposal;Ljava/lang/Object;)V+64
+j  org.eclipse.jface.text.contentassist.AdditionalInfoController$10.showInformation(Lorg/eclipse/jface/text/contentassist/ICompletionProposal;Ljava/lang/Object;)V+25
+j  org.eclipse.jface.text.contentassist.AdditionalInfoController$9.run()V+36
+j  org.eclipse.swt.widgets.RunnableLock.run()V+11
+j  org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Z)Z+29
+j  org.eclipse.swt.widgets.Display.runAsyncMessages(Z)Z+5
+j  org.eclipse.swt.widgets.Display.readAndDispatch()Z+61
+j  org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$9.run()V+606
+j  org.eclipse.core.databinding.observable.Realm.runWithDefault(Lorg/eclipse/core/databinding/observable/Realm;Ljava/lang/Runnable;)V+12
+j  org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(Lorg/eclipse/e4/ui/model/application/MApplicationElement;Lorg/eclipse/e4/core/contexts/IEclipseContext;)Ljava/lang/Object;+57
+j  org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(Lorg/eclipse/e4/ui/model/application/MApplicationElement;)V+20
+j  org.eclipse.ui.internal.Workbench$5.run()V+256
+j  org.eclipse.core.databinding.observable.Realm.runWithDefault(Lorg/eclipse/core/databinding/observable/Realm;Ljava/lang/Runnable;)V+12
+j  org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Lorg/eclipse/swt/widgets/Display;Lorg/eclipse/ui/application/WorkbenchAdvisor;)I+18
+j  org.eclipse.ui.PlatformUI.createAndRunWorkbench(Lorg/eclipse/swt/widgets/Display;Lorg/eclipse/ui/application/WorkbenchAdvisor;)I+2
+j  org.eclipse.ui.internal.ide.application.IDEApplication.start(Lorg/eclipse/equinox/app/IApplicationContext;)Ljava/lang/Object;+108
+j  org.eclipse.equinox.internal.app.EclipseAppHandle.run(Ljava/lang/Object;)Ljava/lang/Object;+135
+j  org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(Ljava/lang/Object;)Ljava/lang/Object;+103
+j  org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(Ljava/lang/Object;)Ljava/lang/Object;+29
+j  org.eclipse.core.runtime.adaptor.EclipseStarter.run(Ljava/lang/Object;)Ljava/lang/Object;+149
+j  org.eclipse.core.runtime.adaptor.EclipseStarter.run([Ljava/lang/String;Ljava/lang/Runnable;)Ljava/lang/Object;+183
+v  ~StubRoutines::call_stub
+j  sun.reflect.NativeMethodAccessorImpl.invoke0(Ljava/lang/reflect/Method;Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+0
+j  sun.reflect.NativeMethodAccessorImpl.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+87
+j  sun.reflect.DelegatingMethodAccessorImpl.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+6
+j  java.lang.reflect.Method.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+57
+j  org.eclipse.equinox.launcher.Main.invokeFramework([Ljava/lang/String;[Ljava/net/URL;)V+211
+j  org.eclipse.equinox.launcher.Main.basicRun([Ljava/lang/String;)V+126
+j  org.eclipse.equinox.launcher.Main.run([Ljava/lang/String;)I+4
+j  org.eclipse.equinox.launcher.Main.main([Ljava/lang/String;)V+10
+v  ~StubRoutines::call_stub
+</code></pre>
+<p>巨大一堆日志文件，完全看不懂。<br>用<code>C  [libsoup-2.4.so.1+0x6c2a1]  soup_session_feature_detach+0x11</code>百度一下，竟然有解决办法:</p>
+<h3 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h3><p>打开Eclipse文件夹下面的<code>eclipse.ini</code><br>在最下面添加</p>
+<pre><code class="html">-Dorg.eclipse.swt.browser.DefaultType=mozilla
+</code></pre>
+<p>完美解决问题。</p>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ul>
+<li><a target="_blank" rel="noopener" href="http://my.oschina.net/u/1446823/blog/294736">Ubuntu64位下使用eclipse闪退的解决</a></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pinned.github.io/2023/05/29/2014-11-04-eclipse-shutdown/" data-id="cli8ygt77000t9y27bf6904pf" data-title="Ubuntu-14.04下Eclipse闪退解决办法" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tools/" rel="tag">Tools</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2014-10-27-Android-Drawable-Animation" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/05/29/2014-10-27-Android-Drawable-Animation/" class="article-date">
+  <time class="dt-published" datetime="2023-05-29T02:54:52.139Z" itemprop="datePublished">2023-05-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AE%89%E5%8D%93/">安卓</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/05/29/2014-10-27-Android-Drawable-Animation/">Android Drawable Animation</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>ProgressBar是一个经常使用的组件，但很多时候，它的外观看起来并不能满足我们的需求。<br>对它进行自定义也很麻烦。</p>
+<p>有一个很简单的解决办法就是用GIF动画，不使用系统提供的ProgressBar。</p>
+<p>有关显示GIF动画，网上有很多例子，这里只介绍将GIF动态图按每一帧切出来，然后在使用<br>Frame Animation将它展示出来。</p>
+<p>先上代码<code>loading.xml</code>：</p>
+<pre><code class="html">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;animation-list android:id=&quot;@+id/loading_animation&quot; android:oneshot=&quot;false&quot;
+  xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;
+    &lt;item android:duration=&quot;@integer/loading_frame_interval&quot; android:drawable=&quot;@drawable/loading_00&quot; /&gt;
+    &lt;item android:duration=&quot;@integer/loading_frame_interval&quot; android:drawable=&quot;@drawable/loading_01&quot; /&gt;
+    &lt;item android:duration=&quot;@integer/loading_frame_interval&quot; android:drawable=&quot;@drawable/loading_02&quot; /&gt;
+    &lt;item android:duration=&quot;@integer/loading_frame_interval&quot; android:drawable=&quot;@drawable/loading_03&quot; /&gt;
+    &lt;item android:duration=&quot;@integer/loading_frame_interval&quot; android:drawable=&quot;@drawable/loading_04&quot; /&gt;
+    &lt;item android:duration=&quot;@integer/loading_frame_interval&quot; android:drawable=&quot;@drawable/loading_05&quot; /&gt;
+    &lt;item android:duration=&quot;@integer/loading_frame_interval&quot; android:drawable=&quot;@drawable/loading_06&quot; /&gt;
+    &lt;item android:duration=&quot;@integer/loading_frame_interval&quot; android:drawable=&quot;@drawable/loading_07&quot; /&gt;
+    &lt;item android:duration=&quot;@integer/loading_frame_interval&quot; android:drawable=&quot;@drawable/loading_08&quot; /&gt;
+    &lt;item android:duration=&quot;@integer/loading_frame_interval&quot; android:drawable=&quot;@drawable/loading_09&quot; /&gt;
+    &lt;item android:duration=&quot;@integer/loading_frame_interval&quot; android:drawable=&quot;@drawable/loading_10&quot; /&gt;
+    &lt;item android:duration=&quot;@integer/loading_frame_interval&quot; android:drawable=&quot;@drawable/loading_11&quot; /&gt;
+    &lt;item android:duration=&quot;@integer/loading_frame_interval&quot; android:drawable=&quot;@drawable/loading_12&quot; /&gt;
+    &lt;item android:duration=&quot;@integer/loading_frame_interval&quot; android:drawable=&quot;@drawable/loading_13&quot; /&gt;
+    &lt;item android:duration=&quot;@integer/loading_frame_interval&quot; android:drawable=&quot;@drawable/loading_14&quot; /&gt;
+    &lt;item android:duration=&quot;@integer/loading_frame_interval&quot; android:drawable=&quot;@drawable/loading_15&quot; /&gt;
+&lt;/animation-list&gt;
+</code></pre>
+<p>其中:</p>
+<pre><code class="html">&lt;integer name=&quot;loading_frame_interval&quot;&gt;30&lt;/integer&gt;
+</code></pre>
+<p>在使用的时候，因为网上说的种种bug，我直接自定义了一个<code>ImageView</code>，用来显示Loading View。 看源码：</p>
+<pre><code class="java">package cn.lovecluo.widget;
+
+import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.drawable.AnimationDrawable;
+import android.util.AttributeSet;
+import android.widget.ImageView;
+
+/**
+ * Create by luozc at Aug 21, 2014
+ */
+public class CustomeImageView extends ImageView &#123;
+
+    public CustomeImageView(Context context, AttributeSet attrs, int defStyle) &#123;
+        super(context, attrs, defStyle);
+        this.initView();
+    &#125;
+
+    public CustomeImageView(Context context, AttributeSet attrs) &#123;
+        super(context, attrs);
+        this.initView();
+    &#125;
+
+    public CustomeImageView(Context context) &#123;
+        super(context);
+        this.initView();
+    &#125;
+
+    private void initView() &#123;
+        this.setImageResource(R.drawable.loading);
+    &#125;
+    
+    @Override
+    protected void onDraw(Canvas canvas) &#123;
+        super.onDraw(canvas);
+        this.loading();
+    &#125;   
+    public void loading() &#123;
+        AnimationDrawable drawable = (AnimationDrawable) this.getDrawable();
+        drawable.start();
+    &#125;
+&#125;
+</code></pre>
+<p>使用的时候也很简单，在XML中添加这个<code>CustomeImageView</code>即可，代码如下：</p>
+<pre><code class="html">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;RelativeLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    style=&quot;@style/fillall&quot;
+    android:paddingLeft=&quot;@dimen/activity_horizontal_margin&quot;
+    android:paddingRight=&quot;@dimen/activity_horizontal_margin&quot; &gt;
+    &lt;cn.lovecluo.widget.CustomeImageView 
+        style=&quot;@style/wrap&quot;
+        android:layout_centerInParent=&quot;true&quot; /&gt;
+&lt;/RelativeLayout&gt;
+</code></pre>
+<p>当然使用场景并不仅仅是这么简单，有时候， 我们会需要在一个Button后面添加一<code>loading</code>动画,<br>就比如说在登录的时候，当然你可以定义几个组件，用代码控制每个组件的显示，但是这样子过于的麻烦。</p>
+<p>就上述情况，我们还是用上面定义的<code>loading.xml</code>的动画效果来做展示:<br>在TextView中有这么几个属性:<code>drawableLeft</code>、<code>drawableRight</code>、<code>drawableTop</code>、<code>drawableBottom</code></p>
+<p>在这里，我们要动态控制，所以不能将这些写到xml中去，所以只能写代码了。</p>
+<pre><code class="java">Drawable drawable= mContext.getResources().getDrawable(R.drawable.loading);
+/// 这一步必须要做,否则不会显示.
+drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+mSubmitBtn.setCompoundDrawables(drawable, null, null, null);
+AnimationDrawable loadingAnimation = (AnimationDrawable) mSubmitBtn.getCompoundDrawables()[0];
+loadingAnimation.start();
+</code></pre>
+<p>是不是很简单，当然，如果你觉得图片和文字离的太近，你可以在xml中加上<code>android:drawablePadding=&quot;8dip&quot;</code></p>
+<p>看XML代码 ：</p>
+<pre><code class="html">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;FrameLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    android:id=&quot;@+id/submit_framelayout&quot;
+    style=&quot;@style/fillx&quot;
+    android:background=&quot;@drawable/add_service_input_btn_bg&quot;
+    android:clickable=&quot;true&quot;
+    android:padding=&quot;@dimen/activity_horizontal_margin&quot; &gt;
+
+    &lt;Button
+        android:id=&quot;@+id/submit_btn&quot;
+        style=&quot;@style/wrap&quot;
+        android:layout_gravity=&quot;center&quot;
+        android:background=&quot;@null&quot;
+        android:drawablePadding=&quot;@dimen/dp8&quot;
+        android:text=&quot;@string/submit&quot;
+        android:textColor=&quot;@color/white&quot;
+        android:textSize=&quot;@dimen/textsize_medium&quot; /&gt;
+
+&lt;/FrameLayout&gt;
+</code></pre>
+<p>看了代码，你就会觉得特别的简单。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pinned.github.io/2023/05/29/2014-10-27-Android-Drawable-Animation/" data-id="cli8ygt77000w9y274u37fbpc" data-title="Android Drawable Animation" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2014-12-04-mac-system-using" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/05/29/2014-12-04-mac-system-using/" class="article-date">
+  <time class="dt-published" datetime="2023-05-29T02:54:52.139Z" itemprop="datePublished">2023-05-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/05/29/2014-12-04-mac-system-using/">Mac系统使用记录（一）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="Mac用户"><a href="#Mac用户" class="headerlink" title="Mac用户"></a>Mac用户</h3><p>本人小屌丝一个，装了个黑苹果，用的是类似Ghost一样的版本，只接还原就可以用，<br>什么也没有改。</p>
+<p>在使用的过程中，有一个问题，就是使用的是Root用户，权限太高，感觉相当的不爽。</p>
+<p>本人又不怎么会用，百度了一下。找到了关掉Root用户的方法：</p>
+<p>如下：</p>
+<p><img src="http://pinned.github.io/assets/posts/img-2014-12-04/mac_clear_root_1.png" alt="step1"></p>
+<p><img src="http://pinned.github.io/assets/posts/img-2014-12-04/mac_clear_root_2.png" alt="step2"></p>
+<p><img src="http://pinned.github.io/assets/posts/img-2014-12-04/mac_clear_root_3.png" alt="step3"></p>
+<p><img src="http://pinned.github.io/assets/posts/img-2014-12-04/mac_clear_root_4.png" alt="step4"></p>
+<p>这样子设置到是没有什么问题，当我重启的时候，我发现问题来了。<br>因为本机只有一个ROOT账号，root账号被我禁用了。就没有可以登陆的账号<br>心中有千万只草泥马奔腾而过，不过也没有办法，出问题了总得解决才行。</p>
+<h3 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h3><p>我们首先要做的事，用单用户登陆。</p>
+<p>因为我安装的是黑苹果，所以我启动的时候加上了<code>-v -s</code>参数</p>
+<p>启动过后，他进入了最高权限的bash中,然后使用如下命令解决：</p>
+<pre><code class="xml">fsck -fy 
+mount -uw /
+rm /var/db/.AppleSetupDone
+reboot
+</code></pre>
+<p>正常重启过后，他会让你重新创建一个用户，创建成功过后，便可以登陆了。</p>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>给文件修改权限（chmod）：</p>
+<pre><code class="xml">chmod 777 file/Folder
+chmod -R 777 Folder
+</code></pre>
+<p>修改文件owner&#x2F;group（chown）:</p>
+<pre><code class="xml">chown username file
+chown -R username Folder
+</code></pre>
+<p>当然，上面的命令你需要在root用户的权限下才可以用。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pinned.github.io/2023/05/29/2014-12-04-mac-system-using/" data-id="cli8ygt78000z9y276gvb4r4k" data-title="Mac系统使用记录（一）" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Systems/" rel="tag">Systems</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2014-12-24-android-studio-using" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/05/29/2014-12-24-android-studio-using/" class="article-date">
+  <time class="dt-published" datetime="2023-05-29T02:54:52.139Z" itemprop="datePublished">2023-05-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/05/29/2014-12-24-android-studio-using/">Android Studio 使用记录（一）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>在使用Android Studio 的时候，不小心手贱。把View内的自动提示和<br>自动引入加入了ignore列表中去了。</p>
+<p>有关这个问题，也不知道怎么在度娘那儿搜索。</p>
+<p>没有办法，只有自己去慢慢找。虽然不认识几个英文。但是最终还是给我找到了。</p>
+<p>解决办法：</p>
+<pre><code class="html">Android Studio -&gt; [Setting] -&gt; [Editer] -&gt; [Auto Import]
+</code></pre>
+<p>如下图所示：</p>
+<p><img src="/assets/posts/img-2014-12-24/step1.png"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pinned.github.io/2023/05/29/2014-12-24-android-studio-using/" data-id="cli8ygt7800129y2713lyhct3" data-title="Android Studio 使用记录（一）" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tools/" rel="tag">Tools</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2014-11-04-butterknife-useing" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/05/29/2014-11-04-butterknife-useing/" class="article-date">
+  <time class="dt-published" datetime="2023-05-29T02:54:52.139Z" itemprop="datePublished">2023-05-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/">开源项目</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/05/29/2014-11-04-butterknife-useing/">Andorid UI注入工具的使用(ButterKnife)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>一个Android项目中，必不可少有很多UI，并且<code>Activity</code>要控制这些UI，当然，我们会用到以下代码:</p>
+<pre><code class="java">// 获取View的引用
+Button mBtn = (Button) this.findViewById(R.id.btn);
+// 给Button添加事件
+mBtn.setOnClickListener(new OnClickListener() &#123;
+    @Override
+    public void onClick(View view) &#123;
+        // TODO 做一些你自己要做的事情 
+    &#125;
+&#125;)
+</code></pre>
+<p>每一个Activity都要做类似的事情，这是一个相当蛋疼的事情。</p>
+<p>如果你可以像如下代码来实现View的初始画以及事件监听以及其它的，你还会用以前的代码么？</p>
+<p>代码如下:</p>
+<pre><code class="java">@InjectView(R.id.user) EditText username;
+@InjectView(R.id.pass) EditText password;
+@OnClick(R.id.submit) void submit() &#123;
+    // TODO 实现submit这个Btn的点击事件
+&#125;
+</code></pre>
+<p>用上面的注解会更加简单的组织我们的代码结构，代码量更少。<br>在这里我使用<a target="_blank" rel="noopener" href="http://jakewharton.github.io/butterknife/">Butter Knife</a></p>
+<h3 id="使用步骤"><a href="#使用步骤" class="headerlink" title="使用步骤"></a>使用步骤</h3><ol>
+<li>去GitHub下载ButterKnife的源码或者jar包  –&gt;  <a target="_blank" rel="noopener" href="https://github.com/JakeWharton/butterknife">传送门</a></li>
+<li>在这里，我是去下载的jar包，将jar包添加到项目的<code>libs</code>文件夹下面就可以使用了</li>
+</ol>
+<p>先上代码,一个很简单的布局文件:</p>
+<pre><code class="html">&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    xmlns:tools=&quot;http://schemas.android.com/tools&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot;
+    android:paddingBottom=&quot;@dimen/activity_vertical_margin&quot;
+    android:paddingLeft=&quot;@dimen/activity_horizontal_margin&quot;
+    android:paddingRight=&quot;@dimen/activity_horizontal_margin&quot;
+    android:paddingTop=&quot;@dimen/activity_vertical_margin&quot;
+    android:orientation=&quot;vertical&quot;&gt;
+
+    &lt;TextView
+        android:id=&quot;@+id/tv&quot;
+        android:layout_width=&quot;match_parent&quot;
+        android:layout_height=&quot;wrap_content&quot;
+        android:gravity=&quot;center&quot;
+        android:text=&quot;@string/hello_world&quot; /&gt;
+    
+    &lt;Button 
+        android:id=&quot;@+id/btn&quot;
+        android:layout_width=&quot;match_parent&quot;
+        android:layout_height=&quot;wrap_content&quot;
+        android:text=&quot;Change Text&quot;/&gt;
+
+&lt;/LinearLayout&gt;
+</code></pre>
+<p>简单到不能在简单的布局了，一个<code>TextView</code>， 一个<code>Button</code></p>
+<p>看Activity的代码，如下：</p>
+<pre><code class="java">public class MainActivity extends Activity &#123;
+
+    @InjectView(R.id.tv) TextView mShowTv;
+    
+    @Override
+    protected void onCreate(Bundle savedInstanceState) &#123;
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        ButterKnife.inject(this);
+        mShowTv.setText(&quot;Default Text&quot;);
+    &#125;
+    @OnClick(R.id.btn) void changeText() &#123;
+        mShowTv.setText(&quot;Change Text:&quot; + System.currentTimeMillis());
+    &#125;
+    
+&#125;
+</code></pre>
+<p>就是这么简单的代码，可是就是用不起来，怎么破，在</p>
+<pre><code class="java">mShowTv.setText(&quot;Default Text&quot;)
+</code></pre>
+<p>这儿报了一个空指针。如下图：</p>
+<p><img src="http://pinned.github.io/assets/posts/file-2014-11-4/inject_nullpoint.png" alt="Alt text"></p>
+<h3 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h3><p>因为使用注解，编译的时候，要进行相应的设置，才可以正常的编译,步骤如下：</p>
+<p>右键<code>项目</code>，选择<code>Properities</code>,然后选择<code>Java Compiler</code>下的<code>Annotation Processing</code>。<br>可是我找了半天，也没有找到它的踪影。不要着急，更新一下<code>Eclipse Java Development Tools</code>就可以了</p>
+<p><img src="http://pinned.github.io/assets/posts/file-2014-11-4/install_eclipse_tools.png" alt="Install Eclipse Java Development Tools"></p>
+<p>等到安装完成过后，你就可以进行如下设置了:</p>
+<p><img src="http://pinned.github.io/assets/posts/file-2014-11-4/eclipse_setting_01.png" alt="Step 01"></p>
+<p><img src="http://pinned.github.io/assets/posts/file-2014-11-4/eclipse_setting_02.png" alt="Step 02"></p>
+<p><img src="http://pinned.github.io/assets/posts/file-2014-11-4/eclipse_setting_03.png" alt="Step 03"></p>
+<p><img src="http://pinned.github.io/assets/posts/file-2014-11-4/eclipse_setting_04.png" alt="Step 04"></p>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ul>
+<li><a target="_blank" rel="noopener" href="http://www.it165.net/pro/html/201404/12375.html">ButterKnife Android程序员的一大利器</a></li>
+<li><a target="_blank" rel="noopener" href="http://jakewharton.github.io/butterknife/">ButterKnife Doc</a></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pinned.github.io/2023/05/29/2014-11-04-butterknife-useing/" data-id="cli8ygt7800159y27880145es" data-title="Andorid UI注入工具的使用(ButterKnife)" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2014-11-05-google volley retry" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/05/29/2014-11-05-google%20volley%20retry/" class="article-date">
+  <time class="dt-published" datetime="2023-05-29T02:54:52.139Z" itemprop="datePublished">2023-05-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/">开源项目</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/05/29/2014-11-05-google%20volley%20retry/">Google Volley 网络请求框架(一)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>Volley是在Google I&#x2F;O 2013上发布的，说来惭愧，都快一年了，才知道有这么个东西。</p>
+<p>有关Volley相关的使用及详细内容，我就不说了。如果还不会用的，但是又想用的可以移步<br>其它地方。</p>
+<p><strong>传送门</strong> (感谢“郭霖”大神)</p>
+<blockquote>
+<ol>
+<li><a target="_blank" rel="noopener" href="http://blog.csdn.net/guolin_blog/article/details/17482095">Android Volley完全解析(一)，初识Volley的基本用法</a></li>
+<li><a target="_blank" rel="noopener" href="http://blog.csdn.net/guolin_blog/article/details/17482165">Android Volley完全解析(二)，使用Volley加载网络图片</a></li>
+<li><a target="_blank" rel="noopener" href="http://blog.csdn.net/guolin_blog/article/details/17612763">Android Volley完全解析(三)，定制自己的Request</a></li>
+<li><a target="_blank" rel="noopener" href="http://blog.csdn.net/guolin_blog/article/details/17656437">Android Volley完全解析(四)，带你从源码的角度理解Volley</a></li>
+</ol>
+</blockquote>
+<p>当然除了大神写的，还可以去看官方文档，也写得相当的好。</p>
+<blockquote>
+<ol>
+<li><a target="_blank" rel="noopener" href="http://developer.android.com/training/volley/index.html">Transmitting Network Data Using Volley</a></li>
+</ol>
+</blockquote>
+<p>虽然看了上述文章，使用起来是完全木有问题。但是问题来了，如果在网络请求的时候出现了bug，<br>你会如何去解决这个问题呢？</p>
+<p>当然，如果你非常了解源码，你肯定知道是怎么引起的。但是我不知道源码啊。肿么破啊。</p>
+<p>于是，硬着头皮去看Volley源码，才发现，人家这个比我也得好是有原因的。</p>
+<h3 id="Volley-网络请求"><a href="#Volley-网络请求" class="headerlink" title="Volley 网络请求"></a>Volley 网络请求</h3><p>先看一下官方给出的架构图嘛，虽然我也不怎么明白是怎么实现的。</p>
+<p><img src="http://pinned.github.io/assets/posts/file-2014-11-05/volley-request.png" alt="Google Volley illustrates the life of a request"></p>
+<p>当你建立一个<code>Request</code>，将<code>Request</code>添加到<code>RequestQuene</code>中去，Volley 首先会去找Cache里面有没有存在有效的<br>请求，如果存在，则直接处理里面请求返回的数据并响应回去，如果没有，则把<code>Request</code>放到网络请求队列里面去，<br>执行异步请求并响应。</p>
+<p>以上就是我暂时对Volley的理解了。</p>
+<h3 id="Volley-请求重试机制"><a href="#Volley-请求重试机制" class="headerlink" title="Volley 请求重试机制"></a>Volley 请求重试机制</h3><p>一个完整的网络请求框架，肯定会有请求失败重试的机制。</p>
+<p>开始使用的时候，没有注意过请求重试的相关东西。自己也封装过一些网络请求的简单框架。也没有使用过。<br>最近在使用Volley的时候，它的网络请求是有一个重试机制的，并且你可以自己写重试的条件和次数等。</p>
+<p>下面来看一下，Google在Volley是怎么实现的。</p>
+<p>先上代码：</p>
+<pre><code class="java">@Override
+public NetworkResponse performRequest(Request&lt;?&gt; request) throws VolleyError &#123;
+    long requestStart = SystemClock.elapsedRealtime();
+    while (true) &#123;
+        HttpResponse httpResponse = null;
+        byte[] responseContents = null;
+        Map&lt;String, String&gt; responseHeaders = new HashMap&lt;String, String&gt;();
+        try &#123;
+            // Gather headers.
+            Map&lt;String, String&gt; headers = new HashMap&lt;String, String&gt;();
+            addCacheHeaders(headers, request.getCacheEntry());
+            httpResponse = mHttpStack.performRequest(request, headers);
+            StatusLine statusLine = httpResponse.getStatusLine();
+            int statusCode = statusLine.getStatusCode();
+
+            responseHeaders = convertHeaders(httpResponse.getAllHeaders());
+            // Handle cache validation.
+            if (statusCode == HttpStatus.SC_NOT_MODIFIED) &#123;
+                return new NetworkResponse(HttpStatus.SC_NOT_MODIFIED,
+                        request.getCacheEntry() == null ? null : request.getCacheEntry().data,
+                        responseHeaders, true);
+            &#125;
+
+            // Some responses such as 204s do not have content.  We must check.
+            if (httpResponse.getEntity() != null) &#123;
+              responseContents = entityToBytes(httpResponse.getEntity());
+            &#125; else &#123;
+              // Add 0 byte response as a way of honestly representing a
+              // no-content request.
+              responseContents = new byte[0];
+            &#125;
+
+            // if the request is slow, log it.
+            long requestLifetime = SystemClock.elapsedRealtime() - requestStart;
+            logSlowRequests(requestLifetime, request, responseContents, statusLine);
+
+            if (statusCode &lt; 200 || statusCode &gt; 299) &#123;
+                throw new IOException();
+            &#125;
+            return new NetworkResponse(statusCode, responseContents, responseHeaders, false);
+        &#125; catch (SocketTimeoutException e) &#123;
+            attemptRetryOnException(&quot;socket&quot;, request, new TimeoutError());
+        &#125; catch (ConnectTimeoutException e) &#123;
+            attemptRetryOnException(&quot;connection&quot;, request, new TimeoutError());
+        &#125; catch (MalformedURLException e) &#123;
+            throw new RuntimeException(&quot;Bad URL &quot; + request.getUrl(), e);
+        &#125; catch (IOException e) &#123;
+            int statusCode = 0;
+            NetworkResponse networkResponse = null;
+            if (httpResponse != null) &#123;
+                statusCode = httpResponse.getStatusLine().getStatusCode();
+            &#125; else &#123;
+                throw new NoConnectionError(e);
+            &#125;
+            VolleyLog.e(&quot;Unexpected response code %d for %s&quot;, statusCode, request.getUrl());
+            if (responseContents != null) &#123;
+                networkResponse = new NetworkResponse(statusCode, responseContents,
+                        responseHeaders, false);
+                if (statusCode == HttpStatus.SC_UNAUTHORIZED ||
+                        statusCode == HttpStatus.SC_FORBIDDEN) &#123;
+                    attemptRetryOnException(&quot;auth&quot;,
+                            request, new AuthFailureError(networkResponse));
+                &#125; else &#123;
+                    // TODO: Only throw ServerError for 5xx status codes.
+                    throw new ServerError(networkResponse);
+                &#125;
+            &#125; else &#123;
+                throw new NetworkError(networkResponse);
+            &#125;
+        &#125;
+    &#125;
+&#125;
+</code></pre>
+<p>Volley的网络请求是在上述代码中进行执行的。一个<code>while(true)</code>循环包含了太多东西。</p>
+<p>网络请求发出去的了，但是如果网络超时怎么办，当然是<code>重试</code>呢，可是上述代码是怎么实现重试的呢？<br>我们可以看到，在<code>catch</code>里面有两个超时的Exception:</p>
+<ul>
+<li><code>SocketTimeoutException</code></li>
+<li><code>ConnectTimeoutException</code></li>
+</ul>
+<p>我们在继续往下面看，当它捕获到超时的时候执行了<code>attemptRetryOnException(&quot;connection&quot;, request, new TimeoutError());</code></p>
+<p>在看一下这个方法的源码:</p>
+<pre><code class="java">/**
+ * Attempts to prepare the request for a retry. If there are no more attempts remaining in the
+ * request&#39;s retry policy, a timeout exception is thrown.
+ * @param request The request to use.
+ */
+private static void attemptRetryOnException(String logPrefix, Request&lt;?&gt; request,
+        VolleyError exception) throws VolleyError &#123;
+    RetryPolicy retryPolicy = request.getRetryPolicy();
+    int oldTimeout = request.getTimeoutMs();
+
+    try &#123;
+        retryPolicy.retry(exception);
+    &#125; catch (VolleyError e) &#123;
+        request.addMarker(
+                String.format(&quot;%s-timeout-giveup [timeout=%s]&quot;, logPrefix, oldTimeout));
+        throw e;
+    &#125;
+    request.addMarker(String.format(&quot;%s-retry [timeout=%s]&quot;, logPrefix, oldTimeout));
+&#125;
+</code></pre>
+<p>看方法上面的注释就可以清晰的看到，给网络请求建立重试，如果重试的次数已经用完了，则抛出一个<br><code>timeout exception</code>.</p>
+<p>在来看一下，默认的重试是怎么进行验证的。</p>
+<pre><code class="java"> /**
+ * Prepares for the next retry by applying a backoff to the timeout.
+ * @param error The error code of the last attempt.
+ */
+@Override
+public void retry(VolleyError error) throws VolleyError &#123;
+    mCurrentRetryCount++;
+    mCurrentTimeoutMs += (mCurrentTimeoutMs * mBackoffMultiplier);
+    if (!hasAttemptRemaining()) &#123;
+        throw error;
+    &#125;
+&#125;
+
+/**
+ * Returns true if this policy has attempts remaining, false otherwise.
+ */
+protected boolean hasAttemptRemaining() &#123;
+    return mCurrentRetryCount &lt;= mMaxNumRetries;
+&#125;
+</code></pre>
+<p>首先将当前重试的次数加1，如果重试的次数小于等于最大次数，则不管，回到上面那个<code>while(true)</code><br>循环继续执行，反之，则抛出异常，最后终止循环。</p>
+<blockquote>
+<p>PS：默认的重试最大次数是1</p>
+</blockquote>
+<h3 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h3><p>多了解一下最新的技术，多去看看那些大神写的Blog，对自己的提升会比较大，虽然你不能很好的<br>去读懂官方给出的英文文档，但是很多技术牛人会将新技术以简单通俗的例子告诉给你。</p>
+<p>最后，感谢“郭霖”大神，他的技术博客地址:<a target="_blank" rel="noopener" href="http://blog.csdn.net/guolin_blog">传送门</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pinned.github.io/2023/05/29/2014-11-05-google%20volley%20retry/" data-id="cli8ygt7900189y27dc4rc9bi" data-title="Google Volley 网络请求框架(一)" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2014-12-05-Android-SDK-Manager-Update-Method" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/05/29/2014-12-05-Android-SDK-Manager-Update-Method/" class="article-date">
+  <time class="dt-published" datetime="2023-05-29T02:54:52.139Z" itemprop="datePublished">2023-05-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/05/29/2014-12-05-Android-SDK-Manager-Update-Method/">Android Sdk Manager无法更新问题解决办法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>每次要更新Android SDK等信息的时候，总是非常蛋疼。</p>
+<p>可以去下载大神们整理好的文件。这里附上下载地址：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/inferjay/AndroidDevTools">https://github.com/inferjay/AndroidDevTools</a></p>
+<p>现在，我们也可以不用这种方式，直接使用Android SDK Manager来更新：</p>
+<p>方法如下：</p>
+<ul>
+<li><p>启动 Android SDK Manager ，打开主界面，依次选择「Tools」、「Options…」，弹出『Android SDK Manager - Settings』窗口；</p>
+</li>
+<li><p>在『Android SDK Manager - Settings』窗口中，在「HTTP Proxy Server」和「HTTP Proxy Port」输入框内填入mirrors.neusoft.edu.cn和80，并且选中「Force https:&#x2F;&#x2F;… sources to be fetched using http:&#x2F;&#x2F;…」复选￼框。设置完成后单击「Close」按钮关闭『Android SDK Manager - Settings』窗口返回到主界面；</p>
+</li>
+<li><p>依次选择「Packages」、「Reload」。</p>
+</li>
+</ul>
+<p>如下图：</p>
+<p><img src="/assets/posts/img-2014-12-05/setting.png" alt="Alt text"></p>
+<p><strong>参考资料</strong></p>
+<p><a target="_blank" rel="noopener" href="http://mirrors.neusoft.edu.cn/configurations.we#android">开源镜像站</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pinned.github.io/2023/05/29/2014-12-05-Android-SDK-Manager-Update-Method/" data-id="cli8ygt79001c9y27gnlbec2d" data-title="Android Sdk Manager无法更新问题解决办法" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2014-10-11-Android Notification blog one" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/05/29/2014-10-11-Android%20Notification%20blog%20one/" class="article-date">
+  <time class="dt-published" datetime="2023-05-29T02:54:52.138Z" itemprop="datePublished">2023-05-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AE%89%E5%8D%93/">安卓</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/05/29/2014-10-11-Android%20Notification%20blog%20one/">Android之Notification的使用(一)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="Android之Notification的使用（一）"><a href="#Android之Notification的使用（一）" class="headerlink" title="Android之Notification的使用（一）"></a>Android之Notification的使用（一）</h2><p>在通知栏展示一些及时消息是一件非常常见的事情，相对来说，使用Notification也是一件很<br>简单的事情。</p>
+<p>一个简单的事情，做起来也会遇到bug，先贴代码：</p>
+<pre><code class="java">Intent intent = new Intent(this, OtherActivity.class);
+String currentTime =  DateTimeUtil.formatDateDefault(Calendar.getInstance().getTime());
+intent.putExtra(&quot;time&quot;, currentTime);
+int notificationId = (int) System.currentTimeMillis();
+PendingIntent pendingIntent= PendingIntent.getActivity(
+    this, notificationId, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this)
+        .setSmallIcon(R.drawable.ic_launcher)
+        .setContentTitle(currentTime)
+        .setContentText(&quot;text&quot;)
+        .setTicker(&quot;tricker&quot;)
+        .setStyle(new NotificationCompat.BigTextStyle().bigText(&quot;big text&quot;))
+        .setAutoCancel(true)
+        .setContentIntent(pendingIntent);
+NotificationManager notificationManager = (NotificationManager)this.getSystemService(Context.NOTIFICATION_SERVICE);
+Notification notification = mBuilder.build();
+notificationManager.notify(notificationId, notification);
+</code></pre>
+<p>就按照上述的样子，就可以展示出一条Notification到状态栏了。很easy.</p>
+<p>可是问题来了，在做点击事件的时候，跳转出现了问题。</p>
+<p><strong>问题描述</strong></p>
+<p>因为没一个Notification的NotificationId都不一样，所以，每一次都会添加一个Notification到状态栏。<br>从上面的代码可以看出，所有的Notification的点击事件都指向了<code>OtherActivity</code>。<br>当状态栏上有多个Notification的时候并且我们退出了应用程序，这时候，点击其中一条Notification，会<br>启动<code>OtherActivity</code>, 问题来了，我在点击其它的Notification的时候,就没有任何响应。</p>
+<p><strong>解决办法</strong></p>
+<p>经过一番查找过后，还是没有找到解决办法。最后问了一下同事，解决方法简单的出乎我的意料。如下代码：</p>
+<pre><code class="java">intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+</code></pre>
+<p>只需要设置一下Flag就行了，如果你只需要启动一个Activity，可以在<strong>Mainfest.xml</strong>中添<br>加<code>android:launchMode=&quot;singleTask&quot;</code>就行了。</p>
+<p>贴上我的代码地址:<a target="_blank" rel="noopener" href="https://github.com/Pinned/NotificationDemo">下载地址NotificationDemo_01</a></p>
+<p><strong>注意事项</strong></p>
+<ul>
+<li><p>当有多个Notification的时候，Notification的跳转事件被最新的一个Notification覆盖了。</p>
+<ul>
+<li><strong>原因</strong><br>  问题主要出在<code>PendingIntent.getActivity();</code>的第二个参数，API文档里虽然说是未被使用的参数<br> (给出的例子也直接写0的)，实际上是通过该参数来区别不同的Intent的，如果id相同，就会覆盖<br> 掉之前的Intent了。所以总是获取到最后一个Intent。</li>
+<li><strong>解决办法</strong><br>  <code>PendingIntent.getActivity();</code>的第二个参数传入不同的id</li>
+</ul>
+</li>
+<li><p>Notification 声音，震动，LED灯</p>
+<pre><code class="java">// 震动
+notification.vibrate = new long[] &#123;100,400,100,400&#125;;
+// 要添加震动权限：&lt;uses-permission android:name=&quot;android.permission.VIBRATE&quot;&gt;&lt;/uses-permission&gt;
+</code></pre>
+<pre><code class="java">// 声音
+notification.sound=Uri.parse(&quot;android.resource://&quot;+R.class.getPackage().getName()+&quot;/&quot; +R.raw.ring);
+</code></pre>
+<pre><code class="java">notification.ledARGB=Color.GREEN;//led灯颜色
+notification.ledOffMS=1000;//关闭时间 毫秒
+notification.ledOnMS=1000;//开启时间 毫秒
+notification.flags|=Notification.FLAG_SHOW_LIGHTS;
+</code></pre>
+<blockquote>
+<p>ps: LED 显示只有在熄屏的时候才有效果， 一定要给震动加上权限</p>
+</blockquote>
+</li>
+</ul>
+<p><strong>参考资料</strong></p>
+<ol>
+<li><a target="_blank" rel="noopener" href="http://blog.csdn.net/berber78/article/details/7278408">intent.setFlags方法中的参数值含义</a></li>
+<li><a target="_blank" rel="noopener" href="http://univasity.iteye.com/blog/1390445">同时显示多个Notification时PendingIntent的Intent被覆盖？</a></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pinned.github.io/2023/05/29/2014-10-11-Android%20Notification%20blog%20one/" data-id="cli8ygt6x00019y27ffyw862n" data-title="Android之Notification的使用(一)" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2014-10-13-Android webview" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/05/29/2014-10-13-Android%20webview/" class="article-date">
+  <time class="dt-published" datetime="2023-05-29T02:54:52.138Z" itemprop="datePublished">2023-05-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AE%89%E5%8D%93/">安卓</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/05/29/2014-10-13-Android%20webview/">Android之Webview使用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="Android之Webview使用"><a href="#Android之Webview使用" class="headerlink" title="Android之Webview使用"></a>Android之Webview使用</h3><p>HTML页面是一个非常重要的角色，不仅是在PC端，在移动端也是非常重要的。</p>
+<p>今天使用Webview来显示一个H5页面，其中就有地图页面。如果你经常使用浏览器，<br>你会发现，浏览器在使用定位信息的时候，需要相关权限，当然，有好的提示用户是一个<br>必不可少的步骤。</p>
+<p><strong>问题</strong></p>
+<p>用Webview加载map的时候，使用地理位置，提示用户授权。</p>
+<p><strong>解决办法</strong></p>
+<p>先看代码：</p>
+<pre><code class="java">@Override
+public void onGeolocationPermissionsShowPrompt(
+        final String origin,
+        final GeolocationPermissions.Callback callback) &#123;
+    DebugLog.d(TAG, &quot;[onGeolocationPermissionsShowPrompt]&quot;);
+    showLocalRemidPopupWindow(origin, new GeoListener() &#123;
+        @Override
+        public void onRefused() &#123;
+            callback.invoke(origin, false, false);
+        &#125;
+
+        @Override
+        public void onSharedLocation() &#123;
+            callback.invoke(origin, true, false);
+        &#125;
+    &#125;);
+&#125;
+
+private void showLocalRemidPopupWindow(final String title, final GeoListener callback) &#123;
+    String saved = PreferencesUtil.getString(this, title, &quot;&quot;);
+    if (!TextUtils.isEmpty(saved)) &#123;
+        if (saved.equals(&quot;true&quot;))&#123;
+            if (callback != null) &#123;
+                callback.onSharedLocation();
+            &#125;
+        &#125; else if (saved.equals(&quot;false&quot;))&#123;
+            if (callback != null)&#123;
+                callback.onRefused();
+            &#125;
+        &#125;
+        return;
+    &#125;
+    if (mGeoPopupWindow == null)&#123;
+        View view = LayoutInflater.from(this).inflate(R.layout.geo_popup_window, null);
+        this.mGeoTitleTv = (TextView) view.findViewById(R.id.geo_title);
+        this.mGeoSaveCb = (CheckBox) view.findViewById(R.id.geo_save_share_preference);
+        this.mRefusedBtn = (Button) view.findViewById(R.id.refused_btn);
+        this.mShareLocationBtn = (Button) view.findViewById(R.id.share_btn);
+        this.mGeoPopupWindow = new PopupWindow(view,
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT, false);
+    &#125;
+    this.mGeoTitleTv.setText(String.format(getString(R.string.geo_title), title));
+    this.mGeoSaveCb.setChecked(true);
+    this.mRefusedBtn.setOnClickListener(new View.OnClickListener() &#123;
+        @Override
+        public void onClick(View view) &#123;
+            saveSharePrefrence(title, false);
+            if (callback != null) &#123;
+                callback.onRefused();
+            &#125;
+            mGeoPopupWindow.dismiss();
+        &#125;
+    &#125;);
+    this.mShareLocationBtn.setOnClickListener(new View.OnClickListener() &#123;
+        @Override
+        public void onClick(View view) &#123;
+            saveSharePrefrence(title, true);
+            if (callback != null) &#123;
+                callback.onSharedLocation();
+            &#125;
+            mGeoPopupWindow.dismiss();
+        &#125;
+    &#125;);
+    this.mGeoPopupWindow.showAtLocation(mWebView, Gravity.BOTTOM, 0, 0);
+&#125;
+</code></pre>
+<p>当浏览器在调用地理位置信息，webView就会触发<code>onGeolocationPermissionsShowPrompt</code>这个方法的调用。<br>那浏览器中是如何调用地理位置信息的呢？这里我也去查看了一点点资料，大概了解了一下，<br>代码如下：</p>
+<pre><code class="javascript">//通过navigator.geolocation对象获取地理位置信息
+//常用的navigator.geolocation对象有以下三种方法：
+//获取当前地理位置
+navigator.geolocation.getCurrentPosition(
+        success_callback_function,
+        error_callback_function,
+        position_options)
+//持续获取地理位置
+navigator.geolocation.watchPosition(
+        success_callback_function,
+        error_callback_function,
+        position_options)
+//清除持续获取地理位置事件
+navigator.geolocation.clearWatch(watch_position_id)  
+</code></pre>
+<p>当然仅仅是重写<code>onGeolocationPermissionsShowPrompt</code>这个方法是不行的。<br>还要对webSetting进入相关设置，具体内容，<a target="_blank" rel="noopener" href="https://github.com/Pinned/WebViewDemo">源码</a><br>中有写相关代码。</p>
+<blockquote>
+<p><strong>WebSettings常用方法</strong></p>
+<p>setAllowFileAccess 启用或禁止WebView访问文件数据</p>
+<p>setBlockNetworkImage 是否显示网络图像</p>
+<p>setBuiltInZoomControls 设置是否支持缩放</p>
+<p>setCacheMode 设置缓冲的模式</p>
+<p>setDefaultFontSize 设置默认的字体大小</p>
+<p>setDefaultTextEncodingName 设置在解码时使用的默认编码</p>
+<p>setFixedFontFamily 设置固定使用的字体</p>
+<p>setJavaSciptEnabled 设置是否支持Javascript</p>
+<p>setLayoutAlgorithm 设置布局方式</p>
+<p>setLightTouchEnabled 设置用鼠标激活被选项</p>
+<p>setSupportZoom 设置是否支持变焦</p>
+<p><strong>WebViewClient常用方法</strong></p>
+<p>doUpdate VisitedHistory 更新历史记录</p>
+<p>onFormResubmission 应用程序重新请求网页数据</p>
+<p>onLoadResource 加载指定地址提供的资源</p>
+<p>onPageFinished 网页加载完毕</p>
+<p>onPageStarted 网页开始加载</p>
+<p>onReceivedError 报告错误信息</p>
+<p>onScaleChanged WebView发生改变</p>
+<p>shouldOverrideUrlLoading 控制新的连接在当前WebView中打开</p>
+<p><strong>WebChromeClient常用方法</strong></p>
+<p>onCloseWindow 关闭WebView</p>
+<p>onCreateWindow 创建WebView</p>
+<p>onJsAlert 处理Javascript中的Alert对话框</p>
+<p>onJsConfirm处理Javascript中的Confirm对话框</p>
+<p>onJsPrompt处理Javascript中的Prompt对话框</p>
+<p>onProgressChanged 加载进度条改变</p>
+<p>onReceivedlcon 网页图标更改</p>
+<p>onReceivedTitle 网页Title更改</p>
+<p>onRequestFocus WebView显示焦点</p>
+</blockquote>
+<p><strong>最后结果</strong></p>
+<p><img src="/../../../../assets/posts/img-2014-10-13/device-2014-10-13-200631.png" alt="result"></p>
+<p><strong>参考资料</strong></p>
+<ol>
+<li><a target="_blank" rel="noopener" href="http://blog.csdn.net/t12x3456/article/details/13769731">Android WebView常见问题及解决方案汇总</a></li>
+<li><a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/5329662/android-webview-geolocation">android webview geolocation</a></li>
+<li><a target="_blank" rel="noopener" href="http://blog.csdn.net/eagelangel/article/details/8807723">利用HTML5开发Android</a></li>
+<li><a target="_blank" rel="noopener" href="http://dev.wo.com.cn/docportal/doc_queryMdocDetail.action?mdoc.docindex=6130">Android WebView</a></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pinned.github.io/2023/05/29/2014-10-13-Android%20webview/" data-id="cli8ygt6z00029y27802k91u0" data-title="Android之Webview使用" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/6/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/8/">下一页 &raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E5%8D%93/">安卓</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/">开源项目</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6/">读书</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Camera/" rel="tag">Android Camera</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Gradle/" rel="tag">Android Gradle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Network/" rel="tag">Android Network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Proguard/" rel="tag">Proguard</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ruby-Ubuntu/" rel="tag">Ruby Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/" rel="tag">Shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Systems/" rel="tag">Systems</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools/" rel="tag">Tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools-Android/" rel="tag">Tools Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools-Ruby/" rel="tag">Tools Ruby</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools-Ruby-Rails/" rel="tag">Tools Ruby Rails</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools-SVN-Git/" rel="tag">Tools SVN Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools-Systems/" rel="tag">Tools Systems</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu-Systems-Tools/" rel="tag">Ubuntu Systems Tools</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Android-Camera/" style="font-size: 10px;">Android Camera</a> <a href="/tags/Android-Gradle/" style="font-size: 12.5px;">Android Gradle</a> <a href="/tags/Android-Network/" style="font-size: 12.5px;">Android Network</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Proguard/" style="font-size: 10px;">Proguard</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/Ruby-Ubuntu/" style="font-size: 10px;">Ruby Ubuntu</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/Systems/" style="font-size: 12.5px;">Systems</a> <a href="/tags/Tools/" style="font-size: 17.5px;">Tools</a> <a href="/tags/Tools-Android/" style="font-size: 15px;">Tools Android</a> <a href="/tags/Tools-Ruby/" style="font-size: 10px;">Tools Ruby</a> <a href="/tags/Tools-Ruby-Rails/" style="font-size: 10px;">Tools Ruby Rails</a> <a href="/tags/Tools-SVN-Git/" style="font-size: 10px;">Tools SVN Git</a> <a href="/tags/Tools-Systems/" style="font-size: 10px;">Tools Systems</a> <a href="/tags/Ubuntu-Systems-Tools/" style="font-size: 12.5px;">Ubuntu Systems Tools</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">五月 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/05/29/2017-10-15-gradlew%20source%20analyze/">gradlew 源码分析</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/29/2017-02-10-proguard-translate/">Proguard 翻译</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/29/2019-05-21-Android-camera-preview/">Android Camera Preview</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/29/2019-08-10-Android-network-Configuration/">Android 网络配置</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/29/2019-08-10-Android-network-security-configuration/">Android Network security configuration</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 罗昭成<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

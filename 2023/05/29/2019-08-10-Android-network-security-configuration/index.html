@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Android Network security configuration | 大罗说事</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="The Network Security Configuration feature lets apps customize their network security settings in a safe, declarative configuration file without modifying app code. These settings can be configured fo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android Network security configuration">
+<meta property="og:url" content="http://pinned.github.io/2023/05/29/2019-08-10-Android-network-security-configuration/index.html">
+<meta property="og:site_name" content="大罗说事">
+<meta property="og:description" content="The Network Security Configuration feature lets apps customize their network security settings in a safe, declarative configuration file without modifying app code. These settings can be configured fo">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-05-29T02:54:52.145Z">
+<meta property="article:modified_time" content="2023-05-29T02:54:52.146Z">
+<meta property="article:author" content="罗昭成">
+<meta property="article:tag" content="Android Network">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="大罗说事" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">大罗说事</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://pinned.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-2019-08-10-Android-network-security-configuration" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/05/29/2019-08-10-Android-network-security-configuration/" class="article-date">
+  <time class="dt-published" datetime="2023-05-29T02:54:52.145Z" itemprop="datePublished">2023-05-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AE%89%E5%8D%93/">安卓</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Android Network security configuration
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>The Network Security Configuration feature lets apps customize their network security settings in a safe, declarative configuration file without modifying app code. These settings can be configured for specific domains and for a specific app. The key capabilities of this feature are as follows:</p>
+<ul>
+<li><strong>Custom trust anchors:</strong> Customize which Certificate Authorities (CA) are trusted for an app’s secure connections. For example, trusting particular self-signed certificates or restricting the set of public CAs that the app trusts.</li>
+<li><strong>Debug-only overrides:</strong> Safely debug secure connections in an app without added risk to the installed base.</li>
+<li><strong>Cleartext traffic opt-out:</strong> Protect apps from accidental usage of cleartext traffic.</li>
+<li><strong>Certificate pinning:</strong> Restrict an app’s secure connection to particular certificates.</li>
+</ul>
+<h2 id="Add-a-Network-Security-Configuration-file"><a href="#Add-a-Network-Security-Configuration-file" class="headerlink" title="Add a Network Security Configuration file"></a>Add a Network Security Configuration file</h2><p>The Network Security Configuration feature uses an XML file where you specify the settings for your app. You must include an entry in the manifest of your app to point to this file. The following code excerpt from a manifest demonstrates how to create this entry:</p>
+<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;manifest ... &gt;
+    &lt;application android:networkSecurityConfig=&quot;@xml/network_security_config&quot;
+                    ... &gt;
+        ...
+    &lt;/application&gt;
+&lt;/manifest&gt;
+</code></pre>
+<h2 id="Customize-trusted-CAs"><a href="#Customize-trusted-CAs" class="headerlink" title="Customize trusted CAs"></a>Customize trusted CAs</h2><p>An app may want to trust a custom set of CAs instead of the platform default. The most common reasons of this are:</p>
+<ul>
+<li>Connecting to a host with a custom certificate authority, such as a CA that is self-signed or is issued internally within a company.</li>
+<li>Limiting the set of CAs to only the CAs you trust instead of every pre-installed CA.</li>
+<li>Trusting additional CAs not included in the system.</li>
+</ul>
+<p>By default, secure connections (using protocols like TLS and HTTPS) from all apps trust the pre-installed system CAs, and apps targeting Android 6.0 (API level 23) and lower also trust the user-added CA store by default. An app can customize its own connections using <code>base-config</code> (for app-wide customization) or <code>domain-config</code> (for per-domain customization).</p>
+<h3 id="Configure-a-custom-CA"><a href="#Configure-a-custom-CA" class="headerlink" title="Configure a custom CA"></a>Configure a custom CA</h3><p>Assume you want to connect to your host which uses a self-signed SSL certificate or to a host whose SSL certificate is issued by a non-public CA which you trust, such as your company’s internal CA.</p>
+<p><code>res/xml/network_security_config.xml</code>:</p>
+<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;network-security-config&gt;
+    &lt;domain-config&gt;
+        &lt;domain includeSubdomains=&quot;true&quot;&gt;example.com&lt;/domain&gt;
+        &lt;trust-anchors&gt;
+            &lt;certificates src=&quot;@raw/my_ca&quot;/&gt;
+        &lt;/trust-anchors&gt;
+    &lt;/domain-config&gt;
+&lt;/network-security-config&gt;
+</code></pre>
+<p>Add the self-signed or non-public CA certificate, in PEM or DER format, to <code>res/raw/my_ca</code>.</p>
+<h3 id="Limit-the-set-of-trusted-CAs"><a href="#Limit-the-set-of-trusted-CAs" class="headerlink" title="Limit the set of trusted CAs"></a>Limit the set of trusted CAs</h3><p>An app that does not want to trust all CAs trusted by system can instead specify its own reduced set of CAs to trust. This protects the app from fraudulent certificates issued by any of the other CAs.</p>
+<p>The configuration to limit the set of trusted CAs is similar to <a target="_blank" rel="noopener" href="https://developer.android.com/training/articles/security-config#ConfigCustom">trusting a custom CA</a> for a specific domain except that multiple CAs are provided in the resource.</p>
+<p><code>res/xml/network_security_config.xml</code>:</p>
+<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;network-security-config&gt;
+    &lt;domain-config&gt;
+        &lt;domain includeSubdomains=&quot;true&quot;&gt;secure.example.com&lt;/domain&gt;
+        &lt;domain includeSubdomains=&quot;true&quot;&gt;cdn.example.com&lt;/domain&gt;
+        &lt;trust-anchors&gt;
+            &lt;certificates src=&quot;@raw/trusted_roots&quot;/&gt;
+        &lt;/trust-anchors&gt;
+    &lt;/domain-config&gt;
+&lt;/network-security-config&gt;
+</code></pre>
+<p>Add the trusted CAs, in PEM or DER format, to <code>res/raw/trusted_roots</code>. Note that if using PEM format the file must contain <em>only</em> PEM data and no extra text. You can also provide multiple <a target="_blank" rel="noopener" href="https://developer.android.com/training/articles/security-config#certificates">&#96;&#96;</a> elements instead of one.</p>
+<h3 id="Trust-additional-CAs"><a href="#Trust-additional-CAs" class="headerlink" title="Trust additional CAs"></a>Trust additional CAs</h3><p>An app may want to trust additional CAs not trusted by the system, this could be due to the system not yet including the CA or a CA that does not meet the requirements for inclusion into the Android system. An app can do this by specifying multiple certificate sources for a configuration.</p>
+<p><code>res/xml/network_security_config.xml</code>:</p>
+<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;network-security-config&gt;
+    &lt;base-config&gt;
+        &lt;trust-anchors&gt;
+            &lt;certificates src=&quot;@raw/extracas&quot;/&gt;
+            &lt;certificates src=&quot;system&quot;/&gt;
+        &lt;/trust-anchors&gt;
+    &lt;/base-config&gt;
+&lt;/network-security-config&gt;
+</code></pre>
+<h2 id="Configure-CAs-for-debugging"><a href="#Configure-CAs-for-debugging" class="headerlink" title="Configure CAs for debugging"></a>Configure CAs for debugging</h2><p>When debugging an app that connects over HTTPS, you may want to connect to a local development server, which does not have the SSL certificate for your production server. In order to support this without any modification to your app’s code, you can specify debug-only CAs, which are trusted <em>only</em> when <a target="_blank" rel="noopener" href="https://developer.android.com/guide/topics/manifest/application-element.html#debug">android:debuggable</a> is <code>true</code>, by using <code>debug-overrides</code>. Normally, IDEs and build tools set this flag automatically for non-release builds.</p>
+<p>This is safer than the usual conditional code because, as a security precaution, app stores do not accept apps which are marked debuggable.</p>
+<p><code>res/xml/network_security_config.xml</code>:</p>
+<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;network-security-config&gt;
+    &lt;debug-overrides&gt;
+        &lt;trust-anchors&gt;
+            &lt;certificates src=&quot;@raw/debug_cas&quot;/&gt;
+        &lt;/trust-anchors&gt;
+    &lt;/debug-overrides&gt;
+&lt;/network-security-config&gt;
+</code></pre>
+<h2 id="Opt-out-of-cleartext-traffic"><a href="#Opt-out-of-cleartext-traffic" class="headerlink" title="Opt out of cleartext traffic"></a>Opt out of cleartext traffic</h2><blockquote>
+<p> <strong>Note:</strong> The guidance in this section applies only to apps that target Android 8.1 (API level 27) or lower. Starting with Android 9 (API level 28), cleartext support is disabled by default.</p>
+</blockquote>
+<p>Applications intending to connect to destinations using only secure connections can opt-out of supporting cleartext (using the unencrypted HTTP protocol instead of HTTPS) to those destinations. This option helps prevent accidental regressions in apps due to changes in URLs provided by external sources such as backend servers. See <code>NetworkSecurityPolicy.isCleartextTrafficPermitted()</code> for more details.</p>
+<p>For example, an app may want to ensure that all connections to <code>secure.example.com</code> are always done over HTTPS to protect sensitive traffic from hostile networks.</p>
+<p><code>res/xml/network_security_config.xml</code>:</p>
+<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;network-security-config&gt;
+    &lt;domain-config cleartextTrafficPermitted=&quot;false&quot;&gt;
+        &lt;domain includeSubdomains=&quot;true&quot;&gt;secure.example.com&lt;/domain&gt;
+    &lt;/domain-config&gt;
+&lt;/network-security-config&gt;
+</code></pre>
+<h2 id="Pin-certificates"><a href="#Pin-certificates" class="headerlink" title="Pin certificates"></a>Pin certificates</h2><p>Normally, an app trusts all pre-installed CAs. If any of these CAs were to issue a fraudulent certificate, the app would be at risk from a man-in-the-middle attack. Some apps choose to limit the set of certificates they accept by either limiting the set of CAs they trust or by certificate pinning.</p>
+<p>Certificate pinning is done by providing a set of certificates by hash of the public key (<code>SubjectPublicKeyInfo</code> of the X.509 certificate). A certificate chain is then valid only if the certificate chain contains at least one of the pinned public keys.</p>
+<p>Note that, when using certificate pinning, you should always include a backup key so that if you are forced to switch to new keys or change CAs (when pinning to a CA certificate or an intermediate of that CA), your app’s connectivity is unaffected. Otherwise, you must push out an update to the app to restore connectivity.</p>
+<p>Additionally, it is possible to set an expiration time for pins after which pinning is not performed. This helps prevent connectivity issues in apps which have not been updated. However, setting an expiration time on pins may enable pinning bypass.</p>
+<p><code>res/xml/network_security_config.xml</code>:</p>
+<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;network-security-config&gt;
+    &lt;domain-config&gt;
+        &lt;domain includeSubdomains=&quot;true&quot;&gt;example.com&lt;/domain&gt;
+        &lt;pin-set expiration=&quot;2018-01-01&quot;&gt;
+            &lt;pin digest=&quot;SHA-256&quot;&gt;7HIpactkIAq2Y49orFOOQKurWxmmSFZhBCoQYcRhJ3Y=&lt;/pin&gt;
+            &lt;!-- backup pin --&gt;
+            &lt;pin digest=&quot;SHA-256&quot;&gt;fwza0LRMXouZHRC8Ei+4PyuldPDcf3UKgO/04cDM1oE=&lt;/pin&gt;
+        &lt;/pin-set&gt;
+    &lt;/domain-config&gt;
+&lt;/network-security-config&gt;
+</code></pre>
+<h2 id="Configuration-inheritance-behavior"><a href="#Configuration-inheritance-behavior" class="headerlink" title="Configuration inheritance behavior"></a>Configuration inheritance behavior</h2><p>Values not set in a specific configuration are inherited. This behavior allows more complex configurations while keeping the configuration file readable.</p>
+<p>If a value is not set in a specific entry, then the value from the more general entry is used. For example, values not set in a <code>domain-config</code> are taken from the parent <code>domain-config</code>, if nested, or from the <code>base-config</code> if not. Values not set in the <code>base-config</code> use the platform default values.</p>
+<p>For example, consider where all connections to subdomains of <code>example.com</code> must use a custom set of CAs. Additonally, cleartext traffic to these domains is permitted <em>except</em> when connecting to <code>secure.example.com</code>. By nesting the configuration for <code>secure.example.com</code> inside the configuration for <code>example.com</code>, the <code>trust-anchors</code> does not need to be duplicated.</p>
+<p><code>res/xml/network_security_config.xml</code>:</p>
+<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;network-security-config&gt;
+    &lt;domain-config&gt;
+        &lt;domain includeSubdomains=&quot;true&quot;&gt;example.com&lt;/domain&gt;
+        &lt;trust-anchors&gt;
+            &lt;certificates src=&quot;@raw/my_ca&quot;/&gt;
+        &lt;/trust-anchors&gt;
+        &lt;domain-config cleartextTrafficPermitted=&quot;false&quot;&gt;
+            &lt;domain includeSubdomains=&quot;true&quot;&gt;secure.example.com&lt;/domain&gt;
+        &lt;/domain-config&gt;
+    &lt;/domain-config&gt;
+&lt;/network-security-config&gt;
+</code></pre>
+<h2 id="Configuration-file-format"><a href="#Configuration-file-format" class="headerlink" title="Configuration file format"></a>Configuration file format</h2><p>The Network Security Configuration feature uses an XML file format. The overall structure of the file is shown in the following code sample:</p>
+<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;network-security-config&gt;
+    &lt;base-config&gt;
+        &lt;trust-anchors&gt;
+            &lt;certificates src=&quot;...&quot;/&gt;
+            ...
+        &lt;/trust-anchors&gt;
+    &lt;/base-config&gt;
+
+    &lt;domain-config&gt;
+        &lt;domain&gt;android.com&lt;/domain&gt;
+        ...
+        &lt;trust-anchors&gt;
+            &lt;certificates src=&quot;...&quot;/&gt;
+            ...
+        &lt;/trust-anchors&gt;
+        &lt;pin-set&gt;
+            &lt;pin digest=&quot;...&quot;&gt;...&lt;/pin&gt;
+            ...
+        &lt;/pin-set&gt;
+    &lt;/domain-config&gt;
+    ...
+    &lt;debug-overrides&gt;
+        &lt;trust-anchors&gt;
+            &lt;certificates src=&quot;...&quot;/&gt;
+            ...
+        &lt;/trust-anchors&gt;
+    &lt;/debug-overrides&gt;
+&lt;/network-security-config&gt;
+</code></pre>
+<p>The following sections describe the syntax and other details of the file format.</p>
+<h3 id="lt-network-security-config-gt"><a href="#lt-network-security-config-gt" class="headerlink" title="&lt;network-security-config&gt;"></a>&lt;network-security-config&gt;</h3><ul>
+<li><p>can contain:</p>
+<p>0 or 1 of <code>&lt;base-config&gt;</code> Any number of <code>&lt;domain-config&gt;</code> 0 or 1 of <code>&lt;debug-overrides&gt;</code></p>
+</li>
+</ul>
+<h3 id="lt-base-config-gt"><a href="#lt-base-config-gt" class="headerlink" title="&lt;base-config&gt;"></a>&lt;base-config&gt;</h3><ul>
+<li>syntax:</li>
+</ul>
+<pre><code class="xml">&lt;base-config cleartextTrafficPermitted=[&quot;true&quot; | &quot;false&quot;]&gt;
+    ...
+&lt;/base-config&gt;
+</code></pre>
+<ul>
+<li><p>can contain:</p>
+<p><code>&lt;trust-anchors&gt;</code></p>
+</li>
+<li><p>description:</p>
+<p>The default configuration used by all connections whose destination is not covered by a <a target="_blank" rel="noopener" href="https://developer.android.com/training/articles/security-config#domain-config"><code>domain-config</code></a>.Any values that are not set use the platform default values.The default configuration for apps targeting Android 9 (API level 28) and higher is as follows:<code>&lt;base-config cleartextTrafficPermitted=&quot;false&quot;&gt;    &lt;trust-anchors&gt;        &lt;certificates src=&quot;system&quot; /&gt;    &lt;/trust-anchors&gt;&lt;/base-config&gt;</code>The default configuration for apps targeting Android 7.0 (API level 24) to Android 8.1 (API level 27) is as follows:<code>&lt;base-config cleartextTrafficPermitted=&quot;true&quot;&gt;    &lt;trust-anchors&gt;        &lt;certificates src=&quot;system&quot; /&gt;    &lt;/trust-anchors&gt;&lt;/base-config&gt;</code>The default configuration for apps targeting Android 6.0 (API level 23) and lower is as follows:<code>&lt;base-config cleartextTrafficPermitted=&quot;true&quot;&gt;    &lt;trust-anchors&gt;        &lt;certificates src=&quot;system&quot; /&gt;        &lt;certificates src=&quot;user&quot; /&gt;    &lt;/trust-anchors&gt;&lt;/base-config&gt;</code></p>
+</li>
+</ul>
+<h3 id="lt-domain-config-gt"><a href="#lt-domain-config-gt" class="headerlink" title="&lt;domain-config&gt;"></a>&lt;domain-config&gt;</h3><ul>
+<li><p>syntax:</p>
+<p><code>&lt;domain-config cleartextTrafficPermitted=[&quot;true&quot; | &quot;false&quot;]&gt;    ...&lt;/domain-config&gt;</code></p>
+</li>
+<li><p>Can Contain:</p>
+<p>1 or more <code>&lt;domain&gt;</code>  0 or 1 <code>&lt;trust-anchors&gt;</code>  0 or 1 <code>&lt;pin-set&gt;</code>  Any number of nested <code>&lt;domain-config&gt;</code></p>
+</li>
+<li><p>Description</p>
+<p>Configuration used for connections to specific destinations, as defined by the <code>domain</code> elements.Note that if multiple <code>domain-config</code> elements cover a destination, the configuration with the most specific (longest) matching domain rule is used.</p>
+</li>
+</ul>
+<h3 id="lt-domain-gt"><a href="#lt-domain-gt" class="headerlink" title="&lt;domain&gt;"></a>&lt;domain&gt;</h3><ul>
+<li><p>syntax:</p>
+<p><code>&lt;domain includeSubdomains=[&quot;true&quot; | &quot;false&quot;]&gt;example.com&lt;/domain&gt;</code></p>
+</li>
+<li><p>Attributes:</p>
+<p><code>includeSubdomains</code>If <code>&quot;true&quot;</code>, then this domain rule matches the domain and all subdomains, including subdomains of subdomains. Otherwise, the rule only applies to exact matches.</p>
+</li>
+<li><p>Description:</p>
+</li>
+</ul>
+<h3 id="lt-debug-overrides-gt"><a href="#lt-debug-overrides-gt" class="headerlink" title="&lt;debug-overrides&gt;"></a>&lt;debug-overrides&gt;</h3><ul>
+<li><p>syntax:</p>
+<p><code>&lt;debug-overrides&gt;    ...&lt;/debug-overrides&gt;</code></p>
+</li>
+<li><p>Can Contain:</p>
+<p>0 or 1 <code>&lt;trust-anchors&gt;</code></p>
+</li>
+<li><p>Description:</p>
+<p>Overrides to be applied when <a target="_blank" rel="noopener" href="https://developer.android.com/guide/topics/manifest/application-element.html#debug">android:debuggable</a> is <code>&quot;true&quot;</code>, which is normally the case for non-release builds generated by IDEs and build tools. Trust anchors specified in <code>debug-overrides</code> are added to all other configurations, and certificate pinning is not performed when the server’s certificate chain uses one of these debug-only trust anchors. If <a target="_blank" rel="noopener" href="https://developer.android.com/guide/topics/manifest/application-element.html#debug">android:debuggable</a> is <code>&quot;false&quot;</code>, then this section is completely ignored.</p>
+</li>
+</ul>
+<h3 id="lt-trust-anchors-gt"><a href="#lt-trust-anchors-gt" class="headerlink" title="&lt;trust-anchors&gt;"></a>&lt;trust-anchors&gt;</h3><ul>
+<li><p>syntax:</p>
+<p><code>&lt;trust-anchors&gt;...&lt;/trust-anchors&gt;</code></p>
+</li>
+<li><p>Can Contain:</p>
+<p>Any number of <code>&lt;certificates&gt;</code></p>
+</li>
+<li><p>Description:</p>
+<p>Set of trust anchors for secure connections.</p>
+</li>
+</ul>
+<h3 id="lt-certificates-gt"><a href="#lt-certificates-gt" class="headerlink" title="&lt;certificates&gt;"></a>&lt;certificates&gt;</h3><ul>
+<li><p>syntax:</p>
+<p><code>&lt;certificates src=[&quot;system&quot; | &quot;user&quot; | &quot;*raw resource*&quot;]              overridePins=[&quot;true&quot; | &quot;false&quot;] /&gt;</code></p>
+</li>
+<li><p>description:</p>
+<p>Set of X.509 certificates for <code>trust-anchors</code> elements.</p>
+</li>
+<li><p>attributes:</p>
+<p><code>src</code>The source of CA certificates. Each certificate can be one of the following:a raw resource ID pointing to a file containing X.509 certificates. Certificates must be encoded in DER or PEM format. In the case of PEM certificates, the file <em>must not</em> contain extra non-PEM data such as comments.<code>&quot;system&quot;</code> for the pre-installed system CA certificates<code>&quot;user&quot;</code> for user-added CA certificates<code>overridePins</code>Specifies if the CAs from this source bypass certificate pinning. If <code>&quot;true&quot;</code>, then pinning is not performed on certificate chains which are signed by one of the CAs from this source. This can be useful for debugging CAs or for testing man-in-the-middle attacks on your app’s secure traffic.Default is <code>&quot;false&quot;</code> unless specified in a <code>debug-overrides</code> element, in which case the default is <code>&quot;true&quot;</code>.</p>
+</li>
+</ul>
+<h3 id="lt-pin-set-gt"><a href="#lt-pin-set-gt" class="headerlink" title="&lt;pin-set&gt;"></a>&lt;pin-set&gt;</h3><ul>
+<li><p>syntax:</p>
+<p><code>&lt;pin-set expiration=&quot;date&quot;&gt;...&lt;/pin-set&gt;</code></p>
+</li>
+<li><p>Can Contain:</p>
+<p>Any number of <code>&lt;pin&gt;</code></p>
+</li>
+<li><p>Description:</p>
+<p>A set of public key pins. For a secure connection to be trusted, one of the public keys in the chain of trust must be in the set of pins. See <code>&lt;pin&gt;</code> for the format of pins.</p>
+</li>
+<li><p>Attributes:</p>
+<p><code>expiration</code>The date, in <code>yyyy-MM-dd</code> format, on which the pins expire, thus disabling pinning. If the attribute is not set, then the pins do not expire.Expiration helps prevent connectivity issues in apps which do not get updates to their pin set, such as when the user disables app updates.</p>
+</li>
+</ul>
+<h3 id="lt-pin-gt"><a href="#lt-pin-gt" class="headerlink" title="&lt;pin&gt;"></a>&lt;pin&gt;</h3><ul>
+<li><p>syntax:</p>
+<p><code>&lt;pin digest=[&quot;SHA-256&quot;]&gt;base64 encoded digest of X.509    SubjectPublicKeyInfo (SPKI)&lt;/pin&gt;</code></p>
+</li>
+<li><p>Attributes:</p>
+<p><code>digest</code>The digest algorithm used to generate the pin. Currently, only <code>&quot;SHA-256&quot;</code> is supported.</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pinned.github.io/2023/05/29/2019-08-10-Android-network-security-configuration/" data-id="cli8ygt7o005t9y274e9vb1go" data-title="Android Network security configuration" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android-Network/" rel="tag">Android Network</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/05/29/2019-08-10-Android-network-Configuration/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          Android 网络配置
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/05/29/2015-05-25-android-soft-keyboard/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">【转】Android打开与关闭软键盘</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E5%8D%93/">安卓</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/">开源项目</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6/">读书</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Camera/" rel="tag">Android Camera</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Gradle/" rel="tag">Android Gradle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Network/" rel="tag">Android Network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Proguard/" rel="tag">Proguard</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ruby-Ubuntu/" rel="tag">Ruby Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/" rel="tag">Shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Systems/" rel="tag">Systems</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools/" rel="tag">Tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools-Android/" rel="tag">Tools Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools-Ruby/" rel="tag">Tools Ruby</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools-Ruby-Rails/" rel="tag">Tools Ruby Rails</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools-SVN-Git/" rel="tag">Tools SVN Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools-Systems/" rel="tag">Tools Systems</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu-Systems-Tools/" rel="tag">Ubuntu Systems Tools</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Android-Camera/" style="font-size: 10px;">Android Camera</a> <a href="/tags/Android-Gradle/" style="font-size: 12.5px;">Android Gradle</a> <a href="/tags/Android-Network/" style="font-size: 12.5px;">Android Network</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Proguard/" style="font-size: 10px;">Proguard</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/Ruby-Ubuntu/" style="font-size: 10px;">Ruby Ubuntu</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/Systems/" style="font-size: 12.5px;">Systems</a> <a href="/tags/Tools/" style="font-size: 17.5px;">Tools</a> <a href="/tags/Tools-Android/" style="font-size: 15px;">Tools Android</a> <a href="/tags/Tools-Ruby/" style="font-size: 10px;">Tools Ruby</a> <a href="/tags/Tools-Ruby-Rails/" style="font-size: 10px;">Tools Ruby Rails</a> <a href="/tags/Tools-SVN-Git/" style="font-size: 10px;">Tools SVN Git</a> <a href="/tags/Tools-Systems/" style="font-size: 10px;">Tools Systems</a> <a href="/tags/Ubuntu-Systems-Tools/" style="font-size: 12.5px;">Ubuntu Systems Tools</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">五月 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/05/29/2017-10-15-gradlew%20source%20analyze/">gradlew 源码分析</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/29/2017-02-10-proguard-translate/">Proguard 翻译</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/29/2019-05-21-Android-camera-preview/">Android Camera Preview</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/29/2019-08-10-Android-network-Configuration/">Android 网络配置</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/29/2019-08-10-Android-network-security-configuration/">Android Network security configuration</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 罗昭成<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

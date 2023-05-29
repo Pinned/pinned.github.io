@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Ubuntu-14.04下Eclipse闪退解决办法 | 大罗说事</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="问题描述打开Eclipse，有时候还可以使用一下，有时候使用都不行。 当Eclipse闪退的时候，还会在Eclipse 文件夹下生成一个hs_err_pidxxxx.log的文件，内容如下: # # A fatal error has been detected by the Java Runtime Environment: # #  SIGSEGV (0xb) at pc&#x3D;0x00007ffd">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ubuntu-14.04下Eclipse闪退解决办法">
+<meta property="og:url" content="http://pinned.github.io/2023/05/29/2014-11-04-eclipse-shutdown/index.html">
+<meta property="og:site_name" content="大罗说事">
+<meta property="og:description" content="问题描述打开Eclipse，有时候还可以使用一下，有时候使用都不行。 当Eclipse闪退的时候，还会在Eclipse 文件夹下生成一个hs_err_pidxxxx.log的文件，内容如下: # # A fatal error has been detected by the Java Runtime Environment: # #  SIGSEGV (0xb) at pc&#x3D;0x00007ffd">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-05-29T02:54:52.139Z">
+<meta property="article:modified_time" content="2023-05-29T02:54:52.139Z">
+<meta property="article:author" content="罗昭成">
+<meta property="article:tag" content="Tools">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="大罗说事" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">大罗说事</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://pinned.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-2014-11-04-eclipse-shutdown" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/05/29/2014-11-04-eclipse-shutdown/" class="article-date">
+  <time class="dt-published" datetime="2023-05-29T02:54:52.139Z" itemprop="datePublished">2023-05-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Ubuntu-14.04下Eclipse闪退解决办法
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>打开Eclipse，有时候还可以使用一下，有时候使用都不行。</p>
+<p>当Eclipse闪退的时候，还会在Eclipse 文件夹下生成一个<code>hs_err_pidxxxx.log</code>的文件，<br>内容如下:</p>
+<pre><code class="html">#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  SIGSEGV (0xb) at pc=0x00007ffd09a902a1, pid=5291, tid=140726369949440
+#
+# JRE version: 7.0_25-b15
+# Java VM: Java HotSpot(TM) 64-Bit Server VM (23.25-b01 mixed mode linux-amd64 compressed oops)
+# Problematic frame:
+# C  [libsoup-2.4.so.1+0x6c2a1]  soup_session_feature_detach+0x11
+#
+# Failed to write core dump. Core dumps have been disabled. To enable core dumping, try &quot;ulimit -c unlimited&quot; before starting Java again
+#
+# If you would like to submit a bug report, please visit:
+#   http://bugreport.sun.com/bugreport/crash.jsp
+# The crash happened outside the Java Virtual Machine in native code.
+# See problematic frame for where to report the bug.
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x00007ffd60009800):  JavaThread &quot;main&quot; [_thread_in_native, id=5292, stack(0x00007ffd693a9000,0x00007ffd694aa000)]
+
+siginfo:si_signo=SIGSEGV: si_errno=0, si_code=1 (SEGV_MAPERR), si_addr=0x0000000000000000
+
+Registers:
+RAX=0x00007ffd61c3a580, RBX=0x0000000000000000, RCX=0x0000000000000001, RDX=0x00007ffd694cf968
+RSP=0x00007ffd694a7290, RBP=0x00007ffd60df46a0, RSI=0x00007ffd60df46a0, RDI=0x0000000000000000
+R8 =0x0000000000000000, R9 =0x00007ffd61a1b0e0, R10=0x00007ffd694a6e70, R11=0x00007ffd694a6f70
+R12=0x0000000000000000, R13=0x00000000b52f7250, R14=0x00007ffd694a7370, R15=0x00007ffd60009800
+RIP=0x00007ffd09a902a1, EFLAGS=0x0000000000010202, CSGSFS=0x0000000000000033, ERR=0x0000000000000004
+  TRAPNO=0x000000000000000e
+
+Top of Stack: (sp=0x00007ffd694a7290)
+0x00007ffd694a7290:   00007ffd61a202b0 00007ffd60df46a0
+0x00007ffd694a72a0:   0000000000000000 00007ffd12430aa9
+0x00007ffd694a72b0:   00007ffd694a7338 00000000b52f7250
+0x00007ffd694a72c0:   00007ffd694a7338 00007ffd5d011f90
+0x00007ffd694a72d0:   0000000000000000 00007ffd0c0c83f0
+0x00007ffd694a72e0:   00007ffd60009800 00007ffd694a72e8
+0x00007ffd694a72f0:   00007ffd60009800 00007ffd694a72f8
+0x00007ffd694a7300:   00000000b52f7250 00007ffd694a7370
+0x00007ffd694a7310:   00000000b5300340 0000000000000000
+0x00007ffd694a7320:   00000000b52f7250 0000000000000000
+0x00007ffd694a7330:   00007ffd694a7358 00007ffd694a73b8
+0x00007ffd694a7340:   00007ffd5d006158 00000000edb807b0
+0x00007ffd694a7350:   00007ffd5d00edd8 00007ffd60df46a0
+0x00007ffd694a7360:   00007ffd60009800 0000000000000000
+0x00007ffd694a7370:   0000000000000001 00007ffd694a7378
+0x00007ffd694a7380:   00000000b52f7359 00007ffd694a73e8
+0x00007ffd694a7390:   00000000b5300340 0000000000000000
+0x00007ffd694a73a0:   00000000b52f7398 00007ffd694a7358
+0x00007ffd694a73b0:   00007ffd694a73d0 00007ffd694a7430
+0x00007ffd694a73c0:   00007ffd5d006158 0000000000000000
+0x00007ffd694a73d0:   00007ffd60df46a0 0000000000000000
+0x00007ffd694a73e0:   0000000000000000 0000000000000000
+0x00007ffd694a73f0:   00007ffd694a73f0 00000000b52e2cd0
+0x00007ffd694a7400:   00007ffd694a74b8 00000000b52eb978
+0x00007ffd694a7410:   0000000000000000 00000000b52e2f70
+0x00007ffd694a7420:   00007ffd694a73d0 00007ffd694a74a8
+0x00007ffd694a7430:   00007ffd694a7500 00007ffd5d006158
+0x00007ffd694a7440:   0000000000000000 0000000000000000
+0x00007ffd694a7450:   0000000000000000 0000000000000000
+0x00007ffd694a7460:   0000000000000000 0000000000000000
+0x00007ffd694a7470:   0000000000000000 00007ffd60df46a0
+0x00007ffd694a7480:   0000000000000000 00000000edbd1e68 
+
+Instructions: (pc=0x00007ffd09a902a1)
+0x00007ffd09a90281:   83 c4 08 48 89 df 5b 48 89 ee 5d ff e0 66 90 55
+0x00007ffd09a90291:   48 89 f5 53 48 89 fb 48 83 ec 08 e8 2f fd ff ff
+0x00007ffd09a902a1:   48 8b 3b 48 89 c6 e8 84 b5 fc ff 48 8b 40 18 48
+0x00007ffd09a902b1:   83 c4 08 48 89 df 5b 48 89 ee 5d ff e0 66 90 55 
+
+Register to memory mapping:
+
+RAX=0x00007ffd61c3a580 is an unknown value
+RBX=0x0000000000000000 is an unknown value
+RCX=0x0000000000000001 is an unknown value
+RDX=0x00007ffd694cf968: _rtld_global+0x908 in /lib64/ld-linux-x86-64.so.2 at 0x00007ffd692ac000
+RSP=0x00007ffd694a7290 is pointing into the stack for thread: 0x00007ffd60009800
+RBP=0x00007ffd60df46a0 is an unknown value
+RSI=0x00007ffd60df46a0 is an unknown value
+RDI=0x0000000000000000 is an unknown value
+R8 =0x0000000000000000 is an unknown value
+R9 =0x00007ffd61a1b0e0 is an unknown value
+R10=0x00007ffd694a6e70 is pointing into the stack for thread: 0x00007ffd60009800
+R11=0x00007ffd694a6f70 is pointing into the stack for thread: 0x00007ffd60009800
+R12=0x0000000000000000 is an unknown value
+R13=0x00000000b52f7250 is an oop
+&#123;method&#125; 
+ - klass: &#123;other class&#125;
+R14=0x00007ffd694a7370 is pointing into the stack for thread: 0x00007ffd60009800
+R15=0x00007ffd60009800 is a thread
+
+
+Stack: [0x00007ffd693a9000,0x00007ffd694aa000],  sp=0x00007ffd694a7290,  free space=1016k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+C  [libsoup-2.4.so.1+0x6c2a1]  soup_session_feature_detach+0x11
+
+Java frames: (J=compiled Java code, j=interpreted, Vv=VM code)
+j  org.eclipse.swt.internal.webkit.WebKitGTK._soup_session_feature_detach(JJ)V+0
+j  org.eclipse.swt.internal.webkit.WebKitGTK.soup_session_feature_detach(JJ)V+9
+j  org.eclipse.swt.browser.WebKit.create(Lorg/eclipse/swt/widgets/Composite;I)V+920
+j  org.eclipse.swt.browser.Browser.&lt;init&gt;(Lorg/eclipse/swt/widgets/Composite;I)V+81
+j  org.eclipse.jface.internal.text.html.BrowserInformationControl.isAvailable(Lorg/eclipse/swt/widgets/Composite;)Z+12
+j  org.eclipse.jdt.internal.ui.text.java.AbstractJavaCompletionProposal.getInformationControlCreator()Lorg/eclipse/jface/text/IInformationControlCreator;+9
+j  org.eclipse.jface.text.contentassist.AdditionalInfoController.computeInformation()V+18
+j  org.eclipse.jface.text.AbstractInformationControlManager.doShowInformation()V+11
+j  org.eclipse.jface.text.AbstractInformationControlManager.showInformation()V+8
+j  org.eclipse.jface.text.contentassist.AdditionalInfoController.showInformation(Lorg/eclipse/jface/text/contentassist/ICompletionProposal;Ljava/lang/Object;)V+64
+j  org.eclipse.jface.text.contentassist.AdditionalInfoController$10.showInformation(Lorg/eclipse/jface/text/contentassist/ICompletionProposal;Ljava/lang/Object;)V+25
+j  org.eclipse.jface.text.contentassist.AdditionalInfoController$9.run()V+36
+j  org.eclipse.swt.widgets.RunnableLock.run()V+11
+j  org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Z)Z+29
+j  org.eclipse.swt.widgets.Display.runAsyncMessages(Z)Z+5
+j  org.eclipse.swt.widgets.Display.readAndDispatch()Z+61
+j  org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$9.run()V+606
+j  org.eclipse.core.databinding.observable.Realm.runWithDefault(Lorg/eclipse/core/databinding/observable/Realm;Ljava/lang/Runnable;)V+12
+j  org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(Lorg/eclipse/e4/ui/model/application/MApplicationElement;Lorg/eclipse/e4/core/contexts/IEclipseContext;)Ljava/lang/Object;+57
+j  org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(Lorg/eclipse/e4/ui/model/application/MApplicationElement;)V+20
+j  org.eclipse.ui.internal.Workbench$5.run()V+256
+j  org.eclipse.core.databinding.observable.Realm.runWithDefault(Lorg/eclipse/core/databinding/observable/Realm;Ljava/lang/Runnable;)V+12
+j  org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Lorg/eclipse/swt/widgets/Display;Lorg/eclipse/ui/application/WorkbenchAdvisor;)I+18
+j  org.eclipse.ui.PlatformUI.createAndRunWorkbench(Lorg/eclipse/swt/widgets/Display;Lorg/eclipse/ui/application/WorkbenchAdvisor;)I+2
+j  org.eclipse.ui.internal.ide.application.IDEApplication.start(Lorg/eclipse/equinox/app/IApplicationContext;)Ljava/lang/Object;+108
+j  org.eclipse.equinox.internal.app.EclipseAppHandle.run(Ljava/lang/Object;)Ljava/lang/Object;+135
+j  org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(Ljava/lang/Object;)Ljava/lang/Object;+103
+j  org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(Ljava/lang/Object;)Ljava/lang/Object;+29
+j  org.eclipse.core.runtime.adaptor.EclipseStarter.run(Ljava/lang/Object;)Ljava/lang/Object;+149
+j  org.eclipse.core.runtime.adaptor.EclipseStarter.run([Ljava/lang/String;Ljava/lang/Runnable;)Ljava/lang/Object;+183
+v  ~StubRoutines::call_stub
+j  sun.reflect.NativeMethodAccessorImpl.invoke0(Ljava/lang/reflect/Method;Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+0
+j  sun.reflect.NativeMethodAccessorImpl.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+87
+j  sun.reflect.DelegatingMethodAccessorImpl.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+6
+j  java.lang.reflect.Method.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+57
+j  org.eclipse.equinox.launcher.Main.invokeFramework([Ljava/lang/String;[Ljava/net/URL;)V+211
+j  org.eclipse.equinox.launcher.Main.basicRun([Ljava/lang/String;)V+126
+j  org.eclipse.equinox.launcher.Main.run([Ljava/lang/String;)I+4
+j  org.eclipse.equinox.launcher.Main.main([Ljava/lang/String;)V+10
+v  ~StubRoutines::call_stub
+</code></pre>
+<p>巨大一堆日志文件，完全看不懂。<br>用<code>C  [libsoup-2.4.so.1+0x6c2a1]  soup_session_feature_detach+0x11</code>百度一下，竟然有解决办法:</p>
+<h3 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h3><p>打开Eclipse文件夹下面的<code>eclipse.ini</code><br>在最下面添加</p>
+<pre><code class="html">-Dorg.eclipse.swt.browser.DefaultType=mozilla
+</code></pre>
+<p>完美解决问题。</p>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ul>
+<li><a target="_blank" rel="noopener" href="http://my.oschina.net/u/1446823/blog/294736">Ubuntu64位下使用eclipse闪退的解决</a></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pinned.github.io/2023/05/29/2014-11-04-eclipse-shutdown/" data-id="cli8ygt77000t9y27bf6904pf" data-title="Ubuntu-14.04下Eclipse闪退解决办法" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tools/" rel="tag">Tools</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/05/29/2014-11-18-Android-Viewpager-scroll-listener/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          Android ViewPager滑动事件
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/05/29/2014-10-27-Android-Drawable-Animation/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">Android Drawable Animation</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E5%8D%93/">安卓</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/">开源项目</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6/">读书</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Camera/" rel="tag">Android Camera</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Gradle/" rel="tag">Android Gradle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Network/" rel="tag">Android Network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Proguard/" rel="tag">Proguard</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ruby-Ubuntu/" rel="tag">Ruby Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/" rel="tag">Shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Systems/" rel="tag">Systems</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools/" rel="tag">Tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools-Android/" rel="tag">Tools Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools-Ruby/" rel="tag">Tools Ruby</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools-Ruby-Rails/" rel="tag">Tools Ruby Rails</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools-SVN-Git/" rel="tag">Tools SVN Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools-Systems/" rel="tag">Tools Systems</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu-Systems-Tools/" rel="tag">Ubuntu Systems Tools</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Android-Camera/" style="font-size: 10px;">Android Camera</a> <a href="/tags/Android-Gradle/" style="font-size: 12.5px;">Android Gradle</a> <a href="/tags/Android-Network/" style="font-size: 12.5px;">Android Network</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Proguard/" style="font-size: 10px;">Proguard</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/Ruby-Ubuntu/" style="font-size: 10px;">Ruby Ubuntu</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/Systems/" style="font-size: 12.5px;">Systems</a> <a href="/tags/Tools/" style="font-size: 17.5px;">Tools</a> <a href="/tags/Tools-Android/" style="font-size: 15px;">Tools Android</a> <a href="/tags/Tools-Ruby/" style="font-size: 10px;">Tools Ruby</a> <a href="/tags/Tools-Ruby-Rails/" style="font-size: 10px;">Tools Ruby Rails</a> <a href="/tags/Tools-SVN-Git/" style="font-size: 10px;">Tools SVN Git</a> <a href="/tags/Tools-Systems/" style="font-size: 10px;">Tools Systems</a> <a href="/tags/Ubuntu-Systems-Tools/" style="font-size: 12.5px;">Ubuntu Systems Tools</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">五月 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/05/29/2017-10-15-gradlew%20source%20analyze/">gradlew 源码分析</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/29/2017-02-10-proguard-translate/">Proguard 翻译</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/29/2019-05-21-Android-camera-preview/">Android Camera Preview</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/29/2019-08-10-Android-network-Configuration/">Android 网络配置</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/29/2019-08-10-Android-network-security-configuration/">Android Network security configuration</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 罗昭成<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
