@@ -71,6 +71,57 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-2015-04-27-android-reflect-inner-class" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/05/29/2015-04-27-android-reflect-inner-class/" class="article-date">
+  <time class="dt-published" datetime="2023-05-29T02:54:52.143Z" itemprop="datePublished">2023-05-29</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/05/29/2015-04-27-android-reflect-inner-class/">java反射内部类</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <ol>
+<li>在java中反射加载类的方法如下</li>
+</ol>
+<pre><code class="java">Class rClass = Class.forName(&quot;android.R&quot;);
+</code></pre>
+<ol start="2">
+<li>加载android.R.attr</li>
+</ol>
+<pre><code class="java">Class attrClass = Class.forName(&quot;android.R$attr&quot;);
+</code></pre>
+<blockquote>
+<p>内部类并不是像调用那样，使用<code>.</code>, 而是使用<code>$</code></p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pinned.github.io/2023/05/29/2015-04-27-android-reflect-inner-class/" data-id="cli8yhxgf003md9276t677o6d" data-title="java反射内部类" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-2015-04-29-android-show-password-text" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2023/05/29/2015-04-29-android-show-password-text/" class="article-date">
@@ -115,75 +166,10 @@ if (inputType == 129) &#123;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pinned.github.io/2023/05/29/2015-04-29-android-show-password-text/" data-id="cli8ygt7h003q9y27bc091418" data-title="Android显示密码" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://pinned.github.io/2023/05/29/2015-04-29-android-show-password-text/" data-id="cli8yhxgf003od927cmshb89a" data-title="Android显示密码" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-2015-04-17-android-notification-small-icon" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/05/29/2015-04-17-android-notification-small-icon/" class="article-date">
-  <time class="dt-published" datetime="2023-05-29T02:54:52.143Z" itemprop="datePublished">2023-05-29</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%AE%89%E5%8D%93/">安卓</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/05/29/2015-04-17-android-notification-small-icon/">Android 5.0设备中，Notification小图标是白色的</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>在使用消息推送，在通知栏中展示通知，我们会有两个图标，一个是在状态栏展示的小图标，一个是打开通知中心，展示的大图标<br>我在我自己的测试设备中，小图标始终显示为一个白色的空白图标。</p>
-<h2 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h2><blockquote>
-<p>原文地址：<a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/28387602/notification-bar-icon-turns-white-in-android-5-lollipop?answertab=active#tab-top">Notification bar icon turns white in Android 5 Lollipop</a></p>
-</blockquote>
-<p>在这里，我把文章中说的东西抄一遍：</p>
-<p>在Android中用来展示Notification图标的代码如下：</p>
-<pre><code class="java">// android_frameworks_base/packages/SystemUI/src/com/android/systemui/
-//   statusbar/BaseStatusBar.java
-
-if (entry.targetSdk &gt;= Build.VERSION_CODES.LOLLIPOP) &#123;
-    entry.icon.setColorFilter(mContext.getResources().getColor(android.R.color.white));
-&#125; else &#123;
-    entry.icon.setColorFilter(null);
-&#125;
-</code></pre>
-<p>所以，我们将target sdk 的版本设置成<code>&lt;21</code>的就可以了 </p>
-<p>在<code>build.gradle</code>中修改成如下：</p>
-<pre><code class="bash">defaultConfig &#123;
-    targetSdkVersion 20
-&#125;
-</code></pre>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pinned.github.io/2023/05/29/2015-04-17-android-notification-small-icon/" data-id="cli8ygt7h003s9y2717qlchwj" data-title="Android 5.0设备中，Notification小图标是白色的" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li></ul>
-
     </footer>
   </div>
   
@@ -236,7 +222,7 @@ set hlsearch             &quot;高亮查找到的所有单词
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pinned.github.io/2023/05/29/2015-04-30-mac-iterm2-zsh/" data-id="cli8ygt7i003w9y27bc392ehr" data-title="Mac Iterm2 zsh使用" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://pinned.github.io/2023/05/29/2015-04-30-mac-iterm2-zsh/" data-id="cli8yhxgf003qd927974pa4gu" data-title="Mac Iterm2 zsh使用" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -250,9 +236,9 @@ set hlsearch             &quot;高亮查找到的所有单词
 
 
   
-    <article id="post-2015-05-12-android-update-sdk-no-ui" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-2015-05-11-svn-to-git" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2023/05/29/2015-05-12-android-update-sdk-no-ui/" class="article-date">
+    <a href="/2023/05/29/2015-05-11-svn-to-git/" class="article-date">
   <time class="dt-published" datetime="2023-05-29T02:54:52.143Z" itemprop="datePublished">2023-05-29</time>
 </a>
     
@@ -268,7 +254,7 @@ set hlsearch             &quot;高亮查找到的所有单词
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/05/29/2015-05-12-android-update-sdk-no-ui/">Android 用命令行更新SDK</a>
+      <a class="p-name article-title" href="/2023/05/29/2015-05-11-svn-to-git/">SVN迁移到GIT</a>
     </h1>
   
 
@@ -276,142 +262,24 @@ set hlsearch             &quot;高亮查找到的所有单词
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h4 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h4><p>在使用桌面系统的时候，我们都是用的<code>SDK Manager</code>, 如果现在要你部署一台CI服务器呢。</p>
-<p>我擦，ssh上去，没有界面，怎么破。</p>
-<p>查找了一下，Android SDK更新是支持命令的</p>
-<p>如下：</p>
-<pre><code class="bash">android update sdk --no-ui
+        <p>通过git svn clone将一个SVN项目克隆成一个git版本库</p>
+<pre><code class="bash"># 参数--no-metadata表示阻止git导出SVN包含的一些无用信息
+git svn clone svn://localhost/proj/ --no-metadata
 </code></pre>
-<p>上面的方法虽然可以更新SDK，但是他会把所有的内容都下载下来，很明显我们并不想这样子。</p>
-<p>查看命令帮助可以看到有一个<code>--filter</code>属性，如下使用</p>
-<pre><code class="bash">android update sdk --filter &lt;component&gt; --no-ui
-</code></pre>
-<p>其中<code>&lt;component&gt;</code> 可以是名字，也可以是数字。查看数字的方式如下：</p>
-<pre><code class="bash">ndroid list sdk --no-ui
-</code></pre>
-<p>所以你可以如下使用：</p>
-<pre><code class="bash">android update sdk --filter 1 --no-ui
-</code></pre>
-<h4 id="代理服务"><a href="#代理服务" class="headerlink" title="代理服务"></a>代理服务</h4><p>当然，还有一个问题，就是GFW, 还好我们有学校提供的镜像服务</p>
-<p>我们可以这样子使用：</p>
-<pre><code class="bash">android update sdk --no-ui --proxy-host &quot;mirrors.opencas.cn&quot; --proxy-port 80 -t 2 -s
-</code></pre>
-<h4 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h4><ol>
-<li><p><a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/4681697/is-there-a-way-to-automate-the-android-sdk-installation?answertab=active#tab-top">Is there a way to automate the android sdk installation?</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://github.com/inferjay/AndroidDevTools">Android Tools</a></p>
-</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pinned.github.io/2023/05/29/2015-05-12-android-update-sdk-no-ui/" data-id="cli8ygt7i00409y27dnje0yz4" data-title="Android 用命令行更新SDK" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tools-Android/" rel="tag">Tools Android</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-2015-05-14-android-mipmap-folder" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/05/29/2015-05-14-android-mipmap-folder/" class="article-date">
-  <time class="dt-published" datetime="2023-05-29T02:54:52.143Z" itemprop="datePublished">2023-05-29</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%AE%89%E5%8D%93/">安卓</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/05/29/2015-05-14-android-mipmap-folder/">Android mipmap文件夹</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>用Android Studio 创建项目的时候，默认创建<code>mipmap</code>文件夹，而不是<code>drawable</code></p>
-<p>查看了一下官方的解释，如下：</p>
-<pre><code class="html">drawable/
-For bitmap files (PNG, JPEG, or GIF), 9-Patch image files, and XML files that describe Drawable shapes or Drawable objects that contain multiple states (normal, pressed, or focused). See the Drawable resource type.
-</code></pre>
-<pre><code class="html">mipmap/
-For app launcher icons. The Android system retains the resources in this folder (and density-specific folders such as mipmap-xxxhdpi) regardless of the screen resolution of the device where your app is installed. This behavior allows launcher apps to pick the best resolution icon for your app to display on the home screen. For more information about using the mipmap folders.
-
-Different home screen launcher apps on different devices show app launcher icons at various resolutions. When app resource optimization techniques remove resources for unused screen densities, launcher icons can wind up looking fuzzy because the launcher app has to upscale a lower-resolution icon for display. To avoid these display issues, apps should use the mipmap/ resource folders for launcher icons. The Android system preserves these resources regardless of density stripping, and ensures that launcher apps can pick icons with the best resolution for display.
-
-Make sure launcher apps show a high-resolution icon for your app by moving all densities of your launcher icons to density-specific res/mipmap/ folders (for example res/mipmap-mdpi/ and res/mipmap-xxxhdpi/). The mipmap/ folders replace the drawable/ folders for launcher icons. For xxhpdi launcher icons, be sure to add the higher resolution xxxhdpi versions of the icons to enhance the visual experience of the icons on higher resolution devices.
+<p>提交到git库</p>
+<pre><code class="bash">git remote add origin git@localhost/proj.git
+git push --set-upstream origin master
 </code></pre>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pinned.github.io/2023/05/29/2015-05-14-android-mipmap-folder/" data-id="cli8ygt7i00429y278say3lin" data-title="Android mipmap文件夹" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://pinned.github.io/2023/05/29/2015-05-11-svn-to-git/" data-id="cli8yhxgf003rd9271cyf8zuu" data-title="SVN迁移到GIT" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tools-SVN-Git/" rel="tag">Tools SVN Git</a></li></ul>
 
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-2015-05-21-android-sub-emoji-text" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/05/29/2015-05-21-android-sub-emoji-text/" class="article-date">
-  <time class="dt-published" datetime="2023-05-29T02:54:52.143Z" itemprop="datePublished">2023-05-29</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/05/29/2015-05-21-android-sub-emoji-text/">Android 截取EditText输入的Emoji表情</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <pre><code class="java">public String subInputText(String inputText,int index) &#123;
-    int unicode = Character.codePointAt(text, index);
-    int skip = Character.charCount(unicode);
-    mInputSquares[textCount++].setText(text.substring(index, index+skip));
-&#125;
-</code></pre>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pinned.github.io/2023/05/29/2015-05-21-android-sub-emoji-text/" data-id="cli8ygt7i00459y27dwuv3ufs" data-title="Android 截取EditText输入的Emoji表情" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
     </footer>
   </div>
   
@@ -705,7 +573,7 @@ If the name assigned to this attribute begins with a colon (&#39;:&#39;), a new 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pinned.github.io/2023/05/29/2015-05-11-android-aidl-server/" data-id="cli8ygt7j00489y27244xb952" data-title="Android Service学习之AIDL, Parcelable和远程服务" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://pinned.github.io/2023/05/29/2015-05-11-android-aidl-server/" data-id="cli8yhxgf003td92712uk436p" data-title="Android Service学习之AIDL, Parcelable和远程服务" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -719,9 +587,9 @@ If the name assigned to this attribute begins with a colon (&#39;:&#39;), a new 
 
 
   
-    <article id="post-2015-05-11-svn-to-git" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-2015-05-12-android-update-sdk-no-ui" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2023/05/29/2015-05-11-svn-to-git/" class="article-date">
+    <a href="/2023/05/29/2015-05-12-android-update-sdk-no-ui/" class="article-date">
   <time class="dt-published" datetime="2023-05-29T02:54:52.143Z" itemprop="datePublished">2023-05-29</time>
 </a>
     
@@ -737,7 +605,7 @@ If the name assigned to this attribute begins with a colon (&#39;:&#39;), a new 
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/05/29/2015-05-11-svn-to-git/">SVN迁移到GIT</a>
+      <a class="p-name article-title" href="/2023/05/29/2015-05-12-android-update-sdk-no-ui/">Android 用命令行更新SDK</a>
     </h1>
   
 
@@ -745,23 +613,41 @@ If the name assigned to this attribute begins with a colon (&#39;:&#39;), a new 
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p>通过git svn clone将一个SVN项目克隆成一个git版本库</p>
-<pre><code class="bash"># 参数--no-metadata表示阻止git导出SVN包含的一些无用信息
-git svn clone svn://localhost/proj/ --no-metadata
+        <h4 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h4><p>在使用桌面系统的时候，我们都是用的<code>SDK Manager</code>, 如果现在要你部署一台CI服务器呢。</p>
+<p>我擦，ssh上去，没有界面，怎么破。</p>
+<p>查找了一下，Android SDK更新是支持命令的</p>
+<p>如下：</p>
+<pre><code class="bash">android update sdk --no-ui
 </code></pre>
-<p>提交到git库</p>
-<pre><code class="bash">git remote add origin git@localhost/proj.git
-git push --set-upstream origin master
+<p>上面的方法虽然可以更新SDK，但是他会把所有的内容都下载下来，很明显我们并不想这样子。</p>
+<p>查看命令帮助可以看到有一个<code>--filter</code>属性，如下使用</p>
+<pre><code class="bash">android update sdk --filter &lt;component&gt; --no-ui
 </code></pre>
+<p>其中<code>&lt;component&gt;</code> 可以是名字，也可以是数字。查看数字的方式如下：</p>
+<pre><code class="bash">ndroid list sdk --no-ui
+</code></pre>
+<p>所以你可以如下使用：</p>
+<pre><code class="bash">android update sdk --filter 1 --no-ui
+</code></pre>
+<h4 id="代理服务"><a href="#代理服务" class="headerlink" title="代理服务"></a>代理服务</h4><p>当然，还有一个问题，就是GFW, 还好我们有学校提供的镜像服务</p>
+<p>我们可以这样子使用：</p>
+<pre><code class="bash">android update sdk --no-ui --proxy-host &quot;mirrors.opencas.cn&quot; --proxy-port 80 -t 2 -s
+</code></pre>
+<h4 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h4><ol>
+<li><p><a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/4681697/is-there-a-way-to-automate-the-android-sdk-installation?answertab=active#tab-top">Is there a way to automate the android sdk installation?</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/inferjay/AndroidDevTools">Android Tools</a></p>
+</li>
+</ol>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pinned.github.io/2023/05/29/2015-05-11-svn-to-git/" data-id="cli8ygt7j004b9y27b99u2lze" data-title="SVN迁移到GIT" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://pinned.github.io/2023/05/29/2015-05-12-android-update-sdk-no-ui/" data-id="cli8yhxgf003ud927dhfq9qo6" data-title="Android 用命令行更新SDK" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tools-SVN-Git/" rel="tag">Tools SVN Git</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tools-Android/" rel="tag">Tools Android</a></li></ul>
 
     </footer>
   </div>
@@ -771,10 +657,66 @@ git push --set-upstream origin master
 
 
   
-    <article id="post-2015-04-06-android-snippet-sdcard-size" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-2015-05-14-android-mipmap-folder" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2023/05/29/2015-04-06-android-snippet-sdcard-size/" class="article-date">
-  <time class="dt-published" datetime="2023-05-29T02:54:52.142Z" itemprop="datePublished">2023-05-29</time>
+    <a href="/2023/05/29/2015-05-14-android-mipmap-folder/" class="article-date">
+  <time class="dt-published" datetime="2023-05-29T02:54:52.143Z" itemprop="datePublished">2023-05-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AE%89%E5%8D%93/">安卓</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/05/29/2015-05-14-android-mipmap-folder/">Android mipmap文件夹</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>用Android Studio 创建项目的时候，默认创建<code>mipmap</code>文件夹，而不是<code>drawable</code></p>
+<p>查看了一下官方的解释，如下：</p>
+<pre><code class="html">drawable/
+For bitmap files (PNG, JPEG, or GIF), 9-Patch image files, and XML files that describe Drawable shapes or Drawable objects that contain multiple states (normal, pressed, or focused). See the Drawable resource type.
+</code></pre>
+<pre><code class="html">mipmap/
+For app launcher icons. The Android system retains the resources in this folder (and density-specific folders such as mipmap-xxxhdpi) regardless of the screen resolution of the device where your app is installed. This behavior allows launcher apps to pick the best resolution icon for your app to display on the home screen. For more information about using the mipmap folders.
+
+Different home screen launcher apps on different devices show app launcher icons at various resolutions. When app resource optimization techniques remove resources for unused screen densities, launcher icons can wind up looking fuzzy because the launcher app has to upscale a lower-resolution icon for display. To avoid these display issues, apps should use the mipmap/ resource folders for launcher icons. The Android system preserves these resources regardless of density stripping, and ensures that launcher apps can pick icons with the best resolution for display.
+
+Make sure launcher apps show a high-resolution icon for your app by moving all densities of your launcher icons to density-specific res/mipmap/ folders (for example res/mipmap-mdpi/ and res/mipmap-xxxhdpi/). The mipmap/ folders replace the drawable/ folders for launcher icons. For xxhpdi launcher icons, be sure to add the higher resolution xxxhdpi versions of the icons to enhance the visual experience of the icons on higher resolution devices.
+</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pinned.github.io/2023/05/29/2015-05-14-android-mipmap-folder/" data-id="cli8yhxgg003xd927e6mq0yju" data-title="Android mipmap文件夹" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2015-05-21-android-sub-emoji-text" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/05/29/2015-05-21-android-sub-emoji-text/" class="article-date">
+  <time class="dt-published" datetime="2023-05-29T02:54:52.143Z" itemprop="datePublished">2023-05-29</time>
 </a>
     
   </div>
@@ -785,7 +727,7 @@ git push --set-upstream origin master
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/05/29/2015-04-06-android-snippet-sdcard-size/">SD Card的大小和容量</a>
+      <a class="p-name article-title" href="/2023/05/29/2015-05-21-android-sub-emoji-text/">Android 截取EditText输入的Emoji表情</a>
     </h1>
   
 
@@ -793,70 +735,103 @@ git push --set-upstream origin master
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <pre><code class="java">StatFs stat = new StatFs(Environment.getExternalStorageDirectory().getPath());
-long sdAvailSize = (long)stat.getAvailableBlocks()
-               * (long)stat.getBlockSize();
-long sdTotalSize =  (long)stat.getBlockCount()
-                * (long)stat.getBlockSize()
-</code></pre>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pinned.github.io/2023/05/29/2015-04-06-android-snippet-sdcard-size/" data-id="cli8ygt7e002x9y279l0f4czn" data-title="SD Card的大小和容量" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-2015-04-06-exit-app-by-press-twice-back" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/05/29/2015-04-06-exit-app-by-press-twice-back/" class="article-date">
-  <time class="dt-published" datetime="2023-05-29T02:54:52.142Z" itemprop="datePublished">2023-05-29</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/05/29/2015-04-06-exit-app-by-press-twice-back/">Android 按两次返回键退出应用程序</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <pre><code class="java">public boolean onKeyDown(int keyCode, KeyEvent event) &#123;
-    if (keyCode == KeyEvent.KEYCODE_BACK) &#123;
-        if ((System.currentTimeMillis() - mExitTime) &gt; 2000) &#123;
-            Object mHelperUtils;
-            Toast.makeText(this, &quot;再按一次退出程序&quot;, Toast.LENGTH_SHORT).show();
-            mExitTime = System.currentTimeMillis();
-
-        &#125; else &#123;
-            finish();
-        &#125;
-        return true;
-    &#125;
-    return super.onKeyDown(keyCode, event);
+        <pre><code class="java">public String subInputText(String inputText,int index) &#123;
+    int unicode = Character.codePointAt(text, index);
+    int skip = Character.charCount(unicode);
+    mInputSquares[textCount++].setText(text.substring(index, index+skip));
 &#125;
 </code></pre>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pinned.github.io/2023/05/29/2015-04-06-exit-app-by-press-twice-back/" data-id="cli8ygt7f00369y27abhh8772" data-title="Android 按两次返回键退出应用程序" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://pinned.github.io/2023/05/29/2015-05-21-android-sub-emoji-text/" data-id="cli8yhxgh004kd9273r9kcccr" data-title="Android 截取EditText输入的Emoji表情" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2015-04-06-android-string-xml-format" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/05/29/2015-04-06-android-string-xml-format/" class="article-date">
+  <time class="dt-published" datetime="2023-05-29T02:54:52.142Z" itemprop="datePublished">2023-05-29</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/05/29/2015-04-06-android-string-xml-format/">Android string.xml中的占位符</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <pre><code class="xml">&lt;!-- .2f表示的是保留三位小数的浮点数  --&gt;
+&lt;string name=&quot;book&quot;&gt;书名 (字符串)%1$s,作者(字符串)%2$s,编号(整数)%3$d,价格(浮点型)：%4$.2f&lt;/string&gt;
+</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pinned.github.io/2023/05/29/2015-04-06-android-string-xml-format/" data-id="cli8yhxgd0031d9275ayogr1m" data-title="Android string.xml中的占位符" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2015-04-06-define-id-in-xml-file" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/05/29/2015-04-06-define-id-in-xml-file/" class="article-date">
+  <time class="dt-published" datetime="2023-05-29T02:54:52.142Z" itemprop="datePublished">2023-05-29</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/05/29/2015-04-06-define-id-in-xml-file/">在`values`中定义id</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>在<code>values</code>文件夹中创建<code>ids.xml</code>文件， 文件目录为：<code>values/ids.xml</code></p>
+<p>我们有时候，会在代码中定义一个组件，如<code>TextView</code>,但是我们想给他设置一个Id，又不知道该设置一个<br>什么值比较好，就可以用上术方法来定义一个<code>id</code>, 具体代码如下:</p>
+<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;values&gt;
+&lt;item name=&quot;custom_item_id&quot; type=&quot;id&quot;&gt;&lt;/item&gt;
+&lt;/values&gt;
+</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pinned.github.io/2023/05/29/2015-04-06-define-id-in-xml-file/" data-id="cli8yhxgd0035d92724sngt9t" data-title="在`values`中定义id" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -925,11 +900,11 @@ long sdTotalSize =  (long)stat.getBlockCount()
       <ul>
         
           <li>
-            <a href="/2023/05/29/2017-10-15-gradlew%20source%20analyze/">gradlew 源码分析</a>
+            <a href="/2023/05/29/2017-02-10-proguard-translate/">Proguard 翻译</a>
           </li>
         
           <li>
-            <a href="/2023/05/29/2017-02-10-proguard-translate/">Proguard 翻译</a>
+            <a href="/2023/05/29/2017-10-15-gradlew%20source%20analyze/">gradlew 源码分析</a>
           </li>
         
           <li>

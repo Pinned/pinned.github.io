@@ -71,9 +71,9 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-2015-04-06-define-id-in-xml-file" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-2015-04-06-exit-app-by-press-twice-back" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2023/05/29/2015-04-06-define-id-in-xml-file/" class="article-date">
+    <a href="/2023/05/29/2015-04-06-exit-app-by-press-twice-back/" class="article-date">
   <time class="dt-published" datetime="2023-05-29T02:54:52.142Z" itemprop="datePublished">2023-05-29</time>
 </a>
     
@@ -85,7 +85,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/05/29/2015-04-06-define-id-in-xml-file/">在`values`中定义id</a>
+      <a class="p-name article-title" href="/2023/05/29/2015-04-06-exit-app-by-press-twice-back/">Android 按两次返回键退出应用程序</a>
     </h1>
   
 
@@ -93,18 +93,26 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p>在<code>values</code>文件夹中创建<code>ids.xml</code>文件， 文件目录为：<code>values/ids.xml</code></p>
-<p>我们有时候，会在代码中定义一个组件，如<code>TextView</code>,但是我们想给他设置一个Id，又不知道该设置一个<br>什么值比较好，就可以用上术方法来定义一个<code>id</code>, 具体代码如下:</p>
-<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;values&gt;
-&lt;item name=&quot;custom_item_id&quot; type=&quot;id&quot;&gt;&lt;/item&gt;
-&lt;/values&gt;
+        <pre><code class="java">public boolean onKeyDown(int keyCode, KeyEvent event) &#123;
+    if (keyCode == KeyEvent.KEYCODE_BACK) &#123;
+        if ((System.currentTimeMillis() - mExitTime) &gt; 2000) &#123;
+            Object mHelperUtils;
+            Toast.makeText(this, &quot;再按一次退出程序&quot;, Toast.LENGTH_SHORT).show();
+            mExitTime = System.currentTimeMillis();
+
+        &#125; else &#123;
+            finish();
+        &#125;
+        return true;
+    &#125;
+    return super.onKeyDown(keyCode, event);
+&#125;
 </code></pre>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pinned.github.io/2023/05/29/2015-04-06-define-id-in-xml-file/" data-id="cli8ygt7f00399y272ul79a47" data-title="在`values`中定义id" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://pinned.github.io/2023/05/29/2015-04-06-exit-app-by-press-twice-back/" data-id="cli8yhxgd0037d927flqafdwi" data-title="Android 按两次返回键退出应用程序" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -116,9 +124,9 @@
 
 
   
-    <article id="post-2015-04-06-gradle-rename-apk-file" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-2015-04-06-android-snippet-sdcard-size" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2023/05/29/2015-04-06-gradle-rename-apk-file/" class="article-date">
+    <a href="/2023/05/29/2015-04-06-android-snippet-sdcard-size/" class="article-date">
   <time class="dt-published" datetime="2023-05-29T02:54:52.142Z" itemprop="datePublished">2023-05-29</time>
 </a>
     
@@ -130,7 +138,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/05/29/2015-04-06-gradle-rename-apk-file/">gradle打包的时候，自动重命名APK文件</a>
+      <a class="p-name article-title" href="/2023/05/29/2015-04-06-android-snippet-sdcard-size/">SD Card的大小和容量</a>
     </h1>
   
 
@@ -138,21 +146,17 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <pre><code class="bash">android.applicationVariants.all &#123; variant -&gt;
-    variant.outputs.each &#123; output -&gt;
-        def outputFile = output.outputFile
-        if (outputFile != null &amp;&amp; outputFile.name.endsWith(&#39;.apk&#39;)) &#123;
-            def fileName = outputFile.name.replace(&quot;.apk&quot;, &quot;-$&#123;defaultConfig.versionName&#125;-$&#123; defaultConfig.versionCode&#125;.apk&quot;)
-            output.outputFile = new File(outputFile.parent, fileName)
-        &#125;
-    &#125;
-&#125;
+        <pre><code class="java">StatFs stat = new StatFs(Environment.getExternalStorageDirectory().getPath());
+long sdAvailSize = (long)stat.getAvailableBlocks()
+               * (long)stat.getBlockSize();
+long sdTotalSize =  (long)stat.getBlockCount()
+                * (long)stat.getBlockSize()
 </code></pre>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pinned.github.io/2023/05/29/2015-04-06-gradle-rename-apk-file/" data-id="cli8ygt7g003f9y27d1uyhky9" data-title="gradle打包的时候，自动重命名APK文件" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://pinned.github.io/2023/05/29/2015-04-06-android-snippet-sdcard-size/" data-id="cli8yhxgd0039d9273hv81rv9" data-title="SD Card的大小和容量" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -200,7 +204,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pinned.github.io/2023/05/29/2015-04-06-text-color-selector/" data-id="cli8ygt7g003i9y271zi9hppm" data-title="Android文字颜色选择器" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://pinned.github.io/2023/05/29/2015-04-06-text-color-selector/" data-id="cli8yhxge003cd92710fjd3qa" data-title="Android文字颜色选择器" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -212,9 +216,9 @@
 
 
   
-    <article id="post-2015-04-06-android-string-xml-format" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-2015-04-06-gradle-rename-apk-file" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2023/05/29/2015-04-06-android-string-xml-format/" class="article-date">
+    <a href="/2023/05/29/2015-04-06-gradle-rename-apk-file/" class="article-date">
   <time class="dt-published" datetime="2023-05-29T02:54:52.142Z" itemprop="datePublished">2023-05-29</time>
 </a>
     
@@ -226,7 +230,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/05/29/2015-04-06-android-string-xml-format/">Android string.xml中的占位符</a>
+      <a class="p-name article-title" href="/2023/05/29/2015-04-06-gradle-rename-apk-file/">gradle打包的时候，自动重命名APK文件</a>
     </h1>
   
 
@@ -234,14 +238,21 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <pre><code class="xml">&lt;!-- .2f表示的是保留三位小数的浮点数  --&gt;
-&lt;string name=&quot;book&quot;&gt;书名 (字符串)%1$s,作者(字符串)%2$s,编号(整数)%3$d,价格(浮点型)：%4$.2f&lt;/string&gt;
+        <pre><code class="bash">android.applicationVariants.all &#123; variant -&gt;
+    variant.outputs.each &#123; output -&gt;
+        def outputFile = output.outputFile
+        if (outputFile != null &amp;&amp; outputFile.name.endsWith(&#39;.apk&#39;)) &#123;
+            def fileName = outputFile.name.replace(&quot;.apk&quot;, &quot;-$&#123;defaultConfig.versionName&#125;-$&#123; defaultConfig.versionCode&#125;.apk&quot;)
+            output.outputFile = new File(outputFile.parent, fileName)
+        &#125;
+    &#125;
+&#125;
 </code></pre>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pinned.github.io/2023/05/29/2015-04-06-android-string-xml-format/" data-id="cli8ygt7g003j9y275lypb03z" data-title="Android string.xml中的占位符" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://pinned.github.io/2023/05/29/2015-04-06-gradle-rename-apk-file/" data-id="cli8yhxge003ed9271crq76d8" data-title="gradle打包的时候，自动重命名APK文件" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -291,58 +302,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pinned.github.io/2023/05/29/2015-04-06-format-file-size/" data-id="cli8ygt7g003l9y276jyo6dwv" data-title="格式化文件容量代码" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://pinned.github.io/2023/05/29/2015-04-06-format-file-size/" data-id="cli8yhxge003fd927aczqdsla" data-title="格式化文件容量代码" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-2015-04-10-mac-os-x-yomesite-install-rails" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/05/29/2015-04-10-mac-os-x-yomesite-install-rails/" class="article-date">
-  <time class="dt-published" datetime="2023-05-29T02:54:52.142Z" itemprop="datePublished">2023-05-29</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/05/29/2015-04-10-mac-os-x-yomesite-install-rails/">Mac OS X Yosemite 安装 Rails</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>参考文章：<br><a target="_blank" rel="noopener" href="http://railsapps.github.io/installrubyonrails-mac.html">Install Ruby on Rails · Mac OS X Yosemite</a></p>
-<p>在安装过程中，出现错误，有关错误信息可以查看下面这一篇博客，但是他的解决办法没有解决问题：</p>
-<p><a target="_blank" rel="noopener" href="http://www.luxingmin.com/mac%E5%AE%89%E8%A3%85rails/">MAC安装Rails</a></p>
-<p>最后的解决办法就是先将<code>ruby</code> 升级到最新版本，然后就可以顺利安装rails了。在此记录一下。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pinned.github.io/2023/05/29/2015-04-10-mac-os-x-yomesite-install-rails/" data-id="cli8ygt7g003m9y2766rscgtd" data-title="Mac OS X Yosemite 安装 Rails" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tools-Ruby-Rails/" rel="tag">Tools Ruby Rails</a></li></ul>
-
     </footer>
   </div>
   
@@ -404,7 +367,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pinned.github.io/2023/05/29/2015-04-15-android-proguard/" data-id="cli8ygt7h003u9y27dysr0rme" data-title="Android 混淆记录" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://pinned.github.io/2023/05/29/2015-04-15-android-proguard/" data-id="cli8yhxge003gd927bg5bgcko" data-title="Android 混淆记录" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -813,11 +776,59 @@ Assert.assertTrue(solo.searchText(&quot;rtf&quot;));
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pinned.github.io/2023/05/29/2015-04-13-android-best-practices-2/" data-id="cli8ygt7i003x9y27d6ly4kxt" data-title="Android最佳实践" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://pinned.github.io/2023/05/29/2015-04-13-android-best-practices-2/" data-id="cli8yhxge003hd927934hb7vc" data-title="Android最佳实践" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2015-04-10-mac-os-x-yomesite-install-rails" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/05/29/2015-04-10-mac-os-x-yomesite-install-rails/" class="article-date">
+  <time class="dt-published" datetime="2023-05-29T02:54:52.142Z" itemprop="datePublished">2023-05-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/05/29/2015-04-10-mac-os-x-yomesite-install-rails/">Mac OS X Yosemite 安装 Rails</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>参考文章：<br><a target="_blank" rel="noopener" href="http://railsapps.github.io/installrubyonrails-mac.html">Install Ruby on Rails · Mac OS X Yosemite</a></p>
+<p>在安装过程中，出现错误，有关错误信息可以查看下面这一篇博客，但是他的解决办法没有解决问题：</p>
+<p><a target="_blank" rel="noopener" href="http://www.luxingmin.com/mac%E5%AE%89%E8%A3%85rails/">MAC安装Rails</a></p>
+<p>最后的解决办法就是先将<code>ruby</code> 升级到最新版本，然后就可以顺利安装rails了。在此记录一下。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pinned.github.io/2023/05/29/2015-04-10-mac-os-x-yomesite-install-rails/" data-id="cli8yhxgl005rd9277qzpc594" data-title="Mac OS X Yosemite 安装 Rails" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tools-Ruby-Rails/" rel="tag">Tools Ruby Rails</a></li></ul>
 
     </footer>
   </div>
@@ -871,7 +882,7 @@ mListView.setLayoutManager(linearLayoutManager);
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pinned.github.io/2023/05/29/2015-03-11-ListView&RecyclerView/" data-id="cli8ygt7b00249y27e9pad4mu" data-title="ListView &amp; RecyclerView" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://pinned.github.io/2023/05/29/2015-03-11-ListView&RecyclerView/" data-id="cli8yhxga0028d9271godf9sv" data-title="ListView &amp; RecyclerView" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -991,7 +1002,7 @@ public void showText(View view) &#123;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pinned.github.io/2023/05/29/2015-03-13-Android-override-confusion/" data-id="cli8ygt7c002e9y277it86m8w" data-title="Android 中方法重载遇到的问题" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://pinned.github.io/2023/05/29/2015-03-13-Android-override-confusion/" data-id="cli8yhxga002ed927fo3vhoz2" data-title="Android 中方法重载遇到的问题" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -1062,11 +1073,11 @@ public void showText(View view) &#123;
       <ul>
         
           <li>
-            <a href="/2023/05/29/2017-10-15-gradlew%20source%20analyze/">gradlew 源码分析</a>
+            <a href="/2023/05/29/2017-02-10-proguard-translate/">Proguard 翻译</a>
           </li>
         
           <li>
-            <a href="/2023/05/29/2017-02-10-proguard-translate/">Proguard 翻译</a>
+            <a href="/2023/05/29/2017-10-15-gradlew%20source%20analyze/">gradlew 源码分析</a>
           </li>
         
           <li>

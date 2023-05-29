@@ -71,9 +71,9 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-2014-11-18-Android-Viewpager-scroll-listener" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-2014-11-03-NullPointException Analysis" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2023/05/29/2014-11-18-Android-Viewpager-scroll-listener/" class="article-date">
+    <a href="/2023/05/29/2014-11-03-NullPointException%20Analysis/" class="article-date">
   <time class="dt-published" datetime="2023-05-29T02:54:52.139Z" itemprop="datePublished">2023-05-29</time>
 </a>
     
@@ -89,7 +89,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/05/29/2014-11-18-Android-Viewpager-scroll-listener/">Android ViewPager滑动事件</a>
+      <a class="p-name article-title" href="/2023/05/29/2014-11-03-NullPointException%20Analysis/">Android 项目中出现的奇葩bug, 数据NullPointExcption</a>
     </h1>
   
 
@@ -97,693 +97,87 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p>ViewPager的滑动事件，是使用的OnPageChangeListener，他有三个方法:</p>
-<p><code>onPageScrollStateChanged</code>, <code>onPageScrolled</code>,<code>onPageSelected</code></p>
-<p>下面来解释一下这三个方法：</p>
-<ol>
-<li><strong>onPageScrollStateChanged</strong></li>
-</ol>
-<pre><code class="java">public void onPageScrollStateChanged(int arg0) &#123;
-&#125;
+        <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>在一个自定义的Form表单中，有各种控件，如文本输入框，时间选择器，城市选择器等。<br>在使用城市选择器的时候，城市的数据存储在<code>List</code>中<br>在定义的时候，我使用如下代码定义：</p>
+<pre><code class="java">private List&lt;CityNode&gt; mCitys = null;
 </code></pre>
-<p> 其中arg0这个参数有三种状态（0，1，2）</p>
+<p>经过数据初始化过后，在构造方法中使用<code>mCitys</code>是正常的，但是在其它方法中使用，<br><code>mCitys</code>便成了空值.</p>
+<p>这个结果让我非常的费解。</p>
+<h3 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h3><p>一开始出现了这个空指针异常，排查了好久，根本就找不到任何原因，<br>因为代码本身没有任何的逻辑错误。不知道是运气好还是怎么的。我把那个<code>List</code>的<br>定义写成如下，代码竟然可以正常运行：</p>
+<pre><code class="java">private List&lt;CityNode&gt; mCitys;
+</code></pre>
+<p>看到上面贴出来的代码，我顿时就无语了，太奇怪了，这两个不应该是一样的么。<br>经过一系列的测试，以下是问题解决的步骤:</p>
 <ul>
-<li><p>arg0&#x3D;&#x3D;1的时辰默示正在滑动 </p>
-</li>
-<li><p>arg0&#x3D;&#x3D;2的时辰默示滑动完毕了</p>
-</li>
-<li><p>arg0&#x3D;&#x3D;0的时辰默示什么都没做。</p>
-</li>
+<li>反射</li>
 </ul>
-<ol start="2">
-<li><strong>onPageScrolled</strong></li>
-</ol>
-<pre><code class="java">public void onPageScrolled(int arg0, float arg1, int arg2) &#123;
+<p>先上反射代码：</p>
+<pre><code class="java">Class&lt;? extends BaseFormElement&gt; clazz = model.getType().getValue();
+BaseFormElement element = null;
+try &#123;
+    Class[] parameterTypes = &#123; Context.class, FormElementModel.class &#125;;
+    //根据参数类型获取相应的构造函数
+    Constructor&lt;? extends BaseFormElement&gt; constructor
+            = clazz.getConstructor(parameterTypes);
+    //参数数组
+    Object[] parameters = &#123; mContext, model &#125;;
+    //根据获取的构造函数和参数，创建实例
+    element = (BaseFormElement)constructor.newInstance(parameters);
+&#125; catch (Exception e) &#123;
+    e.printStackTrace();
 &#125;
 </code></pre>
-<p> 其中三个参数的含义分别为：</p>
+<p>一开始，我以为是由于java的反射机制引起，导致局域变量初始化被执行了两次，<br>可是，有关反射的相关信息，查找了一遍，包括类加载的机制等信息，还是没有能<br>解释代码为什么执行了两次，所以觉得不怎么像是他引起的。后面和一个同事说到，<br>他看了一下代码，开始也没有找到原因,后面他说对象强转型引起的。</p>
 <ul>
-<li>arg0 :当前页面，及你点击滑动的页面</li>
-<li>arg1:当前页面偏移的百分比</li>
-<li>arg2:当前页面偏移的像素位置</li>
+<li>强制转型</li>
 </ul>
-<blockquote>
-<p>arg0 是滑动过程中的较小那一页的下标<br>即，如果是从左往右滑动，arg0为将要出现那一页的下标，也就是说页码小的那一页的下标<br>如果是从右往左滑动，arg0为滑动前显示的那一页的下标，也就是页码小的那一页的下标</p>
-</blockquote>
-<ol start="3">
-<li><strong>onPageSelected</strong></li>
-</ol>
-<pre><code class="java">public void onPageSelected(int arg0) &#123;
+<p>在使用反射的时候，<code>newInstance</code>创建一个对象，返回了一个父类型的变量，可是<br>根本就没有进行强制转换。</p>
+<ul>
+<li>构造方法的执行顺序</li>
+</ul>
+<p>还是抱着局域变量的初始化被执行了两次，打印了一下日志，终于发现了问题的所在。<br>在初始化一个对象的时候，首先是执行父类的构造方法，如果还有父类，继续向上查找。</p>
+<p>示例：</p>
+<pre><code class="java">public class A &#123;
+    &#123;
+        System.out.println(&quot;class a prarms init&quot;);
+    &#125;
+    public A() &#123;
+        System.out.println(&quot;A constructor method excute&quot;);
+    &#125;
 &#125;
 </code></pre>
-<p> 此方法是页面跳转完后得到调用，arg0是你当前选中的页面的Position（位置编号）</p>
-<p> <strong>最佳实践</strong></p>
-<pre><code class="java">  @Override  
-  public void onPageScrolled(int position, float positionOffset,  int positionOffsetPixels) &#123;  
-      if (positionOffset &gt; 0) &#123;  
-          ChangeColorIconWithTextView left = mTabIndicator.get(position);  
-          ChangeColorIconWithTextView right = mTabIndicator.get(position + 1);  
-
-          left.setIconAlpha(1 - positionOffset);  
-          right.setIconAlpha(positionOffset);  
-      &#125;  
-  &#125; 
-   @Override  
-  public void onClick(View v) &#123;  
-      resetOtherTabs();  
-      switch (v.getId()) &#123;  
-      case R.id.id_indicator_one:  
-          mTabIndicator.get(0).setIconAlpha(1.0f);  
-          mViewPager.setCurrentItem(0, false);  
-          break;  
-      case R.id.id_indicator_two:  
-          mTabIndicator.get(1).setIconAlpha(1.0f);  
-          mViewPager.setCurrentItem(1, false);  
-          break;  
-      case R.id.id_indicator_three:  
-          mTabIndicator.get(2).setIconAlpha(1.0f);  
-          mViewPager.setCurrentItem(2, false);  
-          break;  
-      case R.id.id_indicator_four:  
-          mTabIndicator.get(3).setIconAlpha(1.0f);  
-          mViewPager.setCurrentItem(3, false);  
-          break;  
-      &#125;  
-  &#125;  
+<pre><code class="java">public class B extends A &#123;
+    &#123;
+        System.out.println(&quot;class B params init&quot;);
+    &#125;
+    public B() &#123;
+        System.out.println(&quot;B constructor method excute&quot;);
+    &#125;
+&#125;
 </code></pre>
+<pre><code class="java">public class Main &#123;
 
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pinned.github.io/2023/05/29/2014-11-18-Android-Viewpager-scroll-listener/" data-id="cli8ygt77000q9y275qgm2wly" data-title="Android ViewPager滑动事件" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-2014-11-04-eclipse-shutdown" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/05/29/2014-11-04-eclipse-shutdown/" class="article-date">
-  <time class="dt-published" datetime="2023-05-29T02:54:52.139Z" itemprop="datePublished">2023-05-29</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/05/29/2014-11-04-eclipse-shutdown/">Ubuntu-14.04下Eclipse闪退解决办法</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>打开Eclipse，有时候还可以使用一下，有时候使用都不行。</p>
-<p>当Eclipse闪退的时候，还会在Eclipse 文件夹下生成一个<code>hs_err_pidxxxx.log</code>的文件，<br>内容如下:</p>
-<pre><code class="html">#
-# A fatal error has been detected by the Java Runtime Environment:
-#
-#  SIGSEGV (0xb) at pc=0x00007ffd09a902a1, pid=5291, tid=140726369949440
-#
-# JRE version: 7.0_25-b15
-# Java VM: Java HotSpot(TM) 64-Bit Server VM (23.25-b01 mixed mode linux-amd64 compressed oops)
-# Problematic frame:
-# C  [libsoup-2.4.so.1+0x6c2a1]  soup_session_feature_detach+0x11
-#
-# Failed to write core dump. Core dumps have been disabled. To enable core dumping, try &quot;ulimit -c unlimited&quot; before starting Java again
-#
-# If you would like to submit a bug report, please visit:
-#   http://bugreport.sun.com/bugreport/crash.jsp
-# The crash happened outside the Java Virtual Machine in native code.
-# See problematic frame for where to report the bug.
-#
-
----------------  T H R E A D  ---------------
-
-Current thread (0x00007ffd60009800):  JavaThread &quot;main&quot; [_thread_in_native, id=5292, stack(0x00007ffd693a9000,0x00007ffd694aa000)]
-
-siginfo:si_signo=SIGSEGV: si_errno=0, si_code=1 (SEGV_MAPERR), si_addr=0x0000000000000000
-
-Registers:
-RAX=0x00007ffd61c3a580, RBX=0x0000000000000000, RCX=0x0000000000000001, RDX=0x00007ffd694cf968
-RSP=0x00007ffd694a7290, RBP=0x00007ffd60df46a0, RSI=0x00007ffd60df46a0, RDI=0x0000000000000000
-R8 =0x0000000000000000, R9 =0x00007ffd61a1b0e0, R10=0x00007ffd694a6e70, R11=0x00007ffd694a6f70
-R12=0x0000000000000000, R13=0x00000000b52f7250, R14=0x00007ffd694a7370, R15=0x00007ffd60009800
-RIP=0x00007ffd09a902a1, EFLAGS=0x0000000000010202, CSGSFS=0x0000000000000033, ERR=0x0000000000000004
-  TRAPNO=0x000000000000000e
-
-Top of Stack: (sp=0x00007ffd694a7290)
-0x00007ffd694a7290:   00007ffd61a202b0 00007ffd60df46a0
-0x00007ffd694a72a0:   0000000000000000 00007ffd12430aa9
-0x00007ffd694a72b0:   00007ffd694a7338 00000000b52f7250
-0x00007ffd694a72c0:   00007ffd694a7338 00007ffd5d011f90
-0x00007ffd694a72d0:   0000000000000000 00007ffd0c0c83f0
-0x00007ffd694a72e0:   00007ffd60009800 00007ffd694a72e8
-0x00007ffd694a72f0:   00007ffd60009800 00007ffd694a72f8
-0x00007ffd694a7300:   00000000b52f7250 00007ffd694a7370
-0x00007ffd694a7310:   00000000b5300340 0000000000000000
-0x00007ffd694a7320:   00000000b52f7250 0000000000000000
-0x00007ffd694a7330:   00007ffd694a7358 00007ffd694a73b8
-0x00007ffd694a7340:   00007ffd5d006158 00000000edb807b0
-0x00007ffd694a7350:   00007ffd5d00edd8 00007ffd60df46a0
-0x00007ffd694a7360:   00007ffd60009800 0000000000000000
-0x00007ffd694a7370:   0000000000000001 00007ffd694a7378
-0x00007ffd694a7380:   00000000b52f7359 00007ffd694a73e8
-0x00007ffd694a7390:   00000000b5300340 0000000000000000
-0x00007ffd694a73a0:   00000000b52f7398 00007ffd694a7358
-0x00007ffd694a73b0:   00007ffd694a73d0 00007ffd694a7430
-0x00007ffd694a73c0:   00007ffd5d006158 0000000000000000
-0x00007ffd694a73d0:   00007ffd60df46a0 0000000000000000
-0x00007ffd694a73e0:   0000000000000000 0000000000000000
-0x00007ffd694a73f0:   00007ffd694a73f0 00000000b52e2cd0
-0x00007ffd694a7400:   00007ffd694a74b8 00000000b52eb978
-0x00007ffd694a7410:   0000000000000000 00000000b52e2f70
-0x00007ffd694a7420:   00007ffd694a73d0 00007ffd694a74a8
-0x00007ffd694a7430:   00007ffd694a7500 00007ffd5d006158
-0x00007ffd694a7440:   0000000000000000 0000000000000000
-0x00007ffd694a7450:   0000000000000000 0000000000000000
-0x00007ffd694a7460:   0000000000000000 0000000000000000
-0x00007ffd694a7470:   0000000000000000 00007ffd60df46a0
-0x00007ffd694a7480:   0000000000000000 00000000edbd1e68 
-
-Instructions: (pc=0x00007ffd09a902a1)
-0x00007ffd09a90281:   83 c4 08 48 89 df 5b 48 89 ee 5d ff e0 66 90 55
-0x00007ffd09a90291:   48 89 f5 53 48 89 fb 48 83 ec 08 e8 2f fd ff ff
-0x00007ffd09a902a1:   48 8b 3b 48 89 c6 e8 84 b5 fc ff 48 8b 40 18 48
-0x00007ffd09a902b1:   83 c4 08 48 89 df 5b 48 89 ee 5d ff e0 66 90 55 
-
-Register to memory mapping:
-
-RAX=0x00007ffd61c3a580 is an unknown value
-RBX=0x0000000000000000 is an unknown value
-RCX=0x0000000000000001 is an unknown value
-RDX=0x00007ffd694cf968: _rtld_global+0x908 in /lib64/ld-linux-x86-64.so.2 at 0x00007ffd692ac000
-RSP=0x00007ffd694a7290 is pointing into the stack for thread: 0x00007ffd60009800
-RBP=0x00007ffd60df46a0 is an unknown value
-RSI=0x00007ffd60df46a0 is an unknown value
-RDI=0x0000000000000000 is an unknown value
-R8 =0x0000000000000000 is an unknown value
-R9 =0x00007ffd61a1b0e0 is an unknown value
-R10=0x00007ffd694a6e70 is pointing into the stack for thread: 0x00007ffd60009800
-R11=0x00007ffd694a6f70 is pointing into the stack for thread: 0x00007ffd60009800
-R12=0x0000000000000000 is an unknown value
-R13=0x00000000b52f7250 is an oop
-&#123;method&#125; 
- - klass: &#123;other class&#125;
-R14=0x00007ffd694a7370 is pointing into the stack for thread: 0x00007ffd60009800
-R15=0x00007ffd60009800 is a thread
-
-
-Stack: [0x00007ffd693a9000,0x00007ffd694aa000],  sp=0x00007ffd694a7290,  free space=1016k
-Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
-C  [libsoup-2.4.so.1+0x6c2a1]  soup_session_feature_detach+0x11
-
-Java frames: (J=compiled Java code, j=interpreted, Vv=VM code)
-j  org.eclipse.swt.internal.webkit.WebKitGTK._soup_session_feature_detach(JJ)V+0
-j  org.eclipse.swt.internal.webkit.WebKitGTK.soup_session_feature_detach(JJ)V+9
-j  org.eclipse.swt.browser.WebKit.create(Lorg/eclipse/swt/widgets/Composite;I)V+920
-j  org.eclipse.swt.browser.Browser.&lt;init&gt;(Lorg/eclipse/swt/widgets/Composite;I)V+81
-j  org.eclipse.jface.internal.text.html.BrowserInformationControl.isAvailable(Lorg/eclipse/swt/widgets/Composite;)Z+12
-j  org.eclipse.jdt.internal.ui.text.java.AbstractJavaCompletionProposal.getInformationControlCreator()Lorg/eclipse/jface/text/IInformationControlCreator;+9
-j  org.eclipse.jface.text.contentassist.AdditionalInfoController.computeInformation()V+18
-j  org.eclipse.jface.text.AbstractInformationControlManager.doShowInformation()V+11
-j  org.eclipse.jface.text.AbstractInformationControlManager.showInformation()V+8
-j  org.eclipse.jface.text.contentassist.AdditionalInfoController.showInformation(Lorg/eclipse/jface/text/contentassist/ICompletionProposal;Ljava/lang/Object;)V+64
-j  org.eclipse.jface.text.contentassist.AdditionalInfoController$10.showInformation(Lorg/eclipse/jface/text/contentassist/ICompletionProposal;Ljava/lang/Object;)V+25
-j  org.eclipse.jface.text.contentassist.AdditionalInfoController$9.run()V+36
-j  org.eclipse.swt.widgets.RunnableLock.run()V+11
-j  org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Z)Z+29
-j  org.eclipse.swt.widgets.Display.runAsyncMessages(Z)Z+5
-j  org.eclipse.swt.widgets.Display.readAndDispatch()Z+61
-j  org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$9.run()V+606
-j  org.eclipse.core.databinding.observable.Realm.runWithDefault(Lorg/eclipse/core/databinding/observable/Realm;Ljava/lang/Runnable;)V+12
-j  org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(Lorg/eclipse/e4/ui/model/application/MApplicationElement;Lorg/eclipse/e4/core/contexts/IEclipseContext;)Ljava/lang/Object;+57
-j  org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(Lorg/eclipse/e4/ui/model/application/MApplicationElement;)V+20
-j  org.eclipse.ui.internal.Workbench$5.run()V+256
-j  org.eclipse.core.databinding.observable.Realm.runWithDefault(Lorg/eclipse/core/databinding/observable/Realm;Ljava/lang/Runnable;)V+12
-j  org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Lorg/eclipse/swt/widgets/Display;Lorg/eclipse/ui/application/WorkbenchAdvisor;)I+18
-j  org.eclipse.ui.PlatformUI.createAndRunWorkbench(Lorg/eclipse/swt/widgets/Display;Lorg/eclipse/ui/application/WorkbenchAdvisor;)I+2
-j  org.eclipse.ui.internal.ide.application.IDEApplication.start(Lorg/eclipse/equinox/app/IApplicationContext;)Ljava/lang/Object;+108
-j  org.eclipse.equinox.internal.app.EclipseAppHandle.run(Ljava/lang/Object;)Ljava/lang/Object;+135
-j  org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(Ljava/lang/Object;)Ljava/lang/Object;+103
-j  org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(Ljava/lang/Object;)Ljava/lang/Object;+29
-j  org.eclipse.core.runtime.adaptor.EclipseStarter.run(Ljava/lang/Object;)Ljava/lang/Object;+149
-j  org.eclipse.core.runtime.adaptor.EclipseStarter.run([Ljava/lang/String;Ljava/lang/Runnable;)Ljava/lang/Object;+183
-v  ~StubRoutines::call_stub
-j  sun.reflect.NativeMethodAccessorImpl.invoke0(Ljava/lang/reflect/Method;Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+0
-j  sun.reflect.NativeMethodAccessorImpl.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+87
-j  sun.reflect.DelegatingMethodAccessorImpl.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+6
-j  java.lang.reflect.Method.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+57
-j  org.eclipse.equinox.launcher.Main.invokeFramework([Ljava/lang/String;[Ljava/net/URL;)V+211
-j  org.eclipse.equinox.launcher.Main.basicRun([Ljava/lang/String;)V+126
-j  org.eclipse.equinox.launcher.Main.run([Ljava/lang/String;)I+4
-j  org.eclipse.equinox.launcher.Main.main([Ljava/lang/String;)V+10
-v  ~StubRoutines::call_stub
+    public static void main(String[] args) &#123;
+        A a = new B();
+    &#125;
+&#125;
 </code></pre>
-<p>巨大一堆日志文件，完全看不懂。<br>用<code>C  [libsoup-2.4.so.1+0x6c2a1]  soup_session_feature_detach+0x11</code>百度一下，竟然有解决办法:</p>
-<h3 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h3><p>打开Eclipse文件夹下面的<code>eclipse.ini</code><br>在最下面添加</p>
-<pre><code class="html">-Dorg.eclipse.swt.browser.DefaultType=mozilla
+<p>运行结果:</p>
+<pre><code class="html">class a prarms init
+A constructor method excute
+class B params init
+B constructor method excute
 </code></pre>
-<p>完美解决问题。</p>
-<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ul>
-<li><a target="_blank" rel="noopener" href="http://my.oschina.net/u/1446823/blog/294736">Ubuntu64位下使用eclipse闪退的解决</a></li>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>这一次的空指针的最根本原因是在父类的构造方法中执行了子类实例变量的初始化<br>操作，这是一个非常不合理的举动。如果子类属性中的东西应该在子类中进行初始化，<br>而不是在父类中调用初始化方法。</p>
+<h3 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h3><p><del>代码木有上传上来，如果你想看看这个丑陋的代码是怎么写的，你可以邮件联系我：<br><a href="mailto:&#108;&#111;&#x76;&#101;&#99;&#x6c;&#117;&#111;&#x40;&#x6e;&#105;&#103;&#104;&#x74;&#x77;&#x65;&#97;&#118;&#x65;&#x72;&#46;&#111;&#x72;&#x67;">&#108;&#111;&#x76;&#101;&#99;&#x6c;&#117;&#111;&#x40;&#x6e;&#105;&#103;&#104;&#x74;&#x77;&#x65;&#97;&#118;&#x65;&#x72;&#46;&#111;&#x72;&#x67;</a></del></p>
+<p>更新代码地址：</p>
+<ul>
+<li><a href="http://pinned.github.io/assets/posts/file-2014-11-4/NullPointProject-bug.tar.gz">Bug版代码</a></li>
+<li><a href="http://pinned.github.io/assets/posts/file-2014-11-4/NullPointProject-%E6%9B%B4%E6%94%B9.rar">修改版本</a></li>
 </ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pinned.github.io/2023/05/29/2014-11-04-eclipse-shutdown/" data-id="cli8ygt77000t9y27bf6904pf" data-title="Ubuntu-14.04下Eclipse闪退解决办法" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tools/" rel="tag">Tools</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-2014-10-27-Android-Drawable-Animation" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/05/29/2014-10-27-Android-Drawable-Animation/" class="article-date">
-  <time class="dt-published" datetime="2023-05-29T02:54:52.139Z" itemprop="datePublished">2023-05-29</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%AE%89%E5%8D%93/">安卓</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/05/29/2014-10-27-Android-Drawable-Animation/">Android Drawable Animation</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>ProgressBar是一个经常使用的组件，但很多时候，它的外观看起来并不能满足我们的需求。<br>对它进行自定义也很麻烦。</p>
-<p>有一个很简单的解决办法就是用GIF动画，不使用系统提供的ProgressBar。</p>
-<p>有关显示GIF动画，网上有很多例子，这里只介绍将GIF动态图按每一帧切出来，然后在使用<br>Frame Animation将它展示出来。</p>
-<p>先上代码<code>loading.xml</code>：</p>
-<pre><code class="html">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;animation-list android:id=&quot;@+id/loading_animation&quot; android:oneshot=&quot;false&quot;
-  xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;
-    &lt;item android:duration=&quot;@integer/loading_frame_interval&quot; android:drawable=&quot;@drawable/loading_00&quot; /&gt;
-    &lt;item android:duration=&quot;@integer/loading_frame_interval&quot; android:drawable=&quot;@drawable/loading_01&quot; /&gt;
-    &lt;item android:duration=&quot;@integer/loading_frame_interval&quot; android:drawable=&quot;@drawable/loading_02&quot; /&gt;
-    &lt;item android:duration=&quot;@integer/loading_frame_interval&quot; android:drawable=&quot;@drawable/loading_03&quot; /&gt;
-    &lt;item android:duration=&quot;@integer/loading_frame_interval&quot; android:drawable=&quot;@drawable/loading_04&quot; /&gt;
-    &lt;item android:duration=&quot;@integer/loading_frame_interval&quot; android:drawable=&quot;@drawable/loading_05&quot; /&gt;
-    &lt;item android:duration=&quot;@integer/loading_frame_interval&quot; android:drawable=&quot;@drawable/loading_06&quot; /&gt;
-    &lt;item android:duration=&quot;@integer/loading_frame_interval&quot; android:drawable=&quot;@drawable/loading_07&quot; /&gt;
-    &lt;item android:duration=&quot;@integer/loading_frame_interval&quot; android:drawable=&quot;@drawable/loading_08&quot; /&gt;
-    &lt;item android:duration=&quot;@integer/loading_frame_interval&quot; android:drawable=&quot;@drawable/loading_09&quot; /&gt;
-    &lt;item android:duration=&quot;@integer/loading_frame_interval&quot; android:drawable=&quot;@drawable/loading_10&quot; /&gt;
-    &lt;item android:duration=&quot;@integer/loading_frame_interval&quot; android:drawable=&quot;@drawable/loading_11&quot; /&gt;
-    &lt;item android:duration=&quot;@integer/loading_frame_interval&quot; android:drawable=&quot;@drawable/loading_12&quot; /&gt;
-    &lt;item android:duration=&quot;@integer/loading_frame_interval&quot; android:drawable=&quot;@drawable/loading_13&quot; /&gt;
-    &lt;item android:duration=&quot;@integer/loading_frame_interval&quot; android:drawable=&quot;@drawable/loading_14&quot; /&gt;
-    &lt;item android:duration=&quot;@integer/loading_frame_interval&quot; android:drawable=&quot;@drawable/loading_15&quot; /&gt;
-&lt;/animation-list&gt;
-</code></pre>
-<p>其中:</p>
-<pre><code class="html">&lt;integer name=&quot;loading_frame_interval&quot;&gt;30&lt;/integer&gt;
-</code></pre>
-<p>在使用的时候，因为网上说的种种bug，我直接自定义了一个<code>ImageView</code>，用来显示Loading View。 看源码：</p>
-<pre><code class="java">package cn.lovecluo.widget;
-
-import android.content.Context;
-import android.graphics.Canvas;
-import android.graphics.drawable.AnimationDrawable;
-import android.util.AttributeSet;
-import android.widget.ImageView;
-
-/**
- * Create by luozc at Aug 21, 2014
- */
-public class CustomeImageView extends ImageView &#123;
-
-    public CustomeImageView(Context context, AttributeSet attrs, int defStyle) &#123;
-        super(context, attrs, defStyle);
-        this.initView();
-    &#125;
-
-    public CustomeImageView(Context context, AttributeSet attrs) &#123;
-        super(context, attrs);
-        this.initView();
-    &#125;
-
-    public CustomeImageView(Context context) &#123;
-        super(context);
-        this.initView();
-    &#125;
-
-    private void initView() &#123;
-        this.setImageResource(R.drawable.loading);
-    &#125;
-    
-    @Override
-    protected void onDraw(Canvas canvas) &#123;
-        super.onDraw(canvas);
-        this.loading();
-    &#125;   
-    public void loading() &#123;
-        AnimationDrawable drawable = (AnimationDrawable) this.getDrawable();
-        drawable.start();
-    &#125;
-&#125;
-</code></pre>
-<p>使用的时候也很简单，在XML中添加这个<code>CustomeImageView</code>即可，代码如下：</p>
-<pre><code class="html">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;RelativeLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
-    style=&quot;@style/fillall&quot;
-    android:paddingLeft=&quot;@dimen/activity_horizontal_margin&quot;
-    android:paddingRight=&quot;@dimen/activity_horizontal_margin&quot; &gt;
-    &lt;cn.lovecluo.widget.CustomeImageView 
-        style=&quot;@style/wrap&quot;
-        android:layout_centerInParent=&quot;true&quot; /&gt;
-&lt;/RelativeLayout&gt;
-</code></pre>
-<p>当然使用场景并不仅仅是这么简单，有时候， 我们会需要在一个Button后面添加一<code>loading</code>动画,<br>就比如说在登录的时候，当然你可以定义几个组件，用代码控制每个组件的显示，但是这样子过于的麻烦。</p>
-<p>就上述情况，我们还是用上面定义的<code>loading.xml</code>的动画效果来做展示:<br>在TextView中有这么几个属性:<code>drawableLeft</code>、<code>drawableRight</code>、<code>drawableTop</code>、<code>drawableBottom</code></p>
-<p>在这里，我们要动态控制，所以不能将这些写到xml中去，所以只能写代码了。</p>
-<pre><code class="java">Drawable drawable= mContext.getResources().getDrawable(R.drawable.loading);
-/// 这一步必须要做,否则不会显示.
-drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
-mSubmitBtn.setCompoundDrawables(drawable, null, null, null);
-AnimationDrawable loadingAnimation = (AnimationDrawable) mSubmitBtn.getCompoundDrawables()[0];
-loadingAnimation.start();
-</code></pre>
-<p>是不是很简单，当然，如果你觉得图片和文字离的太近，你可以在xml中加上<code>android:drawablePadding=&quot;8dip&quot;</code></p>
-<p>看XML代码 ：</p>
-<pre><code class="html">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;FrameLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
-    android:id=&quot;@+id/submit_framelayout&quot;
-    style=&quot;@style/fillx&quot;
-    android:background=&quot;@drawable/add_service_input_btn_bg&quot;
-    android:clickable=&quot;true&quot;
-    android:padding=&quot;@dimen/activity_horizontal_margin&quot; &gt;
-
-    &lt;Button
-        android:id=&quot;@+id/submit_btn&quot;
-        style=&quot;@style/wrap&quot;
-        android:layout_gravity=&quot;center&quot;
-        android:background=&quot;@null&quot;
-        android:drawablePadding=&quot;@dimen/dp8&quot;
-        android:text=&quot;@string/submit&quot;
-        android:textColor=&quot;@color/white&quot;
-        android:textSize=&quot;@dimen/textsize_medium&quot; /&gt;
-
-&lt;/FrameLayout&gt;
-</code></pre>
-<p>看了代码，你就会觉得特别的简单。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pinned.github.io/2023/05/29/2014-10-27-Android-Drawable-Animation/" data-id="cli8ygt77000w9y274u37fbpc" data-title="Android Drawable Animation" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-2014-12-04-mac-system-using" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/05/29/2014-12-04-mac-system-using/" class="article-date">
-  <time class="dt-published" datetime="2023-05-29T02:54:52.139Z" itemprop="datePublished">2023-05-29</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/05/29/2014-12-04-mac-system-using/">Mac系统使用记录（一）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h3 id="Mac用户"><a href="#Mac用户" class="headerlink" title="Mac用户"></a>Mac用户</h3><p>本人小屌丝一个，装了个黑苹果，用的是类似Ghost一样的版本，只接还原就可以用，<br>什么也没有改。</p>
-<p>在使用的过程中，有一个问题，就是使用的是Root用户，权限太高，感觉相当的不爽。</p>
-<p>本人又不怎么会用，百度了一下。找到了关掉Root用户的方法：</p>
-<p>如下：</p>
-<p><img src="http://pinned.github.io/assets/posts/img-2014-12-04/mac_clear_root_1.png" alt="step1"></p>
-<p><img src="http://pinned.github.io/assets/posts/img-2014-12-04/mac_clear_root_2.png" alt="step2"></p>
-<p><img src="http://pinned.github.io/assets/posts/img-2014-12-04/mac_clear_root_3.png" alt="step3"></p>
-<p><img src="http://pinned.github.io/assets/posts/img-2014-12-04/mac_clear_root_4.png" alt="step4"></p>
-<p>这样子设置到是没有什么问题，当我重启的时候，我发现问题来了。<br>因为本机只有一个ROOT账号，root账号被我禁用了。就没有可以登陆的账号<br>心中有千万只草泥马奔腾而过，不过也没有办法，出问题了总得解决才行。</p>
-<h3 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h3><p>我们首先要做的事，用单用户登陆。</p>
-<p>因为我安装的是黑苹果，所以我启动的时候加上了<code>-v -s</code>参数</p>
-<p>启动过后，他进入了最高权限的bash中,然后使用如下命令解决：</p>
-<pre><code class="xml">fsck -fy 
-mount -uw /
-rm /var/db/.AppleSetupDone
-reboot
-</code></pre>
-<p>正常重启过后，他会让你重新创建一个用户，创建成功过后，便可以登陆了。</p>
-<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>给文件修改权限（chmod）：</p>
-<pre><code class="xml">chmod 777 file/Folder
-chmod -R 777 Folder
-</code></pre>
-<p>修改文件owner&#x2F;group（chown）:</p>
-<pre><code class="xml">chown username file
-chown -R username Folder
-</code></pre>
-<p>当然，上面的命令你需要在root用户的权限下才可以用。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pinned.github.io/2023/05/29/2014-12-04-mac-system-using/" data-id="cli8ygt78000z9y276gvb4r4k" data-title="Mac系统使用记录（一）" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Systems/" rel="tag">Systems</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-2014-12-24-android-studio-using" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/05/29/2014-12-24-android-studio-using/" class="article-date">
-  <time class="dt-published" datetime="2023-05-29T02:54:52.139Z" itemprop="datePublished">2023-05-29</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/05/29/2014-12-24-android-studio-using/">Android Studio 使用记录（一）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>在使用Android Studio 的时候，不小心手贱。把View内的自动提示和<br>自动引入加入了ignore列表中去了。</p>
-<p>有关这个问题，也不知道怎么在度娘那儿搜索。</p>
-<p>没有办法，只有自己去慢慢找。虽然不认识几个英文。但是最终还是给我找到了。</p>
-<p>解决办法：</p>
-<pre><code class="html">Android Studio -&gt; [Setting] -&gt; [Editer] -&gt; [Auto Import]
-</code></pre>
-<p>如下图所示：</p>
-<p><img src="/assets/posts/img-2014-12-24/step1.png"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pinned.github.io/2023/05/29/2014-12-24-android-studio-using/" data-id="cli8ygt7800129y2713lyhct3" data-title="Android Studio 使用记录（一）" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tools/" rel="tag">Tools</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-2014-11-04-butterknife-useing" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/05/29/2014-11-04-butterknife-useing/" class="article-date">
-  <time class="dt-published" datetime="2023-05-29T02:54:52.139Z" itemprop="datePublished">2023-05-29</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/">开源项目</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/05/29/2014-11-04-butterknife-useing/">Andorid UI注入工具的使用(ButterKnife)</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>一个Android项目中，必不可少有很多UI，并且<code>Activity</code>要控制这些UI，当然，我们会用到以下代码:</p>
-<pre><code class="java">// 获取View的引用
-Button mBtn = (Button) this.findViewById(R.id.btn);
-// 给Button添加事件
-mBtn.setOnClickListener(new OnClickListener() &#123;
-    @Override
-    public void onClick(View view) &#123;
-        // TODO 做一些你自己要做的事情 
-    &#125;
-&#125;)
-</code></pre>
-<p>每一个Activity都要做类似的事情，这是一个相当蛋疼的事情。</p>
-<p>如果你可以像如下代码来实现View的初始画以及事件监听以及其它的，你还会用以前的代码么？</p>
-<p>代码如下:</p>
-<pre><code class="java">@InjectView(R.id.user) EditText username;
-@InjectView(R.id.pass) EditText password;
-@OnClick(R.id.submit) void submit() &#123;
-    // TODO 实现submit这个Btn的点击事件
-&#125;
-</code></pre>
-<p>用上面的注解会更加简单的组织我们的代码结构，代码量更少。<br>在这里我使用<a target="_blank" rel="noopener" href="http://jakewharton.github.io/butterknife/">Butter Knife</a></p>
-<h3 id="使用步骤"><a href="#使用步骤" class="headerlink" title="使用步骤"></a>使用步骤</h3><ol>
-<li>去GitHub下载ButterKnife的源码或者jar包  –&gt;  <a target="_blank" rel="noopener" href="https://github.com/JakeWharton/butterknife">传送门</a></li>
-<li>在这里，我是去下载的jar包，将jar包添加到项目的<code>libs</code>文件夹下面就可以使用了</li>
-</ol>
-<p>先上代码,一个很简单的布局文件:</p>
-<pre><code class="html">&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
-    xmlns:tools=&quot;http://schemas.android.com/tools&quot;
-    android:layout_width=&quot;match_parent&quot;
-    android:layout_height=&quot;match_parent&quot;
-    android:paddingBottom=&quot;@dimen/activity_vertical_margin&quot;
-    android:paddingLeft=&quot;@dimen/activity_horizontal_margin&quot;
-    android:paddingRight=&quot;@dimen/activity_horizontal_margin&quot;
-    android:paddingTop=&quot;@dimen/activity_vertical_margin&quot;
-    android:orientation=&quot;vertical&quot;&gt;
-
-    &lt;TextView
-        android:id=&quot;@+id/tv&quot;
-        android:layout_width=&quot;match_parent&quot;
-        android:layout_height=&quot;wrap_content&quot;
-        android:gravity=&quot;center&quot;
-        android:text=&quot;@string/hello_world&quot; /&gt;
-    
-    &lt;Button 
-        android:id=&quot;@+id/btn&quot;
-        android:layout_width=&quot;match_parent&quot;
-        android:layout_height=&quot;wrap_content&quot;
-        android:text=&quot;Change Text&quot;/&gt;
-
-&lt;/LinearLayout&gt;
-</code></pre>
-<p>简单到不能在简单的布局了，一个<code>TextView</code>， 一个<code>Button</code></p>
-<p>看Activity的代码，如下：</p>
-<pre><code class="java">public class MainActivity extends Activity &#123;
-
-    @InjectView(R.id.tv) TextView mShowTv;
-    
-    @Override
-    protected void onCreate(Bundle savedInstanceState) &#123;
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        ButterKnife.inject(this);
-        mShowTv.setText(&quot;Default Text&quot;);
-    &#125;
-    @OnClick(R.id.btn) void changeText() &#123;
-        mShowTv.setText(&quot;Change Text:&quot; + System.currentTimeMillis());
-    &#125;
-    
-&#125;
-</code></pre>
-<p>就是这么简单的代码，可是就是用不起来，怎么破，在</p>
-<pre><code class="java">mShowTv.setText(&quot;Default Text&quot;)
-</code></pre>
-<p>这儿报了一个空指针。如下图：</p>
-<p><img src="http://pinned.github.io/assets/posts/file-2014-11-4/inject_nullpoint.png" alt="Alt text"></p>
-<h3 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h3><p>因为使用注解，编译的时候，要进行相应的设置，才可以正常的编译,步骤如下：</p>
-<p>右键<code>项目</code>，选择<code>Properities</code>,然后选择<code>Java Compiler</code>下的<code>Annotation Processing</code>。<br>可是我找了半天，也没有找到它的踪影。不要着急，更新一下<code>Eclipse Java Development Tools</code>就可以了</p>
-<p><img src="http://pinned.github.io/assets/posts/file-2014-11-4/install_eclipse_tools.png" alt="Install Eclipse Java Development Tools"></p>
-<p>等到安装完成过后，你就可以进行如下设置了:</p>
-<p><img src="http://pinned.github.io/assets/posts/file-2014-11-4/eclipse_setting_01.png" alt="Step 01"></p>
-<p><img src="http://pinned.github.io/assets/posts/file-2014-11-4/eclipse_setting_02.png" alt="Step 02"></p>
-<p><img src="http://pinned.github.io/assets/posts/file-2014-11-4/eclipse_setting_03.png" alt="Step 03"></p>
-<p><img src="http://pinned.github.io/assets/posts/file-2014-11-4/eclipse_setting_04.png" alt="Step 04"></p>
-<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ul>
-<li><a target="_blank" rel="noopener" href="http://www.it165.net/pro/html/201404/12375.html">ButterKnife Android程序员的一大利器</a></li>
-<li><a target="_blank" rel="noopener" href="http://jakewharton.github.io/butterknife/">ButterKnife Doc</a></li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pinned.github.io/2023/05/29/2014-11-04-butterknife-useing/" data-id="cli8ygt7800159y27880145es" data-title="Andorid UI注入工具的使用(ButterKnife)" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://pinned.github.io/2023/05/29/2014-11-03-NullPointException%20Analysis/" data-id="cli8yhxg5000od927gxmkbrw3" data-title="Android 项目中出现的奇葩bug, 数据NullPointExcption" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -984,11 +378,606 @@ protected boolean hasAttemptRemaining() &#123;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pinned.github.io/2023/05/29/2014-11-05-google%20volley%20retry/" data-id="cli8ygt7900189y27dc4rc9bi" data-title="Google Volley 网络请求框架(一)" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://pinned.github.io/2023/05/29/2014-11-05-google%20volley%20retry/" data-id="cli8yhxg5000rd9278axm7l6l" data-title="Google Volley 网络请求框架(一)" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2014-11-04-eclipse-shutdown" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/05/29/2014-11-04-eclipse-shutdown/" class="article-date">
+  <time class="dt-published" datetime="2023-05-29T02:54:52.139Z" itemprop="datePublished">2023-05-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/05/29/2014-11-04-eclipse-shutdown/">Ubuntu-14.04下Eclipse闪退解决办法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>打开Eclipse，有时候还可以使用一下，有时候使用都不行。</p>
+<p>当Eclipse闪退的时候，还会在Eclipse 文件夹下生成一个<code>hs_err_pidxxxx.log</code>的文件，<br>内容如下:</p>
+<pre><code class="html">#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  SIGSEGV (0xb) at pc=0x00007ffd09a902a1, pid=5291, tid=140726369949440
+#
+# JRE version: 7.0_25-b15
+# Java VM: Java HotSpot(TM) 64-Bit Server VM (23.25-b01 mixed mode linux-amd64 compressed oops)
+# Problematic frame:
+# C  [libsoup-2.4.so.1+0x6c2a1]  soup_session_feature_detach+0x11
+#
+# Failed to write core dump. Core dumps have been disabled. To enable core dumping, try &quot;ulimit -c unlimited&quot; before starting Java again
+#
+# If you would like to submit a bug report, please visit:
+#   http://bugreport.sun.com/bugreport/crash.jsp
+# The crash happened outside the Java Virtual Machine in native code.
+# See problematic frame for where to report the bug.
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x00007ffd60009800):  JavaThread &quot;main&quot; [_thread_in_native, id=5292, stack(0x00007ffd693a9000,0x00007ffd694aa000)]
+
+siginfo:si_signo=SIGSEGV: si_errno=0, si_code=1 (SEGV_MAPERR), si_addr=0x0000000000000000
+
+Registers:
+RAX=0x00007ffd61c3a580, RBX=0x0000000000000000, RCX=0x0000000000000001, RDX=0x00007ffd694cf968
+RSP=0x00007ffd694a7290, RBP=0x00007ffd60df46a0, RSI=0x00007ffd60df46a0, RDI=0x0000000000000000
+R8 =0x0000000000000000, R9 =0x00007ffd61a1b0e0, R10=0x00007ffd694a6e70, R11=0x00007ffd694a6f70
+R12=0x0000000000000000, R13=0x00000000b52f7250, R14=0x00007ffd694a7370, R15=0x00007ffd60009800
+RIP=0x00007ffd09a902a1, EFLAGS=0x0000000000010202, CSGSFS=0x0000000000000033, ERR=0x0000000000000004
+  TRAPNO=0x000000000000000e
+
+Top of Stack: (sp=0x00007ffd694a7290)
+0x00007ffd694a7290:   00007ffd61a202b0 00007ffd60df46a0
+0x00007ffd694a72a0:   0000000000000000 00007ffd12430aa9
+0x00007ffd694a72b0:   00007ffd694a7338 00000000b52f7250
+0x00007ffd694a72c0:   00007ffd694a7338 00007ffd5d011f90
+0x00007ffd694a72d0:   0000000000000000 00007ffd0c0c83f0
+0x00007ffd694a72e0:   00007ffd60009800 00007ffd694a72e8
+0x00007ffd694a72f0:   00007ffd60009800 00007ffd694a72f8
+0x00007ffd694a7300:   00000000b52f7250 00007ffd694a7370
+0x00007ffd694a7310:   00000000b5300340 0000000000000000
+0x00007ffd694a7320:   00000000b52f7250 0000000000000000
+0x00007ffd694a7330:   00007ffd694a7358 00007ffd694a73b8
+0x00007ffd694a7340:   00007ffd5d006158 00000000edb807b0
+0x00007ffd694a7350:   00007ffd5d00edd8 00007ffd60df46a0
+0x00007ffd694a7360:   00007ffd60009800 0000000000000000
+0x00007ffd694a7370:   0000000000000001 00007ffd694a7378
+0x00007ffd694a7380:   00000000b52f7359 00007ffd694a73e8
+0x00007ffd694a7390:   00000000b5300340 0000000000000000
+0x00007ffd694a73a0:   00000000b52f7398 00007ffd694a7358
+0x00007ffd694a73b0:   00007ffd694a73d0 00007ffd694a7430
+0x00007ffd694a73c0:   00007ffd5d006158 0000000000000000
+0x00007ffd694a73d0:   00007ffd60df46a0 0000000000000000
+0x00007ffd694a73e0:   0000000000000000 0000000000000000
+0x00007ffd694a73f0:   00007ffd694a73f0 00000000b52e2cd0
+0x00007ffd694a7400:   00007ffd694a74b8 00000000b52eb978
+0x00007ffd694a7410:   0000000000000000 00000000b52e2f70
+0x00007ffd694a7420:   00007ffd694a73d0 00007ffd694a74a8
+0x00007ffd694a7430:   00007ffd694a7500 00007ffd5d006158
+0x00007ffd694a7440:   0000000000000000 0000000000000000
+0x00007ffd694a7450:   0000000000000000 0000000000000000
+0x00007ffd694a7460:   0000000000000000 0000000000000000
+0x00007ffd694a7470:   0000000000000000 00007ffd60df46a0
+0x00007ffd694a7480:   0000000000000000 00000000edbd1e68 
+
+Instructions: (pc=0x00007ffd09a902a1)
+0x00007ffd09a90281:   83 c4 08 48 89 df 5b 48 89 ee 5d ff e0 66 90 55
+0x00007ffd09a90291:   48 89 f5 53 48 89 fb 48 83 ec 08 e8 2f fd ff ff
+0x00007ffd09a902a1:   48 8b 3b 48 89 c6 e8 84 b5 fc ff 48 8b 40 18 48
+0x00007ffd09a902b1:   83 c4 08 48 89 df 5b 48 89 ee 5d ff e0 66 90 55 
+
+Register to memory mapping:
+
+RAX=0x00007ffd61c3a580 is an unknown value
+RBX=0x0000000000000000 is an unknown value
+RCX=0x0000000000000001 is an unknown value
+RDX=0x00007ffd694cf968: _rtld_global+0x908 in /lib64/ld-linux-x86-64.so.2 at 0x00007ffd692ac000
+RSP=0x00007ffd694a7290 is pointing into the stack for thread: 0x00007ffd60009800
+RBP=0x00007ffd60df46a0 is an unknown value
+RSI=0x00007ffd60df46a0 is an unknown value
+RDI=0x0000000000000000 is an unknown value
+R8 =0x0000000000000000 is an unknown value
+R9 =0x00007ffd61a1b0e0 is an unknown value
+R10=0x00007ffd694a6e70 is pointing into the stack for thread: 0x00007ffd60009800
+R11=0x00007ffd694a6f70 is pointing into the stack for thread: 0x00007ffd60009800
+R12=0x0000000000000000 is an unknown value
+R13=0x00000000b52f7250 is an oop
+&#123;method&#125; 
+ - klass: &#123;other class&#125;
+R14=0x00007ffd694a7370 is pointing into the stack for thread: 0x00007ffd60009800
+R15=0x00007ffd60009800 is a thread
+
+
+Stack: [0x00007ffd693a9000,0x00007ffd694aa000],  sp=0x00007ffd694a7290,  free space=1016k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+C  [libsoup-2.4.so.1+0x6c2a1]  soup_session_feature_detach+0x11
+
+Java frames: (J=compiled Java code, j=interpreted, Vv=VM code)
+j  org.eclipse.swt.internal.webkit.WebKitGTK._soup_session_feature_detach(JJ)V+0
+j  org.eclipse.swt.internal.webkit.WebKitGTK.soup_session_feature_detach(JJ)V+9
+j  org.eclipse.swt.browser.WebKit.create(Lorg/eclipse/swt/widgets/Composite;I)V+920
+j  org.eclipse.swt.browser.Browser.&lt;init&gt;(Lorg/eclipse/swt/widgets/Composite;I)V+81
+j  org.eclipse.jface.internal.text.html.BrowserInformationControl.isAvailable(Lorg/eclipse/swt/widgets/Composite;)Z+12
+j  org.eclipse.jdt.internal.ui.text.java.AbstractJavaCompletionProposal.getInformationControlCreator()Lorg/eclipse/jface/text/IInformationControlCreator;+9
+j  org.eclipse.jface.text.contentassist.AdditionalInfoController.computeInformation()V+18
+j  org.eclipse.jface.text.AbstractInformationControlManager.doShowInformation()V+11
+j  org.eclipse.jface.text.AbstractInformationControlManager.showInformation()V+8
+j  org.eclipse.jface.text.contentassist.AdditionalInfoController.showInformation(Lorg/eclipse/jface/text/contentassist/ICompletionProposal;Ljava/lang/Object;)V+64
+j  org.eclipse.jface.text.contentassist.AdditionalInfoController$10.showInformation(Lorg/eclipse/jface/text/contentassist/ICompletionProposal;Ljava/lang/Object;)V+25
+j  org.eclipse.jface.text.contentassist.AdditionalInfoController$9.run()V+36
+j  org.eclipse.swt.widgets.RunnableLock.run()V+11
+j  org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Z)Z+29
+j  org.eclipse.swt.widgets.Display.runAsyncMessages(Z)Z+5
+j  org.eclipse.swt.widgets.Display.readAndDispatch()Z+61
+j  org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$9.run()V+606
+j  org.eclipse.core.databinding.observable.Realm.runWithDefault(Lorg/eclipse/core/databinding/observable/Realm;Ljava/lang/Runnable;)V+12
+j  org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(Lorg/eclipse/e4/ui/model/application/MApplicationElement;Lorg/eclipse/e4/core/contexts/IEclipseContext;)Ljava/lang/Object;+57
+j  org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(Lorg/eclipse/e4/ui/model/application/MApplicationElement;)V+20
+j  org.eclipse.ui.internal.Workbench$5.run()V+256
+j  org.eclipse.core.databinding.observable.Realm.runWithDefault(Lorg/eclipse/core/databinding/observable/Realm;Ljava/lang/Runnable;)V+12
+j  org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Lorg/eclipse/swt/widgets/Display;Lorg/eclipse/ui/application/WorkbenchAdvisor;)I+18
+j  org.eclipse.ui.PlatformUI.createAndRunWorkbench(Lorg/eclipse/swt/widgets/Display;Lorg/eclipse/ui/application/WorkbenchAdvisor;)I+2
+j  org.eclipse.ui.internal.ide.application.IDEApplication.start(Lorg/eclipse/equinox/app/IApplicationContext;)Ljava/lang/Object;+108
+j  org.eclipse.equinox.internal.app.EclipseAppHandle.run(Ljava/lang/Object;)Ljava/lang/Object;+135
+j  org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(Ljava/lang/Object;)Ljava/lang/Object;+103
+j  org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(Ljava/lang/Object;)Ljava/lang/Object;+29
+j  org.eclipse.core.runtime.adaptor.EclipseStarter.run(Ljava/lang/Object;)Ljava/lang/Object;+149
+j  org.eclipse.core.runtime.adaptor.EclipseStarter.run([Ljava/lang/String;Ljava/lang/Runnable;)Ljava/lang/Object;+183
+v  ~StubRoutines::call_stub
+j  sun.reflect.NativeMethodAccessorImpl.invoke0(Ljava/lang/reflect/Method;Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+0
+j  sun.reflect.NativeMethodAccessorImpl.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+87
+j  sun.reflect.DelegatingMethodAccessorImpl.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+6
+j  java.lang.reflect.Method.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+57
+j  org.eclipse.equinox.launcher.Main.invokeFramework([Ljava/lang/String;[Ljava/net/URL;)V+211
+j  org.eclipse.equinox.launcher.Main.basicRun([Ljava/lang/String;)V+126
+j  org.eclipse.equinox.launcher.Main.run([Ljava/lang/String;)I+4
+j  org.eclipse.equinox.launcher.Main.main([Ljava/lang/String;)V+10
+v  ~StubRoutines::call_stub
+</code></pre>
+<p>巨大一堆日志文件，完全看不懂。<br>用<code>C  [libsoup-2.4.so.1+0x6c2a1]  soup_session_feature_detach+0x11</code>百度一下，竟然有解决办法:</p>
+<h3 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h3><p>打开Eclipse文件夹下面的<code>eclipse.ini</code><br>在最下面添加</p>
+<pre><code class="html">-Dorg.eclipse.swt.browser.DefaultType=mozilla
+</code></pre>
+<p>完美解决问题。</p>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ul>
+<li><a target="_blank" rel="noopener" href="http://my.oschina.net/u/1446823/blog/294736">Ubuntu64位下使用eclipse闪退的解决</a></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pinned.github.io/2023/05/29/2014-11-04-eclipse-shutdown/" data-id="cli8yhxg6000wd9276c2ocd30" data-title="Ubuntu-14.04下Eclipse闪退解决办法" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tools/" rel="tag">Tools</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2014-10-27-Android-Drawable-Animation" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/05/29/2014-10-27-Android-Drawable-Animation/" class="article-date">
+  <time class="dt-published" datetime="2023-05-29T02:54:52.139Z" itemprop="datePublished">2023-05-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AE%89%E5%8D%93/">安卓</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/05/29/2014-10-27-Android-Drawable-Animation/">Android Drawable Animation</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>ProgressBar是一个经常使用的组件，但很多时候，它的外观看起来并不能满足我们的需求。<br>对它进行自定义也很麻烦。</p>
+<p>有一个很简单的解决办法就是用GIF动画，不使用系统提供的ProgressBar。</p>
+<p>有关显示GIF动画，网上有很多例子，这里只介绍将GIF动态图按每一帧切出来，然后在使用<br>Frame Animation将它展示出来。</p>
+<p>先上代码<code>loading.xml</code>：</p>
+<pre><code class="html">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;animation-list android:id=&quot;@+id/loading_animation&quot; android:oneshot=&quot;false&quot;
+  xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;
+    &lt;item android:duration=&quot;@integer/loading_frame_interval&quot; android:drawable=&quot;@drawable/loading_00&quot; /&gt;
+    &lt;item android:duration=&quot;@integer/loading_frame_interval&quot; android:drawable=&quot;@drawable/loading_01&quot; /&gt;
+    &lt;item android:duration=&quot;@integer/loading_frame_interval&quot; android:drawable=&quot;@drawable/loading_02&quot; /&gt;
+    &lt;item android:duration=&quot;@integer/loading_frame_interval&quot; android:drawable=&quot;@drawable/loading_03&quot; /&gt;
+    &lt;item android:duration=&quot;@integer/loading_frame_interval&quot; android:drawable=&quot;@drawable/loading_04&quot; /&gt;
+    &lt;item android:duration=&quot;@integer/loading_frame_interval&quot; android:drawable=&quot;@drawable/loading_05&quot; /&gt;
+    &lt;item android:duration=&quot;@integer/loading_frame_interval&quot; android:drawable=&quot;@drawable/loading_06&quot; /&gt;
+    &lt;item android:duration=&quot;@integer/loading_frame_interval&quot; android:drawable=&quot;@drawable/loading_07&quot; /&gt;
+    &lt;item android:duration=&quot;@integer/loading_frame_interval&quot; android:drawable=&quot;@drawable/loading_08&quot; /&gt;
+    &lt;item android:duration=&quot;@integer/loading_frame_interval&quot; android:drawable=&quot;@drawable/loading_09&quot; /&gt;
+    &lt;item android:duration=&quot;@integer/loading_frame_interval&quot; android:drawable=&quot;@drawable/loading_10&quot; /&gt;
+    &lt;item android:duration=&quot;@integer/loading_frame_interval&quot; android:drawable=&quot;@drawable/loading_11&quot; /&gt;
+    &lt;item android:duration=&quot;@integer/loading_frame_interval&quot; android:drawable=&quot;@drawable/loading_12&quot; /&gt;
+    &lt;item android:duration=&quot;@integer/loading_frame_interval&quot; android:drawable=&quot;@drawable/loading_13&quot; /&gt;
+    &lt;item android:duration=&quot;@integer/loading_frame_interval&quot; android:drawable=&quot;@drawable/loading_14&quot; /&gt;
+    &lt;item android:duration=&quot;@integer/loading_frame_interval&quot; android:drawable=&quot;@drawable/loading_15&quot; /&gt;
+&lt;/animation-list&gt;
+</code></pre>
+<p>其中:</p>
+<pre><code class="html">&lt;integer name=&quot;loading_frame_interval&quot;&gt;30&lt;/integer&gt;
+</code></pre>
+<p>在使用的时候，因为网上说的种种bug，我直接自定义了一个<code>ImageView</code>，用来显示Loading View。 看源码：</p>
+<pre><code class="java">package cn.lovecluo.widget;
+
+import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.drawable.AnimationDrawable;
+import android.util.AttributeSet;
+import android.widget.ImageView;
+
+/**
+ * Create by luozc at Aug 21, 2014
+ */
+public class CustomeImageView extends ImageView &#123;
+
+    public CustomeImageView(Context context, AttributeSet attrs, int defStyle) &#123;
+        super(context, attrs, defStyle);
+        this.initView();
+    &#125;
+
+    public CustomeImageView(Context context, AttributeSet attrs) &#123;
+        super(context, attrs);
+        this.initView();
+    &#125;
+
+    public CustomeImageView(Context context) &#123;
+        super(context);
+        this.initView();
+    &#125;
+
+    private void initView() &#123;
+        this.setImageResource(R.drawable.loading);
+    &#125;
+    
+    @Override
+    protected void onDraw(Canvas canvas) &#123;
+        super.onDraw(canvas);
+        this.loading();
+    &#125;   
+    public void loading() &#123;
+        AnimationDrawable drawable = (AnimationDrawable) this.getDrawable();
+        drawable.start();
+    &#125;
+&#125;
+</code></pre>
+<p>使用的时候也很简单，在XML中添加这个<code>CustomeImageView</code>即可，代码如下：</p>
+<pre><code class="html">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;RelativeLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    style=&quot;@style/fillall&quot;
+    android:paddingLeft=&quot;@dimen/activity_horizontal_margin&quot;
+    android:paddingRight=&quot;@dimen/activity_horizontal_margin&quot; &gt;
+    &lt;cn.lovecluo.widget.CustomeImageView 
+        style=&quot;@style/wrap&quot;
+        android:layout_centerInParent=&quot;true&quot; /&gt;
+&lt;/RelativeLayout&gt;
+</code></pre>
+<p>当然使用场景并不仅仅是这么简单，有时候， 我们会需要在一个Button后面添加一<code>loading</code>动画,<br>就比如说在登录的时候，当然你可以定义几个组件，用代码控制每个组件的显示，但是这样子过于的麻烦。</p>
+<p>就上述情况，我们还是用上面定义的<code>loading.xml</code>的动画效果来做展示:<br>在TextView中有这么几个属性:<code>drawableLeft</code>、<code>drawableRight</code>、<code>drawableTop</code>、<code>drawableBottom</code></p>
+<p>在这里，我们要动态控制，所以不能将这些写到xml中去，所以只能写代码了。</p>
+<pre><code class="java">Drawable drawable= mContext.getResources().getDrawable(R.drawable.loading);
+/// 这一步必须要做,否则不会显示.
+drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+mSubmitBtn.setCompoundDrawables(drawable, null, null, null);
+AnimationDrawable loadingAnimation = (AnimationDrawable) mSubmitBtn.getCompoundDrawables()[0];
+loadingAnimation.start();
+</code></pre>
+<p>是不是很简单，当然，如果你觉得图片和文字离的太近，你可以在xml中加上<code>android:drawablePadding=&quot;8dip&quot;</code></p>
+<p>看XML代码 ：</p>
+<pre><code class="html">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;FrameLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    android:id=&quot;@+id/submit_framelayout&quot;
+    style=&quot;@style/fillx&quot;
+    android:background=&quot;@drawable/add_service_input_btn_bg&quot;
+    android:clickable=&quot;true&quot;
+    android:padding=&quot;@dimen/activity_horizontal_margin&quot; &gt;
+
+    &lt;Button
+        android:id=&quot;@+id/submit_btn&quot;
+        style=&quot;@style/wrap&quot;
+        android:layout_gravity=&quot;center&quot;
+        android:background=&quot;@null&quot;
+        android:drawablePadding=&quot;@dimen/dp8&quot;
+        android:text=&quot;@string/submit&quot;
+        android:textColor=&quot;@color/white&quot;
+        android:textSize=&quot;@dimen/textsize_medium&quot; /&gt;
+
+&lt;/FrameLayout&gt;
+</code></pre>
+<p>看了代码，你就会觉得特别的简单。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pinned.github.io/2023/05/29/2014-10-27-Android-Drawable-Animation/" data-id="cli8yhxg6000zd927a9lsf2pb" data-title="Android Drawable Animation" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2014-12-04-mac-system-using" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/05/29/2014-12-04-mac-system-using/" class="article-date">
+  <time class="dt-published" datetime="2023-05-29T02:54:52.139Z" itemprop="datePublished">2023-05-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/05/29/2014-12-04-mac-system-using/">Mac系统使用记录（一）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="Mac用户"><a href="#Mac用户" class="headerlink" title="Mac用户"></a>Mac用户</h3><p>本人小屌丝一个，装了个黑苹果，用的是类似Ghost一样的版本，只接还原就可以用，<br>什么也没有改。</p>
+<p>在使用的过程中，有一个问题，就是使用的是Root用户，权限太高，感觉相当的不爽。</p>
+<p>本人又不怎么会用，百度了一下。找到了关掉Root用户的方法：</p>
+<p>如下：</p>
+<p><img src="http://pinned.github.io/assets/posts/img-2014-12-04/mac_clear_root_1.png" alt="step1"></p>
+<p><img src="http://pinned.github.io/assets/posts/img-2014-12-04/mac_clear_root_2.png" alt="step2"></p>
+<p><img src="http://pinned.github.io/assets/posts/img-2014-12-04/mac_clear_root_3.png" alt="step3"></p>
+<p><img src="http://pinned.github.io/assets/posts/img-2014-12-04/mac_clear_root_4.png" alt="step4"></p>
+<p>这样子设置到是没有什么问题，当我重启的时候，我发现问题来了。<br>因为本机只有一个ROOT账号，root账号被我禁用了。就没有可以登陆的账号<br>心中有千万只草泥马奔腾而过，不过也没有办法，出问题了总得解决才行。</p>
+<h3 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h3><p>我们首先要做的事，用单用户登陆。</p>
+<p>因为我安装的是黑苹果，所以我启动的时候加上了<code>-v -s</code>参数</p>
+<p>启动过后，他进入了最高权限的bash中,然后使用如下命令解决：</p>
+<pre><code class="xml">fsck -fy 
+mount -uw /
+rm /var/db/.AppleSetupDone
+reboot
+</code></pre>
+<p>正常重启过后，他会让你重新创建一个用户，创建成功过后，便可以登陆了。</p>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>给文件修改权限（chmod）：</p>
+<pre><code class="xml">chmod 777 file/Folder
+chmod -R 777 Folder
+</code></pre>
+<p>修改文件owner&#x2F;group（chown）:</p>
+<pre><code class="xml">chown username file
+chown -R username Folder
+</code></pre>
+<p>当然，上面的命令你需要在root用户的权限下才可以用。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pinned.github.io/2023/05/29/2014-12-04-mac-system-using/" data-id="cli8yhxg70013d927d3de99nv" data-title="Mac系统使用记录（一）" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Systems/" rel="tag">Systems</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2014-11-18-Android-Viewpager-scroll-listener" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/05/29/2014-11-18-Android-Viewpager-scroll-listener/" class="article-date">
+  <time class="dt-published" datetime="2023-05-29T02:54:52.139Z" itemprop="datePublished">2023-05-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AE%89%E5%8D%93/">安卓</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/05/29/2014-11-18-Android-Viewpager-scroll-listener/">Android ViewPager滑动事件</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>ViewPager的滑动事件，是使用的OnPageChangeListener，他有三个方法:</p>
+<p><code>onPageScrollStateChanged</code>, <code>onPageScrolled</code>,<code>onPageSelected</code></p>
+<p>下面来解释一下这三个方法：</p>
+<ol>
+<li><strong>onPageScrollStateChanged</strong></li>
+</ol>
+<pre><code class="java">public void onPageScrollStateChanged(int arg0) &#123;
+&#125;
+</code></pre>
+<p> 其中arg0这个参数有三种状态（0，1，2）</p>
+<ul>
+<li><p>arg0&#x3D;&#x3D;1的时辰默示正在滑动 </p>
+</li>
+<li><p>arg0&#x3D;&#x3D;2的时辰默示滑动完毕了</p>
+</li>
+<li><p>arg0&#x3D;&#x3D;0的时辰默示什么都没做。</p>
+</li>
+</ul>
+<ol start="2">
+<li><strong>onPageScrolled</strong></li>
+</ol>
+<pre><code class="java">public void onPageScrolled(int arg0, float arg1, int arg2) &#123;
+&#125;
+</code></pre>
+<p> 其中三个参数的含义分别为：</p>
+<ul>
+<li>arg0 :当前页面，及你点击滑动的页面</li>
+<li>arg1:当前页面偏移的百分比</li>
+<li>arg2:当前页面偏移的像素位置</li>
+</ul>
+<blockquote>
+<p>arg0 是滑动过程中的较小那一页的下标<br>即，如果是从左往右滑动，arg0为将要出现那一页的下标，也就是说页码小的那一页的下标<br>如果是从右往左滑动，arg0为滑动前显示的那一页的下标，也就是页码小的那一页的下标</p>
+</blockquote>
+<ol start="3">
+<li><strong>onPageSelected</strong></li>
+</ol>
+<pre><code class="java">public void onPageSelected(int arg0) &#123;
+&#125;
+</code></pre>
+<p> 此方法是页面跳转完后得到调用，arg0是你当前选中的页面的Position（位置编号）</p>
+<p> <strong>最佳实践</strong></p>
+<pre><code class="java">  @Override  
+  public void onPageScrolled(int position, float positionOffset,  int positionOffsetPixels) &#123;  
+      if (positionOffset &gt; 0) &#123;  
+          ChangeColorIconWithTextView left = mTabIndicator.get(position);  
+          ChangeColorIconWithTextView right = mTabIndicator.get(position + 1);  
+
+          left.setIconAlpha(1 - positionOffset);  
+          right.setIconAlpha(positionOffset);  
+      &#125;  
+  &#125; 
+   @Override  
+  public void onClick(View v) &#123;  
+      resetOtherTabs();  
+      switch (v.getId()) &#123;  
+      case R.id.id_indicator_one:  
+          mTabIndicator.get(0).setIconAlpha(1.0f);  
+          mViewPager.setCurrentItem(0, false);  
+          break;  
+      case R.id.id_indicator_two:  
+          mTabIndicator.get(1).setIconAlpha(1.0f);  
+          mViewPager.setCurrentItem(1, false);  
+          break;  
+      case R.id.id_indicator_three:  
+          mTabIndicator.get(2).setIconAlpha(1.0f);  
+          mViewPager.setCurrentItem(2, false);  
+          break;  
+      case R.id.id_indicator_four:  
+          mTabIndicator.get(3).setIconAlpha(1.0f);  
+          mViewPager.setCurrentItem(3, false);  
+          break;  
+      &#125;  
+  &#125;  
+</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pinned.github.io/2023/05/29/2014-11-18-Android-Viewpager-scroll-listener/" data-id="cli8yhxg70016d9272dlh457f" data-title="Android ViewPager滑动事件" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2014-12-24-android-studio-using" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/05/29/2014-12-24-android-studio-using/" class="article-date">
+  <time class="dt-published" datetime="2023-05-29T02:54:52.139Z" itemprop="datePublished">2023-05-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/05/29/2014-12-24-android-studio-using/">Android Studio 使用记录（一）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>在使用Android Studio 的时候，不小心手贱。把View内的自动提示和<br>自动引入加入了ignore列表中去了。</p>
+<p>有关这个问题，也不知道怎么在度娘那儿搜索。</p>
+<p>没有办法，只有自己去慢慢找。虽然不认识几个英文。但是最终还是给我找到了。</p>
+<p>解决办法：</p>
+<pre><code class="html">Android Studio -&gt; [Setting] -&gt; [Editer] -&gt; [Auto Import]
+</code></pre>
+<p>如下图所示：</p>
+<p><img src="/assets/posts/img-2014-12-24/step1.png"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pinned.github.io/2023/05/29/2014-12-24-android-studio-using/" data-id="cli8yhxg7001ad9272u0t8i8v" data-title="Android Studio 使用记录（一）" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tools/" rel="tag">Tools</a></li></ul>
 
     </footer>
   </div>
@@ -1045,11 +1034,126 @@ protected boolean hasAttemptRemaining() &#123;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pinned.github.io/2023/05/29/2014-12-05-Android-SDK-Manager-Update-Method/" data-id="cli8ygt79001c9y27gnlbec2d" data-title="Android Sdk Manager无法更新问题解决办法" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://pinned.github.io/2023/05/29/2014-12-05-Android-SDK-Manager-Update-Method/" data-id="cli8yhxg8001dd9276mam6bef" data-title="Android Sdk Manager无法更新问题解决办法" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2014-09-14-Ubuntu System Install" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/05/29/2014-09-14-Ubuntu%20System%20Install/" class="article-date">
+  <time class="dt-published" datetime="2023-05-29T02:54:52.138Z" itemprop="datePublished">2023-05-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/05/29/2014-09-14-Ubuntu%20System%20Install/">安装Ubuntu单系统</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="安装Ubuntu单系统"><a href="#安装Ubuntu单系统" class="headerlink" title="安装Ubuntu单系统"></a>安装Ubuntu单系统</h2><h3 id="背景介绍"><a href="#背景介绍" class="headerlink" title="背景介绍"></a>背景介绍</h3><p>本人是一个程序员，但是由于各种原因，使用的是Windows操作系统。一次偶然的机会，使用了Linux Ubuntu系统，才发现，还是一个很不错的东东。从那个时候开始就开始使用Ubuntu系统。但是鉴于Ubuntu不怎么会用，所以安装的是Windows和Linux的双系统。上班的时候，在公司拿了一张Ubuntu 13.04的系统安装光盘，虽然不怎么会使用Linux系统，但是一次尝试也是未尝不可的啊。于是开始安装起了我的系统。</p>
+<h3 id="安装过程"><a href="#安装过程" class="headerlink" title="安装过程"></a>安装过程</h3><ul>
+<li><p>安装过程非常的简单。很快就装上了Ubuntu 13.04的系统。安装上和系统，第一件事是什么？那还用说，当然是装输入法咯。可是，问题来了。也不知道是怎么回事，输入法死活就安不上，什么修改软件源什么的。反正搞了一大堆，就是装不上。百度上也没得好多关于13.04的信息，于是呼，我就把系统升级了。</p>
+</li>
+<li><p>经过了一个很漫长的过程，终于，将系统升级到13.10。输入法很快的就装好了。什么软件环境也快装好了。重启了一下系统，一个重大bug来了。花屏。我擦，你没看错，就是花屏。一看到这个样子，我就知道，肯定是显卡驱动的问题，于是装了一下显卡驱动。我去，彻底的bug了。开机都开不起了。唉，没办法，拿出手机各种百度。找了办天，还是没有找到解决办法。最后，索性把系统在一次重装了。</p>
+</li>
+<li><p>系统重装到了13.04,我什么事情都没干，直接一个劲的把系统升级到14.04了。又出现了一个大大的问题。非常的严重。还好找到了解决办法。</p>
+</li>
+<li><p>问题： 升级到了14.04后，开机卡屏，连鼠标都不能动，这怎么能行呢。然后我重启进了recovy模式，有一个选项好像是<code>图形安全模式</code>，进去看了一下，报了个<code>显卡驱动</code>的错误。查找百度，最后还是找到了解决方案。</p>
+</li>
+<li><p>添加swap:</p>
+</li>
+</ul>
+<blockquote>
+<ul>
+<li><code> sudo dd if=/dev/zero of=/swap bs=1024 count=8</code>(从&#x2F;分区中分出8×1024M大小的空间，挂在&#x2F;swap分区中)</li>
+<li><code> mkswap /swap</code> (格式化成&#x2F;swap格式)</li>
+<li><code> swapon /swap</code> (激活&#x2F;swap，加入到swap分区中)</li>
+</ul>
+<p>执行以上步骤只会在这一次生效配置，如果要永久生效还须进行修改<br><code> sudo vim /etc/fstab</code>(添加swap分区到开机启动中)<br>–&gt; <code>/swap swap swap defaults  0 0 </code> (添加到文件中的语句)</p>
+</blockquote>
+<ul>
+<li>安装显卡驱动和配置</li>
+</ul>
+<blockquote>
+<p>开机启动，在输入密码的界面停住，按<code>ctrl + alt + F2</code>进入控制台中：</p>
+<ul>
+<li>重新安装fgirx</li>
+</ul>
+<blockquote>
+<p><code>sudo apt-get install fglrx</code></p>
+<p><code>sudo reboot</code></p>
+<p>或者 <code>sudo apt-get install --reinstall ubuntu-desktop</code><br>重启过后，无效。继续后面的方法</p>
+</blockquote>
+<ul>
+<li>桌面文件授权</li>
+</ul>
+<blockquote>
+<p><code> sudo chown lightdm:lightdm -R /var/lib/lightdm</code></p>
+<p><code> sudo chown avahi-autoipd:avahi-autoipd -R /var/lib/avahi-autoipd</code></p>
+<p><code> sudo chown colord:colord -R /var/lib/colord</code></p>
+<p>使用无效</p>
+</blockquote>
+<ul>
+<li>重装显示驱动</li>
+</ul>
+<blockquote>
+<p>对于新的Nvidia二进制驱动：</p>
+<p><code>sudo add-apt-repository ppa:ubuntu-x-swat/x-updates</code></p>
+<p><code>sudo apt-get update </code></p>
+<p><code>sudo apt-get install nvidia-current nvidia-settings</code></p>
+<p>重启，系统成功运行，无卡顿现象</p>
+</blockquote>
+</blockquote>
+<h3 id="记录"><a href="#记录" class="headerlink" title="记录"></a>记录</h3><ul>
+<li><p>对于新的ATI&#x2F;AMD二进制驱动：</p>
+<blockquote>
+<p><code>sudo add-apt-repository ppa:ubuntu-x-swat/x-updates</code></p>
+<p><code>sudo apt-get update </code></p>
+<p><code>sudo apt-get install fglrx</code></p>
+</blockquote>
+</li>
+<li><p>如果机器上之前有一个老版本，请按如下来做</p>
+<blockquote>
+<p>Nvidia 和 ATI&#x2F;AMD 显卡的命令都一样：</p>
+<p><code>sudo add-apt-repository ppa:ubuntu-x-swat/x-updates</code></p>
+<p><code>sudo apt-get update </code></p>
+<p><code>sudo apt-get upgrade</code></p>
+</blockquote>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pinned.github.io/2023/05/29/2014-09-14-Ubuntu%20System%20Install/" data-id="cli8yhxfx0001d927gqun4uq5" data-title="安装Ubuntu单系统" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Systems/" rel="tag">Systems</a></li></ul>
 
     </footer>
   </div>
@@ -1150,183 +1254,7 @@ notification.flags|=Notification.FLAG_SHOW_LIGHTS;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pinned.github.io/2023/05/29/2014-10-11-Android%20Notification%20blog%20one/" data-id="cli8ygt6x00019y27ffyw862n" data-title="Android之Notification的使用(一)" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-2014-10-13-Android webview" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/05/29/2014-10-13-Android%20webview/" class="article-date">
-  <time class="dt-published" datetime="2023-05-29T02:54:52.138Z" itemprop="datePublished">2023-05-29</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%AE%89%E5%8D%93/">安卓</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/05/29/2014-10-13-Android%20webview/">Android之Webview使用</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h3 id="Android之Webview使用"><a href="#Android之Webview使用" class="headerlink" title="Android之Webview使用"></a>Android之Webview使用</h3><p>HTML页面是一个非常重要的角色，不仅是在PC端，在移动端也是非常重要的。</p>
-<p>今天使用Webview来显示一个H5页面，其中就有地图页面。如果你经常使用浏览器，<br>你会发现，浏览器在使用定位信息的时候，需要相关权限，当然，有好的提示用户是一个<br>必不可少的步骤。</p>
-<p><strong>问题</strong></p>
-<p>用Webview加载map的时候，使用地理位置，提示用户授权。</p>
-<p><strong>解决办法</strong></p>
-<p>先看代码：</p>
-<pre><code class="java">@Override
-public void onGeolocationPermissionsShowPrompt(
-        final String origin,
-        final GeolocationPermissions.Callback callback) &#123;
-    DebugLog.d(TAG, &quot;[onGeolocationPermissionsShowPrompt]&quot;);
-    showLocalRemidPopupWindow(origin, new GeoListener() &#123;
-        @Override
-        public void onRefused() &#123;
-            callback.invoke(origin, false, false);
-        &#125;
-
-        @Override
-        public void onSharedLocation() &#123;
-            callback.invoke(origin, true, false);
-        &#125;
-    &#125;);
-&#125;
-
-private void showLocalRemidPopupWindow(final String title, final GeoListener callback) &#123;
-    String saved = PreferencesUtil.getString(this, title, &quot;&quot;);
-    if (!TextUtils.isEmpty(saved)) &#123;
-        if (saved.equals(&quot;true&quot;))&#123;
-            if (callback != null) &#123;
-                callback.onSharedLocation();
-            &#125;
-        &#125; else if (saved.equals(&quot;false&quot;))&#123;
-            if (callback != null)&#123;
-                callback.onRefused();
-            &#125;
-        &#125;
-        return;
-    &#125;
-    if (mGeoPopupWindow == null)&#123;
-        View view = LayoutInflater.from(this).inflate(R.layout.geo_popup_window, null);
-        this.mGeoTitleTv = (TextView) view.findViewById(R.id.geo_title);
-        this.mGeoSaveCb = (CheckBox) view.findViewById(R.id.geo_save_share_preference);
-        this.mRefusedBtn = (Button) view.findViewById(R.id.refused_btn);
-        this.mShareLocationBtn = (Button) view.findViewById(R.id.share_btn);
-        this.mGeoPopupWindow = new PopupWindow(view,
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT, false);
-    &#125;
-    this.mGeoTitleTv.setText(String.format(getString(R.string.geo_title), title));
-    this.mGeoSaveCb.setChecked(true);
-    this.mRefusedBtn.setOnClickListener(new View.OnClickListener() &#123;
-        @Override
-        public void onClick(View view) &#123;
-            saveSharePrefrence(title, false);
-            if (callback != null) &#123;
-                callback.onRefused();
-            &#125;
-            mGeoPopupWindow.dismiss();
-        &#125;
-    &#125;);
-    this.mShareLocationBtn.setOnClickListener(new View.OnClickListener() &#123;
-        @Override
-        public void onClick(View view) &#123;
-            saveSharePrefrence(title, true);
-            if (callback != null) &#123;
-                callback.onSharedLocation();
-            &#125;
-            mGeoPopupWindow.dismiss();
-        &#125;
-    &#125;);
-    this.mGeoPopupWindow.showAtLocation(mWebView, Gravity.BOTTOM, 0, 0);
-&#125;
-</code></pre>
-<p>当浏览器在调用地理位置信息，webView就会触发<code>onGeolocationPermissionsShowPrompt</code>这个方法的调用。<br>那浏览器中是如何调用地理位置信息的呢？这里我也去查看了一点点资料，大概了解了一下，<br>代码如下：</p>
-<pre><code class="javascript">//通过navigator.geolocation对象获取地理位置信息
-//常用的navigator.geolocation对象有以下三种方法：
-//获取当前地理位置
-navigator.geolocation.getCurrentPosition(
-        success_callback_function,
-        error_callback_function,
-        position_options)
-//持续获取地理位置
-navigator.geolocation.watchPosition(
-        success_callback_function,
-        error_callback_function,
-        position_options)
-//清除持续获取地理位置事件
-navigator.geolocation.clearWatch(watch_position_id)  
-</code></pre>
-<p>当然仅仅是重写<code>onGeolocationPermissionsShowPrompt</code>这个方法是不行的。<br>还要对webSetting进入相关设置，具体内容，<a target="_blank" rel="noopener" href="https://github.com/Pinned/WebViewDemo">源码</a><br>中有写相关代码。</p>
-<blockquote>
-<p><strong>WebSettings常用方法</strong></p>
-<p>setAllowFileAccess 启用或禁止WebView访问文件数据</p>
-<p>setBlockNetworkImage 是否显示网络图像</p>
-<p>setBuiltInZoomControls 设置是否支持缩放</p>
-<p>setCacheMode 设置缓冲的模式</p>
-<p>setDefaultFontSize 设置默认的字体大小</p>
-<p>setDefaultTextEncodingName 设置在解码时使用的默认编码</p>
-<p>setFixedFontFamily 设置固定使用的字体</p>
-<p>setJavaSciptEnabled 设置是否支持Javascript</p>
-<p>setLayoutAlgorithm 设置布局方式</p>
-<p>setLightTouchEnabled 设置用鼠标激活被选项</p>
-<p>setSupportZoom 设置是否支持变焦</p>
-<p><strong>WebViewClient常用方法</strong></p>
-<p>doUpdate VisitedHistory 更新历史记录</p>
-<p>onFormResubmission 应用程序重新请求网页数据</p>
-<p>onLoadResource 加载指定地址提供的资源</p>
-<p>onPageFinished 网页加载完毕</p>
-<p>onPageStarted 网页开始加载</p>
-<p>onReceivedError 报告错误信息</p>
-<p>onScaleChanged WebView发生改变</p>
-<p>shouldOverrideUrlLoading 控制新的连接在当前WebView中打开</p>
-<p><strong>WebChromeClient常用方法</strong></p>
-<p>onCloseWindow 关闭WebView</p>
-<p>onCreateWindow 创建WebView</p>
-<p>onJsAlert 处理Javascript中的Alert对话框</p>
-<p>onJsConfirm处理Javascript中的Confirm对话框</p>
-<p>onJsPrompt处理Javascript中的Prompt对话框</p>
-<p>onProgressChanged 加载进度条改变</p>
-<p>onReceivedlcon 网页图标更改</p>
-<p>onReceivedTitle 网页Title更改</p>
-<p>onRequestFocus WebView显示焦点</p>
-</blockquote>
-<p><strong>最后结果</strong></p>
-<p><img src="/../../../../assets/posts/img-2014-10-13/device-2014-10-13-200631.png" alt="result"></p>
-<p><strong>参考资料</strong></p>
-<ol>
-<li><a target="_blank" rel="noopener" href="http://blog.csdn.net/t12x3456/article/details/13769731">Android WebView常见问题及解决方案汇总</a></li>
-<li><a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/5329662/android-webview-geolocation">android webview geolocation</a></li>
-<li><a target="_blank" rel="noopener" href="http://blog.csdn.net/eagelangel/article/details/8807723">利用HTML5开发Android</a></li>
-<li><a target="_blank" rel="noopener" href="http://dev.wo.com.cn/docportal/doc_queryMdocDetail.action?mdoc.docindex=6130">Android WebView</a></li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pinned.github.io/2023/05/29/2014-10-13-Android%20webview/" data-id="cli8ygt6z00029y27802k91u0" data-title="Android之Webview使用" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://pinned.github.io/2023/05/29/2014-10-11-Android%20Notification%20blog%20one/" data-id="cli8yhxg00002d9277wv590a9" data-title="Android之Notification的使用(一)" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -1397,11 +1325,11 @@ navigator.geolocation.clearWatch(watch_position_id)
       <ul>
         
           <li>
-            <a href="/2023/05/29/2017-10-15-gradlew%20source%20analyze/">gradlew 源码分析</a>
+            <a href="/2023/05/29/2017-02-10-proguard-translate/">Proguard 翻译</a>
           </li>
         
           <li>
-            <a href="/2023/05/29/2017-02-10-proguard-translate/">Proguard 翻译</a>
+            <a href="/2023/05/29/2017-10-15-gradlew%20source%20analyze/">gradlew 源码分析</a>
           </li>
         
           <li>

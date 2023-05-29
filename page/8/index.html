@@ -71,124 +71,9 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-2014-09-14-Ubuntu System Install" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-2014-10-13-Android webview" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2023/05/29/2014-09-14-Ubuntu%20System%20Install/" class="article-date">
-  <time class="dt-published" datetime="2023-05-29T02:54:52.138Z" itemprop="datePublished">2023-05-29</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/05/29/2014-09-14-Ubuntu%20System%20Install/">安装Ubuntu单系统</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="安装Ubuntu单系统"><a href="#安装Ubuntu单系统" class="headerlink" title="安装Ubuntu单系统"></a>安装Ubuntu单系统</h2><h3 id="背景介绍"><a href="#背景介绍" class="headerlink" title="背景介绍"></a>背景介绍</h3><p>本人是一个程序员，但是由于各种原因，使用的是Windows操作系统。一次偶然的机会，使用了Linux Ubuntu系统，才发现，还是一个很不错的东东。从那个时候开始就开始使用Ubuntu系统。但是鉴于Ubuntu不怎么会用，所以安装的是Windows和Linux的双系统。上班的时候，在公司拿了一张Ubuntu 13.04的系统安装光盘，虽然不怎么会使用Linux系统，但是一次尝试也是未尝不可的啊。于是开始安装起了我的系统。</p>
-<h3 id="安装过程"><a href="#安装过程" class="headerlink" title="安装过程"></a>安装过程</h3><ul>
-<li><p>安装过程非常的简单。很快就装上了Ubuntu 13.04的系统。安装上和系统，第一件事是什么？那还用说，当然是装输入法咯。可是，问题来了。也不知道是怎么回事，输入法死活就安不上，什么修改软件源什么的。反正搞了一大堆，就是装不上。百度上也没得好多关于13.04的信息，于是呼，我就把系统升级了。</p>
-</li>
-<li><p>经过了一个很漫长的过程，终于，将系统升级到13.10。输入法很快的就装好了。什么软件环境也快装好了。重启了一下系统，一个重大bug来了。花屏。我擦，你没看错，就是花屏。一看到这个样子，我就知道，肯定是显卡驱动的问题，于是装了一下显卡驱动。我去，彻底的bug了。开机都开不起了。唉，没办法，拿出手机各种百度。找了办天，还是没有找到解决办法。最后，索性把系统在一次重装了。</p>
-</li>
-<li><p>系统重装到了13.04,我什么事情都没干，直接一个劲的把系统升级到14.04了。又出现了一个大大的问题。非常的严重。还好找到了解决办法。</p>
-</li>
-<li><p>问题： 升级到了14.04后，开机卡屏，连鼠标都不能动，这怎么能行呢。然后我重启进了recovy模式，有一个选项好像是<code>图形安全模式</code>，进去看了一下，报了个<code>显卡驱动</code>的错误。查找百度，最后还是找到了解决方案。</p>
-</li>
-<li><p>添加swap:</p>
-</li>
-</ul>
-<blockquote>
-<ul>
-<li><code> sudo dd if=/dev/zero of=/swap bs=1024 count=8</code>(从&#x2F;分区中分出8×1024M大小的空间，挂在&#x2F;swap分区中)</li>
-<li><code> mkswap /swap</code> (格式化成&#x2F;swap格式)</li>
-<li><code> swapon /swap</code> (激活&#x2F;swap，加入到swap分区中)</li>
-</ul>
-<p>执行以上步骤只会在这一次生效配置，如果要永久生效还须进行修改<br><code> sudo vim /etc/fstab</code>(添加swap分区到开机启动中)<br>–&gt; <code>/swap swap swap defaults  0 0 </code> (添加到文件中的语句)</p>
-</blockquote>
-<ul>
-<li>安装显卡驱动和配置</li>
-</ul>
-<blockquote>
-<p>开机启动，在输入密码的界面停住，按<code>ctrl + alt + F2</code>进入控制台中：</p>
-<ul>
-<li>重新安装fgirx</li>
-</ul>
-<blockquote>
-<p><code>sudo apt-get install fglrx</code></p>
-<p><code>sudo reboot</code></p>
-<p>或者 <code>sudo apt-get install --reinstall ubuntu-desktop</code><br>重启过后，无效。继续后面的方法</p>
-</blockquote>
-<ul>
-<li>桌面文件授权</li>
-</ul>
-<blockquote>
-<p><code> sudo chown lightdm:lightdm -R /var/lib/lightdm</code></p>
-<p><code> sudo chown avahi-autoipd:avahi-autoipd -R /var/lib/avahi-autoipd</code></p>
-<p><code> sudo chown colord:colord -R /var/lib/colord</code></p>
-<p>使用无效</p>
-</blockquote>
-<ul>
-<li>重装显示驱动</li>
-</ul>
-<blockquote>
-<p>对于新的Nvidia二进制驱动：</p>
-<p><code>sudo add-apt-repository ppa:ubuntu-x-swat/x-updates</code></p>
-<p><code>sudo apt-get update </code></p>
-<p><code>sudo apt-get install nvidia-current nvidia-settings</code></p>
-<p>重启，系统成功运行，无卡顿现象</p>
-</blockquote>
-</blockquote>
-<h3 id="记录"><a href="#记录" class="headerlink" title="记录"></a>记录</h3><ul>
-<li><p>对于新的ATI&#x2F;AMD二进制驱动：</p>
-<blockquote>
-<p><code>sudo add-apt-repository ppa:ubuntu-x-swat/x-updates</code></p>
-<p><code>sudo apt-get update </code></p>
-<p><code>sudo apt-get install fglrx</code></p>
-</blockquote>
-</li>
-<li><p>如果机器上之前有一个老版本，请按如下来做</p>
-<blockquote>
-<p>Nvidia 和 ATI&#x2F;AMD 显卡的命令都一样：</p>
-<p><code>sudo add-apt-repository ppa:ubuntu-x-swat/x-updates</code></p>
-<p><code>sudo apt-get update </code></p>
-<p><code>sudo apt-get upgrade</code></p>
-</blockquote>
-</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pinned.github.io/2023/05/29/2014-09-14-Ubuntu%20System%20Install/" data-id="cli8ygt7100059y278ydd9pzv" data-title="安装Ubuntu单系统" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Systems/" rel="tag">Systems</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-2014-10-21-Genymotion-network-error" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/05/29/2014-10-21-Genymotion-network-error/" class="article-date">
+    <a href="/2023/05/29/2014-10-13-Android%20webview/" class="article-date">
   <time class="dt-published" datetime="2023-05-29T02:54:52.138Z" itemprop="datePublished">2023-05-29</time>
 </a>
     
@@ -204,7 +89,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/05/29/2014-10-21-Genymotion-network-error/">使用Fidder来拦截Android发送的HTTP请求</a>
+      <a class="p-name article-title" href="/2023/05/29/2014-10-13-Android%20webview/">Android之Webview使用</a>
     </h1>
   
 
@@ -212,28 +97,143 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h3 id="Fidder"><a href="#Fidder" class="headerlink" title="Fidder"></a>Fidder</h3><p>Fiddler是一个http调试代理，它能够记录所有的你电脑和互联网之间的http通讯，Fiddler可以也可以让你检查所有的http通讯，<br>设置断点，以及Fiddler所有的“进出”的数据（指cookie,html,js,css等文件，这些都可以让你胡乱修改的意思）。<br>Fiddler 要比其他的网络调试器要更加简单，因为它仅仅暴露http通讯还有提供一个用户友好的格式。</p>
-<p>有关Fiddler的使用教程请移步：<a target="_blank" rel="noopener" href="http://kb.cnblogs.com/page/130367/">Fiddler 教程</a></p>
-<h3 id="Fiddler-Android模拟器抓包"><a href="#Fiddler-Android模拟器抓包" class="headerlink" title="Fiddler Android模拟器抓包"></a>Fiddler Android模拟器抓包</h3><ol>
-<li><p>当然，第一件事情就是要确保你电脑上安装了Fiddler,如没有，请下载安装.<a target="_blank" rel="noopener" href="http://www.telerik.com/download/fiddler">下载地址</a></p>
-</li>
-<li><p>打开你的Android模拟器，依次点击 Setting -&gt; More… -&gt; Mobile networks -&gt; Access Point Name</p>
-<p> <img src="/../../../../assets/img/2014-08-13/step_01.png" alt="step 1"><br> <img src="/../../../../assets/img/2014-08-13/step_02.png" alt="step 2"><br> <img src="/../../../../assets/img/2014-08-13/step_03.png" alt="step 3"><br> <img src="/../../../../assets/img/2014-08-13/step_04.png" alt="step 4"><br> <img src="/../../../../assets/img/2014-08-13/step_05.png" alt="step 5"></p>
-<p>上面这个是模拟器设置，如果你用的是Genymotion的模拟器，便和真机设置一样;</p>
-<p><img src="/../../../../assets/img/2014-08-13/step_06.png" alt="step 6"><br><img src="/../../../../assets/img/2014-08-13/step_07.png" alt="step 7"><br><img src="/../../../../assets/img/2014-08-13/step_07.png" alt="step 7"><br><img src="/../../../../assets/img/2014-08-13/step_08.png" alt="step 8"></p>
+        <h3 id="Android之Webview使用"><a href="#Android之Webview使用" class="headerlink" title="Android之Webview使用"></a>Android之Webview使用</h3><p>HTML页面是一个非常重要的角色，不仅是在PC端，在移动端也是非常重要的。</p>
+<p>今天使用Webview来显示一个H5页面，其中就有地图页面。如果你经常使用浏览器，<br>你会发现，浏览器在使用定位信息的时候，需要相关权限，当然，有好的提示用户是一个<br>必不可少的步骤。</p>
+<p><strong>问题</strong></p>
+<p>用Webview加载map的时候，使用地理位置，提示用户授权。</p>
+<p><strong>解决办法</strong></p>
+<p>先看代码：</p>
+<pre><code class="java">@Override
+public void onGeolocationPermissionsShowPrompt(
+        final String origin,
+        final GeolocationPermissions.Callback callback) &#123;
+    DebugLog.d(TAG, &quot;[onGeolocationPermissionsShowPrompt]&quot;);
+    showLocalRemidPopupWindow(origin, new GeoListener() &#123;
+        @Override
+        public void onRefused() &#123;
+            callback.invoke(origin, false, false);
+        &#125;
+
+        @Override
+        public void onSharedLocation() &#123;
+            callback.invoke(origin, true, false);
+        &#125;
+    &#125;);
+&#125;
+
+private void showLocalRemidPopupWindow(final String title, final GeoListener callback) &#123;
+    String saved = PreferencesUtil.getString(this, title, &quot;&quot;);
+    if (!TextUtils.isEmpty(saved)) &#123;
+        if (saved.equals(&quot;true&quot;))&#123;
+            if (callback != null) &#123;
+                callback.onSharedLocation();
+            &#125;
+        &#125; else if (saved.equals(&quot;false&quot;))&#123;
+            if (callback != null)&#123;
+                callback.onRefused();
+            &#125;
+        &#125;
+        return;
+    &#125;
+    if (mGeoPopupWindow == null)&#123;
+        View view = LayoutInflater.from(this).inflate(R.layout.geo_popup_window, null);
+        this.mGeoTitleTv = (TextView) view.findViewById(R.id.geo_title);
+        this.mGeoSaveCb = (CheckBox) view.findViewById(R.id.geo_save_share_preference);
+        this.mRefusedBtn = (Button) view.findViewById(R.id.refused_btn);
+        this.mShareLocationBtn = (Button) view.findViewById(R.id.share_btn);
+        this.mGeoPopupWindow = new PopupWindow(view,
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT, false);
+    &#125;
+    this.mGeoTitleTv.setText(String.format(getString(R.string.geo_title), title));
+    this.mGeoSaveCb.setChecked(true);
+    this.mRefusedBtn.setOnClickListener(new View.OnClickListener() &#123;
+        @Override
+        public void onClick(View view) &#123;
+            saveSharePrefrence(title, false);
+            if (callback != null) &#123;
+                callback.onRefused();
+            &#125;
+            mGeoPopupWindow.dismiss();
+        &#125;
+    &#125;);
+    this.mShareLocationBtn.setOnClickListener(new View.OnClickListener() &#123;
+        @Override
+        public void onClick(View view) &#123;
+            saveSharePrefrence(title, true);
+            if (callback != null) &#123;
+                callback.onSharedLocation();
+            &#125;
+            mGeoPopupWindow.dismiss();
+        &#125;
+    &#125;);
+    this.mGeoPopupWindow.showAtLocation(mWebView, Gravity.BOTTOM, 0, 0);
+&#125;
+</code></pre>
+<p>当浏览器在调用地理位置信息，webView就会触发<code>onGeolocationPermissionsShowPrompt</code>这个方法的调用。<br>那浏览器中是如何调用地理位置信息的呢？这里我也去查看了一点点资料，大概了解了一下，<br>代码如下：</p>
+<pre><code class="javascript">//通过navigator.geolocation对象获取地理位置信息
+//常用的navigator.geolocation对象有以下三种方法：
+//获取当前地理位置
+navigator.geolocation.getCurrentPosition(
+        success_callback_function,
+        error_callback_function,
+        position_options)
+//持续获取地理位置
+navigator.geolocation.watchPosition(
+        success_callback_function,
+        error_callback_function,
+        position_options)
+//清除持续获取地理位置事件
+navigator.geolocation.clearWatch(watch_position_id)  
+</code></pre>
+<p>当然仅仅是重写<code>onGeolocationPermissionsShowPrompt</code>这个方法是不行的。<br>还要对webSetting进入相关设置，具体内容，<a target="_blank" rel="noopener" href="https://github.com/Pinned/WebViewDemo">源码</a><br>中有写相关代码。</p>
 <blockquote>
-<p>PS：如果用真机，要保证真机和PC在同一个局域网类（在这里，我用的是Wifi）</p>
+<p><strong>WebSettings常用方法</strong></p>
+<p>setAllowFileAccess 启用或禁止WebView访问文件数据</p>
+<p>setBlockNetworkImage 是否显示网络图像</p>
+<p>setBuiltInZoomControls 设置是否支持缩放</p>
+<p>setCacheMode 设置缓冲的模式</p>
+<p>setDefaultFontSize 设置默认的字体大小</p>
+<p>setDefaultTextEncodingName 设置在解码时使用的默认编码</p>
+<p>setFixedFontFamily 设置固定使用的字体</p>
+<p>setJavaSciptEnabled 设置是否支持Javascript</p>
+<p>setLayoutAlgorithm 设置布局方式</p>
+<p>setLightTouchEnabled 设置用鼠标激活被选项</p>
+<p>setSupportZoom 设置是否支持变焦</p>
+<p><strong>WebViewClient常用方法</strong></p>
+<p>doUpdate VisitedHistory 更新历史记录</p>
+<p>onFormResubmission 应用程序重新请求网页数据</p>
+<p>onLoadResource 加载指定地址提供的资源</p>
+<p>onPageFinished 网页加载完毕</p>
+<p>onPageStarted 网页开始加载</p>
+<p>onReceivedError 报告错误信息</p>
+<p>onScaleChanged WebView发生改变</p>
+<p>shouldOverrideUrlLoading 控制新的连接在当前WebView中打开</p>
+<p><strong>WebChromeClient常用方法</strong></p>
+<p>onCloseWindow 关闭WebView</p>
+<p>onCreateWindow 创建WebView</p>
+<p>onJsAlert 处理Javascript中的Alert对话框</p>
+<p>onJsConfirm处理Javascript中的Confirm对话框</p>
+<p>onJsPrompt处理Javascript中的Prompt对话框</p>
+<p>onProgressChanged 加载进度条改变</p>
+<p>onReceivedlcon 网页图标更改</p>
+<p>onReceivedTitle 网页Title更改</p>
+<p>onRequestFocus WebView显示焦点</p>
 </blockquote>
-</li>
-<li><p>设置Fiddler<br> 这一步是非常重要的一步，打开Fiddler, 选择<code>Tools -&gt; Fiddler Options...</code> ，然后选择<code>Connections</code>选项卡,勾选<code>Allow remote computers to connect</code>,<br> 重启Fiddler就可以了。如下图所示:</p>
-<p> <img src="/../../../assets/img/2014-08-13/step_09.png" alt="step 9"></p>
-</li>
+<p><strong>最后结果</strong></p>
+<p><img src="/../../../../assets/posts/img-2014-10-13/device-2014-10-13-200631.png" alt="result"></p>
+<p><strong>参考资料</strong></p>
+<ol>
+<li><a target="_blank" rel="noopener" href="http://blog.csdn.net/t12x3456/article/details/13769731">Android WebView常见问题及解决方案汇总</a></li>
+<li><a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/5329662/android-webview-geolocation">android webview geolocation</a></li>
+<li><a target="_blank" rel="noopener" href="http://blog.csdn.net/eagelangel/article/details/8807723">利用HTML5开发Android</a></li>
+<li><a target="_blank" rel="noopener" href="http://dev.wo.com.cn/docportal/doc_queryMdocDetail.action?mdoc.docindex=6130">Android WebView</a></li>
 </ol>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pinned.github.io/2023/05/29/2014-10-21-Genymotion-network-error/" data-id="cli8ygt7300069y27a1ah3kc0" data-title="使用Fidder来拦截Android发送的HTTP请求" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://pinned.github.io/2023/05/29/2014-10-13-Android%20webview/" data-id="cli8yhxg20005d9279b02arlw" data-title="Android之Webview使用" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -303,7 +303,7 @@ notification.flags|=Notification.FLAG_SHOW_LIGHTS;
 notificationManager.notify(notificationId, notification);
 </code></pre>
 <p>和上一个例子不同的是，这一个Notification跳转的位置并不是<code>OtherActiivty</code>，<br>而是直接跳转到<code>MainActivity</code>.</p>
-<p><strong>问题</strong><br>非常不幸的事，他并不能够正常接收么Intent传过来的参数。至于为什么，我也不知道。<br>如您知道这个的具体原因请告知我(邮箱：<a href="mailto:&#108;&#111;&#118;&#101;&#99;&#x6c;&#x75;&#x6f;&#x40;&#103;&#x6d;&#x61;&#x69;&#x6c;&#46;&#99;&#x6f;&#109;">&#108;&#111;&#118;&#101;&#99;&#x6c;&#x75;&#x6f;&#x40;&#103;&#x6d;&#x61;&#x69;&#x6c;&#46;&#99;&#x6f;&#109;</a>)。</p>
+<p><strong>问题</strong><br>非常不幸的事，他并不能够正常接收么Intent传过来的参数。至于为什么，我也不知道。<br>如您知道这个的具体原因请告知我(邮箱：<a href="mailto:&#108;&#111;&#118;&#x65;&#x63;&#x6c;&#117;&#x6f;&#x40;&#103;&#x6d;&#x61;&#x69;&#x6c;&#x2e;&#99;&#111;&#109;">&#108;&#111;&#118;&#x65;&#x63;&#x6c;&#117;&#x6f;&#x40;&#103;&#x6d;&#x61;&#x69;&#x6c;&#x2e;&#99;&#111;&#109;</a>)。</p>
 <p><strong>解决办法</strong></p>
 <p>虽然不知道是什么原因造成了这个问题，但是最终还是找到了解决方案：</p>
 <p>解决方法如下：</p>
@@ -321,11 +321,62 @@ protected void onNewIntent(Intent intent) &#123;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pinned.github.io/2023/05/29/2014-10-12-Android%20Notification%20blog%20two/" data-id="cli8ygt7300079y27gngia9dn" data-title="Android之Notification的使用（二）" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://pinned.github.io/2023/05/29/2014-10-12-Android%20Notification%20blog%20two/" data-id="cli8yhxg20006d927axqa7rek" data-title="Android之Notification的使用（二）" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2014-10-20-Eclipse Refactor" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/05/29/2014-10-20-Eclipse%20Refactor/" class="article-date">
+  <time class="dt-published" datetime="2023-05-29T02:54:52.138Z" itemprop="datePublished">2023-05-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/05/29/2014-10-20-Eclipse%20Refactor/">Eclipse中重构使用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><strong>Eclipse中重构方法，修改方法中的某个参数</strong></p>
+<p>“Change Method Signature”重构的功能是改变方法的定义，例如改变方法的参数名称、类型和个数、返回值的类型，方法的可见性以及方法的名称等。 </p>
+<p>要改变方法的定义，可以先选择方法，通过右键菜单选择Refactor菜单的“Change Method Signature”子菜单项，弹出“Change Method Signature”对话框，然后就可以修改对应的参数。</p>
+<p><strong>参考资料</strong></p>
+<ol>
+<li><a target="_blank" rel="noopener" href="http://blog.csdn.net/hamxyy/article/details/6705791">使用Eclipse中提供的Refactor(重构)工具</a></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pinned.github.io/2023/05/29/2014-10-20-Eclipse%20Refactor/" data-id="cli8yhxg20007d927a6gt8374" data-title="Eclipse中重构使用" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tools/" rel="tag">Tools</a></li></ul>
 
     </footer>
   </div>
@@ -486,7 +537,7 @@ DebugLog.d(&quot;This is a log&quot;);
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pinned.github.io/2023/05/29/2014-10-24-android%20Log%20useing/" data-id="cli8ygt75000b9y275zhpgevt" data-title="Android之使用Log打印日志" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://pinned.github.io/2023/05/29/2014-10-24-android%20Log%20useing/" data-id="cli8yhxg3000bd92714hh9brt" data-title="Android之使用Log打印日志" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -500,14 +551,14 @@ DebugLog.d(&quot;This is a log&quot;);
 
 
   
-    <article id="post-2014-10-20-Eclipse Refactor" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-2014-10-21-Genymotion-network-error" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2023/05/29/2014-10-20-Eclipse%20Refactor/" class="article-date">
+    <a href="/2023/05/29/2014-10-21-Genymotion-network-error/" class="article-date">
   <time class="dt-published" datetime="2023-05-29T02:54:52.138Z" itemprop="datePublished">2023-05-29</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>
+    <a class="article-category-link" href="/categories/%E5%AE%89%E5%8D%93/">安卓</a>
   </div>
 
   </div>
@@ -518,7 +569,7 @@ DebugLog.d(&quot;This is a log&quot;);
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/05/29/2014-10-20-Eclipse%20Refactor/">Eclipse中重构使用</a>
+      <a class="p-name article-title" href="/2023/05/29/2014-10-21-Genymotion-network-error/">使用Fidder来拦截Android发送的HTTP请求</a>
     </h1>
   
 
@@ -526,22 +577,32 @@ DebugLog.d(&quot;This is a log&quot;);
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p><strong>Eclipse中重构方法，修改方法中的某个参数</strong></p>
-<p>“Change Method Signature”重构的功能是改变方法的定义，例如改变方法的参数名称、类型和个数、返回值的类型，方法的可见性以及方法的名称等。 </p>
-<p>要改变方法的定义，可以先选择方法，通过右键菜单选择Refactor菜单的“Change Method Signature”子菜单项，弹出“Change Method Signature”对话框，然后就可以修改对应的参数。</p>
-<p><strong>参考资料</strong></p>
-<ol>
-<li><a target="_blank" rel="noopener" href="http://blog.csdn.net/hamxyy/article/details/6705791">使用Eclipse中提供的Refactor(重构)工具</a></li>
+        <h3 id="Fidder"><a href="#Fidder" class="headerlink" title="Fidder"></a>Fidder</h3><p>Fiddler是一个http调试代理，它能够记录所有的你电脑和互联网之间的http通讯，Fiddler可以也可以让你检查所有的http通讯，<br>设置断点，以及Fiddler所有的“进出”的数据（指cookie,html,js,css等文件，这些都可以让你胡乱修改的意思）。<br>Fiddler 要比其他的网络调试器要更加简单，因为它仅仅暴露http通讯还有提供一个用户友好的格式。</p>
+<p>有关Fiddler的使用教程请移步：<a target="_blank" rel="noopener" href="http://kb.cnblogs.com/page/130367/">Fiddler 教程</a></p>
+<h3 id="Fiddler-Android模拟器抓包"><a href="#Fiddler-Android模拟器抓包" class="headerlink" title="Fiddler Android模拟器抓包"></a>Fiddler Android模拟器抓包</h3><ol>
+<li><p>当然，第一件事情就是要确保你电脑上安装了Fiddler,如没有，请下载安装.<a target="_blank" rel="noopener" href="http://www.telerik.com/download/fiddler">下载地址</a></p>
+</li>
+<li><p>打开你的Android模拟器，依次点击 Setting -&gt; More… -&gt; Mobile networks -&gt; Access Point Name</p>
+<p> <img src="/../../../../assets/img/2014-08-13/step_01.png" alt="step 1"><br> <img src="/../../../../assets/img/2014-08-13/step_02.png" alt="step 2"><br> <img src="/../../../../assets/img/2014-08-13/step_03.png" alt="step 3"><br> <img src="/../../../../assets/img/2014-08-13/step_04.png" alt="step 4"><br> <img src="/../../../../assets/img/2014-08-13/step_05.png" alt="step 5"></p>
+<p>上面这个是模拟器设置，如果你用的是Genymotion的模拟器，便和真机设置一样;</p>
+<p><img src="/../../../../assets/img/2014-08-13/step_06.png" alt="step 6"><br><img src="/../../../../assets/img/2014-08-13/step_07.png" alt="step 7"><br><img src="/../../../../assets/img/2014-08-13/step_07.png" alt="step 7"><br><img src="/../../../../assets/img/2014-08-13/step_08.png" alt="step 8"></p>
+<blockquote>
+<p>PS：如果用真机，要保证真机和PC在同一个局域网类（在这里，我用的是Wifi）</p>
+</blockquote>
+</li>
+<li><p>设置Fiddler<br> 这一步是非常重要的一步，打开Fiddler, 选择<code>Tools -&gt; Fiddler Options...</code> ，然后选择<code>Connections</code>选项卡,勾选<code>Allow remote computers to connect</code>,<br> 重启Fiddler就可以了。如下图所示:</p>
+<p> <img src="/../../../assets/img/2014-08-13/step_09.png" alt="step 9"></p>
+</li>
 </ol>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pinned.github.io/2023/05/29/2014-10-20-Eclipse%20Refactor/" data-id="cli8ygt76000i9y274mic69yq" data-title="Eclipse中重构使用" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://pinned.github.io/2023/05/29/2014-10-21-Genymotion-network-error/" data-id="cli8yhxg3000cd927193u5k6r" data-title="使用Fidder来拦截Android发送的HTTP请求" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tools/" rel="tag">Tools</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li></ul>
 
     </footer>
   </div>
@@ -608,11 +669,11 @@ DebugLog.d(&quot;This is a log&quot;);
       <ul>
         
           <li>
-            <a href="/2023/05/29/2017-10-15-gradlew%20source%20analyze/">gradlew 源码分析</a>
+            <a href="/2023/05/29/2017-02-10-proguard-translate/">Proguard 翻译</a>
           </li>
         
           <li>
-            <a href="/2023/05/29/2017-02-10-proguard-translate/">Proguard 翻译</a>
+            <a href="/2023/05/29/2017-10-15-gradlew%20source%20analyze/">gradlew 源码分析</a>
           </li>
         
           <li>

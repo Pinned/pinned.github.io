@@ -71,14 +71,14 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-2016-10-10-Shell-Sub-String" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-2015-12-22-gradle-download-error" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2023/05/29/2016-10-10-Shell-Sub-String/" class="article-date">
+    <a href="/2023/05/29/2015-12-22-gradle-download-error/" class="article-date">
   <time class="dt-published" datetime="2023-05-29T02:54:52.144Z" itemprop="datePublished">2023-05-29</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a>
+    <a class="article-category-link" href="/categories/%E5%AE%89%E5%8D%93/">安卓</a>
   </div>
 
   </div>
@@ -89,7 +89,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/05/29/2016-10-10-Shell-Sub-String/">Shell脚本8种字符串截取方法</a>
+      <a class="p-name article-title" href="/2023/05/29/2015-12-22-gradle-download-error/">Android Studio Gradle Download Error</a>
     </h1>
   
 
@@ -97,140 +97,26 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p>假设有变量： <code>var=http://blog.knero.cn/test.html</code></p>
-<h2 id="号截取，删除左边字符，保留右边字符"><a href="#号截取，删除左边字符，保留右边字符" class="headerlink" title="#号截取，删除左边字符，保留右边字符"></a><code>#</code>号截取，删除左边字符，保留右边字符</h2><p><strong>示例</strong></p>
-<pre><code class="shell">var=http://blog.knero.cn/test.html
-sub=$&#123;var#*/&#125;
-echo $sub
-</code></pre>
-<p><strong>输出结果</strong></p>
-<pre><code class="shell">/blog.knero.cn/test.html
-</code></pre>
-<p>其中<strong>var</strong>是变量名，**#<strong>号是运算符，</strong><em>&#x2F;</em>* 表示从左边开始删除第一个**&#x2F;<strong>号及左边的所有字符<br>即删除</strong>http:&#x2F;**<br>结果是 ：&#x2F;blog.knero.cn&#x2F;test.html</p>
-<p><strong>示例</strong></p>
-<pre><code class="shell">var=http://blog.knero.cn/test.html
-sub=$&#123;var##*/&#125;
-echo $sub
-</code></pre>
-<p><strong>输出结果</strong></p>
-<pre><code class="shell">test.html
-</code></pre>
-<p>其中<strong>var</strong>是变量名，**##<strong>号是运算符，</strong><em>&#x2F;</em>* 表示从左边开始删除最后一个**&#x2F;<strong>号及左边的所有字符<br>即删除</strong><a target="_blank" rel="noopener" href="http://blog.knero.cn/">http://blog.knero.cn/</a>**<br>结果是 ：test.html</p>
-<h2 id="号截取，删除右边字符，保留左边字符"><a href="#号截取，删除右边字符，保留左边字符" class="headerlink" title="%号截取，删除右边字符，保留左边字符"></a><code>%</code>号截取，删除右边字符，保留左边字符</h2><p><strong>示例</strong></p>
-<pre><code class="shell">var=http://blog.knero.cn/test.html
-sub=$&#123;var%/*&#125;
-echo $sub
-</code></pre>
-<p><strong>输出结果</strong></p>
-<pre><code class="shell">http://blog.knero.cn
-</code></pre>
-<p>其中<strong>var</strong>是变量名，**%<strong>号是运算符，</strong>&#x2F;*** 表示从右边开始删除第一个**&#x2F;<strong>号及右边的所有字符<br>即删除</strong>test.html**<br>结果是 ：<a target="_blank" rel="noopener" href="http://blog.knero.cn/">http://blog.knero.cn</a></p>
-<p><strong>示例</strong></p>
-<pre><code class="shell">var=http://blog.knero.cn/test.html
-sub=$&#123;var%%/*&#125;
-echo $sub
-</code></pre>
-<p><strong>输出结果</strong></p>
-<pre><code class="shell">http:
-</code></pre>
-<p>其中<strong>var</strong>是变量名，**%%<strong>号是运算符，</strong>&#x2F;*** 表示从右边开始删除最后一个**&#x2F;<strong>号及右边的所有字符<br>即删除</strong>&#x2F;&#x2F;blog.knero.cn&#x2F;test.html**<br>结果是 ：http:</p>
-<h2 id="从左边指定第几个字符开始截取"><a href="#从左边指定第几个字符开始截取" class="headerlink" title="从左边指定第几个字符开始截取"></a>从左边指定第几个字符开始截取</h2><p><strong>示例</strong></p>
-<pre><code class="shell">var=http://blog.knero.cn/test.html
-sub=$&#123;var:0:5&#125;
-echo $sub
-sub=$&#123;var:7&#125;
-echo $sub
-</code></pre>
-<p><strong>输出结果</strong></p>
-<pre><code class="shell">http:
-blog.knero.cn/test.html
-</code></pre>
-<p><code>$&#123;var:0:5&#125;</code>其中的<strong>0</strong>表示左边第一个字符开始, <strong>5</strong>表示字符的总个数。<br>结果是：<strong>http:</strong></p>
-<p><code>$&#123;var:7&#125;</code>指从左边index第几个字符开始到结束</p>
-<h2 id="从右边第几个字符开始截取"><a href="#从右边第几个字符开始截取" class="headerlink" title="从右边第几个字符开始截取"></a>从右边第几个字符开始截取</h2><p><strong>示例</strong></p>
-<pre><code class="shell">var=http://blog.knero.cn/test.html
-sub=$&#123;var:0-9:4&#125;
-echo $sub
-sub=$&#123;var:0-9&#125;
-echo $sub
-</code></pre>
-<p><strong>输出结果</strong></p>
-<pre><code class="shell">test
-test.html
-</code></pre>
-<p><code>$&#123;var:0-9:4&#125;</code>其中的<strong>0-9</strong>表示左边第9个字符开始, <strong>4</strong>表示截取字符个数，如果没有就是到结束</p>
+        <p>自从使用Android Studio 开始，就一直存在一个问题，那就是Gradle下载不下来。不仅如此，JCtener 与 mavenCentral 也是被墙了。</p>
+<ol>
+<li><p>我们先来解决gradle 下载的问题</p>
+<p>用浏览器挂上vpn， 将你需要的<a target="_blank" rel="noopener" href="https://services.gradle.org/distributions/gradle-2.8-all.zip">gralde-version.zip</a>文件下载下来，放到本地。打开你的项目，找到当前目录下 <code>gradle -&gt; wrapper -&gt; gradle-wrapper.properties</code> , 打开这个文件，将最后一行的地址修改为如下：<code>distributionUrl=file:///Users/pinned/Downloads/gradle-2.7-all.zip</code></p>
+<p>然后在同步一下，就可以正常使用Gradle</p>
+</li>
+<li><p>下载lib库</p>
+<p>这个得感谢网友<a target="_blank" rel="noopener" href="http://www.j99.io/">henjue</a>给我们提供的服务, 具体使用参考：[向大家提供一个jcenter镜像</p>
+</li>
+</ol>
+<p>](<a target="_blank" rel="noopener" href="http://www.j99.io/2015/06/19/%E5%90%91%E5%A4%A7%E5%AE%B6%E6%8F%90%E4%BE%9B%E4%B8%80%E4%B8%AAjcenter%E9%95%9C%E5%83%8F/">http://www.j99.io/2015/06/19/%E5%90%91%E5%A4%A7%E5%AE%B6%E6%8F%90%E4%BE%9B%E4%B8%80%E4%B8%AAjcenter%E9%95%9C%E5%83%8F/</a>)</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pinned.github.io/2023/05/29/2016-10-10-Shell-Sub-String/" data-id="cli8ygt7k004t9y275dkabskx" data-title="Shell脚本8种字符串截取方法" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://pinned.github.io/2023/05/29/2015-12-22-gradle-download-error/" data-id="cli8yhxgh004hd9278e9lakdt" data-title="Android Studio Gradle Download Error" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Shell/" rel="tag">Shell</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-2016-10-17-ubuntu-ruby-install" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/05/29/2016-10-17-ubuntu-ruby-install/" class="article-date">
-  <time class="dt-published" datetime="2023-05-29T02:54:52.144Z" itemprop="datePublished">2023-05-29</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/05/29/2016-10-17-ubuntu-ruby-install/">Ubuntu中安装Ruby的一些注意事项</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="使用RVM安装Ruby"><a href="#使用RVM安装Ruby" class="headerlink" title="使用RVM安装Ruby"></a>使用RVM安装Ruby</h2><p>安装RVM</p>
-<pre><code class="shell">curl -L get.rvm.io | bash -s stable
-//若提示找不到公钥，执行下边语句
-gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
-//然后，重新执行，安装完rvm之后，需配置终端，以便下次打开终端能直接只用rvm。更改终端配置方法：参见https://rvm.io/integration/gnome-terminal
-curl -L get.rvm.io | bash -s stable
-//至此，rvm安装完成，下边我们手动为终端配置rvm环境，否则以后在终端中可能每次都要手动加载rvm环境
-//更改终端配置方法：工具栏--编辑--配置文件首选项--标题和命令--命令--选中“以登录shell方式运行命令”
-//然后，我们手动加载rvm环境，将服务器资源改为淘宝的
-///////$ source ~/.rvm/scripts/rvm 官方的加载rvm环境命令，我们就不执行了
-//临时加载rvm环境，参考：https://rvm.io/integration/gnome-terminal
-source ~/.bashrc
-source ~/.bash_profile
-</code></pre>
-<p>使用RVM安装Ruby:</p>
-<pre><code class="shell">rvm install 2.2.1
-</code></pre>
-<h2 id="设置GEM-Sources"><a href="#设置GEM-Sources" class="headerlink" title="设置GEM Sources"></a>设置GEM Sources</h2><p>以前使用淘宝的Gem sources, 但是现在以经停止维护了。现在可以使用: <a target="_blank" rel="noopener" href="http://gems.ruby-china.org/">http://gems.ruby-china.org/</a></p>
-<p>使用见官网。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pinned.github.io/2023/05/29/2016-10-17-ubuntu-ruby-install/" data-id="cli8ygt7l004v9y276t8ffgyy" data-title="Ubuntu中安装Ruby的一些注意事项" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ruby-Ubuntu/" rel="tag">Ruby Ubuntu</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android-Gradle/" rel="tag">Android Gradle</a></li></ul>
 
     </footer>
   </div>
@@ -358,7 +244,229 @@ protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) &#123;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pinned.github.io/2023/05/29/2015-12-29-Android-RelativeLayout-Gravity/" data-id="cli8ygt7l00509y278ja2a44r" data-title="Android RelativeLayout 之 Gravity 的使用" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://pinned.github.io/2023/05/29/2015-12-29-Android-RelativeLayout-Gravity/" data-id="cli8yhxgh004nd927400m47j7" data-title="Android RelativeLayout 之 Gravity 的使用" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2016-10-10-Shell-Sub-String" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/05/29/2016-10-10-Shell-Sub-String/" class="article-date">
+  <time class="dt-published" datetime="2023-05-29T02:54:52.144Z" itemprop="datePublished">2023-05-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/05/29/2016-10-10-Shell-Sub-String/">Shell脚本8种字符串截取方法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>假设有变量： <code>var=http://blog.knero.cn/test.html</code></p>
+<h2 id="号截取，删除左边字符，保留右边字符"><a href="#号截取，删除左边字符，保留右边字符" class="headerlink" title="#号截取，删除左边字符，保留右边字符"></a><code>#</code>号截取，删除左边字符，保留右边字符</h2><p><strong>示例</strong></p>
+<pre><code class="shell">var=http://blog.knero.cn/test.html
+sub=$&#123;var#*/&#125;
+echo $sub
+</code></pre>
+<p><strong>输出结果</strong></p>
+<pre><code class="shell">/blog.knero.cn/test.html
+</code></pre>
+<p>其中<strong>var</strong>是变量名，**#<strong>号是运算符，</strong><em>&#x2F;</em>* 表示从左边开始删除第一个**&#x2F;<strong>号及左边的所有字符<br>即删除</strong>http:&#x2F;**<br>结果是 ：&#x2F;blog.knero.cn&#x2F;test.html</p>
+<p><strong>示例</strong></p>
+<pre><code class="shell">var=http://blog.knero.cn/test.html
+sub=$&#123;var##*/&#125;
+echo $sub
+</code></pre>
+<p><strong>输出结果</strong></p>
+<pre><code class="shell">test.html
+</code></pre>
+<p>其中<strong>var</strong>是变量名，**##<strong>号是运算符，</strong><em>&#x2F;</em>* 表示从左边开始删除最后一个**&#x2F;<strong>号及左边的所有字符<br>即删除</strong><a target="_blank" rel="noopener" href="http://blog.knero.cn/">http://blog.knero.cn/</a>**<br>结果是 ：test.html</p>
+<h2 id="号截取，删除右边字符，保留左边字符"><a href="#号截取，删除右边字符，保留左边字符" class="headerlink" title="%号截取，删除右边字符，保留左边字符"></a><code>%</code>号截取，删除右边字符，保留左边字符</h2><p><strong>示例</strong></p>
+<pre><code class="shell">var=http://blog.knero.cn/test.html
+sub=$&#123;var%/*&#125;
+echo $sub
+</code></pre>
+<p><strong>输出结果</strong></p>
+<pre><code class="shell">http://blog.knero.cn
+</code></pre>
+<p>其中<strong>var</strong>是变量名，**%<strong>号是运算符，</strong>&#x2F;*** 表示从右边开始删除第一个**&#x2F;<strong>号及右边的所有字符<br>即删除</strong>test.html**<br>结果是 ：<a target="_blank" rel="noopener" href="http://blog.knero.cn/">http://blog.knero.cn</a></p>
+<p><strong>示例</strong></p>
+<pre><code class="shell">var=http://blog.knero.cn/test.html
+sub=$&#123;var%%/*&#125;
+echo $sub
+</code></pre>
+<p><strong>输出结果</strong></p>
+<pre><code class="shell">http:
+</code></pre>
+<p>其中<strong>var</strong>是变量名，**%%<strong>号是运算符，</strong>&#x2F;*** 表示从右边开始删除最后一个**&#x2F;<strong>号及右边的所有字符<br>即删除</strong>&#x2F;&#x2F;blog.knero.cn&#x2F;test.html**<br>结果是 ：http:</p>
+<h2 id="从左边指定第几个字符开始截取"><a href="#从左边指定第几个字符开始截取" class="headerlink" title="从左边指定第几个字符开始截取"></a>从左边指定第几个字符开始截取</h2><p><strong>示例</strong></p>
+<pre><code class="shell">var=http://blog.knero.cn/test.html
+sub=$&#123;var:0:5&#125;
+echo $sub
+sub=$&#123;var:7&#125;
+echo $sub
+</code></pre>
+<p><strong>输出结果</strong></p>
+<pre><code class="shell">http:
+blog.knero.cn/test.html
+</code></pre>
+<p><code>$&#123;var:0:5&#125;</code>其中的<strong>0</strong>表示左边第一个字符开始, <strong>5</strong>表示字符的总个数。<br>结果是：<strong>http:</strong></p>
+<p><code>$&#123;var:7&#125;</code>指从左边index第几个字符开始到结束</p>
+<h2 id="从右边第几个字符开始截取"><a href="#从右边第几个字符开始截取" class="headerlink" title="从右边第几个字符开始截取"></a>从右边第几个字符开始截取</h2><p><strong>示例</strong></p>
+<pre><code class="shell">var=http://blog.knero.cn/test.html
+sub=$&#123;var:0-9:4&#125;
+echo $sub
+sub=$&#123;var:0-9&#125;
+echo $sub
+</code></pre>
+<p><strong>输出结果</strong></p>
+<pre><code class="shell">test
+test.html
+</code></pre>
+<p><code>$&#123;var:0-9:4&#125;</code>其中的<strong>0-9</strong>表示左边第9个字符开始, <strong>4</strong>表示截取字符个数，如果没有就是到结束</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pinned.github.io/2023/05/29/2016-10-10-Shell-Sub-String/" data-id="cli8yhxgi004pd927fg5i5pjv" data-title="Shell脚本8种字符串截取方法" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Shell/" rel="tag">Shell</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2016-10-17-ubuntu-ruby-install" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/05/29/2016-10-17-ubuntu-ruby-install/" class="article-date">
+  <time class="dt-published" datetime="2023-05-29T02:54:52.144Z" itemprop="datePublished">2023-05-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/05/29/2016-10-17-ubuntu-ruby-install/">Ubuntu中安装Ruby的一些注意事项</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="使用RVM安装Ruby"><a href="#使用RVM安装Ruby" class="headerlink" title="使用RVM安装Ruby"></a>使用RVM安装Ruby</h2><p>安装RVM</p>
+<pre><code class="shell">curl -L get.rvm.io | bash -s stable
+//若提示找不到公钥，执行下边语句
+gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+//然后，重新执行，安装完rvm之后，需配置终端，以便下次打开终端能直接只用rvm。更改终端配置方法：参见https://rvm.io/integration/gnome-terminal
+curl -L get.rvm.io | bash -s stable
+//至此，rvm安装完成，下边我们手动为终端配置rvm环境，否则以后在终端中可能每次都要手动加载rvm环境
+//更改终端配置方法：工具栏--编辑--配置文件首选项--标题和命令--命令--选中“以登录shell方式运行命令”
+//然后，我们手动加载rvm环境，将服务器资源改为淘宝的
+///////$ source ~/.rvm/scripts/rvm 官方的加载rvm环境命令，我们就不执行了
+//临时加载rvm环境，参考：https://rvm.io/integration/gnome-terminal
+source ~/.bashrc
+source ~/.bash_profile
+</code></pre>
+<p>使用RVM安装Ruby:</p>
+<pre><code class="shell">rvm install 2.2.1
+</code></pre>
+<h2 id="设置GEM-Sources"><a href="#设置GEM-Sources" class="headerlink" title="设置GEM Sources"></a>设置GEM Sources</h2><p>以前使用淘宝的Gem sources, 但是现在以经停止维护了。现在可以使用: <a target="_blank" rel="noopener" href="http://gems.ruby-china.org/">http://gems.ruby-china.org/</a></p>
+<p>使用见官网。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pinned.github.io/2023/05/29/2016-10-17-ubuntu-ruby-install/" data-id="cli8yhxgi004sd92796bwa1q1" data-title="Ubuntu中安装Ruby的一些注意事项" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ruby-Ubuntu/" rel="tag">Ruby Ubuntu</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2016-10-18-android-dynamic-create-menu" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/05/29/2016-10-18-android-dynamic-create-menu/" class="article-date">
+  <time class="dt-published" datetime="2023-05-29T02:54:52.144Z" itemprop="datePublished">2023-05-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AE%89%E5%8D%93/">安卓</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/05/29/2016-10-18-android-dynamic-create-menu/">Android 动态修改菜单</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>在一个Android创建菜单menu时，需要重写Activity的<code>onCreateOptionsMenu(Menu menu)</code>方法，这个方法只在第一次创建的时候调用一次，所以如果之后想对menu进行动态的修改，那么就不要再对<code>onCreateOptionsMenu</code>做什么手脚了。</p>
+<p>动态修改菜单就要用到<code>onPrepareOptionsMenu(Menu menu)</code>方法了。<code>onPrepareOptionsMenu</code>与<code>onCreateOptionsMenu</code>不同的是，他在每次按下menu硬键之前会被调用，所以可以在这里动态的改变menu。如果需要创建一个全新的菜单,如下：</p>
+<pre><code class="java">public boolean onPrepareOptionsMenu(Menu menu) &#123;
+    super.onPrepareOptionsMenu(menu);
+    menu.clear();
+    // create new menu code     
+    return true;
+&#125;
+</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pinned.github.io/2023/05/29/2016-10-18-android-dynamic-create-menu/" data-id="cli8yhxgi004wd927foa02tri" data-title="Android 动态修改菜单" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -402,57 +510,7 @@ bigText.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pinned.github.io/2023/05/29/2016-10-18-set-textview-textsize-big/" data-id="cli8ygt7l00529y278tsy7kro" data-title="Android TextView setTextSize" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-2015-07-28-xml-listview-divider-margin" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/05/29/2015-07-28-xml-listview-divider-margin/" class="article-date">
-  <time class="dt-published" datetime="2023-05-29T02:54:52.144Z" itemprop="datePublished">2023-05-29</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/05/29/2015-07-28-xml-listview-divider-margin/">XML 实现 ListView divider margin</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;inset xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
-    android:insetLeft=&quot;50dp&quot;
-    android:insetRight=&quot;50dp&quot; &gt;
-    &lt;shape&gt;
-        &lt;solid android:color=&quot;@color/orange&quot; /&gt;
-        &lt;corners android:radius=&quot;2.0dip&quot; /&gt;
-    &lt;/shape&gt;
-&lt;/inset&gt;
-</code></pre>
-<p>参考：</p>
-<p>  <a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/14054364/how-to-assign-padding-to-listview-item-divider-line?answertab=active#tab-top">How to assign padding to Listview item divider line</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pinned.github.io/2023/05/29/2015-07-28-xml-listview-divider-margin/" data-id="cli8ygt7l00559y271g7b8s76" data-title="XML 实现 ListView divider margin" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://pinned.github.io/2023/05/29/2016-10-18-set-textview-textsize-big/" data-id="cli8yhxgi004yd9274nhg0q6i" data-title="Android TextView setTextSize" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -523,7 +581,7 @@ sudo pip install --upgrade tensorflow-0.11.0rc0-cp27-none-linux_x86_64.whl
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pinned.github.io/2023/05/29/2016-10-21-ubuntu-install-tensorflow/" data-id="cli8ygt7m00589y27fducdafw" data-title="Ubuntu 安装 Tensorflow" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://pinned.github.io/2023/05/29/2016-10-21-ubuntu-install-tensorflow/" data-id="cli8yhxgi0050d9270rq58ssu" data-title="Ubuntu 安装 Tensorflow" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -611,7 +669,7 @@ sudo pip install --upgrade tensorflow-0.11.0rc0-cp27-none-linux_x86_64.whl
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pinned.github.io/2023/05/29/2016-12-23-android-get-logcat/" data-id="cli8ygt7m005b9y27fqiu15i6" data-title="获取Logcat信息" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://pinned.github.io/2023/05/29/2016-12-23-android-get-logcat/" data-id="cli8yhxgj0054d9271hkjbq35" data-title="获取Logcat信息" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -623,10 +681,10 @@ sudo pip install --upgrade tensorflow-0.11.0rc0-cp27-none-linux_x86_64.whl
 
 
   
-    <article id="post-2016-10-18-android-dynamic-create-menu" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-2015-04-17-android-notification-small-icon" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2023/05/29/2016-10-18-android-dynamic-create-menu/" class="article-date">
-  <time class="dt-published" datetime="2023-05-29T02:54:52.144Z" itemprop="datePublished">2023-05-29</time>
+    <a href="/2023/05/29/2015-04-17-android-notification-small-icon/" class="article-date">
+  <time class="dt-published" datetime="2023-05-29T02:54:52.143Z" itemprop="datePublished">2023-05-29</time>
 </a>
     
   <div class="article-category">
@@ -641,7 +699,7 @@ sudo pip install --upgrade tensorflow-0.11.0rc0-cp27-none-linux_x86_64.whl
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/05/29/2016-10-18-android-dynamic-create-menu/">Android 动态修改菜单</a>
+      <a class="p-name article-title" href="/2023/05/29/2015-04-17-android-notification-small-icon/">Android 5.0设备中，Notification小图标是白色的</a>
     </h1>
   
 
@@ -649,20 +707,32 @@ sudo pip install --upgrade tensorflow-0.11.0rc0-cp27-none-linux_x86_64.whl
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p>在一个Android创建菜单menu时，需要重写Activity的<code>onCreateOptionsMenu(Menu menu)</code>方法，这个方法只在第一次创建的时候调用一次，所以如果之后想对menu进行动态的修改，那么就不要再对<code>onCreateOptionsMenu</code>做什么手脚了。</p>
-<p>动态修改菜单就要用到<code>onPrepareOptionsMenu(Menu menu)</code>方法了。<code>onPrepareOptionsMenu</code>与<code>onCreateOptionsMenu</code>不同的是，他在每次按下menu硬键之前会被调用，所以可以在这里动态的改变menu。如果需要创建一个全新的菜单,如下：</p>
-<pre><code class="java">public boolean onPrepareOptionsMenu(Menu menu) &#123;
-    super.onPrepareOptionsMenu(menu);
-    menu.clear();
-    // create new menu code     
-    return true;
+        <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>在使用消息推送，在通知栏中展示通知，我们会有两个图标，一个是在状态栏展示的小图标，一个是打开通知中心，展示的大图标<br>我在我自己的测试设备中，小图标始终显示为一个白色的空白图标。</p>
+<h2 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h2><blockquote>
+<p>原文地址：<a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/28387602/notification-bar-icon-turns-white-in-android-5-lollipop?answertab=active#tab-top">Notification bar icon turns white in Android 5 Lollipop</a></p>
+</blockquote>
+<p>在这里，我把文章中说的东西抄一遍：</p>
+<p>在Android中用来展示Notification图标的代码如下：</p>
+<pre><code class="java">// android_frameworks_base/packages/SystemUI/src/com/android/systemui/
+//   statusbar/BaseStatusBar.java
+
+if (entry.targetSdk &gt;= Build.VERSION_CODES.LOLLIPOP) &#123;
+    entry.icon.setColorFilter(mContext.getResources().getColor(android.R.color.white));
+&#125; else &#123;
+    entry.icon.setColorFilter(null);
+&#125;
+</code></pre>
+<p>所以，我们将target sdk 的版本设置成<code>&lt;21</code>的就可以了 </p>
+<p>在<code>build.gradle</code>中修改成如下：</p>
+<pre><code class="bash">defaultConfig &#123;
+    targetSdkVersion 20
 &#125;
 </code></pre>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pinned.github.io/2023/05/29/2016-10-18-android-dynamic-create-menu/" data-id="cli8ygt7m005e9y279vbfh9q2" data-title="Android 动态修改菜单" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://pinned.github.io/2023/05/29/2015-04-17-android-notification-small-icon/" data-id="cli8yhxge003id92700mg2sej" data-title="Android 5.0设备中，Notification小图标是白色的" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -752,58 +822,7 @@ private void setRawTextSize(float size) &#123;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pinned.github.io/2023/05/29/2015-04-21-android-textview-size/" data-id="cli8ygt7g003n9y27bac0gqul" data-title="Android TextView 设置字体大小" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-2015-04-27-android-reflect-inner-class" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/05/29/2015-04-27-android-reflect-inner-class/" class="article-date">
-  <time class="dt-published" datetime="2023-05-29T02:54:52.143Z" itemprop="datePublished">2023-05-29</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/05/29/2015-04-27-android-reflect-inner-class/">java反射内部类</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <ol>
-<li>在java中反射加载类的方法如下</li>
-</ol>
-<pre><code class="java">Class rClass = Class.forName(&quot;android.R&quot;);
-</code></pre>
-<ol start="2">
-<li>加载android.R.attr</li>
-</ol>
-<pre><code class="java">Class attrClass = Class.forName(&quot;android.R$attr&quot;);
-</code></pre>
-<blockquote>
-<p>内部类并不是像调用那样，使用<code>.</code>, 而是使用<code>$</code></p>
-</blockquote>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pinned.github.io/2023/05/29/2015-04-27-android-reflect-inner-class/" data-id="cli8ygt7h003p9y27hkfpbv23" data-title="java反射内部类" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://pinned.github.io/2023/05/29/2015-04-21-android-textview-size/" data-id="cli8yhxge003kd9278vkn7pgj" data-title="Android TextView 设置字体大小" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -872,11 +891,11 @@ private void setRawTextSize(float size) &#123;
       <ul>
         
           <li>
-            <a href="/2023/05/29/2017-10-15-gradlew%20source%20analyze/">gradlew 源码分析</a>
+            <a href="/2023/05/29/2017-02-10-proguard-translate/">Proguard 翻译</a>
           </li>
         
           <li>
-            <a href="/2023/05/29/2017-02-10-proguard-translate/">Proguard 翻译</a>
+            <a href="/2023/05/29/2017-10-15-gradlew%20source%20analyze/">gradlew 源码分析</a>
           </li>
         
           <li>

@@ -71,141 +71,6 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-2014-9-21-Navicat install" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/05/29/2014-9-21-Navicat%20install/" class="article-date">
-  <time class="dt-published" datetime="2023-05-29T02:54:52.140Z" itemprop="datePublished">2023-05-29</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/05/29/2014-9-21-Navicat%20install/">Ubuntu 下安装Navicat</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="Navicat的安装"><a href="#Navicat的安装" class="headerlink" title="Navicat的安装"></a>Navicat的安装</h2><p>在使用Mysql的时候，一开始就喜欢使用Navicat，所以就想安装一个<br>Navicat来使用。</p>
-<p>很简单，去Navicat官网下一个下来，解压就可以用了。</p>
-<p>步骤如下：</p>
-<ol>
-<li>解压文件<br> <code>tar -xzvf navicat_xxx.tar.gz</code></li>
-<li>进入到解压好的文件夹中，运行就可以了<code>./start_navicat</code></li>
-</ol>
-<p>但是不知道为什么，运行没有任何反应。</p>
-<p>在google上查找了一下，才知道是没有安装32位库和wine环境</p>
-<p>打开<strong>synaptic</strong>,然后在<strong>Setting-&gt;Repros</strong>，打开界面中</p>
-<p>选择其它软件源，添加:<br><code>deb http://old-releases.ubuntu.com/ubuntu/ raring main restricted universe multiverse</code></p>
-<p>保存，退出。</p>
-<p>然后执行命令:</p>
-<pre><code class="xml">sudo apt-get install libgtk2.0-0:i386
-sudo apt-get -f install
-sudo apt-get install wine
-</code></pre>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pinned.github.io/2023/05/29/2014-9-21-Navicat%20install/" data-id="cli8ygt7a001m9y27egew6lvv" data-title="Ubuntu 下安装Navicat" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tools/" rel="tag">Tools</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-2014-12-24-git-checkout" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/05/29/2014-12-24-git-checkout/" class="article-date">
-  <time class="dt-published" datetime="2023-05-29T02:54:52.140Z" itemprop="datePublished">2023-05-29</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/05/29/2014-12-24-git-checkout/">git checkout 的使用（一）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>在使用git的过程中，有很多好的点</p>
-<p>其中，我们使用<code>git-flow</code>模型</p>
-<p>我的小伙伴创建了一个<code>branch</code></p>
-<blockquote>
-<p>feature&#x2F;branch_test</p>
-</blockquote>
-<p>在这个地方，我想切换到<code>branch_test</code>分支</p>
-<p>我使用如下命令：</p>
-<pre><code class="html"> git checkout remotes/origin/feature/branch_test
- 
- git checkout origin/feature/branch_test
- 
-</code></pre>
-<p>使用上面两句命令都不得行，都只创建了一个临时分支。输出如下：</p>
-<pre><code class="html">
-Note: checking out &#39;origin/feature/branch_test&#39;.
-
-You are in &#39;detached HEAD&#39; state. You can look around, make experimental
-changes and commit them, and you can discard any commits you make in this
-state without impacting any branches by performing another checkout.
-
-If you want to create a new branch to retain commits you create, you may
-do so (now or later) by using -b with the checkout command again. Example:
-
-  git checkout -b new_branch_name
-</code></pre>
-<p>后面的解决办法是使用如下命令：</p>
-<pre><code class="html">git checkout reature/branch_test
-</code></pre>
-<p>不是什么高深的技术，只是记录一下。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pinned.github.io/2023/05/29/2014-12-24-git-checkout/" data-id="cli8ygt7a001p9y27emfj69jw" data-title="git checkout 的使用（一）" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tools/" rel="tag">Tools</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
     <article id="post-2015-01-16-textview-url-lickify-02" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2023/05/29/2015-01-16-textview-url-lickify-02/" class="article-date">
@@ -359,54 +224,7 @@ private static final String makeUrl(String url, String[] prefixes,
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pinned.github.io/2023/05/29/2015-01-16-textview-url-lickify-02/" data-id="cli8ygt7a001s9y27384w0tfi" data-title="TextView高亮URL地址解析" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-2015-01-17-advance-textview-using" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/05/29/2015-01-17-advance-textview-using/" class="article-date">
-  <time class="dt-published" datetime="2023-05-29T02:54:52.140Z" itemprop="datePublished">2023-05-29</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%AE%89%E5%8D%93/">安卓</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/05/29/2015-01-17-advance-textview-using/">Advanced Android TextView</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>TextView是一个经常使用的组件，但是你并不一定完全知道他的<br>详细使用方法及具体细节。</p>
-<p>在github上面看到一个PPT，详细的写到了TextView的用法。</p>
-<p><strong>参考地址:</strong> <a target="_blank" rel="noopener" href="http://chiuki.github.io/advanced-android-textview/#/">Advanced Android TextView</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pinned.github.io/2023/05/29/2015-01-17-advance-textview-using/" data-id="cli8ygt7b001v9y279iugdgy7" data-title="Advanced Android TextView" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://pinned.github.io/2023/05/29/2015-01-16-textview-url-lickify-02/" data-id="cli8yhxg8001md9270lcy2abd" data-title="TextView高亮URL地址解析" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -510,7 +328,517 @@ if (urls == null || urls.length &lt;= 0) &#123;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pinned.github.io/2023/05/29/2015-01-15-textview-url-lickify/" data-id="cli8ygt7b001y9y27dud6c8eq" data-title="TextView 高亮URL地址，并实现跳转" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://pinned.github.io/2023/05/29/2015-01-15-textview-url-lickify/" data-id="cli8yhxg8001pd927fe2hchu2" data-title="TextView 高亮URL地址，并实现跳转" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2014-12-24-git-checkout" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/05/29/2014-12-24-git-checkout/" class="article-date">
+  <time class="dt-published" datetime="2023-05-29T02:54:52.140Z" itemprop="datePublished">2023-05-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/05/29/2014-12-24-git-checkout/">git checkout 的使用（一）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>在使用git的过程中，有很多好的点</p>
+<p>其中，我们使用<code>git-flow</code>模型</p>
+<p>我的小伙伴创建了一个<code>branch</code></p>
+<blockquote>
+<p>feature&#x2F;branch_test</p>
+</blockquote>
+<p>在这个地方，我想切换到<code>branch_test</code>分支</p>
+<p>我使用如下命令：</p>
+<pre><code class="html"> git checkout remotes/origin/feature/branch_test
+ 
+ git checkout origin/feature/branch_test
+ 
+</code></pre>
+<p>使用上面两句命令都不得行，都只创建了一个临时分支。输出如下：</p>
+<pre><code class="html">
+Note: checking out &#39;origin/feature/branch_test&#39;.
+
+You are in &#39;detached HEAD&#39; state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by performing another checkout.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -b with the checkout command again. Example:
+
+  git checkout -b new_branch_name
+</code></pre>
+<p>后面的解决办法是使用如下命令：</p>
+<pre><code class="html">git checkout reature/branch_test
+</code></pre>
+<p>不是什么高深的技术，只是记录一下。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pinned.github.io/2023/05/29/2014-12-24-git-checkout/" data-id="cli8yhxg9001sd9272jklcf73" data-title="git checkout 的使用（一）" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tools/" rel="tag">Tools</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2015-01-17-advance-textview-using" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/05/29/2015-01-17-advance-textview-using/" class="article-date">
+  <time class="dt-published" datetime="2023-05-29T02:54:52.140Z" itemprop="datePublished">2023-05-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AE%89%E5%8D%93/">安卓</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/05/29/2015-01-17-advance-textview-using/">Advanced Android TextView</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>TextView是一个经常使用的组件，但是你并不一定完全知道他的<br>详细使用方法及具体细节。</p>
+<p>在github上面看到一个PPT，详细的写到了TextView的用法。</p>
+<p><strong>参考地址:</strong> <a target="_blank" rel="noopener" href="http://chiuki.github.io/advanced-android-textview/#/">Advanced Android TextView</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pinned.github.io/2023/05/29/2015-01-17-advance-textview-using/" data-id="cli8yhxg9001vd927a6ntdw58" data-title="Advanced Android TextView" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2014-12-30-android-best-practices" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/05/29/2014-12-30-android-best-practices/" class="article-date">
+  <time class="dt-published" datetime="2023-05-29T02:54:52.140Z" itemprop="datePublished">2023-05-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AE%89%E5%8D%93/">安卓</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/05/29/2014-12-30-android-best-practices/">Best practices in Android development</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>Lessons learned from Android developers in <a target="_blank" rel="noopener" href="http://www.futurice.com/">Futurice</a>. Avoid reinventing the wheel by following these guidelines. If you are interested in iOS or Windows Phone development, be sure to check also our <a target="_blank" rel="noopener" href="https://github.com/futurice/ios-good-practices"><strong>iOS Good Practices</strong></a> and <a target="_blank" rel="noopener" href="https://github.com/futurice/win-client-dev-good-practices"><strong>Windows client Good Practices</strong></a> documents.</p>
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><h4 id="Use-Gradle-and-its-recommended-project-structure"><a href="#Use-Gradle-and-its-recommended-project-structure" class="headerlink" title="Use Gradle and its recommended project structure"></a>Use Gradle and its recommended project structure</h4><h4 id="Put-passwords-and-sensitive-data-in-gradle-properties"><a href="#Put-passwords-and-sensitive-data-in-gradle-properties" class="headerlink" title="Put passwords and sensitive data in gradle.properties"></a>Put passwords and sensitive data in gradle.properties</h4><h4 id="Don’t-write-your-own-HTTP-client-use-Volley-or-OkHttp-libraries"><a href="#Don’t-write-your-own-HTTP-client-use-Volley-or-OkHttp-libraries" class="headerlink" title="Don’t write your own HTTP client, use Volley or OkHttp libraries"></a>Don’t write your own HTTP client, use Volley or OkHttp libraries</h4><h4 id="Use-the-Jackson-library-to-parse-JSON-data"><a href="#Use-the-Jackson-library-to-parse-JSON-data" class="headerlink" title="Use the Jackson library to parse JSON data"></a>Use the Jackson library to parse JSON data</h4><h4 id="Avoid-Guava-and-use-only-a-few-libraries-due-to-the-65k-method-limit"><a href="#Avoid-Guava-and-use-only-a-few-libraries-due-to-the-65k-method-limit" class="headerlink" title="Avoid Guava and use only a few libraries due to the 65k method limit"></a>Avoid Guava and use only a few libraries due to the <em>65k method limit</em></h4><h4 id="Use-Fragments-to-represent-a-UI-screen"><a href="#Use-Fragments-to-represent-a-UI-screen" class="headerlink" title="Use Fragments to represent a UI screen"></a>Use Fragments to represent a UI screen</h4><h4 id="Use-Activities-just-to-manage-Fragments"><a href="#Use-Activities-just-to-manage-Fragments" class="headerlink" title="Use Activities just to manage Fragments"></a>Use Activities just to manage Fragments</h4><h4 id="Layout-XMLs-are-code-organize-them-well"><a href="#Layout-XMLs-are-code-organize-them-well" class="headerlink" title="Layout XMLs are code, organize them well"></a>Layout XMLs are code, organize them well</h4><h4 id="Use-styles-to-avoid-duplicate-attributes-in-layout-XMLs"><a href="#Use-styles-to-avoid-duplicate-attributes-in-layout-XMLs" class="headerlink" title="Use styles to avoid duplicate attributes in layout XMLs"></a>Use styles to avoid duplicate attributes in layout XMLs</h4><h4 id="Use-multiple-style-files-to-avoid-a-single-huge-one"><a href="#Use-multiple-style-files-to-avoid-a-single-huge-one" class="headerlink" title="Use multiple style files to avoid a single huge one"></a>Use multiple style files to avoid a single huge one</h4><h4 id="Keep-your-colors-xml-short-and-DRY-just-define-the-palette"><a href="#Keep-your-colors-xml-short-and-DRY-just-define-the-palette" class="headerlink" title="Keep your colors.xml short and DRY, just define the palette"></a>Keep your colors.xml short and DRY, just define the palette</h4><h4 id="Also-keep-dimens-xml-DRY-define-generic-constants"><a href="#Also-keep-dimens-xml-DRY-define-generic-constants" class="headerlink" title="Also keep dimens.xml DRY, define generic constants"></a>Also keep dimens.xml DRY, define generic constants</h4><h4 id="Do-not-make-a-deep-hierarchy-of-ViewGroups"><a href="#Do-not-make-a-deep-hierarchy-of-ViewGroups" class="headerlink" title="Do not make a deep hierarchy of ViewGroups"></a>Do not make a deep hierarchy of ViewGroups</h4><h4 id="Avoid-client-side-processing-for-WebViews-and-beware-of-leaks"><a href="#Avoid-client-side-processing-for-WebViews-and-beware-of-leaks" class="headerlink" title="Avoid client-side processing for WebViews, and beware of leaks"></a>Avoid client-side processing for WebViews, and beware of leaks</h4><h4 id="Use-Robolectric-for-unit-tests-Robotium-for-connected-UI-tests"><a href="#Use-Robolectric-for-unit-tests-Robotium-for-connected-UI-tests" class="headerlink" title="Use Robolectric for unit tests, Robotium for connected (UI) tests"></a>Use Robolectric for unit tests, Robotium for connected (UI) tests</h4><h4 id="Use-Genymotion-as-your-emulator"><a href="#Use-Genymotion-as-your-emulator" class="headerlink" title="Use Genymotion as your emulator"></a>Use Genymotion as your emulator</h4><h4 id="Always-use-ProGuard-or-DexGuard"><a href="#Always-use-ProGuard-or-DexGuard" class="headerlink" title="Always use ProGuard or DexGuard"></a>Always use ProGuard or DexGuard</h4><hr>
+<h3 id="Android-SDK"><a href="#Android-SDK" class="headerlink" title="Android SDK"></a>Android SDK</h3><p>Place your <a target="_blank" rel="noopener" href="https://developer.android.com/sdk/installing/index.html?pkg=tools">Android SDK</a> somewhere in your home directory or some other application-independent location. Some IDEs include the SDK when installed, and may place it under the same directory as the IDE. This can be bad when you need to upgrade (or reinstall) the IDE, or when changing IDEs. Also avoid putting the SDK in another system-level directory that might need sudo permissions, if your IDE is running under your user and not under root.</p>
+<h3 id="Build-system"><a href="#Build-system" class="headerlink" title="Build system"></a>Build system</h3><p>Your default option should be <a target="_blank" rel="noopener" href="http://tools.android.com/tech-docs/new-build-system">Gradle</a>. Ant is much more limited and also more verbose. With Gradle, it’s simple to:</p>
+<ul>
+<li>Build different flavours or variants of your app</li>
+<li>Make simple script-like tasks</li>
+<li>Manage and download dependencies</li>
+<li>Customize keystores</li>
+<li>And more</li>
+</ul>
+<p>Android’s Gradle plugin is also being actively developed by Google as the new standard build system.</p>
+<h3 id="Project-structure"><a href="#Project-structure" class="headerlink" title="Project structure"></a>Project structure</h3><p>There are two popular options: the old Ant &amp; Eclipse ADT project structure, and the new Gradle &amp; Android Studio project structure. You should choose the new project structure. If your project uses the old structure, consider it legacy and start porting it to the new structure.</p>
+<p>Old structure:</p>
+<pre><code>old-structure
+├─ assets
+├─ libs
+├─ res
+├─ src
+│  └─ com/futurice/project
+├─ AndroidManifest.xml
+├─ build.gradle
+├─ project.properties
+└─ proguard-rules.pro
+</code></pre>
+<p>New structure:</p>
+<pre><code>new-structure
+├─ library-foobar
+├─ app
+│  ├─ libs
+│  ├─ src
+│  │  ├─ androidTest
+│  │  │  └─ java
+│  │  │     └─ com/futurice/project
+│  │  └─ main
+│  │     ├─ java
+│  │     │  └─ com/futurice/project
+│  │     ├─ res
+│  │     └─ AndroidManifest.xml
+│  ├─ build.gradle
+│  └─ proguard-rules.pro
+├─ build.gradle
+└─ settings.gradle
+</code></pre>
+<p>The main difference is that the new structure explicitly separates ‘source sets’ (<code>main</code>, <code>androidTest</code>), a concept from Gradle. You could, for instance, add source sets ‘paid’ and ‘free’ into <code>src</code> which will have source code for the paid and free flavours of your app.</p>
+<p>Having a top-level <code>app</code> is useful to distinguish your app from other library projects (e.g., <code>library-foobar</code>) that will be referenced in your app. The <code>settings.gradle</code> then keeps references to these library projects, which <code>app/build.gradle</code> can reference to.</p>
+<h3 id="Gradle-configuration"><a href="#Gradle-configuration" class="headerlink" title="Gradle configuration"></a>Gradle configuration</h3><p><strong>General structure.</strong> Follow <a target="_blank" rel="noopener" href="http://tools.android.com/tech-docs/new-build-system/user-guide">Google’s guide on Gradle for Android</a></p>
+<p><strong>Small tasks.</strong> Instead of (shell, Python, Perl, etc) scripts, you can make tasks in Gradle. Just follow <a target="_blank" rel="noopener" href="http://www.gradle.org/docs/current/userguide/userguide_single.html#N10CBF">Gradle’s documentation</a> for more details.</p>
+<p><strong>Passwords.</strong> In your app’s <code>build.gradle</code> you will need to define the <code>signingConfigs</code> for the release build. Here is what you should avoid:</p>
+<p><em>Don’t do this</em>. This would appear in the version control system.</p>
+<pre><code class="groovy">signingConfigs &#123;
+    release &#123;
+        storeFile file(&quot;myapp.keystore&quot;)
+        storePassword &quot;password123&quot;
+        keyAlias &quot;thekey&quot;
+        keyPassword &quot;password789&quot;
+    &#125;
+&#125;
+</code></pre>
+<p>Instead, make a <code>gradle.properties</code> file which should <em>not</em> be added to the version control system:</p>
+<pre><code>KEYSTORE_PASSWORD=password123
+KEY_PASSWORD=password789
+</code></pre>
+<p>That file is automatically imported by gradle, so you can use it in <code>build.gradle</code> as such:</p>
+<pre><code class="groovy">signingConfigs &#123;
+    release &#123;
+        try &#123;
+            storeFile file(&quot;myapp.keystore&quot;)
+            storePassword KEYSTORE_PASSWORD
+            keyAlias &quot;thekey&quot;
+            keyPassword KEY_PASSWORD
+        &#125;
+        catch (ex) &#123;
+            throw new InvalidUserDataException(&quot;You should define KEYSTORE_PASSWORD and KEY_PASSWORD in gradle.properties.&quot;)
+        &#125;
+    &#125;
+&#125;
+</code></pre>
+<p><strong>Prefer Maven dependency resolution instead of importing jar files.</strong> If you explicitly include jar files in your project, they will be of some specific frozen version, such as <code>2.1.1</code>. Downloading jars and handling updates is cumbersome, this is a problem that Maven solves properly, and is also encouraged in Android Gradle builds. You can specify a range of versions, such as <code>2.1.+</code> and Maven will handle the automatic update to the most recent version matching that pattern. Example:</p>
+<pre><code class="groovy">dependencies &#123;
+    compile &#39;com.netflix.rxjava:rxjava-core:0.19.+&#39;
+    compile &#39;com.netflix.rxjava:rxjava-android:0.19.+&#39;
+    compile &#39;com.fasterxml.jackson.core:jackson-databind:2.4.+&#39;
+    compile &#39;com.fasterxml.jackson.core:jackson-core:2.4.+&#39;
+    compile &#39;com.fasterxml.jackson.core:jackson-annotations:2.4.+&#39;
+    compile &#39;com.squareup.okhttp:okhttp:2.0.+&#39;
+    compile &#39;com.squareup.okhttp:okhttp-urlconnection:2.0.+&#39;
+&#125;
+</code></pre>
+<h3 id="IDEs-and-text-editors"><a href="#IDEs-and-text-editors" class="headerlink" title="IDEs and text editors"></a>IDEs and text editors</h3><p><strong>Use whatever editor, but it must play nicely with the project structure.</strong> Editors are a personal choice, and it’s your responsibility to get your editor functioning according to the project structure and build system.</p>
+<p>The most recommended IDE at the moment is <a target="_blank" rel="noopener" href="https://developer.android.com/sdk/installing/studio.html">Android Studio</a>, because it is developed by Google, is closest to Gradle, uses the new project structure by default, is finally in beta stage, and is tailored for Android development.</p>
+<p>You can use <a target="_blank" rel="noopener" href="https://developer.android.com/sdk/installing/index.html?pkg=adt">Eclipse ADT</a> if you wish, but you need to configure it, since it expects the old project structure and Ant for building. You can even use a plain text editor like Vim, Sublime Text, or Emacs. In that case, you will need to use Gradle and <code>adb</code> on the command line. If Eclipse’s integration with Gradle is not working for you, your options are using the command line just to build, or migrating to Android Studio.</p>
+<p>Whatever you use, just make sure Gradle and the new project structure remain as the official way of building the application, and avoid adding your editor-specific configuration files to the version control system. For instance, avoid adding an Ant <code>build.xml</code> file. Especially don’t forget to keep <code>build.gradle</code> up-to-date and functioning if you are changing build configurations in Ant. Also, be kind to other developers, don’t force them to change their tool of preference.</p>
+<h3 id="Libraries"><a href="#Libraries" class="headerlink" title="Libraries"></a>Libraries</h3><p><strong><a target="_blank" rel="noopener" href="http://wiki.fasterxml.com/JacksonHome">Jackson</a></strong> is a Java library for converting Objects into JSON and vice-versa. <a target="_blank" rel="noopener" href="https://code.google.com/p/google-gson/">Gson</a> is a popular choice for solving this problem, however we find Jackson to be more performant since it supports alternative ways of processing JSON: streaming, in-memory tree model, and traditional JSON-POJO data binding. Keep in mind, though, that Jackson is a larger library than GSON, so depending on your case, you might prefer GSON to avoid 65k methods limitation. Other alternatives: <a target="_blank" rel="noopener" href="https://code.google.com/p/json-smart/">Json-smart</a> and <a target="_blank" rel="noopener" href="https://github.com/RichardHightower/boon/wiki/Boon-JSON-in-five-minutes">Boon JSON</a></p>
+<p><strong>Networking, caching, and images.</strong> There are a couple of battle-proven solutions for performing requests to backend servers, which you should use perform considering implementing your own client. Use <a target="_blank" rel="noopener" href="https://android.googlesource.com/platform/frameworks/volley">Volley</a> or <a target="_blank" rel="noopener" href="http://square.github.io/retrofit/">Retrofit</a>. Volley also provides helpers to load and cache images. If you choose Retrofit, consider <a target="_blank" rel="noopener" href="http://square.github.io/picasso/">Picasso</a> for loading and caching images, and <a target="_blank" rel="noopener" href="http://square.github.io/okhttp/">OkHttp</a> for efficient HTTP requests. All three Retrofit, Picasso and OkHttp are created by the same company, so they complement each other nicely. <a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/24375043/how-to-implement-android-volley-with-okhttp-2-0/24951835#24951835">OkHttp can also be used in connection with Volley</a>.</p>
+<p><strong>RxJava</strong> is a library for Reactive Programming, in other words, handling asynchronous events. It is a powerful and promising paradigm, which can also be confusing since it’s so different. We recommend to take some caution before using this library to architect the entire application. There are some projects done by us using RxJava, if you need help talk to one of these people: Timo Tuominen, Olli Salonen, Andre Medeiros, Mark Voit, Antti Lammi, Vera Izrailit, Juha Ristolainen. We have written some blog posts on it: <a target="_blank" rel="noopener" href="http://blog.futurice.com/tech-pick-of-the-week-rx-for-net-and-rxjava-for-android">[1]</a>, <a target="_blank" rel="noopener" href="http://blog.futurice.com/top-7-tips-for-rxjava-on-android">[2]</a>, <a target="_blank" rel="noopener" href="https://gist.github.com/staltz/868e7e9bc2a7b8c1f754">[3]</a>, <a target="_blank" rel="noopener" href="http://blog.futurice.com/android-development-has-its-own-swift">[4]</a>.</p>
+<p>If you have no previous experience with Rx, start by applying it only for responses from the API. Alternatively, start by applying it for simple UI event handling, like click events or typing events on a search field. If you are confident in your Rx skills and want to apply it to the whole architecture, then write Javadocs on all the tricky parts. Keep in mind that another programmer unfamiliar to RxJava might have a very hard time maintaining the project. Do your best to help them understand your code and also Rx.</p>
+<p><strong><a target="_blank" rel="noopener" href="https://github.com/evant/gradle-retrolambda">Retrolambda</a></strong> is a Java library for using Lambda expression syntax in Android and other pre-JDK8 platforms. It helps keep your code tight and readable especially if you use a functional style with for example with RxJava. To use it, install JDK8, set that as your SDK Location in the Android Studio Project Structure dialog, and set <code>JAVA8_HOME</code> and <code>JAVA7_HOME</code> environment variables, then in the project root build.gradle:</p>
+<pre><code class="groovy">dependencies &#123;
+    classpath &#39;me.tatarka:gradle-retrolambda:2.4.+&#39;
+&#125;
+</code></pre>
+<p>and in each module’s build.gradle, add</p>
+<pre><code class="groovy">apply plugin: &#39;retrolambda&#39;
+
+android &#123;
+    compileOptions &#123;
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+&#125;
+
+retrolambda &#123;
+    jdk System.getenv(&quot;JAVA8_HOME&quot;)
+    oldJdk System.getenv(&quot;JAVA7_HOME&quot;)
+    javaVersion JavaVersion.VERSION_1_7
+&#125;
+</code></pre>
+<p>Android Studio offers code assist support for Java8 lambdas. If you are new to lambdas, just use the following to get started:</p>
+<ul>
+<li>Any interface with just one method is “lambda friendly” and can be folded into the more tight syntax</li>
+<li>If in doubt about parameters and such, write a normal anon inner class and then let Android Studio fold it into a lambda for you.</li>
+</ul>
+<p><strong>Beware of the dex method limitation, and avoid using many libraries.</strong> Android apps, when packaged as a dex file, have a hard limitation of 65536 referenced methods <a target="_blank" rel="noopener" href="https://medium.com/@rotxed/dex-skys-the-limit-no-65k-methods-is-28e6cb40cf71">[1]</a> <a target="_blank" rel="noopener" href="http://blog.persistent.info/2014/05/per-package-method-counts-for-androids.html">[2]</a> <a target="_blank" rel="noopener" href="http://jakewharton.com/play-services-is-a-monolith/">[3]</a>. You will see a fatal error on compilation if you pass the limit. For that reason, use a minimal amount of libraries, and use the <a target="_blank" rel="noopener" href="https://github.com/mihaip/dex-method-counts">dex-method-counts</a> tool to determine which set of libraries can be used in order to stay under the limit. Especially avoid using the Guava library, since it contains over 13k methods.</p>
+<h3 id="Activities-and-Fragments"><a href="#Activities-and-Fragments" class="headerlink" title="Activities and Fragments"></a>Activities and Fragments</h3><p><a target="_blank" rel="noopener" href="http://developer.android.com/guide/components/fragments.html">Fragments</a> should be your default option for implementing a UI screen in Android. Fragments are reusable user interfaces that can be composed in your application. We recommend using fragments instead of <a target="_blank" rel="noopener" href="http://developer.android.com/guide/components/activities.html">activities</a> to represent a user interface screen, here are some reasons why:</p>
+<ul>
+<li><p><strong>Solution for multi-pane layouts.</strong> Fragments were primarily introduced for extending phone applications to tablet screens, so that you can have both panes A and B on a tablet screen, while either A or B occupy an entire phone screen. If your application is implemented in fragments from the beginning, you will make it easier later to adapt your application to different form-factors.</p>
+</li>
+<li><p><strong>Screen-to-screen communication.</strong> Android’s API does not provide a proper way of sending complex data (e.g., some Java Object) from one activity to another activity. With fragments, however, you can use the instance of an activity as a channel of communication between its child fragments. Even though this is better than Activity-to-Activity communication, you might want to consider an Event Bus architecture, using e.g. <a target="_blank" rel="noopener" href="https://square.github.io/otto/">Otto</a> or <a target="_blank" rel="noopener" href="https://github.com/greenrobot/EventBus">greenrobot EventBus</a>, as a cleaner approach. RxJava can also be used for implementing an Event Bus, in case you want to avoid adding yet another library.</p>
+</li>
+<li><p><strong>Fragments are generic enough to not be UI-only.</strong> You can have a <a target="_blank" rel="noopener" href="http://developer.android.com/guide/components/fragments.html#AddingWithoutUI">fragment without a UI</a> that works as background workers for the activity. You can take that idea further to create a <a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/12363790/how-many-activities-vs-fragments/12528434#12528434">fragment to contain the logic for changing fragments</a>, instead of having that logic in the activity.</p>
+</li>
+<li><p><strong>Even the ActionBar can be managed from within fragments.</strong> You can choose to have one Fragment without a UI with the sole purpose of managing the ActionBar, or you can choose to have each currently visible Fragment add its own action items to the parent Activity’s ActionBar. <a target="_blank" rel="noopener" href="http://www.grokkingandroid.com/adding-action-items-from-within-fragments/">Read more here</a>.</p>
+</li>
+</ul>
+<p>That being said, we advise not to use <a target="_blank" rel="noopener" href="https://developer.android.com/about/versions/android-4.2.html#NestedFragments">nested fragments</a> extensively, because <a target="_blank" rel="noopener" href="http://delyan.me/android-s-matryoshka-problem/">matryoshka bugs</a> can occur. Use nested fragments only when it makes sense (for instance, fragments in a horizontally-sliding ViewPager inside a screen-like fragment) or if it’s a well-informed decision.</p>
+<p>On an architectural level, your app should have a top-level activity that contains most of the business-related fragments. You can also have some other supporting activities, as long as their communication with the main activity is simple and can be limited to <a target="_blank" rel="noopener" href="http://developer.android.com/reference/android/content/Intent.html#setData(android.net.Uri)"><code>Intent.setData()</code></a> or <a target="_blank" rel="noopener" href="http://developer.android.com/reference/android/content/Intent.html#setAction(java.lang.String)"><code>Intent.setAction()</code></a> or similar.</p>
+<h3 id="Java-packages-architecture"><a href="#Java-packages-architecture" class="headerlink" title="Java packages architecture"></a>Java packages architecture</h3><p>Java architectures for Android applications can be roughly approximated in <a target="_blank" rel="noopener" href="http://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller">Model-View-Controller</a>. In Android, <a target="_blank" rel="noopener" href="http://www.informit.com/articles/article.aspx?p=2126865">Fragment and Activity are actually controller classes</a>. On the other hand, they are explicity part of the user interface, hence are also views.</p>
+<p>For this reason, it is hard to classify fragments (or activities) as strictly controllers or views. It’s better to let them stay in their own <code>fragments</code> package. Activities can stay on the top-level package as long as you follow the advice of the previous section. If you are planning to have more than 2 or 3 activities, then make also an <code>activities</code> package.</p>
+<p>Otherwise, the architecture can look like a typical MVC, with a <code>models</code> package containing POJOs to be populated through the JSON parser with API responses, and a <code>views</code> package containing your custom Views, notifications, action bar views, widgets, etc. Adapters are a gray matter, living between data and views. However, they typically need to export some View via <code>getView()</code>, so you can include the <code>adapters</code> subpackage inside <code>views</code>.</p>
+<p>Some controller classes are application-wide and close to the Android system. These can live in a <code>managers</code> package. Miscellaneous data processing classes, such as “DateUtils”, stay in the <code>utils</code> package. Classes that are responsible for interacting with the backend stay in the <code>network</code> package.</p>
+<p>All in all, ordered from the closest-to-backend to the closest-to-the-user:</p>
+<pre><code>com.futurice.project
+├─ network
+├─ models
+├─ managers
+├─ utils
+├─ fragments
+└─ views
+   ├─ adapters
+   ├─ actionbar
+   ├─ widgets
+   └─ notifications
+</code></pre>
+<h3 id="Resources"><a href="#Resources" class="headerlink" title="Resources"></a>Resources</h3><p><strong>Naming.</strong> Follow the convention of prefixing the type, as in <code>type_foo_bar.xml</code>. Examples: <code>fragment_contact_details.xml</code>, <code>view_primary_button.xml</code>, <code>activity_main.xml</code>.</p>
+<p><strong>Organizing layout XMLs.</strong> If you’re unsure how to format a layout XML, the following convention may help.</p>
+<ul>
+<li>One attribute per line, indented by 4 spaces</li>
+<li><code>android:id</code> as the first attribute always</li>
+<li><code>android:layout_****</code> attributes at the top</li>
+<li><code>style</code> attribute at the bottom</li>
+<li>Tag closer <code>/&gt;</code> on its own line, to facilitate ordering and adding attributes.</li>
+<li>Rather than hard coding <code>android:text</code>, consider using <a target="_blank" rel="noopener" href="http://tools.android.com/tips/layout-designtime-attributes">Designtime attributes</a> available for Android Studio.</li>
+</ul>
+<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;LinearLayout
+    xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    xmlns:tools=&quot;http://schemas.android.com/tools&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot;
+    android:orientation=&quot;vertical&quot;
+    &gt;
+
+    &lt;TextView
+        android:id=&quot;@+id/name&quot;
+        android:layout_width=&quot;match_parent&quot;
+        android:layout_height=&quot;wrap_content&quot;
+        android:layout_alignParentRight=&quot;true&quot;
+        android:text=&quot;@string/name&quot;
+        style=&quot;@style/FancyText&quot;
+        /&gt;
+
+    &lt;include layout=&quot;@layout/reusable_part&quot; /&gt;
+
+&lt;/LinearLayout&gt;
+</code></pre>
+<p>As a rule of thumb, attributes <code>android:layout_****</code> should be defined in the layout XML, while other attributes <code>android:****</code> should stay in a style XML. This rule has exceptions, but in general works fine. The idea is to keep only layout (positioning, margin, sizing) and content attributes in the layout files, while keeping all appearance details (colors, padding, font) in styles files.</p>
+<p>The exceptions are:</p>
+<ul>
+<li><code>android:id</code> should obviously be in the layout files</li>
+<li><code>android:orientation</code> for a <code>LinearLayout</code> normally makes more sense in layout files</li>
+<li><code>android:text</code> should be in layout files because it defines content</li>
+<li>Sometimes it will make sense to make a generic style defining <code>android:layout_width</code> and <code>android:layout_height</code> but by default these should appear in the layout files</li>
+</ul>
+<p><strong>Use styles.</strong> Almost every project needs to properly use styles, because it is very common to have a repeated appearance for a view. At least you should have a common style for most text content in the application, for example:</p>
+<pre><code class="xml">&lt;style name=&quot;ContentText&quot;&gt;
+    &lt;item name=&quot;android:textSize&quot;&gt;@dimen/font_normal&lt;/item&gt;
+    &lt;item name=&quot;android:textColor&quot;&gt;@color/basic_black&lt;/item&gt;
+&lt;/style&gt;
+</code></pre>
+<p>Applied to TextViews:</p>
+<pre><code class="xml">&lt;TextView
+    android:layout_width=&quot;wrap_content&quot;
+    android:layout_height=&quot;wrap_content&quot;
+    android:text=&quot;@string/price&quot;
+    style=&quot;@style/ContentText&quot;
+    /&gt;
+</code></pre>
+<p>You probably will need to do the same for buttons, but don’t stop there yet. Go beyond and move a group of related and repeated <code>android:****</code> attributes to a common style.</p>
+<p><strong>Split a large style file into other files.</strong> You don’t need to have a single <code>styles.xml</code> file. Android SDK supports other files out of the box, there is nothing magical about the name <code>styles</code>, what matters are the XML tags <code>&lt;style&gt;</code> inside the file. Hence you can have files <code>styles.xml</code>, <code>styles_home.xml</code>, <code>styles_item_details.xml</code>, <code>styles_forms.xml</code>. Unlike resource directory names which carry some meaning for the build system, filenames in <code>res/values</code> can be arbitrary.</p>
+<p><strong><code>colors.xml</code> is a color palette.</strong> There should be nothing else in your <code>colors.xml</code> than just a mapping from a color name to an RGBA value. Do not use it to define RGBA values for different types of buttons.</p>
+<p><em>Don’t do this:</em></p>
+<pre><code class="xml">&lt;resources&gt;
+    &lt;color name=&quot;button_foreground&quot;&gt;#FFFFFF&lt;/color&gt;
+    &lt;color name=&quot;button_background&quot;&gt;#2A91BD&lt;/color&gt;
+    &lt;color name=&quot;comment_background_inactive&quot;&gt;#5F5F5F&lt;/color&gt;
+    &lt;color name=&quot;comment_background_active&quot;&gt;#939393&lt;/color&gt;
+    &lt;color name=&quot;comment_foreground&quot;&gt;#FFFFFF&lt;/color&gt;
+    &lt;color name=&quot;comment_foreground_important&quot;&gt;#FF9D2F&lt;/color&gt;
+    ...
+    &lt;color name=&quot;comment_shadow&quot;&gt;#323232&lt;/color&gt;
+</code></pre>
+<p>You can easily start repeating RGBA values in this format, and that makes it complicated to change a basic color if needed. Also, those definitions are related to some context, like “button” or “comment”, and should live in a button style, not in <code>colors.xml</code>.</p>
+<p>Instead, do this:</p>
+<pre><code class="xml">&lt;resources&gt;
+
+    &lt;!-- grayscale --&gt;
+    &lt;color name=&quot;white&quot;     &gt;#FFFFFF&lt;/color&gt;
+    &lt;color name=&quot;gray_light&quot;&gt;#DBDBDB&lt;/color&gt;
+    &lt;color name=&quot;gray&quot;      &gt;#939393&lt;/color&gt;
+    &lt;color name=&quot;gray_dark&quot; &gt;#5F5F5F&lt;/color&gt;
+    &lt;color name=&quot;black&quot;     &gt;#323232&lt;/color&gt;
+
+    &lt;!-- basic colors --&gt;
+    &lt;color name=&quot;green&quot;&gt;#27D34D&lt;/color&gt;
+    &lt;color name=&quot;blue&quot;&gt;#2A91BD&lt;/color&gt;
+    &lt;color name=&quot;orange&quot;&gt;#FF9D2F&lt;/color&gt;
+    &lt;color name=&quot;red&quot;&gt;#FF432F&lt;/color&gt;
+
+&lt;/resources&gt;
+</code></pre>
+<p>Ask for this palette from the designer of the application. The names do not need to be color names as “green”, “blue”, etc. Names such as “brand_primary”, “brand_secondary”, “brand_negative” are totally acceptable as well. Formatting colors as such will make it easy to change or refactor colors, and also will make it explicit how many different colors are being used. Normally for a aesthetic UI, it is important to reduce the variety of colors being used.</p>
+<p><strong>Treat dimens.xml like colors.xml.</strong> You should also define a “palette” of typical spacing and font sizes, for basically the same purposes as for colors. A good example of a dimens file:</p>
+<pre><code class="xml">&lt;resources&gt;
+
+    &lt;!-- font sizes --&gt;
+    &lt;dimen name=&quot;font_larger&quot;&gt;22sp&lt;/dimen&gt;
+    &lt;dimen name=&quot;font_large&quot;&gt;18sp&lt;/dimen&gt;
+    &lt;dimen name=&quot;font_normal&quot;&gt;15sp&lt;/dimen&gt;
+    &lt;dimen name=&quot;font_small&quot;&gt;12sp&lt;/dimen&gt;
+
+    &lt;!-- typical spacing between two views --&gt;
+    &lt;dimen name=&quot;spacing_huge&quot;&gt;40dp&lt;/dimen&gt;
+    &lt;dimen name=&quot;spacing_large&quot;&gt;24dp&lt;/dimen&gt;
+    &lt;dimen name=&quot;spacing_normal&quot;&gt;14dp&lt;/dimen&gt;
+    &lt;dimen name=&quot;spacing_small&quot;&gt;10dp&lt;/dimen&gt;
+    &lt;dimen name=&quot;spacing_tiny&quot;&gt;4dp&lt;/dimen&gt;
+
+    &lt;!-- typical sizes of views --&gt;
+    &lt;dimen name=&quot;button_height_tall&quot;&gt;60dp&lt;/dimen&gt;
+    &lt;dimen name=&quot;button_height_normal&quot;&gt;40dp&lt;/dimen&gt;
+    &lt;dimen name=&quot;button_height_short&quot;&gt;32dp&lt;/dimen&gt;
+
+&lt;/resources&gt;
+</code></pre>
+<p>You should use the <code>spacing_****</code> dimensions for layouting, in margins and paddings, instead of hard-coded values, much like strings are normally treated. This will give a consistent look-and-feel, while making it easier to organize and change styles and layouts.</p>
+<p><strong>Avoid a deep hierarchy of views.</strong> Sometimes you might be tempted to just add yet another LinearLayout, to be able to accomplish an arrangement of views. This kind of situation may occur:</p>
+<pre><code class="xml">&lt;LinearLayout
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot;
+    android:orientation=&quot;vertical&quot;
+    &gt;
+
+    &lt;RelativeLayout
+        ...
+        &gt;
+
+        &lt;LinearLayout
+            ...
+            &gt;
+
+            &lt;LinearLayout
+                ...
+                &gt;
+
+                &lt;LinearLayout
+                    ...
+                    &gt;
+                &lt;/LinearLayout&gt;
+
+            &lt;/LinearLayout&gt;
+
+        &lt;/LinearLayout&gt;
+
+    &lt;/RelativeLayout&gt;
+
+&lt;/LinearLayout&gt;
+</code></pre>
+<p>Even if you don’t witness this explicitly in a layout file, it might end up happening if you are inflating (in Java) views into other views.</p>
+<p>A couple of problems may occur. You might experience performance problems, because there are is a complex UI tree that the processor needs to handle. Another more serious issue is a possibility of <a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/2762924/java-lang-stackoverflow-error-suspected-too-many-views">StackOverflowError</a>.</p>
+<p>Therefore, try to keep your views hierarchy as flat as possible: learn how to use <a target="_blank" rel="noopener" href="https://developer.android.com/guide/topics/ui/layout/relative.html">RelativeLayout</a>, how to <a target="_blank" rel="noopener" href="http://developer.android.com/training/improving-layouts/optimizing-layout.html">optimize your layouts</a> and to use the <a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/8834898/what-is-the-purpose-of-androids-merge-tag-in-xml-layouts"><code>&lt;merge&gt;</code> tag</a>.</p>
+<p><strong>Beware of problems related to WebViews.</strong> When you must display a web page, for instance for a news article, avoid doing client-side processing to clean the HTML, rather ask for a “<em>pure</em>“ HTML from the backend programmers. <a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/3130654/memory-leak-in-webview">WebViews can also leak memory</a> when they keep a reference to their Activity, instead of being bound to the ApplicationContext. Avoid using a WebView for simple texts or buttons, prefer TextViews or Buttons.</p>
+<h3 id="Test-frameworks"><a href="#Test-frameworks" class="headerlink" title="Test frameworks"></a>Test frameworks</h3><p>Android SDK’s testing framework is still infant, specially regarding UI tests. Android Gradle currently implements a test task called <a target="_blank" rel="noopener" href="http://tools.android.com/tech-docs/new-build-system/user-guide#TOC-Testing"><code>connectedAndroidTest</code></a> which runs JUnit tests that you created, using an <a target="_blank" rel="noopener" href="http://developer.android.com/reference/android/test/package-summary.html">extension of JUnit with helpers for Android</a>. This means you will need to run tests connected to a device, or an emulator. Follow the official guide <a target="_blank" rel="noopener" href="http://developer.android.com/tools/testing/testing_android.html">[1]</a> <a target="_blank" rel="noopener" href="http://developer.android.com/tools/testing/activity_test.html">[2]</a> for testing.</p>
+<p><strong>Use <a target="_blank" rel="noopener" href="http://robolectric.org/">Robolectric</a> only for unit tests, not for views.</strong> It is a test framework seeking to provide tests “disconnected from device” for the sake of development speed, suitable specially for unit tests on models and view models. However, testing under Robolectric is inaccurate and incomplete regarding UI tests. You will have problems testing UI elements related to animations, dialogs, etc, and this will be complicated by the fact that you are “walking in the dark” (testing without seeing the screen being controlled).</p>
+<p><strong><a target="_blank" rel="noopener" href="https://code.google.com/p/robotium/">Robotium</a> makes writing UI tests easy.</strong> You do not need Robotium for running connected tests for UI cases, but it will probably be beneficial to you because of its many helpers to get and analyse views, and control the screen. Test cases will look as simple as:</p>
+<pre><code class="java">solo.sendKey(Solo.MENU);
+solo.clickOnText(&quot;More&quot;); // searches for the first occurence of &quot;More&quot; and clicks on it
+solo.clickOnText(&quot;Preferences&quot;);
+solo.clickOnText(&quot;Edit File Extensions&quot;);
+Assert.assertTrue(solo.searchText(&quot;rtf&quot;));
+</code></pre>
+<h3 id="Emulators"><a href="#Emulators" class="headerlink" title="Emulators"></a>Emulators</h3><p>If you are developing Android apps as a profession, buy a license for the <a target="_blank" rel="noopener" href="http://www.genymotion.com/">Genymotion emulator</a>. Genymotion emulators run at a faster frames&#x2F;sec rate than typical AVD emulators. They have tools for demoing your app, emulating network connection quality, GPS positions, etc. They are also ideal for connected tests. You have access to many (not all) different devices, so the cost of a Genymotion license is actually much cheaper than buying multiple real devices.</p>
+<p>Caveats are: Genymotion emulators don’t ship all Google services such as Google Play Store and Maps. You might also need to test Samsung-specific APIs, so it’s necessary to have a real Samsung device.</p>
+<h3 id="Proguard-configuration"><a href="#Proguard-configuration" class="headerlink" title="Proguard configuration"></a>Proguard configuration</h3><p><a target="_blank" rel="noopener" href="http://proguard.sourceforge.net/">ProGuard</a> is normally used on Android projects to shrink and obfuscate the packaged code.</p>
+<p>Whether you are using ProGuard or not depends on your project configuration. Usually you would configure gradle to use ProGuard when building a release apk.</p>
+<pre><code class="groovy">buildTypes &#123;
+    debug &#123;
+        minifyEnabled false
+    &#125;
+    release &#123;
+        signingConfig signingConfigs.release
+        minifyEnabled true
+        proguardFiles &#39;proguard-rules.pro&#39;
+    &#125;
+&#125;
+</code></pre>
+<p>In order to determine which code has to be preserved and which code can be discarded or obfuscated, you have to specify one or more entry points to your code. These entry points are typically classes with main methods, applets, midlets, activities, etc.<br>Android framework uses a default configuration which can be found from <code>SDK_HOME/tools/proguard/proguard-android.txt</code>. Custom project-specific proguard rules, as defined in <code>my-project/app/proguard-rules.pro</code>, will be appended to the default configuration.</p>
+<p>A common problem related to ProGuard is to see the application crashing on startup with <code>ClassNotFoundException</code> or <code>NoSuchFieldException</code> or similar, even though the build command (i.e. <code>assembleRelease</code>) succeeded without warnings.<br>This means one out of two things:</p>
+<ol>
+<li>ProGuard has removed the class, enum, method, field or annotation, considering it’s not required.</li>
+<li>ProGuard has obfuscated (renamed) the class, enum or field name, but it’s being used indirectly by its original name, i.e. through Java reflection.</li>
+</ol>
+<p>Check <code>app/build/outputs/proguard/release/usage.txt</code> to see if the object in question has been removed.<br>Check <code>app/build/outputs/proguard/release/mapping.txt</code> to see if the object in question has been obfuscated.</p>
+<p>In order to prevent ProGuard from <em>stripping away</em> needed classes or class members, add a <code>keep</code> options to your proguard config:</p>
+<pre><code>-keep class com.futurice.project.MyClass &#123; *; &#125;
+</code></pre>
+<p>To prevent ProGuard from <em>obfuscating</em> classes or class members, add a <code>keepnames</code>:</p>
+<pre><code>-keepnames class com.futurice.project.MyClass &#123; *; &#125;
+</code></pre>
+<p>Check <a target="_blank" rel="noopener" href="https://github.com/futurice/android-best-practices/blob/master/templates/rx-architecture/app/proguard-rules.pro">this template’s ProGuard config</a> for some examples.<br>Read more at <a target="_blank" rel="noopener" href="http://proguard.sourceforge.net/#manual/examples.html">Proguard</a> for examples.</p>
+<p><strong>Tip.</strong> Save the <code>mapping.txt</code> file for every release that you publish to your users. By retaining a copy of the <code>mapping.txt</code> file for each release build, you ensure that you can debug a problem if a user encounters a bug and submits an obfuscated stack trace.</p>
+<p><strong>DexGuard</strong>. If you need hard-core tools for optimizing, and specially obfuscating release code, consider <a target="_blank" rel="noopener" href="http://www.saikoa.com/dexguard">DexGuard</a>, a commercial software made by the same team that built ProGuard. It can also easily split Dex files to solve the 65k methods limitation.</p>
+<h3 id="Thanks-to"><a href="#Thanks-to" class="headerlink" title="Thanks to"></a>Thanks to</h3><p>Antti Lammi, Joni Karppinen, Peter Tackage, Timo Tuominen, Vera Izrailit, Vihtori Mäntylä, Mark Voit, Andre Medeiros, Paul Houghton and other Futurice developers for sharing their knowledge on Android development.</p>
+<h3 id="License"><a href="#License" class="headerlink" title="License"></a>License</h3><p><a href="www.futurice.com">Futurice Oy</a><br>Creative Commons Attribution 4.0 International (CC BY 4.0)</p>
+<hr>
+<p><strong>原文地址</strong> <a target="_blank" rel="noopener" href="https://github.com/futurice/android-best-practices">https://github.com/futurice/android-best-practices</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pinned.github.io/2023/05/29/2014-12-30-android-best-practices/" data-id="cli8yhxg9001yd927e9vfdcjd" data-title="Best practices in Android development" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -554,10 +882,202 @@ if (urls == null || urls.length &lt;= 0) &#123;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pinned.github.io/2023/05/29/2015-01-22-book-list-of-2015/" data-id="cli8ygt7b00219y27fat310nl" data-title="2015阅读书单" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://pinned.github.io/2023/05/29/2015-01-22-book-list-of-2015/" data-id="cli8yhxg90021d92750sc4f4q" data-title="2015阅读书单" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2015-01-19-Android-log" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/05/29/2015-01-19-Android-log/" class="article-date">
+  <time class="dt-published" datetime="2023-05-29T02:54:52.140Z" itemprop="datePublished">2023-05-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AE%89%E5%8D%93/">安卓</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/05/29/2015-01-19-Android-log/">Creating logs in Android applications</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>For Android applications, logging is handled by the android.util.Log class, which is a basic logging class that stores the logs in a circular buffer for the whole device. All logs for the device can be seen in the LogCat tab in Eclipse, or read using the logcat command. Here is a standard log output for the LogCat tab in Eclipse :</p>
+<p><img src="/assets/posts/img-2015-01-19/image.png" alt="Eclipse Image"></p>
+<p>There are five levels of logs you can use in your application, for the most verbose to the least verbose :</p>
+<ul>
+<li><strong>Verbose</strong>: For extra information messages that are only compiled in a debug application, but never included in a release application.</li>
+<li><strong>Debug</strong>: For debug log messages that are always compiled, but stripped at runtime in a release application.</li>
+<li><strong>Info</strong>: For an information in the logs that will be written in debug and release.</li>
+<li><strong>Warning</strong>: For a warning in the logs that will be written in debug and release.</li>
+<li><strong>Error</strong>: For an error in the logs that will be written in debug and release.</li>
+</ul>
+<p>A log message includes a tag identifying a group of messages and the message. By default the log level of all tags is Info, which means than messages that are of level Debug and Verbose should never shown unless the setprop command is used to change the log level. So, to write a verbose message to the log, you should call the isLoggable method to check if the message can be logged, and call the logging method :</p>
+<pre><code class="java">if (!Log.isLoggable(logMessageTag, Log.Verbose))
+   Log.v(&quot;MyApplicationTag&quot;, logMessage);
+</code></pre>
+<p>And to show the Debug and Verbose log message for a specific tag, run the setprop command while your device is plugged in. If you reboot the device you will have to run the command again.</p>
+<pre><code class="html">adb shell setprop log.tag.MyApplicationTag VERBOSE
+</code></pre>
+<p>Unfortunately, starting  with Android 4.0, an application can only read its own logs. It was useful for debugging to be able to read logs from another application, but in some cases sensitive information was written in those logs, and malicious apps were created to retrieve them. So if you need to have logs files send to you for debugging, you will need to create your own log class using the methods from the android.util.Log class. Remember, only Info, Warning and Error logs should be shown when the application is not run in debug mode.  Here is an example of a simple logger wrapping the call to isLoggable and storing the logs messages on the primary storage of the device (requires the permission WRITE_EXTERNAL_STORAGE) and to the standard buffer :</p>
+<pre><code class="java">/**
+  * A logger that uses the standard Android Log class to log exceptions, and also logs them to a 
+  * file on the device. Requires permission WRITE_EXTERNAL_STORAGE in AndroidManifest.xml.
+  * @author Cindy Potvin
+  */
+ public class Logger
+ &#123;
+ /**
+   * Sends an error message to LogCat and to a log file.
+   * @param context The context of the application.
+   * @param logMessageTag A tag identifying a group of log messages. Should be a constant in the 
+   *                      class calling the logger.
+   * @param logMessage The message to add to the log.
+   */
+ public static void e(Context context, String logMessageTag, String logMessage) 
+    &#123;
+    if (!Log.isLoggable(logMessageTag, Log.ERROR))
+       return;
+
+    int logResult = Log.e(logMessageTag, logMessage);
+    if (logResult &gt; 0) 
+       logToFile(context, logMessageTag, logMessage);
+    &#125;
+
+/**
+   * Sends an error message and the exception to LogCat and to a log file.
+   * @param context The context of the application.
+   * @param logMessageTag A tag identifying a group of log messages. Should be a constant in the 
+   *                      class calling the logger.
+   * @param logMessage The message to add to the log.
+   * @param throwableException An exception to log
+   */
+ public static void e(Context context, String logMessageTag, String logMessage, Throwable throwableException) 
+    &#123;
+    if (!Log.isLoggable(logMessageTag, Log.ERROR))
+       return;
+
+    int logResult = Log.e(logMessageTag, logMessage, throwableException);
+    if (logResult &gt; 0) 
+       logToFile(context, logMessageTag, logMessage + &quot;\r\n&quot; + Log.getStackTraceString(throwableException));
+    &#125;
+
+// The i and w method for info and warning logs should be implemented in the same way as the e method for error logs.
+
+/**
+   * Sends a message to LogCat and to a log file.
+   * @param context The context of the application.
+   * @param logMessageTag A tag identifying a group of log messages. Should be a constant in the 
+   *                      class calling the logger.
+   * @param logMessage The message to add to the log.
+   */
+ public static void v(Context context, String logMessageTag, String logMessage) 
+    &#123;
+                              // If the build is not debug, do not try to log, the logcat be 
+                              // stripped at compilation.
+    if (!BuildConfig.DEBUG || !Log.isLoggable(logMessageTag, Log.VERBOSE))
+        return;
+
+    int logResult = Log.v(logMessageTag, logMessage);
+    if (logResult &gt; 0) 
+       logToFile(context, logMessageTag, logMessage);
+    &#125;
+
+/**
+   * Sends a message and the exception to LogCat and to a log file.
+   * @param logMessageTag A tag identifying a group of log messages. Should be a constant in the 
+   *                      class calling the logger.
+   * @param logMessage The message to add to the log.
+   * @param throwableException An exception to log
+   */
+ public static void v(Context context,String logMessageTag, String logMessage, Throwable throwableException) 
+    &#123;
+                              // If the build is not debug, do not try to log, the logcat be 
+                              // stripped at compilation.
+    if (!BuildConfig.DEBUG || !Log.isLoggable(logMessageTag, Log.VERBOSE))
+        return;
+
+    int logResult = Log.v(logMessageTag, logMessage, throwableException);
+    if (logResult &gt; 0) 
+       logToFile(context, logMessageTag,  logMessage + &quot;\r\n&quot; + Log.getStackTraceString(throwableException));
+    &#125;
+
+// The d method for debug logs should be implemented in the same way as the v method for verbose logs.
+
+/**
+  * Gets a stamp containing the current date and time to write to the log.
+  * @return The stamp for the current date and time.
+  */
+ private static String getDateTimeStamp()
+    &#123;
+    Date dateNow = Calendar.getInstance().getTime();
+                              // My locale, so all the log files have the same date and time format
+    return (DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, Locale.CANADA_FRENCH).format(dateNow));
+    &#125;
+
+/**
+  * Writes a message to the log file on the device.
+  * @param logMessageTag A tag identifying a group of log messages.
+  * @param logMessage The message to add to the log.
+  */
+ private static void logToFile(Context context, String logMessageTag, String logMessage)
+    &#123;
+    try
+       &#123;
+                              // Gets the log file from the root of the primary storage. If it does 
+                              // not exist, the file is created.
+       File logFile = new File(Environment.getExternalStorageDirectory(), &quot;TestApplicationLog.txt&quot;);
+       if (!logFile.exists())
+          logFile.createNewFile();
+                              // Write the message to the log with a timestamp
+       BufferedWriter writer = new BufferedWriter(new FileWriter(logFile, true));
+       writer.write(String.format(&quot;%1s [%2s]:%3s\r\n&quot;, getDateTimeStamp(), logMessageTag, logMessage));
+       writer.close();
+                              // Refresh the data so it can seen when the device is plugged in a 
+                              // computer. You may have to unplug and replug to see the latest 
+                              // changes
+      MediaScannerConnection.scanFile(context, 
+                                      new String[] &#123; logFile.toString() &#125;, 
+                                      null, 
+                                      null);
+
+       &#125;
+    catch (IOException e)
+       &#123;
+       Log.e(&quot;com.cindypotvin.Logger&quot;, &quot;Unable to log exception to file.&quot;);
+       &#125;
+    &#125;
+ &#125;
+</code></pre>
+<p>If you release an application to the app store or to a client with this kind of logger, you should disable logging by default and add a switch in the preferences to enable logging on demand. If the logger is always enabled, your application will often write to the primary storage and to the logcat, which is an unnecessary overhead when everything works correctly. Also, the size of the log file should be limited in some way to avoid filling up the primary storage.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pinned.github.io/2023/05/29/2015-01-19-Android-log/" data-id="cli8yhxga0024d927h60i9f4q" data-title="Creating logs in Android applications" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li></ul>
+
     </footer>
   </div>
   
@@ -918,204 +1438,12 @@ protected Response&lt;String&gt; parseNetworkResponse(NetworkResponse response) 
 </code></pre>
 <p>就是<code>HttpHeaderParser.parseCacheHeaders(response)</code>实现<code>Response</code>向<code>Cache.Entry</code>的转换。</p>
 <p>当然，你可以实现自己的<code>parseCacheHeaders</code>的方法，来实现你自己的缓存侧略。</p>
-<p>到此为止，基本写完了我所读到的<code>Volley</code>中实现<code>Cache</code>的方法。如果你对本文或者我有什么意见或者建议。<br>请骚扰我：<a href="mailto:&#x6c;&#x6f;&#118;&#x65;&#99;&#x6c;&#117;&#111;&#64;&#110;&#x69;&#103;&#104;&#116;&#x77;&#101;&#97;&#118;&#x65;&#114;&#x2e;&#111;&#x72;&#x67;">&#x6c;&#x6f;&#118;&#x65;&#99;&#x6c;&#117;&#111;&#64;&#110;&#x69;&#103;&#104;&#116;&#x77;&#101;&#97;&#118;&#x65;&#114;&#x2e;&#111;&#x72;&#x67;</a></p>
+<p>到此为止，基本写完了我所读到的<code>Volley</code>中实现<code>Cache</code>的方法。如果你对本文或者我有什么意见或者建议。<br>请骚扰我：<a href="mailto:&#x6c;&#x6f;&#x76;&#x65;&#x63;&#x6c;&#117;&#x6f;&#64;&#110;&#105;&#x67;&#104;&#116;&#119;&#x65;&#97;&#x76;&#101;&#x72;&#46;&#111;&#x72;&#103;">&#x6c;&#x6f;&#x76;&#x65;&#x63;&#x6c;&#117;&#x6f;&#64;&#110;&#105;&#x67;&#104;&#116;&#119;&#x65;&#97;&#x76;&#101;&#x72;&#46;&#111;&#x72;&#103;</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pinned.github.io/2023/05/29/2015-01-23-google-volley-url-cache-key/" data-id="cli8ygt7c00289y2709ht0l5s" data-title="Google Volley如何缓存HTTP请求文件" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-2015-01-19-Android-log" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/05/29/2015-01-19-Android-log/" class="article-date">
-  <time class="dt-published" datetime="2023-05-29T02:54:52.140Z" itemprop="datePublished">2023-05-29</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%AE%89%E5%8D%93/">安卓</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/05/29/2015-01-19-Android-log/">Creating logs in Android applications</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>For Android applications, logging is handled by the android.util.Log class, which is a basic logging class that stores the logs in a circular buffer for the whole device. All logs for the device can be seen in the LogCat tab in Eclipse, or read using the logcat command. Here is a standard log output for the LogCat tab in Eclipse :</p>
-<p><img src="/assets/posts/img-2015-01-19/image.png" alt="Eclipse Image"></p>
-<p>There are five levels of logs you can use in your application, for the most verbose to the least verbose :</p>
-<ul>
-<li><strong>Verbose</strong>: For extra information messages that are only compiled in a debug application, but never included in a release application.</li>
-<li><strong>Debug</strong>: For debug log messages that are always compiled, but stripped at runtime in a release application.</li>
-<li><strong>Info</strong>: For an information in the logs that will be written in debug and release.</li>
-<li><strong>Warning</strong>: For a warning in the logs that will be written in debug and release.</li>
-<li><strong>Error</strong>: For an error in the logs that will be written in debug and release.</li>
-</ul>
-<p>A log message includes a tag identifying a group of messages and the message. By default the log level of all tags is Info, which means than messages that are of level Debug and Verbose should never shown unless the setprop command is used to change the log level. So, to write a verbose message to the log, you should call the isLoggable method to check if the message can be logged, and call the logging method :</p>
-<pre><code class="java">if (!Log.isLoggable(logMessageTag, Log.Verbose))
-   Log.v(&quot;MyApplicationTag&quot;, logMessage);
-</code></pre>
-<p>And to show the Debug and Verbose log message for a specific tag, run the setprop command while your device is plugged in. If you reboot the device you will have to run the command again.</p>
-<pre><code class="html">adb shell setprop log.tag.MyApplicationTag VERBOSE
-</code></pre>
-<p>Unfortunately, starting  with Android 4.0, an application can only read its own logs. It was useful for debugging to be able to read logs from another application, but in some cases sensitive information was written in those logs, and malicious apps were created to retrieve them. So if you need to have logs files send to you for debugging, you will need to create your own log class using the methods from the android.util.Log class. Remember, only Info, Warning and Error logs should be shown when the application is not run in debug mode.  Here is an example of a simple logger wrapping the call to isLoggable and storing the logs messages on the primary storage of the device (requires the permission WRITE_EXTERNAL_STORAGE) and to the standard buffer :</p>
-<pre><code class="java">/**
-  * A logger that uses the standard Android Log class to log exceptions, and also logs them to a 
-  * file on the device. Requires permission WRITE_EXTERNAL_STORAGE in AndroidManifest.xml.
-  * @author Cindy Potvin
-  */
- public class Logger
- &#123;
- /**
-   * Sends an error message to LogCat and to a log file.
-   * @param context The context of the application.
-   * @param logMessageTag A tag identifying a group of log messages. Should be a constant in the 
-   *                      class calling the logger.
-   * @param logMessage The message to add to the log.
-   */
- public static void e(Context context, String logMessageTag, String logMessage) 
-    &#123;
-    if (!Log.isLoggable(logMessageTag, Log.ERROR))
-       return;
-
-    int logResult = Log.e(logMessageTag, logMessage);
-    if (logResult &gt; 0) 
-       logToFile(context, logMessageTag, logMessage);
-    &#125;
-
-/**
-   * Sends an error message and the exception to LogCat and to a log file.
-   * @param context The context of the application.
-   * @param logMessageTag A tag identifying a group of log messages. Should be a constant in the 
-   *                      class calling the logger.
-   * @param logMessage The message to add to the log.
-   * @param throwableException An exception to log
-   */
- public static void e(Context context, String logMessageTag, String logMessage, Throwable throwableException) 
-    &#123;
-    if (!Log.isLoggable(logMessageTag, Log.ERROR))
-       return;
-
-    int logResult = Log.e(logMessageTag, logMessage, throwableException);
-    if (logResult &gt; 0) 
-       logToFile(context, logMessageTag, logMessage + &quot;\r\n&quot; + Log.getStackTraceString(throwableException));
-    &#125;
-
-// The i and w method for info and warning logs should be implemented in the same way as the e method for error logs.
-
-/**
-   * Sends a message to LogCat and to a log file.
-   * @param context The context of the application.
-   * @param logMessageTag A tag identifying a group of log messages. Should be a constant in the 
-   *                      class calling the logger.
-   * @param logMessage The message to add to the log.
-   */
- public static void v(Context context, String logMessageTag, String logMessage) 
-    &#123;
-                              // If the build is not debug, do not try to log, the logcat be 
-                              // stripped at compilation.
-    if (!BuildConfig.DEBUG || !Log.isLoggable(logMessageTag, Log.VERBOSE))
-        return;
-
-    int logResult = Log.v(logMessageTag, logMessage);
-    if (logResult &gt; 0) 
-       logToFile(context, logMessageTag, logMessage);
-    &#125;
-
-/**
-   * Sends a message and the exception to LogCat and to a log file.
-   * @param logMessageTag A tag identifying a group of log messages. Should be a constant in the 
-   *                      class calling the logger.
-   * @param logMessage The message to add to the log.
-   * @param throwableException An exception to log
-   */
- public static void v(Context context,String logMessageTag, String logMessage, Throwable throwableException) 
-    &#123;
-                              // If the build is not debug, do not try to log, the logcat be 
-                              // stripped at compilation.
-    if (!BuildConfig.DEBUG || !Log.isLoggable(logMessageTag, Log.VERBOSE))
-        return;
-
-    int logResult = Log.v(logMessageTag, logMessage, throwableException);
-    if (logResult &gt; 0) 
-       logToFile(context, logMessageTag,  logMessage + &quot;\r\n&quot; + Log.getStackTraceString(throwableException));
-    &#125;
-
-// The d method for debug logs should be implemented in the same way as the v method for verbose logs.
-
-/**
-  * Gets a stamp containing the current date and time to write to the log.
-  * @return The stamp for the current date and time.
-  */
- private static String getDateTimeStamp()
-    &#123;
-    Date dateNow = Calendar.getInstance().getTime();
-                              // My locale, so all the log files have the same date and time format
-    return (DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, Locale.CANADA_FRENCH).format(dateNow));
-    &#125;
-
-/**
-  * Writes a message to the log file on the device.
-  * @param logMessageTag A tag identifying a group of log messages.
-  * @param logMessage The message to add to the log.
-  */
- private static void logToFile(Context context, String logMessageTag, String logMessage)
-    &#123;
-    try
-       &#123;
-                              // Gets the log file from the root of the primary storage. If it does 
-                              // not exist, the file is created.
-       File logFile = new File(Environment.getExternalStorageDirectory(), &quot;TestApplicationLog.txt&quot;);
-       if (!logFile.exists())
-          logFile.createNewFile();
-                              // Write the message to the log with a timestamp
-       BufferedWriter writer = new BufferedWriter(new FileWriter(logFile, true));
-       writer.write(String.format(&quot;%1s [%2s]:%3s\r\n&quot;, getDateTimeStamp(), logMessageTag, logMessage));
-       writer.close();
-                              // Refresh the data so it can seen when the device is plugged in a 
-                              // computer. You may have to unplug and replug to see the latest 
-                              // changes
-      MediaScannerConnection.scanFile(context, 
-                                      new String[] &#123; logFile.toString() &#125;, 
-                                      null, 
-                                      null);
-
-       &#125;
-    catch (IOException e)
-       &#123;
-       Log.e(&quot;com.cindypotvin.Logger&quot;, &quot;Unable to log exception to file.&quot;);
-       &#125;
-    &#125;
- &#125;
-</code></pre>
-<p>If you release an application to the app store or to a client with this kind of logger, you should disable logging by default and add a switch in the preferences to enable logging on demand. If the logger is always enabled, your application will often write to the primary storage and to the logcat, which is an unnecessary overhead when everything works correctly. Also, the size of the log file should be limited in some way to avoid filling up the primary storage.</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pinned.github.io/2023/05/29/2015-01-19-Android-log/" data-id="cli8ygt7c002b9y2771ws56wj" data-title="Creating logs in Android applications" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://pinned.github.io/2023/05/29/2015-01-23-google-volley-url-cache-key/" data-id="cli8yhxga002bd927blj28kl5" data-title="Google Volley如何缓存HTTP请求文件" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -1489,7 +1817,7 @@ public class FastBlur &#123;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pinned.github.io/2023/05/29/2014-10-26-Android-blur-image/" data-id="cli8ygt75000d9y27e9qldyoy" data-title="Android 图片的毛玻璃效果" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://pinned.github.io/2023/05/29/2014-10-26-Android-blur-image/" data-id="cli8yhxg4000hd927gy9dgoro" data-title="Android 图片的毛玻璃效果" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -1503,14 +1831,14 @@ public class FastBlur &#123;
 
 
   
-    <article id="post-2014-11-03-NullPointException Analysis" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-2014-11-04-butterknife-useing" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2023/05/29/2014-11-03-NullPointException%20Analysis/" class="article-date">
+    <a href="/2023/05/29/2014-11-04-butterknife-useing/" class="article-date">
   <time class="dt-published" datetime="2023-05-29T02:54:52.139Z" itemprop="datePublished">2023-05-29</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%AE%89%E5%8D%93/">安卓</a>
+    <a class="article-category-link" href="/categories/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/">开源项目</a>
   </div>
 
   </div>
@@ -1521,7 +1849,7 @@ public class FastBlur &#123;
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/05/29/2014-11-03-NullPointException%20Analysis/">Android 项目中出现的奇葩bug, 数据NullPointExcption</a>
+      <a class="p-name article-title" href="/2023/05/29/2014-11-04-butterknife-useing/">Andorid UI注入工具的使用(ButterKnife)</a>
     </h1>
   
 
@@ -1529,87 +1857,98 @@ public class FastBlur &#123;
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>在一个自定义的Form表单中，有各种控件，如文本输入框，时间选择器，城市选择器等。<br>在使用城市选择器的时候，城市的数据存储在<code>List</code>中<br>在定义的时候，我使用如下代码定义：</p>
-<pre><code class="java">private List&lt;CityNode&gt; mCitys = null;
+        <p>一个Android项目中，必不可少有很多UI，并且<code>Activity</code>要控制这些UI，当然，我们会用到以下代码:</p>
+<pre><code class="java">// 获取View的引用
+Button mBtn = (Button) this.findViewById(R.id.btn);
+// 给Button添加事件
+mBtn.setOnClickListener(new OnClickListener() &#123;
+    @Override
+    public void onClick(View view) &#123;
+        // TODO 做一些你自己要做的事情 
+    &#125;
+&#125;)
 </code></pre>
-<p>经过数据初始化过后，在构造方法中使用<code>mCitys</code>是正常的，但是在其它方法中使用，<br><code>mCitys</code>便成了空值.</p>
-<p>这个结果让我非常的费解。</p>
-<h3 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h3><p>一开始出现了这个空指针异常，排查了好久，根本就找不到任何原因，<br>因为代码本身没有任何的逻辑错误。不知道是运气好还是怎么的。我把那个<code>List</code>的<br>定义写成如下，代码竟然可以正常运行：</p>
-<pre><code class="java">private List&lt;CityNode&gt; mCitys;
-</code></pre>
-<p>看到上面贴出来的代码，我顿时就无语了，太奇怪了，这两个不应该是一样的么。<br>经过一系列的测试，以下是问题解决的步骤:</p>
-<ul>
-<li>反射</li>
-</ul>
-<p>先上反射代码：</p>
-<pre><code class="java">Class&lt;? extends BaseFormElement&gt; clazz = model.getType().getValue();
-BaseFormElement element = null;
-try &#123;
-    Class[] parameterTypes = &#123; Context.class, FormElementModel.class &#125;;
-    //根据参数类型获取相应的构造函数
-    Constructor&lt;? extends BaseFormElement&gt; constructor
-            = clazz.getConstructor(parameterTypes);
-    //参数数组
-    Object[] parameters = &#123; mContext, model &#125;;
-    //根据获取的构造函数和参数，创建实例
-    element = (BaseFormElement)constructor.newInstance(parameters);
-&#125; catch (Exception e) &#123;
-    e.printStackTrace();
+<p>每一个Activity都要做类似的事情，这是一个相当蛋疼的事情。</p>
+<p>如果你可以像如下代码来实现View的初始画以及事件监听以及其它的，你还会用以前的代码么？</p>
+<p>代码如下:</p>
+<pre><code class="java">@InjectView(R.id.user) EditText username;
+@InjectView(R.id.pass) EditText password;
+@OnClick(R.id.submit) void submit() &#123;
+    // TODO 实现submit这个Btn的点击事件
 &#125;
 </code></pre>
-<p>一开始，我以为是由于java的反射机制引起，导致局域变量初始化被执行了两次，<br>可是，有关反射的相关信息，查找了一遍，包括类加载的机制等信息，还是没有能<br>解释代码为什么执行了两次，所以觉得不怎么像是他引起的。后面和一个同事说到，<br>他看了一下代码，开始也没有找到原因,后面他说对象强转型引起的。</p>
-<ul>
-<li>强制转型</li>
-</ul>
-<p>在使用反射的时候，<code>newInstance</code>创建一个对象，返回了一个父类型的变量，可是<br>根本就没有进行强制转换。</p>
-<ul>
-<li>构造方法的执行顺序</li>
-</ul>
-<p>还是抱着局域变量的初始化被执行了两次，打印了一下日志，终于发现了问题的所在。<br>在初始化一个对象的时候，首先是执行父类的构造方法，如果还有父类，继续向上查找。</p>
-<p>示例：</p>
-<pre><code class="java">public class A &#123;
-    &#123;
-        System.out.println(&quot;class a prarms init&quot;);
-    &#125;
-    public A() &#123;
-        System.out.println(&quot;A constructor method excute&quot;);
-    &#125;
-&#125;
-</code></pre>
-<pre><code class="java">public class B extends A &#123;
-    &#123;
-        System.out.println(&quot;class B params init&quot;);
-    &#125;
-    public B() &#123;
-        System.out.println(&quot;B constructor method excute&quot;);
-    &#125;
-&#125;
-</code></pre>
-<pre><code class="java">public class Main &#123;
+<p>用上面的注解会更加简单的组织我们的代码结构，代码量更少。<br>在这里我使用<a target="_blank" rel="noopener" href="http://jakewharton.github.io/butterknife/">Butter Knife</a></p>
+<h3 id="使用步骤"><a href="#使用步骤" class="headerlink" title="使用步骤"></a>使用步骤</h3><ol>
+<li>去GitHub下载ButterKnife的源码或者jar包  –&gt;  <a target="_blank" rel="noopener" href="https://github.com/JakeWharton/butterknife">传送门</a></li>
+<li>在这里，我是去下载的jar包，将jar包添加到项目的<code>libs</code>文件夹下面就可以使用了</li>
+</ol>
+<p>先上代码,一个很简单的布局文件:</p>
+<pre><code class="html">&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    xmlns:tools=&quot;http://schemas.android.com/tools&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot;
+    android:paddingBottom=&quot;@dimen/activity_vertical_margin&quot;
+    android:paddingLeft=&quot;@dimen/activity_horizontal_margin&quot;
+    android:paddingRight=&quot;@dimen/activity_horizontal_margin&quot;
+    android:paddingTop=&quot;@dimen/activity_vertical_margin&quot;
+    android:orientation=&quot;vertical&quot;&gt;
 
-    public static void main(String[] args) &#123;
-        A a = new B();
+    &lt;TextView
+        android:id=&quot;@+id/tv&quot;
+        android:layout_width=&quot;match_parent&quot;
+        android:layout_height=&quot;wrap_content&quot;
+        android:gravity=&quot;center&quot;
+        android:text=&quot;@string/hello_world&quot; /&gt;
+    
+    &lt;Button 
+        android:id=&quot;@+id/btn&quot;
+        android:layout_width=&quot;match_parent&quot;
+        android:layout_height=&quot;wrap_content&quot;
+        android:text=&quot;Change Text&quot;/&gt;
+
+&lt;/LinearLayout&gt;
+</code></pre>
+<p>简单到不能在简单的布局了，一个<code>TextView</code>， 一个<code>Button</code></p>
+<p>看Activity的代码，如下：</p>
+<pre><code class="java">public class MainActivity extends Activity &#123;
+
+    @InjectView(R.id.tv) TextView mShowTv;
+    
+    @Override
+    protected void onCreate(Bundle savedInstanceState) &#123;
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        ButterKnife.inject(this);
+        mShowTv.setText(&quot;Default Text&quot;);
     &#125;
+    @OnClick(R.id.btn) void changeText() &#123;
+        mShowTv.setText(&quot;Change Text:&quot; + System.currentTimeMillis());
+    &#125;
+    
 &#125;
 </code></pre>
-<p>运行结果:</p>
-<pre><code class="html">class a prarms init
-A constructor method excute
-class B params init
-B constructor method excute
+<p>就是这么简单的代码，可是就是用不起来，怎么破，在</p>
+<pre><code class="java">mShowTv.setText(&quot;Default Text&quot;)
 </code></pre>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>这一次的空指针的最根本原因是在父类的构造方法中执行了子类实例变量的初始化<br>操作，这是一个非常不合理的举动。如果子类属性中的东西应该在子类中进行初始化，<br>而不是在父类中调用初始化方法。</p>
-<h3 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h3><p><del>代码木有上传上来，如果你想看看这个丑陋的代码是怎么写的，你可以邮件联系我：<br><a href="mailto:&#x6c;&#x6f;&#118;&#101;&#99;&#108;&#x75;&#x6f;&#64;&#110;&#105;&#103;&#104;&#116;&#x77;&#x65;&#97;&#118;&#101;&#x72;&#46;&#111;&#114;&#x67;">&#x6c;&#x6f;&#118;&#101;&#99;&#108;&#x75;&#x6f;&#64;&#110;&#105;&#103;&#104;&#116;&#x77;&#x65;&#97;&#118;&#101;&#x72;&#46;&#111;&#114;&#x67;</a></del></p>
-<p>更新代码地址：</p>
-<ul>
-<li><a href="http://pinned.github.io/assets/posts/file-2014-11-4/NullPointProject-bug.tar.gz">Bug版代码</a></li>
-<li><a href="http://pinned.github.io/assets/posts/file-2014-11-4/NullPointProject-%E6%9B%B4%E6%94%B9.rar">修改版本</a></li>
+<p>这儿报了一个空指针。如下图：</p>
+<p><img src="http://pinned.github.io/assets/posts/file-2014-11-4/inject_nullpoint.png" alt="Alt text"></p>
+<h3 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h3><p>因为使用注解，编译的时候，要进行相应的设置，才可以正常的编译,步骤如下：</p>
+<p>右键<code>项目</code>，选择<code>Properities</code>,然后选择<code>Java Compiler</code>下的<code>Annotation Processing</code>。<br>可是我找了半天，也没有找到它的踪影。不要着急，更新一下<code>Eclipse Java Development Tools</code>就可以了</p>
+<p><img src="http://pinned.github.io/assets/posts/file-2014-11-4/install_eclipse_tools.png" alt="Install Eclipse Java Development Tools"></p>
+<p>等到安装完成过后，你就可以进行如下设置了:</p>
+<p><img src="http://pinned.github.io/assets/posts/file-2014-11-4/eclipse_setting_01.png" alt="Step 01"></p>
+<p><img src="http://pinned.github.io/assets/posts/file-2014-11-4/eclipse_setting_02.png" alt="Step 02"></p>
+<p><img src="http://pinned.github.io/assets/posts/file-2014-11-4/eclipse_setting_03.png" alt="Step 03"></p>
+<p><img src="http://pinned.github.io/assets/posts/file-2014-11-4/eclipse_setting_04.png" alt="Step 04"></p>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ul>
+<li><a target="_blank" rel="noopener" href="http://www.it165.net/pro/html/201404/12375.html">ButterKnife Android程序员的一大利器</a></li>
+<li><a target="_blank" rel="noopener" href="http://jakewharton.github.io/butterknife/">ButterKnife Doc</a></li>
 </ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pinned.github.io/2023/05/29/2014-11-03-NullPointException%20Analysis/" data-id="cli8ygt76000l9y27bfk50457" data-title="Android 项目中出现的奇葩bug, 数据NullPointExcption" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://pinned.github.io/2023/05/29/2014-11-04-butterknife-useing/" data-id="cli8yhxg4000jd9270yei1hpu" data-title="Andorid UI注入工具的使用(ButterKnife)" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -1680,11 +2019,11 @@ B constructor method excute
       <ul>
         
           <li>
-            <a href="/2023/05/29/2017-10-15-gradlew%20source%20analyze/">gradlew 源码分析</a>
+            <a href="/2023/05/29/2017-02-10-proguard-translate/">Proguard 翻译</a>
           </li>
         
           <li>
-            <a href="/2023/05/29/2017-02-10-proguard-translate/">Proguard 翻译</a>
+            <a href="/2023/05/29/2017-10-15-gradlew%20source%20analyze/">gradlew 源码分析</a>
           </li>
         
           <li>
