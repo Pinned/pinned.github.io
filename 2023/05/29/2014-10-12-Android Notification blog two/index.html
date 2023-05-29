@@ -63,7 +63,7 @@ notification.flags|=Notification.FLAG_SHOW_LIGHTS;
 notificationManager.notify(notificationId, notification);
 </code></pre>
 <p>和上一个例子不同的是，这一个Notification跳转的位置并不是<code>OtherActiivty</code>，<br>而是直接跳转到<code>MainActivity</code>.</p>
-<p><strong>问题</strong><br>非常不幸的事，他并不能够正常接收么Intent传过来的参数。至于为什么，我也不知道。<br>如您知道这个的具体原因请告知我(邮箱：<a href="mailto:&#108;&#111;&#118;&#x65;&#x63;&#108;&#117;&#x6f;&#x40;&#x67;&#109;&#x61;&#105;&#x6c;&#46;&#x63;&#x6f;&#x6d;">&#108;&#111;&#118;&#x65;&#x63;&#108;&#117;&#x6f;&#x40;&#x67;&#109;&#x61;&#105;&#x6c;&#46;&#x63;&#x6f;&#x6d;</a>)。</p>
+<p><strong>问题</strong><br>非常不幸的事，他并不能够正常接收么Intent传过来的参数。至于为什么，我也不知道。<br>如您知道这个的具体原因请告知我(邮箱：<a href="mailto:&#108;&#x6f;&#118;&#101;&#99;&#x6c;&#117;&#x6f;&#x40;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#x6f;&#109;">&#108;&#x6f;&#118;&#101;&#99;&#x6c;&#117;&#x6f;&#x40;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#x6f;&#109;</a>)。</p>
 <p><strong>解决办法</strong></p>
 <p>虽然不知道是什么原因造成了这个问题，但是最终还是找到了解决方案：</p>
 <p>解决方法如下：</p>
@@ -87,12 +87,12 @@ protected void onNewIntent(Intent intent) &#123;
                     <div class="post_pre_next">
     
         <div class="post-pre">
-            <a href="/2023/05/29/2014-10-11-Android%20Notification%20blog%20one/">上一篇: Android之Notification的使用(一)</a>
+            <a href="/2023/05/29/2014-09-14-Ubuntu%20System%20Install/">上一篇: 安装Ubuntu单系统</a>
         </div>
     
     
-        <a href="/2023/05/29/2014-10-20-Eclipse%20Refactor/">下一篇: 
-            Eclipse中重构使用
+        <a href="/2023/05/29/2014-10-11-Android%20Notification%20blog%20one/">下一篇: 
+            Android之Notification的使用(一)
         </a>
     
 </div>

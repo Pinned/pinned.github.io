@@ -38,6 +38,21 @@
                 <div class="post-list">
     
     <div class="post">
+        <a class="post-title" href="/2023/05/29/2017-02-10-proguard-translate/">Proguard 翻译</a>
+        <div class="post-except">
+            [译] ProGuard 选项
+注：只针对 Android 平台翻译了 ProGuard 选项的相关用法，更多信息请查看官方原文。
+
+Input&#x2F;Output Options@filename简短版 -include filename
+-include filename读取指定文件的配置参数
+-basedirectory directoryname指定当前配置文件中所有相对文件路径的基础目录
+-injars class_path指定需要处理的 jar&#x2F;aa
+            <a class="read-more" href="/2023/05/29/2017-02-10-proguard-translate/"> ... </a>
+        </div>
+        <div class="post-date">2023.05.29</div>
+    </div>
+    
+    <div class="post">
         <a class="post-title" href="/2023/05/29/2017-10-15-gradlew%20source%20analyze/">gradlew 源码分析</a>
         <div class="post-except">
             gradlew 源码分析使用Android Studio 新建一个项目，会默认使用gradle编译项目。在编译的时候可以使用：gradle assembleRelease, 当然，如果没有安装gradle的时候，也可以使用项目文件夹下面的gradlew进行编译。
@@ -59,21 +74,6 @@
     </div>
     
     <div class="post">
-        <a class="post-title" href="/2023/05/29/2017-02-10-proguard-translate/">Proguard 翻译</a>
-        <div class="post-except">
-            [译] ProGuard 选项
-注：只针对 Android 平台翻译了 ProGuard 选项的相关用法，更多信息请查看官方原文。
-
-Input&#x2F;Output Options@filename简短版 -include filename
--include filename读取指定文件的配置参数
--basedirectory directoryname指定当前配置文件中所有相对文件路径的基础目录
--injars class_path指定需要处理的 jar&#x2F;aa
-            <a class="read-more" href="/2023/05/29/2017-02-10-proguard-translate/"> ... </a>
-        </div>
-        <div class="post-date">2023.05.29</div>
-    </div>
-    
-    <div class="post">
         <a class="post-title" href="/2023/05/29/2019-08-10-Android-network-Configuration/">Android 网络配置</a>
         <div class="post-except">
             HTTP 与 HTTPS自2017年1月1日开始，苹果要求所有的APP都要使用 HTTPS 进行网络请求，否则无法上架。但是 HTTPS 在 2000 年就已经确定下来。10多年过去，现在依然还有很多网站使用着 HTTP 协议。
@@ -88,6 +88,61 @@ HTTP协议以明文方式发送内容，不提供任何方式的数据加密，�
         <div class="post-except">
             The Network Security Configuration feature lets apps customize their network security settings in a safe, declarative configuration file without modifying app code. These settings can be configured for specific domains and for a specific ap
             <a class="read-more" href="/2023/05/29/2019-08-10-Android-network-security-configuration/"> ... </a>
+        </div>
+        <div class="post-date">2023.05.29</div>
+    </div>
+    
+    <div class="post">
+        <a class="post-title" href="/2023/05/29/2015-06-29-android-add-view/">Android加载子View</a>
+        <div class="post-except">
+            Android的一个View界面都是通过ViewGroup 加上很多子View来实现的，即viewGroup.addView(view)。
+让我一起来看看源码是如何执行的。
+addView(view)
+public void addView(View child) &#123;
+    addView(child, -1);
+&#125;
+public void addView(View child, int index) &#123;
+    if (child == nu
+            <a class="read-more" href="/2023/05/29/2015-06-29-android-add-view/"> ... </a>
+        </div>
+        <div class="post-date">2023.05.29</div>
+    </div>
+    
+    <div class="post">
+        <a class="post-title" href="/2023/05/29/2015-07-27-git-merge-two-project/">Git 合并两个Project</a>
+        <div class="post-except">
+            问题： 公司开始使用的是SVN进行项目管理的，现在有一个项目，有两个Project，其中一个是Application， 另一个是Library。现在要把SVN上面的项目迁移到Git服务器上去。但是Git服务器上面只有一个Proj，也就是说，现在需要将两个项目和在一起。想想，本来也应该把两个项目合在一起，不然，版本管理必然也会是一个大的问题。
+解决方式
+如果不需要保存SVN上的提交日志，那直接复制提交就行了。
+
+要保存提交日志
+首先要将SVN的项目迁移到GIT服务器上。我在本地
+            <a class="read-more" href="/2023/05/29/2015-07-27-git-merge-two-project/"> ... </a>
+        </div>
+        <div class="post-date">2023.05.29</div>
+    </div>
+    
+    <div class="post">
+        <a class="post-title" href="/2023/05/29/2015-07-28-xml-listview-divider-margin/">XML 实现 ListView divider margin</a>
+        <div class="post-except">
+            &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;inset xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    android:insetLeft=&quot;50dp&quot;
+    android:insetRight=&quot;50dp&quot; &gt;
+    &lt;shap
+            <a class="read-more" href="/2023/05/29/2015-07-28-xml-listview-divider-margin/"> ... </a>
+        </div>
+        <div class="post-date">2023.05.29</div>
+    </div>
+    
+    <div class="post">
+        <a class="post-title" href="/2023/05/29/2015-12-22-gradle-download-error/">Android Studio Gradle Download Error</a>
+        <div class="post-except">
+            自从使用Android Studio 开始，就一直存在一个问题，那就是Gradle下载不下来。不仅如此，JCtener 与 mavenCentral 也是被墙了。
+
+我们先来解决gradle 下载的问题
+用浏览器挂上vpn， 将你需要的gralde-version.zip文件下载下来，放到本地。打开你的项目，找到当前目录下 gradle -&gt; wrapper -&gt; gradle-wrapper.properties , 打开这个文件，将最后一行的地址修改为如下：d
+            <a class="read-more" href="/2023/05/29/2015-12-22-gradle-download-error/"> ... </a>
         </div>
         <div class="post-date">2023.05.29</div>
     </div>
@@ -114,65 +169,6 @@ HTTP协议以明文方式发送内容，不提供任何方式的数据加密，�
  private boolean showKeyboard() &#123;
     InputMethodManager imm = (Inp
             <a class="read-more" href="/2023/05/29/2015-05-22-android-like-qq-input/"> ... </a>
-        </div>
-        <div class="post-date">2023.05.29</div>
-    </div>
-    
-    <div class="post">
-        <a class="post-title" href="/2023/05/29/2015-05-25-android-soft-keyboard/">【转】Android打开与关闭软键盘</a>
-        <div class="post-except">
-            
-方法一(如果输入法在窗口上已经显示，则隐藏，反之则显示)
-
-InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS); 
-
-
-方法二(View为接受软键盘输入的视图)
-
-InputMethodManager imm = (Inpu
-            <a class="read-more" href="/2023/05/29/2015-05-25-android-soft-keyboard/"> ... </a>
-        </div>
-        <div class="post-date">2023.05.29</div>
-    </div>
-    
-    <div class="post">
-        <a class="post-title" href="/2023/05/29/2015-06-29-android-add-view/">Android加载子View</a>
-        <div class="post-except">
-            Android的一个View界面都是通过ViewGroup 加上很多子View来实现的，即viewGroup.addView(view)。
-让我一起来看看源码是如何执行的。
-addView(view)
-public void addView(View child) &#123;
-    addView(child, -1);
-&#125;
-public void addView(View child, int index) &#123;
-    if (child == nu
-            <a class="read-more" href="/2023/05/29/2015-06-29-android-add-view/"> ... </a>
-        </div>
-        <div class="post-date">2023.05.29</div>
-    </div>
-    
-    <div class="post">
-        <a class="post-title" href="/2023/05/29/2015-07-28-xml-listview-divider-margin/">XML 实现 ListView divider margin</a>
-        <div class="post-except">
-            &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;inset xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
-    android:insetLeft=&quot;50dp&quot;
-    android:insetRight=&quot;50dp&quot; &gt;
-    &lt;shap
-            <a class="read-more" href="/2023/05/29/2015-07-28-xml-listview-divider-margin/"> ... </a>
-        </div>
-        <div class="post-date">2023.05.29</div>
-    </div>
-    
-    <div class="post">
-        <a class="post-title" href="/2023/05/29/2015-12-22-gradle-download-error/">Android Studio Gradle Download Error</a>
-        <div class="post-except">
-            自从使用Android Studio 开始，就一直存在一个问题，那就是Gradle下载不下来。不仅如此，JCtener 与 mavenCentral 也是被墙了。
-
-我们先来解决gradle 下载的问题
-用浏览器挂上vpn， 将你需要的gralde-version.zip文件下载下来，放到本地。打开你的项目，找到当前目录下 gradle -&gt; wrapper -&gt; gradle-wrapper.properties , 打开这个文件，将最后一行的地址修改为如下：d
-            <a class="read-more" href="/2023/05/29/2015-12-22-gradle-download-error/"> ... </a>
         </div>
         <div class="post-date">2023.05.29</div>
     </div>

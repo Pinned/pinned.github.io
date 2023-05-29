@@ -47,6 +47,34 @@
     </div>
     
     <div class="post">
+        <a class="post-title" href="/2023/05/29/2015-05-25-android-soft-keyboard/">【转】Android打开与关闭软键盘</a>
+        <div class="post-except">
+            
+方法一(如果输入法在窗口上已经显示，则隐藏，反之则显示)
+
+InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS); 
+
+
+方法二(View为接受软键盘输入的视图)
+
+InputMethodManager imm = (Inpu
+            <a class="read-more" href="/2023/05/29/2015-05-25-android-soft-keyboard/"> ... </a>
+        </div>
+        <div class="post-date">2023.05.29</div>
+    </div>
+    
+    <div class="post">
+        <a class="post-title" href="/2023/05/29/2016-10-18-android-dynamic-create-menu/">Android 动态修改菜单</a>
+        <div class="post-except">
+            在一个Android创建菜单menu时，需要重写Activity的onCreateOptionsMenu(Menu menu)方法，这个方法只在第一次创建的时候调用一次，所以如果之后想对menu进行动态的修改，那么就不要再对onCreateOptionsMenu做什么手脚了。
+动态修改菜单就要用到onPrepareOptionsMenu(Menu menu)方法了。onPrepareOptionsMenu与onCreateOptionsMenu不同的是，他在每次按下menu硬
+            <a class="read-more" href="/2023/05/29/2016-10-18-android-dynamic-create-menu/"> ... </a>
+        </div>
+        <div class="post-date">2023.05.29</div>
+    </div>
+    
+    <div class="post">
         <a class="post-title" href="/2023/05/29/2016-10-10-Shell-Sub-String/">Shell脚本8种字符串截取方法</a>
         <div class="post-except">
             假设有变量： var=http://blog.knero.cn/test.html
@@ -78,16 +106,6 @@ gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB8
     </div>
     
     <div class="post">
-        <a class="post-title" href="/2023/05/29/2016-10-18-android-dynamic-create-menu/">Android 动态修改菜单</a>
-        <div class="post-except">
-            在一个Android创建菜单menu时，需要重写Activity的onCreateOptionsMenu(Menu menu)方法，这个方法只在第一次创建的时候调用一次，所以如果之后想对menu进行动态的修改，那么就不要再对onCreateOptionsMenu做什么手脚了。
-动态修改菜单就要用到onPrepareOptionsMenu(Menu menu)方法了。onPrepareOptionsMenu与onCreateOptionsMenu不同的是，他在每次按下menu硬
-            <a class="read-more" href="/2023/05/29/2016-10-18-android-dynamic-create-menu/"> ... </a>
-        </div>
-        <div class="post-date">2023.05.29</div>
-    </div>
-    
-    <div class="post">
         <a class="post-title" href="/2023/05/29/2016-10-18-set-textview-textsize-big/">Android TextView setTextSize</a>
         <div class="post-except">
             Android TextView 在设置TextSize 值很大的时候，会报如下错误Font size too large to fit in cache。 修改方法如下：
@@ -96,20 +114,6 @@ bigText.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
 
 
             <a class="read-more" href="/2023/05/29/2016-10-18-set-textview-textsize-big/"> ... </a>
-        </div>
-        <div class="post-date">2023.05.29</div>
-    </div>
-    
-    <div class="post">
-        <a class="post-title" href="/2023/05/29/2015-07-27-git-merge-two-project/">Git 合并两个Project</a>
-        <div class="post-except">
-            问题： 公司开始使用的是SVN进行项目管理的，现在有一个项目，有两个Project，其中一个是Application， 另一个是Library。现在要把SVN上面的项目迁移到Git服务器上去。但是Git服务器上面只有一个Proj，也就是说，现在需要将两个项目和在一起。想想，本来也应该把两个项目合在一起，不然，版本管理必然也会是一个大的问题。
-解决方式
-如果不需要保存SVN上的提交日志，那直接复制提交就行了。
-
-要保存提交日志
-首先要将SVN的项目迁移到GIT服务器上。我在本地
-            <a class="read-more" href="/2023/05/29/2015-07-27-git-merge-two-project/"> ... </a>
         </div>
         <div class="post-date">2023.05.29</div>
     </div>
@@ -150,16 +154,17 @@ export TF_BINARY_URL=https://storage.googleapis.com/tensorflow/linux/cpu/tensorf
     </div>
     
     <div class="post">
-        <a class="post-title" href="/2023/05/29/2015-04-17-android-notification-small-icon/">Android 5.0设备中，Notification小图标是白色的</a>
+        <a class="post-title" href="/2023/05/29/2015-04-21-android-textview-size/">Android TextView 设置字体大小</a>
         <div class="post-except">
-            问题描述在使用消息推送，在通知栏中展示通知，我们会有两个图标，一个是在状态栏展示的小图标，一个是打开通知中心，展示的大图标我在我自己的测试设备中，小图标始终显示为一个白色的空白图标。
-问题解决
-原文地址：Notification bar icon turns white in Android 5 Lollipop
-
-在这里，我把文章中说的东西抄一遍：
-在Android中用来展示Notification图标的代码如下：
-// android_frameworks_base/pa
-            <a class="read-more" href="/2023/05/29/2015-04-17-android-notification-small-icon/"> ... </a>
+            /**
+ * Set the default text size to the given value, interpreted as &quot;scaled
+ * pixel&quot; units.  This size is adjusted based on the current density and
+ * user font size preference.
+ *
+ * @param size The scaled pixel size.
+ *
+ * @att
+            <a class="read-more" href="/2023/05/29/2015-04-21-android-textview-size/"> ... </a>
         </div>
         <div class="post-date">2023.05.29</div>
     </div>

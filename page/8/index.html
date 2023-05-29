@@ -38,6 +38,34 @@
                 <div class="post-list">
     
     <div class="post">
+        <a class="post-title" href="/2023/05/29/2014-10-11-Android%20Notification%20blog%20one/">Android之Notification的使用(一)</a>
+        <div class="post-except">
+            Android之Notification的使用（一）在通知栏展示一些及时消息是一件非常常见的事情，相对来说，使用Notification也是一件很简单的事情。
+一个简单的事情，做起来也会遇到bug，先贴代码：
+Intent intent = new Intent(this, OtherActivity.class);
+String currentTime =  DateTimeUtil.formatDateDefault(Calendar.getInstance().getT
+            <a class="read-more" href="/2023/05/29/2014-10-11-Android%20Notification%20blog%20one/"> ... </a>
+        </div>
+        <div class="post-date">2023.05.29</div>
+    </div>
+    
+    <div class="post">
+        <a class="post-title" href="/2023/05/29/2014-10-13-Android%20webview/">Android之Webview使用</a>
+        <div class="post-except">
+            Android之Webview使用HTML页面是一个非常重要的角色，不仅是在PC端，在移动端也是非常重要的。
+今天使用Webview来显示一个H5页面，其中就有地图页面。如果你经常使用浏览器，你会发现，浏览器在使用定位信息的时候，需要相关权限，当然，有好的提示用户是一个必不可少的步骤。
+问题
+用Webview加载map的时候，使用地理位置，提示用户授权。
+解决办法
+先看代码：
+@Override
+public void onGeolocationPermissionsShow
+            <a class="read-more" href="/2023/05/29/2014-10-13-Android%20webview/"> ... </a>
+        </div>
+        <div class="post-date">2023.05.29</div>
+    </div>
+    
+    <div class="post">
         <a class="post-title" href="/2023/05/29/2014-10-20-Eclipse%20Refactor/">Eclipse中重构使用</a>
         <div class="post-except">
             Eclipse中重构方法，修改方法中的某个参数
@@ -47,17 +75,6 @@
 
 使用Eclipse中提供的Refac
             <a class="read-more" href="/2023/05/29/2014-10-20-Eclipse%20Refactor/"> ... </a>
-        </div>
-        <div class="post-date">2023.05.29</div>
-    </div>
-    
-    <div class="post">
-        <a class="post-title" href="/2023/05/29/2014-10-21-Genymotion-network-error/">使用Fidder来拦截Android发送的HTTP请求</a>
-        <div class="post-except">
-            FidderFiddler是一个http调试代理，它能够记录所有的你电脑和互联网之间的http通讯，Fiddler可以也可以让你检查所有的http通讯，设置断点，以及Fiddler所有的“进出”的数据（指cookie,html,js,css等文件，这些都可以让你胡乱修改的意思）。Fiddler 要比其他的网络调试器要更加简单，因为它仅仅暴露http通讯还有提供一个用户友好的格式。
-有关Fiddler的使用教程请移步：Fiddler 教程
-Fiddler Android模拟器抓
-            <a class="read-more" href="/2023/05/29/2014-10-21-Genymotion-network-error/"> ... </a>
         </div>
         <div class="post-date">2023.05.29</div>
     </div>
@@ -81,28 +98,12 @@ public class MainActivity &#123;
     </div>
     
     <div class="post">
-        <a class="post-title" href="/2023/05/29/2014-10-13-Android%20webview/">Android之Webview使用</a>
+        <a class="post-title" href="/2023/05/29/2014-10-21-Genymotion-network-error/">使用Fidder来拦截Android发送的HTTP请求</a>
         <div class="post-except">
-            Android之Webview使用HTML页面是一个非常重要的角色，不仅是在PC端，在移动端也是非常重要的。
-今天使用Webview来显示一个H5页面，其中就有地图页面。如果你经常使用浏览器，你会发现，浏览器在使用定位信息的时候，需要相关权限，当然，有好的提示用户是一个必不可少的步骤。
-问题
-用Webview加载map的时候，使用地理位置，提示用户授权。
-解决办法
-先看代码：
-@Override
-public void onGeolocationPermissionsShow
-            <a class="read-more" href="/2023/05/29/2014-10-13-Android%20webview/"> ... </a>
-        </div>
-        <div class="post-date">2023.05.29</div>
-    </div>
-    
-    <div class="post">
-        <a class="post-title" href="/2023/05/29/2014-09-14-Ubuntu%20System%20Install/">安装Ubuntu单系统</a>
-        <div class="post-except">
-            安装Ubuntu单系统背景介绍本人是一个程序员，但是由于各种原因，使用的是Windows操作系统。一次偶然的机会，使用了Linux Ubuntu系统，才发现，还是一个很不错的东东。从那个时候开始就开始使用Ubuntu系统。但是鉴于Ubuntu不怎么会用，所以安装的是Windows和Linux的双系统。上班的时候，在公司拿了一张Ubuntu 13.04的系统安装光盘，虽然不怎么会使用Linux系统，但是一次尝试也是未尝不可的啊。于是开始安装起了我的系统。
-安装过程
-安装过程非常
-            <a class="read-more" href="/2023/05/29/2014-09-14-Ubuntu%20System%20Install/"> ... </a>
+            FidderFiddler是一个http调试代理，它能够记录所有的你电脑和互联网之间的http通讯，Fiddler可以也可以让你检查所有的http通讯，设置断点，以及Fiddler所有的“进出”的数据（指cookie,html,js,css等文件，这些都可以让你胡乱修改的意思）。Fiddler 要比其他的网络调试器要更加简单，因为它仅仅暴露http通讯还有提供一个用户友好的格式。
+有关Fiddler的使用教程请移步：Fiddler 教程
+Fiddler Android模拟器抓
+            <a class="read-more" href="/2023/05/29/2014-10-21-Genymotion-network-error/"> ... </a>
         </div>
         <div class="post-date">2023.05.29</div>
     </div>

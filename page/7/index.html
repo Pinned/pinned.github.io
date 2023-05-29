@@ -67,21 +67,6 @@ mBtn.setOnClickListener(new OnClickListener() &#123;
     </div>
     
     <div class="post">
-        <a class="post-title" href="/2023/05/29/2014-11-04-eclipse-shutdown/">Ubuntu-14.04下Eclipse闪退解决办法</a>
-        <div class="post-except">
-            问题描述打开Eclipse，有时候还可以使用一下，有时候使用都不行。
-当Eclipse闪退的时候，还会在Eclipse 文件夹下生成一个hs_err_pidxxxx.log的文件，内容如下:
-#
-# A fatal error has been detected by the Java Runtime Environment:
-#
-#  SIGSEGV (0xb) at pc=0x00007ffd09a902a1, pid=5291, tid=140726369949440
-
-            <a class="read-more" href="/2023/05/29/2014-11-04-eclipse-shutdown/"> ... </a>
-        </div>
-        <div class="post-date">2023.05.29</div>
-    </div>
-    
-    <div class="post">
         <a class="post-title" href="/2023/05/29/2014-11-05-google%20volley%20retry/">Google Volley 网络请求框架(一)</a>
         <div class="post-except">
             Volley是在Google I&#x2F;O 2013上发布的，说来惭愧，都快一年了，才知道有这么个东西。
@@ -94,6 +79,41 @@ Android Volley完全解析(二)，使用Volley加载网络图片
 Android Volley完全解析(三)，定制自己的Request
 Android Vol
             <a class="read-more" href="/2023/05/29/2014-11-05-google%20volley%20retry/"> ... </a>
+        </div>
+        <div class="post-date">2023.05.29</div>
+    </div>
+    
+    <div class="post">
+        <a class="post-title" href="/2023/05/29/2014-11-18-Android-Viewpager-scroll-listener/">Android ViewPager滑动事件</a>
+        <div class="post-except">
+            ViewPager的滑动事件，是使用的OnPageChangeListener，他有三个方法:
+onPageScrollStateChanged, onPageScrolled,onPageSelected
+下面来解释一下这三个方法：
+
+onPageScrollStateChanged
+
+public void onPageScrollStateChanged(int arg0) &#123;
+&#125;
+
+ 其中arg0这个参数有三种状态（0，1，2）
+
+arg0&#x3
+            <a class="read-more" href="/2023/05/29/2014-11-18-Android-Viewpager-scroll-listener/"> ... </a>
+        </div>
+        <div class="post-date">2023.05.29</div>
+    </div>
+    
+    <div class="post">
+        <a class="post-title" href="/2023/05/29/2014-11-04-eclipse-shutdown/">Ubuntu-14.04下Eclipse闪退解决办法</a>
+        <div class="post-except">
+            问题描述打开Eclipse，有时候还可以使用一下，有时候使用都不行。
+当Eclipse闪退的时候，还会在Eclipse 文件夹下生成一个hs_err_pidxxxx.log的文件，内容如下:
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  SIGSEGV (0xb) at pc=0x00007ffd09a902a1, pid=5291, tid=140726369949440
+
+            <a class="read-more" href="/2023/05/29/2014-11-04-eclipse-shutdown/"> ... </a>
         </div>
         <div class="post-date">2023.05.29</div>
     </div>
@@ -132,26 +152,6 @@ https://github.com/inferjay/AndroidDevTools
     </div>
     
     <div class="post">
-        <a class="post-title" href="/2023/05/29/2014-11-18-Android-Viewpager-scroll-listener/">Android ViewPager滑动事件</a>
-        <div class="post-except">
-            ViewPager的滑动事件，是使用的OnPageChangeListener，他有三个方法:
-onPageScrollStateChanged, onPageScrolled,onPageSelected
-下面来解释一下这三个方法：
-
-onPageScrollStateChanged
-
-public void onPageScrollStateChanged(int arg0) &#123;
-&#125;
-
- 其中arg0这个参数有三种状态（0，1，2）
-
-arg0&#x3
-            <a class="read-more" href="/2023/05/29/2014-11-18-Android-Viewpager-scroll-listener/"> ... </a>
-        </div>
-        <div class="post-date">2023.05.29</div>
-    </div>
-    
-    <div class="post">
         <a class="post-title" href="/2023/05/29/2014-12-24-android-studio-using/">Android Studio 使用记录（一）</a>
         <div class="post-except">
             在使用Android Studio 的时候，不小心手贱。把View内的自动提示和自动引入加入了ignore列表中去了。
@@ -169,13 +169,12 @@ Android Studio -&gt; [Setting] -&gt; [Editer] -&gt; [Auto Import]
     </div>
     
     <div class="post">
-        <a class="post-title" href="/2023/05/29/2014-10-11-Android%20Notification%20blog%20one/">Android之Notification的使用(一)</a>
+        <a class="post-title" href="/2023/05/29/2014-09-14-Ubuntu%20System%20Install/">安装Ubuntu单系统</a>
         <div class="post-except">
-            Android之Notification的使用（一）在通知栏展示一些及时消息是一件非常常见的事情，相对来说，使用Notification也是一件很简单的事情。
-一个简单的事情，做起来也会遇到bug，先贴代码：
-Intent intent = new Intent(this, OtherActivity.class);
-String currentTime =  DateTimeUtil.formatDateDefault(Calendar.getInstance().getT
-            <a class="read-more" href="/2023/05/29/2014-10-11-Android%20Notification%20blog%20one/"> ... </a>
+            安装Ubuntu单系统背景介绍本人是一个程序员，但是由于各种原因，使用的是Windows操作系统。一次偶然的机会，使用了Linux Ubuntu系统，才发现，还是一个很不错的东东。从那个时候开始就开始使用Ubuntu系统。但是鉴于Ubuntu不怎么会用，所以安装的是Windows和Linux的双系统。上班的时候，在公司拿了一张Ubuntu 13.04的系统安装光盘，虽然不怎么会使用Linux系统，但是一次尝试也是未尝不可的啊。于是开始安装起了我的系统。
+安装过程
+安装过程非常
+            <a class="read-more" href="/2023/05/29/2014-09-14-Ubuntu%20System%20Install/"> ... </a>
         </div>
         <div class="post-date">2023.05.29</div>
     </div>
