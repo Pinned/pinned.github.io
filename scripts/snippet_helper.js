@@ -5,9 +5,9 @@ hexo.extend.helper.register('code_snippet', function() {
     let result = '';
     result += '<div class="post-md">'
     for (const item of Object.entries(posts)) {
-        console.log(item[1].title)
-        console.log(item[1].type)
         if (item[1].type === 'snippet') {
+            console.log(item[1].title)
+            console.log(item[1].type)
             result += `<h1><span class="prefix"></span><span class="content">${item[1].title}</span><span class="suffix"></span></h1>`
             result += item[1].content
         }
