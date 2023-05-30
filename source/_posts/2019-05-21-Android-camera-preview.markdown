@@ -10,7 +10,7 @@ tags: Android Camera
 
 现如今，每一台Android设备基本都有多个摄像头，基本可以分为两类，前置摄像头与后置摄像头。在API中，每一个摄像头硬件，称之为一个 CameraDevice。我们开发者关心的是，每一个 CameraDevice 同时会输出多个数据流。
 
-![0*ugRv8BWWMigxK03S](2019-05-21-Android-camera-preview.assets/0*ugRv8BWWMigxK03S.png)
+![0*ugRv8BWWMigxK03S](../../../../assets/2019-05-21-Android-camera-preview.assets/0*ugRv8BWWMigxK03S.png)
 
 此图来源于 Google I/O 2018， 从图中，可以看到，摄像头获取到的数据流会转换不同的数据流来交由不同的逻辑模块进行处理。为什么会这样子做呢？在不用的场景中，数据可能会有不同的优化策略，用来更好的适应对应的场景。
 
