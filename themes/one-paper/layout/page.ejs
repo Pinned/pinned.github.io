@@ -1,0 +1,11 @@
+<div class="post-main">
+    <% if (page.type === 'snippet') { %>
+        <%- code_snippet() %>
+    <% } else { %>
+
+        <div class="post-md">
+            <%- page.content %>
+        </div>
+
+    <% } %>
+</div>
