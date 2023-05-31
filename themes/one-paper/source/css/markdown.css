@@ -15,22 +15,23 @@
 {
     color: var(--font-color-1);
 }
-/* 二级标题 */
+/* 一级标题 */
 .post-md h1  {
     display:block;
     border-bottom: 4px solid rgb(33, 33, 34);
-  }
+    font-size: 1rem;
+}
   
-  /* 二级标题内容 */
-  .post-md h1  .content {
+/* 一级标题内容 */
+.post-md h1  .content {
     display: flex;
     color: rgb(33, 33, 34);
     font-size: 1rem;
-  }
+}
   
   
-  /* 二级标题后缀 */
-  .post-md h1  .suffix {
+/* 一级标题后缀 */
+.post-md h1  .suffix {
     display: flex;
     box-sizing: border-box;
     width: 20px;
@@ -54,8 +55,8 @@
     height: 40px;
     background-color: rgb(251, 251, 251);
     border-bottom: 1px solid rgb(246, 246, 246);
-    overflow: hidden;
     box-sizing: border-box;
+    font-size: 1rem;
 }
 
 /* 二级标题内容 */
@@ -67,11 +68,10 @@
     background-color: rgb(33, 33, 34);
     border-bottom-right-radius:100px;
     color: rgb(255, 255, 255);
-    padding-top: 6px;
-    padding-right: 20px;
+    padding-right: 30px;
     padding-left: 20px;
-    line-height: 1.1;
     font-size: 1rem;
+    line-height: 40px;
 }
 
 /* 三级标题 */
@@ -79,6 +79,7 @@
     margin: 20px auto 5px;
     border-top: 1px solid rgb(221, 221, 221);
     box-sizing: border-box;
+    font-size: 1rem;
 }
   
 /* 三级标题内容 */
@@ -226,8 +227,4 @@
 {
     opacity: .5;
     padding-right: 12px;
-}
-
-.post-md code.hljs {
-    font-size: 12px;
 }
