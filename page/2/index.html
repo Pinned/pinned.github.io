@@ -4,7 +4,9 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
     <link rel="alternate icon" type="image/png" href="/img/favicon.png">
-    <title>大罗说事 | </title>
+    
+        <title>大罗说事 </title>
+    
     
 <link rel="stylesheet" href="/css/reset.css">
 
@@ -30,6 +32,8 @@
         
         <li><a href="/archives">归档</a></li>
         
+        <li><a href="/snippet">代码片段</a></li>
+        
         <li><a href="/about">关于</a></li>
         
     </ul>
@@ -37,47 +41,31 @@
                 
                 <div class="post-list">
     
-    <div class="post">
-        <a class="post-title" href="/2023/05/29/2015-12-29-Android-RelativeLayout-Gravity/">Android RelativeLayout 之 Gravity 的使用</a>
-        <div class="post-except">
-            在xml中，ViewGroup用来控制view布局位置，我们可以使用android:gravity=&quot;center&quot;来实现。但是很少会在RelativeLayout中使用，今天碰到了一个项目中的布局使用了这个属性。但是在印象中这个属性在RelativeLayout是不生效的。但是，在项目中，这个属性生效了，并且引起了一个问题。去百度了一下，好多人在博客里面写的这个属性在RelativeLayout不生效，在这里，我在强调一下，RelativeLayout中
-            <a class="read-more" href="/2023/05/29/2015-12-29-Android-RelativeLayout-Gravity/"> ... </a>
-        </div>
-        <div class="post-date">2023.05.29</div>
-    </div>
+    
     
     <div class="post">
-        <a class="post-title" href="/2023/05/29/2015-05-25-android-soft-keyboard/">【转】Android打开与关闭软键盘</a>
+        <a class="post-title" href="/2016/10/17/ubuntu-ruby-install/">Ubuntu中安装Ruby的一些注意事项</a>
         <div class="post-except">
             
-方法一(如果输入法在窗口上已经显示，则隐藏，反之则显示)
-
-InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS); 
-
-
-方法二(View为接受软键盘输入的视图)
-
-InputMethodManager imm = (Inpu
-            <a class="read-more" href="/2023/05/29/2015-05-25-android-soft-keyboard/"> ... </a>
+                使用RVM安装Ruby安装RVM
+curl -L get.rvm.io | bash -s stable
+//若提示找不到公钥，执行下边语句
+gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+//然后，重新执行，安装完rvm之后，需配置终端，以便下次打开终端能直接只用rvm。更改终端配置方法：参见https://rvm.io/integration
+            
+            <a class="read-more" href="/2016/10/17/ubuntu-ruby-install/"> ... </a>
         </div>
-        <div class="post-date">2023.05.29</div>
+        <div class="post-date">2016.10.17</div>
     </div>
     
-    <div class="post">
-        <a class="post-title" href="/2023/05/29/2016-10-18-android-dynamic-create-menu/">Android 动态修改菜单</a>
-        <div class="post-except">
-            在一个Android创建菜单menu时，需要重写Activity的onCreateOptionsMenu(Menu menu)方法，这个方法只在第一次创建的时候调用一次，所以如果之后想对menu进行动态的修改，那么就不要再对onCreateOptionsMenu做什么手脚了。
-动态修改菜单就要用到onPrepareOptionsMenu(Menu menu)方法了。onPrepareOptionsMenu与onCreateOptionsMenu不同的是，他在每次按下menu硬
-            <a class="read-more" href="/2023/05/29/2016-10-18-android-dynamic-create-menu/"> ... </a>
-        </div>
-        <div class="post-date">2023.05.29</div>
-    </div>
+    
+    
     
     <div class="post">
-        <a class="post-title" href="/2023/05/29/2016-10-10-Shell-Sub-String/">Shell脚本8种字符串截取方法</a>
+        <a class="post-title" href="/2016/10/10/Shell-Sub-String/">Shell脚本8种字符串截取方法</a>
         <div class="post-except">
-            假设有变量： var=http://blog.knero.cn/test.html
+            
+                假设有变量： var=http://blog.knero.cn/test.html
 #号截取，删除左边字符，保留右边字符示例
 var=http://blog.knero.cn/test.html
 sub=$&#123;var#*/&#125;
@@ -87,109 +75,143 @@ echo $sub
 /blog.knero.cn/test.html
 
 其中var是变量名，**#号是运算符，&#x2F;* 表示从左边开始删除第一个**&#x2F;号及左边的所有字符即删除http:&#x2F;**结果是 
-            <a class="read-more" href="/2023/05/29/2016-10-10-Shell-Sub-String/"> ... </a>
+            
+            <a class="read-more" href="/2016/10/10/Shell-Sub-String/"> ... </a>
         </div>
-        <div class="post-date">2023.05.29</div>
+        <div class="post-date">2016.10.10</div>
     </div>
     
-    <div class="post">
-        <a class="post-title" href="/2023/05/29/2016-10-17-ubuntu-ruby-install/">Ubuntu中安装Ruby的一些注意事项</a>
-        <div class="post-except">
-            使用RVM安装Ruby安装RVM
-curl -L get.rvm.io | bash -s stable
-//若提示找不到公钥，执行下边语句
-gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
-//然后，重新执行，安装完rvm之后，需配置终端，以便下次打开终端能直接只用rvm。更改终端配置方法：参见https://rvm.io/integration
-            <a class="read-more" href="/2023/05/29/2016-10-17-ubuntu-ruby-install/"> ... </a>
-        </div>
-        <div class="post-date">2023.05.29</div>
-    </div>
+    
+    
     
     <div class="post">
-        <a class="post-title" href="/2023/05/29/2016-10-18-set-textview-textsize-big/">Android TextView setTextSize</a>
-        <div class="post-except">
-            Android TextView 在设置TextSize 值很大的时候，会报如下错误Font size too large to fit in cache。 修改方法如下：
-TextView bigText = (TextView) findViewById(R.id.bigtext);
-bigText.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
-
-
-            <a class="read-more" href="/2023/05/29/2016-10-18-set-textview-textsize-big/"> ... </a>
-        </div>
-        <div class="post-date">2023.05.29</div>
-    </div>
-    
-    <div class="post">
-        <a class="post-title" href="/2023/05/29/2016-10-21-ubuntu-install-tensorflow/">Ubuntu 安装 Tensorflow</a>
-        <div class="post-except">
-            首先贴一下官方GET STARTED地址： 传送门
-安装步骤：
-
-安装python
-
-sudo apt-get install python-pip python-dev
-
-
-按电脑配置环境变量
-
-// Ubuntu/Linux 64-bit, CPU only, Python 2.7
-export TF_BINARY_URL=https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-0.11.0rc0-cp
-            <a class="read-more" href="/2023/05/29/2016-10-21-ubuntu-install-tensorflow/"> ... </a>
-        </div>
-        <div class="post-date">2023.05.29</div>
-    </div>
-    
-    <div class="post">
-        <a class="post-title" href="/2023/05/29/2016-12-23-android-get-logcat/">获取Logcat信息</a>
-        <div class="post-except">
-            private void getLogcat( final LogcatListener listener ) &#123;
-
-    new Thread() &#123;
-        @Override
-        public void run() &#123;
-            try &#123;
-                String processId = Integer.toString( android.os.Process.myPid(
-            <a class="read-more" href="/2023/05/29/2016-12-23-android-get-logcat/"> ... </a>
-        </div>
-        <div class="post-date">2023.05.29</div>
-    </div>
-    
-    <div class="post">
-        <a class="post-title" href="/2023/05/29/2015-04-21-android-textview-size/">Android TextView 设置字体大小</a>
-        <div class="post-except">
-            /**
- * Set the default text size to the given value, interpreted as &quot;scaled
- * pixel&quot; units.  This size is adjusted based on the current density and
- * user font size preference.
- *
- * @param size The scaled pixel size.
- *
- * @att
-            <a class="read-more" href="/2023/05/29/2015-04-21-android-textview-size/"> ... </a>
-        </div>
-        <div class="post-date">2023.05.29</div>
-    </div>
-    
-    <div class="post">
-        <a class="post-title" href="/2023/05/29/2015-04-27-android-reflect-inner-class/">java反射内部类</a>
+        <a class="post-title" href="/2015/12/29/Android-RelativeLayout-Gravity/">Android RelativeLayout 之 Gravity 的使用</a>
         <div class="post-except">
             
-在java中反射加载类的方法如下
-
-Class rClass = Class.forName(&quot;android.R&quot;);
-
-
-加载android.R.attr
-
-Class attrClass = Class.forName(&quot;android.R$attr&quot;);
-
-
-内部类并不是像调用那样，使用., 而是使用$
-
-
-            <a class="read-more" href="/2023/05/29/2015-04-27-android-reflect-inner-class/"> ... </a>
+                在xml中，ViewGroup用来控制view布局位置，我们可以使用android:gravity=&quot;center&quot;来实现。但是很少会在RelativeLayout中使用，今天碰到了一个项目中的布局使用了这个属性。但是在印象中这个属性在RelativeLayout是不生效的。但是，在项目中，这个属性生效了，并且引起了一个问题。去百度了一下，好多人在博客里面写的这个属性在RelativeLayout不生效，在这里，我在强调一下，RelativeLayout中
+            
+            <a class="read-more" href="/2015/12/29/Android-RelativeLayout-Gravity/"> ... </a>
         </div>
-        <div class="post-date">2023.05.29</div>
+        <div class="post-date">2015.12.29</div>
     </div>
+    
+    
+    
+    
+    <div class="post">
+        <a class="post-title" href="/2015/12/22/gradle-download-error/">Android Studio Gradle Download Error</a>
+        <div class="post-except">
+            
+                自从使用Android Studio 开始，就一直存在一个问题，那就是Gradle下载不下来。不仅如此，JCtener 与 mavenCentral 也是被墙了。
+
+我们先来解决gradle 下载的问题
+用浏览器挂上vpn， 将你需要的gralde-version.zip文件下载下来，放到本地。打开你的项目，找到当前目录下 gradle -&gt; wrapper -&gt; gradle-wrapper.properties , 打开这个文件，将最后一行的地址修改为如下：d
+            
+            <a class="read-more" href="/2015/12/22/gradle-download-error/"> ... </a>
+        </div>
+        <div class="post-date">2015.12.22</div>
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    <div class="post">
+        <a class="post-title" href="/2015/07/27/git-merge-two-project/">Git 合并两个Project</a>
+        <div class="post-except">
+            
+                问题： 公司开始使用的是SVN进行项目管理的，现在有一个项目，有两个Project，其中一个是Application， 另一个是Library。现在要把SVN上面的项目迁移到Git服务器上去。但是Git服务器上面只有一个Proj，也就是说，现在需要将两个项目和在一起。想想，本来也应该把两个项目合在一起，不然，版本管理必然也会是一个大的问题。
+解决方式
+如果不需要保存SVN上的提交日志，那直接复制提交就行了。
+
+要保存提交日志
+首先要将SVN的项目迁移到GIT服务器上。我在本地
+            
+            <a class="read-more" href="/2015/07/27/git-merge-two-project/"> ... </a>
+        </div>
+        <div class="post-date">2015.07.27</div>
+    </div>
+    
+    
+    
+    
+    <div class="post">
+        <a class="post-title" href="/2015/06/29/android-add-view/">Android加载子View</a>
+        <div class="post-except">
+            
+                Android的一个View界面都是通过ViewGroup 加上很多子View来实现的，即viewGroup.addView(view)。
+让我一起来看看源码是如何执行的。
+addView(view)
+public void addView(View child) &#123;
+    addView(child, -1);
+&#125;
+public void addView(View child, int index) &#123;
+    if (child == nu
+            
+            <a class="read-more" href="/2015/06/29/android-add-view/"> ... </a>
+        </div>
+        <div class="post-date">2015.06.29</div>
+    </div>
+    
+    
+    
+    
+    <div class="post">
+        <a class="post-title" href="/2015/05/25/android-soft-keyboard/">【转】Android打开与关闭软键盘</a>
+        <div class="post-except">
+            
+                
+方法一(如果输入法在窗口上已经显示，则隐藏，反之则显示)
+
+InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS); 
+
+
+方法二(View为接受软键盘输入的视图)
+
+InputMethodManager imm = (Inpu
+            
+            <a class="read-more" href="/2015/05/25/android-soft-keyboard/"> ... </a>
+        </div>
+        <div class="post-date">2015.05.25</div>
+    </div>
+    
+    
+    
+    
+    <div class="post">
+        <a class="post-title" href="/2015/05/22/android-like-qq-input/">Android EditText软键盘显示隐藏以及“监听”</a>
+        <div class="post-except">
+            
+                
+起因
+
+本人在做类似于微信、易信等这样的输入框时，遇到了一个问题。聊天界面最下面一般有输入文字的EditText和表情按钮等。
+
+点击表情会在这下面显示表情选择，如图2，如果之前点击输入框弹出了软键盘，那么还需要隐藏软键盘；
+
+点击输入框，弹出软键盘，如果之前显示了表情选择，则还需要隐藏表情选择。
+
+
+
+解决办法
+
+
+隐藏输入法
+
+ private boolean showKeyboard() &#123;
+    InputMethodManager imm = (Inp
+            
+            <a class="read-more" href="/2015/05/22/android-like-qq-input/"> ... </a>
+        </div>
+        <div class="post-date">2015.05.22</div>
+    </div>
+    
+    
+    
+    
     
 </div>
 
@@ -218,10 +240,20 @@ Class attrClass = Class.forName(&quot;android.R$attr&quot;);
 <script src="/js/highlightjs-line-numbers.js"></script>
 
 
+<script src="/js/clipboard.min.js"></script>
+
+
 <script>
-    hljs.initHighlightingOnLoad();
-    hljs.initLineNumbersOnLoad();
     hljs.highlightAll();
+    var clipboard = new ClipboardJS('#clipboardbtn');
+    clipboard.on('success', function (e) {
+        console.log("Copied")
+        e.clearSelection();  
+    });
+
+    clipboard.on('error', function (e) {
+        console.log(e);
+    });
 </script>
 
             </div>

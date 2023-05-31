@@ -14,10 +14,54 @@
 .post-md h6
 {
     color: var(--font-color-1);
-    margin: 4px 0;
 }
-.post-md h1 {
-    margin-left: -5px;
+/* 一级标题 */
+.post-md h1  {
+    display:block;
+    border-bottom: 4px solid rgb(33, 33, 34);
+    font-size: 1rem;
+}
+  
+/* 一级标题内容 */
+.post-md h1  .content {
+    display: flex;
+    color: rgb(33, 33, 34);
+    font-size: 1rem;
+}
+  
+  
+/* 一级标题后缀 */
+.post-md h1  .suffix {
+    display: flex;
+    box-sizing: border-box;
+    width: 20px;
+    height: 10px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    background: RGBA(33, 33, 34, .5);
+    color: rgb(255, 255, 255);
+    font-size: 16px;
+    letter-spacing: 0.544px;
+    justify-content: flex-end;
+    box-sizing: border-box !important;
+    overflow-wrap: break-word !important;
+    float: right;
+    margin-top: -10px;
+}
+
+/* 二级标题 */
+.post-md h2 {
+    margin: 10px auto;
+    height: 40px;
+    background-color: rgb(251, 251, 251);
+    border-bottom: 1px solid rgb(246, 246, 246);
+    box-sizing: border-box;
+    font-size: 1rem;
+}
+
+/* 二级标题内容 */
+.post-md h2 .content {
+    margin-left: -10px;
     display: inline-block;
     width: auto;
     height: 40px;
@@ -25,23 +69,21 @@
     border-bottom-right-radius:100px;
     color: rgb(255, 255, 255);
     padding-right: 30px;
-    padding-left: 10px;
+    padding-left: 20px;
+    font-size: 1rem;
     line-height: 40px;
+}
+
+/* 三级标题 */
+.post-md h3 {
+    margin: 20px auto 5px;
+    border-top: 1px solid rgb(221, 221, 221);
+    box-sizing: border-box;
     font-size: 1rem;
 }
-.post-md h2
-{
-    margin-top: -1px;
-    padding-top: 6px;
-    padding-right: 5px;
-    padding-left: 5px;
-    font-size: 1rem;
-    border-top: 2px solid rgb(33, 33, 34);
-    display: inline-block;
-    line-height: 1.1;
-}
-.post-md h3
-{
+  
+/* 三级标题内容 */
+.post-md h3 .content {
     margin-top: -1px;
     padding-top: 6px;
     padding-right: 5px;
@@ -185,8 +227,4 @@
 {
     opacity: .5;
     padding-right: 12px;
-}
-
-.post-md code.hljs {
-    font-size: 12px;
 }

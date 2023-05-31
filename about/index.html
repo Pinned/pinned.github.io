@@ -4,7 +4,9 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
     <link rel="alternate icon" type="image/png" href="/img/favicon.png">
-    <title>大罗说事 | </title>
+    
+        <title>大罗说事 </title>
+    
     
 <link rel="stylesheet" href="/css/reset.css">
 
@@ -30,27 +32,27 @@
         
         <li><a href="/archives">归档</a></li>
         
+        <li><a href="/snippet">代码片段</a></li>
+        
         <li><a href="/about">关于</a></li>
         
     </ul>
 </div>
                 
                 <div class="post-main">
-
     
 
         <div class="post-md">
-            <h2 id="关于我"><a href="#关于我" class="headerlink" title="关于我"></a>关于我</h2><ul>
+            <h2><span class="prefix"></span><span class="content">关于我</span><span class="suffix"></span></h2><ul>
 <li>程序员一枚，主要从事Android软件开发喜爱摆弄各种新鲜技术。</li>
 <li>热爱互联网以及移动互联网，常年混迹于网络。</li>
 </ul>
-<h2 id="关于博客"><a href="#关于博客" class="headerlink" title="关于博客"></a>关于博客</h2><p>记录我的技术成长，技术历程，遇到的技术问题。</p>
-<h2 id="联系我"><a href="#联系我" class="headerlink" title="联系我"></a>联系我</h2><p>邮箱： lovecluo#gmail.com</p>
+<h2><span class="prefix"></span><span class="content">关于博客</span><span class="suffix"></span></h2><p>记录我的技术成长，技术历程，遇到的技术问题。</p>
+<h2><span class="prefix"></span><span class="content">联系我</span><span class="suffix"></span></h2><p>邮箱： lovecluo#gmail.com</p>
 
         </div>
 
     
-
 </div>
                 <!--  -->
                 <div class="footer">
@@ -73,10 +75,20 @@
 <script src="/js/highlightjs-line-numbers.js"></script>
 
 
+<script src="/js/clipboard.min.js"></script>
+
+
 <script>
-    hljs.initHighlightingOnLoad();
-    hljs.initLineNumbersOnLoad();
     hljs.highlightAll();
+    var clipboard = new ClipboardJS('#clipboardbtn');
+    clipboard.on('success', function (e) {
+        console.log("Copied")
+        e.clearSelection();  
+    });
+
+    clipboard.on('error', function (e) {
+        console.log(e);
+    });
 </script>
 
             </div>

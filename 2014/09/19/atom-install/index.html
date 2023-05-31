@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+    <link rel="alternate icon" type="image/png" href="/img/favicon.png">
+    
+        <title>Ubuntu 14.04 安装Atom编辑器 </title>
+    
+    
+<link rel="stylesheet" href="/css/reset.css">
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/css/markdown.css">
+
+    
+<link rel="stylesheet" href="/css/fonts.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="post-header">
+    <p class="post-title">Ubuntu 14.04 安装Atom编辑器</p>
+</div>
+                
+                <div class="post-main">
+
+    
+        <div class="post-meta">
+            <a class='author' href="/">罗昭成</a> <span id="clipboardbtn" 
+            data-clipboard-action="copy"
+            data-clipboard-target="#copy-post-content"
+            >2014年09月19日</span>
+        </div>
+        <div class="post-md" id="copy-post-content">
+            <h2><span class="prefix"></span><span class="content">Ubuntu下安装Atom编辑器</span><span class="suffix"></span></h2><p>重装了Ubuntu系统，没得什么好的文本编辑器。又不喜欢使用默认的编辑器。<br>所以装了一个Atom。用了一下，还可以。</p>
+<ol>
+<li>Clone the Atom repository:</li>
+</ol>
+<pre><code class="xml">git clone https://github.com/atom/atom
+cd atom
+</code></pre>
+<ol start="2">
+<li>Build Atom</li>
+</ol>
+<pre><code class="xml">script/build
+</code></pre>
+<p>  This will create the atom application at $TMPDIR&#x2F;atom-build&#x2F;Atom.</p>
+<ol start="3">
+<li>Install the atom and apm commands to &#x2F;usr&#x2F;local&#x2F;bin by executing:</li>
+</ol>
+<pre><code class="xml">sudo script/grunt install
+</code></pre>
+<ol start="4">
+<li>Optionally, you may generate a .deb package at $TMPDIR&#x2F;atom-build:</li>
+</ol>
+<pre><code class="xml">script/grunt mkdeb
+</code></pre>
+<p>安装过程有一点小波折，但最终还是搞定了。</p>
+<p>遇到了一个错误，信息如下：</p>
+<p><code>/usr/bin/env: node: No such file or directory</code></p>
+<hr>
+<p><strong>官方的方案</strong></p>
+<hr>
+<blockquote>
+<p>If you get this notice when attempting to script&#x2F;build, you either do not have Node.js installed, or node isn’t identified as Node.js on your machine. If it’s the latter, entering sudo ln -s &#x2F;usr&#x2F;bin&#x2F;nodejs &#x2F;usr&#x2F;bin&#x2F;node into your terminal may fix the issue.</p>
+</blockquote>
+<p>但是我还是没有解决，并且安装了Nodejs。后面才发现，原来是我安装的<br>Nodejs的位置的问题。</p>
+<p>解决办法：</p>
+<pre><code class="xml">ln -s /usr/local/node/bin/node /usr/bin/node
+</code></pre>
+
+        </div>
+
+    
+
+</div>
+                <!-- 
+                    <div class="post_pre_next">
+    
+        <div class="post-pre">
+            <a href="/2014/09/21/Navicat%20install/">上一篇: Ubuntu 下安装Navicat</a>
+        </div>
+    
+    
+        <a href="/2014/09/14/Ubuntu%20System%20Install/">下一篇: 
+            安装Ubuntu单系统
+        </a>
+    
+</div>
+
+
+                 -->
+                <div class="footer">
+    <span>Copyright © 2023 大罗说事</span>
+</div>
+
+<!-- 
+<link rel="stylesheet" href="/css/highlight.default.css">
+ -->
+
+<link rel="stylesheet" href="/css/atom-one-dark.css">
+
+
+<link rel="stylesheet" href="/css/code-theme.css">
+
+
+<script src="/js/highlight.min.js"></script>
+
+
+<script src="/js/highlightjs-line-numbers.js"></script>
+
+
+<script src="/js/clipboard.min.js"></script>
+
+
+<script>
+    hljs.highlightAll();
+    var clipboard = new ClipboardJS('#clipboardbtn');
+    clipboard.on('success', function (e) {
+        console.log("Copied")
+        e.clearSelection();  
+    });
+
+    clipboard.on('error', function (e) {
+        console.log(e);
+    });
+</script>
+
+            </div>
+        </div>
+    </body>
+</html>

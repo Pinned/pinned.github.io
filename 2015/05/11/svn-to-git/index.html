@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+    <link rel="alternate icon" type="image/png" href="/img/favicon.png">
+    
+        <title>SVN迁移到GIT </title>
+    
+    
+<link rel="stylesheet" href="/css/reset.css">
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/css/markdown.css">
+
+    
+<link rel="stylesheet" href="/css/fonts.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="post-header">
+    <p class="post-title">SVN迁移到GIT</p>
+</div>
+                
+                <div class="post-main">
+
+    
+        <div class="post-meta">
+            <a class='author' href="/">罗昭成</a> <span id="clipboardbtn" 
+            data-clipboard-action="copy"
+            data-clipboard-target="#copy-post-content"
+            >2015年05月11日</span>
+        </div>
+        <div class="post-md" id="copy-post-content">
+            <p>通过git svn clone将一个SVN项目克隆成一个git版本库</p>
+<pre><code class="bash"># 参数--no-metadata表示阻止git导出SVN包含的一些无用信息
+git svn clone svn://localhost/proj/ --no-metadata
+</code></pre>
+<p>提交到git库</p>
+<pre><code class="bash">git remote add origin git@localhost/proj.git
+git push --set-upstream origin master
+</code></pre>
+
+        </div>
+
+    
+
+</div>
+                <!-- 
+                    <div class="post_pre_next">
+    
+        <div class="post-pre">
+            <a href="/2015/05/11/android-aidl-server/">上一篇: Android Service学习之AIDL, Parcelable和远程服务</a>
+        </div>
+    
+    
+        <a href="/2015/04/30/mac-iterm2-zsh/">下一篇: 
+            Mac Iterm2 zsh使用
+        </a>
+    
+</div>
+
+
+                 -->
+                <div class="footer">
+    <span>Copyright © 2023 大罗说事</span>
+</div>
+
+<!-- 
+<link rel="stylesheet" href="/css/highlight.default.css">
+ -->
+
+<link rel="stylesheet" href="/css/atom-one-dark.css">
+
+
+<link rel="stylesheet" href="/css/code-theme.css">
+
+
+<script src="/js/highlight.min.js"></script>
+
+
+<script src="/js/highlightjs-line-numbers.js"></script>
+
+
+<script src="/js/clipboard.min.js"></script>
+
+
+<script>
+    hljs.highlightAll();
+    var clipboard = new ClipboardJS('#clipboardbtn');
+    clipboard.on('success', function (e) {
+        console.log("Copied")
+        e.clearSelection();  
+    });
+
+    clipboard.on('error', function (e) {
+        console.log(e);
+    });
+</script>
+
+            </div>
+        </div>
+    </body>
+</html>

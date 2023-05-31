@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+    <link rel="alternate icon" type="image/png" href="/img/favicon.png">
+    
+        <title>TextView高亮URL地址解析 </title>
+    
+    
+<link rel="stylesheet" href="/css/reset.css">
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/css/markdown.css">
+
+    
+<link rel="stylesheet" href="/css/fonts.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="post-header">
+    <p class="post-title">TextView高亮URL地址解析</p>
+</div>
+                
+                <div class="post-main">
+
+    
+        <div class="post-meta">
+            <a class='author' href="/">罗昭成</a> <span id="clipboardbtn" 
+            data-clipboard-action="copy"
+            data-clipboard-target="#copy-post-content"
+            >2015年01月16日</span>
+        </div>
+        <div class="post-md" id="copy-post-content">
+            <p>#TextView 高亮实现</p>
+<p>基本使用方法：</p>
+<pre><code class="java">textView.setAutoLinkMask(Linkify.ALL);
+//public static final int WEB_URLS = 1;
+//public static final int EMAIL_ADDRESSES = 2;
+//public static final int PHONE_NUMBERS = 4;
+//public static final int MAP_ADDRESSES = 8; 
+//public static final int ALL = 15;
+textView.setMovementMethod(LinkMovementMethod.getInstacne());
+</code></pre>
+<p><code>setMovementMethod()</code>是设置相应点击跳转时间触发用的。</p>
+<p>去研究了一下<code>TextView</code>的源码。URL地址匹配实际上是用的正则做的。<br>所以我们也能很简单的实现这个东西。</p>
+<p>#修改源码，实现自己的高亮和自定义跳转</p>
+<p>首先拿到我们要显示的字符串，创建<code>Spannable</code>对象：</p>
+<pre><code class="java">private Spannable.Factory mSpannableFactory = Spannable.Factory.getInstance();
+Spannable spannable = mSpannableFactory.newSpannable(pili.description);
+</code></pre>
+<p>然后我们要去拿到的<code>spannable</code>进行处理，将我们要高亮的数据<code>正则匹配</code>出来。</p>
+<ol>
+<li>先移除掉<code>spannable</code>中已经存在的<code>URLSpan</code></li>
+</ol>
+<pre><code class="java">  URLSpan[] old = text.getSpans(0, text.length(), URLSpan.class);
+  for (int i = old.length - 1; i &gt;= 0; i--) &#123;
+    text.removeSpan(old[i]);
+  &#125;
+</code></pre>
+<ol start="2">
+<li>匹配URL地址，并设置<code>Spannable</code></li>
+</ol>
+<pre><code class="java">public static final Linkify.MatchFilter sUrlMatchFilter = new Linkify.MatchFilter() &#123;
+         public final boolean acceptMatch(CharSequence s, int start, int end) &#123;
+         if (start == 0) &#123;
+             return true;
+         &#125;
+
+         if (s.charAt(start - 1) == &#39;@&#39;) &#123;
+             return false;
+         &#125;
+         return true;
+         &#125;
+&#125;;
+private static final String makeUrl(String url, String[] prefixes,
+                                      Matcher m, Linkify.TransformFilter filter) &#123;
+      if (filter != null) &#123;
+          url = filter.transformUrl(m, url);
+      &#125;
+
+      boolean hasPrefix = false;
+
+      for (int i = 0; i &lt; prefixes.length; i++) &#123;
+          if (url.regionMatches(true, 0, prefixes[i], 0,
+                  prefixes[i].length())) &#123;
+              hasPrefix = true;
+
+              // Fix capitalization if necessary
+              if (!url.regionMatches(false, 0, prefixes[i], 0,
+                      prefixes[i].length())) &#123;
+                  url = prefixes[i] + url.substring(prefixes[i].length());
+              &#125;
+
+              break;
+          &#125;
+      &#125;
+
+      if (!hasPrefix) &#123;
+          url = prefixes[0] + url;
+      &#125;
+      return url;
+  &#125;
+  
+  private final void gatherLinks(ArrayList&lt;LinkSpec&gt; links,
+                                       Spannable s, Pattern pattern, String[] schemes,
+                                       Linkify.MatchFilter matchFilter, 
+                                       Linkify.TransformFilter transformFilter) &#123;
+     Matcher m = pattern.matcher(s); // 正则匹配，使用Patterns.WEB_URL
+     while (m.find()) &#123;
+         int start = m.start();
+         int end = m.end();
+
+         if (matchFilter == null || matchFilter.acceptMatch(s, start, end)) &#123;
+             LinkSpec spec = new LinkSpec();
+             String url = makeUrl(m.group(0), schemes, m, transformFilter);
+             spec.url = url;
+             spec.start = start;
+             spec.end = end;
+             links.add(spec);
+         &#125;
+     &#125;
+   &#125;
+   class LinkSpec &#123;
+      String url;
+      int start;
+      int end;
+  &#125;
+</code></pre>
+<pre><code class="java">  private final void applyLink(String url, int start, int end, Spannable text) &#123;
+      URLSpanNoUnderline span = new URLSpanNoUnderline(url);
+      text.setSpan(span, start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+  &#125;
+  public class URLSpanNoUnderline extends ClickableSpan &#123;
+      private final String mURL;
+      public URLSpanNoUnderline(String url) &#123;
+          mURL = url;
+      &#125;
+
+      public String getURL() &#123;
+          return mURL;
+      &#125;
+
+      @Override
+      public void onClick(View widget) &#123;
+          final Context context = widget.getContext();
+          BrowserActivity.startActivity(context, mURL);
+      &#125;
+      @Override
+      public void updateDrawState(TextPaint ds) &#123;
+          super.updateDrawState(ds);
+          ds.setUnderlineText(false);  //取消下划线
+          ds.setColor(0xff0066ff);     //指定文字颜色
+          //ds.setTextSize(ds.getTextSize()*1.1F);
+      &#125;
+  &#125;
+</code></pre>
+
+        </div>
+
+    
+
+</div>
+                <!-- 
+                    <div class="post_pre_next">
+    
+        <div class="post-pre">
+            <a href="/2015/01/17/advance-textview-using/">上一篇: Advanced Android TextView</a>
+        </div>
+    
+    
+        <a href="/2015/01/15/textview-url-lickify/">下一篇: 
+            TextView 高亮URL地址，并实现跳转
+        </a>
+    
+</div>
+
+
+                 -->
+                <div class="footer">
+    <span>Copyright © 2023 大罗说事</span>
+</div>
+
+<!-- 
+<link rel="stylesheet" href="/css/highlight.default.css">
+ -->
+
+<link rel="stylesheet" href="/css/atom-one-dark.css">
+
+
+<link rel="stylesheet" href="/css/code-theme.css">
+
+
+<script src="/js/highlight.min.js"></script>
+
+
+<script src="/js/highlightjs-line-numbers.js"></script>
+
+
+<script src="/js/clipboard.min.js"></script>
+
+
+<script>
+    hljs.highlightAll();
+    var clipboard = new ClipboardJS('#clipboardbtn');
+    clipboard.on('success', function (e) {
+        console.log("Copied")
+        e.clearSelection();  
+    });
+
+    clipboard.on('error', function (e) {
+        console.log(e);
+    });
+</script>
+
+            </div>
+        </div>
+    </body>
+</html>

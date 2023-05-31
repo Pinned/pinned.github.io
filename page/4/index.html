@@ -4,7 +4,9 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
     <link rel="alternate icon" type="image/png" href="/img/favicon.png">
-    <title>大罗说事 | </title>
+    
+        <title>大罗说事 </title>
+    
     
 <link rel="stylesheet" href="/css/reset.css">
 
@@ -30,6 +32,8 @@
         
         <li><a href="/archives">归档</a></li>
         
+        <li><a href="/snippet">代码片段</a></li>
+        
         <li><a href="/about">关于</a></li>
         
     </ul>
@@ -37,146 +41,67 @@
                 
                 <div class="post-list">
     
-    <div class="post">
-        <a class="post-title" href="/2023/05/29/2015-04-06-define-id-in-xml-file/">在`values`中定义id</a>
-        <div class="post-except">
-            在values文件夹中创建ids.xml文件， 文件目录为：values/ids.xml
-我们有时候，会在代码中定义一个组件，如TextView,但是我们想给他设置一个Id，又不知道该设置一个什么值比较好，就可以用上术方法来定义一个id, 具体代码如下:
-&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;values&gt;
-&lt;item name=&quot;custom_item_
-            <a class="read-more" href="/2023/05/29/2015-04-06-define-id-in-xml-file/"> ... </a>
-        </div>
-        <div class="post-date">2023.05.29</div>
-    </div>
+    
     
     <div class="post">
-        <a class="post-title" href="/2023/05/29/2015-04-06-exit-app-by-press-twice-back/">Android 按两次返回键退出应用程序</a>
+        <a class="post-title" href="/2015/04/13/android-best-practices-2/">Android最佳实践</a>
         <div class="post-except">
-            public boolean onKeyDown(int keyCode, KeyEvent event) &#123;
-    if (keyCode == KeyEvent.KEYCODE_BACK) &#123;
-        if ((System.currentTimeMillis() - mExitTime) &gt; 2000) &#123;
-            Object mHelperUtils;
-            Toast.makeText
-            <a class="read-more" href="/2023/05/29/2015-04-06-exit-app-by-press-twice-back/"> ... </a>
-        </div>
-        <div class="post-date">2023.05.29</div>
-    </div>
-    
-    <div class="post">
-        <a class="post-title" href="/2023/05/29/2015-04-06-format-file-size/">格式化文件容量代码</a>
-        <div class="post-except">
-            public static String formatSize(long size) &#123;
-    if (size &lt; 1024) &#123;
-        return String.format(&quot;%dByte&quot;, size);
-    &#125; else if (size &lt; 1024 * 1024) &#123;
-        return String.format(&quot;%.2fKb&quot;, size
-            <a class="read-more" href="/2023/05/29/2015-04-06-format-file-size/"> ... </a>
-        </div>
-        <div class="post-date">2023.05.29</div>
-    </div>
-    
-    <div class="post">
-        <a class="post-title" href="/2023/05/29/2015-04-06-gradle-rename-apk-file/">gradle打包的时候，自动重命名APK文件</a>
-        <div class="post-except">
-            android.applicationVariants.all &#123; variant -&gt;
-    variant.outputs.each &#123; output -&gt;
-        def outputFile = output.outputFile
-        if (outputFile != null &amp;&amp; outputFile.name.endsWith(&#39;.apk&#39;)) &#123;
-        
-            <a class="read-more" href="/2023/05/29/2015-04-06-gradle-rename-apk-file/"> ... </a>
-        </div>
-        <div class="post-date">2023.05.29</div>
-    </div>
-    
-    <div class="post">
-        <a class="post-title" href="/2023/05/29/2015-04-06-text-color-selector/">Android文字颜色选择器</a>
-        <div class="post-except">
-            //在这个地方，应该使用
-//android:textColor=&quot;@drawable/text_color&quot;
-
-// text_color.xml
-&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;selector xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;
-    
-            <a class="read-more" href="/2023/05/29/2015-04-06-text-color-selector/"> ... </a>
-        </div>
-        <div class="post-date">2023.05.29</div>
-    </div>
-    
-    <div class="post">
-        <a class="post-title" href="/2023/05/29/2015-04-10-mac-os-x-yomesite-install-rails/">Mac OS X Yosemite 安装 Rails</a>
-        <div class="post-except">
-            参考文章：Install Ruby on Rails · Mac OS X Yosemite
-在安装过程中，出现错误，有关错误信息可以查看下面这一篇博客，但是他的解决办法没有解决问题：
-MAC安装Rails
-最后的解决办法就是先将ruby 升级到最新版本，然后就可以顺利安装rails了。在此记录一下。
-
-            <a class="read-more" href="/2023/05/29/2015-04-10-mac-os-x-yomesite-install-rails/"> ... </a>
-        </div>
-        <div class="post-date">2023.05.29</div>
-    </div>
-    
-    <div class="post">
-        <a class="post-title" href="/2023/05/29/2015-04-13-android-best-practices-2/">Android最佳实践</a>
-        <div class="post-except">
-            从Futurice公司Android开发者中学到的经验。遵循以下准则，避免重复发明轮子。若您对开发iOS或Windows Phone 有兴趣，请看iOS Good Practices 和 Windows client Good Practices 这两篇文章。
+            
+                从Futurice公司Android开发者中学到的经验。遵循以下准则，避免重复发明轮子。若您对开发iOS或Windows Phone 有兴趣，请看iOS Good Practices 和 Windows client Good Practices 这两篇文章。
 摘要
 使用 Gradle 和它推荐的工程结构
 把密码和敏感数据放在gradle.properties
 不要自己写 HTTP 客户端,使用Volley或OkHttp库
 使用Jackson库解析JSON数据
 避免使用Gua
-            <a class="read-more" href="/2023/05/29/2015-04-13-android-best-practices-2/"> ... </a>
+            
+            <a class="read-more" href="/2015/04/13/android-best-practices-2/"> ... </a>
         </div>
-        <div class="post-date">2023.05.29</div>
+        <div class="post-date">2015.04.13</div>
     </div>
     
-    <div class="post">
-        <a class="post-title" href="/2023/05/29/2015-04-15-android-proguard/">Android 混淆记录</a>
-        <div class="post-except">
-            --keep class cn.knero.model.*&#123;
-    public &lt;methods&gt;; // 不混淆public的方法
-&#125;
-
-
-# Google Gson
-#---------------Begin: proguard configuration for Gson  ----------
-# Gson uses generic type information stored in a class file when worki
-            <a class="read-more" href="/2023/05/29/2015-04-15-android-proguard/"> ... </a>
-        </div>
-        <div class="post-date">2023.05.29</div>
-    </div>
+    
+    
     
     <div class="post">
-        <a class="post-title" href="/2023/05/29/2015-03-02-android-studio-using-2/">Android Studio 使用 -- 最佳实践</a>
-        <div class="post-except">
-            修改为Darcula主题File –&gt; Settings –&gt; Appearance ; 找到Theme， 选择Darcula， 重启Android Studio即可
-快速注释File –&gt; Setting –&gt; Keymap ；然后搜索Fix doc comment， 添加快捷键Alt + Shift + D
-局域变量前缀加m在使用Android编写代码的时候，会有一个习惯，就是在定义的变量前面加上前缀上加m，使用Alt + Insert的时候，生成
-            <a class="read-more" href="/2023/05/29/2015-03-02-android-studio-using-2/"> ... </a>
-        </div>
-        <div class="post-date">2023.05.29</div>
-    </div>
-    
-    <div class="post">
-        <a class="post-title" href="/2023/05/29/2015-03-11-ListView&RecyclerView/">ListView &amp; RecyclerView</a>
+        <a class="post-title" href="/2015/04/10/mac-os-x-yomesite-install-rails/">Mac OS X Yosemite 安装 Rails</a>
         <div class="post-except">
             
-RecyclerView 作消息列表滚动到最后面
+                参考文章：Install Ruby on Rails · Mac OS X Yosemite
+在安装过程中，出现错误，有关错误信息可以查看下面这一篇博客，但是他的解决办法没有解决问题：
+MAC安装Rails
+最后的解决办法就是先将ruby 升级到最新版本，然后就可以顺利安装rails了。在此记录一下。
 
-// 添加一条数据，滚动到最后面
-if(mDatas.size &gt; 0) &#123;
-    mListView.scrollToPosition(mDatas.size() - 1);
-&#125;
-
-2 . RecyclerView &amp; LinearLayoutManager
-// 显示的时候，按照整个RecyclerView的大小，从后往前显示，数据也是从最后一条开始展示
-LinearLayoutMa
-            <a class="read-more" href="/2023/05/29/2015-03-11-ListView&RecyclerView/"> ... </a>
+            
+            <a class="read-more" href="/2015/04/10/mac-os-x-yomesite-install-rails/"> ... </a>
         </div>
-        <div class="post-date">2023.05.29</div>
+        <div class="post-date">2015.04.10</div>
     </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
 </div>
 
@@ -205,10 +130,20 @@ LinearLayoutMa
 <script src="/js/highlightjs-line-numbers.js"></script>
 
 
+<script src="/js/clipboard.min.js"></script>
+
+
 <script>
-    hljs.initHighlightingOnLoad();
-    hljs.initLineNumbersOnLoad();
     hljs.highlightAll();
+    var clipboard = new ClipboardJS('#clipboardbtn');
+    clipboard.on('success', function (e) {
+        console.log("Copied")
+        e.clearSelection();  
+    });
+
+    clipboard.on('error', function (e) {
+        console.log(e);
+    });
 </script>
 
             </div>

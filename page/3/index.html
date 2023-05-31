@@ -4,7 +4,9 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
     <link rel="alternate icon" type="image/png" href="/img/favicon.png">
-    <title>大罗说事 | </title>
+    
+        <title>大罗说事 </title>
+    
     
 <link rel="stylesheet" href="/css/reset.css">
 
@@ -30,6 +32,8 @@
         
         <li><a href="/archives">归档</a></li>
         
+        <li><a href="/snippet">代码片段</a></li>
+        
         <li><a href="/about">关于</a></li>
         
     </ul>
@@ -37,100 +41,30 @@
                 
                 <div class="post-list">
     
-    <div class="post">
-        <a class="post-title" href="/2023/05/29/2015-04-17-android-notification-small-icon/">Android 5.0设备中，Notification小图标是白色的</a>
-        <div class="post-except">
-            问题描述在使用消息推送，在通知栏中展示通知，我们会有两个图标，一个是在状态栏展示的小图标，一个是打开通知中心，展示的大图标我在我自己的测试设备中，小图标始终显示为一个白色的空白图标。
-问题解决
-原文地址：Notification bar icon turns white in Android 5 Lollipop
-
-在这里，我把文章中说的东西抄一遍：
-在Android中用来展示Notification图标的代码如下：
-// android_frameworks_base/pa
-            <a class="read-more" href="/2023/05/29/2015-04-17-android-notification-small-icon/"> ... </a>
-        </div>
-        <div class="post-date">2023.05.29</div>
-    </div>
+    
     
     <div class="post">
-        <a class="post-title" href="/2023/05/29/2015-04-29-android-show-password-text/">Android显示密码</a>
+        <a class="post-title" href="/2015/05/14/android-mipmap-folder/">Android mipmap文件夹</a>
         <div class="post-except">
             
-//  方法1：
-if (mIsShowPsw) &#123;
-    mPswEdit.setTransformationMethod(HideReturnsTransformationMethod
-            .getInstance());
-&#125; else &#123;
-    mPswEdit.setTransformationMethod(PasswordTransformationMethod
-            .getInstance
-            <a class="read-more" href="/2023/05/29/2015-04-29-android-show-password-text/"> ... </a>
-        </div>
-        <div class="post-date">2023.05.29</div>
-    </div>
-    
-    <div class="post">
-        <a class="post-title" href="/2023/05/29/2015-04-30-mac-iterm2-zsh/">Mac Iterm2 zsh使用</a>
-        <div class="post-except">
-            安装zshbrew install zsh
-
-下载oh my zsh项目git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
-
-设置zshcp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
-chsh -s /bin/zsh
-
-VIM 的一些配置syntax on                &quot;语法高亮
-set nu!       
-            <a class="read-more" href="/2023/05/29/2015-04-30-mac-iterm2-zsh/"> ... </a>
-        </div>
-        <div class="post-date">2023.05.29</div>
-    </div>
-    
-    <div class="post">
-        <a class="post-title" href="/2023/05/29/2015-05-11-svn-to-git/">SVN迁移到GIT</a>
-        <div class="post-except">
-            通过git svn clone将一个SVN项目克隆成一个git版本库
-# 参数--no-metadata表示阻止git导出SVN包含的一些无用信息
-git svn clone svn://localhost/proj/ --no-metadata
-
-提交到git库
-git remote add origin git@localhost/proj.git
-git push --set-upstream origin master
-
-
-            <a class="read-more" href="/2023/05/29/2015-05-11-svn-to-git/"> ... </a>
-        </div>
-        <div class="post-date">2023.05.29</div>
-    </div>
-    
-    <div class="post">
-        <a class="post-title" href="/2023/05/29/2015-05-14-android-mipmap-folder/">Android mipmap文件夹</a>
-        <div class="post-except">
-            用Android Studio 创建项目的时候，默认创建mipmap文件夹，而不是drawable
+                用Android Studio 创建项目的时候，默认创建mipmap文件夹，而不是drawable
 查看了一下官方的解释，如下：
 drawable/
 For bitmap files (PNG, JPEG, or GIF), 9-Patch image files, and XML files that describe Drawable shapes or Drawable objects that contain multiple states (normal, pres
-            <a class="read-more" href="/2023/05/29/2015-05-14-android-mipmap-folder/"> ... </a>
+            
+            <a class="read-more" href="/2015/05/14/android-mipmap-folder/"> ... </a>
         </div>
-        <div class="post-date">2023.05.29</div>
+        <div class="post-date">2015.05.14</div>
     </div>
     
-    <div class="post">
-        <a class="post-title" href="/2023/05/29/2015-05-21-android-sub-emoji-text/">Android 截取EditText输入的Emoji表情</a>
-        <div class="post-except">
-            public String subInputText(String inputText,int index) &#123;
-    int unicode = Character.codePointAt(text, index);
-    int skip = Character.charCount(unicode);
-    mInputSquares[textCount++].setText(text.substring(index, index+skip));
-&#12
-            <a class="read-more" href="/2023/05/29/2015-05-21-android-sub-emoji-text/"> ... </a>
-        </div>
-        <div class="post-date">2023.05.29</div>
-    </div>
+    
+    
     
     <div class="post">
-        <a class="post-title" href="/2023/05/29/2015-05-12-android-update-sdk-no-ui/">Android 用命令行更新SDK</a>
+        <a class="post-title" href="/2015/05/12/android-update-sdk-no-ui/">Android 用命令行更新SDK</a>
         <div class="post-except">
-            基本使用在使用桌面系统的时候，我们都是用的SDK Manager, 如果现在要你部署一台CI服务器呢。
+            
+                基本使用在使用桌面系统的时候，我们都是用的SDK Manager, 如果现在要你部署一台CI服务器呢。
 我擦，ssh上去，没有界面，怎么破。
 查找了一下，Android SDK更新是支持命令的
 如下：
@@ -139,46 +73,104 @@ android update sdk --no-ui
 上面的方法虽然可以更新SDK，但是他会把所有的内容都下载下来，很明显我们并不想这样子。
 查看命令帮助可以看到有一个--filter属性，如下使用
 android update sdk --filter &lt;compon
-            <a class="read-more" href="/2023/05/29/2015-05-12-android-update-sdk-no-ui/"> ... </a>
+            
+            <a class="read-more" href="/2015/05/12/android-update-sdk-no-ui/"> ... </a>
         </div>
-        <div class="post-date">2023.05.29</div>
+        <div class="post-date">2015.05.12</div>
     </div>
     
+    
+    
+    
     <div class="post">
-        <a class="post-title" href="/2023/05/29/2015-05-11-android-aidl-server/">Android Service学习之AIDL, Parcelable和远程服务</a>
+        <a class="post-title" href="/2015/05/11/android-aidl-server/">Android Service学习之AIDL, Parcelable和远程服务</a>
         <div class="post-except">
-            AIDL的作用由于每个应用程序都运行在自己的进程空间，并且可以从应用程序UI运行另一个服务进程，而且经常会在不同的进程间传递对象。在Android平台，一个进程通常不能访问另一个进程的内存空间，所以要想对话，需要将对象分解成操作系统可以理解的基本单元，并且有序的通过进程边界。
+            
+                AIDL的作用由于每个应用程序都运行在自己的进程空间，并且可以从应用程序UI运行另一个服务进程，而且经常会在不同的进程间传递对象。在Android平台，一个进程通常不能访问另一个进程的内存空间，所以要想对话，需要将对象分解成操作系统可以理解的基本单元，并且有序的通过进程边界。
 通过代码来实现这个数据传输过程是冗长乏味的，Android提供了AIDL工具来处理这项工作。
 AIDL (Android Interface Definition Language) 是一种IDL 语言
-            <a class="read-more" href="/2023/05/29/2015-05-11-android-aidl-server/"> ... </a>
+            
+            <a class="read-more" href="/2015/05/11/android-aidl-server/"> ... </a>
         </div>
-        <div class="post-date">2023.05.29</div>
+        <div class="post-date">2015.05.11</div>
     </div>
     
-    <div class="post">
-        <a class="post-title" href="/2023/05/29/2015-04-06-android-snippet-sdcard-size/">SD Card的大小和容量</a>
-        <div class="post-except">
-            StatFs stat = new StatFs(Environment.getExternalStorageDirectory().getPath());
-long sdAvailSize = (long)stat.getAvailableBlocks()
-               * (long)stat.getBlockSize();
-long sdTotalSize =  (long)stat.getBlockCount()
-                * (
-            <a class="read-more" href="/2023/05/29/2015-04-06-android-snippet-sdcard-size/"> ... </a>
-        </div>
-        <div class="post-date">2023.05.29</div>
-    </div>
+    
+    
     
     <div class="post">
-        <a class="post-title" href="/2023/05/29/2015-04-06-android-string-xml-format/">Android string.xml中的占位符</a>
+        <a class="post-title" href="/2015/05/11/svn-to-git/">SVN迁移到GIT</a>
         <div class="post-except">
-            &lt;!-- .2f表示的是保留三位小数的浮点数  --&gt;
-&lt;string name=&quot;book&quot;&gt;书名 (字符串)%1$s,作者(字符串)%2$s,编号(整数)%3$d,价格(浮点型)：%4$.2f&lt;/string&gt;
+            
+                通过git svn clone将一个SVN项目克隆成一个git版本库
+# 参数--no-metadata表示阻止git导出SVN包含的一些无用信息
+git svn clone svn://localhost/proj/ --no-metadata
+
+提交到git库
+git remote add origin git@localhost/proj.git
+git push --set-upstream origin master
 
 
-            <a class="read-more" href="/2023/05/29/2015-04-06-android-string-xml-format/"> ... </a>
+            
+            <a class="read-more" href="/2015/05/11/svn-to-git/"> ... </a>
         </div>
-        <div class="post-date">2023.05.29</div>
+        <div class="post-date">2015.05.11</div>
     </div>
+    
+    
+    
+    
+    <div class="post">
+        <a class="post-title" href="/2015/04/30/mac-iterm2-zsh/">Mac Iterm2 zsh使用</a>
+        <div class="post-except">
+            
+                安装zshbrew install zsh
+
+下载oh my zsh项目git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
+
+设置zshcp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
+chsh -s /bin/zsh
+
+VIM 的一些配置syntax on                &quot;语法高亮
+set nu!       
+            
+            <a class="read-more" href="/2015/04/30/mac-iterm2-zsh/"> ... </a>
+        </div>
+        <div class="post-date">2015.04.30</div>
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="post">
+        <a class="post-title" href="/2015/04/17/android-notification-small-icon/">Android 5.0设备中，Notification小图标是白色的</a>
+        <div class="post-except">
+            
+                问题描述在使用消息推送，在通知栏中展示通知，我们会有两个图标，一个是在状态栏展示的小图标，一个是打开通知中心，展示的大图标我在我自己的测试设备中，小图标始终显示为一个白色的空白图标。
+问题解决
+原文地址：Notification bar icon turns white in Android 5 Lollipop
+
+在这里，我把文章中说的东西抄一遍：
+在Android中用来展示Notification图标的代码如下：
+// android_frameworks_base/pa
+            
+            <a class="read-more" href="/2015/04/17/android-notification-small-icon/"> ... </a>
+        </div>
+        <div class="post-date">2015.04.17</div>
+    </div>
+    
+    
+    
+    
     
 </div>
 
@@ -207,10 +199,20 @@ long sdTotalSize =  (long)stat.getBlockCount()
 <script src="/js/highlightjs-line-numbers.js"></script>
 
 
+<script src="/js/clipboard.min.js"></script>
+
+
 <script>
-    hljs.initHighlightingOnLoad();
-    hljs.initLineNumbersOnLoad();
     hljs.highlightAll();
+    var clipboard = new ClipboardJS('#clipboardbtn');
+    clipboard.on('success', function (e) {
+        console.log("Copied")
+        e.clearSelection();  
+    });
+
+    clipboard.on('error', function (e) {
+        console.log(e);
+    });
 </script>
 
             </div>

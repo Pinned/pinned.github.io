@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+    <link rel="alternate icon" type="image/png" href="/img/favicon.png">
+    
+        <title>Android Studio 使用 -- 最佳实践 </title>
+    
+    
+<link rel="stylesheet" href="/css/reset.css">
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/css/markdown.css">
+
+    
+<link rel="stylesheet" href="/css/fonts.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="post-header">
+    <p class="post-title">Android Studio 使用 -- 最佳实践</p>
+</div>
+                
+                <div class="post-main">
+
+    
+        <div class="post-meta">
+            <a class='author' href="/">罗昭成</a> <span id="clipboardbtn" 
+            data-clipboard-action="copy"
+            data-clipboard-target="#copy-post-content"
+            >2015年03月02日</span>
+        </div>
+        <div class="post-md" id="copy-post-content">
+            <h2><span class="prefix"></span><span class="content">修改为Darcula主题</span><span class="suffix"></span></h2><p>File –&gt; Settings –&gt; Appearance ; 找到Theme， 选择<code>Darcula</code>， 重启Android Studio即可</p>
+<h2><span class="prefix"></span><span class="content">快速注释</span><span class="suffix"></span></h2><p>File –&gt; Setting –&gt; Keymap ；然后搜索<code>Fix doc comment</code>， 添加快捷键<code>Alt + Shift + D</code></p>
+<h2><span class="prefix"></span><span class="content">局域变量前缀加m</span><span class="suffix"></span></h2><p>在使用Android编写代码的时候，会有一个习惯，就是在定义的变量前面加上前缀上加<code>m</code>，使用<code>Alt + Insert</code>的时候，生成的构造方法和get，set方法会在参数和方法名上加上<code>m</code>， 很是不爽。解决办法：</p>
+<p>File –&gt; Setting –&gt; Code Style –&gt; Java –&gt; Code Generation ; 然后在 <code>Field</code> 那一行的<code>Name Prefix</code>上写上<code>m</code>。就这么简单</p>
+
+        </div>
+
+    
+
+</div>
+                <!-- 
+                    <div class="post_pre_next">
+    
+        <div class="post-pre">
+            <a href="/2015/03/11/ListView&RecyclerView/">上一篇: ListView &amp; RecyclerView</a>
+        </div>
+    
+    
+        <a href="/2015/01/23/google-volley-url-cache-key/">下一篇: 
+            Google Volley如何缓存HTTP请求文件
+        </a>
+    
+</div>
+
+
+                 -->
+                <div class="footer">
+    <span>Copyright © 2023 大罗说事</span>
+</div>
+
+<!-- 
+<link rel="stylesheet" href="/css/highlight.default.css">
+ -->
+
+<link rel="stylesheet" href="/css/atom-one-dark.css">
+
+
+<link rel="stylesheet" href="/css/code-theme.css">
+
+
+<script src="/js/highlight.min.js"></script>
+
+
+<script src="/js/highlightjs-line-numbers.js"></script>
+
+
+<script src="/js/clipboard.min.js"></script>
+
+
+<script>
+    hljs.highlightAll();
+    var clipboard = new ClipboardJS('#clipboardbtn');
+    clipboard.on('success', function (e) {
+        console.log("Copied")
+        e.clearSelection();  
+    });
+
+    clipboard.on('error', function (e) {
+        console.log(e);
+    });
+</script>
+
+            </div>
+        </div>
+    </body>
+</html>

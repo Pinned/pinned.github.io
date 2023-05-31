@@ -4,7 +4,9 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
     <link rel="alternate icon" type="image/png" href="/img/favicon.png">
-    <title>大罗说事 | </title>
+    
+        <title>大罗说事 </title>
+    
     
 <link rel="stylesheet" href="/css/reset.css">
 
@@ -30,6 +32,8 @@
         
         <li><a href="/archives">归档</a></li>
         
+        <li><a href="/snippet">代码片段</a></li>
+        
         <li><a href="/about">关于</a></li>
         
     </ul>
@@ -37,81 +41,16 @@
                 
                 <div class="post-list">
     
-    <div class="post">
-        <a class="post-title" href="/2023/05/29/2015-03-13-Android-override-confusion/">Android 中方法重载遇到的问题</a>
-        <div class="post-except">
-            问题描述 今天在使用的一个第三方库，执行的是一个异步下载，有一个封装DownloadInfo的类，在下载的Task中，通过DownloadInfo 获取真实的下载地址。但是由于粗心，库中的getRealUrl方法，没有加任何方法修饰词。我在使用的时候，重写了DownloadInfo 和getRealUrl方法。在测试中出现了一个问题，在Android 4.4中按照预期的执行，但是在Android 5.0中，却没有按照预期的 效果执行。
-详细代码
-DownloadInfo
-
-p
-            <a class="read-more" href="/2023/05/29/2015-03-13-Android-override-confusion/"> ... </a>
-        </div>
-        <div class="post-date">2023.05.29</div>
-    </div>
+    
+    
+    
+    
     
     <div class="post">
-        <a class="post-title" href="/2023/05/29/2015-03-16-adnroid-code-Snippets/">Android代码片段</a>
+        <a class="post-title" href="/2015/04/05/keystore-file-options/">Android Keystore 文件的密码修改</a>
         <div class="post-except">
             
-SD Card的大小和容量
-
-StatFs stat = new StatFs(Environment.getExternalStorageDirectory().getPath());
-long sdAvailSize = (long)stat.getAvailableBlocks()
-               * (long)stat.getBlockSize();
-long sdTotalSize =  (long)stat.getBlockCount()
-   
-            <a class="read-more" href="/2023/05/29/2015-03-16-adnroid-code-Snippets/"> ... </a>
-        </div>
-        <div class="post-date">2023.05.29</div>
-    </div>
-    
-    <div class="post">
-        <a class="post-title" href="/2023/05/29/2015-03-16-ubuntu-unzip-encode/">Ubuntu 解压zip，文件乱码</a>
-        <div class="post-except">
-            在windows上压缩的文件，是以系统默认编码中文来压缩文件。由于zip文件中没有声明其编码，所以linux上的unzip一般以默认编码解压，中文文件名会出现乱码。
-解决方式：
-unzip -O CP936 xxx.zip
-// 用GBK, GB18030也可以
-
-
-            <a class="read-more" href="/2023/05/29/2015-03-16-ubuntu-unzip-encode/"> ... </a>
-        </div>
-        <div class="post-date">2023.05.29</div>
-    </div>
-    
-    <div class="post">
-        <a class="post-title" href="/2023/05/29/2015-03-29-ubuntu-install-rails/">Ubuntu 下安装Rails</a>
-        <div class="post-except">
-            
-Rails 是使用 Ruby 语言编写的网页程序开发框架，目的是为开发者提供常用组件，简化网页程序的开发。只需编写较少的代码，就能实现其他编程语言或框架难以企及的功能。
-
-安装Ruby在Ubuntu系统中，默认已经安装了Ruby， 但是其版本很低，要装Ruby for rails，就必须得装Ruby升级到1.9.3及以上
-安装Ruby, 使用Brightbox 维护的 Ruby PPA
-sudo apt-add-repository ppa:brightbox/ruby-n
-            <a class="read-more" href="/2023/05/29/2015-03-29-ubuntu-install-rails/"> ... </a>
-        </div>
-        <div class="post-date">2023.05.29</div>
-    </div>
-    
-    <div class="post">
-        <a class="post-title" href="/2023/05/29/2015-04-03-android-studio-load-so-files/">Android Studio 中加载so库文件</a>
-        <div class="post-except">
-            在使用第三方库的时候，经常会遇到一些第三方的so库文件。
-以前在Eclipse中，只需要将*.so 的文件放到libs文件目录下就行了。
-可是在使用Android Studio的时候，却出了点小问题。记录一下，以备后面查阅:
-首先，还是将*.so文件导入到libs文件目录下面。Android Studio使用的是gradle进行编译的。在bulid.gradle文件里面，你可以很清晰的看到如下代码：
-dependencies &#123;
-    compile fileTr
-            <a class="read-more" href="/2023/05/29/2015-04-03-android-studio-load-so-files/"> ... </a>
-        </div>
-        <div class="post-date">2023.05.29</div>
-    </div>
-    
-    <div class="post">
-        <a class="post-title" href="/2023/05/29/2015-04-05-keystore-file-options/">Android Keystore 文件的密码修改</a>
-        <div class="post-except">
-            #修改keystore密码的命令(keytool为JDK带的命令行工具)
+                #修改keystore密码的命令(keytool为JDK带的命令行工具)
 # my.keysotre 是你的签名文件
 keytool -storepasswd -keystore my.keystore
 
@@ -120,81 +59,166 @@ keytool -storepasswd -keystore my.keystore
 keytool -keypasswd -keystore my.keystore -alias debugalias
 
 
-            <a class="read-more" href="/2023/05/29/2015-04-05-keystore-file-options/"> ... </a>
+            
+            <a class="read-more" href="/2015/04/05/keystore-file-options/"> ... </a>
         </div>
-        <div class="post-date">2023.05.29</div>
+        <div class="post-date">2015.04.05</div>
     </div>
     
-    <div class="post">
-        <a class="post-title" href="/2023/05/29/2015-04-06-activity-animation/">Android 去掉Activtiy之间的切换动画</a>
-        <div class="post-except">
-            &lt;style name=&quot;NoAnimationTheme&quot;&gt;
-    &lt;item name=&quot;android:windowAnimationStyle&quot;&gt;@style/Animation&lt;/item&gt;
-&lt;/style&gt;
-&lt;style name=&quot;Animation&quot;&gt;
-    &lt;item name=&quot;android:activityOpen
-            <a class="read-more" href="/2023/05/29/2015-04-06-activity-animation/"> ... </a>
-        </div>
-        <div class="post-date">2023.05.29</div>
-    </div>
+    
+    
     
     <div class="post">
-        <a class="post-title" href="/2023/05/29/2015-04-06-android-set-textview-drawable-by-java-code/">TextView之代码设置DrawableLeft</a>
+        <a class="post-title" href="/2015/04/03/android-studio-load-so-files/">Android Studio 中加载so库文件</a>
         <div class="post-except">
-            Drawable drawable = getResources().getDrawable(R.drawable.drawable);  
-/// 这一步必须要做,否则不会显示.  
-drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());  
-myTextview.setCompoundDrawables(drawable,null,null,null);
-
-
-            <a class="read-more" href="/2023/05/29/2015-04-06-android-set-textview-drawable-by-java-code/"> ... </a>
+            
+                在使用第三方库的时候，经常会遇到一些第三方的so库文件。
+以前在Eclipse中，只需要将*.so 的文件放到libs文件目录下就行了。
+可是在使用Android Studio的时候，却出了点小问题。记录一下，以备后面查阅:
+首先，还是将*.so文件导入到libs文件目录下面。Android Studio使用的是gradle进行编译的。在bulid.gradle文件里面，你可以很清晰的看到如下代码：
+dependencies &#123;
+    compile fileTr
+            
+            <a class="read-more" href="/2015/04/03/android-studio-load-so-files/"> ... </a>
         </div>
-        <div class="post-date">2023.05.29</div>
+        <div class="post-date">2015.04.03</div>
     </div>
     
-    <div class="post">
-        <a class="post-title" href="/2023/05/29/2014-12-24-git-checkout/">git checkout 的使用（一）</a>
-        <div class="post-except">
-            在使用git的过程中，有很多好的点
-其中，我们使用git-flow模型
-我的小伙伴创建了一个branch
-
-feature&#x2F;branch_test
-
-在这个地方，我想切换到branch_test分支
-我使用如下命令：
- git checkout remotes/origin/feature/branch_test
- 
- git checkout origin/feature/branch_test
- 
-
-使用上面两句命令都不得行，都只创建了一个临时分支。输出如下：
-
-            <a class="read-more" href="/2023/05/29/2014-12-24-git-checkout/"> ... </a>
-        </div>
-        <div class="post-date">2023.05.29</div>
-    </div>
+    
+    
     
     <div class="post">
-        <a class="post-title" href="/2023/05/29/2014-9-19-atom-install/">Ubuntu 14.04 安装Atom编辑器</a>
+        <a class="post-title" href="/2015/03/29/ubuntu-install-rails/">Ubuntu 下安装Rails</a>
         <div class="post-except">
-            Ubuntu下安装Atom编辑器重装了Ubuntu系统，没得什么好的文本编辑器。又不喜欢使用默认的编辑器。所以装了一个Atom。用了一下，还可以。
+            
+                
+Rails 是使用 Ruby 语言编写的网页程序开发框架，目的是为开发者提供常用组件，简化网页程序的开发。只需编写较少的代码，就能实现其他编程语言或框架难以企及的功能。
 
-Clone the Atom repository:
-
-git clone https://github.com/atom/atom
-cd atom
-
-
-Build Atom
-
-script/build
-
-  This will create the atom application at $TMPDIR&#x2F;atom-b
-            <a class="read-more" href="/2023/05/29/2014-9-19-atom-install/"> ... </a>
+安装Ruby在Ubuntu系统中，默认已经安装了Ruby， 但是其版本很低，要装Ruby for rails，就必须得装Ruby升级到1.9.3及以上
+安装Ruby, 使用Brightbox 维护的 Ruby PPA
+sudo apt-add-repository ppa:brightbox/ruby-n
+            
+            <a class="read-more" href="/2015/03/29/ubuntu-install-rails/"> ... </a>
         </div>
-        <div class="post-date">2023.05.29</div>
+        <div class="post-date">2015.03.29</div>
     </div>
+    
+    
+    
+    
+    <div class="post">
+        <a class="post-title" href="/2015/03/16/adnroid-code-Snippets/">Android代码片段</a>
+        <div class="post-except">
+            
+                
+SD Card的大小和容量
+
+StatFs stat = new StatFs(Environment.getExternalStorageDirectory().getPath());
+long sdAvailSize = (long)stat.getAvailableBlocks()
+               * (long)stat.getBlockSize();
+long sdTotalSize =  (long)stat.getBlockCount()
+   
+            
+            <a class="read-more" href="/2015/03/16/adnroid-code-Snippets/"> ... </a>
+        </div>
+        <div class="post-date">2015.03.16</div>
+    </div>
+    
+    
+    
+    
+    <div class="post">
+        <a class="post-title" href="/2015/03/16/ubuntu-unzip-encode/">Ubuntu 解压zip，文件乱码</a>
+        <div class="post-except">
+            
+                在windows上压缩的文件，是以系统默认编码中文来压缩文件。由于zip文件中没有声明其编码，所以linux上的unzip一般以默认编码解压，中文文件名会出现乱码。
+解决方式：
+unzip -O CP936 xxx.zip
+// 用GBK, GB18030也可以
+
+
+            
+            <a class="read-more" href="/2015/03/16/ubuntu-unzip-encode/"> ... </a>
+        </div>
+        <div class="post-date">2015.03.16</div>
+    </div>
+    
+    
+    
+    
+    <div class="post">
+        <a class="post-title" href="/2015/03/13/Android-override-confusion/">Android 中方法重载遇到的问题</a>
+        <div class="post-except">
+            
+                问题描述 今天在使用的一个第三方库，执行的是一个异步下载，有一个封装DownloadInfo的类，在下载的Task中，通过DownloadInfo 获取真实的下载地址。但是由于粗心，库中的getRealUrl方法，没有加任何方法修饰词。我在使用的时候，重写了DownloadInfo 和getRealUrl方法。在测试中出现了一个问题，在Android 4.4中按照预期的执行，但是在Android 5.0中，却没有按照预期的 效果执行。
+详细代码
+DownloadInfo
+
+p
+            
+            <a class="read-more" href="/2015/03/13/Android-override-confusion/"> ... </a>
+        </div>
+        <div class="post-date">2015.03.13</div>
+    </div>
+    
+    
+    
+    
+    <div class="post">
+        <a class="post-title" href="/2015/03/11/ListView&RecyclerView/">ListView &amp; RecyclerView</a>
+        <div class="post-except">
+            
+                
+RecyclerView 作消息列表滚动到最后面
+
+// 添加一条数据，滚动到最后面
+if(mDatas.size &gt; 0) &#123;
+    mListView.scrollToPosition(mDatas.size() - 1);
+&#125;
+
+2 . RecyclerView &amp; LinearLayoutManager
+// 显示的时候，按照整个RecyclerView的大小，从后往前显示，数据也是从最后一条开始展示
+LinearLayoutMa
+            
+            <a class="read-more" href="/2015/03/11/ListView&RecyclerView/"> ... </a>
+        </div>
+        <div class="post-date">2015.03.11</div>
+    </div>
+    
+    
+    
+    
+    <div class="post">
+        <a class="post-title" href="/2015/03/02/android-studio-using-2/">Android Studio 使用 -- 最佳实践</a>
+        <div class="post-except">
+            
+                修改为Darcula主题File –&gt; Settings –&gt; Appearance ; 找到Theme， 选择Darcula， 重启Android Studio即可
+快速注释File –&gt; Setting –&gt; Keymap ；然后搜索Fix doc comment， 添加快捷键Alt + Shift + D
+局域变量前缀加m在使用Android编写代码的时候，会有一个习惯，就是在定义的变量前面加上前缀上加m，使用Alt + Insert的时候，生成
+            
+            <a class="read-more" href="/2015/03/02/android-studio-using-2/"> ... </a>
+        </div>
+        <div class="post-date">2015.03.02</div>
+    </div>
+    
+    
+    
+    
+    <div class="post">
+        <a class="post-title" href="/2015/01/23/google-volley-url-cache-key/">Google Volley如何缓存HTTP请求文件</a>
+        <div class="post-except">
+            
+                概述HTTP请求，是一个很长见的过程，缓存也是一个不可避免的话题。一个有好的HTTP请求，肯定会有它自己的一套缓存机制。我们要如何来做，即能方便，又能快速的实现这个功能呢？
+想法以前，自己也封装过一些简陋的HTTP框架，有的在HTTP框架中做过数据缓存，有的没有做过数据缓存。
+
+没有做数据缓存
+  在没有做数据缓存的时候，将HTTP请求的Response响应到UI之前作数据预处理，并且此过程的处理放到子线程中进行，不占用UI线程。这样可以很方便的让用户选择如何进行数据缓存，以
+            
+            <a class="read-more" href="/2015/01/23/google-volley-url-cache-key/"> ... </a>
+        </div>
+        <div class="post-date">2015.01.23</div>
+    </div>
+    
     
 </div>
 
@@ -223,10 +247,20 @@ script/build
 <script src="/js/highlightjs-line-numbers.js"></script>
 
 
+<script src="/js/clipboard.min.js"></script>
+
+
 <script>
-    hljs.initHighlightingOnLoad();
-    hljs.initLineNumbersOnLoad();
     hljs.highlightAll();
+    var clipboard = new ClipboardJS('#clipboardbtn');
+    clipboard.on('success', function (e) {
+        console.log("Copied")
+        e.clearSelection();  
+    });
+
+    clipboard.on('error', function (e) {
+        console.log(e);
+    });
 </script>
 
             </div>

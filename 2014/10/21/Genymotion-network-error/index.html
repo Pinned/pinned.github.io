@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+    <link rel="alternate icon" type="image/png" href="/img/favicon.png">
+    
+        <title>使用Fidder来拦截Android发送的HTTP请求 </title>
+    
+    
+<link rel="stylesheet" href="/css/reset.css">
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/css/markdown.css">
+
+    
+<link rel="stylesheet" href="/css/fonts.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="post-header">
+    <p class="post-title">使用Fidder来拦截Android发送的HTTP请求</p>
+</div>
+                
+                <div class="post-main">
+
+    
+        <div class="post-meta">
+            <a class='author' href="/">罗昭成</a> <span id="clipboardbtn" 
+            data-clipboard-action="copy"
+            data-clipboard-target="#copy-post-content"
+            >2014年10月21日</span>
+        </div>
+        <div class="post-md" id="copy-post-content">
+            <h3><span class="prefix"></span><span class="content">Fidder</span><span class="suffix"></span></h3><p>Fiddler是一个http调试代理，它能够记录所有的你电脑和互联网之间的http通讯，Fiddler可以也可以让你检查所有的http通讯，<br>设置断点，以及Fiddler所有的“进出”的数据（指cookie,html,js,css等文件，这些都可以让你胡乱修改的意思）。<br>Fiddler 要比其他的网络调试器要更加简单，因为它仅仅暴露http通讯还有提供一个用户友好的格式。</p>
+<p>有关Fiddler的使用教程请移步：<a target="_blank" rel="noopener" href="http://kb.cnblogs.com/page/130367/">Fiddler 教程</a></p>
+<h3><span class="prefix"></span><span class="content">Fiddler Android模拟器抓包</span><span class="suffix"></span></h3><ol>
+<li><p>当然，第一件事情就是要确保你电脑上安装了Fiddler,如没有，请下载安装.<a target="_blank" rel="noopener" href="http://www.telerik.com/download/fiddler">下载地址</a></p>
+</li>
+<li><p>打开你的Android模拟器，依次点击 Setting -&gt; More… -&gt; Mobile networks -&gt; Access Point Name</p>
+<p> <img src="/../../../../assets/img/2014-08-13/step_01.png" alt="step 1"><br> <img src="/../../../../assets/img/2014-08-13/step_02.png" alt="step 2"><br> <img src="/../../../../assets/img/2014-08-13/step_03.png" alt="step 3"><br> <img src="/../../../../assets/img/2014-08-13/step_04.png" alt="step 4"><br> <img src="/../../../../assets/img/2014-08-13/step_05.png" alt="step 5"></p>
+<p>上面这个是模拟器设置，如果你用的是Genymotion的模拟器，便和真机设置一样;</p>
+<p><img src="/../../../../assets/img/2014-08-13/step_06.png" alt="step 6"><br><img src="/../../../../assets/img/2014-08-13/step_07.png" alt="step 7"><br><img src="/../../../../assets/img/2014-08-13/step_07.png" alt="step 7"><br><img src="/../../../../assets/img/2014-08-13/step_08.png" alt="step 8"></p>
+<blockquote>
+<p>PS：如果用真机，要保证真机和PC在同一个局域网类（在这里，我用的是Wifi）</p>
+</blockquote>
+</li>
+<li><p>设置Fiddler<br> 这一步是非常重要的一步，打开Fiddler, 选择<code>Tools -&gt; Fiddler Options...</code> ，然后选择<code>Connections</code>选项卡,勾选<code>Allow remote computers to connect</code>,<br> 重启Fiddler就可以了。如下图所示:</p>
+<p> <img src="/../../../assets/img/2014-08-13/step_09.png" alt="step 9"></p>
+</li>
+</ol>
+
+        </div>
+
+    
+
+</div>
+                <!-- 
+                    <div class="post_pre_next">
+    
+        <div class="post-pre">
+            <a href="/2014/10/24/android%20Log%20useing/">上一篇: Android之使用Log打印日志</a>
+        </div>
+    
+    
+        <a href="/2014/10/20/Eclipse%20Refactor/">下一篇: 
+            Eclipse中重构使用
+        </a>
+    
+</div>
+
+
+                 -->
+                <div class="footer">
+    <span>Copyright © 2023 大罗说事</span>
+</div>
+
+<!-- 
+<link rel="stylesheet" href="/css/highlight.default.css">
+ -->
+
+<link rel="stylesheet" href="/css/atom-one-dark.css">
+
+
+<link rel="stylesheet" href="/css/code-theme.css">
+
+
+<script src="/js/highlight.min.js"></script>
+
+
+<script src="/js/highlightjs-line-numbers.js"></script>
+
+
+<script src="/js/clipboard.min.js"></script>
+
+
+<script>
+    hljs.highlightAll();
+    var clipboard = new ClipboardJS('#clipboardbtn');
+    clipboard.on('success', function (e) {
+        console.log("Copied")
+        e.clearSelection();  
+    });
+
+    clipboard.on('error', function (e) {
+        console.log(e);
+    });
+</script>
+
+            </div>
+        </div>
+    </body>
+</html>

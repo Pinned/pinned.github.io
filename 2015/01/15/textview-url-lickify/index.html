@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+    <link rel="alternate icon" type="image/png" href="/img/favicon.png">
+    
+        <title>TextView 高亮URL地址，并实现跳转 </title>
+    
+    
+<link rel="stylesheet" href="/css/reset.css">
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/css/markdown.css">
+
+    
+<link rel="stylesheet" href="/css/fonts.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="post-header">
+    <p class="post-title">TextView 高亮URL地址，并实现跳转</p>
+</div>
+                
+                <div class="post-main">
+
+    
+        <div class="post-meta">
+            <a class='author' href="/">罗昭成</a> <span id="clipboardbtn" 
+            data-clipboard-action="copy"
+            data-clipboard-target="#copy-post-content"
+            >2015年01月15日</span>
+        </div>
+        <div class="post-md" id="copy-post-content">
+            <h1><span class="prefix"></span><span class="content">Android TextView 使用</span><span class="suffix"></span></h1><p>TextView的使用中，存在很多高级功能。比如高亮URL地址、电话号码等</p>
+<p>使用方法：</p>
+<pre><code class="java">TextView tempText = new TextView(context);
+tempText.setText(&quot;www.baidu.com&quot;);
+tempText.setAutoLinkMask(Linkify.WEB_URLS);
+tempText.setMovementMethod(LinkMovementMethod.getInstance());
+</code></pre>
+<p>但是我在使用过程中，要跳转到自己的Webview中去，又不想去解析字符串，提取里面的URL地址<br>所以我想了个简单的解决方案.</p>
+<h1><span class="prefix"></span><span class="content">解决方法：</span><span class="suffix"></span></h1><pre><code class="java">TextView tempText = new TextView(context);
+tempText.setText(&quot;www.baidu.com&quot;);
+SpannableStringBuilder style = new SpannableStringBuilder(pili.description);
+tempText.setAutoLinkMask(Linkify.WEB_URLS);
+tempText.setMovementMethod(LinkMovementMethod.getInstance());
+URLSpan [] urls = tempText.getUrls();
+if (urls == null || urls.length &lt;= 0) &#123;
+    text.setText(pili.description);
+&#125; else &#123;
+    for (URLSpan urlSpan : urls) &#123;
+        String url = urlSpan.getURL();
+        int n = pili.description.indexOf(url);
+        if (n &lt; 0) &#123;
+            // 去掉前面的HTTP
+            url = url.substring(7);
+            n = pili.description.indexOf(url);
+        &#125;
+        if (n &lt; 0) &#123;
+            continue;
+        &#125;
+        style.setSpan(new URLSpanNoUnderline(urlSpan.getURL()), n, url.length(), Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
+    &#125;
+    text.setText(style);
+    text.setMovementMethod(LinkMovementMethod.getInstance());
+&#125;
+</code></pre>
+<pre><code class="java">public class URLSpanNoUnderline extends ClickableSpan &#123;
+    private final String mURL;
+    public URLSpanNoUnderline(String url) &#123;
+        mURL = url;
+    &#125;
+
+    public String getURL() &#123;
+        return mURL;
+    &#125;
+
+    @Override
+    public void onClick(View widget) &#123;
+        final Context context = widget.getContext();
+        BrowserActivity.startActivity(context, mURL);
+    &#125;
+    @Override
+    public void updateDrawState(TextPaint ds) &#123;
+        super.updateDrawState(ds);
+        ds.setUnderlineText(false);  //取消下划线
+        ds.setColor(0xff0066ff);     //指定文字颜色
+        //ds.setTextSize(ds.getTextSize()*1.1F);
+    &#125;
+&#125;
+</code></pre>
+<p>就是如此的简单，但是为了弄这个东西，还是花了不少时间。</p>
+<p>这种方法虽然可以实现功能，但是我觉得这样子做并不好。如果你有更好的解决方案。<br>望赐教，不胜感激。</p>
+
+        </div>
+
+    
+
+</div>
+                <!-- 
+                    <div class="post_pre_next">
+    
+        <div class="post-pre">
+            <a href="/2015/01/16/textview-url-lickify-02/">上一篇: TextView高亮URL地址解析</a>
+        </div>
+    
+    
+        <a href="/2014/12/30/android-best-practices/">下一篇: 
+            Best practices in Android development
+        </a>
+    
+</div>
+
+
+                 -->
+                <div class="footer">
+    <span>Copyright © 2023 大罗说事</span>
+</div>
+
+<!-- 
+<link rel="stylesheet" href="/css/highlight.default.css">
+ -->
+
+<link rel="stylesheet" href="/css/atom-one-dark.css">
+
+
+<link rel="stylesheet" href="/css/code-theme.css">
+
+
+<script src="/js/highlight.min.js"></script>
+
+
+<script src="/js/highlightjs-line-numbers.js"></script>
+
+
+<script src="/js/clipboard.min.js"></script>
+
+
+<script>
+    hljs.highlightAll();
+    var clipboard = new ClipboardJS('#clipboardbtn');
+    clipboard.on('success', function (e) {
+        console.log("Copied")
+        e.clearSelection();  
+    });
+
+    clipboard.on('error', function (e) {
+        console.log(e);
+    });
+</script>
+
+            </div>
+        </div>
+    </body>
+</html>

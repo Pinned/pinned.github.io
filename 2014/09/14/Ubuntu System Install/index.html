@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+    <link rel="alternate icon" type="image/png" href="/img/favicon.png">
+    
+        <title>安装Ubuntu单系统 </title>
+    
+    
+<link rel="stylesheet" href="/css/reset.css">
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/css/markdown.css">
+
+    
+<link rel="stylesheet" href="/css/fonts.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="post-header">
+    <p class="post-title">安装Ubuntu单系统</p>
+</div>
+                
+                <div class="post-main">
+
+    
+        <div class="post-meta">
+            <a class='author' href="/">罗昭成</a> <span id="clipboardbtn" 
+            data-clipboard-action="copy"
+            data-clipboard-target="#copy-post-content"
+            >2014年09月14日</span>
+        </div>
+        <div class="post-md" id="copy-post-content">
+            <h2><span class="prefix"></span><span class="content">安装Ubuntu单系统</span><span class="suffix"></span></h2><h3><span class="prefix"></span><span class="content">背景介绍</span><span class="suffix"></span></h3><p>本人是一个程序员，但是由于各种原因，使用的是Windows操作系统。一次偶然的机会，使用了Linux Ubuntu系统，才发现，还是一个很不错的东东。从那个时候开始就开始使用Ubuntu系统。但是鉴于Ubuntu不怎么会用，所以安装的是Windows和Linux的双系统。上班的时候，在公司拿了一张Ubuntu 13.04的系统安装光盘，虽然不怎么会使用Linux系统，但是一次尝试也是未尝不可的啊。于是开始安装起了我的系统。</p>
+<h3><span class="prefix"></span><span class="content">安装过程</span><span class="suffix"></span></h3><ul>
+<li><p>安装过程非常的简单。很快就装上了Ubuntu 13.04的系统。安装上和系统，第一件事是什么？那还用说，当然是装输入法咯。可是，问题来了。也不知道是怎么回事，输入法死活就安不上，什么修改软件源什么的。反正搞了一大堆，就是装不上。百度上也没得好多关于13.04的信息，于是呼，我就把系统升级了。</p>
+</li>
+<li><p>经过了一个很漫长的过程，终于，将系统升级到13.10。输入法很快的就装好了。什么软件环境也快装好了。重启了一下系统，一个重大bug来了。花屏。我擦，你没看错，就是花屏。一看到这个样子，我就知道，肯定是显卡驱动的问题，于是装了一下显卡驱动。我去，彻底的bug了。开机都开不起了。唉，没办法，拿出手机各种百度。找了办天，还是没有找到解决办法。最后，索性把系统在一次重装了。</p>
+</li>
+<li><p>系统重装到了13.04,我什么事情都没干，直接一个劲的把系统升级到14.04了。又出现了一个大大的问题。非常的严重。还好找到了解决办法。</p>
+</li>
+<li><p>问题： 升级到了14.04后，开机卡屏，连鼠标都不能动，这怎么能行呢。然后我重启进了recovy模式，有一个选项好像是<code>图形安全模式</code>，进去看了一下，报了个<code>显卡驱动</code>的错误。查找百度，最后还是找到了解决方案。</p>
+</li>
+<li><p>添加swap:</p>
+</li>
+</ul>
+<blockquote>
+<ul>
+<li><code> sudo dd if=/dev/zero of=/swap bs=1024 count=8</code>(从&#x2F;分区中分出8×1024M大小的空间，挂在&#x2F;swap分区中)</li>
+<li><code> mkswap /swap</code> (格式化成&#x2F;swap格式)</li>
+<li><code> swapon /swap</code> (激活&#x2F;swap，加入到swap分区中)</li>
+</ul>
+<p>执行以上步骤只会在这一次生效配置，如果要永久生效还须进行修改<br><code> sudo vim /etc/fstab</code>(添加swap分区到开机启动中)<br>–&gt; <code>/swap swap swap defaults  0 0 </code> (添加到文件中的语句)</p>
+</blockquote>
+<ul>
+<li>安装显卡驱动和配置</li>
+</ul>
+<blockquote>
+<p>开机启动，在输入密码的界面停住，按<code>ctrl + alt + F2</code>进入控制台中：</p>
+<ul>
+<li>重新安装fgirx</li>
+</ul>
+<blockquote>
+<p><code>sudo apt-get install fglrx</code></p>
+<p><code>sudo reboot</code></p>
+<p>或者 <code>sudo apt-get install --reinstall ubuntu-desktop</code><br>重启过后，无效。继续后面的方法</p>
+</blockquote>
+<ul>
+<li>桌面文件授权</li>
+</ul>
+<blockquote>
+<p><code> sudo chown lightdm:lightdm -R /var/lib/lightdm</code></p>
+<p><code> sudo chown avahi-autoipd:avahi-autoipd -R /var/lib/avahi-autoipd</code></p>
+<p><code> sudo chown colord:colord -R /var/lib/colord</code></p>
+<p>使用无效</p>
+</blockquote>
+<ul>
+<li>重装显示驱动</li>
+</ul>
+<blockquote>
+<p>对于新的Nvidia二进制驱动：</p>
+<p><code>sudo add-apt-repository ppa:ubuntu-x-swat/x-updates</code></p>
+<p><code>sudo apt-get update </code></p>
+<p><code>sudo apt-get install nvidia-current nvidia-settings</code></p>
+<p>重启，系统成功运行，无卡顿现象</p>
+</blockquote>
+</blockquote>
+<h3><span class="prefix"></span><span class="content">记录</span><span class="suffix"></span></h3><ul>
+<li><p>对于新的ATI&#x2F;AMD二进制驱动：</p>
+<blockquote>
+<p><code>sudo add-apt-repository ppa:ubuntu-x-swat/x-updates</code></p>
+<p><code>sudo apt-get update </code></p>
+<p><code>sudo apt-get install fglrx</code></p>
+</blockquote>
+</li>
+<li><p>如果机器上之前有一个老版本，请按如下来做</p>
+<blockquote>
+<p>Nvidia 和 ATI&#x2F;AMD 显卡的命令都一样：</p>
+<p><code>sudo add-apt-repository ppa:ubuntu-x-swat/x-updates</code></p>
+<p><code>sudo apt-get update </code></p>
+<p><code>sudo apt-get upgrade</code></p>
+</blockquote>
+</li>
+</ul>
+
+        </div>
+
+    
+
+</div>
+                <!-- 
+                    <div class="post_pre_next">
+    
+        <div class="post-pre">
+            <a href="/2014/09/19/atom-install/">上一篇: Ubuntu 14.04 安装Atom编辑器</a>
+        </div>
+    
+    
+</div>
+
+
+                 -->
+                <div class="footer">
+    <span>Copyright © 2023 大罗说事</span>
+</div>
+
+<!-- 
+<link rel="stylesheet" href="/css/highlight.default.css">
+ -->
+
+<link rel="stylesheet" href="/css/atom-one-dark.css">
+
+
+<link rel="stylesheet" href="/css/code-theme.css">
+
+
+<script src="/js/highlight.min.js"></script>
+
+
+<script src="/js/highlightjs-line-numbers.js"></script>
+
+
+<script src="/js/clipboard.min.js"></script>
+
+
+<script>
+    hljs.highlightAll();
+    var clipboard = new ClipboardJS('#clipboardbtn');
+    clipboard.on('success', function (e) {
+        console.log("Copied")
+        e.clearSelection();  
+    });
+
+    clipboard.on('error', function (e) {
+        console.log(e);
+    });
+</script>
+
+            </div>
+        </div>
+    </body>
+</html>

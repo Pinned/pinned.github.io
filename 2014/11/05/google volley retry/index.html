@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+    <link rel="alternate icon" type="image/png" href="/img/favicon.png">
+    
+        <title>Google Volley 网络请求框架(一) </title>
+    
+    
+<link rel="stylesheet" href="/css/reset.css">
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/css/markdown.css">
+
+    
+<link rel="stylesheet" href="/css/fonts.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="post-header">
+    <p class="post-title">Google Volley 网络请求框架(一)</p>
+</div>
+                
+                <div class="post-main">
+
+    
+        <div class="post-meta">
+            <a class='author' href="/">罗昭成</a> <span id="clipboardbtn" 
+            data-clipboard-action="copy"
+            data-clipboard-target="#copy-post-content"
+            >2014年11月05日</span>
+        </div>
+        <div class="post-md" id="copy-post-content">
+            <p>Volley是在Google I&#x2F;O 2013上发布的，说来惭愧，都快一年了，才知道有这么个东西。</p>
+<p>有关Volley相关的使用及详细内容，我就不说了。如果还不会用的，但是又想用的可以移步<br>其它地方。</p>
+<p><strong>传送门</strong> (感谢“郭霖”大神)</p>
+<blockquote>
+<ol>
+<li><a target="_blank" rel="noopener" href="http://blog.csdn.net/guolin_blog/article/details/17482095">Android Volley完全解析(一)，初识Volley的基本用法</a></li>
+<li><a target="_blank" rel="noopener" href="http://blog.csdn.net/guolin_blog/article/details/17482165">Android Volley完全解析(二)，使用Volley加载网络图片</a></li>
+<li><a target="_blank" rel="noopener" href="http://blog.csdn.net/guolin_blog/article/details/17612763">Android Volley完全解析(三)，定制自己的Request</a></li>
+<li><a target="_blank" rel="noopener" href="http://blog.csdn.net/guolin_blog/article/details/17656437">Android Volley完全解析(四)，带你从源码的角度理解Volley</a></li>
+</ol>
+</blockquote>
+<p>当然除了大神写的，还可以去看官方文档，也写得相当的好。</p>
+<blockquote>
+<ol>
+<li><a target="_blank" rel="noopener" href="http://developer.android.com/training/volley/index.html">Transmitting Network Data Using Volley</a></li>
+</ol>
+</blockquote>
+<p>虽然看了上述文章，使用起来是完全木有问题。但是问题来了，如果在网络请求的时候出现了bug，<br>你会如何去解决这个问题呢？</p>
+<p>当然，如果你非常了解源码，你肯定知道是怎么引起的。但是我不知道源码啊。肿么破啊。</p>
+<p>于是，硬着头皮去看Volley源码，才发现，人家这个比我也得好是有原因的。</p>
+<h3><span class="prefix"></span><span class="content">Volley 网络请求</span><span class="suffix"></span></h3><p>先看一下官方给出的架构图嘛，虽然我也不怎么明白是怎么实现的。</p>
+<p><img src="http://pinned.github.io/assets/posts/file-2014-11-05/volley-request.png" alt="Google Volley illustrates the life of a request"></p>
+<p>当你建立一个<code>Request</code>，将<code>Request</code>添加到<code>RequestQuene</code>中去，Volley 首先会去找Cache里面有没有存在有效的<br>请求，如果存在，则直接处理里面请求返回的数据并响应回去，如果没有，则把<code>Request</code>放到网络请求队列里面去，<br>执行异步请求并响应。</p>
+<p>以上就是我暂时对Volley的理解了。</p>
+<h3><span class="prefix"></span><span class="content">Volley 请求重试机制</span><span class="suffix"></span></h3><p>一个完整的网络请求框架，肯定会有请求失败重试的机制。</p>
+<p>开始使用的时候，没有注意过请求重试的相关东西。自己也封装过一些网络请求的简单框架。也没有使用过。<br>最近在使用Volley的时候，它的网络请求是有一个重试机制的，并且你可以自己写重试的条件和次数等。</p>
+<p>下面来看一下，Google在Volley是怎么实现的。</p>
+<p>先上代码：</p>
+<pre><code class="java">@Override
+public NetworkResponse performRequest(Request&lt;?&gt; request) throws VolleyError &#123;
+    long requestStart = SystemClock.elapsedRealtime();
+    while (true) &#123;
+        HttpResponse httpResponse = null;
+        byte[] responseContents = null;
+        Map&lt;String, String&gt; responseHeaders = new HashMap&lt;String, String&gt;();
+        try &#123;
+            // Gather headers.
+            Map&lt;String, String&gt; headers = new HashMap&lt;String, String&gt;();
+            addCacheHeaders(headers, request.getCacheEntry());
+            httpResponse = mHttpStack.performRequest(request, headers);
+            StatusLine statusLine = httpResponse.getStatusLine();
+            int statusCode = statusLine.getStatusCode();
+
+            responseHeaders = convertHeaders(httpResponse.getAllHeaders());
+            // Handle cache validation.
+            if (statusCode == HttpStatus.SC_NOT_MODIFIED) &#123;
+                return new NetworkResponse(HttpStatus.SC_NOT_MODIFIED,
+                        request.getCacheEntry() == null ? null : request.getCacheEntry().data,
+                        responseHeaders, true);
+            &#125;
+
+            // Some responses such as 204s do not have content.  We must check.
+            if (httpResponse.getEntity() != null) &#123;
+              responseContents = entityToBytes(httpResponse.getEntity());
+            &#125; else &#123;
+              // Add 0 byte response as a way of honestly representing a
+              // no-content request.
+              responseContents = new byte[0];
+            &#125;
+
+            // if the request is slow, log it.
+            long requestLifetime = SystemClock.elapsedRealtime() - requestStart;
+            logSlowRequests(requestLifetime, request, responseContents, statusLine);
+
+            if (statusCode &lt; 200 || statusCode &gt; 299) &#123;
+                throw new IOException();
+            &#125;
+            return new NetworkResponse(statusCode, responseContents, responseHeaders, false);
+        &#125; catch (SocketTimeoutException e) &#123;
+            attemptRetryOnException(&quot;socket&quot;, request, new TimeoutError());
+        &#125; catch (ConnectTimeoutException e) &#123;
+            attemptRetryOnException(&quot;connection&quot;, request, new TimeoutError());
+        &#125; catch (MalformedURLException e) &#123;
+            throw new RuntimeException(&quot;Bad URL &quot; + request.getUrl(), e);
+        &#125; catch (IOException e) &#123;
+            int statusCode = 0;
+            NetworkResponse networkResponse = null;
+            if (httpResponse != null) &#123;
+                statusCode = httpResponse.getStatusLine().getStatusCode();
+            &#125; else &#123;
+                throw new NoConnectionError(e);
+            &#125;
+            VolleyLog.e(&quot;Unexpected response code %d for %s&quot;, statusCode, request.getUrl());
+            if (responseContents != null) &#123;
+                networkResponse = new NetworkResponse(statusCode, responseContents,
+                        responseHeaders, false);
+                if (statusCode == HttpStatus.SC_UNAUTHORIZED ||
+                        statusCode == HttpStatus.SC_FORBIDDEN) &#123;
+                    attemptRetryOnException(&quot;auth&quot;,
+                            request, new AuthFailureError(networkResponse));
+                &#125; else &#123;
+                    // TODO: Only throw ServerError for 5xx status codes.
+                    throw new ServerError(networkResponse);
+                &#125;
+            &#125; else &#123;
+                throw new NetworkError(networkResponse);
+            &#125;
+        &#125;
+    &#125;
+&#125;
+</code></pre>
+<p>Volley的网络请求是在上述代码中进行执行的。一个<code>while(true)</code>循环包含了太多东西。</p>
+<p>网络请求发出去的了，但是如果网络超时怎么办，当然是<code>重试</code>呢，可是上述代码是怎么实现重试的呢？<br>我们可以看到，在<code>catch</code>里面有两个超时的Exception:</p>
+<ul>
+<li><code>SocketTimeoutException</code></li>
+<li><code>ConnectTimeoutException</code></li>
+</ul>
+<p>我们在继续往下面看，当它捕获到超时的时候执行了<code>attemptRetryOnException(&quot;connection&quot;, request, new TimeoutError());</code></p>
+<p>在看一下这个方法的源码:</p>
+<pre><code class="java">/**
+ * Attempts to prepare the request for a retry. If there are no more attempts remaining in the
+ * request&#39;s retry policy, a timeout exception is thrown.
+ * @param request The request to use.
+ */
+private static void attemptRetryOnException(String logPrefix, Request&lt;?&gt; request,
+        VolleyError exception) throws VolleyError &#123;
+    RetryPolicy retryPolicy = request.getRetryPolicy();
+    int oldTimeout = request.getTimeoutMs();
+
+    try &#123;
+        retryPolicy.retry(exception);
+    &#125; catch (VolleyError e) &#123;
+        request.addMarker(
+                String.format(&quot;%s-timeout-giveup [timeout=%s]&quot;, logPrefix, oldTimeout));
+        throw e;
+    &#125;
+    request.addMarker(String.format(&quot;%s-retry [timeout=%s]&quot;, logPrefix, oldTimeout));
+&#125;
+</code></pre>
+<p>看方法上面的注释就可以清晰的看到，给网络请求建立重试，如果重试的次数已经用完了，则抛出一个<br><code>timeout exception</code>.</p>
+<p>在来看一下，默认的重试是怎么进行验证的。</p>
+<pre><code class="java"> /**
+ * Prepares for the next retry by applying a backoff to the timeout.
+ * @param error The error code of the last attempt.
+ */
+@Override
+public void retry(VolleyError error) throws VolleyError &#123;
+    mCurrentRetryCount++;
+    mCurrentTimeoutMs += (mCurrentTimeoutMs * mBackoffMultiplier);
+    if (!hasAttemptRemaining()) &#123;
+        throw error;
+    &#125;
+&#125;
+
+/**
+ * Returns true if this policy has attempts remaining, false otherwise.
+ */
+protected boolean hasAttemptRemaining() &#123;
+    return mCurrentRetryCount &lt;= mMaxNumRetries;
+&#125;
+</code></pre>
+<p>首先将当前重试的次数加1，如果重试的次数小于等于最大次数，则不管，回到上面那个<code>while(true)</code><br>循环继续执行，反之，则抛出异常，最后终止循环。</p>
+<blockquote>
+<p>PS：默认的重试最大次数是1</p>
+</blockquote>
+<h3><span class="prefix"></span><span class="content">写在最后</span><span class="suffix"></span></h3><p>多了解一下最新的技术，多去看看那些大神写的Blog，对自己的提升会比较大，虽然你不能很好的<br>去读懂官方给出的英文文档，但是很多技术牛人会将新技术以简单通俗的例子告诉给你。</p>
+<p>最后，感谢“郭霖”大神，他的技术博客地址:<a target="_blank" rel="noopener" href="http://blog.csdn.net/guolin_blog">传送门</a></p>
+
+        </div>
+
+    
+
+</div>
+                <!-- 
+                    <div class="post_pre_next">
+    
+        <div class="post-pre">
+            <a href="/2014/11/18/Android-Viewpager-scroll-listener/">上一篇: Android ViewPager滑动事件</a>
+        </div>
+    
+    
+        <a href="/2014/11/04/eclipse-shutdown/">下一篇: 
+            Ubuntu-14.04下Eclipse闪退解决办法
+        </a>
+    
+</div>
+
+
+                 -->
+                <div class="footer">
+    <span>Copyright © 2023 大罗说事</span>
+</div>
+
+<!-- 
+<link rel="stylesheet" href="/css/highlight.default.css">
+ -->
+
+<link rel="stylesheet" href="/css/atom-one-dark.css">
+
+
+<link rel="stylesheet" href="/css/code-theme.css">
+
+
+<script src="/js/highlight.min.js"></script>
+
+
+<script src="/js/highlightjs-line-numbers.js"></script>
+
+
+<script src="/js/clipboard.min.js"></script>
+
+
+<script>
+    hljs.highlightAll();
+    var clipboard = new ClipboardJS('#clipboardbtn');
+    clipboard.on('success', function (e) {
+        console.log("Copied")
+        e.clearSelection();  
+    });
+
+    clipboard.on('error', function (e) {
+        console.log(e);
+    });
+</script>
+
+            </div>
+        </div>
+    </body>
+</html>

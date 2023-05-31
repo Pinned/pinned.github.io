@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+    <link rel="alternate icon" type="image/png" href="/img/favicon.png">
+    
+        <title>【转】Android打开与关闭软键盘 </title>
+    
+    
+<link rel="stylesheet" href="/css/reset.css">
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/css/markdown.css">
+
+    
+<link rel="stylesheet" href="/css/fonts.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="post-header">
+    <p class="post-title">【转】Android打开与关闭软键盘</p>
+</div>
+                
+                <div class="post-main">
+
+    
+        <div class="post-meta">
+            <a class='author' href="/">罗昭成</a> <span id="clipboardbtn" 
+            data-clipboard-action="copy"
+            data-clipboard-target="#copy-post-content"
+            >2015年05月25日</span>
+        </div>
+        <div class="post-md" id="copy-post-content">
+            <ol>
+<li>方法一(如果输入法在窗口上已经显示，则隐藏，反之则显示)</li>
+</ol>
+<pre><code class="java">InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS); 
+</code></pre>
+<ol start="2">
+<li>方法二(View为接受软键盘输入的视图)</li>
+</ol>
+<pre><code class="java">InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+imm.showSoftInput(view,InputMethodManager.SHOW_FORCED);  
+
+imm.hideSoftInputFromWindow(view.getWindowToken(), 0); //强制隐藏键盘  
+</code></pre>
+<ol start="3">
+<li>调用隐藏系统默认的输入法</li>
+</ol>
+<pre><code class="java">((InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(WidgetSearchActivity.this.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);  //(WidgetSearchActivity是当前的Activity)
+</code></pre>
+<ol start="4">
+<li>获取输入法打开的状态</li>
+</ol>
+<pre><code class="java">InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+boolean isOpen=imm.isActive();//isOpen若返回true，则表示输入法打开  
+</code></pre>
+<hr>
+<p> <strong>转载地址：</strong> <a target="_blank" rel="noopener" href="http://blog.csdn.net/h7870181/article/details/8332991">Android 手动显示和隐藏软键盘</a></p>
+
+        </div>
+
+    
+
+</div>
+                <!-- 
+                    <div class="post_pre_next">
+    
+        <div class="post-pre">
+            <a href="/2015/06/29/android-add-view/">上一篇: Android加载子View</a>
+        </div>
+    
+    
+        <a href="/2015/05/22/android-like-qq-input/">下一篇: 
+            Android EditText软键盘显示隐藏以及“监听”
+        </a>
+    
+</div>
+
+
+                 -->
+                <div class="footer">
+    <span>Copyright © 2023 大罗说事</span>
+</div>
+
+<!-- 
+<link rel="stylesheet" href="/css/highlight.default.css">
+ -->
+
+<link rel="stylesheet" href="/css/atom-one-dark.css">
+
+
+<link rel="stylesheet" href="/css/code-theme.css">
+
+
+<script src="/js/highlight.min.js"></script>
+
+
+<script src="/js/highlightjs-line-numbers.js"></script>
+
+
+<script src="/js/clipboard.min.js"></script>
+
+
+<script>
+    hljs.highlightAll();
+    var clipboard = new ClipboardJS('#clipboardbtn');
+    clipboard.on('success', function (e) {
+        console.log("Copied")
+        e.clearSelection();  
+    });
+
+    clipboard.on('error', function (e) {
+        console.log(e);
+    });
+</script>
+
+            </div>
+        </div>
+    </body>
+</html>

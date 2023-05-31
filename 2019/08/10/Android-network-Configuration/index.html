@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+    <link rel="alternate icon" type="image/png" href="/img/favicon.png">
+    
+        <title>Android 网络配置 </title>
+    
+    
+<link rel="stylesheet" href="/css/reset.css">
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/css/markdown.css">
+
+    
+<link rel="stylesheet" href="/css/fonts.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="post-header">
+    <p class="post-title">Android 网络配置</p>
+</div>
+                
+                <div class="post-main">
+
+    
+        <div class="post-meta">
+            <a class='author' href="/">罗昭成</a> <span id="clipboardbtn" 
+            data-clipboard-action="copy"
+            data-clipboard-target="#copy-post-content"
+            >2019年08月10日</span>
+        </div>
+        <div class="post-md" id="copy-post-content">
+            <h1><span class="prefix"></span><span class="content">HTTP 与 HTTPS</span><span class="suffix"></span></h1><p>自2017年1月1日开始，苹果要求所有的APP都要使用 HTTPS 进行网络请求，否则无法上架。但是 HTTPS 在 2000 年就已经确定下来。10多年过去，现在依然还有很多网站使用着 HTTP 协议。</p>
+<p>HTTP协议以明文方式发送内容，不提供任何方式的数据加密，如果攻击者截取了Web浏览器和网站服务器之间的传输报文，就可以直接读懂其中的信息。为了数据传输的安全，HTTPS在HTTP的基础上加入了SSL协议，SSL依靠证书来验证服务器的身份，并为浏览器和服务器之间的通信加密。</p>
+<p>Android 也从 Android 9.0 开始限制 HTTP 的网路请求。</p>
+<h1><span class="prefix"></span><span class="content">Android 网络安全配置</span><span class="suffix"></span></h1><p>在 Android App 的开发过程中，测试服务器部署到内网服务器，没有配置 HTTPS 证书，导致我们的 APP 在 Android 9.0 上进行运行测试。</p>
+<p><strong>解决方案</strong></p>
+<ol>
+<li><p>在 res&#x2F;xml 文件中创建 <code>network_security_config.xml</code> (文件名可修改)，并按如下写入</p>
+<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;network-security-config&gt;
+    &lt;base-config cleartextTrafficPermitted=&quot;true&quot;&gt;
+        &lt;trust-anchors&gt;
+            &lt;certificates src=&quot;system&quot; /&gt;
+            &lt;certificates src=&quot;user&quot; /&gt;
+        &lt;/trust-anchors&gt;
+    &lt;/base-config&gt;
+&lt;/network-security-config&gt;
+</code></pre>
+</li>
+<li><p>在 <code>AndroidManifest.xml</code> 的 <strong>application</strong> 标签中添加网络设置</p>
+<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;manifest xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    package=&quot;com.knero.network.example&quot;&gt;
+&lt;application xmlns:tools=&quot;http://schemas.android.com/tools&quot;
+        android:networkSecurityConfig=&quot;@xml/network_security_config&quot;&gt;
+&lt;/application&gt;
+</code></pre>
+</li>
+</ol>
+<p>到此，在Android 9.0 上，所有的 HTTP 网络请求都可以进行访问了。</p>
+<h1><span class="prefix"></span><span class="content">Android 默认网络配置</span><span class="suffix"></span></h1><p>在 Android 9.0（API Level 28）或者更高的版本，网络配置默认如下：</p>
+<pre><code class="xml">&lt;base-config cleartextTrafficPermitted=&quot;false&quot;&gt;
+    &lt;trust-anchors&gt;
+        &lt;certificates src=&quot;system&quot; /&gt;
+    &lt;/trust-anchors&gt;
+&lt;/base-config&gt;
+</code></pre>
+<p>在 Android 7.0 (API level 24) 到 Android 8.1 (API level 27) 中，网络默认配置如下：</p>
+<pre><code class="xml">&lt;base-config cleartextTrafficPermitted=&quot;true&quot;&gt;
+    &lt;trust-anchors&gt;
+        &lt;certificates src=&quot;system&quot; /&gt;
+    &lt;/trust-anchors&gt;
+&lt;/base-config&gt;
+</code></pre>
+<p>在 Android 6.0（API Level 23）或者以下版本，网络默认配置如下： </p>
+<pre><code class="xml">&lt;base-config cleartextTrafficPermitted=&quot;true&quot;&gt;
+    &lt;trust-anchors&gt;
+        &lt;certificates src=&quot;system&quot; /&gt;
+        &lt;certificates src=&quot;user&quot; /&gt;
+    &lt;/trust-anchors&gt;
+&lt;/base-config&gt;
+</code></pre>
+<blockquote>
+<p>PS: 在 Android 7.0 （API level 24）以上， 手机系统安装第三方证书也不能抓包，就是因为 trust-anchors 配置了只支持系统的，如果要实现抓包，可修改配置为 Android 6.0 的版本。</p>
+</blockquote>
+<h1><span class="prefix"></span><span class="content">参考文档</span><span class="suffix"></span></h1><ul>
+<li><a target="_blank" rel="noopener" href="https://developer.android.com/training/articles/security-config#CleartextTrafficPermitted">Network security configuration</a></li>
+</ul>
+
+        </div>
+
+    
+
+</div>
+                <!-- 
+                    <div class="post_pre_next">
+    
+        <div class="post-pre">
+            <a href="/2022/06/30/Android-VM/">上一篇: 这么多年，Android 虚拟机到底干了些什么？</a>
+        </div>
+    
+    
+        <a href="/2019/08/10/Android-network-security-configuration/">下一篇: 
+            Android Network security configuration
+        </a>
+    
+</div>
+
+
+                 -->
+                <div class="footer">
+    <span>Copyright © 2023 大罗说事</span>
+</div>
+
+<!-- 
+<link rel="stylesheet" href="/css/highlight.default.css">
+ -->
+
+<link rel="stylesheet" href="/css/atom-one-dark.css">
+
+
+<link rel="stylesheet" href="/css/code-theme.css">
+
+
+<script src="/js/highlight.min.js"></script>
+
+
+<script src="/js/highlightjs-line-numbers.js"></script>
+
+
+<script src="/js/clipboard.min.js"></script>
+
+
+<script>
+    hljs.highlightAll();
+    var clipboard = new ClipboardJS('#clipboardbtn');
+    clipboard.on('success', function (e) {
+        console.log("Copied")
+        e.clearSelection();  
+    });
+
+    clipboard.on('error', function (e) {
+        console.log(e);
+    });
+</script>
+
+            </div>
+        </div>
+    </body>
+</html>

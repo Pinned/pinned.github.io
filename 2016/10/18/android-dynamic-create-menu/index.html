@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+    <link rel="alternate icon" type="image/png" href="/img/favicon.png">
+    
+        <title>Android 动态修改菜单 </title>
+    
+    
+<link rel="stylesheet" href="/css/reset.css">
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/css/markdown.css">
+
+    
+<link rel="stylesheet" href="/css/fonts.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="post-header">
+    <p class="post-title">Android 动态修改菜单</p>
+</div>
+                
+                <div class="post-main">
+
+    
+        <div class="post-meta">
+            <a class='author' href="/">罗昭成</a> <span id="clipboardbtn" 
+            data-clipboard-action="copy"
+            data-clipboard-target="#copy-post-content"
+            >2016年10月18日</span>
+        </div>
+        <div class="post-md" id="copy-post-content">
+            <p>在一个Android创建菜单menu时，需要重写Activity的<code>onCreateOptionsMenu(Menu menu)</code>方法，这个方法只在第一次创建的时候调用一次，所以如果之后想对menu进行动态的修改，那么就不要再对<code>onCreateOptionsMenu</code>做什么手脚了。</p>
+<p>动态修改菜单就要用到<code>onPrepareOptionsMenu(Menu menu)</code>方法了。<code>onPrepareOptionsMenu</code>与<code>onCreateOptionsMenu</code>不同的是，他在每次按下menu硬键之前会被调用，所以可以在这里动态的改变menu。如果需要创建一个全新的菜单,如下：</p>
+<pre><code class="java">public boolean onPrepareOptionsMenu(Menu menu) &#123;
+    super.onPrepareOptionsMenu(menu);
+    menu.clear();
+    // create new menu code     
+    return true;
+&#125;
+</code></pre>
+
+        </div>
+
+    
+
+</div>
+                <!-- 
+                    <div class="post_pre_next">
+    
+        <div class="post-pre">
+            <a href="/2016/10/21/ubuntu-install-tensorflow/">上一篇: Ubuntu 安装 Tensorflow</a>
+        </div>
+    
+    
+        <a href="/2016/10/18/set-textview-textsize-big/">下一篇: 
+            Android TextView setTextSize
+        </a>
+    
+</div>
+
+
+                 -->
+                <div class="footer">
+    <span>Copyright © 2023 大罗说事</span>
+</div>
+
+<!-- 
+<link rel="stylesheet" href="/css/highlight.default.css">
+ -->
+
+<link rel="stylesheet" href="/css/atom-one-dark.css">
+
+
+<link rel="stylesheet" href="/css/code-theme.css">
+
+
+<script src="/js/highlight.min.js"></script>
+
+
+<script src="/js/highlightjs-line-numbers.js"></script>
+
+
+<script src="/js/clipboard.min.js"></script>
+
+
+<script>
+    hljs.highlightAll();
+    var clipboard = new ClipboardJS('#clipboardbtn');
+    clipboard.on('success', function (e) {
+        console.log("Copied")
+        e.clearSelection();  
+    });
+
+    clipboard.on('error', function (e) {
+        console.log(e);
+    });
+</script>
+
+            </div>
+        </div>
+    </body>
+</html>

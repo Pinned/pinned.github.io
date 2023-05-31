@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+    <link rel="alternate icon" type="image/png" href="/img/favicon.png">
+    
+        <title>Android 用命令行更新SDK </title>
+    
+    
+<link rel="stylesheet" href="/css/reset.css">
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/css/markdown.css">
+
+    
+<link rel="stylesheet" href="/css/fonts.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="post-header">
+    <p class="post-title">Android 用命令行更新SDK</p>
+</div>
+                
+                <div class="post-main">
+
+    
+        <div class="post-meta">
+            <a class='author' href="/">罗昭成</a> <span id="clipboardbtn" 
+            data-clipboard-action="copy"
+            data-clipboard-target="#copy-post-content"
+            >2015年05月12日</span>
+        </div>
+        <div class="post-md" id="copy-post-content">
+            <h4><span class="prefix"></span><span class="content">基本使用</span><span class="suffix"></span></h4><p>在使用桌面系统的时候，我们都是用的<code>SDK Manager</code>, 如果现在要你部署一台CI服务器呢。</p>
+<p>我擦，ssh上去，没有界面，怎么破。</p>
+<p>查找了一下，Android SDK更新是支持命令的</p>
+<p>如下：</p>
+<pre><code class="bash">android update sdk --no-ui
+</code></pre>
+<p>上面的方法虽然可以更新SDK，但是他会把所有的内容都下载下来，很明显我们并不想这样子。</p>
+<p>查看命令帮助可以看到有一个<code>--filter</code>属性，如下使用</p>
+<pre><code class="bash">android update sdk --filter &lt;component&gt; --no-ui
+</code></pre>
+<p>其中<code>&lt;component&gt;</code> 可以是名字，也可以是数字。查看数字的方式如下：</p>
+<pre><code class="bash">ndroid list sdk --no-ui
+</code></pre>
+<p>所以你可以如下使用：</p>
+<pre><code class="bash">android update sdk --filter 1 --no-ui
+</code></pre>
+<h4><span class="prefix"></span><span class="content">代理服务</span><span class="suffix"></span></h4><p>当然，还有一个问题，就是GFW, 还好我们有学校提供的镜像服务</p>
+<p>我们可以这样子使用：</p>
+<pre><code class="bash">android update sdk --no-ui --proxy-host &quot;mirrors.opencas.cn&quot; --proxy-port 80 -t 2 -s
+</code></pre>
+<h4><span class="prefix"></span><span class="content">参考资料</span><span class="suffix"></span></h4><ol>
+<li><p><a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/4681697/is-there-a-way-to-automate-the-android-sdk-installation?answertab=active#tab-top">Is there a way to automate the android sdk installation?</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/inferjay/AndroidDevTools">Android Tools</a></p>
+</li>
+</ol>
+
+        </div>
+
+    
+
+</div>
+                <!-- 
+                    <div class="post_pre_next">
+    
+        <div class="post-pre">
+            <a href="/2015/05/14/android-mipmap-folder/">上一篇: Android mipmap文件夹</a>
+        </div>
+    
+    
+        <a href="/2015/05/11/android-aidl-server/">下一篇: 
+            Android Service学习之AIDL, Parcelable和远程服务
+        </a>
+    
+</div>
+
+
+                 -->
+                <div class="footer">
+    <span>Copyright © 2023 大罗说事</span>
+</div>
+
+<!-- 
+<link rel="stylesheet" href="/css/highlight.default.css">
+ -->
+
+<link rel="stylesheet" href="/css/atom-one-dark.css">
+
+
+<link rel="stylesheet" href="/css/code-theme.css">
+
+
+<script src="/js/highlight.min.js"></script>
+
+
+<script src="/js/highlightjs-line-numbers.js"></script>
+
+
+<script src="/js/clipboard.min.js"></script>
+
+
+<script>
+    hljs.highlightAll();
+    var clipboard = new ClipboardJS('#clipboardbtn');
+    clipboard.on('success', function (e) {
+        console.log("Copied")
+        e.clearSelection();  
+    });
+
+    clipboard.on('error', function (e) {
+        console.log(e);
+    });
+</script>
+
+            </div>
+        </div>
+    </body>
+</html>

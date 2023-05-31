@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+    <link rel="alternate icon" type="image/png" href="/img/favicon.png">
+    
+        <title>gradlew 源码分析 </title>
+    
+    
+<link rel="stylesheet" href="/css/reset.css">
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/css/markdown.css">
+
+    
+<link rel="stylesheet" href="/css/fonts.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="post-header">
+    <p class="post-title">gradlew 源码分析</p>
+</div>
+                
+                <div class="post-main">
+
+    
+        <div class="post-meta">
+            <a class='author' href="/">罗昭成</a> <span id="clipboardbtn" 
+            data-clipboard-action="copy"
+            data-clipboard-target="#copy-post-content"
+            >2017年10月15日</span>
+        </div>
+        <div class="post-md" id="copy-post-content">
+            <h1><span class="prefix"></span><span class="content">gradlew 源码分析</span><span class="suffix"></span></h1><p>使用Android Studio 新建一个项目，会默认使用gradle编译项目。在编译的时候可以使用：<code>gradle assembleRelease</code>, 当然，如果没有安装<code>gradle</code>的时候，也可以使用项目文件夹下面的<code>gradlew</code>进行编译。</p>
+<p>可以看到<code>gradlew</code>是一个shell脚本，他读取了系统的一些环境变量，并运行了<strong>gradle&#x2F;wrapper&#x2F;gradle-wrapper.jar</strong>文件的<code>org.gradle.wrapper.GradleWrapperMain</code>。执行编译。</p>
+<h2><span class="prefix"></span><span class="content">gradle-wrapper.jar</span><span class="suffix"></span></h2><p>在<strong>org.gradle.wrapper.GradleWrapperMain</strong>的main如下：</p>
+<pre><code class="java">public static void main(String[] args) throws Exception &#123;
+    // 第一步
+    File wrapperJar = wrapperJar();  // gradle-wrapper.jar 文件
+    File propertiesFile = wrapperProperties(wrapperJar); // gradle-wrapper.properties
+    File rootDir = rootDir(wrapperJar); // 项目根目录
+
+    // 第二步
+    CommandLineParser parser = new CommandLineParser();
+    parser.allowUnknownOptions();
+    parser.option(GRADLE_USER_HOME_OPTION, GRADLE_USER_HOME_DETAILED_OPTION).hasArgument();
+    parser.option(GRADLE_QUIET_OPTION, GRADLE_QUIET_DETAILED_OPTION);
+
+    SystemPropertiesCommandLineConverter converter = new SystemPropertiesCommandLineConverter();
+    converter.configure(parser);
+    // 读取gradlew assembleRelease [args]
+    ParsedCommandLine options = parser.parse(args);
+
+    Properties systemProperties = System.getProperties();
+    systemProperties.putAll(converter.convert(options, new HashMap&lt;String, String&gt;()));
+    // 第三步
+    File gradleUserHome = gradleUserHome(options); // gradle 所在的文件夹
+
+    addSystemProperties(gradleUserHome, rootDir);
+
+    Logger logger = logger(options);
+
+    // 第四步
+    WrapperExecutor wrapperExecutor = WrapperExecutor.forWrapperPropertiesFile(propertiesFile, logger);
+    wrapperExecutor.execute(
+            args,
+            new Install(logger, new Download(logger, &quot;gradlew&quot;, wrapperVersion()), new PathAssembler(gradleUserHome)),
+            new BootstrapMainStarter());
+&#125;
+</code></pre>
+<ol>
+<li>先根据 <strong>GradleWrapperMain</strong> 这个类找到<code>gradle-wrapper.jar</code>,<code>gradle-wrapper.properties</code>,<code>root dir</code></li>
+<li>读取系统环境的配置</li>
+<li>读取系统的gradle 配置的路径<code>gradle user home</code></li>
+<li>检测gradle-launcher-version.jar（如果不存在，先下载）, 并运行<code>org.gradle.launcher.GradleMain</code></li>
+</ol>
+<h2><span class="prefix"></span><span class="content">读取系统的配置文件</span><span class="suffix"></span></h2><ol>
+<li>如果在使用<code>gradlew</code>编译的时候，参数中包含<code>g</code>, 则使用这个参数的值来作为<code>gradle user home</code></li>
+<li>如果不存在<code>g</code>这个参数， 先读取<code>gradle.user.home</code>, 如果没有，读取环境变量中的<code>GRADLE_USER_HOME</code>，如果依然不存在，使用默认值<code>~/.gradle/</code></li>
+</ol>
+<pre><code class="java">public class GradleUserHomeLookup &#123;
+    public static final String DEFAULT_GRADLE_USER_HOME = System.getProperty(&quot;user.home&quot;) + &quot;/.gradle&quot;;
+    public static final String GRADLE_USER_HOME_PROPERTY_KEY = &quot;gradle.user.home&quot;;
+    public static final String GRADLE_USER_HOME_ENV_KEY = &quot;GRADLE_USER_HOME&quot;;
+
+    public static File gradleUserHome() &#123;
+        String gradleUserHome;
+        if ((gradleUserHome = System.getProperty(GRADLE_USER_HOME_PROPERTY_KEY)) != null) &#123;
+            return new File(gradleUserHome);
+        &#125;
+        if ((gradleUserHome = System.getenv(GRADLE_USER_HOME_ENV_KEY)) != null) &#123;
+            return new File(gradleUserHome);
+        &#125;
+        return new File(DEFAULT_GRADLE_USER_HOME);
+    &#125;
+&#125;
+</code></pre>
+<h2><span class="prefix"></span><span class="content">gradle的检测与下载</span><span class="suffix"></span></h2><p>从<code>gradle-wrapper.properties</code>中读取到<code>distributionUrl</code>,使用md5作为hash值，找到<code>gradleUserHome/gradle_dest_name/gradle_hash</code>的文件夹下</p>
+<pre><code class="java">final File markerFile = new File(localZipFile.getParentFile(), localZipFile.getName() + &quot;.ok&quot;);
+if (distDir.isDirectory() &amp;&amp; markerFile.isFile()) &#123;
+    return getAndVerifyDistributionRoot(distDir, distDir.getAbsolutePath());
+&#125;
+</code></pre>
+<p>如果文件夹下面有<code>.ok</code>文件，说明下载成功，直接使用。<br>如果不存在，则执行下载任务，下载完成，解压，在使用。</p>
+
+        </div>
+
+    
+
+</div>
+                <!-- 
+                    <div class="post_pre_next">
+    
+        <div class="post-pre">
+            <a href="/2019/05/21/Android-camera-preview/">上一篇: Android Camera Preview</a>
+        </div>
+    
+    
+        <a href="/2017/02/10/proguard-translate/">下一篇: 
+            Proguard 翻译
+        </a>
+    
+</div>
+
+
+                 -->
+                <div class="footer">
+    <span>Copyright © 2023 大罗说事</span>
+</div>
+
+<!-- 
+<link rel="stylesheet" href="/css/highlight.default.css">
+ -->
+
+<link rel="stylesheet" href="/css/atom-one-dark.css">
+
+
+<link rel="stylesheet" href="/css/code-theme.css">
+
+
+<script src="/js/highlight.min.js"></script>
+
+
+<script src="/js/highlightjs-line-numbers.js"></script>
+
+
+<script src="/js/clipboard.min.js"></script>
+
+
+<script>
+    hljs.highlightAll();
+    var clipboard = new ClipboardJS('#clipboardbtn');
+    clipboard.on('success', function (e) {
+        console.log("Copied")
+        e.clearSelection();  
+    });
+
+    clipboard.on('error', function (e) {
+        console.log(e);
+    });
+</script>
+
+            </div>
+        </div>
+    </body>
+</html>

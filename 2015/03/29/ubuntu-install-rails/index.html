@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+    <link rel="alternate icon" type="image/png" href="/img/favicon.png">
+    
+        <title>Ubuntu 下安装Rails </title>
+    
+    
+<link rel="stylesheet" href="/css/reset.css">
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/css/markdown.css">
+
+    
+<link rel="stylesheet" href="/css/fonts.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="post-header">
+    <p class="post-title">Ubuntu 下安装Rails</p>
+</div>
+                
+                <div class="post-main">
+
+    
+        <div class="post-meta">
+            <a class='author' href="/">罗昭成</a> <span id="clipboardbtn" 
+            data-clipboard-action="copy"
+            data-clipboard-target="#copy-post-content"
+            >2015年03月29日</span>
+        </div>
+        <div class="post-md" id="copy-post-content">
+            <blockquote>
+<p>Rails 是使用 Ruby 语言编写的网页程序开发框架，目的是为开发者提供常用组件，简化网页程序的开发。<br>只需编写较少的代码，就能实现其他编程语言或框架难以企及的功能。</p>
+</blockquote>
+<h2><span class="prefix"></span><span class="content">安装Ruby</span><span class="suffix"></span></h2><p>在Ubuntu系统中，默认已经安装了Ruby， 但是其版本很低，要装<code>Ruby for rails</code>，就必须得装Ruby<br>升级到1.9.3及以上</p>
+<p>安装Ruby, 使用<a target="_blank" rel="noopener" href="https://www.brightbox.com/docs/ruby/ubuntu/">Brightbox 维护的 Ruby PPA</a></p>
+<pre><code class="bash">sudo apt-add-repository ppa:brightbox/ruby-ng
+sudo apt-get update
+sudo apt-get install ruby2.2 ruby2.2-dev
+</code></pre>
+<p>安装完毕过后，可以查看Ruby的版本和Gem的版本,如下：</p>
+<pre><code class="bash">~$ ruby -v
+ruby 2.2.0p0 (2014-12-25 revision 49005) [x86_64-linux-gnu]
+~$ gem -v
+2.4.5
+</code></pre>
+<h2><span class="prefix"></span><span class="content">安装SQLite3</span><span class="suffix"></span></h2><p>在这里，我使用的是<code>LinuxBrew</code>来进行安装的</p>
+<blockquote>
+<p><strong>LinuxBrew</strong>: Linuxbrew is a fork of Homebrew, the Mac OS package manager, for Linux.<br>地址：<a target="_blank" rel="noopener" href="https://github.com/Homebrew/linuxbrew">https://github.com/Homebrew/linuxbrew</a></p>
+</blockquote>
+<p>我直接将安装方法贴在这里来：</p>
+<pre><code class="html">1. 先安装依赖
+
+sudo apt-get install build-essential curl git m4 ruby texinfo libbz2-dev libcurl4-openssl-dev libexpat-dev libncurses-dev zlib1g-dev
+
+2. 下载LinuxBrew的源码
+
+ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/linuxbrew/go/install)&quot;
+OR
+git clone https://github.com/Homebrew/linuxbrew.git ~/.linuxbrew
+
+3. 配置环境变量
+
+添加到你的.bashrc文件中
+export PATH=&quot;$HOME/.linuxbrew/bin:$PATH&quot;
+export MANPATH=&quot;$HOME/.linuxbrew/share/man:$MANPATH&quot;
+export INFOPATH=&quot;$HOME/.linuxbrew/share/info:$INFOPATH&quot;
+</code></pre>
+<p>LinuxBrew安装完成过后，你就可以直接安装<code>Sqlite3</code></p>
+<pre><code class="bash">brew install sqlite3
+</code></pre>
+<h2><span class="prefix"></span><span class="content">安装Rails</span><span class="suffix"></span></h2><p>首先，修改ruby的源到taobao的源上去</p>
+<pre><code class="bash">gem sources --remove http://rubygems.org/
+gem sources -a http://ruby.taobao.org/
+gem sources -l
+# 请确保只有 ruby.taobao.org
+</code></pre>
+<p>然后安装Rails</p>
+<pre><code class="bash"># 添加verbose会在控制台显示安装
+sudo gem install rails --verbose
+
+# 查看rails版本
+rails -v
+</code></pre>
+<h2><span class="prefix"></span><span class="content">参考资料</span><span class="suffix"></span></h2><ol>
+<li><a target="_blank" rel="noopener" href="http://chloerei.com/2014/07/13/the-best-way-to-install-the-latest-version-of-ruby-on-ubuntu/">Ubuntu 上安装 Ruby 最新版的最佳方法</a>: <a target="_blank" rel="noopener" href="http://chloerei.com/2014/07/13/the-best-way-to-install-the-latest-version-of-ruby-on-ubuntu/">http://chloerei.com/2014/07/13/the-best-way-to-install-the-latest-version-of-ruby-on-ubuntu/</a></li>
+</ol>
+
+        </div>
+
+    
+
+</div>
+                <!-- 
+                    <div class="post_pre_next">
+    
+        <div class="post-pre">
+            <a href="/2015/04/03/android-studio-load-so-files/">上一篇: Android Studio 中加载so库文件</a>
+        </div>
+    
+    
+        <a href="/2015/03/16/adnroid-code-Snippets/">下一篇: 
+            Android代码片段
+        </a>
+    
+</div>
+
+
+                 -->
+                <div class="footer">
+    <span>Copyright © 2023 大罗说事</span>
+</div>
+
+<!-- 
+<link rel="stylesheet" href="/css/highlight.default.css">
+ -->
+
+<link rel="stylesheet" href="/css/atom-one-dark.css">
+
+
+<link rel="stylesheet" href="/css/code-theme.css">
+
+
+<script src="/js/highlight.min.js"></script>
+
+
+<script src="/js/highlightjs-line-numbers.js"></script>
+
+
+<script src="/js/clipboard.min.js"></script>
+
+
+<script>
+    hljs.highlightAll();
+    var clipboard = new ClipboardJS('#clipboardbtn');
+    clipboard.on('success', function (e) {
+        console.log("Copied")
+        e.clearSelection();  
+    });
+
+    clipboard.on('error', function (e) {
+        console.log(e);
+    });
+</script>
+
+            </div>
+        </div>
+    </body>
+</html>

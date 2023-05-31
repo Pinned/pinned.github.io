@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+    <link rel="alternate icon" type="image/png" href="/img/favicon.png">
+    
+        <title>Ubuntu中安装Ruby的一些注意事项 </title>
+    
+    
+<link rel="stylesheet" href="/css/reset.css">
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/css/markdown.css">
+
+    
+<link rel="stylesheet" href="/css/fonts.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="post-header">
+    <p class="post-title">Ubuntu中安装Ruby的一些注意事项</p>
+</div>
+                
+                <div class="post-main">
+
+    
+        <div class="post-meta">
+            <a class='author' href="/">罗昭成</a> <span id="clipboardbtn" 
+            data-clipboard-action="copy"
+            data-clipboard-target="#copy-post-content"
+            >2016年10月17日</span>
+        </div>
+        <div class="post-md" id="copy-post-content">
+            <h2><span class="prefix"></span><span class="content">使用RVM安装Ruby</span><span class="suffix"></span></h2><p>安装RVM</p>
+<pre><code class="shell">curl -L get.rvm.io | bash -s stable
+//若提示找不到公钥，执行下边语句
+gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+//然后，重新执行，安装完rvm之后，需配置终端，以便下次打开终端能直接只用rvm。更改终端配置方法：参见https://rvm.io/integration/gnome-terminal
+curl -L get.rvm.io | bash -s stable
+//至此，rvm安装完成，下边我们手动为终端配置rvm环境，否则以后在终端中可能每次都要手动加载rvm环境
+//更改终端配置方法：工具栏--编辑--配置文件首选项--标题和命令--命令--选中“以登录shell方式运行命令”
+//然后，我们手动加载rvm环境，将服务器资源改为淘宝的
+///////$ source ~/.rvm/scripts/rvm 官方的加载rvm环境命令，我们就不执行了
+//临时加载rvm环境，参考：https://rvm.io/integration/gnome-terminal
+source ~/.bashrc
+source ~/.bash_profile
+</code></pre>
+<p>使用RVM安装Ruby:</p>
+<pre><code class="shell">rvm install 2.2.1
+</code></pre>
+<h2><span class="prefix"></span><span class="content">设置GEM Sources</span><span class="suffix"></span></h2><p>以前使用淘宝的Gem sources, 但是现在以经停止维护了。现在可以使用: <a target="_blank" rel="noopener" href="http://gems.ruby-china.org/">http://gems.ruby-china.org/</a></p>
+<p>使用见官网。</p>
+
+        </div>
+
+    
+
+</div>
+                <!-- 
+                    <div class="post_pre_next">
+    
+        <div class="post-pre">
+            <a href="/2016/10/18/set-textview-textsize-big/">上一篇: Android TextView setTextSize</a>
+        </div>
+    
+    
+        <a href="/2016/10/10/Shell-Sub-String/">下一篇: 
+            Shell脚本8种字符串截取方法
+        </a>
+    
+</div>
+
+
+                 -->
+                <div class="footer">
+    <span>Copyright © 2023 大罗说事</span>
+</div>
+
+<!-- 
+<link rel="stylesheet" href="/css/highlight.default.css">
+ -->
+
+<link rel="stylesheet" href="/css/atom-one-dark.css">
+
+
+<link rel="stylesheet" href="/css/code-theme.css">
+
+
+<script src="/js/highlight.min.js"></script>
+
+
+<script src="/js/highlightjs-line-numbers.js"></script>
+
+
+<script src="/js/clipboard.min.js"></script>
+
+
+<script>
+    hljs.highlightAll();
+    var clipboard = new ClipboardJS('#clipboardbtn');
+    clipboard.on('success', function (e) {
+        console.log("Copied")
+        e.clearSelection();  
+    });
+
+    clipboard.on('error', function (e) {
+        console.log(e);
+    });
+</script>
+
+            </div>
+        </div>
+    </body>
+</html>

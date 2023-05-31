@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+    <link rel="alternate icon" type="image/png" href="/img/favicon.png">
+    
+        <title>Shell脚本8种字符串截取方法 </title>
+    
+    
+<link rel="stylesheet" href="/css/reset.css">
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/css/markdown.css">
+
+    
+<link rel="stylesheet" href="/css/fonts.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="post-header">
+    <p class="post-title">Shell脚本8种字符串截取方法</p>
+</div>
+                
+                <div class="post-main">
+
+    
+        <div class="post-meta">
+            <a class='author' href="/">罗昭成</a> <span id="clipboardbtn" 
+            data-clipboard-action="copy"
+            data-clipboard-target="#copy-post-content"
+            >2016年10月10日</span>
+        </div>
+        <div class="post-md" id="copy-post-content">
+            <p>假设有变量： <code>var=http://blog.knero.cn/test.html</code></p>
+<h2><span class="prefix"></span><span class="content"><code>#</code>号截取，删除左边字符，保留右边字符</span><span class="suffix"></span></h2><p><strong>示例</strong></p>
+<pre><code class="shell">var=http://blog.knero.cn/test.html
+sub=$&#123;var#*/&#125;
+echo $sub
+</code></pre>
+<p><strong>输出结果</strong></p>
+<pre><code class="shell">/blog.knero.cn/test.html
+</code></pre>
+<p>其中<strong>var</strong>是变量名，**#<strong>号是运算符，</strong><em>&#x2F;</em>* 表示从左边开始删除第一个**&#x2F;<strong>号及左边的所有字符<br>即删除</strong>http:&#x2F;**<br>结果是 ：&#x2F;blog.knero.cn&#x2F;test.html</p>
+<p><strong>示例</strong></p>
+<pre><code class="shell">var=http://blog.knero.cn/test.html
+sub=$&#123;var##*/&#125;
+echo $sub
+</code></pre>
+<p><strong>输出结果</strong></p>
+<pre><code class="shell">test.html
+</code></pre>
+<p>其中<strong>var</strong>是变量名，**##<strong>号是运算符，</strong><em>&#x2F;</em>* 表示从左边开始删除最后一个**&#x2F;<strong>号及左边的所有字符<br>即删除</strong><a target="_blank" rel="noopener" href="http://blog.knero.cn/">http://blog.knero.cn/</a>**<br>结果是 ：test.html</p>
+<h2><span class="prefix"></span><span class="content"><code>%</code>号截取，删除右边字符，保留左边字符</span><span class="suffix"></span></h2><p><strong>示例</strong></p>
+<pre><code class="shell">var=http://blog.knero.cn/test.html
+sub=$&#123;var%/*&#125;
+echo $sub
+</code></pre>
+<p><strong>输出结果</strong></p>
+<pre><code class="shell">http://blog.knero.cn
+</code></pre>
+<p>其中<strong>var</strong>是变量名，**%<strong>号是运算符，</strong>&#x2F;*** 表示从右边开始删除第一个**&#x2F;<strong>号及右边的所有字符<br>即删除</strong>test.html**<br>结果是 ：<a target="_blank" rel="noopener" href="http://blog.knero.cn/">http://blog.knero.cn</a></p>
+<p><strong>示例</strong></p>
+<pre><code class="shell">var=http://blog.knero.cn/test.html
+sub=$&#123;var%%/*&#125;
+echo $sub
+</code></pre>
+<p><strong>输出结果</strong></p>
+<pre><code class="shell">http:
+</code></pre>
+<p>其中<strong>var</strong>是变量名，**%%<strong>号是运算符，</strong>&#x2F;*** 表示从右边开始删除最后一个**&#x2F;<strong>号及右边的所有字符<br>即删除</strong>&#x2F;&#x2F;blog.knero.cn&#x2F;test.html**<br>结果是 ：http:</p>
+<h2><span class="prefix"></span><span class="content">从左边指定第几个字符开始截取</span><span class="suffix"></span></h2><p><strong>示例</strong></p>
+<pre><code class="shell">var=http://blog.knero.cn/test.html
+sub=$&#123;var:0:5&#125;
+echo $sub
+sub=$&#123;var:7&#125;
+echo $sub
+</code></pre>
+<p><strong>输出结果</strong></p>
+<pre><code class="shell">http:
+blog.knero.cn/test.html
+</code></pre>
+<p><code>$&#123;var:0:5&#125;</code>其中的<strong>0</strong>表示左边第一个字符开始, <strong>5</strong>表示字符的总个数。<br>结果是：<strong>http:</strong></p>
+<p><code>$&#123;var:7&#125;</code>指从左边index第几个字符开始到结束</p>
+<h2><span class="prefix"></span><span class="content">从右边第几个字符开始截取</span><span class="suffix"></span></h2><p><strong>示例</strong></p>
+<pre><code class="shell">var=http://blog.knero.cn/test.html
+sub=$&#123;var:0-9:4&#125;
+echo $sub
+sub=$&#123;var:0-9&#125;
+echo $sub
+</code></pre>
+<p><strong>输出结果</strong></p>
+<pre><code class="shell">test
+test.html
+</code></pre>
+<p><code>$&#123;var:0-9:4&#125;</code>其中的<strong>0-9</strong>表示左边第9个字符开始, <strong>4</strong>表示截取字符个数，如果没有就是到结束</p>
+
+        </div>
+
+    
+
+</div>
+                <!-- 
+                    <div class="post_pre_next">
+    
+        <div class="post-pre">
+            <a href="/2016/10/17/ubuntu-ruby-install/">上一篇: Ubuntu中安装Ruby的一些注意事项</a>
+        </div>
+    
+    
+        <a href="/2015/12/29/Android-RelativeLayout-Gravity/">下一篇: 
+            Android RelativeLayout 之 Gravity 的使用
+        </a>
+    
+</div>
+
+
+                 -->
+                <div class="footer">
+    <span>Copyright © 2023 大罗说事</span>
+</div>
+
+<!-- 
+<link rel="stylesheet" href="/css/highlight.default.css">
+ -->
+
+<link rel="stylesheet" href="/css/atom-one-dark.css">
+
+
+<link rel="stylesheet" href="/css/code-theme.css">
+
+
+<script src="/js/highlight.min.js"></script>
+
+
+<script src="/js/highlightjs-line-numbers.js"></script>
+
+
+<script src="/js/clipboard.min.js"></script>
+
+
+<script>
+    hljs.highlightAll();
+    var clipboard = new ClipboardJS('#clipboardbtn');
+    clipboard.on('success', function (e) {
+        console.log("Copied")
+        e.clearSelection();  
+    });
+
+    clipboard.on('error', function (e) {
+        console.log(e);
+    });
+</script>
+
+            </div>
+        </div>
+    </body>
+</html>

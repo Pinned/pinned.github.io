@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+    <link rel="alternate icon" type="image/png" href="/img/favicon.png">
+    
+        <title>Ubuntu 安装 Tensorflow </title>
+    
+    
+<link rel="stylesheet" href="/css/reset.css">
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/css/markdown.css">
+
+    
+<link rel="stylesheet" href="/css/fonts.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="post-header">
+    <p class="post-title">Ubuntu 安装 Tensorflow</p>
+</div>
+                
+                <div class="post-main">
+
+    
+        <div class="post-meta">
+            <a class='author' href="/">罗昭成</a> <span id="clipboardbtn" 
+            data-clipboard-action="copy"
+            data-clipboard-target="#copy-post-content"
+            >2016年10月21日</span>
+        </div>
+        <div class="post-md" id="copy-post-content">
+            <p>首先贴一下官方<strong>GET STARTED</strong>地址： <a target="_blank" rel="noopener" href="https://www.tensorflow.org/versions/r0.11/get_started/os_setup.html#pip-installation">传送门</a></p>
+<p>安装步骤：</p>
+<ul>
+<li>安装python</li>
+</ul>
+<pre><code class="shell">sudo apt-get install python-pip python-dev
+</code></pre>
+<ul>
+<li>按电脑配置环境变量</li>
+</ul>
+<pre><code class="shell">// Ubuntu/Linux 64-bit, CPU only, Python 2.7
+export TF_BINARY_URL=https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-0.11.0rc0-cp27-none-linux_x86_64.whl
+</code></pre>
+<p>因为我使用的是虚拟机，所以就下了这个。</p>
+<ul>
+<li>安装Tensorflow</li>
+</ul>
+<pre><code class="shell">sudo pip install --upgrade $TF_BINARY_URL
+</code></pre>
+<p>我安装的时候一直提示<strong>网络错误</strong>。</p>
+<p>我的解决方案：</p>
+<ol>
+<li>翻墙下载<a target="_blank" rel="noopener" href="https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-0.11.0rc0-cp27-none-linux_x86_64.whl">tensorflow的安装文件</a></li>
+<li>配置pip国内镜像, 我使用的是<a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/help/pypi/">清华大学的源</a>, 按照文档自行配置</li>
+</ol>
+<p>安装使用如下命令：</p>
+<pre><code class="shell">// 后面的whl地址，直接指向本地地址
+sudo pip install --upgrade tensorflow-0.11.0rc0-cp27-none-linux_x86_64.whl
+</code></pre>
+
+        </div>
+
+    
+
+</div>
+                <!-- 
+                    <div class="post_pre_next">
+    
+        <div class="post-pre">
+            <a href="/2016/12/23/android-get-logcat/">上一篇: 获取Logcat信息</a>
+        </div>
+    
+    
+        <a href="/2016/10/18/android-dynamic-create-menu/">下一篇: 
+            Android 动态修改菜单
+        </a>
+    
+</div>
+
+
+                 -->
+                <div class="footer">
+    <span>Copyright © 2023 大罗说事</span>
+</div>
+
+<!-- 
+<link rel="stylesheet" href="/css/highlight.default.css">
+ -->
+
+<link rel="stylesheet" href="/css/atom-one-dark.css">
+
+
+<link rel="stylesheet" href="/css/code-theme.css">
+
+
+<script src="/js/highlight.min.js"></script>
+
+
+<script src="/js/highlightjs-line-numbers.js"></script>
+
+
+<script src="/js/clipboard.min.js"></script>
+
+
+<script>
+    hljs.highlightAll();
+    var clipboard = new ClipboardJS('#clipboardbtn');
+    clipboard.on('success', function (e) {
+        console.log("Copied")
+        e.clearSelection();  
+    });
+
+    clipboard.on('error', function (e) {
+        console.log(e);
+    });
+</script>
+
+            </div>
+        </div>
+    </body>
+</html>

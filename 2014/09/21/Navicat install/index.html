@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+    <link rel="alternate icon" type="image/png" href="/img/favicon.png">
+    
+        <title>Ubuntu 下安装Navicat </title>
+    
+    
+<link rel="stylesheet" href="/css/reset.css">
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/css/markdown.css">
+
+    
+<link rel="stylesheet" href="/css/fonts.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="post-header">
+    <p class="post-title">Ubuntu 下安装Navicat</p>
+</div>
+                
+                <div class="post-main">
+
+    
+        <div class="post-meta">
+            <a class='author' href="/">罗昭成</a> <span id="clipboardbtn" 
+            data-clipboard-action="copy"
+            data-clipboard-target="#copy-post-content"
+            >2014年09月21日</span>
+        </div>
+        <div class="post-md" id="copy-post-content">
+            <h2><span class="prefix"></span><span class="content">Navicat的安装</span><span class="suffix"></span></h2><p>在使用Mysql的时候，一开始就喜欢使用Navicat，所以就想安装一个<br>Navicat来使用。</p>
+<p>很简单，去Navicat官网下一个下来，解压就可以用了。</p>
+<p>步骤如下：</p>
+<ol>
+<li>解压文件<br> <code>tar -xzvf navicat_xxx.tar.gz</code></li>
+<li>进入到解压好的文件夹中，运行就可以了<code>./start_navicat</code></li>
+</ol>
+<p>但是不知道为什么，运行没有任何反应。</p>
+<p>在google上查找了一下，才知道是没有安装32位库和wine环境</p>
+<p>打开<strong>synaptic</strong>,然后在<strong>Setting-&gt;Repros</strong>，打开界面中</p>
+<p>选择其它软件源，添加:<br><code>deb http://old-releases.ubuntu.com/ubuntu/ raring main restricted universe multiverse</code></p>
+<p>保存，退出。</p>
+<p>然后执行命令:</p>
+<pre><code class="xml">sudo apt-get install libgtk2.0-0:i386
+sudo apt-get -f install
+sudo apt-get install wine
+</code></pre>
+
+        </div>
+
+    
+
+</div>
+                <!-- 
+                    <div class="post_pre_next">
+    
+        <div class="post-pre">
+            <a href="/2014/10/11/Android%20Notification%20blog%20one/">上一篇: Android之Notification的使用(一)</a>
+        </div>
+    
+    
+        <a href="/2014/09/19/atom-install/">下一篇: 
+            Ubuntu 14.04 安装Atom编辑器
+        </a>
+    
+</div>
+
+
+                 -->
+                <div class="footer">
+    <span>Copyright © 2023 大罗说事</span>
+</div>
+
+<!-- 
+<link rel="stylesheet" href="/css/highlight.default.css">
+ -->
+
+<link rel="stylesheet" href="/css/atom-one-dark.css">
+
+
+<link rel="stylesheet" href="/css/code-theme.css">
+
+
+<script src="/js/highlight.min.js"></script>
+
+
+<script src="/js/highlightjs-line-numbers.js"></script>
+
+
+<script src="/js/clipboard.min.js"></script>
+
+
+<script>
+    hljs.highlightAll();
+    var clipboard = new ClipboardJS('#clipboardbtn');
+    clipboard.on('success', function (e) {
+        console.log("Copied")
+        e.clearSelection();  
+    });
+
+    clipboard.on('error', function (e) {
+        console.log(e);
+    });
+</script>
+
+            </div>
+        </div>
+    </body>
+</html>

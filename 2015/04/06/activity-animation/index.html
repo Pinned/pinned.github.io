@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+    <link rel="alternate icon" type="image/png" href="/img/favicon.png">
+    
+        <title>Android 去掉Activtiy之间的切换动画 </title>
+    
+    
+<link rel="stylesheet" href="/css/reset.css">
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/css/markdown.css">
+
+    
+<link rel="stylesheet" href="/css/fonts.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="post-header">
+    <p class="post-title">Android 去掉Activtiy之间的切换动画</p>
+</div>
+                
+                <div class="post-main">
+
+    
+        <div class="post-meta">
+            <a class='author' href="/">罗昭成</a> <span id="clipboardbtn" 
+            data-clipboard-action="copy"
+            data-clipboard-target="#copy-post-content"
+            >2015年04月06日</span>
+        </div>
+        <div class="post-md" id="copy-post-content">
+            <pre><code class="xml">&lt;style name=&quot;NoAnimationTheme&quot;&gt;
+    &lt;item name=&quot;android:windowAnimationStyle&quot;&gt;@style/Animation&lt;/item&gt;
+&lt;/style&gt;
+&lt;style name=&quot;Animation&quot;&gt;
+    &lt;item name=&quot;android:activityOpenEnterAnimation&quot;&gt;@null&lt;/item&gt;
+    &lt;item name=&quot;android:activityOpenExitAnimation&quot;&gt;@null&lt;/item&gt;
+    &lt;item name=&quot;android:activityCloseEnterAnimation&quot;&gt;@null&lt;/item&gt;
+    &lt;item name=&quot;android:activityCloseExitAnimation&quot;&gt;@null&lt;/item&gt;
+    &lt;item name=&quot;android:taskOpenEnterAnimation&quot;&gt;@null&lt;/item&gt;
+    &lt;item name=&quot;android:taskOpenExitAnimation&quot;&gt;@null&lt;/item&gt;
+    &lt;item name=&quot;android:taskCloseEnterAnimation&quot;&gt;@null&lt;/item&gt;
+    &lt;item name=&quot;android:taskCloseExitAnimation&quot;&gt;@null&lt;/item&gt;
+    &lt;item name=&quot;android:taskToFrontEnterAnimation&quot;&gt;@null&lt;/item&gt;
+    &lt;item name=&quot;android:taskToFrontExitAnimation&quot;&gt;@null&lt;/item&gt;
+    &lt;item name=&quot;android:taskToBackEnterAnimation&quot;&gt;@null&lt;/item&gt;
+    &lt;item name=&quot;android:taskToBackExitAnimation&quot;&gt;@null&lt;/item&gt;
+&lt;/style&gt;
+</code></pre>
+<p>在使用的时候，只需将不需要动画的Activity的<code>style</code>设置成这个就可以了</p>
+
+        </div>
+
+    
+
+</div>
+                <!-- 
+                    <div class="post_pre_next">
+    
+        <div class="post-pre">
+            <a href="/2015/04/10/mac-os-x-yomesite-install-rails/">上一篇: Mac OS X Yosemite 安装 Rails</a>
+        </div>
+    
+    
+        <a href="/2015/04/06/android-snippet-sdcard-size/">下一篇: 
+            SD Card的大小和容量
+        </a>
+    
+</div>
+
+
+                 -->
+                <div class="footer">
+    <span>Copyright © 2023 大罗说事</span>
+</div>
+
+<!-- 
+<link rel="stylesheet" href="/css/highlight.default.css">
+ -->
+
+<link rel="stylesheet" href="/css/atom-one-dark.css">
+
+
+<link rel="stylesheet" href="/css/code-theme.css">
+
+
+<script src="/js/highlight.min.js"></script>
+
+
+<script src="/js/highlightjs-line-numbers.js"></script>
+
+
+<script src="/js/clipboard.min.js"></script>
+
+
+<script>
+    hljs.highlightAll();
+    var clipboard = new ClipboardJS('#clipboardbtn');
+    clipboard.on('success', function (e) {
+        console.log("Copied")
+        e.clearSelection();  
+    });
+
+    clipboard.on('error', function (e) {
+        console.log(e);
+    });
+</script>
+
+            </div>
+        </div>
+    </body>
+</html>

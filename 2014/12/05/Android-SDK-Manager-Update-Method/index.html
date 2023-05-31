@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+    <link rel="alternate icon" type="image/png" href="/img/favicon.png">
+    
+        <title>Android Sdk Manager无法更新问题解决办法 </title>
+    
+    
+<link rel="stylesheet" href="/css/reset.css">
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/css/markdown.css">
+
+    
+<link rel="stylesheet" href="/css/fonts.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="post-header">
+    <p class="post-title">Android Sdk Manager无法更新问题解决办法</p>
+</div>
+                
+                <div class="post-main">
+
+    
+        <div class="post-meta">
+            <a class='author' href="/">罗昭成</a> <span id="clipboardbtn" 
+            data-clipboard-action="copy"
+            data-clipboard-target="#copy-post-content"
+            >2014年12月05日</span>
+        </div>
+        <div class="post-md" id="copy-post-content">
+            <p>每次要更新Android SDK等信息的时候，总是非常蛋疼。</p>
+<p>可以去下载大神们整理好的文件。这里附上下载地址：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/inferjay/AndroidDevTools">https://github.com/inferjay/AndroidDevTools</a></p>
+<p>现在，我们也可以不用这种方式，直接使用Android SDK Manager来更新：</p>
+<p>方法如下：</p>
+<ul>
+<li><p>启动 Android SDK Manager ，打开主界面，依次选择「Tools」、「Options…」，弹出『Android SDK Manager - Settings』窗口；</p>
+</li>
+<li><p>在『Android SDK Manager - Settings』窗口中，在「HTTP Proxy Server」和「HTTP Proxy Port」输入框内填入mirrors.neusoft.edu.cn和80，并且选中「Force https:&#x2F;&#x2F;… sources to be fetched using http:&#x2F;&#x2F;…」复选￼框。设置完成后单击「Close」按钮关闭『Android SDK Manager - Settings』窗口返回到主界面；</p>
+</li>
+<li><p>依次选择「Packages」、「Reload」。</p>
+</li>
+</ul>
+<p>如下图：</p>
+<p><img src="/assets/posts/img-2014-12-05/setting.png" alt="Alt text"></p>
+<p><strong>参考资料</strong></p>
+<p><a target="_blank" rel="noopener" href="http://mirrors.neusoft.edu.cn/configurations.we#android">开源镜像站</a></p>
+
+        </div>
+
+    
+
+</div>
+                <!-- 
+                    <div class="post_pre_next">
+    
+        <div class="post-pre">
+            <a href="/2014/12/24/git-checkout/">上一篇: git checkout 的使用（一）</a>
+        </div>
+    
+    
+        <a href="/2014/12/04/mac-system-using/">下一篇: 
+            Mac系统使用记录（一）
+        </a>
+    
+</div>
+
+
+                 -->
+                <div class="footer">
+    <span>Copyright © 2023 大罗说事</span>
+</div>
+
+<!-- 
+<link rel="stylesheet" href="/css/highlight.default.css">
+ -->
+
+<link rel="stylesheet" href="/css/atom-one-dark.css">
+
+
+<link rel="stylesheet" href="/css/code-theme.css">
+
+
+<script src="/js/highlight.min.js"></script>
+
+
+<script src="/js/highlightjs-line-numbers.js"></script>
+
+
+<script src="/js/clipboard.min.js"></script>
+
+
+<script>
+    hljs.highlightAll();
+    var clipboard = new ClipboardJS('#clipboardbtn');
+    clipboard.on('success', function (e) {
+        console.log("Copied")
+        e.clearSelection();  
+    });
+
+    clipboard.on('error', function (e) {
+        console.log(e);
+    });
+</script>
+
+            </div>
+        </div>
+    </body>
+</html>

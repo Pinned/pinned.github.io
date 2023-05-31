@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+    <link rel="alternate icon" type="image/png" href="/img/favicon.png">
+    
+        <title>gradle打包的时候，自动重命名APK文件 </title>
+    
+    
+<link rel="stylesheet" href="/css/reset.css">
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/css/markdown.css">
+
+    
+<link rel="stylesheet" href="/css/fonts.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="post-header">
+    <p class="post-title">gradle打包的时候，自动重命名APK文件</p>
+</div>
+                
+                <div class="post-main">
+
+    
+        <div class="post-meta">
+            <a class='author' href="/">罗昭成</a> <span id="clipboardbtn" 
+            data-clipboard-action="copy"
+            data-clipboard-target="#copy-post-content"
+            >2015年04月06日</span>
+        </div>
+        <div class="post-md" id="copy-post-content">
+            <pre><code class="bash">android.applicationVariants.all &#123; variant -&gt;
+    variant.outputs.each &#123; output -&gt;
+        def outputFile = output.outputFile
+        if (outputFile != null &amp;&amp; outputFile.name.endsWith(&#39;.apk&#39;)) &#123;
+            def fileName = outputFile.name.replace(&quot;.apk&quot;, &quot;-$&#123;defaultConfig.versionName&#125;-$&#123; defaultConfig.versionCode&#125;.apk&quot;)
+            output.outputFile = new File(outputFile.parent, fileName)
+        &#125;
+    &#125;
+&#125;
+</code></pre>
+
+        </div>
+
+    
+
+</div>
+                <!-- 
+                    <div class="post_pre_next">
+    
+        <div class="post-pre">
+            <a href="/2015/04/06/android-string-xml-format/">上一篇: Android string.xml中的占位符</a>
+        </div>
+    
+    
+        <a href="/2015/04/05/keystore-file-options/">下一篇: 
+            Android Keystore 文件的密码修改
+        </a>
+    
+</div>
+
+
+                 -->
+                <div class="footer">
+    <span>Copyright © 2023 大罗说事</span>
+</div>
+
+<!-- 
+<link rel="stylesheet" href="/css/highlight.default.css">
+ -->
+
+<link rel="stylesheet" href="/css/atom-one-dark.css">
+
+
+<link rel="stylesheet" href="/css/code-theme.css">
+
+
+<script src="/js/highlight.min.js"></script>
+
+
+<script src="/js/highlightjs-line-numbers.js"></script>
+
+
+<script src="/js/clipboard.min.js"></script>
+
+
+<script>
+    hljs.highlightAll();
+    var clipboard = new ClipboardJS('#clipboardbtn');
+    clipboard.on('success', function (e) {
+        console.log("Copied")
+        e.clearSelection();  
+    });
+
+    clipboard.on('error', function (e) {
+        console.log(e);
+    });
+</script>
+
+            </div>
+        </div>
+    </body>
+</html>

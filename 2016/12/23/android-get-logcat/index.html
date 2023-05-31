@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+    <link rel="alternate icon" type="image/png" href="/img/favicon.png">
+    
+        <title>获取Logcat信息 </title>
+    
+    
+<link rel="stylesheet" href="/css/reset.css">
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/css/markdown.css">
+
+    
+<link rel="stylesheet" href="/css/fonts.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="post-header">
+    <p class="post-title">获取Logcat信息</p>
+</div>
+                
+                <div class="post-main">
+
+    
+        <div class="post-meta">
+            <a class='author' href="/">罗昭成</a> <span id="clipboardbtn" 
+            data-clipboard-action="copy"
+            data-clipboard-target="#copy-post-content"
+            >2016年12月23日</span>
+        </div>
+        <div class="post-md" id="copy-post-content">
+            <pre><code class="java">private void getLogcat( final LogcatListener listener ) &#123;
+
+    new Thread() &#123;
+        @Override
+        public void run() &#123;
+            try &#123;
+                String processId = Integer.toString( android.os.Process.myPid() );
+                String[] command = new String[]&#123;
+                        &quot;logcat&quot;,
+                        &quot;-d&quot;,
+                        &quot;-v&quot;,
+                        &quot;threadtime&quot;
+                &#125;;
+                Process process = Runtime.getRuntime().exec( command );
+                BufferedReader bufferedReader = new BufferedReader( new InputStreamReader( process
+                        .getInputStream() ) );
+
+                StringBuilder log = new StringBuilder();
+                String line;
+                while ( ( line = bufferedReader.readLine() ) != null ) &#123;
+                    if ( line.contains( processId ) ) &#123;
+                        int lineColor = verboseColor;
+
+                        if ( line.contains( &quot; I &quot; ) ) &#123;
+                            lineColor = infoColor;
+                        &#125; else if ( line.contains( &quot; E &quot; ) ) &#123;
+                            lineColor = errorColor;
+                        &#125; else if ( line.contains( &quot; D &quot; ) ) &#123;
+                            lineColor = debugColor;
+                        &#125; else if ( line.contains( &quot; W &quot; ) ) &#123;
+                            lineColor = warningColor;
+                        &#125;
+
+                        log.append( &quot;&lt;font color=\&quot;#&quot; + Integer.toHexString( lineColor )
+                                .toUpperCase()
+                                .substring( 2 ) + &quot;\&quot;&gt;&quot; + line + &quot;&lt;/font&gt;&lt;br&gt;&lt;br&gt;&quot; );
+                    &#125;
+                &#125;
+                listener.onLogcatCaptured( log.toString() );
+            &#125; catch ( Exception e ) &#123;
+                e.printStackTrace();
+            &#125;
+        &#125;
+    &#125;.start();
+&#125;
+
+```java
+</code></pre>
+
+        </div>
+
+    
+
+</div>
+                <!-- 
+                    <div class="post_pre_next">
+    
+        <div class="post-pre">
+            <a href="/2017/02/10/proguard-translate/">上一篇: Proguard 翻译</a>
+        </div>
+    
+    
+        <a href="/2016/10/21/ubuntu-install-tensorflow/">下一篇: 
+            Ubuntu 安装 Tensorflow
+        </a>
+    
+</div>
+
+
+                 -->
+                <div class="footer">
+    <span>Copyright © 2023 大罗说事</span>
+</div>
+
+<!-- 
+<link rel="stylesheet" href="/css/highlight.default.css">
+ -->
+
+<link rel="stylesheet" href="/css/atom-one-dark.css">
+
+
+<link rel="stylesheet" href="/css/code-theme.css">
+
+
+<script src="/js/highlight.min.js"></script>
+
+
+<script src="/js/highlightjs-line-numbers.js"></script>
+
+
+<script src="/js/clipboard.min.js"></script>
+
+
+<script>
+    hljs.highlightAll();
+    var clipboard = new ClipboardJS('#clipboardbtn');
+    clipboard.on('success', function (e) {
+        console.log("Copied")
+        e.clearSelection();  
+    });
+
+    clipboard.on('error', function (e) {
+        console.log(e);
+    });
+</script>
+
+            </div>
+        </div>
+    </body>
+</html>

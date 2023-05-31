@@ -4,7 +4,9 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
     <link rel="alternate icon" type="image/png" href="/img/favicon.png">
-    <title>大罗说事 | </title>
+    
+        <title>大罗说事 </title>
+    
     
 <link rel="stylesheet" href="/css/reset.css">
 
@@ -30,6 +32,8 @@
         
         <li><a href="/archives">归档</a></li>
         
+        <li><a href="/snippet">代码片段</a></li>
+        
         <li><a href="/about">关于</a></li>
         
     </ul>
@@ -39,10 +43,10 @@
     <ul class="archive">
         
         <li>
-            <span class="archive-date">2023.05.29</span>
+            <span class="archive-date">2015.04.10</span>
             <div class="archive-main">
-                <a class="archive-title" href="/2023/05/29/2015-04-10-mac-os-x-yomesite-install-rails/">Mac OS X Yosemite 安装 Rails</a>
-                <!-- <a class="read-more" href="/2023/05/29/2015-04-10-mac-os-x-yomesite-install-rails/"> ... </a> -->
+                <a class="archive-title" href="/2015/04/10/mac-os-x-yomesite-install-rails/">Mac OS X Yosemite 安装 Rails</a>
+                <!-- <a class="read-more" href="/2015/04/10/mac-os-x-yomesite-install-rails/"> ... </a> -->
             </div>
         </li>
         
@@ -70,10 +74,20 @@
 <script src="/js/highlightjs-line-numbers.js"></script>
 
 
+<script src="/js/clipboard.min.js"></script>
+
+
 <script>
-    hljs.initHighlightingOnLoad();
-    hljs.initLineNumbersOnLoad();
     hljs.highlightAll();
+    var clipboard = new ClipboardJS('#clipboardbtn');
+    clipboard.on('success', function (e) {
+        console.log("Copied")
+        e.clearSelection();  
+    });
+
+    clipboard.on('error', function (e) {
+        console.log(e);
+    });
 </script>
 
             </div>

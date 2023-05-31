@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+    <link rel="alternate icon" type="image/png" href="/img/favicon.png">
+    
+        <title>Android之Notification的使用（二） </title>
+    
+    
+<link rel="stylesheet" href="/css/reset.css">
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/css/markdown.css">
+
+    
+<link rel="stylesheet" href="/css/fonts.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="post-header">
+    <p class="post-title">Android之Notification的使用（二）</p>
+</div>
+                
+                <div class="post-main">
+
+    
+        <div class="post-meta">
+            <a class='author' href="/">罗昭成</a> <span id="clipboardbtn" 
+            data-clipboard-action="copy"
+            data-clipboard-target="#copy-post-content"
+            >2014年10月12日</span>
+        </div>
+        <div class="post-md" id="copy-post-content">
+            <h2><span class="prefix"></span><span class="content">Android之Notification的使用（二）</span><span class="suffix"></span></h2><p>接着上篇文章，解决了一些我在使用Notification的过程中的一些bug。但是解决这些问题是远远不够的。</p>
+<p>在上篇文章中，解决了多个Notification跳转到同一个Activity中的问题。<br>但是那样子做并不能完全解决问题，下面来看一下，我新遇到的问题。</p>
+<p><strong>先上代码</strong></p>
+<pre><code class="java">Intent intent = new Intent(this, MainActivity.class);
+intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+String currentTime =  DateTimeUtil.formatDateDefault(Calendar.getInstance().getTime());
+intent.putExtra(&quot;time&quot;, currentTime);
+int notificationId = (int) System.currentTimeMillis();
+PendingIntent pendingIntent= PendingIntent.getActivity(
+    this, notificationId, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this)
+        .setSmallIcon(R.drawable.ic_launcher)
+        .setContentTitle(currentTime)
+        .setContentText(&quot;text&quot;)
+        .setTicker(&quot;tricker&quot;)
+        .setStyle(new NotificationCompat.BigTextStyle().bigText(&quot;big text&quot;))
+        .setAutoCancel(true)
+        .setContentIntent(pendingIntent);
+NotificationManager notificationManager = (NotificationManager)
+        this.getSystemService(Context.NOTIFICATION_SERVICE);
+Notification notification = mBuilder.build();
+notification.defaults=Notification.DEFAULT_SOUND;
+notification.vibrate = new long[] &#123;100,400,100,400&#125;;
+notification.ledARGB=Color.GREEN;//led灯颜色
+notification.ledOffMS=1000;//关闭时间 毫秒
+notification.ledOnMS=1000;//开启时间 毫秒
+notification.flags|=Notification.FLAG_SHOW_LIGHTS;
+notificationManager.notify(notificationId, notification);
+</code></pre>
+<p>和上一个例子不同的是，这一个Notification跳转的位置并不是<code>OtherActiivty</code>，<br>而是直接跳转到<code>MainActivity</code>.</p>
+<p><strong>问题</strong><br>非常不幸的事，他并不能够正常接收么Intent传过来的参数。至于为什么，我也不知道。<br>如您知道这个的具体原因请告知我(邮箱：<a href="mailto:&#x6c;&#111;&#118;&#101;&#x63;&#108;&#117;&#111;&#x40;&#103;&#109;&#97;&#x69;&#x6c;&#x2e;&#99;&#x6f;&#x6d;">&#x6c;&#111;&#118;&#101;&#x63;&#108;&#117;&#111;&#x40;&#103;&#109;&#97;&#x69;&#x6c;&#x2e;&#99;&#x6f;&#x6d;</a>)。</p>
+<p><strong>解决办法</strong></p>
+<p>虽然不知道是什么原因造成了这个问题，但是最终还是找到了解决方案：</p>
+<p>解决方法如下：</p>
+<pre><code class="java">@Override
+protected void onNewIntent(Intent intent) &#123;
+    Log.d(TAG, &quot;[onNewIntent] 执行onNewIntent方法&quot;);
+    showReciveParams(intent);
+&#125;
+</code></pre>
+<p><strong>写在最后</strong></p>
+<p>本次试验的代码地址：<a target="_blank" rel="noopener" href="https://github.com/Pinned/NotificationDemo">下载地址:NotificationDemo_02</a></p>
+<p><strong>参考资料</strong></p>
+<p>[1] <a target="_blank" rel="noopener" href="http://www.cnblogs.com/zenfly/archive/2012/02/10/2345196.html">onNewIntent调用时机</a></p>
+
+        </div>
+
+    
+
+</div>
+                <!-- 
+                    <div class="post_pre_next">
+    
+        <div class="post-pre">
+            <a href="/2014/10/13/Android%20webview/">上一篇: Android之Webview使用</a>
+        </div>
+    
+    
+        <a href="/2014/10/11/Android%20Notification%20blog%20one/">下一篇: 
+            Android之Notification的使用(一)
+        </a>
+    
+</div>
+
+
+                 -->
+                <div class="footer">
+    <span>Copyright © 2023 大罗说事</span>
+</div>
+
+<!-- 
+<link rel="stylesheet" href="/css/highlight.default.css">
+ -->
+
+<link rel="stylesheet" href="/css/atom-one-dark.css">
+
+
+<link rel="stylesheet" href="/css/code-theme.css">
+
+
+<script src="/js/highlight.min.js"></script>
+
+
+<script src="/js/highlightjs-line-numbers.js"></script>
+
+
+<script src="/js/clipboard.min.js"></script>
+
+
+<script>
+    hljs.highlightAll();
+    var clipboard = new ClipboardJS('#clipboardbtn');
+    clipboard.on('success', function (e) {
+        console.log("Copied")
+        e.clearSelection();  
+    });
+
+    clipboard.on('error', function (e) {
+        console.log(e);
+    });
+</script>
+
+            </div>
+        </div>
+    </body>
+</html>

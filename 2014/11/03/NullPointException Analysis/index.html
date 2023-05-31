@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+    <link rel="alternate icon" type="image/png" href="/img/favicon.png">
+    
+        <title>Android 项目中出现的奇葩bug, 数据NullPointExcption </title>
+    
+    
+<link rel="stylesheet" href="/css/reset.css">
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/css/markdown.css">
+
+    
+<link rel="stylesheet" href="/css/fonts.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="post-header">
+    <p class="post-title">Android 项目中出现的奇葩bug, 数据NullPointExcption</p>
+</div>
+                
+                <div class="post-main">
+
+    
+        <div class="post-meta">
+            <a class='author' href="/">罗昭成</a> <span id="clipboardbtn" 
+            data-clipboard-action="copy"
+            data-clipboard-target="#copy-post-content"
+            >2014年11月03日</span>
+        </div>
+        <div class="post-md" id="copy-post-content">
+            <h3><span class="prefix"></span><span class="content">问题描述</span><span class="suffix"></span></h3><p>在一个自定义的Form表单中，有各种控件，如文本输入框，时间选择器，城市选择器等。<br>在使用城市选择器的时候，城市的数据存储在<code>List</code>中<br>在定义的时候，我使用如下代码定义：</p>
+<pre><code class="java">private List&lt;CityNode&gt; mCitys = null;
+</code></pre>
+<p>经过数据初始化过后，在构造方法中使用<code>mCitys</code>是正常的，但是在其它方法中使用，<br><code>mCitys</code>便成了空值.</p>
+<p>这个结果让我非常的费解。</p>
+<h3><span class="prefix"></span><span class="content">解决问题</span><span class="suffix"></span></h3><p>一开始出现了这个空指针异常，排查了好久，根本就找不到任何原因，<br>因为代码本身没有任何的逻辑错误。不知道是运气好还是怎么的。我把那个<code>List</code>的<br>定义写成如下，代码竟然可以正常运行：</p>
+<pre><code class="java">private List&lt;CityNode&gt; mCitys;
+</code></pre>
+<p>看到上面贴出来的代码，我顿时就无语了，太奇怪了，这两个不应该是一样的么。<br>经过一系列的测试，以下是问题解决的步骤:</p>
+<ul>
+<li>反射</li>
+</ul>
+<p>先上反射代码：</p>
+<pre><code class="java">Class&lt;? extends BaseFormElement&gt; clazz = model.getType().getValue();
+BaseFormElement element = null;
+try &#123;
+    Class[] parameterTypes = &#123; Context.class, FormElementModel.class &#125;;
+    //根据参数类型获取相应的构造函数
+    Constructor&lt;? extends BaseFormElement&gt; constructor
+            = clazz.getConstructor(parameterTypes);
+    //参数数组
+    Object[] parameters = &#123; mContext, model &#125;;
+    //根据获取的构造函数和参数，创建实例
+    element = (BaseFormElement)constructor.newInstance(parameters);
+&#125; catch (Exception e) &#123;
+    e.printStackTrace();
+&#125;
+</code></pre>
+<p>一开始，我以为是由于java的反射机制引起，导致局域变量初始化被执行了两次，<br>可是，有关反射的相关信息，查找了一遍，包括类加载的机制等信息，还是没有能<br>解释代码为什么执行了两次，所以觉得不怎么像是他引起的。后面和一个同事说到，<br>他看了一下代码，开始也没有找到原因,后面他说对象强转型引起的。</p>
+<ul>
+<li>强制转型</li>
+</ul>
+<p>在使用反射的时候，<code>newInstance</code>创建一个对象，返回了一个父类型的变量，可是<br>根本就没有进行强制转换。</p>
+<ul>
+<li>构造方法的执行顺序</li>
+</ul>
+<p>还是抱着局域变量的初始化被执行了两次，打印了一下日志，终于发现了问题的所在。<br>在初始化一个对象的时候，首先是执行父类的构造方法，如果还有父类，继续向上查找。</p>
+<p>示例：</p>
+<pre><code class="java">public class A &#123;
+    &#123;
+        System.out.println(&quot;class a prarms init&quot;);
+    &#125;
+    public A() &#123;
+        System.out.println(&quot;A constructor method excute&quot;);
+    &#125;
+&#125;
+</code></pre>
+<pre><code class="java">public class B extends A &#123;
+    &#123;
+        System.out.println(&quot;class B params init&quot;);
+    &#125;
+    public B() &#123;
+        System.out.println(&quot;B constructor method excute&quot;);
+    &#125;
+&#125;
+</code></pre>
+<pre><code class="java">public class Main &#123;
+
+    public static void main(String[] args) &#123;
+        A a = new B();
+    &#125;
+&#125;
+</code></pre>
+<p>运行结果:</p>
+<pre><code class="html">class a prarms init
+A constructor method excute
+class B params init
+B constructor method excute
+</code></pre>
+<h3><span class="prefix"></span><span class="content">总结</span><span class="suffix"></span></h3><p>这一次的空指针的最根本原因是在父类的构造方法中执行了子类实例变量的初始化<br>操作，这是一个非常不合理的举动。如果子类属性中的东西应该在子类中进行初始化，<br>而不是在父类中调用初始化方法。</p>
+<h3><span class="prefix"></span><span class="content">写在最后</span><span class="suffix"></span></h3><p><del>代码木有上传上来，如果你想看看这个丑陋的代码是怎么写的，你可以邮件联系我：<br><a href="mailto:&#x6c;&#x6f;&#118;&#101;&#x63;&#108;&#x75;&#x6f;&#x40;&#110;&#105;&#103;&#104;&#x74;&#x77;&#x65;&#x61;&#x76;&#x65;&#114;&#x2e;&#111;&#114;&#x67;">&#x6c;&#x6f;&#118;&#101;&#x63;&#108;&#x75;&#x6f;&#x40;&#110;&#105;&#103;&#104;&#x74;&#x77;&#x65;&#x61;&#x76;&#x65;&#114;&#x2e;&#111;&#114;&#x67;</a></del></p>
+<p>更新代码地址：</p>
+<ul>
+<li><a href="http://pinned.github.io/assets/posts/file-2014-11-4/NullPointProject-bug.tar.gz">Bug版代码</a></li>
+<li><a href="http://pinned.github.io/assets/posts/file-2014-11-4/NullPointProject-%E6%9B%B4%E6%94%B9.rar">修改版本</a></li>
+</ul>
+
+        </div>
+
+    
+
+</div>
+                <!-- 
+                    <div class="post_pre_next">
+    
+        <div class="post-pre">
+            <a href="/2014/11/04/butterknife-useing/">上一篇: Andorid UI注入工具的使用(ButterKnife)</a>
+        </div>
+    
+    
+        <a href="/2014/10/27/Android-Drawable-Animation/">下一篇: 
+            Android Drawable Animation
+        </a>
+    
+</div>
+
+
+                 -->
+                <div class="footer">
+    <span>Copyright © 2023 大罗说事</span>
+</div>
+
+<!-- 
+<link rel="stylesheet" href="/css/highlight.default.css">
+ -->
+
+<link rel="stylesheet" href="/css/atom-one-dark.css">
+
+
+<link rel="stylesheet" href="/css/code-theme.css">
+
+
+<script src="/js/highlight.min.js"></script>
+
+
+<script src="/js/highlightjs-line-numbers.js"></script>
+
+
+<script src="/js/clipboard.min.js"></script>
+
+
+<script>
+    hljs.highlightAll();
+    var clipboard = new ClipboardJS('#clipboardbtn');
+    clipboard.on('success', function (e) {
+        console.log("Copied")
+        e.clearSelection();  
+    });
+
+    clipboard.on('error', function (e) {
+        console.log(e);
+    });
+</script>
+
+            </div>
+        </div>
+    </body>
+</html>

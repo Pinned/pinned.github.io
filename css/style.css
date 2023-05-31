@@ -161,7 +161,7 @@ a
 }
 .post-except
 {
-    /* word-break: break-all; */
+    word-break: break-all;
     margin-bottom: 12px;
     text-align: justify;
 }
@@ -344,4 +344,16 @@ a
 {
     color: var(--font-color-0);
     transition: color ease-in-out .5s;
+}
+
+.post-image-caption {
+    margin-top: 5px;
+    text-align: center;
+    color: #888;
+    font-size: 0.85rem;
+    display: block;
+}
+
+#clipboardbtn {
+    cursor: pointer;
 }
