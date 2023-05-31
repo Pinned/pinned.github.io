@@ -1,7 +1,7 @@
 pre code.hljs {
   display: block;
   overflow-x: auto;
-  padding: 3px 5px;
+  padding: 12px;
   font-size: 12px;
 }
 /*
@@ -99,20 +99,3 @@ hue-6-2: #e6c07b
   text-decoration: underline;
 }
 
-pre::before {
-  content: '';
-  display: block;
-  background: url("../img/mac_style.svg");
-  height: 30px;
-  width: 100%;
-  background-size: 40px;
-  background-repeat: no-repeat;
-  background-color: #282c34;
-  margin-bottom: -7px;
-  border-radius: 5px;
-  background-position: 10px 10px;
-}
-
-pre code {
-  border-radius: 5px;
-}

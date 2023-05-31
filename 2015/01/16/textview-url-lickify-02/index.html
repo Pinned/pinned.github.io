@@ -7,15 +7,666 @@
     
         <title>TextView高亮URL地址解析 </title>
     
-    
-<link rel="stylesheet" href="/css/reset.css">
+    <style type="text/css" id="reset">@charset "utf-8";
 
-    
-<link rel="stylesheet" href="/css/style.css">
+*,
+*::before,
+*::after
+{
+    box-sizing: border-box;
+}
 
-    
-<link rel="stylesheet" href="/css/markdown.css">
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+figure,
+blockquote,
+dl,
+dd
+{
+    margin: 0;
+}
 
+ul,
+ol
+{
+    list-style: none;
+}
+
+ul
+{
+    padding-inline-start: 0;
+}
+
+html,
+body
+{
+    scroll-behavior: smooth;
+}
+
+a:not([class])
+{
+    text-decoration-skip-ink: auto;
+}
+
+img,
+picture
+{
+    width: auto;
+    max-width: 100%;
+    display: block;
+}
+
+input,
+button,
+textarea,
+select
+{
+    font: inherit;
+}
+
+@media (prefers-reduced-motion: reduce)
+{
+    html:focus-within
+    {
+        scroll-behavior: auto;
+    }
+}</style>
+    <style type="text/css" id="style">@charset "utf-8";
+
+:root
+{
+    --font-color-0: #04077e;
+    --font-color-1: #000;
+    --font-color-2: #666;
+    --font-color-3: #aaa;
+    --bg-color-1: #eee;
+    --line-1: #ccc;
+    --line-2: #ddd;
+}
+p
+{
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    text-align: justify;
+}
+
+body
+{
+    font-family: "Montserrat", "SF UI Text", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Segoe UI", "Helvetica Neue", Helvetica, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+    font-size: 16px;
+    line-height: 1.75;
+    letter-spacing: 0.6px;
+    color: var(--font-color-2);
+    background: #111;
+}
+a
+{
+    text-decoration: none;
+    color: var(--font-color-1);
+}
+
+
+
+@media screen and (max-width: 480px) {
+    body {
+        background: #fff;
+    }
+    .paper {
+        padding: 4vw;
+    }
+    .paper-main {
+        width: 100%;
+        margin: 0 auto;
+        padding: 30px 1vw 12px;
+        background: #fff;
+    }
+}
+@media screen and (min-width: 481px) {
+    .paper {
+        padding: 4vw;
+    }
+    .paper-main {
+        width: 100%;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 62px 3vw 24px;
+        background: #fff;
+        border-radius: 24px;
+    }
+}
+
+.header
+{
+    padding-bottom: 48px;
+    margin-bottom: 48px;
+    border-bottom: 1px solid var(--line-1);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: center;
+}
+.logo
+{
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--font-color-1);
+    margin-bottom: 16px;
+    flex: 0 0 100%;
+}
+.nav
+{
+    margin: 0 0 4px;
+    flex: 0 0 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: center;
+}
+.nav li
+{
+    padding: 2px 0;
+    margin-right: 24px;
+}
+.nav li:last-of-type
+{
+    margin-right: 0;
+}
+.nav li a
+{
+    color: var(--font-color-1);
+    opacity: .6;
+    transition: opacity ease-in-out .5s;
+}
+.nav li a:hover
+{
+    opacity: 1;
+    transition: opacity ease-in-out .5s;
+}
+
+.post-header
+{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: center;
+}
+.post-header .post-title
+{
+    font-size: 1.375rem;
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+    line-height: 1;
+}
+
+.post-list
+{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: stretch;
+}
+.post
+{
+    width: 100%;
+    padding-bottom: 48px;
+    margin-bottom: 48px;
+    border-bottom: 1px dashed var(--line-2);
+}
+.post-title
+{
+    display: inline-block;
+    font-size: 1.6rem;
+    font-weight: 600;
+    line-height: 1.5;
+    margin-bottom: 12px;
+    color: var(--font-color-1);
+    /*transition: color ease-in-out .5s;*/
+}
+.post-title:hover
+{
+    color: var(--font-color-0);
+    transition: color ease-in-out .5s;
+}
+.post-except
+{
+    word-break: break-all;
+    margin-bottom: 12px;
+    text-align: justify;
+}
+.read-more
+{
+    padding: 0 4px;
+    color: var(--font-color-0);   
+}
+.read-more:before,
+.read-more:after
+{
+    display: inline-block;
+    transition: transform ease-in-out .5s;
+}
+.read-more:before
+{
+    content: "{ ";
+}
+.read-more:after
+{
+    content: " }";
+}
+.read-more:hover:before
+{
+    transform: translateX(-4px);
+    transition: transform ease-in-out .25s;
+}
+.read-more:hover:after
+{
+    transform: translateX(4px);
+    transition: transform ease-in-out .25s;
+}
+.post-date
+{
+    font-size: 0.875rem;
+    color: var(--font-color-3);
+}
+
+.paginator
+{
+    font-size: 0.875rem;
+    width: 100%;
+    margin: 0 auto 24px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.paginator *
+{
+    display: block;
+    padding: 8px 16px;
+    border-radius: 18px;
+    background: #fff;
+    border: 1px solid #eee;
+}
+.paginator .space
+{
+    display: block;
+    padding: 8px 16px;
+    border-radius: 18px;
+    background: #fff;
+    border: none;
+}
+.paginator a
+{
+    margin: 4px;
+    color: var(--font-color-2);
+    transition: color ease-in-out .5s;
+}
+.paginator a:hover
+{
+    color: var(--font-color-0);
+    transition: color ease-in-out .5s;
+}
+.paginator .current
+{
+    color: var(--font-color-0);
+    border: 1px solid var(--font-color-0);
+}
+
+.footer
+{
+    padding: 24px 0;
+    font-size: 0.875rem;
+    color: var(--font-color-3);
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-content: center;
+}
+.footer span
+{
+    text-align: center;
+    margin-bottom: 8px;
+}
+.footer a
+{
+    color: var(--font-color-3);
+    transition: color ease-in-out .5s;
+}
+.footer a:hover
+{
+    color: var(--font-color-0);
+    transition: color ease-in-out .5s;
+}
+
+.post-main
+{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 24px;
+}
+.post-main-title
+{
+    flex: 0 0 100%;
+    margin-bottom: 12px;
+    font-size: 1.6rem;
+    font-weight: 600;
+    line-height: 1.5;
+    color: var(--font-color-1);
+}
+.post-meta
+{
+    font-size: 0.875rem;
+    color: var(--font-color-3);
+    flex: 0 0 100%;
+    margin-bottom: 32px;
+}
+
+.author {
+    color: #576b95;
+}
+
+.archive
+{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-content: normal;
+}
+.archive li
+{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-content: center;
+    padding: 12px 0;
+}
+.archive li:nth-child(odd)
+{
+    background: #fafafa;
+}
+.archive li:nth-child(even)
+{
+    background: #fff;
+}
+.archive li span
+{
+    width: 108px;
+    color: var(--font-color-2);
+}
+.archive-main
+{
+    flex: 0 1 calc( 100% - 108px );
+}
+.archive-title
+{
+    color: var(--font-color-1);
+    /*transition: color ease-in-out .5s;*/
+}
+.archive-title:hover
+{
+    color: var(--font-color-0);
+    transition: color ease-in-out .5s;
+}
+
+.post-image-caption {
+    margin-top: 5px;
+    text-align: center;
+    color: #888;
+    font-size: 0.85rem;
+    display: block;
+}
+
+#clipboardbtn {
+    cursor: pointer;
+}</style>
+    <style type="text/css" id="markdown">@charset "utf-8";
+
+.post-md
+{
+    width: 100%;
+    letter-spacing: 0;
+}
+
+.post-md h1,
+.post-md h2,
+.post-md h3,
+.post-md h4,
+.post-md h5,
+.post-md h6
+{
+    color: var(--font-color-1);
+}
+/* 一级标题 */
+.post-md h1  {
+    display:block;
+    border-bottom: 4px solid rgb(33, 33, 34);
+    font-size: 1rem;
+}
+  
+/* 一级标题内容 */
+.post-md h1  .content {
+    display: flex;
+    color: rgb(33, 33, 34);
+    font-size: 1rem;
+}
+  
+  
+/* 一级标题后缀 */
+.post-md h1  .suffix {
+    display: flex;
+    box-sizing: border-box;
+    width: 20px;
+    height: 10px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    background: RGBA(33, 33, 34, .5);
+    color: rgb(255, 255, 255);
+    font-size: 16px;
+    letter-spacing: 0.544px;
+    justify-content: flex-end;
+    box-sizing: border-box !important;
+    overflow-wrap: break-word !important;
+    float: right;
+    margin-top: -10px;
+}
+
+/* 二级标题 */
+.post-md h2 {
+    margin: 10px auto;
+    height: 40px;
+    background-color: rgb(251, 251, 251);
+    border-bottom: 1px solid rgb(246, 246, 246);
+    box-sizing: border-box;
+    font-size: 1rem;
+}
+
+/* 二级标题内容 */
+.post-md h2 .content {
+    margin-left: -10px;
+    display: inline-block;
+    width: auto;
+    height: 40px;
+    background-color: rgb(33, 33, 34);
+    border-bottom-right-radius:100px;
+    color: rgb(255, 255, 255);
+    padding-right: 30px;
+    padding-left: 20px;
+    font-size: 1rem;
+    line-height: 40px;
+}
+
+/* 三级标题 */
+.post-md h3 {
+    margin: 20px auto 5px;
+    border-top: 1px solid rgb(221, 221, 221);
+    box-sizing: border-box;
+    font-size: 1rem;
+}
+  
+/* 三级标题内容 */
+.post-md h3 .content {
+    margin-top: -1px;
+    padding-top: 6px;
+    padding-right: 5px;
+    padding-left: 5px;
+    font-size: 1rem;
+    border-top: 2px solid rgb(33, 33, 34);
+    display: inline-block;
+    line-height: 1.1;
+}
+.post-md h4
+{
+    font-size: 1rem;
+    line-height: 1.2;
+    padding: 16px 0;
+}
+.post-md h5
+{
+    font-size: 0.83rem;
+    line-height: 1.2;
+    padding: 14px 0;
+}
+.post-md h6
+{
+    font-size: 0.67rem;
+    line-height: 1.2;
+    padding: 12px 0;
+}
+.post-md a
+{
+    color: var(--font-color-2);
+    box-shadow: 0 2px 0 var(--line-1);
+    transition: color ease-in-out .65s, box-shadow ease-in-out .65s;
+}
+.post-md a:hover
+{
+    color: var(--font-color-0);
+    box-shadow: 0 2px 0 var(--font-color-0);
+    transition: color ease-in-out .65s, box-shadow ease-in-out .65s;
+}
+.post-md strong
+{
+    font-weight: 700;
+}
+.post-md em
+{
+    font-style: italic;
+}
+.post-md kbd
+{
+    padding: 2px 4px;
+    border-radius: 2px;
+    background: #eee;
+    border: 1px solid #ddd;
+}
+.post-md ol
+{
+    list-style: decimal;
+    padding-left: 24px;
+}
+.post-md ul
+{
+    list-style: disc;
+    padding-left: 24px;
+}
+.post-md img
+{
+    border-radius: 4px;
+}
+.post-md hr
+{
+    border: none;
+    height: 1px;
+    background: var(--line-1);
+    margin: 24px 0;
+}
+
+.post-md p,
+.post-md blockquote
+{
+    width: 100%;
+    margin: 12px 0;
+}
+.post-md blockquote
+{
+    border-left: 2px solid var(--line-2);
+    padding-left: 12px;
+    word-wrap: break-word;
+}
+
+.post-md .video-container
+{
+    background: #000;
+    border-radius: 4px;
+    overflow: hidden;
+}
+.post-md iframe,
+.post-md .video-container iframe
+{
+    width: 100%;
+    height: 100vh;
+    max-height: 360px;
+    margin: 12px 0;
+}
+
+.post-md>table
+{
+    width: 100%;
+    text-align: left;
+    border-spacing: 0;
+}
+.post-md>table th
+{
+    padding: 12px 0;
+    border-bottom: 2px solid var(--line-1);
+}
+.post-md>table tr:nth-child(odd) td
+{
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line-1);
+    background: #fafafa;
+}
+.post-md>table tr:nth-child(even) td
+{
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line-1);
+    background: #fff;
+}
+
+.post-md p code
+{
+    border-radius: 4px;
+    background:rgba(27,31,35,.05);
+    padding: 2px 4px;
+    color: rgb(0, 112, 96);
+    font-size: 1rem;
+    margin-left: 1px;
+    margin-right: 1px;
+}
+
+.post-md .hljs-ln-numbers
+{
+    opacity: .5;
+    padding-right: 12px;
+}
+</style>
     
 <link rel="stylesheet" href="/css/fonts.css">
 
@@ -32,12 +683,10 @@
 
     
         <div class="post-meta">
-            <a class='author' href="/">罗昭成</a> <span id="clipboardbtn" 
-            data-clipboard-action="copy"
-            data-clipboard-target="#copy-post-content"
-            >2015年01月16日</span>
+            <a class='author' href="/">罗昭成</a> <span id="clipboardbtn">2015年01月16日</span>
         </div>
         <div class="post-md" id="copy-post-content">
+        <section id="beautiful">
             <p>#TextView 高亮实现</p>
 <p>基本使用方法：</p>
 <pre><code class="java">textView.setAutoLinkMask(Linkify.ALL);
@@ -162,6 +811,7 @@ private static final String makeUrl(String url, String[] prefixes,
   &#125;
 </code></pre>
 
+        </section>
         </div>
 
     
@@ -190,12 +840,125 @@ private static final String makeUrl(String url, String[] prefixes,
 <!-- 
 <link rel="stylesheet" href="/css/highlight.default.css">
  -->
+<style type="text/css" id="atom-one-dark">pre code.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 12px;
+  font-size: 12px;
+}
+/*
 
-<link rel="stylesheet" href="/css/atom-one-dark.css">
+Atom One Dark by Daniel Gamage
+Original One Dark Syntax theme from https://github.com/atom/one-dark-syntax
 
+base:    #282c34
+mono-1:  #abb2bf
+mono-2:  #818896
+mono-3:  #5c6370
+hue-1:   #56b6c2
+hue-2:   #61aeee
+hue-3:   #c678dd
+hue-4:   #98c379
+hue-5:   #e06c75
+hue-5-2: #be5046
+hue-6:   #d19a66
+hue-6-2: #e6c07b
 
-<link rel="stylesheet" href="/css/code-theme.css">
+*/
 
+.hljs {
+  color: #abb2bf;
+  background: #282c34;
+}
+
+.hljs-comment,
+.hljs-quote {
+  color: #5c6370;
+  font-style: italic;
+}
+
+.hljs-doctag,
+.hljs-keyword,
+.hljs-formula {
+  color: #c678dd;
+}
+
+.hljs-section,
+.hljs-name,
+.hljs-selector-tag,
+.hljs-deletion,
+.hljs-subst {
+  color: #e06c75;
+}
+
+.hljs-literal {
+  color: #56b6c2;
+}
+
+.hljs-string,
+.hljs-regexp,
+.hljs-addition,
+.hljs-attribute,
+.hljs-meta .hljs-string {
+  color: #98c379;
+}
+
+.hljs-attr,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-type,
+.hljs-selector-class,
+.hljs-selector-attr,
+.hljs-selector-pseudo,
+.hljs-number {
+  color: #d19a66;
+}
+
+.hljs-symbol,
+.hljs-bullet,
+.hljs-link,
+.hljs-meta,
+.hljs-selector-id,
+.hljs-title {
+  color: #61aeee;
+}
+
+.hljs-built_in,
+.hljs-title.class_,
+.hljs-class .hljs-title {
+  color: #e6c07b;
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-strong {
+  font-weight: bold;
+}
+
+.hljs-link {
+  text-decoration: underline;
+}
+
+</style>
+<style type="text/css" id="code-theme">pre::before {
+    content: '';
+    display: block;
+    background: url("http://pinned.github.io/img/mac_style.svg");
+    height: 30px;
+    width: 100%;
+    background-size: 40px;
+    background-repeat: no-repeat;
+    background-color: #282c34;
+    margin-bottom: -7px;
+    border-radius: 5px;
+    background-position: 10px 10px;
+}
+
+pre code {
+    border-radius: 5px;
+}</style>
 
 <script src="/js/highlight.min.js"></script>
 
@@ -203,20 +966,14 @@ private static final String makeUrl(String url, String[] prefixes,
 <script src="/js/highlightjs-line-numbers.js"></script>
 
 
-<script src="/js/clipboard.min.js"></script>
+<script src="/js/juice.js"></script>
+
+
+<script src="/js/copy_wechat.js"></script>
 
 
 <script>
-    hljs.highlightAll();
-    var clipboard = new ClipboardJS('#clipboardbtn');
-    clipboard.on('success', function (e) {
-        console.log("Copied")
-        e.clearSelection();  
-    });
-
-    clipboard.on('error', function (e) {
-        console.log(e);
-    });
+    hljs.highlightAll();    
 </script>
 
             </div>
