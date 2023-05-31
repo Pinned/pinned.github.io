@@ -353,3 +353,7 @@ a
     font-size: 0.85rem;
     display: block;
 }
+
+#clipboardbtn {
+    cursor: pointer;
+}

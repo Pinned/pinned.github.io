@@ -7,7 +7,17 @@
 <%- css('css/code-theme.css') %>
 <%- js('js/highlight.min.js') %>
 <%- js('js/highlightjs-line-numbers.js') %>
+<%- js('js/clipboard.min.js') %>
 
 <script>
     hljs.highlightAll();
+    var clipboard = new ClipboardJS('#clipboardbtn');
+    clipboard.on('success', function (e) {
+        console.log("Copied")
+        e.clearSelection();  
+    });
+
+    clipboard.on('error', function (e) {
+        console.log(e);
+    });
 </script>
