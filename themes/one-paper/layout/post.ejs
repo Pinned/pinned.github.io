@@ -2,13 +2,12 @@
 
     <% if (is_post()) { %>
         <div class="post-meta">
-            <a class='author' href="<%- url_for() %>"><%= config.author %></a> <span id="clipboardbtn" 
-            data-clipboard-action="copy"
-            data-clipboard-target="#copy-post-content"
-            ><%- date(page.date, "YYYY年MM月DD日") %></span>
+            <a class='author' href="<%- url_for() %>"><%= config.author %></a> <span id="clipboardbtn"><%- date(page.date, "YYYY年MM月DD日") %></span>
         </div>
         <div class="post-md" id="copy-post-content">
+        <section id="beautiful">
             <%- page.content %>
+        </section>
         </div>
 
     <% } else { %>
