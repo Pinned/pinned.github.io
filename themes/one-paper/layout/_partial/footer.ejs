@@ -3,15 +3,49 @@
 </div>
 
 <!-- <%- css('css/highlight.default.css') %> -->
-<%- css('css/atom-one-dark.css') %>
-<%- css('css/code-theme.css') %>
+<%- css_inline('css/atom-one-dark.css') %>
+<%- css_inline('css/code-theme.css') %>
 <%- js('js/highlight.min.js') %>
 <%- js('js/highlightjs-line-numbers.js') %>
 <%- js('js/clipboard.min.js') %>
 
 <script>
+    // import juice from "juice";
     hljs.highlightAll();
-    var clipboard = new ClipboardJS('#clipboardbtn');
+
+    // const solveHtml = () => {
+    // const element = document.getElementById(BOX_ID);
+
+    // const inner = element.children[0].children;
+    // let html = element.innerHTML;
+    // html = html.replace(/<mjx-container (class="inline.+?)<\/mjx-container>/g, "<span $1</span>");
+    // html = html.replace(/\s<span class="inline/g, '&nbsp;<span class="inline');
+    // html = html.replace(/svg><\/span>\s/g, "svg></span>&nbsp;");
+    // html = html.replace(/mjx-container/g, "section");
+    // html = html.replace(/class="mjx-solid"/g, 'fill="none" stroke-width="70"');
+    // html = html.replace(/<mjx-assistive-mml.+?<\/mjx-assistive-mml>/g, "");
+    // const basicStyle = document.getElementById(BASIC_THEME_ID).innerText;
+    // const markdownStyle = document.getElementById(MARKDOWN_THEME_ID).innerText;
+    // const codeStyle = document.getElementById(CODE_THEME_ID).innerText;
+    // const fontStyle = document.getElementById(FONT_THEME_ID).innerText;
+    // let res = "";
+    // try {
+    //     res = juice.inlineContent(html, basicStyle + markdownStyle + codeStyle + fontStyle, {
+    //     inlinePseudoElements: true,
+    //     preserveImportant: true,
+    //     });
+    // } catch (e) {
+    //     message.error("请检查 CSS 文件是否编写正确！");
+    // }
+
+    // return res;
+    // };
+
+    var clipboard = new ClipboardJS('#clipboardbtn', {
+        text: function(trigger) {
+            return document.getElementById('copy-post-content').innerHTML
+        }
+    });
     clipboard.on('success', function (e) {
         console.log("Copied")
         e.clearSelection();  
