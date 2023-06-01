@@ -98,7 +98,7 @@ p
 
 body
 {
-    font-family: "Montserrat", "SF UI Text", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Segoe UI", "Helvetica Neue", Helvetica, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+    font-family: "PingFang SC", BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serifhtml, body;
     font-size: 16px;
     line-height: 1.75;
     letter-spacing: 0.6px;
@@ -435,7 +435,18 @@ a
 
 #clipboardbtn {
     cursor: pointer;
-}</style>
+}
+
+#beautiful p {
+    box-sizing: border-box;
+    margin-bottom: 16px;
+    font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
+    font-size: 15px;
+    text-align: justify;
+    white-space: normal;
+    text-size-adjust: auto;
+    line-height: 1.75em;
+  }</style>
     <style type="text/css" id="markdown">@charset "utf-8";
 
 .post-md
@@ -667,9 +678,6 @@ a
     padding-right: 12px;
 }
 </style>
-    
-<link rel="stylesheet" href="/css/fonts.css">
-
 <meta name="generator" content="Hexo 6.3.0"></head>
     <body>
         <div class="paper">
@@ -721,8 +729,8 @@ a
 &lt;/RelativeLayout&gt;
 </code></pre>
 <p>代码很简单，那我们在来看一下他的运行效果：</p>
-<p><figure><img src="https://cloud.githubusercontent.com/assets/8403321/12022795/46c90190-adce-11e5-8cfd-f39a8d1fd4a1.png" alt="效果图"><figcaption class="post-image-caption">效果图</figcaption></figure></p>
-<p>我那个擦，为什么下面那个TextView上的文字内容显示不完整，这尼玛什么情况，于是乎，我调整了一个<code>RelativeLayout</code>的高度，让他变高一点，改成<code>android:layout_height=&quot;125dp&quot;</code>, run了一下，居然正常了，如下图：<br><figure><img src="https://cloud.githubusercontent.com/assets/8403321/12022788/299ea278-adce-11e5-93c7-104e82cbf6fb.png" alt="效果图"><figcaption class="post-image-caption">效果图</figcaption></figure></p>
+<p><img src="https://cloud.githubusercontent.com/assets/8403321/12022795/46c90190-adce-11e5-8cfd-f39a8d1fd4a1.png" alt="效果图" referrerpolicy="no-referrer"><figcaption class="post-image-caption">效果图</figcaption></figure></p>
+<p>我那个擦，为什么下面那个TextView上的文字内容显示不完整，这尼玛什么情况，于是乎，我调整了一个<code>RelativeLayout</code>的高度，让他变高一点，改成<code>android:layout_height=&quot;125dp&quot;</code>, run了一下，居然正常了，如下图：<br><img src="https://cloud.githubusercontent.com/assets/8403321/12022788/299ea278-adce-11e5-93c7-104e82cbf6fb.png" alt="效果图" referrerpolicy="no-referrer"><figcaption class="post-image-caption">效果图</figcaption></figure></p>
 <p>我特么的惊呆了，内心中一万只草泥马奔腾而过，上面那个图中，RelativeLayout中明明还有空白，为什么会导致下面的TextView的高度不够呢。</p>
 <p>带着疑惑，我去看了一下Android RelativeLayout的源码，才发现，RelativeLayout 先按照不写gravity属性的时候来计算子View的高度：</p>
 <pre><code class="html">在Nexcus下调试，得到控件的高度：

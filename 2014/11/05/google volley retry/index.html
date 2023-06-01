@@ -98,7 +98,7 @@ p
 
 body
 {
-    font-family: "Montserrat", "SF UI Text", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Segoe UI", "Helvetica Neue", Helvetica, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+    font-family: "PingFang SC", BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serifhtml, body;
     font-size: 16px;
     line-height: 1.75;
     letter-spacing: 0.6px;
@@ -435,7 +435,18 @@ a
 
 #clipboardbtn {
     cursor: pointer;
-}</style>
+}
+
+#beautiful p {
+    box-sizing: border-box;
+    margin-bottom: 16px;
+    font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
+    font-size: 15px;
+    text-align: justify;
+    white-space: normal;
+    text-size-adjust: auto;
+    line-height: 1.75em;
+  }</style>
     <style type="text/css" id="markdown">@charset "utf-8";
 
 .post-md
@@ -667,9 +678,6 @@ a
     padding-right: 12px;
 }
 </style>
-    
-<link rel="stylesheet" href="/css/fonts.css">
-
 <meta name="generator" content="Hexo 6.3.0"></head>
     <body>
         <div class="paper">
@@ -708,7 +716,7 @@ a
 <p>当然，如果你非常了解源码，你肯定知道是怎么引起的。但是我不知道源码啊。肿么破啊。</p>
 <p>于是，硬着头皮去看Volley源码，才发现，人家这个比我也得好是有原因的。</p>
 <h3><span class="prefix"></span><span class="content">Volley 网络请求</span><span class="suffix"></span></h3><p>先看一下官方给出的架构图嘛，虽然我也不怎么明白是怎么实现的。</p>
-<p><figure><img src="http://pinned.github.io/assets/posts/file-2014-11-05/volley-request.png" alt="Google Volley illustrates the life of a request"><figcaption class="post-image-caption">Google Volley illustrates the life of a request</figcaption></figure></p>
+<p><img src="http://pinned.github.io/assets/posts/file-2014-11-05/volley-request.png" alt="Google Volley illustrates the life of a request" referrerpolicy="no-referrer"><figcaption class="post-image-caption">Google Volley illustrates the life of a request</figcaption></figure></p>
 <p>当你建立一个<code>Request</code>，将<code>Request</code>添加到<code>RequestQuene</code>中去，Volley 首先会去找Cache里面有没有存在有效的<br>请求，如果存在，则直接处理里面请求返回的数据并响应回去，如果没有，则把<code>Request</code>放到网络请求队列里面去，<br>执行异步请求并响应。</p>
 <p>以上就是我暂时对Volley的理解了。</p>
 <h3><span class="prefix"></span><span class="content">Volley 请求重试机制</span><span class="suffix"></span></h3><p>一个完整的网络请求框架，肯定会有请求失败重试的机制。</p>

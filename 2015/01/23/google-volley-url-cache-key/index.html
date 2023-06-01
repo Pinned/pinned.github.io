@@ -98,7 +98,7 @@ p
 
 body
 {
-    font-family: "Montserrat", "SF UI Text", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Segoe UI", "Helvetica Neue", Helvetica, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+    font-family: "PingFang SC", BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serifhtml, body;
     font-size: 16px;
     line-height: 1.75;
     letter-spacing: 0.6px;
@@ -435,7 +435,18 @@ a
 
 #clipboardbtn {
     cursor: pointer;
-}</style>
+}
+
+#beautiful p {
+    box-sizing: border-box;
+    margin-bottom: 16px;
+    font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
+    font-size: 15px;
+    text-align: justify;
+    white-space: normal;
+    text-size-adjust: auto;
+    line-height: 1.75em;
+  }</style>
     <style type="text/css" id="markdown">@charset "utf-8";
 
 .post-md
@@ -667,9 +678,6 @@ a
     padding-right: 12px;
 }
 </style>
-    
-<link rel="stylesheet" href="/css/fonts.css">
-
 <meta name="generator" content="Hexo 6.3.0"></head>
     <body>
         <div class="paper">
@@ -1013,7 +1021,7 @@ protected Response&lt;String&gt; parseNetworkResponse(NetworkResponse response) 
 </code></pre>
 <p>就是<code>HttpHeaderParser.parseCacheHeaders(response)</code>实现<code>Response</code>向<code>Cache.Entry</code>的转换。</p>
 <p>当然，你可以实现自己的<code>parseCacheHeaders</code>的方法，来实现你自己的缓存侧略。</p>
-<p>到此为止，基本写完了我所读到的<code>Volley</code>中实现<code>Cache</code>的方法。如果你对本文或者我有什么意见或者建议。<br>请骚扰我：<a href="mailto:&#108;&#111;&#118;&#x65;&#x63;&#x6c;&#x75;&#111;&#x40;&#110;&#105;&#103;&#x68;&#116;&#x77;&#x65;&#97;&#x76;&#101;&#114;&#x2e;&#111;&#x72;&#103;">&#108;&#111;&#118;&#x65;&#x63;&#x6c;&#x75;&#111;&#x40;&#110;&#105;&#103;&#x68;&#116;&#x77;&#x65;&#97;&#x76;&#101;&#114;&#x2e;&#111;&#x72;&#103;</a></p>
+<p>到此为止，基本写完了我所读到的<code>Volley</code>中实现<code>Cache</code>的方法。如果你对本文或者我有什么意见或者建议。<br>请骚扰我：<a href="mailto:&#108;&#x6f;&#118;&#x65;&#x63;&#108;&#x75;&#111;&#64;&#x6e;&#105;&#103;&#104;&#x74;&#x77;&#x65;&#x61;&#118;&#101;&#x72;&#46;&#111;&#x72;&#103;">&#108;&#x6f;&#118;&#x65;&#x63;&#108;&#x75;&#111;&#64;&#x6e;&#105;&#103;&#104;&#x74;&#x77;&#x65;&#x61;&#118;&#101;&#x72;&#46;&#111;&#x72;&#103;</a></p>
 
         </section>
         </div>

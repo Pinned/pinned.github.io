@@ -98,7 +98,7 @@ p
 
 body
 {
-    font-family: "Montserrat", "SF UI Text", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Segoe UI", "Helvetica Neue", Helvetica, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+    font-family: "PingFang SC", BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serifhtml, body;
     font-size: 16px;
     line-height: 1.75;
     letter-spacing: 0.6px;
@@ -435,7 +435,18 @@ a
 
 #clipboardbtn {
     cursor: pointer;
-}</style>
+}
+
+#beautiful p {
+    box-sizing: border-box;
+    margin-bottom: 16px;
+    font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
+    font-size: 15px;
+    text-align: justify;
+    white-space: normal;
+    text-size-adjust: auto;
+    line-height: 1.75em;
+  }</style>
     <style type="text/css" id="markdown">@charset "utf-8";
 
 .post-md
@@ -667,9 +678,6 @@ a
     padding-right: 12px;
 }
 </style>
-    
-<link rel="stylesheet" href="/css/fonts.css">
-
 <meta name="generator" content="Hexo 6.3.0"></head>
     <body>
         <div class="paper">
@@ -757,7 +765,7 @@ class B params init
 B constructor method excute
 </code></pre>
 <h3><span class="prefix"></span><span class="content">总结</span><span class="suffix"></span></h3><p>这一次的空指针的最根本原因是在父类的构造方法中执行了子类实例变量的初始化<br>操作，这是一个非常不合理的举动。如果子类属性中的东西应该在子类中进行初始化，<br>而不是在父类中调用初始化方法。</p>
-<h3><span class="prefix"></span><span class="content">写在最后</span><span class="suffix"></span></h3><p><del>代码木有上传上来，如果你想看看这个丑陋的代码是怎么写的，你可以邮件联系我：<br><a href="mailto:&#x6c;&#x6f;&#118;&#101;&#99;&#x6c;&#117;&#111;&#64;&#x6e;&#x69;&#x67;&#x68;&#116;&#119;&#101;&#x61;&#118;&#101;&#114;&#46;&#111;&#114;&#x67;">&#x6c;&#x6f;&#118;&#101;&#99;&#x6c;&#117;&#111;&#64;&#x6e;&#x69;&#x67;&#x68;&#116;&#119;&#101;&#x61;&#118;&#101;&#114;&#46;&#111;&#114;&#x67;</a></del></p>
+<h3><span class="prefix"></span><span class="content">写在最后</span><span class="suffix"></span></h3><p><del>代码木有上传上来，如果你想看看这个丑陋的代码是怎么写的，你可以邮件联系我：<br><a href="mailto:&#x6c;&#111;&#118;&#x65;&#99;&#108;&#117;&#x6f;&#x40;&#110;&#105;&#x67;&#104;&#x74;&#119;&#x65;&#x61;&#x76;&#x65;&#114;&#x2e;&#x6f;&#114;&#103;">&#x6c;&#111;&#118;&#x65;&#99;&#108;&#117;&#x6f;&#x40;&#110;&#105;&#x67;&#104;&#x74;&#119;&#x65;&#x61;&#x76;&#x65;&#114;&#x2e;&#x6f;&#114;&#103;</a></del></p>
 <p>更新代码地址：</p>
 <ul>
 <li><a href="http://pinned.github.io/assets/posts/file-2014-11-4/NullPointProject-bug.tar.gz">Bug版代码</a></li>

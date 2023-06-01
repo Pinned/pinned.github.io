@@ -98,7 +98,7 @@ p
 
 body
 {
-    font-family: "Montserrat", "SF UI Text", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Segoe UI", "Helvetica Neue", Helvetica, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+    font-family: "PingFang SC", BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serifhtml, body;
     font-size: 16px;
     line-height: 1.75;
     letter-spacing: 0.6px;
@@ -435,7 +435,18 @@ a
 
 #clipboardbtn {
     cursor: pointer;
-}</style>
+}
+
+#beautiful p {
+    box-sizing: border-box;
+    margin-bottom: 16px;
+    font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
+    font-size: 15px;
+    text-align: justify;
+    white-space: normal;
+    text-size-adjust: auto;
+    line-height: 1.75em;
+  }</style>
     <style type="text/css" id="markdown">@charset "utf-8";
 
 .post-md
@@ -667,9 +678,6 @@ a
     padding-right: 12px;
 }
 </style>
-    
-<link rel="stylesheet" href="/css/fonts.css">
-
 <meta name="generator" content="Hexo 6.3.0"></head>
     <body>
         <div class="paper">
@@ -705,9 +713,9 @@ a
 </blockquote>
 <p>这种 AOT 的模式，一直持续到 Android 6 的系统，在 Android 7.0 后，又进行了一次较大的升级。</p>
 <h2><span class="prefix"></span><span class="content">4. Hybrid: AOT + JIT</span><span class="suffix"></span></h2><p>从前面可以看到， AOT 和 JIT 的优缺点是反过来的，因此 Google 将这两种方式进行了结合，搞了一个混合编译的方案。ART 下的 JIT 架构如下：</p>
-<p><figure><img src="/assets/6374c0794d554ed481e471398bd97a40.png" alt="AOT+JIT 架构"><figcaption class="post-image-caption">AOT+JIT 架构</figcaption></figure></p>
+<p><img src="https://img-blog.csdnimg.cn/6374c0794d554ed481e471398bd97a40.png" alt="AOT+JIT 架构" referrerpolicy="no-referrer"><figcaption class="post-image-caption">AOT+JIT 架构</figcaption></figure></p>
 <p>从整个流程可以看到， 未经过编译的代码，如果是非热点代码，会直接进行解释执行，如果是热点代码，会经过 JIT 编译成机器码，再进行执行。JIT编译而来的机器码是存储到内存中的，不是在硬盘上。所以，在应用重新启动时，所有的热点代码也都需要使用 JIT 重新编译成机器码。代码在整个 ART 虚拟机中的执行流程如下图所示：</p>
-<p><figure><img src="/assets/55b4f782f5b943b1a00c6f7e9e01dae5.png" alt="JIT 工作流程"><figcaption class="post-image-caption">JIT 工作流程</figcaption></figure></p>
+<p><img src="https://img-blog.csdnimg.cn/55b4f782f5b943b1a00c6f7e9e01dae5.png" alt="JIT 工作流程" referrerpolicy="no-referrer"><figcaption class="post-image-caption">JIT 工作流程</figcaption></figure></p>
 <p>在上图中，可以看到，没有经过编译的函数调用，在首次执行的时候，会直接使用 JIT 解释执行，并且会对相应的代码执行进行采样，统计出热点代码，并将统计出来的信息存放到 <code>/data/misc/profiles/cur/0/packageName/primary.prof</code> 下，这个文件有什么用呢？ 在上图中，可以看到了 JIT 的整个运行流程，但没有 .oat 文件编译生成的流程。既然是  AOT 与 JIT 混合模式，那肯定还是有 AOT 相关的流程， AOT 编译的守护进程会在设备空闲以及充电的时候，使用生成的 <code>primary.prof</code> 文件进行部分代码编译。</p>
 <h2><span class="prefix"></span><span class="content">5. Baseline Profiles</span><span class="suffix"></span></h2><p>在前面的流程中，已经可以知道 Profile 的配置信息，可以帮助 AOT 编译，提高应用程序性能。但是，应用程序需要在本地运行一段时间后，才能统计出热点代码。而 Baseline Profiles 的原理就是让开发者自己将热点代码统计出来生成配置文件，在 APP 运行的时候，将配置写入到指定位置，帮助 AOT 编译出热点代码的机器码。更好地提高使用效率。</p>
 <ol>
@@ -758,10 +766,6 @@ class BaselineProfileGenerator &#123;
 </div>
                 <!-- 
                     <div class="post_pre_next">
-    
-        <div class="post-pre">
-            <a href="/2023/05/31/copy-test/">上一篇: TestCopy</a>
-        </div>
     
     
         <a href="/2019/08/10/Android-network-Configuration/">下一篇: 

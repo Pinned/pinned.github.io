@@ -98,7 +98,7 @@ p
 
 body
 {
-    font-family: "Montserrat", "SF UI Text", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Segoe UI", "Helvetica Neue", Helvetica, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+    font-family: "PingFang SC", BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serifhtml, body;
     font-size: 16px;
     line-height: 1.75;
     letter-spacing: 0.6px;
@@ -435,7 +435,18 @@ a
 
 #clipboardbtn {
     cursor: pointer;
-}</style>
+}
+
+#beautiful p {
+    box-sizing: border-box;
+    margin-bottom: 16px;
+    font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
+    font-size: 15px;
+    text-align: justify;
+    white-space: normal;
+    text-size-adjust: auto;
+    line-height: 1.75em;
+  }</style>
     <style type="text/css" id="markdown">@charset "utf-8";
 
 .post-md
@@ -667,9 +678,6 @@ a
     padding-right: 12px;
 }
 </style>
-    
-<link rel="stylesheet" href="/css/fonts.css">
-
 <meta name="generator" content="Hexo 6.3.0"></head>
     <body>
         <div class="paper">
@@ -761,15 +769,15 @@ mBtn.setOnClickListener(new OnClickListener() &#123;
 <pre><code class="java">mShowTv.setText(&quot;Default Text&quot;)
 </code></pre>
 <p>这儿报了一个空指针。如下图：</p>
-<p><figure><img src="http://pinned.github.io/assets/posts/file-2014-11-4/inject_nullpoint.png" alt="Alt text"><figcaption class="post-image-caption">Alt text</figcaption></figure></p>
+<p><img src="http://pinned.github.io/assets/posts/file-2014-11-4/inject_nullpoint.png" alt="Alt text" referrerpolicy="no-referrer"><figcaption class="post-image-caption">Alt text</figcaption></figure></p>
 <h3><span class="prefix"></span><span class="content">解决办法</span><span class="suffix"></span></h3><p>因为使用注解，编译的时候，要进行相应的设置，才可以正常的编译,步骤如下：</p>
 <p>右键<code>项目</code>，选择<code>Properities</code>,然后选择<code>Java Compiler</code>下的<code>Annotation Processing</code>。<br>可是我找了半天，也没有找到它的踪影。不要着急，更新一下<code>Eclipse Java Development Tools</code>就可以了</p>
-<p><figure><img src="http://pinned.github.io/assets/posts/file-2014-11-4/install_eclipse_tools.png" alt="Install Eclipse Java Development Tools"><figcaption class="post-image-caption">Install Eclipse Java Development Tools</figcaption></figure></p>
+<p><img src="http://pinned.github.io/assets/posts/file-2014-11-4/install_eclipse_tools.png" alt="Install Eclipse Java Development Tools" referrerpolicy="no-referrer"><figcaption class="post-image-caption">Install Eclipse Java Development Tools</figcaption></figure></p>
 <p>等到安装完成过后，你就可以进行如下设置了:</p>
-<p><figure><img src="http://pinned.github.io/assets/posts/file-2014-11-4/eclipse_setting_01.png" alt="Step 01"><figcaption class="post-image-caption">Step 01</figcaption></figure></p>
-<p><figure><img src="http://pinned.github.io/assets/posts/file-2014-11-4/eclipse_setting_02.png" alt="Step 02"><figcaption class="post-image-caption">Step 02</figcaption></figure></p>
-<p><figure><img src="http://pinned.github.io/assets/posts/file-2014-11-4/eclipse_setting_03.png" alt="Step 03"><figcaption class="post-image-caption">Step 03</figcaption></figure></p>
-<p><figure><img src="http://pinned.github.io/assets/posts/file-2014-11-4/eclipse_setting_04.png" alt="Step 04"><figcaption class="post-image-caption">Step 04</figcaption></figure></p>
+<p><img src="http://pinned.github.io/assets/posts/file-2014-11-4/eclipse_setting_01.png" alt="Step 01" referrerpolicy="no-referrer"><figcaption class="post-image-caption">Step 01</figcaption></figure></p>
+<p><img src="http://pinned.github.io/assets/posts/file-2014-11-4/eclipse_setting_02.png" alt="Step 02" referrerpolicy="no-referrer"><figcaption class="post-image-caption">Step 02</figcaption></figure></p>
+<p><img src="http://pinned.github.io/assets/posts/file-2014-11-4/eclipse_setting_03.png" alt="Step 03" referrerpolicy="no-referrer"><figcaption class="post-image-caption">Step 03</figcaption></figure></p>
+<p><img src="http://pinned.github.io/assets/posts/file-2014-11-4/eclipse_setting_04.png" alt="Step 04" referrerpolicy="no-referrer"><figcaption class="post-image-caption">Step 04</figcaption></figure></p>
 <h3><span class="prefix"></span><span class="content">参考资料</span><span class="suffix"></span></h3><ul>
 <li><a target="_blank" rel="noopener" href="http://www.it165.net/pro/html/201404/12375.html">ButterKnife Android程序员的一大利器</a></li>
 <li><a target="_blank" rel="noopener" href="http://jakewharton.github.io/butterknife/">ButterKnife Doc</a></li>

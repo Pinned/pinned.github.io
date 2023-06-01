@@ -98,7 +98,7 @@ p
 
 body
 {
-    font-family: "Montserrat", "SF UI Text", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Segoe UI", "Helvetica Neue", Helvetica, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+    font-family: "PingFang SC", BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serifhtml, body;
     font-size: 16px;
     line-height: 1.75;
     letter-spacing: 0.6px;
@@ -435,7 +435,18 @@ a
 
 #clipboardbtn {
     cursor: pointer;
-}</style>
+}
+
+#beautiful p {
+    box-sizing: border-box;
+    margin-bottom: 16px;
+    font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
+    font-size: 15px;
+    text-align: justify;
+    white-space: normal;
+    text-size-adjust: auto;
+    line-height: 1.75em;
+  }</style>
     <style type="text/css" id="markdown">@charset "utf-8";
 
 .post-md
@@ -667,9 +678,6 @@ a
     padding-right: 12px;
 }
 </style>
-    
-<link rel="stylesheet" href="/css/fonts.css">
-
 <meta name="generator" content="Hexo 6.3.0"></head>
     <body>
         <div class="paper">
@@ -691,24 +699,6 @@ a
 </div>
                 
                 <div class="post-list">
-    
-    
-    
-    <div class="post">
-        <a class="post-title" href="/2015/01/23/google-volley-url-cache-key/">Google Volley如何缓存HTTP请求文件</a>
-        <div class="post-except">
-            
-                概述HTTP请求，是一个很长见的过程，缓存也是一个不可避免的话题。一个有好的HTTP请求，肯定会有它自己的一套缓存机制。我们要如何来做，即能方便，又能快速的实现这个功能呢？
-想法以前，自己也封装过一些简陋的HTTP框架，有的在HTTP框架中做过数据缓存，有的没有做过数据缓存。
-
-没有做数据缓存
-  在没有做数据缓存的时候，将HTTP请求的Response响应到UI之前作数据预处理，并且此过程的处理放到子线程中进行，不占用UI线程。这样可以很方便的让用户选择如何进行数据缓存，以
-            
-            <a class="read-more" href="/2015/01/23/google-volley-url-cache-key/"> ... </a>
-        </div>
-        <div class="post-date">2015.01.23</div>
-    </div>
-    
     
     
     
@@ -812,28 +802,6 @@ tempText.setMovementMethod(LinkMovementMethod
     
     
     <div class="post">
-        <a class="post-title" href="/2014/12/24/android-studio-using/">Android Studio 使用记录（一）</a>
-        <div class="post-except">
-            
-                在使用Android Studio 的时候，不小心手贱。把View内的自动提示和自动引入加入了ignore列表中去了。
-有关这个问题，也不知道怎么在度娘那儿搜索。
-没有办法，只有自己去慢慢找。虽然不认识几个英文。但是最终还是给我找到了。
-解决办法：
-Android Studio -&gt; [Setting] -&gt; [Editer] -&gt; [Auto Import]
-
-如下图所示：
-
-
-            
-            <a class="read-more" href="/2014/12/24/android-studio-using/"> ... </a>
-        </div>
-        <div class="post-date">2014.12.24</div>
-    </div>
-    
-    
-    
-    
-    <div class="post">
         <a class="post-title" href="/2014/12/24/git-checkout/">git checkout 的使用（一）</a>
         <div class="post-except">
             
@@ -862,6 +830,28 @@ feature&#x2F;branch_test
     
     
     <div class="post">
+        <a class="post-title" href="/2014/12/24/android-studio-using/">Android Studio 使用记录（一）</a>
+        <div class="post-except">
+            
+                在使用Android Studio 的时候，不小心手贱。把View内的自动提示和自动引入加入了ignore列表中去了。
+有关这个问题，也不知道怎么在度娘那儿搜索。
+没有办法，只有自己去慢慢找。虽然不认识几个英文。但是最终还是给我找到了。
+解决办法：
+Android Studio -&gt; [Setting] -&gt; [Editer] -&gt; [Auto Import]
+
+如下图所示：
+
+
+            
+            <a class="read-more" href="/2014/12/24/android-studio-using/"> ... </a>
+        </div>
+        <div class="post-date">2014.12.24</div>
+    </div>
+    
+    
+    
+    
+    <div class="post">
         <a class="post-title" href="/2014/12/05/Android-SDK-Manager-Update-Method/">Android Sdk Manager无法更新问题解决办法</a>
         <div class="post-except">
             
@@ -876,6 +866,28 @@ https://github.com/inferjay/AndroidDevTools
             <a class="read-more" href="/2014/12/05/Android-SDK-Manager-Update-Method/"> ... </a>
         </div>
         <div class="post-date">2014.12.05</div>
+    </div>
+    
+    
+    
+    
+    <div class="post">
+        <a class="post-title" href="/2014/12/04/mac-system-using/">Mac系统使用记录（一）</a>
+        <div class="post-except">
+            
+                Mac用户本人小屌丝一个，装了个黑苹果，用的是类似Ghost一样的版本，只接还原就可以用，什么也没有改。
+在使用的过程中，有一个问题，就是使用的是Root用户，权限太高，感觉相当的不爽。
+本人又不怎么会用，百度了一下。找到了关掉Root用户的方法：
+如下：
+step1
+step2
+step3
+step4
+这样子设置到是没有什么问题，当我重启的时候，我发现问题来了。因为本机只有一个ROOT账号，root账号被我禁用了。就没有可以登陆的账号心中有千万只草泥马奔腾而过，不过也没有办
+            
+            <a class="read-more" href="/2014/12/04/mac-system-using/"> ... </a>
+        </div>
+        <div class="post-date">2014.12.04</div>
     </div>
     
     

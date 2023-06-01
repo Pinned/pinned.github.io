@@ -98,7 +98,7 @@ p
 
 body
 {
-    font-family: "Montserrat", "SF UI Text", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Segoe UI", "Helvetica Neue", Helvetica, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+    font-family: "PingFang SC", BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serifhtml, body;
     font-size: 16px;
     line-height: 1.75;
     letter-spacing: 0.6px;
@@ -435,7 +435,18 @@ a
 
 #clipboardbtn {
     cursor: pointer;
-}</style>
+}
+
+#beautiful p {
+    box-sizing: border-box;
+    margin-bottom: 16px;
+    font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
+    font-size: 15px;
+    text-align: justify;
+    white-space: normal;
+    text-size-adjust: auto;
+    line-height: 1.75em;
+  }</style>
     <style type="text/css" id="markdown">@charset "utf-8";
 
 .post-md
@@ -667,9 +678,6 @@ a
     padding-right: 12px;
 }
 </style>
-    
-<link rel="stylesheet" href="/css/fonts.css">
-
 <meta name="generator" content="Hexo 6.3.0"></head>
     <body>
         <div class="paper">
@@ -688,7 +696,7 @@ a
         <div class="post-md" id="copy-post-content">
         <section id="beautiful">
             <p>For Android applications, logging is handled by the android.util.Log class, which is a basic logging class that stores the logs in a circular buffer for the whole device. All logs for the device can be seen in the LogCat tab in Eclipse, or read using the logcat command. Here is a standard log output for the LogCat tab in Eclipse :</p>
-<p><figure><img src="/assets/posts/img-2015-01-19/image.png" alt="Eclipse Image"><figcaption class="post-image-caption">Eclipse Image</figcaption></figure></p>
+<p><img src="/assets/posts/img-2015-01-19/image.png" alt="Eclipse Image" referrerpolicy="no-referrer"><figcaption class="post-image-caption">Eclipse Image</figcaption></figure></p>
 <p>There are five levels of logs you can use in your application, for the most verbose to the least verbose :</p>
 <ul>
 <li><strong>Verbose</strong>: For extra information messages that are only compiled in a debug application, but never included in a release application.</li>
