@@ -368,3 +368,10 @@ a
     text-size-adjust: auto;
     line-height: 1.75em;
   }
+
+  #bing-bg {
+    width: 100%;
+    position: absolute;
+    z-index: -1;
+    filter: blur(10px);
+  }

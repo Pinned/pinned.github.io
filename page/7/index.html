@@ -446,6 +446,13 @@ a
     white-space: normal;
     text-size-adjust: auto;
     line-height: 1.75em;
+  }
+
+  #bing-bg {
+    width: 100%;
+    position: absolute;
+    z-index: -1;
+    filter: blur(10px);
   }</style>
     <style type="text/css" id="markdown">@charset "utf-8";
 
@@ -680,6 +687,7 @@ a
 </style>
 <meta name="generator" content="Hexo 6.3.0"></head>
     <body>
+        <img id='bing-bg' class="bg" src="http://cn.bing.com/th?id=OHR.WorldOtterDay_EN-US4690332709_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" alt="bg" referrerpolicy="no-referrer">
         <div class="paper">
             <div class="paper-main">
                 
@@ -750,26 +758,6 @@ Android Vol
     
     
     <div class="post">
-        <a class="post-title" href="/2014/11/04/eclipse-shutdown/">Ubuntu-14.04下Eclipse闪退解决办法</a>
-        <div class="post-except">
-            
-                问题描述打开Eclipse，有时候还可以使用一下，有时候使用都不行。
-当Eclipse闪退的时候，还会在Eclipse 文件夹下生成一个hs_err_pidxxxx.log的文件，内容如下:
-#
-# A fatal error has been detected by the Java Runtime Environment:
-#
-#  SIGSEGV (0xb) at pc=0x00007ffd09a902a1, pid=5291, tid=140726369949440
-
-            
-            <a class="read-more" href="/2014/11/04/eclipse-shutdown/"> ... </a>
-        </div>
-        <div class="post-date">2014.11.04</div>
-    </div>
-    
-    
-    
-    
-    <div class="post">
         <a class="post-title" href="/2014/11/04/butterknife-useing/">Andorid UI注入工具的使用(ButterKnife)</a>
         <div class="post-except">
             
@@ -782,6 +770,26 @@ mBtn.setOnClickListener(new OnClickListener() &#123;
     public void onClick(View view) &#1
             
             <a class="read-more" href="/2014/11/04/butterknife-useing/"> ... </a>
+        </div>
+        <div class="post-date">2014.11.04</div>
+    </div>
+    
+    
+    
+    
+    <div class="post">
+        <a class="post-title" href="/2014/11/04/eclipse-shutdown/">Ubuntu-14.04下Eclipse闪退解决办法</a>
+        <div class="post-except">
+            
+                问题描述打开Eclipse，有时候还可以使用一下，有时候使用都不行。
+当Eclipse闪退的时候，还会在Eclipse 文件夹下生成一个hs_err_pidxxxx.log的文件，内容如下:
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  SIGSEGV (0xb) at pc=0x00007ffd09a902a1, pid=5291, tid=140726369949440
+
+            
+            <a class="read-more" href="/2014/11/04/eclipse-shutdown/"> ... </a>
         </div>
         <div class="post-date">2014.11.04</div>
     </div>
