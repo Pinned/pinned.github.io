@@ -1,8 +1,8 @@
 ---
 title: iTerm2 常用配置
 styles: [syntax]
-category:
-tags:
+category: 工具
+tags: Terminal
 ---
 
 工欲善其事，必先利其器。当我们拿到一台新电脑，为了让自己的效率更高，当然需要做一些配置。本文将介绍对于终端的一些配置。
