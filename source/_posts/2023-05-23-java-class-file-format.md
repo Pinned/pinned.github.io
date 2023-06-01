@@ -1,5 +1,5 @@
 ---
-title: java-class-file-format
+title: 解密 Java Class 文件不为人知的秘密
 category: Java
 tags: Java
 ---
