@@ -441,7 +441,17 @@ a {
     white-space: normal;
     text-size-adjust: auto;
     line-height: 1.75em;
-}</style>
+}
+#bing-bg {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    filter: blur(10px);
+    object-fit: cover;
+  }
+</style>
     <style type="text/css" id="markdown">@charset "utf-8";
 
 .post-md
@@ -675,6 +685,7 @@ a {
 </style>
 <meta name="generator" content="Hexo 6.3.0"></head>
     <body>
+        <img id="bing-bg" src="http://cn.bing.com/th?id=OHR.WorldOtterDay_EN-US4690332709_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" referrerpolicy="no-referrer" />
         <div class="paper">
             <div class="paper-main">
                 
@@ -1016,7 +1027,7 @@ protected Response&lt;String&gt; parseNetworkResponse(NetworkResponse response) 
 </code></pre>
 <p>就是<code>HttpHeaderParser.parseCacheHeaders(response)</code>实现<code>Response</code>向<code>Cache.Entry</code>的转换。</p>
 <p>当然，你可以实现自己的<code>parseCacheHeaders</code>的方法，来实现你自己的缓存侧略。</p>
-<p>到此为止，基本写完了我所读到的<code>Volley</code>中实现<code>Cache</code>的方法。如果你对本文或者我有什么意见或者建议。<br>请骚扰我：<a href="mailto:&#108;&#111;&#118;&#101;&#99;&#x6c;&#x75;&#111;&#64;&#110;&#105;&#x67;&#104;&#116;&#x77;&#x65;&#97;&#118;&#x65;&#x72;&#46;&#111;&#x72;&#x67;">&#108;&#111;&#118;&#101;&#99;&#x6c;&#x75;&#111;&#64;&#110;&#105;&#x67;&#104;&#116;&#x77;&#x65;&#97;&#118;&#x65;&#x72;&#46;&#111;&#x72;&#x67;</a></p>
+<p>到此为止，基本写完了我所读到的<code>Volley</code>中实现<code>Cache</code>的方法。如果你对本文或者我有什么意见或者建议。<br>请骚扰我：<a href="mailto:&#108;&#111;&#118;&#x65;&#x63;&#x6c;&#117;&#x6f;&#x40;&#110;&#x69;&#x67;&#x68;&#x74;&#119;&#101;&#97;&#118;&#x65;&#114;&#x2e;&#111;&#x72;&#103;">&#108;&#111;&#118;&#x65;&#x63;&#x6c;&#117;&#x6f;&#x40;&#110;&#x69;&#x67;&#x68;&#x74;&#119;&#101;&#97;&#118;&#x65;&#114;&#x2e;&#111;&#x72;&#103;</a></p>
 
         </section>
         </div>
@@ -1180,7 +1191,17 @@ pre code {
 
 
 <script>
-    hljs.highlightAll();    
+    hljs.highlightAll();
+    window.onload = function() {
+        fetch('https://pinned.github.io/bing-daily-picture/index.json')
+        .then(response => response.text())
+        .then(data => {
+            var result = JSON.parse(data)
+            var count = result.images.length
+            const index = Math.floor(Math.random() * count);
+            document.getElementById("bing-bg").src = "https://cn.bing.com" + result.images[index].url;
+        }); // 返回的结果
+    }    
 </script>
 
             </div>
