@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+    <link rel="alternate icon" type="image/png" href="/img/favicon.png">
+    
+        <title>深入理解 Java 字符串编码 </title>
+    
+    <style type="text/css" id="reset">@charset "utf-8";
+
+*,
+*::before,
+*::after
+{
+    box-sizing: border-box;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+figure,
+blockquote,
+dl,
+dd
+{
+    margin: 0;
+}
+
+ul,
+ol
+{
+    list-style: none;
+}
+
+ul
+{
+    padding-inline-start: 0;
+}
+
+html,
+body
+{
+    scroll-behavior: smooth;
+}
+
+a:not([class])
+{
+    text-decoration-skip-ink: auto;
+}
+
+img,
+picture
+{
+    width: auto;
+    max-width: 100%;
+    display: block;
+}
+
+input,
+button,
+textarea,
+select
+{
+    font: inherit;
+}
+
+@media (prefers-reduced-motion: reduce)
+{
+    html:focus-within
+    {
+        scroll-behavior: auto;
+    }
+}</style>
+    <style type="text/css" id="style">@charset "utf-8";
+
+:root {
+    --font-color-0: #04077e;
+    --font-color-1: #000;
+    --font-color-2: #666;
+    --font-color-3: #aaa;
+    --bg-color-1: #eee;
+    --line-1: #ccc;
+    --line-2: #ddd;
+}
+
+p {
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    text-align: justify;
+}
+
+body {
+    font-family: "PingFang SC", BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serifhtml, body;
+    font-size: 16px;
+    line-height: 1.75;
+    letter-spacing: 0.6px;
+    color: var(--font-color-2);
+    background: #F0F0F0;
+}
+
+a {
+    text-decoration: none;
+    color: var(--font-color-1);
+}
+
+
+
+@media screen and (max-width: 480px) {
+    body {
+        background: #fff;
+    }
+
+    .paper {
+        padding: 4vw;
+    }
+
+    .paper-main {
+        width: 100%;
+        margin: 0 auto;
+        padding: 30px 1vw 12px;
+        background: #fff;
+    }
+}
+
+@media screen and (min-width: 481px) {
+    .paper {
+        padding: 4vw;
+    }
+
+    .paper-main {
+        width: 100%;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 62px 3vw 24px;
+        background: #fff;
+        border-radius: 24px;
+    }
+}
+
+.header {
+    padding-bottom: 48px;
+    margin-bottom: 48px;
+    border-bottom: 1px solid var(--line-1);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: center;
+}
+
+.logo {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--font-color-1);
+    margin-bottom: 16px;
+    flex: 0 0 100%;
+}
+
+.nav {
+    margin: 0 0 4px;
+    flex: 0 0 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: center;
+}
+
+.nav li {
+    padding: 2px 0;
+    margin-right: 24px;
+}
+
+.nav li:last-of-type {
+    margin-right: 0;
+}
+
+.nav li a {
+    color: var(--font-color-1);
+    opacity: .6;
+    transition: opacity ease-in-out .5s;
+}
+
+.nav li a:hover {
+    opacity: 1;
+    transition: opacity ease-in-out .5s;
+}
+
+.post-header {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: center;
+}
+
+.post-header .post-title {
+    font-size: 1.375rem;
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+    line-height: 1;
+}
+
+.post-list {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: stretch;
+}
+
+.post {
+    width: 100%;
+    padding-bottom: 48px;
+    margin-bottom: 48px;
+    border-bottom: 1px dashed var(--line-2);
+}
+
+.post-title {
+    display: inline-block;
+    font-size: 1.6rem;
+    font-weight: 600;
+    line-height: 1.5;
+    margin-bottom: 12px;
+    color: var(--font-color-1);
+    /*transition: color ease-in-out .5s;*/
+}
+
+.post-title:hover {
+    color: var(--font-color-0);
+    transition: color ease-in-out .5s;
+}
+
+.post-except {
+    word-break: break-all;
+    margin-bottom: 12px;
+    text-align: justify;
+}
+
+.read-more {
+    padding: 0 4px;
+    color: var(--font-color-0);
+}
+
+.read-more:before,
+.read-more:after {
+    display: inline-block;
+    transition: transform ease-in-out .5s;
+}
+
+.read-more:before {
+    content: "{ ";
+}
+
+.read-more:after {
+    content: " }";
+}
+
+.read-more:hover:before {
+    transform: translateX(-4px);
+    transition: transform ease-in-out .25s;
+}
+
+.read-more:hover:after {
+    transform: translateX(4px);
+    transition: transform ease-in-out .25s;
+}
+
+.post-date {
+    font-size: 0.875rem;
+    color: var(--font-color-3);
+}
+
+.paginator {
+    font-size: 0.875rem;
+    width: 100%;
+    margin: 0 auto 24px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.paginator * {
+    display: block;
+    padding: 8px 16px;
+    border-radius: 18px;
+    background: #fff;
+    border: 1px solid #eee;
+}
+
+.paginator .space {
+    display: block;
+    padding: 8px 16px;
+    border-radius: 18px;
+    background: #fff;
+    border: none;
+}
+
+.paginator a {
+    margin: 4px;
+    color: var(--font-color-2);
+    transition: color ease-in-out .5s;
+}
+
+.paginator a:hover {
+    color: var(--font-color-0);
+    transition: color ease-in-out .5s;
+}
+
+.paginator .current {
+    color: var(--font-color-0);
+    border: 1px solid var(--font-color-0);
+}
+
+.footer {
+    padding: 24px 0;
+    font-size: 0.875rem;
+    color: var(--font-color-3);
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-content: center;
+}
+
+.footer span {
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.footer a {
+    color: var(--font-color-3);
+    transition: color ease-in-out .5s;
+}
+
+.footer a:hover {
+    color: var(--font-color-0);
+    transition: color ease-in-out .5s;
+}
+
+.post-main {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.post-main-title {
+    flex: 0 0 100%;
+    margin-bottom: 12px;
+    font-size: 1.6rem;
+    font-weight: 600;
+    line-height: 1.5;
+    color: var(--font-color-1);
+}
+
+.post-meta {
+    font-size: 0.875rem;
+    color: var(--font-color-3);
+    flex: 0 0 100%;
+    margin-bottom: 32px;
+}
+
+.author {
+    color: #576b95;
+}
+
+.archive {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-content: normal;
+}
+
+.archive li {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-content: center;
+    padding: 12px 0;
+}
+
+.archive li:nth-child(odd) {
+    background: #fafafa;
+}
+
+.archive li:nth-child(even) {
+    background: #fff;
+}
+
+.archive li span {
+    width: 108px;
+    color: var(--font-color-2);
+}
+
+.archive-main {
+    flex: 0 1 calc(100% - 108px);
+}
+
+.archive-title {
+    color: var(--font-color-1);
+    /*transition: color ease-in-out .5s;*/
+}
+
+.archive-title:hover {
+    color: var(--font-color-0);
+    transition: color ease-in-out .5s;
+}
+
+.post-image-caption {
+    margin-top: 5px;
+    text-align: center;
+    color: #888;
+    font-size: 0.85rem;
+    display: block;
+}
+
+#clipboardbtn {
+    cursor: pointer;
+}
+
+#beautiful p {
+    box-sizing: border-box;
+    margin-bottom: 16px;
+    font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
+    font-size: 15px;
+    text-align: justify;
+    white-space: normal;
+    text-size-adjust: auto;
+    line-height: 1.75em;
+}
+#bing-bg {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    filter: blur(10px);
+    object-fit: cover;
+  }
+</style>
+    <style type="text/css" id="markdown">@charset "utf-8";
+
+.post-md
+{
+    width: 100%;
+    letter-spacing: 0;
+}
+
+.post-md h1,
+.post-md h2,
+.post-md h3,
+.post-md h4,
+.post-md h5,
+.post-md h6
+{
+    color: var(--font-color-1);
+}
+/* 一级标题 */
+.post-md h1  {
+    display:block;
+    border-bottom: 4px solid rgb(33, 33, 34);
+    font-size: 1rem;
+}
+  
+/* 一级标题内容 */
+.post-md h1  .content {
+    display: flex;
+    color: rgb(33, 33, 34);
+    font-size: 1rem;
+}
+  
+  
+/* 一级标题后缀 */
+.post-md h1  .suffix {
+    display: flex;
+    box-sizing: border-box;
+    width: 20px;
+    height: 10px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    background: RGBA(33, 33, 34, .5);
+    color: rgb(255, 255, 255);
+    font-size: 16px;
+    letter-spacing: 0.544px;
+    justify-content: flex-end;
+    box-sizing: border-box !important;
+    overflow-wrap: break-word !important;
+    float: right;
+    margin-top: -10px;
+}
+
+/* 二级标题 */
+.post-md h2 {
+    margin: 10px auto;
+    height: 40px;
+    background-color: rgb(251, 251, 251);
+    border-bottom: 1px solid rgb(246, 246, 246);
+    box-sizing: border-box;
+    font-size: 1rem;
+}
+
+/* 二级标题内容 */
+.post-md h2 .content {
+    margin-left: -10px;
+    display: inline-block;
+    width: auto;
+    height: 40px;
+    background-color: rgb(33, 33, 34);
+    border-bottom-right-radius:100px;
+    color: rgb(255, 255, 255);
+    padding-right: 30px;
+    padding-left: 20px;
+    font-size: 1rem;
+    line-height: 40px;
+}
+
+/* 三级标题 */
+.post-md h3 {
+    margin: 20px auto 5px;
+    border-top: 1px solid rgb(221, 221, 221);
+    box-sizing: border-box;
+    font-size: 1rem;
+}
+  
+/* 三级标题内容 */
+.post-md h3 .content {
+    margin-top: -1px;
+    padding-top: 6px;
+    padding-right: 5px;
+    padding-left: 5px;
+    font-size: 1rem;
+    border-top: 2px solid rgb(33, 33, 34);
+    display: inline-block;
+    line-height: 1.1;
+}
+.post-md h4
+{
+    font-size: 1rem;
+    line-height: 1.2;
+    padding: 16px 0;
+}
+.post-md h5
+{
+    font-size: 0.83rem;
+    line-height: 1.2;
+    padding: 14px 0;
+}
+.post-md h6
+{
+    font-size: 0.67rem;
+    line-height: 1.2;
+    padding: 12px 0;
+}
+.post-md a
+{
+    color: var(--font-color-2);
+    box-shadow: 0 2px 0 var(--line-1);
+    transition: color ease-in-out .65s, box-shadow ease-in-out .65s;
+}
+.post-md a:hover
+{
+    color: var(--font-color-0);
+    box-shadow: 0 2px 0 var(--font-color-0);
+    transition: color ease-in-out .65s, box-shadow ease-in-out .65s;
+}
+.post-md strong
+{
+    font-weight: 700;
+}
+.post-md em
+{
+    font-style: italic;
+}
+.post-md kbd
+{
+    padding: 2px 4px;
+    border-radius: 2px;
+    background: #eee;
+    border: 1px solid #ddd;
+}
+.post-md ol
+{
+    list-style: decimal;
+    padding-left: 24px;
+}
+.post-md ul
+{
+    list-style: disc;
+    padding-left: 24px;
+}
+.post-md img
+{
+    border-radius: 4px;
+}
+.post-md hr
+{
+    border: none;
+    height: 1px;
+    background: var(--line-1);
+    margin: 24px 0;
+}
+
+.post-md p,
+.post-md blockquote
+{
+    width: 100%;
+    margin: 12px 0;
+}
+.post-md blockquote
+{
+    border-left: 2px solid var(--line-2);
+    padding-left: 12px;
+    word-wrap: break-word;
+}
+
+.post-md .video-container
+{
+    background: #000;
+    border-radius: 4px;
+    overflow: hidden;
+}
+.post-md iframe,
+.post-md .video-container iframe
+{
+    width: 100%;
+    height: 100vh;
+    max-height: 360px;
+    margin: 12px 0;
+}
+
+.post-md>table
+{
+    width: 100%;
+    text-align: left;
+    border-spacing: 0;
+}
+.post-md>table th
+{
+    padding: 12px 0;
+    border-bottom: 2px solid var(--line-1);
+}
+.post-md>table tr:nth-child(odd) td
+{
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line-1);
+    background: #fafafa;
+}
+.post-md>table tr:nth-child(even) td
+{
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line-1);
+    background: #fff;
+}
+
+.post-md p code
+{
+    border-radius: 4px;
+    background:rgba(27,31,35,.05);
+    padding: 2px 4px;
+    color: rgb(0, 112, 96);
+    font-size: 1rem;
+    margin-left: 1px;
+    margin-right: 1px;
+}
+
+.post-md .hljs-ln-numbers
+{
+    opacity: .5;
+    padding-right: 12px;
+}
+</style>
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body>
+        <img id="bing-bg" src="" referrerpolicy="no-referrer" />
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="post-header">
+    <p class="post-title">深入理解 Java 字符串编码</p>
+</div>
+                
+                <div class="post-main">
+
+    
+        <div class="post-meta">
+            <a class='author' href="/">罗昭成</a> <span id="clipboardbtn">2022年10月13日</span>
+        </div>
+        <div class="post-md" id="copy-post-content">
+        <section id="beautiful">
+            <p>近期在工作中，遇到了一段历史代码，在代码中，将一个字符串进行加密，得到一个 <code>byte 数组</code>， 在代码中，这个 <code>byte 数组</code> 需要存储到 文件中，但代码却是用这个 <code>byte 数组</code> 创建了一个 <code>String</code> ，然后在将 <code>String</code> 写入到文件中。 聪明的你应该发现问题了，<code>byte 数组</code> 直接转成 <code>String</code> 会有问题，一般的处理方法是将 <code>byte 数组</code> 使用 <code>Base64</code> 编码，然后将编码后的字符串写入文件中，在使用的时候，先使用 <code>Base64</code> 解码。</p>
+<p>可是，为什么 <code>byte 数组 </code>直接使用 <code>String</code> 会有问题呢？要想深入解答这个问题，本文将从字符串编码， 以及分析 Java 中<code>String</code>处理逻辑，来尝试回答这个问题。</p>
+<h2><span class="prefix"></span><span class="content">1. 字符串编码</span><span class="suffix"></span></h2><p>在计算机的世界中，存储任何信息都是按照二进制数字来处理的，因此字符都需要编码成数字，才能在计算机中正常的处理。在计算机中，一个 <code>byte</code> 有 <code>8 bit</code>， 能表示 0~255 范围的数字，应运而生的就是 ASCII 编码，此编码使用了 <code>7 个 bit</code>，共定义了 128 个字符，但对于中文，一个 <code>byte</code> 肯定是表示不了的，因此需要新的编码方式去支持。  我们现在在编码过程中，最常用的是 UTF-8，说到 UTF-8 ， 就不得不先讲一下 <code>Unicode</code> ，它一种在计算机上使用的字符编码，它为每种语言中的每个字符设定了统一并且唯一的二进制编码，以满足跨语言、跨平台进行文本转换、处理的要求。<code>Unicode</code> 是一个字符集， 它只规定了每个字符的二进制值，但是字符具体如何存储并没有规定，<code>Unicode</code> 编码范围为 <code>0 - 0x10FFFF</code> ，需要使用了其中的 <code>21 bit</code>， 如按此标准，每一个字符需要使用 3 个 <code>byte</code> 进行编码 。那 UTF-8 和 Unicode 有什么关系呢？</p>
+<p>刚讲到， 如每一个 Unicode 字符都需要 3 个 <code>byte</code> 进行编码，但对于 ASCII 中的那些字符只需要 1 个 <code>byte</code> 就能表示，这样编码就会造成很多空间浪费。 UTF-8 就是以字节为单位对 Unicode 字符进行的编码，它的特点是对不同范围的字符使用不同长度的编码， 如下表所示：</p>
+<table>
+<thead>
+<tr>
+<th align="center">字节数</th>
+<th align="center">格式</th>
+<th align="center">实际编码位数</th>
+<th align="center">编码范围</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1 byte</td>
+<td align="center">0xxxxxxx</td>
+<td align="center">7 位</td>
+<td align="center">0 -127</td>
+</tr>
+<tr>
+<td align="center">2 byte</td>
+<td align="center">110xxxxx 10xxxxxx</td>
+<td align="center">11 位</td>
+<td align="center">128 - 2047</td>
+</tr>
+<tr>
+<td align="center">3 byte</td>
+<td align="center">1110xxxx 10xxxxxx 10xxxxxx</td>
+<td align="center">16 位</td>
+<td align="center">2048 - 65535</td>
+</tr>
+<tr>
+<td align="center">4 byte</td>
+<td align="center">11110xxx 10xxxxxx 10xxxxxx 10xxxxxx</td>
+<td align="center">21 位</td>
+<td align="center">65536 - 2097151</td>
+</tr>
+</tbody></table>
+<p>图表中，<code>x</code> 表示编码 <code>Unicode</code> 所使用的位，举几个例子：</p>
+<ul>
+<li>字符 <code>A</code> ：它的 <code>Unicode</code> 编码为 <code>U+000041</code> ，在 UTF-8 格式下，只需要 <code>1 byte</code> 就能存储，将数字 <code>0x41</code> 转换为二进制为 <code>01000001</code>， 因此在 UTF-8 编码格式中，数据为 <code>01000001</code></li>
+<li>字符<code>¥</code>：它的 <code>Unicode</code> 编码为 <code>U+0000A5</code>， 在 UTF-8 格式下，需要 <code>2 byte</code> 才能够存储，将数字 <code>0xA5</code> 转换为二进制为 <code>10100101</code>， 因此在 UTF-8 编码格式中，数据为 <code>11000010</code> <code>10100101</code> 。</li>
+<li>字符 <code>中</code>： 它的  <code>Unicode</code> 编码为 <code>U+004E2D</code>，在 UTF-8 格式下，需要 <code>3 byte</code>  才能够存储，将 <code>0x4E2D</code> 转换为二进制为 <code>01001110</code> 和<code>00101101</code>， 因此在 UTF-8 编码格式中，数据为 <code>11100100</code> <code>10111000</code> <code>10101101</code>。</li>
+<li>字符 <code>🎃</code>：它的 <code>Unicode</code> 编码为 <code>U+01F383</code>，在 UTF-8 格式下，需要 <code>4 byte</code> 才能够存储，将 <code>0xD83C</code> 转换为二进制为 <code>00000001</code> 和 <code>11110011</code> <code>10000011</code>，因此在 UTF-8 编码格式中，数据为 <code>11110000</code> <code>10011111</code> <code>10001110</code> <code>10000011</code>。</li>
+</ul>
+<p>通过上面的例子，可以大体了解其编码过程，下图将  <code>🎃</code> 从 <code>Unicode</code> 编码转换成 <code>UTF-8</code> 编码的转化图，可以更好的理解转换过程。</p>
+<p><img src="https://img-blog.csdnimg.cn/ca4c6e51326b428ba9ad818c968d2e82.png" alt="UTF-8编码过程" referrerpolicy="no-referrer"><figcaption class="post-image-caption">UTF-8编码过程</figcaption></figure></p>
+<p>相信读到这里，大家对计算机系统中字符编码有了初步的了解。下面紧接着来看看在 Java 中，String 相关的一些细节。</p>
+<h2><span class="prefix"></span><span class="content">2. String 中字符是如何存储的？</span><span class="suffix"></span></h2><p>在 Java 中，String 类定义在 <code>java.lang</code> 这 个包下面，在 <code>Intellij IDEA</code> 直接跳转，就可以看到  <code>String</code> 的源码，下图截取了一部分内容：</p>
+<p><img src="https://img-blog.csdnimg.cn/69399bb46d874926ac137af67892f854.png" alt="String 类" referrerpolicy="no-referrer"><figcaption class="post-image-caption">String 类</figcaption></figure></p>
+<p>从图中 <code>value</code> 的注释可以看到， String 内部存储数据是用 <code>char</code> 数组来表示的。</p>
+<blockquote>
+<p> PS： 上图截图内容为 JDK 1.8 版本，在 1.9 过后的版本中，已经将 <code>char</code> 数组改为 <code>byte</code> 数组来存储数据。如有兴趣可以参看知乎这篇回答：jdk9为何要将String的底层实现由char[]改成了byte[]? (<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/447224628/answer/1824574900">https://www.zhihu.com/question/447224628/answer/1824574900</a>)</p>
+</blockquote>
+<p><code>char</code> 在 JAVA 中定义为 <code>16 bit</code> ， 所以在存储的时候使用的是 <code>UTF-16</code> 的编码，针对 <code>16 bit</code> 可以表示的字符（Basic Multilingual Plane (BMP)），就直接使用一个 <code>char</code> 表示；如果是 <code>16 bit</code> 表示不下的字符，使两个 <code>char</code> 表示，在进行编码时，会将 <code>Unicode</code> 的值的 <code>21 bit</code> 拆分成 <code>11 bit</code> 和 <code>10 bit</code>， 分别放入两个 <code>char</code> 中： 第一个 <code>char</code> 表示 <code> high-surrogates</code>， 范围为 <code>U+D800 - U+DBFF</code>；另一个 <code>char</code> 表示 <code>low-surrogates</code> ，范围为 <code>U+DC00 - U+DCFF</code>。</p>
+<h2><span class="prefix"></span><span class="content">3. 代码调试，byte 数组创建 String 的过程</span><span class="suffix"></span></h2><p>回到文章开头的问题，使用 <code>byte 数组</code> 直接创建 <code>String</code> 的过程，在 JVM 执行过程中，是如何执行的呢？ 要知道创建的细节，可以直接使用 <code>Intellij IDEA</code> 进行调试，跟进一下逻辑。</p>
+<p>为了方便调试，可以用以下测试代码进行调试：</p>
+<pre><code class="java">byte[] data = new byte[]&#123;(byte) 0b11110000, (byte) 0b10011111, (byte) 0b10001110, (byte) 0b10000011&#125;;
+String createStr = new String(data);
+</code></pre>
+<p>断点运行进去，在下图中，高亮行中，会调用 <code>StringCoding.decode</code> 去解码对应的 <code>bytes</code> 。</p>
+<p><img src="https://img-blog.csdnimg.cn/1a1de76a888a4b05acfe27fcca751b7b.png" alt="String 构造方法" referrerpolicy="no-referrer"><figcaption class="post-image-caption">String 构造方法</figcaption></figure></p>
+<p>在 <code>StringCoding</code> 中，使用当前默认的编码格式去进行解码，在我的机器上，默认使用的是 <code>UTF-8</code>， 因此，在调试中，可以看到使用的是 <code>UTF_8</code> 和 <code>UTF_8$Decoder</code> 去进行解码。</p>
+<p><img src="https://img-blog.csdnimg.cn/e6fbd7e701b6403f983bc8007df58c77.png" alt="decode" referrerpolicy="no-referrer"><figcaption class="post-image-caption">decode</figcaption></figure></p>
+<p>进一步跟进去，会跟到 <code>UTF_8.java</code> 这个类，这个类在 <code>rt.jar</code> 包中，JDK 中默认不包含其源代码，为了更好的调试，可以参看<strong>「 附录：如何在 IDEA 中查看与调试 rt.jar 中的源码 」</strong> 。</p>
+<p><img src="https://img-blog.csdnimg.cn/cc4a2b7b8b354a1dba489ed441897909.png" alt="Decode byte 的逻辑" referrerpolicy="no-referrer"><figcaption class="post-image-caption">Decode byte 的逻辑</figcaption></figure></p>
+<p>从代码中可以看到， UTF-8 的解码过程，按照<code>一个byte</code>、<code>两个byte</code>、<code>三个byte</code>、<code>四个byte</code> 分别去计算，此计算方式与<strong>「 字符串编码 」</strong>中讲到的映射关系一致。到此，基本了解 <code>byte 数组</code> 到 <code>String</code> 的过程。也可以清晰的理解到，在创建 <code>String</code> 的过程中，传过来的 <code>byte 数组</code> 就是对应编码的二进制数据。</p>
+<p>重点来了，如果传过来的 <code>byte 数组</code> 中的编码并不是按照  UTF-8 编码规则来的数组，会是什么样的结果呢？我也做了一个测试，测试代码如下：</p>
+<pre><code class="java">byte[] data = new byte[]&#123;(byte) 0b10011111, (byte) 0b10001110, (byte) 0b10000011&#125;;
+String createStr = new String(data);
+</code></pre>
+<p><img src="https://img-blog.csdnimg.cn/34719390793a4d1eaf07bff5d083511b.png" alt="无法解码时的逻辑" referrerpolicy="no-referrer"><figcaption class="post-image-caption">无法解码时的逻辑</figcaption></figure></p>
+<p>代码中，第一个 <code>byte</code> 为 <code>0b10011111</code> ，这个数不满足前面的判断规则， 会直接进入 <code>else</code>  中，就将直接将当前字符设置成 <code>65533</code> 这个字符，从而丢掉了真实的 <code>byte</code> 数据。当然，除了第一个 <code>byte</code> 有问题，其它 <code>byte</code> 有问题时，也会使用 <code>65533</code> 来进行替换，有兴趣的同学可以去尝试看看对应的代码。</p>
+<p>最后，在回到文章开始的那个问题，<code>byte 数组</code> 在创建 <code>String</code> 时，如果 <code>byte</code> 中的数据不符合 <code>UTF-8</code> 的规则，原始数据会被丢掉，也就导致 <code>new String(data)</code>  中传入的 <code>data</code> 与 <code>getBytes()</code> 拿到的二进制不一致，因此，在处理 <code>byte 数组</code> 数据时，需要先进行 <code>Base64</code> 编码处理。</p>
+<h2><span class="prefix"></span><span class="content">总结</span><span class="suffix"></span></h2><p>初入计算机行业时，也曾被各种不同的编码格式搞得头大，但也从未去了解过其底层设计原理。本文以 UTF-8 以及 Java 内部 String 处理的机制着手，对计算机中编解码的细节作了一定的了解，希望给读者朋友们带来一定的启发，如果有什么新奇的想法，也欢迎与我沟通交流。</p>
+<h2><span class="prefix"></span><span class="content">附录：如何在 IDEA 中查看与调试 rt.jar 中的源码</span><span class="suffix"></span></h2><p>前面所提到的字符串编码，在 Java 中，用于实现编码是 <code>Charset</code> 相关的类， 其源代码在 <code>rt.jar</code> 中。JDK 中默认不包含对应的源码，在调试的时候，可以去 openjdk 中去把下载下来，我当前使用的版本为 JDK 8，下载地址为：<a target="_blank" rel="noopener" href="http://hg.openjdk.java.net/jdk8u/jdk8u-dev/jdk/">http://hg.openjdk.java.net/jdk8u/jdk8u-dev/jdk/</a> ， 点击下图中的 zip ，即可下载。</p>
+<p><img src="https://img-blog.csdnimg.cn/ae23a74bd82a47b5b74af9f1c0b9d67c.png" alt="JDK 下载" referrerpolicy="no-referrer"><figcaption class="post-image-caption">JDK 下载</figcaption></figure> </p>
+<p>下载完成后，在 <code>Intellij IDEA</code> 中为 JDK 添加 <code>sourcepath</code> 后，就可以非常愉快的调试看代码了，具体设置步骤可以看下图红框圈出来的部分。</p>
+<p><img src="https://img-blog.csdnimg.cn/823739724b1542a9862a1b75e2bc9fe5.png" alt="Sorcepath 添加示例" referrerpolicy="no-referrer"><figcaption class="post-image-caption">Sorcepath 添加示例</figcaption></figure></p>
+
+        </section>
+        </div>
+
+    
+
+</div>
+                <!-- 
+                    <div class="post_pre_next">
+    
+        <div class="post-pre">
+            <a href="/2023/02/17/git-principle-analysis-01/">上一篇: Git 必知必会：原理剖析（一）</a>
+        </div>
+    
+    
+        <a href="/2022/10/01/android-proguard-multi-module/">下一篇: 
+            深入 Android 混淆实践：多模块打包爬坑之旅
+        </a>
+    
+</div>
+
+
+                 -->
+                <div class="footer">
+    <span>Copyright © 2023 大罗说事</span>
+</div>
+
+<!-- 
+<link rel="stylesheet" href="/css/highlight.default.css">
+ -->
+<style type="text/css" id="atom-one-dark">pre code.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 12px;
+  font-size: 12px;
+}
+/*
+
+Atom One Dark by Daniel Gamage
+Original One Dark Syntax theme from https://github.com/atom/one-dark-syntax
+
+base:    #282c34
+mono-1:  #abb2bf
+mono-2:  #818896
+mono-3:  #5c6370
+hue-1:   #56b6c2
+hue-2:   #61aeee
+hue-3:   #c678dd
+hue-4:   #98c379
+hue-5:   #e06c75
+hue-5-2: #be5046
+hue-6:   #d19a66
+hue-6-2: #e6c07b
+
+*/
+
+.hljs {
+  color: #abb2bf;
+  background: #282c34;
+}
+
+.hljs-comment,
+.hljs-quote {
+  color: #5c6370;
+  font-style: italic;
+}
+
+.hljs-doctag,
+.hljs-keyword,
+.hljs-formula {
+  color: #c678dd;
+}
+
+.hljs-section,
+.hljs-name,
+.hljs-selector-tag,
+.hljs-deletion,
+.hljs-subst {
+  color: #e06c75;
+}
+
+.hljs-literal {
+  color: #56b6c2;
+}
+
+.hljs-string,
+.hljs-regexp,
+.hljs-addition,
+.hljs-attribute,
+.hljs-meta .hljs-string {
+  color: #98c379;
+}
+
+.hljs-attr,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-type,
+.hljs-selector-class,
+.hljs-selector-attr,
+.hljs-selector-pseudo,
+.hljs-number {
+  color: #d19a66;
+}
+
+.hljs-symbol,
+.hljs-bullet,
+.hljs-link,
+.hljs-meta,
+.hljs-selector-id,
+.hljs-title {
+  color: #61aeee;
+}
+
+.hljs-built_in,
+.hljs-title.class_,
+.hljs-class .hljs-title {
+  color: #e6c07b;
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-strong {
+  font-weight: bold;
+}
+
+.hljs-link {
+  text-decoration: underline;
+}
+
+</style>
+<style type="text/css" id="code-theme">pre::before {
+    content: '';
+    display: block;
+    background: url("http://pinned.github.io/img/mac_style.svg");
+    height: 30px;
+    width: 100%;
+    background-size: 40px;
+    background-repeat: no-repeat;
+    background-color: #282c34;
+    margin-bottom: -7px;
+    border-radius: 5px;
+    background-position: 10px 10px;
+}
+
+pre code {
+    border-radius: 5px;
+}</style>
+
+<script src="/js/highlight.min.js"></script>
+
+
+<script src="/js/highlightjs-line-numbers.js"></script>
+
+
+<script src="/js/juice.js"></script>
+
+
+<script src="/js/copy_wechat.js"></script>
+
+
+<script>
+    hljs.highlightAll();
+    window.onload = function() {
+        // 判断是否为手机浏览器
+        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+        if (!isMobile) {
+            fetch('https://pinned.github.io/bing-daily-picture/index.json')
+                .then(response => response.text())
+                .then(data => {
+                    var result = JSON.parse(data)
+                    var count = result.images.length
+                    const index = Math.floor(Math.random() * count);
+                    document.getElementById("bing-bg").src = "https://cn.bing.com" + result.images[index].url;
+                }); // 返回的结果
+        } 
+    }    
+</script>
+
+            </div>
+        </div>
+    </body>
+</html>

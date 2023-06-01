@@ -708,6 +708,167 @@ a {
     
     
     
+    
+    
+    
+    <div class="post">
+        <a class="post-title" href="/2015/04/05/keystore-file-options/">Android Keystore 文件的密码修改</a>
+        <div class="post-except">
+            
+                #修改keystore密码的命令(keytool为JDK带的命令行工具)
+# my.keysotre 是你的签名文件
+keytool -storepasswd -keystore my.keystore
+
+#修改keystore的alias的密码
+# my.keystore 是你的签名文件，debugalias为你alias名字
+keytool -keypasswd -keystore my.keystore -alias debugalias
+
+
+            
+            <a class="read-more" href="/2015/04/05/keystore-file-options/"> ... </a>
+        </div>
+        <div class="post-date">2015.04.05</div>
+    </div>
+    
+    
+    
+    
+    <div class="post">
+        <a class="post-title" href="/2015/04/03/android-studio-load-so-files/">Android Studio 中加载so库文件</a>
+        <div class="post-except">
+            
+                在使用第三方库的时候，经常会遇到一些第三方的so库文件。
+以前在Eclipse中，只需要将*.so 的文件放到libs文件目录下就行了。
+可是在使用Android Studio的时候，却出了点小问题。记录一下，以备后面查阅:
+首先，还是将*.so文件导入到libs文件目录下面。Android Studio使用的是gradle进行编译的。在bulid.gradle文件里面，你可以很清晰的看到如下代码：
+dependencies &#123;
+    compile fileTr
+            
+            <a class="read-more" href="/2015/04/03/android-studio-load-so-files/"> ... </a>
+        </div>
+        <div class="post-date">2015.04.03</div>
+    </div>
+    
+    
+    
+    
+    <div class="post">
+        <a class="post-title" href="/2015/03/29/ubuntu-install-rails/">Ubuntu 下安装Rails</a>
+        <div class="post-except">
+            
+                
+Rails 是使用 Ruby 语言编写的网页程序开发框架，目的是为开发者提供常用组件，简化网页程序的开发。只需编写较少的代码，就能实现其他编程语言或框架难以企及的功能。
+
+安装Ruby在Ubuntu系统中，默认已经安装了Ruby， 但是其版本很低，要装Ruby for rails，就必须得装Ruby升级到1.9.3及以上
+安装Ruby, 使用Brightbox 维护的 Ruby PPA
+sudo apt-add-repository ppa:brightbox/ruby-n
+            
+            <a class="read-more" href="/2015/03/29/ubuntu-install-rails/"> ... </a>
+        </div>
+        <div class="post-date">2015.03.29</div>
+    </div>
+    
+    
+    
+    
+    <div class="post">
+        <a class="post-title" href="/2015/03/16/adnroid-code-Snippets/">Android代码片段</a>
+        <div class="post-except">
+            
+                
+SD Card的大小和容量
+
+StatFs stat = new StatFs(Environment.getExternalStorageDirectory().getPath());
+long sdAvailSize = (long)stat.getAvailableBlocks()
+               * (long)stat.getBlockSize();
+long sdTotalSize =  (long)stat.getBlockCount()
+   
+            
+            <a class="read-more" href="/2015/03/16/adnroid-code-Snippets/"> ... </a>
+        </div>
+        <div class="post-date">2015.03.16</div>
+    </div>
+    
+    
+    
+    
+    <div class="post">
+        <a class="post-title" href="/2015/03/16/ubuntu-unzip-encode/">Ubuntu 解压zip，文件乱码</a>
+        <div class="post-except">
+            
+                在windows上压缩的文件，是以系统默认编码中文来压缩文件。由于zip文件中没有声明其编码，所以linux上的unzip一般以默认编码解压，中文文件名会出现乱码。
+解决方式：
+unzip -O CP936 xxx.zip
+// 用GBK, GB18030也可以
+
+
+            
+            <a class="read-more" href="/2015/03/16/ubuntu-unzip-encode/"> ... </a>
+        </div>
+        <div class="post-date">2015.03.16</div>
+    </div>
+    
+    
+    
+    
+    <div class="post">
+        <a class="post-title" href="/2015/03/13/Android-override-confusion/">Android 中方法重载遇到的问题</a>
+        <div class="post-except">
+            
+                问题描述 今天在使用的一个第三方库，执行的是一个异步下载，有一个封装DownloadInfo的类，在下载的Task中，通过DownloadInfo 获取真实的下载地址。但是由于粗心，库中的getRealUrl方法，没有加任何方法修饰词。我在使用的时候，重写了DownloadInfo 和getRealUrl方法。在测试中出现了一个问题，在Android 4.4中按照预期的执行，但是在Android 5.0中，却没有按照预期的 效果执行。
+详细代码
+DownloadInfo
+
+p
+            
+            <a class="read-more" href="/2015/03/13/Android-override-confusion/"> ... </a>
+        </div>
+        <div class="post-date">2015.03.13</div>
+    </div>
+    
+    
+    
+    
+    <div class="post">
+        <a class="post-title" href="/2015/03/11/ListView&RecyclerView/">ListView &amp; RecyclerView</a>
+        <div class="post-except">
+            
+                
+RecyclerView 作消息列表滚动到最后面
+
+// 添加一条数据，滚动到最后面
+if(mDatas.size &gt; 0) &#123;
+    mListView.scrollToPosition(mDatas.size() - 1);
+&#125;
+
+2 . RecyclerView &amp; LinearLayoutManager
+// 显示的时候，按照整个RecyclerView的大小，从后往前显示，数据也是从最后一条开始展示
+LinearLayoutMa
+            
+            <a class="read-more" href="/2015/03/11/ListView&RecyclerView/"> ... </a>
+        </div>
+        <div class="post-date">2015.03.11</div>
+    </div>
+    
+    
+    
+    
+    <div class="post">
+        <a class="post-title" href="/2015/03/02/android-studio-using-2/">Android Studio 使用 -- 最佳实践</a>
+        <div class="post-except">
+            
+                修改为Darcula主题File –&gt; Settings –&gt; Appearance ; 找到Theme， 选择Darcula， 重启Android Studio即可
+快速注释File –&gt; Setting –&gt; Keymap ；然后搜索Fix doc comment， 添加快捷键Alt + Shift + D
+局域变量前缀加m在使用Android编写代码的时候，会有一个习惯，就是在定义的变量前面加上前缀上加m，使用Alt + Insert的时候，生成
+            
+            <a class="read-more" href="/2015/03/02/android-studio-using-2/"> ... </a>
+        </div>
+        <div class="post-date">2015.03.02</div>
+    </div>
+    
+    
+    
+    
     <div class="post">
         <a class="post-title" href="/2015/01/23/google-volley-url-cache-key/">Google Volley如何缓存HTTP请求文件</a>
         <div class="post-except">
@@ -724,179 +885,10 @@ a {
     </div>
     
     
-    
-    
-    <div class="post">
-        <a class="post-title" href="/2015/01/22/book-list-of-2015/">2015阅读书单</a>
-        <div class="post-except">
-            
-                
-            
-            <a class="read-more" href="/2015/01/22/book-list-of-2015/"> ... </a>
-        </div>
-        <div class="post-date">2015.01.22</div>
-    </div>
-    
-    
-    
-    
-    <div class="post">
-        <a class="post-title" href="/2015/01/19/Android-log/">Creating logs in Android applications</a>
-        <div class="post-except">
-            
-                For Android applications, logging is handled by the android.util.Log class, which is a basic logging class that stores the logs in a circular buffer for the whole device. All logs for the device can be seen in the LogCat tab in Eclipse, or 
-            
-            <a class="read-more" href="/2015/01/19/Android-log/"> ... </a>
-        </div>
-        <div class="post-date">2015.01.19</div>
-    </div>
-    
-    
-    
-    
-    <div class="post">
-        <a class="post-title" href="/2015/01/17/advance-textview-using/">Advanced Android TextView</a>
-        <div class="post-except">
-            
-                TextView是一个经常使用的组件，但是你并不一定完全知道他的详细使用方法及具体细节。
-在github上面看到一个PPT，详细的写到了TextView的用法。
-参考地址: Advanced Android TextView
-
-            
-            <a class="read-more" href="/2015/01/17/advance-textview-using/"> ... </a>
-        </div>
-        <div class="post-date">2015.01.17</div>
-    </div>
-    
-    
-    
-    
-    <div class="post">
-        <a class="post-title" href="/2015/01/16/textview-url-lickify-02/">TextView高亮URL地址解析</a>
-        <div class="post-except">
-            
-                #TextView 高亮实现
-基本使用方法：
-textView.setAutoLinkMask(Linkify.ALL);
-//public static final int WEB_URLS = 1;
-//public static final int EMAIL_ADDRESSES = 2;
-//public static final int PHONE_NUMBERS = 4;
-//public static final int MAP_ADDRESSES = 8; 
-
-            
-            <a class="read-more" href="/2015/01/16/textview-url-lickify-02/"> ... </a>
-        </div>
-        <div class="post-date">2015.01.16</div>
-    </div>
-    
-    
-    
-    
-    <div class="post">
-        <a class="post-title" href="/2015/01/15/textview-url-lickify/">TextView 高亮URL地址，并实现跳转</a>
-        <div class="post-except">
-            
-                Android TextView 使用TextView的使用中，存在很多高级功能。比如高亮URL地址、电话号码等
-使用方法：
-TextView tempText = new TextView(context);
-tempText.setText(&quot;www.baidu.com&quot;);
-tempText.setAutoLinkMask(Linkify.WEB_URLS);
-tempText.setMovementMethod(LinkMovementMethod
-            
-            <a class="read-more" href="/2015/01/15/textview-url-lickify/"> ... </a>
-        </div>
-        <div class="post-date">2015.01.15</div>
-    </div>
-    
-    
-    
-    
-    <div class="post">
-        <a class="post-title" href="/2014/12/30/android-best-practices/">Best practices in Android development</a>
-        <div class="post-except">
-            
-                Lessons learned from Android developers in Futurice. Avoid reinventing the wheel by following these guidelines. If you are interested in iOS or Windows Phone development, be sure to check also our iOS Good Practices and Windows client Good 
-            
-            <a class="read-more" href="/2014/12/30/android-best-practices/"> ... </a>
-        </div>
-        <div class="post-date">2014.12.30</div>
-    </div>
-    
-    
-    
-    
-    <div class="post">
-        <a class="post-title" href="/2014/12/24/android-studio-using/">Android Studio 使用记录（一）</a>
-        <div class="post-except">
-            
-                在使用Android Studio 的时候，不小心手贱。把View内的自动提示和自动引入加入了ignore列表中去了。
-有关这个问题，也不知道怎么在度娘那儿搜索。
-没有办法，只有自己去慢慢找。虽然不认识几个英文。但是最终还是给我找到了。
-解决办法：
-Android Studio -&gt; [Setting] -&gt; [Editer] -&gt; [Auto Import]
-
-如下图所示：
-
-
-            
-            <a class="read-more" href="/2014/12/24/android-studio-using/"> ... </a>
-        </div>
-        <div class="post-date">2014.12.24</div>
-    </div>
-    
-    
-    
-    
-    <div class="post">
-        <a class="post-title" href="/2014/12/24/git-checkout/">git checkout 的使用（一）</a>
-        <div class="post-except">
-            
-                在使用git的过程中，有很多好的点
-其中，我们使用git-flow模型
-我的小伙伴创建了一个branch
-
-feature&#x2F;branch_test
-
-在这个地方，我想切换到branch_test分支
-我使用如下命令：
- git checkout remotes/origin/feature/branch_test
- 
- git checkout origin/feature/branch_test
- 
-
-使用上面两句命令都不得行，都只创建了一个临时分支。输出如下：
-
-            
-            <a class="read-more" href="/2014/12/24/git-checkout/"> ... </a>
-        </div>
-        <div class="post-date">2014.12.24</div>
-    </div>
-    
-    
-    
-    
-    <div class="post">
-        <a class="post-title" href="/2014/12/05/Android-SDK-Manager-Update-Method/">Android Sdk Manager无法更新问题解决办法</a>
-        <div class="post-except">
-            
-                每次要更新Android SDK等信息的时候，总是非常蛋疼。
-可以去下载大神们整理好的文件。这里附上下载地址：
-https://github.com/inferjay/AndroidDevTools
-现在，我们也可以不用这种方式，直接使用Android SDK Manager来更新：
-方法如下：
-
-启动 Android SDK Manager ，打开主界面，依次选择「Tools」、「Options…」，弹出『Android SDK Manager - Settings』窗口；
-            
-            <a class="read-more" href="/2014/12/05/Android-SDK-Manager-Update-Method/"> ... </a>
-        </div>
-        <div class="post-date">2014.12.05</div>
-    </div>
-    
-    
 </div>
 
 <div class="paginator">
-    <a class="extend prev" rel="prev" href="/page/5/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/7/">下一页</a>
+    <a class="extend prev" rel="prev" href="/page/5/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/7/">下一页</a>
 </div>
 
                 <!--  -->

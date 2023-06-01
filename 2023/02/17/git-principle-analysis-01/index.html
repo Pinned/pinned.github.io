@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+    <link rel="alternate icon" type="image/png" href="/img/favicon.png">
+    
+        <title>Git 必知必会：原理剖析（一） </title>
+    
+    <style type="text/css" id="reset">@charset "utf-8";
+
+*,
+*::before,
+*::after
+{
+    box-sizing: border-box;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+figure,
+blockquote,
+dl,
+dd
+{
+    margin: 0;
+}
+
+ul,
+ol
+{
+    list-style: none;
+}
+
+ul
+{
+    padding-inline-start: 0;
+}
+
+html,
+body
+{
+    scroll-behavior: smooth;
+}
+
+a:not([class])
+{
+    text-decoration-skip-ink: auto;
+}
+
+img,
+picture
+{
+    width: auto;
+    max-width: 100%;
+    display: block;
+}
+
+input,
+button,
+textarea,
+select
+{
+    font: inherit;
+}
+
+@media (prefers-reduced-motion: reduce)
+{
+    html:focus-within
+    {
+        scroll-behavior: auto;
+    }
+}</style>
+    <style type="text/css" id="style">@charset "utf-8";
+
+:root {
+    --font-color-0: #04077e;
+    --font-color-1: #000;
+    --font-color-2: #666;
+    --font-color-3: #aaa;
+    --bg-color-1: #eee;
+    --line-1: #ccc;
+    --line-2: #ddd;
+}
+
+p {
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    text-align: justify;
+}
+
+body {
+    font-family: "PingFang SC", BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serifhtml, body;
+    font-size: 16px;
+    line-height: 1.75;
+    letter-spacing: 0.6px;
+    color: var(--font-color-2);
+    background: #F0F0F0;
+}
+
+a {
+    text-decoration: none;
+    color: var(--font-color-1);
+}
+
+
+
+@media screen and (max-width: 480px) {
+    body {
+        background: #fff;
+    }
+
+    .paper {
+        padding: 4vw;
+    }
+
+    .paper-main {
+        width: 100%;
+        margin: 0 auto;
+        padding: 30px 1vw 12px;
+        background: #fff;
+    }
+}
+
+@media screen and (min-width: 481px) {
+    .paper {
+        padding: 4vw;
+    }
+
+    .paper-main {
+        width: 100%;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 62px 3vw 24px;
+        background: #fff;
+        border-radius: 24px;
+    }
+}
+
+.header {
+    padding-bottom: 48px;
+    margin-bottom: 48px;
+    border-bottom: 1px solid var(--line-1);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: center;
+}
+
+.logo {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--font-color-1);
+    margin-bottom: 16px;
+    flex: 0 0 100%;
+}
+
+.nav {
+    margin: 0 0 4px;
+    flex: 0 0 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: center;
+}
+
+.nav li {
+    padding: 2px 0;
+    margin-right: 24px;
+}
+
+.nav li:last-of-type {
+    margin-right: 0;
+}
+
+.nav li a {
+    color: var(--font-color-1);
+    opacity: .6;
+    transition: opacity ease-in-out .5s;
+}
+
+.nav li a:hover {
+    opacity: 1;
+    transition: opacity ease-in-out .5s;
+}
+
+.post-header {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: center;
+}
+
+.post-header .post-title {
+    font-size: 1.375rem;
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+    line-height: 1;
+}
+
+.post-list {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: stretch;
+}
+
+.post {
+    width: 100%;
+    padding-bottom: 48px;
+    margin-bottom: 48px;
+    border-bottom: 1px dashed var(--line-2);
+}
+
+.post-title {
+    display: inline-block;
+    font-size: 1.6rem;
+    font-weight: 600;
+    line-height: 1.5;
+    margin-bottom: 12px;
+    color: var(--font-color-1);
+    /*transition: color ease-in-out .5s;*/
+}
+
+.post-title:hover {
+    color: var(--font-color-0);
+    transition: color ease-in-out .5s;
+}
+
+.post-except {
+    word-break: break-all;
+    margin-bottom: 12px;
+    text-align: justify;
+}
+
+.read-more {
+    padding: 0 4px;
+    color: var(--font-color-0);
+}
+
+.read-more:before,
+.read-more:after {
+    display: inline-block;
+    transition: transform ease-in-out .5s;
+}
+
+.read-more:before {
+    content: "{ ";
+}
+
+.read-more:after {
+    content: " }";
+}
+
+.read-more:hover:before {
+    transform: translateX(-4px);
+    transition: transform ease-in-out .25s;
+}
+
+.read-more:hover:after {
+    transform: translateX(4px);
+    transition: transform ease-in-out .25s;
+}
+
+.post-date {
+    font-size: 0.875rem;
+    color: var(--font-color-3);
+}
+
+.paginator {
+    font-size: 0.875rem;
+    width: 100%;
+    margin: 0 auto 24px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.paginator * {
+    display: block;
+    padding: 8px 16px;
+    border-radius: 18px;
+    background: #fff;
+    border: 1px solid #eee;
+}
+
+.paginator .space {
+    display: block;
+    padding: 8px 16px;
+    border-radius: 18px;
+    background: #fff;
+    border: none;
+}
+
+.paginator a {
+    margin: 4px;
+    color: var(--font-color-2);
+    transition: color ease-in-out .5s;
+}
+
+.paginator a:hover {
+    color: var(--font-color-0);
+    transition: color ease-in-out .5s;
+}
+
+.paginator .current {
+    color: var(--font-color-0);
+    border: 1px solid var(--font-color-0);
+}
+
+.footer {
+    padding: 24px 0;
+    font-size: 0.875rem;
+    color: var(--font-color-3);
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-content: center;
+}
+
+.footer span {
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.footer a {
+    color: var(--font-color-3);
+    transition: color ease-in-out .5s;
+}
+
+.footer a:hover {
+    color: var(--font-color-0);
+    transition: color ease-in-out .5s;
+}
+
+.post-main {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.post-main-title {
+    flex: 0 0 100%;
+    margin-bottom: 12px;
+    font-size: 1.6rem;
+    font-weight: 600;
+    line-height: 1.5;
+    color: var(--font-color-1);
+}
+
+.post-meta {
+    font-size: 0.875rem;
+    color: var(--font-color-3);
+    flex: 0 0 100%;
+    margin-bottom: 32px;
+}
+
+.author {
+    color: #576b95;
+}
+
+.archive {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-content: normal;
+}
+
+.archive li {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-content: center;
+    padding: 12px 0;
+}
+
+.archive li:nth-child(odd) {
+    background: #fafafa;
+}
+
+.archive li:nth-child(even) {
+    background: #fff;
+}
+
+.archive li span {
+    width: 108px;
+    color: var(--font-color-2);
+}
+
+.archive-main {
+    flex: 0 1 calc(100% - 108px);
+}
+
+.archive-title {
+    color: var(--font-color-1);
+    /*transition: color ease-in-out .5s;*/
+}
+
+.archive-title:hover {
+    color: var(--font-color-0);
+    transition: color ease-in-out .5s;
+}
+
+.post-image-caption {
+    margin-top: 5px;
+    text-align: center;
+    color: #888;
+    font-size: 0.85rem;
+    display: block;
+}
+
+#clipboardbtn {
+    cursor: pointer;
+}
+
+#beautiful p {
+    box-sizing: border-box;
+    margin-bottom: 16px;
+    font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
+    font-size: 15px;
+    text-align: justify;
+    white-space: normal;
+    text-size-adjust: auto;
+    line-height: 1.75em;
+}
+#bing-bg {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    filter: blur(10px);
+    object-fit: cover;
+  }
+</style>
+    <style type="text/css" id="markdown">@charset "utf-8";
+
+.post-md
+{
+    width: 100%;
+    letter-spacing: 0;
+}
+
+.post-md h1,
+.post-md h2,
+.post-md h3,
+.post-md h4,
+.post-md h5,
+.post-md h6
+{
+    color: var(--font-color-1);
+}
+/* 一级标题 */
+.post-md h1  {
+    display:block;
+    border-bottom: 4px solid rgb(33, 33, 34);
+    font-size: 1rem;
+}
+  
+/* 一级标题内容 */
+.post-md h1  .content {
+    display: flex;
+    color: rgb(33, 33, 34);
+    font-size: 1rem;
+}
+  
+  
+/* 一级标题后缀 */
+.post-md h1  .suffix {
+    display: flex;
+    box-sizing: border-box;
+    width: 20px;
+    height: 10px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    background: RGBA(33, 33, 34, .5);
+    color: rgb(255, 255, 255);
+    font-size: 16px;
+    letter-spacing: 0.544px;
+    justify-content: flex-end;
+    box-sizing: border-box !important;
+    overflow-wrap: break-word !important;
+    float: right;
+    margin-top: -10px;
+}
+
+/* 二级标题 */
+.post-md h2 {
+    margin: 10px auto;
+    height: 40px;
+    background-color: rgb(251, 251, 251);
+    border-bottom: 1px solid rgb(246, 246, 246);
+    box-sizing: border-box;
+    font-size: 1rem;
+}
+
+/* 二级标题内容 */
+.post-md h2 .content {
+    margin-left: -10px;
+    display: inline-block;
+    width: auto;
+    height: 40px;
+    background-color: rgb(33, 33, 34);
+    border-bottom-right-radius:100px;
+    color: rgb(255, 255, 255);
+    padding-right: 30px;
+    padding-left: 20px;
+    font-size: 1rem;
+    line-height: 40px;
+}
+
+/* 三级标题 */
+.post-md h3 {
+    margin: 20px auto 5px;
+    border-top: 1px solid rgb(221, 221, 221);
+    box-sizing: border-box;
+    font-size: 1rem;
+}
+  
+/* 三级标题内容 */
+.post-md h3 .content {
+    margin-top: -1px;
+    padding-top: 6px;
+    padding-right: 5px;
+    padding-left: 5px;
+    font-size: 1rem;
+    border-top: 2px solid rgb(33, 33, 34);
+    display: inline-block;
+    line-height: 1.1;
+}
+.post-md h4
+{
+    font-size: 1rem;
+    line-height: 1.2;
+    padding: 16px 0;
+}
+.post-md h5
+{
+    font-size: 0.83rem;
+    line-height: 1.2;
+    padding: 14px 0;
+}
+.post-md h6
+{
+    font-size: 0.67rem;
+    line-height: 1.2;
+    padding: 12px 0;
+}
+.post-md a
+{
+    color: var(--font-color-2);
+    box-shadow: 0 2px 0 var(--line-1);
+    transition: color ease-in-out .65s, box-shadow ease-in-out .65s;
+}
+.post-md a:hover
+{
+    color: var(--font-color-0);
+    box-shadow: 0 2px 0 var(--font-color-0);
+    transition: color ease-in-out .65s, box-shadow ease-in-out .65s;
+}
+.post-md strong
+{
+    font-weight: 700;
+}
+.post-md em
+{
+    font-style: italic;
+}
+.post-md kbd
+{
+    padding: 2px 4px;
+    border-radius: 2px;
+    background: #eee;
+    border: 1px solid #ddd;
+}
+.post-md ol
+{
+    list-style: decimal;
+    padding-left: 24px;
+}
+.post-md ul
+{
+    list-style: disc;
+    padding-left: 24px;
+}
+.post-md img
+{
+    border-radius: 4px;
+}
+.post-md hr
+{
+    border: none;
+    height: 1px;
+    background: var(--line-1);
+    margin: 24px 0;
+}
+
+.post-md p,
+.post-md blockquote
+{
+    width: 100%;
+    margin: 12px 0;
+}
+.post-md blockquote
+{
+    border-left: 2px solid var(--line-2);
+    padding-left: 12px;
+    word-wrap: break-word;
+}
+
+.post-md .video-container
+{
+    background: #000;
+    border-radius: 4px;
+    overflow: hidden;
+}
+.post-md iframe,
+.post-md .video-container iframe
+{
+    width: 100%;
+    height: 100vh;
+    max-height: 360px;
+    margin: 12px 0;
+}
+
+.post-md>table
+{
+    width: 100%;
+    text-align: left;
+    border-spacing: 0;
+}
+.post-md>table th
+{
+    padding: 12px 0;
+    border-bottom: 2px solid var(--line-1);
+}
+.post-md>table tr:nth-child(odd) td
+{
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line-1);
+    background: #fafafa;
+}
+.post-md>table tr:nth-child(even) td
+{
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line-1);
+    background: #fff;
+}
+
+.post-md p code
+{
+    border-radius: 4px;
+    background:rgba(27,31,35,.05);
+    padding: 2px 4px;
+    color: rgb(0, 112, 96);
+    font-size: 1rem;
+    margin-left: 1px;
+    margin-right: 1px;
+}
+
+.post-md .hljs-ln-numbers
+{
+    opacity: .5;
+    padding-right: 12px;
+}
+</style>
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body>
+        <img id="bing-bg" src="" referrerpolicy="no-referrer" />
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="post-header">
+    <p class="post-title">Git 必知必会：原理剖析（一）</p>
+</div>
+                
+                <div class="post-main">
+
+    
+        <div class="post-meta">
+            <a class='author' href="/">罗昭成</a> <span id="clipboardbtn">2023年02月17日</span>
+        </div>
+        <div class="post-md" id="copy-post-content">
+        <section id="beautiful">
+            <p>作为程序员，最常用的版本管理工具便是 Git。但我相信大多数人和我一样，从没有认真了解过其具体实现的原理。但了解 Git 的原理，能有助于我们工作更好的使用 Git。下面，让我们一起来了解 Git 中的一些概念，以及实现。</p>
+<h2><span class="prefix"></span><span class="content">一、概念</span><span class="suffix"></span></h2><p>Git 是一个分布式版本控制软件，在使用的过程中，与 CVS 类不同，不需要使用服务端，就可以实现版本控制。但在我们常用的使用过程中，依然会一个中间服务器作为 <code>original</code> 来实现代码的<code>托管</code>、<code>控制</code> 等，整个流程如下图所示：</p>
+<p><img src="https://img-blog.csdnimg.cn/9c6738b207a34906bc451d2791b59aaf.png" alt="Git 中代码的流转过程" referrerpolicy="no-referrer"><figcaption class="post-image-caption">Git 中代码的流转过程</figcaption></figure></p>
+<p>从图中可以看到，虽然有一个<strong>远程仓库</strong> ，但它仅仅是提供托管以及作为权威库存在，所有程序员仓库节点都可以不依赖这个远程仓库独立存在并使用。</p>
+<p>在进行开发工作的时候，我们对代码的源文件进行修改，然后通过 <code>commit</code> 命令提交到本地仓库，在通过 <code>push</code> 命令将代码同步到远程仓库中。那图中的 <code>Git 本地仓库</code> 以及 <code>工作区</code> 指的分别是哪些东西呢？</p>
+<p>相信熟悉 Git 的同学都知道，我们克隆到本地的项目中，都会有一个 <code>.git</code> 的隐藏文件夹，这个文件夹中的内容就是 <code>Git 本地仓库</code>， 而工作区就是我们看到的其它原代码。所以，对一个 <code>Git 仓库</code>  来说，最重要的便是 <code>.git</code> 文件夹里面的内容了。</p>
+<h2><span class="prefix"></span><span class="content">二、Git 的工作原理</span><span class="suffix"></span></h2><p>刚提到，在本地工程中，<code>.git</code> 文件夹为 Git 本地仓库，库目录结构如下：</p>
+<p><img src="https://img-blog.csdnimg.cn/5519132d41224307812ce30bb61d1a93.png" alt=".git 文件目录" referrerpolicy="no-referrer"><figcaption class="post-image-caption">.git 文件目录</figcaption></figure></p>
+<ul>
+<li><strong>hooks：</strong> 存储钩子的文件夹，可以注入到 git 生命周期的所有流程</li>
+<li><strong>objects：</strong> 存放 git 对象，代码文件、目录等都会转换成对象存储到这个目录下中</li>
+<li><strong>refs：</strong> 存储分支以及TAG的指针文件。</li>
+<li><strong>HEAD：</strong> 当前工作区执行的代码分支的指针，一般指向 <strong>refs</strong> 下的某个文件。</li>
+<li><strong>config：</strong> 存储当前项目的一些配置，如 <code>remote url</code>、<code>用户信息</code></li>
+</ul>
+<p>在这些目录和文件中，其中最重要的为 <code>objects</code> 文件夹。在 Git 的设计中，所有的核心对象都会往里装。这些对象又分为：</p>
+<ul>
+<li><strong>blob：</strong> 而进制大对象，使用 <strong>zlib</strong>（一种无损压缩算法） 压缩算法对文件内容进行压缩后的结果。</li>
+<li><strong>tree：</strong> 对应于文件目录，用于存储文件名列表以及文件类型。</li>
+<li><strong>commit：</strong> 对应一个 <code>commit</code> ， 存储信息中包含 <strong>顶层源目录的 tree hash值</strong> 、<strong>时间戳</strong>、<strong>commit 日志信息</strong>、<strong>0个或多个父commit hash值</strong></li>
+</ul>
+<p>我在本地建了一个项目，添加了几个文件，以及两次提交。在 objects 目录下，存储的文件类容如下：</p>
+<p><img src="https://img-blog.csdnimg.cn/106777ee76b54d3eb677e99bb78f53a0.png" alt="objects 目录示例" referrerpolicy="no-referrer"><figcaption class="post-image-caption">objects 目录示例</figcaption></figure></p>
+<p>初看这个会一脸懵，其实很简单，以 <code>objects/78/ace89700a69e490c86f54fbe9d12f0cfb2dbdb</code> 这个文件为例，其中 <code>78ace89700a69e490c86f54fbe9d12f0cfb2dbdb</code> 这一串为这个文件的 Hash 值，计算时使用的是 SHA-1 的算法，其计算结果为 20 个字节组成，通常表示成 40 个 16 进制的形式的字符。对比 Hash 与文件结构可以看出，Git 使用的 Hash 前两个字符作为文件夹名称，后 38 个字符作为文件名，即表示为 <code>hash[0,2]/hash[2:]</code>  格式。在 git 中，也有相应的工具查看 Hash 文件存储的数据类型以及数据内容，可以使用如下命令进行查看：</p>
+<pre><code class="shell"># 查看文件类弄
+git cat-file -t 78ace89700a69e490c86f54fbe9d12f0cfb2dbdb
+# 查看文件内容
+git cat-file -p 78ace89700a69e490c86f54fbe9d12f0cfb2dbdb
+</code></pre>
+<p>下面在来看一下各 Hash 值的计算：</p>
+<h3><span class="prefix"></span><span class="content">计算 blob 的 Hash</span><span class="suffix"></span></h3><p>在 Git 中， Blob 的文件中，存储的内容格式如下：</p>
+<pre><code class="shell">blob &lt;content length&gt;&lt;NUL&gt;&lt;content&gt;
+</code></pre>
+<p>其中 <strong>content length</strong> 指的是源文件内容的长度，<strong>NUL</strong> 为 <code>\0</code> ，而 <strong>content</strong> 为源文件的内容。举个例子， 我在一个空仓库中，添加了一个文件 <code>Main.java</code> ，其内容如下：</p>
+<pre><code class="java">public class Main &#123;
+    public static void main(String [] args) &#123;
+        System.out.println(&quot;This is Main.java&quot;);
+    &#125;
+&#125;
+</code></pre>
+<p>因此，存储到 <strong>objcets</strong> 中的文件内容为：</p>
+<pre><code class="text">blob 122\0public class Main &#123;
+    public static void main(String [] args) &#123;
+        System.out.println(&quot;This is Main.java&quot;);
+    &#125;
+&#125;
+</code></pre>
+<p>为了更好的验证这个逻辑，我写了一段 <code>Java</code> 记算此 <code>Hash</code> 的测试代码，代码如下：</p>
+<pre><code class="java">public static HashData getBlobHash(File file) throws Exception &#123;
+    String content = new String(FileUtil.read(file));
+    String header = &quot;blob &quot; + content.length() + &quot;\0&quot;;
+    return getHash(header + content);
+&#125;
+</code></pre>
+<p>运行出来的结果正好为 <code>78ace89700a69e490c86f54fbe9d12f0cfb2dbdb</code> ， 与 Git 中记算的结果一致。</p>
+<h3><span class="prefix"></span><span class="content">计算 tree 的 hash</span><span class="suffix"></span></h3><p>在存储 <code>Main.java</code> 文件类容中，并没有将文件名存储进去，那 Git 是在哪儿存储的呢？ 对，就是现在要讲的 <strong>tree</strong> 的结构。 先来看一下，我写的示例中的文件结构：</p>
+<p><img src="https://img-blog.csdnimg.cn/170f0911710a46928fdc1646f4e5fe20.png" alt="文件目录结构" referrerpolicy="no-referrer"><figcaption class="post-image-caption">文件目录结构</figcaption></figure></p>
+<p>和 blob 类似， tree 也有对应的内容存储结构:</p>
+<pre><code class="shell">tree &lt;content length&gt;&lt;NUL&gt;&lt;file mode&gt; &lt;file name&gt;&lt;NUL&gt;&lt;file hash&gt;
+</code></pre>
+<p>其中 <strong>content length</strong> 指的后面<code>&lt;file mode&gt; &lt;file name&gt;&lt;NUL&gt;&lt;file hash&gt;</code>的长度，<strong>NUL</strong> 为 <code>\0</code>， <strong>file mode</strong> 指的是文件类型， 列举其中几种：</p>
+<ul>
+<li><code>0100000000000000</code> (<code>040000</code>): 文件夹</li>
+<li><code>1000000110100100</code> (<code>100644</code>): 常规非执行文件</li>
+<li><code>1000000110110100</code> (<code>100664</code>): 常规不可执行组可写文件</li>
+<li><code>1000000111101101</code> (<code>100755</code>): 常规可执行文件</li>
+<li><code>1010000000000000</code> (<code>120000</code>): 软链文件</li>
+</ul>
+<p><strong>file name</strong> 指的是文件名称， <strong>file hash</strong> 为 <code>blob</code> 或者 <code>tree</code> 的 hash 值，使用的是 20 位二进制值，非 40 位的 16 进制字符串。</p>
+<p>具体来看上面例子中的信息，我们从最下面的 blob 文件往上看，通过上面的脚本， 可以计算出 <code>Main.java</code> 的 hash 为：<code>78ace89700a69e490c86f54fbe9d12f0cfb2dbdb</code>， <code>new.txt</code> 的 hash 为： <code>fa49b077972391ad58037050f2a75f74e3671e92</code>，因此，针对 <code>example</code> 这一级目录的文件类容如下：</p>
+<pre><code class="text">tree 72&lt;NUL&gt;
+100644 Main.java&lt;NUL&gt;78ace89700a69e490c86f54fbe9d12f0cfb2dbdb
+100644 new.txt&lt;NUL&gt;fa49b077972391ad58037050f2a75f74e3671e92
+</code></pre>
+<blockquote>
+<p>PS：为了更好的阅读，上面的内容进行了换行处理，实际文件中并没有换行。格式中提到的 file hash 在此处为了便于展示，直接放了对应的 40 位的 16 进制字符串。</p>
+</blockquote>
+<p>得到文件内容后，可以很方便的计算出 hash 为：<code>f6e2e8e5243c07191d0c1f4353448bd57785c39d</code>。也可以用 git 命令去验证：</p>
+<pre><code class="shell">➜ git cat-file -p f6e2e8e5243c07191d0c1f4353448bd57785c39d
+100644 blob 78ace89700a69e490c86f54fbe9d12f0cfb2dbdb	Main.java
+100644 blob fa49b077972391ad58037050f2a75f74e3671e92	new.txt
+➜ git cat-file -t f6e2e8e5243c07191d0c1f4353448bd57785c39d
+tree
+</code></pre>
+<p>当然，计算这个，我也用 Java 实现了一个简单的计算。看一下代码的实现：</p>
+<pre><code class="java">File[] allFiles = dir.listFiles();
+//按文件名进行字典排序
+SortedMap&lt;File, HashData&gt; allHash = new TreeMap&lt;&gt;(Comparator.comparing(File::getName));
+for (File file : allFiles) &#123;
+    if (file.getName().equals(&quot;.git&quot;) || file.getName().equals(&quot;.DS_Store&quot;)) &#123;
+        continue;
+    &#125;
+      // 计算每一个文件的 hash
+    allHash.put(file, calcHash(file));
+&#125;
+// 拼接文件子文件的 hash 
+byte[] allContent = new byte[0];
+for (Map.Entry&lt;File, HashData&gt; item : allHash.entrySet()) &#123;
+    String header = getFileMode(item.getKey()) + &quot; &quot; + item.getKey().getName() + &quot;\0&quot;;
+    byte[] content = merge(header, item.getValue().originalData);
+    byte[] tempContent = merge(allContent, content);
+    allContent = tempContent;
+&#125;
+String header = &quot;tree &quot; + allContent.length + &quot;\0&quot;;
+byte[] mergedArray = merge(header, allContent);
+HashData hash = getHash(mergedArray, &quot;SHA-1&quot;);
+</code></pre>
+<h3><span class="prefix"></span><span class="content">计算 commit 的 hash</span><span class="suffix"></span></h3><p>与前面的 tree 和  blob 的相似，按照固定格式进行拼装即可：</p>
+<pre><code class="text">commit &lt;content length&gt;&lt;NUL&gt;tree &lt;tree hash&gt;
+parent &lt;parent hash&gt;
+author &lt;username&gt; &lt;email&gt; &lt;timestamp&gt;
+committer &lt;username&gt; &lt;email&gt; &lt;timestamp&gt;
+
+&lt;commit message&gt;
+</code></pre>
+<p>需要注意的是，此格式中的 <strong>tree hash</strong> 与 <strong>parent hash</strong> 是 40 位的 16 进制值， 换行也是真实的换行。按照上面的格式进行拼装后，使用 SHA-1 可以很方便的计算出  Hash 值。</p>
+<h3><span class="prefix"></span><span class="content">Git 存储树结构</span><span class="suffix"></span></h3><p>通过前面 blob 、tree、以及 commit 计算后，通过 commit 作为入口，就可以将所有的文件夹以及文件内容进行关联起来，构建一个树目录结构。还是前面提到的那个例子，一共执行了三次提交：</p>
+<ol>
+<li>在创建的 Git 项目中，添加 <strong>Main.java</strong> 后，并使用 <code>git commit -am &quot;first commit&quot;</code> 进行第一次提交</li>
+<li>继续在 <strong>com&#x2F;example</strong> 文件夹下，添加 <strong>new.txt</strong> 文件， 并使用<code>git commit -am &quot;add new file&quot;</code> 进行第二次提交</li>
+<li>修改 <strong>Main.java</strong> 的内容， 并使用 <code>git commit -am &quot;modify Main.java&quot;</code> 进行第三次提交</li>
+</ol>
+<p>在本例中， <code>.git/HEAD</code> 中指向的 <code>.git/refs/heads/main</code> 文件，此文件中存储了 <code>commit</code> 的  hash 值， 作为入口，可以将刚的三次提交，构建出一个树结构，如下图所示：</p>
+<p><img src="https://img-blog.csdnimg.cn/fc934b817cea47a5b59d1b2b5445d15a.png" alt="仓库树结构示意图" referrerpolicy="no-referrer"><figcaption class="post-image-caption">仓库树结构示意图</figcaption></figure></p>
+<h2><span class="prefix"></span><span class="content">三、Git LFS 二进制大文件处理</span><span class="suffix"></span></h2><p>从上面的例子中，可以看到，<strong>Main.java</strong> 经过第一次的创建与后续的修改，创建了两个 blob ，虽然使用了 <strong>zlib</strong> 进行了压缩，但针对二进制文件文件，压缩率可以说很微小，这就会导致 objects 中存储的 blob 文件大小会快速增长。当我们首次克隆代码时，会把这些二进制的所有版本文件都下载下来，导致下载速度很慢。并且这些历史版本的文件，你可能永远也用不到，但是却不得不下载它。</p>
+<p><img src="https://img-blog.csdnimg.cn/75e2085237d74f16a55fa10caae63e9d.png" alt="仓库大小变更" referrerpolicy="no-referrer"><figcaption class="post-image-caption">仓库大小变更</figcaption></figure></p>
+<p>基于此，Git LFS 应运而生，它通过将大文件替换为一个很小的指针文件，并且在使用中，只会将当前需要使用到的二进制文件下载到本地即可。</p>
+<h3><span class="prefix"></span><span class="content">安装配置 Git LFS</span><span class="suffix"></span></h3><p>在 mac 上，我喜欢使用 <code>Homebrew</code> 进行安装，使用如下命令就可以安装好 <code>git-lfs</code> ：</p>
+<pre><code class="shell">brew install git-lfs
+</code></pre>
+<p>安装好后，就可以对项目进行配置，在不支持 git-lfs 的项目目录下，执行如下命令：</p>
+<pre><code>git lfs install
+</code></pre>
+<p>此命令会更新 <code>.git/hooks/</code> 下的脚本，注入 <code>git</code> 命令的处理流程</p>
+<p><img src="https://img-blog.csdnimg.cn/ccbcaa7b39524af6ab003179aa95a834.png" alt="install 前后对比" referrerpolicy="no-referrer"><figcaption class="post-image-caption">install 前后对比</figcaption></figure></p>
+<p>可以看到，在 <code>hooks</code> 文件夹中，多了 <code>post-checkout</code> 、<code>post-commit</code> 、<code>pre-push</code> 等脚本，根据这些脚本名称就知道其执行时间点。</p>
+<p>下一步便是将我们要跟踪的二进制文件添加到跟踪目录中，使用如下命令：</p>
+<pre><code class="shell">git lfs track &lt;file-type&gt;
+# 例如
+# git lfs track &quot;*.db&quot;
+</code></pre>
+<p>执行后，会在项目根目录下创建 <code>.gitattributes</code> 文件，注意，需要将此文件上传到远程库中去。这个文件中的内容格式如下：</p>
+<pre><code>*.db filter=lfs diff=lfs merge=lfs -text
+</code></pre>
+<h3><span class="prefix"></span><span class="content">Git LFS 指针转移</span><span class="suffix"></span></h3><p>在这里，我随机生成了一个无序的二进制文件 <code>test.db</code>， 添加到项目中，并且执行 <code>git add .</code> 命令，会将此文件加入进去，从文件目录中可以看到，lfs 目录下新增了一个文件：</p>
+<p><img src="https://img-blog.csdnimg.cn/b6a6f3c796094fa8abf52e85460745e7.png" alt="LFS文件" referrerpolicy="no-referrer"><figcaption class="post-image-caption">LFS文件</figcaption></figure></p>
+<p>而在<code>f2bb0511bd0ce670c75a1ce4d52ecea91bad219b</code> 这个文件中存储的便是 lfs 的文件指针：</p>
+<pre><code>version https://git-lfs.github.com/spec/v1
+oid sha256:d1ccb0fe6d165aab8c40c6b0aa796bf4f80011c050e168a625d3d2ab46b07306
+size 41943040
+</code></pre>
+<p>通过此种方式，进行关联，降低代码库大小。最后，在看看官方图：</p>
+<p><img src="https://img-blog.csdnimg.cn/cdcc2ad0fa1340c586a85238db0e2889.png" alt="官方图例" referrerpolicy="no-referrer"><figcaption class="post-image-caption">官方图例</figcaption></figure></p>
+<h2><span class="prefix"></span><span class="content">写到最后</span><span class="suffix"></span></h2><p>创建于 2005 年的 Git 中，有很多知识点值得学习，建议有时间同学深入研究。最后，如果文中有错误和遗漏，欢迎与我联系。</p>
+
+        </section>
+        </div>
+
+    
+
+</div>
+                <!-- 
+                    <div class="post_pre_next">
+    
+        <div class="post-pre">
+            <a href="/2023/02/25/git-principle-analysis-02/">上一篇: Git 必知必会：原理剖析（二）</a>
+        </div>
+    
+    
+        <a href="/2022/10/13/java-string-encoding/">下一篇: 
+            深入理解 Java 字符串编码
+        </a>
+    
+</div>
+
+
+                 -->
+                <div class="footer">
+    <span>Copyright © 2023 大罗说事</span>
+</div>
+
+<!-- 
+<link rel="stylesheet" href="/css/highlight.default.css">
+ -->
+<style type="text/css" id="atom-one-dark">pre code.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 12px;
+  font-size: 12px;
+}
+/*
+
+Atom One Dark by Daniel Gamage
+Original One Dark Syntax theme from https://github.com/atom/one-dark-syntax
+
+base:    #282c34
+mono-1:  #abb2bf
+mono-2:  #818896
+mono-3:  #5c6370
+hue-1:   #56b6c2
+hue-2:   #61aeee
+hue-3:   #c678dd
+hue-4:   #98c379
+hue-5:   #e06c75
+hue-5-2: #be5046
+hue-6:   #d19a66
+hue-6-2: #e6c07b
+
+*/
+
+.hljs {
+  color: #abb2bf;
+  background: #282c34;
+}
+
+.hljs-comment,
+.hljs-quote {
+  color: #5c6370;
+  font-style: italic;
+}
+
+.hljs-doctag,
+.hljs-keyword,
+.hljs-formula {
+  color: #c678dd;
+}
+
+.hljs-section,
+.hljs-name,
+.hljs-selector-tag,
+.hljs-deletion,
+.hljs-subst {
+  color: #e06c75;
+}
+
+.hljs-literal {
+  color: #56b6c2;
+}
+
+.hljs-string,
+.hljs-regexp,
+.hljs-addition,
+.hljs-attribute,
+.hljs-meta .hljs-string {
+  color: #98c379;
+}
+
+.hljs-attr,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-type,
+.hljs-selector-class,
+.hljs-selector-attr,
+.hljs-selector-pseudo,
+.hljs-number {
+  color: #d19a66;
+}
+
+.hljs-symbol,
+.hljs-bullet,
+.hljs-link,
+.hljs-meta,
+.hljs-selector-id,
+.hljs-title {
+  color: #61aeee;
+}
+
+.hljs-built_in,
+.hljs-title.class_,
+.hljs-class .hljs-title {
+  color: #e6c07b;
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-strong {
+  font-weight: bold;
+}
+
+.hljs-link {
+  text-decoration: underline;
+}
+
+</style>
+<style type="text/css" id="code-theme">pre::before {
+    content: '';
+    display: block;
+    background: url("http://pinned.github.io/img/mac_style.svg");
+    height: 30px;
+    width: 100%;
+    background-size: 40px;
+    background-repeat: no-repeat;
+    background-color: #282c34;
+    margin-bottom: -7px;
+    border-radius: 5px;
+    background-position: 10px 10px;
+}
+
+pre code {
+    border-radius: 5px;
+}</style>
+
+<script src="/js/highlight.min.js"></script>
+
+
+<script src="/js/highlightjs-line-numbers.js"></script>
+
+
+<script src="/js/juice.js"></script>
+
+
+<script src="/js/copy_wechat.js"></script>
+
+
+<script>
+    hljs.highlightAll();
+    window.onload = function() {
+        // 判断是否为手机浏览器
+        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+        if (!isMobile) {
+            fetch('https://pinned.github.io/bing-daily-picture/index.json')
+                .then(response => response.text())
+                .then(data => {
+                    var result = JSON.parse(data)
+                    var count = result.images.length
+                    const index = Math.floor(Math.random() * count);
+                    document.getElementById("bing-bg").src = "https://cn.bing.com" + result.images[index].url;
+                }); // 返回的结果
+        } 
+    }    
+</script>
+
+            </div>
+        </div>
+    </body>
+</html>

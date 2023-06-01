@@ -1,0 +1,2586 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+    <link rel="alternate icon" type="image/png" href="/img/favicon.png">
+    
+        <title>解密 Java Class 文件不为人知的秘密 </title>
+    
+    <style type="text/css" id="reset">@charset "utf-8";
+
+*,
+*::before,
+*::after
+{
+    box-sizing: border-box;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+figure,
+blockquote,
+dl,
+dd
+{
+    margin: 0;
+}
+
+ul,
+ol
+{
+    list-style: none;
+}
+
+ul
+{
+    padding-inline-start: 0;
+}
+
+html,
+body
+{
+    scroll-behavior: smooth;
+}
+
+a:not([class])
+{
+    text-decoration-skip-ink: auto;
+}
+
+img,
+picture
+{
+    width: auto;
+    max-width: 100%;
+    display: block;
+}
+
+input,
+button,
+textarea,
+select
+{
+    font: inherit;
+}
+
+@media (prefers-reduced-motion: reduce)
+{
+    html:focus-within
+    {
+        scroll-behavior: auto;
+    }
+}</style>
+    <style type="text/css" id="style">@charset "utf-8";
+
+:root {
+    --font-color-0: #04077e;
+    --font-color-1: #000;
+    --font-color-2: #666;
+    --font-color-3: #aaa;
+    --bg-color-1: #eee;
+    --line-1: #ccc;
+    --line-2: #ddd;
+}
+
+p {
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    text-align: justify;
+}
+
+body {
+    font-family: "PingFang SC", BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serifhtml, body;
+    font-size: 16px;
+    line-height: 1.75;
+    letter-spacing: 0.6px;
+    color: var(--font-color-2);
+    background: #F0F0F0;
+}
+
+a {
+    text-decoration: none;
+    color: var(--font-color-1);
+}
+
+
+
+@media screen and (max-width: 480px) {
+    body {
+        background: #fff;
+    }
+
+    .paper {
+        padding: 4vw;
+    }
+
+    .paper-main {
+        width: 100%;
+        margin: 0 auto;
+        padding: 30px 1vw 12px;
+        background: #fff;
+    }
+}
+
+@media screen and (min-width: 481px) {
+    .paper {
+        padding: 4vw;
+    }
+
+    .paper-main {
+        width: 100%;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 62px 3vw 24px;
+        background: #fff;
+        border-radius: 24px;
+    }
+}
+
+.header {
+    padding-bottom: 48px;
+    margin-bottom: 48px;
+    border-bottom: 1px solid var(--line-1);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: center;
+}
+
+.logo {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--font-color-1);
+    margin-bottom: 16px;
+    flex: 0 0 100%;
+}
+
+.nav {
+    margin: 0 0 4px;
+    flex: 0 0 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: center;
+}
+
+.nav li {
+    padding: 2px 0;
+    margin-right: 24px;
+}
+
+.nav li:last-of-type {
+    margin-right: 0;
+}
+
+.nav li a {
+    color: var(--font-color-1);
+    opacity: .6;
+    transition: opacity ease-in-out .5s;
+}
+
+.nav li a:hover {
+    opacity: 1;
+    transition: opacity ease-in-out .5s;
+}
+
+.post-header {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: center;
+}
+
+.post-header .post-title {
+    font-size: 1.375rem;
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+    line-height: 1;
+}
+
+.post-list {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: stretch;
+}
+
+.post {
+    width: 100%;
+    padding-bottom: 48px;
+    margin-bottom: 48px;
+    border-bottom: 1px dashed var(--line-2);
+}
+
+.post-title {
+    display: inline-block;
+    font-size: 1.6rem;
+    font-weight: 600;
+    line-height: 1.5;
+    margin-bottom: 12px;
+    color: var(--font-color-1);
+    /*transition: color ease-in-out .5s;*/
+}
+
+.post-title:hover {
+    color: var(--font-color-0);
+    transition: color ease-in-out .5s;
+}
+
+.post-except {
+    word-break: break-all;
+    margin-bottom: 12px;
+    text-align: justify;
+}
+
+.read-more {
+    padding: 0 4px;
+    color: var(--font-color-0);
+}
+
+.read-more:before,
+.read-more:after {
+    display: inline-block;
+    transition: transform ease-in-out .5s;
+}
+
+.read-more:before {
+    content: "{ ";
+}
+
+.read-more:after {
+    content: " }";
+}
+
+.read-more:hover:before {
+    transform: translateX(-4px);
+    transition: transform ease-in-out .25s;
+}
+
+.read-more:hover:after {
+    transform: translateX(4px);
+    transition: transform ease-in-out .25s;
+}
+
+.post-date {
+    font-size: 0.875rem;
+    color: var(--font-color-3);
+}
+
+.paginator {
+    font-size: 0.875rem;
+    width: 100%;
+    margin: 0 auto 24px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.paginator * {
+    display: block;
+    padding: 8px 16px;
+    border-radius: 18px;
+    background: #fff;
+    border: 1px solid #eee;
+}
+
+.paginator .space {
+    display: block;
+    padding: 8px 16px;
+    border-radius: 18px;
+    background: #fff;
+    border: none;
+}
+
+.paginator a {
+    margin: 4px;
+    color: var(--font-color-2);
+    transition: color ease-in-out .5s;
+}
+
+.paginator a:hover {
+    color: var(--font-color-0);
+    transition: color ease-in-out .5s;
+}
+
+.paginator .current {
+    color: var(--font-color-0);
+    border: 1px solid var(--font-color-0);
+}
+
+.footer {
+    padding: 24px 0;
+    font-size: 0.875rem;
+    color: var(--font-color-3);
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-content: center;
+}
+
+.footer span {
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.footer a {
+    color: var(--font-color-3);
+    transition: color ease-in-out .5s;
+}
+
+.footer a:hover {
+    color: var(--font-color-0);
+    transition: color ease-in-out .5s;
+}
+
+.post-main {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.post-main-title {
+    flex: 0 0 100%;
+    margin-bottom: 12px;
+    font-size: 1.6rem;
+    font-weight: 600;
+    line-height: 1.5;
+    color: var(--font-color-1);
+}
+
+.post-meta {
+    font-size: 0.875rem;
+    color: var(--font-color-3);
+    flex: 0 0 100%;
+    margin-bottom: 32px;
+}
+
+.author {
+    color: #576b95;
+}
+
+.archive {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-content: normal;
+}
+
+.archive li {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-content: center;
+    padding: 12px 0;
+}
+
+.archive li:nth-child(odd) {
+    background: #fafafa;
+}
+
+.archive li:nth-child(even) {
+    background: #fff;
+}
+
+.archive li span {
+    width: 108px;
+    color: var(--font-color-2);
+}
+
+.archive-main {
+    flex: 0 1 calc(100% - 108px);
+}
+
+.archive-title {
+    color: var(--font-color-1);
+    /*transition: color ease-in-out .5s;*/
+}
+
+.archive-title:hover {
+    color: var(--font-color-0);
+    transition: color ease-in-out .5s;
+}
+
+.post-image-caption {
+    margin-top: 5px;
+    text-align: center;
+    color: #888;
+    font-size: 0.85rem;
+    display: block;
+}
+
+#clipboardbtn {
+    cursor: pointer;
+}
+
+#beautiful p {
+    box-sizing: border-box;
+    margin-bottom: 16px;
+    font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
+    font-size: 15px;
+    text-align: justify;
+    white-space: normal;
+    text-size-adjust: auto;
+    line-height: 1.75em;
+}
+#bing-bg {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    filter: blur(10px);
+    object-fit: cover;
+  }
+</style>
+    <style type="text/css" id="markdown">@charset "utf-8";
+
+.post-md
+{
+    width: 100%;
+    letter-spacing: 0;
+}
+
+.post-md h1,
+.post-md h2,
+.post-md h3,
+.post-md h4,
+.post-md h5,
+.post-md h6
+{
+    color: var(--font-color-1);
+}
+/* 一级标题 */
+.post-md h1  {
+    display:block;
+    border-bottom: 4px solid rgb(33, 33, 34);
+    font-size: 1rem;
+}
+  
+/* 一级标题内容 */
+.post-md h1  .content {
+    display: flex;
+    color: rgb(33, 33, 34);
+    font-size: 1rem;
+}
+  
+  
+/* 一级标题后缀 */
+.post-md h1  .suffix {
+    display: flex;
+    box-sizing: border-box;
+    width: 20px;
+    height: 10px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    background: RGBA(33, 33, 34, .5);
+    color: rgb(255, 255, 255);
+    font-size: 16px;
+    letter-spacing: 0.544px;
+    justify-content: flex-end;
+    box-sizing: border-box !important;
+    overflow-wrap: break-word !important;
+    float: right;
+    margin-top: -10px;
+}
+
+/* 二级标题 */
+.post-md h2 {
+    margin: 10px auto;
+    height: 40px;
+    background-color: rgb(251, 251, 251);
+    border-bottom: 1px solid rgb(246, 246, 246);
+    box-sizing: border-box;
+    font-size: 1rem;
+}
+
+/* 二级标题内容 */
+.post-md h2 .content {
+    margin-left: -10px;
+    display: inline-block;
+    width: auto;
+    height: 40px;
+    background-color: rgb(33, 33, 34);
+    border-bottom-right-radius:100px;
+    color: rgb(255, 255, 255);
+    padding-right: 30px;
+    padding-left: 20px;
+    font-size: 1rem;
+    line-height: 40px;
+}
+
+/* 三级标题 */
+.post-md h3 {
+    margin: 20px auto 5px;
+    border-top: 1px solid rgb(221, 221, 221);
+    box-sizing: border-box;
+    font-size: 1rem;
+}
+  
+/* 三级标题内容 */
+.post-md h3 .content {
+    margin-top: -1px;
+    padding-top: 6px;
+    padding-right: 5px;
+    padding-left: 5px;
+    font-size: 1rem;
+    border-top: 2px solid rgb(33, 33, 34);
+    display: inline-block;
+    line-height: 1.1;
+}
+.post-md h4
+{
+    font-size: 1rem;
+    line-height: 1.2;
+    padding: 16px 0;
+}
+.post-md h5
+{
+    font-size: 0.83rem;
+    line-height: 1.2;
+    padding: 14px 0;
+}
+.post-md h6
+{
+    font-size: 0.67rem;
+    line-height: 1.2;
+    padding: 12px 0;
+}
+.post-md a
+{
+    color: var(--font-color-2);
+    box-shadow: 0 2px 0 var(--line-1);
+    transition: color ease-in-out .65s, box-shadow ease-in-out .65s;
+}
+.post-md a:hover
+{
+    color: var(--font-color-0);
+    box-shadow: 0 2px 0 var(--font-color-0);
+    transition: color ease-in-out .65s, box-shadow ease-in-out .65s;
+}
+.post-md strong
+{
+    font-weight: 700;
+}
+.post-md em
+{
+    font-style: italic;
+}
+.post-md kbd
+{
+    padding: 2px 4px;
+    border-radius: 2px;
+    background: #eee;
+    border: 1px solid #ddd;
+}
+.post-md ol
+{
+    list-style: decimal;
+    padding-left: 24px;
+}
+.post-md ul
+{
+    list-style: disc;
+    padding-left: 24px;
+}
+.post-md img
+{
+    border-radius: 4px;
+}
+.post-md hr
+{
+    border: none;
+    height: 1px;
+    background: var(--line-1);
+    margin: 24px 0;
+}
+
+.post-md p,
+.post-md blockquote
+{
+    width: 100%;
+    margin: 12px 0;
+}
+.post-md blockquote
+{
+    border-left: 2px solid var(--line-2);
+    padding-left: 12px;
+    word-wrap: break-word;
+}
+
+.post-md .video-container
+{
+    background: #000;
+    border-radius: 4px;
+    overflow: hidden;
+}
+.post-md iframe,
+.post-md .video-container iframe
+{
+    width: 100%;
+    height: 100vh;
+    max-height: 360px;
+    margin: 12px 0;
+}
+
+.post-md>table
+{
+    width: 100%;
+    text-align: left;
+    border-spacing: 0;
+}
+.post-md>table th
+{
+    padding: 12px 0;
+    border-bottom: 2px solid var(--line-1);
+}
+.post-md>table tr:nth-child(odd) td
+{
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line-1);
+    background: #fafafa;
+}
+.post-md>table tr:nth-child(even) td
+{
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line-1);
+    background: #fff;
+}
+
+.post-md p code
+{
+    border-radius: 4px;
+    background:rgba(27,31,35,.05);
+    padding: 2px 4px;
+    color: rgb(0, 112, 96);
+    font-size: 1rem;
+    margin-left: 1px;
+    margin-right: 1px;
+}
+
+.post-md .hljs-ln-numbers
+{
+    opacity: .5;
+    padding-right: 12px;
+}
+</style>
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body>
+        <img id="bing-bg" src="" referrerpolicy="no-referrer" />
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="post-header">
+    <p class="post-title">解密 Java Class 文件不为人知的秘密</p>
+</div>
+                
+                <div class="post-main">
+
+    
+        <div class="post-meta">
+            <a class='author' href="/">罗昭成</a> <span id="clipboardbtn">2023年05月23日</span>
+        </div>
+        <div class="post-md" id="copy-post-content">
+        <section id="beautiful">
+            <p>Java 诞生多年，因此在网络上，有关 Java Class 文件格式解析的文章有很多，但他们大多数都是在列举《Java 虚拟机》中定义的格式，通读下来，好像所有的东西都讲清楚了，但是我个人好像并没有看懂，不知道定义的这些东西到底是用来存储什么东西的。本文仍然是在讲《Java 虚拟机》中定义的 Class 文件的格式，但会更多的从一个应用开发者的角度，将字节码文件中定义的字段与原始的 Java 代码信息进行一些关联，让应用开发者能够更好的理解其中的内容。当然，文中也存在部分知识点，不太常用或者我也没有了解清楚的，可能会一笔带过。当然，作为经久不衰的 Java ，其强大之处远不是一篇文章能讲清楚的，文中肯定会有疏漏的地方，如果你对其内容感兴趣，可以有针对性的进行深入研究。当然，本文内容近 1.6 万字，也很枯燥，建议大体浏览一遍即可，无需太过深究，如以后遇到相关问题后，在回来查阅即可。 下面为本文正文内容：</p>
+<p>Java 诞生快 20 年，能够一直保持良好的兼容性，其 Class 文件结构的稳定性起到了很重要的作用。在我们现在使用的 Class 文件中，其结构定义绝大部分都是在 1997 年发布的第一版 《Java 虚拟机规范》中就已经定义好了。虽然定义的时间距今已经 20 多年过去， Java 发展经历十多个大版本的迭代 以及无数字小的更新，最开始定义好的各项细节几乎没有出现任何改变。</p>
+<p>Class 文件是一组以 8 个比特位为基础的二进制流，各个数据项都是按照固定的顺序紧密的排列在一起。先来看下一整体结构，以及每一个字段的长度信息如下：</p>
+<p><img src="https://img-blog.csdnimg.cn/d79ecce9d3c541a2a9b6c7b1c57f539c.png" alt="Class 文件格式" referrerpolicy="no-referrer"><figcaption class="post-image-caption">Class 文件格式</figcaption></figure></p>
+<h2><span class="prefix"></span><span class="content">一、Magic Number 魔数</span><span class="suffix"></span></h2><p>魔数， 如魔法一样神奇的数字。当我们写代码时，都建议不要使用魔数，因为它在你刚写完代码的时候只有“你和上帝”知道是什么意思，但过一段时间后，就只有“上帝”知道了。而为了区分文件格式，在文件内容的开头，都会使用一些魔数，用于标记和识别文件。如常见的 JPEG 的格式，文件头为 <code>FFD8FF</code>。在 Java 的字节码文件中，其魔数为 <code>CAFEBABE</code>，它是一个4字节的标识符，用于表明该文件是一个 Java 字节码文件。Java 虚拟机可以通过魔数来判断该文件是否为一个有效的 Java 字节码文件，如果不是，则无法被正确加载并执行。</p>
+<p>而关于 <code>CAFEBABE</code> 这个魔数的起源，还有一些小故事，Java 创始人 James Gosling 曾透露：</p>
+<blockquote>
+<p>我们以前经常去一个叫 <code>St Michael&#39;s Alley</code> 餐厅吃饭， 当地传说，美国著名的摇滚乐队 <code>Grateful Dead</code> 在其大火之前，曾在这里面演出过，可以说这家餐厅就是 <code>Grateful Dead</code> 的起源之地。在 <code>Jerry</code> 去世后，他们甚至为建立了一个小型神龛用于纪念。当我们在次来到这家餐厅的时候，发现它已经被改名为 <code>Cafe Dead</code> 。 我注意到这个名字是 16 进制字符串，而那时我正需要用一对魔数去表示 <code>Class</code> 文件和 <code>Object</code> 文件。最终我使用 <code>CAFEBDEAD</code> 表示了 <code>Object</code> 文件，与之对应，<code>Class</code> 文件头我以 <code>CAFE</code> 开始，去查找另外 4 个 16 进制字符，并在不经意间发现了<code>BABE</code>，于是我决定使用它们， 因此 <code>CAFEBABE</code> 成为了 <code>Class</code> 文件的文件格式。</p>
+<p>—— 来源：维基百科 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Java_class_file">https://en.wikipedia.org/wiki/Java_class_file</a></p>
+</blockquote>
+<h2><span class="prefix"></span><span class="content">二、版本号</span><span class="suffix"></span></h2><p>在 Class 文件中，版本号分为主版本号和次版本号，第 5、6 两位是次版本号，第 7 和第 8 两位是主版本号。主版本号是从 45 开始的，从 JDK 1.1 之后的每一个 JDK 大版本发布，主版本号都会加 1 。</p>
+<blockquote>
+<p>PS： 在 JDK 最早期的版本中，JDK 1.0 ~ 1.1 使用了 45.0 ~ 45.3 的版本号</p>
+</blockquote>
+<p>关于次版本号，曾经在 Java 1.2 之前曾被短暂使用过，但从 Java 1.2 后到 Java 12 之前，次版本号均未使用，全部固定为 0 。而到了 Java 12 后，由于JDK提供的功能集已经非常庞大，有一些复杂的新特性需要以“公测”的形式放出，因此设计者重新启用了副版本号，将它用于标识“技术预览版”功能特性的支持。如果 Class 文件中使用了该版本 JDK 尚未列入正式特性清单中的预览功能，则必须把次版本号标识为 65535，以便Java虚拟机在加载类文件时能够区分出来。</p>
+<h2><span class="prefix"></span><span class="content">三、常量池</span><span class="suffix"></span></h2><p>顾名思义，常量池是用来放常量的，但这个常量与我们在 Java 代码中的常量一样吗？这个常量到底包含有哪些信息呢？</p>
+<p>在 Class 文件中的常量池里，主要存放两大类常量：字面量（Literal）和符号引用（Symbolic References）。字面量比较接近于Java语言层面的常量概念，如文本字符串、被声明为 <code>final</code> 的常量值等。而符号引用是属于编译原理方面的概念，主要有 <code>类和接口的全限定名</code>、<code>字段的名称和描述符</code>、<code>方法的名称和描述符</code> 等，到目前为止，JDK 中共定义了 17 种不同类型的常量，如下表所示：</p>
+<table>
+<thead>
+<tr>
+<th>常量类型</th>
+<th>Tag</th>
+<th>Class 文件版本号</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CONSTANT_Utf8_info</td>
+<td>1</td>
+<td>45.3</td>
+</tr>
+<tr>
+<td>CONSTANT_Integer_info</td>
+<td>3</td>
+<td>45.3</td>
+</tr>
+<tr>
+<td>CONSTANT_Float_info</td>
+<td>4</td>
+<td>45.3</td>
+</tr>
+<tr>
+<td>CONSTANT_Long_info</td>
+<td>5</td>
+<td>45.3</td>
+</tr>
+<tr>
+<td>CONSTANT_Double_info</td>
+<td>6</td>
+<td>45.3</td>
+</tr>
+<tr>
+<td>CONSTANT_Class_info</td>
+<td>7</td>
+<td>45.3</td>
+</tr>
+<tr>
+<td>CONSTANT_String_info</td>
+<td>8</td>
+<td>45.3</td>
+</tr>
+<tr>
+<td>CONSTANT_Fieldref_info</td>
+<td>9</td>
+<td>45.3</td>
+</tr>
+<tr>
+<td>CONSTANT_Methodref_info</td>
+<td>10</td>
+<td>45.3</td>
+</tr>
+<tr>
+<td>CONSTANT_InterfaceMethodref_info</td>
+<td>11</td>
+<td>45.3</td>
+</tr>
+<tr>
+<td>CONSTANT_NameAndType_info</td>
+<td>12</td>
+<td>45.3</td>
+</tr>
+<tr>
+<td>CONSTANT_MethodHandle_info</td>
+<td>15</td>
+<td>51.0</td>
+</tr>
+<tr>
+<td>CONSTANT_MethodType_info</td>
+<td>16</td>
+<td>51.0</td>
+</tr>
+<tr>
+<td>CONSTANT_Dynamic_info</td>
+<td>17</td>
+<td>55.0</td>
+</tr>
+<tr>
+<td>CONSTANT_InvokeDynamic_info</td>
+<td>18</td>
+<td>51.0</td>
+</tr>
+<tr>
+<td>CONSTANT_Module_info</td>
+<td>19</td>
+<td>53.0</td>
+</tr>
+<tr>
+<td>CONSTANT_Package_info</td>
+<td>20</td>
+<td>53.0</td>
+</tr>
+</tbody></table>
+<p>为了更好的理解字面量、符号引用，以及他们与 Java 代码的关系，我写以下的一段测试代码，来看看 Java 中哪些数据会被放在 Class 文件的常量池中：</p>
+<pre><code class="java">package com.example;
+class ClassFormat &#123;
+    public final int finalVerbose = 1;
+    public int verbose = 100;
+    public int verboseV2 = 32768;
+    public double doubleVerbose = 1;
+    public double doubleVerboseV2 = 1.1;
+    public float floatVerbose = 1f;
+    public float floatVerboseV2 = 1.00001f;	
+    public long longVerbose = 1L;
+    public long longVerboseV2 = 2L;
+    public char charVerbose = &#39;Z&#39;;
+    public String strVerbose = &quot;This is a string.&quot;;
+    public void testMethod() &#123;
+    &#125;
+&#125;
+</code></pre>
+<p>在这段代码中，我们使用了常见的基本数据类型，它们都有各自的初始化值。在执行 Javac 进行编译的过程中，会将代码中的一些值放入常量区，而一另外一些不会。先说结论，上面示例中的代码中，<code>finalVerbose</code>、<code>strVerbose</code> 和以 <code>V2</code> 结尾的变量的初始值都会写入常量池。</p>
+<p><img src="https://img-blog.csdnimg.cn/66c503414a1d4cd2a175c19510defe22.png" alt="基本数据类型中写入到常量池中的变量" referrerpolicy="no-referrer"><figcaption class="post-image-caption">基本数据类型中写入到常量池中的变量</figcaption></figure></p>
+<p>编译后，使用  <code>javap -v ClassFormat</code> 查看常量池，具体内容如上图所示，图中圈出来的是我们在 Java 代码中定义的值，这些需要放在常量池满足以下条件：</p>
+<ul>
+<li>定义变量时，有 final 修饰的值，如   <code>public final int finalVerbose = 1</code>，此时数字 <code>1</code> 就会放到常量池中。</li>
+<li>int 型的值范围在 <code>-32768</code> 到 <code>32767</code> 之间的数是不会放入常量池，即两个字节可以表示的整形数字不会放进去，其它都会放进去。</li>
+<li>long &#x2F;  float &#x2F; double 中除了 <code>0</code>  和 <code>1</code> 以外的其它值都会放出常量池。</li>
+<li>String 中定义的字符串都会放入常量池。</li>
+</ul>
+<p>上面这些放入常量池中的字段，是与代码中写的 <code>值</code> 直接相关。除了这些，常量池中还会保存很多符号引用，在上图中还可以看到如下信息：</p>
+<pre><code> #1 = Methodref          #2.#3          // java/lang/Object.&quot;&lt;init&gt;&quot;:()V
+ #2 = Class              #4             // java/lang/Object
+ #3 = NameAndType        #5:#6          // &quot;&lt;init&gt;&quot;:()V
+ #5 = Utf8               &lt;init&gt;
+ #6 = Utf8               ()V
+ #8 = Class              #10            // ClassFormat
+#10 = Utf8               ClassFormat
+#12 = Utf8               I 
+#17 = Fieldref           #8.#18         // ClassFormat.verboseV2:I
+#18 = NameAndType        #19:#12        // verboseV2:I
+#19 = Utf8               verboseV2
+</code></pre>
+<p>其中 <code>#1</code> 表示常量池中的第一个常量，此处为一个 <code>Methodref</code> ， 即一个方法的引用，根据 《Java虚拟机规范》中的描述，他有两个字段，分别指向此方法所属的类，和方法的名称和类型描述，此例中为 <code>java.lang.Object</code> 的 <code>&lt;init&gt;()</code> 方法，按其结构绘制图如下：</p>
+<p><img src="https://img-blog.csdnimg.cn/7f248f41b0a34e76b771162fbe39bb46.png" alt="Objct 的 &lt;init&gt; 方法引用" referrerpolicy="no-referrer"><figcaption class="post-image-caption">Objct 的 &lt;init&gt; 方法引用</figcaption></figure></p>
+<p>需要注意的是，我们在类中定义的方法，只有在被调用时，才会生成 <code>Methodref</code> 引用。用于表示方法引用的还有一个常量类型： <code>InterfaceMethodref</code>，此常量用来标记为接口的方法，例如下面代码中的 <code>commonMethod</code> 的调用：</p>
+<pre><code class="java">public interface CommonInterface &#123;
+    public void commonMethod();
+&#125;
+
+public class CommonImplementation implements CommonInterface&#123;
+    @Override
+    public void commonMethod() &#123;
+    &#125;
+&#125;
+
+class ClassFormat &#123;
+    CommonInterface common = new CommonImplementation();
+    public void testMethod() &#123;
+        common.commonMethod();
+    &#125;
+&#125;
+</code></pre>
+<p>编译后，便会生成一个 <code>InterfaceMethodref</code>，其结构与 <code>Methodref</code> 一致，其指向的类名为 <code>CommonInterface</code>。</p>
+<p>与方法对应的便是我们常用的变量，与之不同的是，在代码中定义的类变量以及属性变量，都会生成一个 <code>Fieldref</code> 属性，其结构与 <code>Methodref</code> 一致，此例中的 <code>#17</code> 便是代码中的 <code>public int verboseV2 = 32768;</code>。按其结构绘制图如下：</p>
+<p><img src="https://img-blog.csdnimg.cn/d5b804750e1d4322ac4f9fc52aaf817b.png" alt="Fieldref 结构图" referrerpolicy="no-referrer"><figcaption class="post-image-caption">Fieldref 结构图</figcaption></figure></p>
+<p>上述常量池中信息除了上述两个字段以外，还有 <code>Class</code>、<code>Utf8</code> 以及 <code>NameAndType</code>， 它们分别用来表示类常量、<code>Utf8</code> 常量以及描述方法&#x2F;字段名称和类型的常量。</p>
+<p><code>Utf8</code> 常量应该是常量池中使用最多的字段，在代码中定义的 <code>变量名</code>、<code>方法名</code> 都会以该常量的形式将名称存储在常量池中，当在进行 <code>javac</code> 编译时，可添加参数 <code>-g:vars</code>让方法参数名称、局部变量名称也存储在常量池中。</p>
+<p>内容到这儿，在 Java 1.2 中定义的 11 个基本常量类型已经完全涉及到了。在后续的 JDK 版本中，随着功能升级，也新增了其它常量。</p>
+<p>在 JDK 7 中，添加了  <code>InvokeDynamic</code> 指令，随之添加了三个常量：<code>CONSTANT_MethodHandle_info</code>、<code>CONSTANT_MethodType_info</code> 和 <code>CONSTANT_InvokeDynamic_info</code>。而我们使用的 Java 代码，在  Java SE 1.8 及以上代码才被使用到，其中我们常用的 <code>lambda</code> 就是基于这几条指令实现的，例如下面的代码：</p>
+<pre><code class="java">public class LambdaExample &#123;
+    public void print() &#123;
+        TestLambdaInterface ii = (i, b) -&gt; i++;
+        ii.print(10, &quot;&quot;);
+    &#125;
+&#125;
+interface TestLambdaInterface &#123;
+    void print(int i, String b);
+&#125;
+</code></pre>
+<p>根据这几个常量的结构，可以生成如下关联关系图：</p>
+<p><img src="https://img-blog.csdnimg.cn/21bd26f1d79e4bea9366a042bc3c1c89.png" alt="InvokeDynamic 相关常量结构" referrerpolicy="no-referrer"><figcaption class="post-image-caption">InvokeDynamic 相关常量结构</figcaption></figure></p>
+<p>上述代码，在 JVM 中进行执行时，首先会找到常量池中 <code>#7</code> 的常量，通过它指向的 <code>bootstrapMethod</code> ，JVM 会调用这个引导方法，并将参数值传递给引导方法。从而获得一个 CallSite 对象，此对象中包含被真实执行的方法句柄，最终调用到真实的方法。动态调用方法在 Groovy 中使用比较多，有兴趣可使用 Groovy 进行深度研究。此处是用于动态方法调用，与之对应还有动动变量，在 JDK 11 的版本中，添加了 <code>CONSTANT_Dynamic_info</code>，用于实现动态变量的逻辑，但对于 Java 语言， 暂未找到使用此指令实现的逻辑。</p>
+<p>在 Java 9 中引入了模块系统，用来组织和管理代码，从而使得应用程序更加安全、可维护和高效。这两个常量分别为 <code>CONSTANT_Module_info</code> 和  <code>CONSTANT_Package_info</code>，分别用来存储模块信息与包信息，并且他们仅能用于 <code>module-info.java</code> 中。先来看以下代码：</p>
+<pre><code class="java">// module-info.java
+module JavaClassFileStructure &#123;
+    requires java.base;
+    requires java.desktop;
+    exports com.example.clazz;
+&#125;
+</code></pre>
+<p>此段代码，编译后会生成 <code>CONSTANT_Module_info</code> 以及 <code>CONSTANT_Package_info</code>，分别用来记录模块信息</p>
+<p><code>JavaClassFileStructure</code>、<code>java.base</code>、<code>java.desktop</code> 和包信息 <code>com/example/clazz</code> 。</p>
+<p>以上是现在已有的 17 种常量类型，这里面的这些常量类型，有一部分是原子的，比如 <code>CONSTANT_Utf8_info</code>、<code>CONSTANT_Integer_info</code>，但还有部分，是通过 <code>_index</code> 对象指向其它常量， 如 <code>CONSTANT_Class_info</code> 、<code>CONSTANT_Fieldref_info</code>，在《Java虚拟机规范》中，各常量定义的结构如下：</p>
+<table>
+<thead>
+<tr>
+<th>常量类型</th>
+<th align="center">Tag</th>
+<th>字段</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CONSTANT_Utf8_info</td>
+<td align="center">1</td>
+<td>tag:u1<br/>length:u2<br/>bytes:u1[length]</td>
+</tr>
+<tr>
+<td>CONSTANT_Integer_info</td>
+<td align="center">3</td>
+<td>tag:u1<br/>bytes:u4</td>
+</tr>
+<tr>
+<td>CONSTANT_Float_info</td>
+<td align="center">4</td>
+<td>tag:u1<br/>bytes:u4</td>
+</tr>
+<tr>
+<td>CONSTANT_Long_info</td>
+<td align="center">5</td>
+<td>tag:u1<br/>high_bytes:u4<br/>low_bytes:u4</td>
+</tr>
+<tr>
+<td>CONSTANT_Double_info</td>
+<td align="center">6</td>
+<td>tag:u1<br/>high_bytes:u4<br/>low_bytes:u4</td>
+</tr>
+<tr>
+<td>CONSTANT_Class_info</td>
+<td align="center">7</td>
+<td>tag:u1<br/>name_index:u2</td>
+</tr>
+<tr>
+<td>CONSTANT_String_info</td>
+<td align="center">8</td>
+<td>tag:u1<br/>string_index:u2</td>
+</tr>
+<tr>
+<td>CONSTANT_Fieldref_info</td>
+<td align="center">9</td>
+<td>tag:u1<br/>class_index:u2<br/>name_and_type_index:u2</td>
+</tr>
+<tr>
+<td>CONSTANT_Methodref_info</td>
+<td align="center">10</td>
+<td>tag:u1<br/>class_index:u2<br/>name_and_type_index:u2</td>
+</tr>
+<tr>
+<td>CONSTANT_InterfaceMethodref_info</td>
+<td align="center">11</td>
+<td>tag:u1<br/>class_index:u2<br/>name_and_type_index:u2</td>
+</tr>
+<tr>
+<td>CONSTANT_NameAndType_info</td>
+<td align="center">12</td>
+<td>tag:u1<br/>name_index:u2<br/>descriptor_index:u2</td>
+</tr>
+<tr>
+<td>CONSTANT_MethodHandle_info</td>
+<td align="center">15</td>
+<td>tag:u1<br/>reference_kind:u1<br/>reference_index:u2</td>
+</tr>
+<tr>
+<td>CONSTANT_MethodType_info</td>
+<td align="center">16</td>
+<td>tag:u1<br/>descriptor_index:u2</td>
+</tr>
+<tr>
+<td>CONSTANT_Dynamic_info</td>
+<td align="center">17</td>
+<td>tag:u1<br/>bootstrap_method_attr_index:u2<br/>name_and_type_index:u2</td>
+</tr>
+<tr>
+<td>CONSTANT_InvokeDynamic_info</td>
+<td align="center">18</td>
+<td>tag:u1<br/>bootstrap_method_attr_index:u2<br/>name_and_type_index:u2</td>
+</tr>
+<tr>
+<td>CONSTANT_Module_info</td>
+<td align="center">19</td>
+<td>tag:u1<br/>name_index:u2</td>
+</tr>
+<tr>
+<td>CONSTANT_Package_info</td>
+<td align="center">20</td>
+<td>tag:u1<br/>name_index:u2</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>传送门， 常量池结构: <a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/specs/jvms/se14/html/jvms-4.html#jvms-4.4">https://docs.oracle.com/javase/specs/jvms/se14/html/jvms-4.html#jvms-4.4</a></p>
+</blockquote>
+<p>看到这里，在 Class 文件中定义的常量结构，基本上都了解清楚了。在回到上一层的结构：</p>
+<p><img src="https://img-blog.csdnimg.cn/d24d1a41b28840e1817046603b929c0c.png" alt="常量池在 Class 文件中的格式" referrerpolicy="no-referrer"><figcaption class="post-image-caption">常量池在 Class 文件中的格式</figcaption></figure></p>
+<p>常量池是一个表类型的数据项目，常量池中常量的数量也是不固定的，因此在常量池的入口是一个 2 字节数据，代表常量池中常量的数量。在这里需要注意的是，常量的索引是从 index 为 1 开始的。因此，常量池中的常量个数加 1 后为 <code>constant_pool_count</code>。</p>
+<blockquote>
+<p>注：在 Class 文件格式规范制定之时，设计者将第 0 项常量空出来是有特殊考虑的，这样做的目的在于，如果后面某些指向常量池的索引值的数据在<strong>特定情况下</strong>需要表达”不引用任何一个常量池项目”的含义，可以把索引值设置为 0 来表示。</p>
+</blockquote>
+<h2><span class="prefix"></span><span class="content">四、访问标志</span><span class="suffix"></span></h2><p>在常量池后，紧接着两个字节是用来标识类的访问标识（access_flags），表示这个类的可访问性，如常见的 <code>public</code> 、<code>final</code> 等信息，具体标识位的值及其含义如下：</p>
+<table>
+<thead>
+<tr>
+<th>标志名称</th>
+<th>值</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ACC_PUBLIC</td>
+<td>0x0001</td>
+<td>声明为公共的；可以从包外访问。</td>
+</tr>
+<tr>
+<td>ACC_FINAL</td>
+<td>0x0010</td>
+<td>声明为最终的；不允许有子类。</td>
+</tr>
+<tr>
+<td>ACC_SUPER</td>
+<td>0x0020</td>
+<td>当通过 invokespecial 指令调用超类方法时，对其进行特殊处理。</td>
+</tr>
+<tr>
+<td>ACC_INTERFACE</td>
+<td>0x0200</td>
+<td>是一个接口，而非类。</td>
+</tr>
+<tr>
+<td>ACC_ABSTRACT</td>
+<td>0x0400</td>
+<td>声明为抽象的；不能被实例化。</td>
+</tr>
+<tr>
+<td>ACC_SYNTHETIC</td>
+<td>0x1000</td>
+<td>声明为生成的；在源代码中不存在。</td>
+</tr>
+<tr>
+<td>ACC_ANNOTATION</td>
+<td>0x2000</td>
+<td>声明为注解接口。</td>
+</tr>
+<tr>
+<td>ACC_ENUM</td>
+<td>0x4000</td>
+<td>声明为枚举类。</td>
+</tr>
+<tr>
+<td>ACC_MODULE</td>
+<td>0x8000</td>
+<td>是一个模块，而非类或接口。</td>
+</tr>
+</tbody></table>
+<p>这些访问标志中， 其中一些字段与 Java 代码中的关键字一致，根据其名字就知道其在什么场景会出现，我在这儿就不做过多介绍。下面来看一下，两个没有出现在平时的代码中的两个关键字：</p>
+<p>第一个为 <code>ACC_SYNTHETIC</code>，此字段就是用来标记此类是编译器生成的，没有与之对应的源代码码。</p>
+<p>第二个为 <code>ACC_SUPER</code>，它用于解决调用 <code>super</code> 方法时的问题。 在 JDK 1.1 之前， 编译出来的 Class 文件是不包含 <code>ACC_SUPER</code> 字段的，并且 <code>invokespecial</code> 指令在那时的功能与现在不一致。从 JDK 1.1 开始，编译产生的 Class 文件始终都会添加 <code>ACC_SUPPER</code>，在 《Java虚拟机规范》中描述，  Java SE 8 及以上版本中，Java 虚拟机认为在每个类文件中都设置了 ACC_SUPER 标志，无论该标志在类文件中的实际值和类文件版本如何。</p>
+<h2><span class="prefix"></span><span class="content">五、 类索引、父类索引、接口索引列表</span><span class="suffix"></span></h2><p>在 Class 结构中，会分别有两个字节来表示当前类索引（this_class） 和父类索引（super_class），这两个字节分别存储的两个指向常量值的索引。除此之外，Java 中继承的接口可以是多个，因此在 Class 文件中定义了一个与常量池类似的表结构，用于存储所有的接口，需要注意的是， 它的索引是从 0 开始，即 <code>interfaces_count</code> 的值与 <code>interfaces[]</code> 数据中元素个数一致。表结构中存储的每一个接口的信息与 <code>this_class</code> 一样，也是用两个字节来存储指向常量池的索引。比如代码</p>
+<pre><code class="java">public class ClassFormat implements Serializable, Cloneable &#123;
+&#125;
+</code></pre>
+<p>中的结构如下图所示： </p>
+<p><img src="https://img-blog.csdnimg.cn/75a87b2bb74c41a98be376cefbfc00e5.png" alt="this、super、interface 的引用" referrerpolicy="no-referrer"><figcaption class="post-image-caption">this、super、interface 的引用</figcaption></figure></p>
+<h2><span class="prefix"></span><span class="content">六、字段集合</span><span class="suffix"></span></h2><p>在使用 Java 语言编写代码时，变量有三种，一种是类级别变量，如 <code>public static int staticVerbose = 1;</code> ，第二种是实例变量，如 <code>public int verbose = 2;</code> ，还有一个是局部变量，如定义在方法代码块中的变量。前两种变量从 Class 文件的角度来看，他们并没有太大的区别 ，变量编译后，编译后都会放到字段集合中进行存储。而局部变量不会放到字段集合中去。与常量池类似，字段集合也是一个表结构，下图为字段的结构表：</p>
+<p><img src="https://img-blog.csdnimg.cn/5261b1f8777344f3add6e1972dccd4b1.png" alt="字段结构" referrerpolicy="no-referrer"><figcaption class="post-image-caption">字段结构</figcaption></figure></p>
+<p>从图中可以看到，每一个字段信息中包含有 5 个字段，属性是一个嵌套的表结构。从上到下，第一个是 <code>access_flags</code>，里面存储着字段修饰符，它与类中的 <code>access_flags</code> 值是非常类似的，都是使用两个字节的数据类型，但他们之间值范围有略微的差别，字段可以设置的标志位和含义如下所示：</p>
+<table>
+<thead>
+<tr>
+<th>Flag名称</th>
+<th>值</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ACC_PUBLIC</td>
+<td>0x0001</td>
+<td>声明为公共的；可以从其它包外部访问。</td>
+</tr>
+<tr>
+<td>ACC_PRIVATE</td>
+<td>0x0002</td>
+<td>声明为私有的；只能在定义该类和属于同一个nest（§5.4.4）的其他类中访问。</td>
+</tr>
+<tr>
+<td>ACC_PROTECTED</td>
+<td>0x0004</td>
+<td>声明为受保护的；可以在子类中访问。</td>
+</tr>
+<tr>
+<td>ACC_STATIC</td>
+<td>0x0008</td>
+<td>声明为静态的。</td>
+</tr>
+<tr>
+<td>ACC_FINAL</td>
+<td>0x0010</td>
+<td>声明为final；在对象构造之后不会被直接赋值（JLS §17.5）。</td>
+</tr>
+<tr>
+<td>ACC_VOLATILE</td>
+<td>0x0040</td>
+<td>声明为volatile；不能被缓存。</td>
+</tr>
+<tr>
+<td>ACC_TRANSIENT</td>
+<td>0x0080</td>
+<td>声明为transient；不会被持久化对象管理器写入或读取。</td>
+</tr>
+<tr>
+<td>ACC_SYNTHETIC</td>
+<td>0x1000</td>
+<td>声明为synthetic；不在源代码中存在，编译时生成，如内部类中持有的外部类引用变量</td>
+</tr>
+<tr>
+<td>ACC_ENUM</td>
+<td>0x4000</td>
+<td>声明为枚举的元素。</td>
+</tr>
+</tbody></table>
+<p>关于这几个标志位中，基本都能根据名称知道其含义。在 Class 文件中的访问标识符里面，我没有找到 <code>ACC_SYNTHETIC</code> 修饰的 Class 示例，但字段中还是可以举个例子。在写代码时，应该都使用过匿名内部类，在匿名内部类中，编译器就会为我们生成一些字段 。举个例子：</p>
+<pre><code class="java">class ClassFormat &#123;
+    int verbose = 1;
+    public void testMethod() &#123;
+        TestInterface innerVerbose = new TestInterface() &#123;
+            @Override
+            public void testMethodV1() &#123;
+                System.out.println(verbose);
+            &#125;
+            @Override
+            public void testMethodV2() &#123;
+                verbose ++;
+            &#125;
+        &#125;;
+    &#125;
+&#125;
+</code></pre>
+<p>上述代码会生成一个内部类，名叫  <code>ClassFormat$1.class</code> 的文件，而编译器为了解决内部类能访问外部类的信息，实现相互访问，编译器会生成一个变量用于支持这种情况。针对这种情况，我们来看一下，其中生成的类结构信息，如下图所示：</p>
+<p><img src="https://img-blog.csdnimg.cn/76b4882b1ee441c794f365b996a626aa.png" alt="ACC_SYNTHETIC 示例" referrerpolicy="no-referrer"><figcaption class="post-image-caption">ACC_SYNTHETIC 示例</figcaption></figure></p>
+<p>从图中可以看到，在 <code>ClassFormat$1</code>  中有一个名叫 <code>this$0</code> 的字段，类型为 <code>com.example.clazz.format.ClassFormat</code> ， 此字段就是由编译器生成，因此其访问标识符中有 <code>ACC_SYNTHETIC</code> 。</p>
+<p>在访问标识符后面，紧接着的两个字段分别会 <code>name_index</code>、<code>descriptor_index</code> ，各占两个字节，它们将指向常量池中的字段，上例中，<code>name_index</code> 的值为 5 ，即指向了常量池中第五个常量，其类型为 Utf8 ，存储的值为 <code>this$0</code>，<code>descriptor_index</code> 的值为 6， 类型同样为 Utf8，存储的值为 <code>Lcom/example/clazz/format/classFormat;</code>。</p>
+<p>紧随其后的便是字段的属性表数据，属性表是一个非常复杂的结构，并且字段、方法、类都有对应的属性，此处先跳过属性的内容，后文中将进行统一梳理。</p>
+<h2><span class="prefix"></span><span class="content">七、方法表</span><span class="suffix"></span></h2><p>与字段表类似，整个方法字段的结构体与字段结构体一模一样，方法的结构体如下：</p>
+<p><img src="https://img-blog.csdnimg.cn/f6eecfad09914bbfa74ecece9afb71fe.png" alt="方法表结构体" referrerpolicy="no-referrer"><figcaption class="post-image-caption">方法表结构体</figcaption></figure></p>
+<p>虽然结构体中字段定义一样，但其值包含的内容与范围还是有一些区别的，先看 <code>access_flags</code> ，此字段依然是用来定义其访问修饰符的，包含信息如下：</p>
+<table>
+<thead>
+<tr>
+<th>Flag名称</th>
+<th>值</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ACC_PUBLIC</td>
+<td>0x0001</td>
+<td>声明为public，可以从包外访问。</td>
+</tr>
+<tr>
+<td>ACC_PRIVATE</td>
+<td>0x0002</td>
+<td>声明为private，只能在定义类和其他属于同一嵌套的类中访问。</td>
+</tr>
+<tr>
+<td>ACC_PROTECTED</td>
+<td>0x0004</td>
+<td>声明为protected，可以在子类中访问。</td>
+</tr>
+<tr>
+<td>ACC_STATIC</td>
+<td>0x0008</td>
+<td>声明为static。</td>
+</tr>
+<tr>
+<td>ACC_FINAL</td>
+<td>0x0010</td>
+<td>声明为final，不能被覆盖。</td>
+</tr>
+<tr>
+<td>ACC_SYNCHRONIZED</td>
+<td>0x0020</td>
+<td>声明为synchronized，方法调用将被封装在一个监视器使用中。</td>
+</tr>
+<tr>
+<td>ACC_BRIDGE</td>
+<td>0x0040</td>
+<td>桥接方法，由编译器生成。</td>
+</tr>
+<tr>
+<td>ACC_VARARGS</td>
+<td>0x0080</td>
+<td>声明具有可变数量的参数。</td>
+</tr>
+<tr>
+<td>ACC_NATIVE</td>
+<td>0x0100</td>
+<td>声明为native，实现使用的是Java编程语言之外的语言。</td>
+</tr>
+<tr>
+<td>ACC_ABSTRACT</td>
+<td>0x0400</td>
+<td>声明为abstract，没有提供实现。</td>
+</tr>
+<tr>
+<td>ACC_STRICT</td>
+<td>0x0800</td>
+<td>声明为strictfp，浮点模式为FP-strict。</td>
+</tr>
+<tr>
+<td>ACC_SYNTHETIC</td>
+<td>0x1000</td>
+<td>声明为synthetic，在源代码中不存在</td>
+</tr>
+</tbody></table>
+<p>这些修饰符大部分都是常见的，看其名就能知其意，其中 <code>ACC_BRIDGE</code> 以及 <code>ACC_SYNTHETIC</code> 是由编译器生成的，平时基本不会关注到。其中 ACC_BRIDGE  用于范型中，标识该方法为编译器自动生成的桥接方法，用于兼容范型，在这里，先来看一下泛型的示例代码：</p>
+<pre><code class="java">interface GenericInterface&lt;T&gt; &#123;
+    T testBridgeMethod();
+&#125;
+
+class ClassFormat implements GenericInterface&lt;String&gt; &#123;
+    @Override
+    public String testBridgeMethod() &#123;
+        return null;
+    &#125;
+&#125;
+</code></pre>
+<p>代码中，<code>testBridgeMethod</code> 返回的是一个泛型，在 ClassFormat 中使用的具体类型为 <code>String</code>，将此代码进行编译，编译后的产物  <code>ClassFormat.class</code> 文件中会生成一个 <code>bridge</code> 的方法，因此编译器会在此方法中加入 <code>ACC_BRIDGE</code> 和 <code>ACC_SYNTHETIC</code> 这两个方法修饰符。最终 <code>ClassFormat.class</code> 方法表结构如下所示：</p>
+<p><img src="https://img-blog.csdnimg.cn/d6182265993b42b898d945f23a249b08.png" alt="ACC_BRIDGE方法示例" referrerpolicy="no-referrer"><figcaption class="post-image-caption">ACC_BRIDGE方法示例</figcaption></figure></p>
+<p>从结构中可以看到，在 <code>ClassFormat.class</code> 文件中的方法表里面有两个方法，用 Java 代码表示如下所示：</p>
+<pre><code class="java">public String testBridgeMethod()&#123;
+    return null;
+&#125;
+public Object testBridgeMethod() &#123;
+  // 此方法即为编译器生成的代理方法
+  // 通过 invokevirtual 调用方法 testBridgeMethod:()Ljava/lang/String;
+    // invokevirtual #2     // Method testBridgeMethod:()Ljava/lang/String;
+&#125;
+</code></pre>
+<p>上述代码在 Java 中并不合法，Java 中的方法重载时需要方法名相同，却需要拥有一个与原方法不同的特征签名。在 Java 源代码中的特征签名只包含<strong>方法名称</strong>、<strong>参数顺序</strong>以及<strong>参数类型</strong>。而在 Class 文件中，字节码中的特征签名还包含<strong>方法返回值</strong>以及<strong>异常表</strong>，因此上述逻辑在 Class 文件中是合法的。</p>
+<p>另一个访问标志位 <code>ACC_STRICT</code> 也很少用到，在 java 中有一个关键字 <code>strictfp</code> 与之对应。在虚拟机执行时，浮点运算有两种运行模式：严格浮点模式和非严格浮点模式。当我们执行严格浮点运算时，在所有的Java虚拟机实现上运行结果都是精确相等的。需要注意的是，在 Java 17 及以后，此关键字已经不在使用了。</p>
+<p>在访问标识符后面，紧接着的四个字段信息<code>name_index</code>、<code>descriptor_index</code>、<code>attributes_count</code>、<code>attributes</code> 与字段表中的格式一致，在此处就不在赘述。 </p>
+<h2><span class="prefix"></span><span class="content">八、属性表</span><span class="suffix"></span></h2><p>属性表（attribute_info） 在 Class 文件中用于多处地方，在 Class 文件最末尾是属性表，在字段（field_info）和方法（method_info）里面也都包含属性表。与Class文件中其他的数据项要求严格的顺序、长度和内容不同，属性表中的限制稍微宽松一些，不再要求各个属性表具有严格顺序，并且《Java虚拟机规范》允许只要不与已有属性名重复，任何人实现的编译器都可以向属性表中写入自己定义的属性信息，Java虚拟机运行时会忽略掉它不认识的属性。先来看一下属性字段中定义的结构：</p>
+<p><img src="https://img-blog.csdnimg.cn/35f2e37352124c33a3effd928bfb41eb.png" alt="属性结构体" referrerpolicy="no-referrer"><figcaption class="post-image-caption">属性结构体</figcaption></figure></p>
+<p>到目前为止，一共定义了 30 个属性，信息如下：</p>
+<table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>版本号</th>
+<th>位置</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ConstantValue</td>
+<td>45.3</td>
+<td>字段属性中</td>
+<td>由 final 关键字定义的常量值</td>
+</tr>
+<tr>
+<td>Code</td>
+<td>45.3</td>
+<td>方法属性中</td>
+<td>Java 代码编译后的字节码指令</td>
+</tr>
+<tr>
+<td>StackMapTable</td>
+<td>50.0</td>
+<td>Code属性中</td>
+<td>JDK 6 中新增属性，用于类型检查器验证</td>
+</tr>
+<tr>
+<td>Exceptions</td>
+<td>45.3</td>
+<td>方法属性中</td>
+<td>方法抛出的异常列表</td>
+</tr>
+<tr>
+<td>InnerClasses</td>
+<td>45.3</td>
+<td>Class文件属性表结构</td>
+<td>内部类列表</td>
+</tr>
+<tr>
+<td>EnclosingMethod</td>
+<td>49.0</td>
+<td>Class文件属性表结构</td>
+<td>仅当类为局部类或者匿名内时才会有这个属性，用于标示这个类所在的外围方法</td>
+</tr>
+<tr>
+<td>Synthetic</td>
+<td>45.3</td>
+<td>Class文件属性表结构，字段属性中, 方法属性中</td>
+<td>表示方法、字段是由编译器生成</td>
+</tr>
+<tr>
+<td>Signature</td>
+<td>49.0</td>
+<td>字段属性中, 方法属性中</td>
+<td>JDK 5 中新增，用于支持泛型情况下的方法签名。</td>
+</tr>
+<tr>
+<td>SourceFile</td>
+<td>45.3</td>
+<td>Class文件属性表结构</td>
+<td>记录源文件名称</td>
+</tr>
+<tr>
+<td>SourceDebugExtension</td>
+<td>49.0</td>
+<td>Class文件属性表结构</td>
+<td>源调试信息扩展，如 JSP 文件行号</td>
+</tr>
+<tr>
+<td>LineNumberTable</td>
+<td>45.3</td>
+<td>Code属性中</td>
+<td>Java 源代码行号与字节码指令的对应关系</td>
+</tr>
+<tr>
+<td>LocalVariableTable</td>
+<td>45.3</td>
+<td>Code属性中</td>
+<td>方法局部变量表</td>
+</tr>
+<tr>
+<td>LocalVariableTypeTable</td>
+<td>49.0</td>
+<td>Code属性中</td>
+<td>局部变量类型表</td>
+</tr>
+<tr>
+<td>Deprecated</td>
+<td>45.3</td>
+<td>Class文件属性表结构，字段属性中, 方法属性中</td>
+<td>被申明为弃用的方法</td>
+</tr>
+<tr>
+<td>RuntimeVisibleAnnotations</td>
+<td>49.0</td>
+<td>Class文件属性表结构，字段属性中, 方法属性中</td>
+<td>运行时可见注释</td>
+</tr>
+<tr>
+<td>RuntimeInvisibleAnnotations</td>
+<td>49.0</td>
+<td>字段属性中, 方法属性中</td>
+<td>运行时不可见注释</td>
+</tr>
+<tr>
+<td>RuntimeVisibleParameterAnnotations</td>
+<td>49.0</td>
+<td>方法属性中</td>
+<td>运行时可见参数注释</td>
+</tr>
+<tr>
+<td>RuntimeInvisibleParameterAnnotations</td>
+<td>49.0</td>
+<td>方法属性中</td>
+<td>运行时不可见参数注释</td>
+</tr>
+<tr>
+<td>RuntimeVisibleTypeAnnotations</td>
+<td>52.0</td>
+<td>字段属性中, 方法属性中</td>
+<td>运行时可见类型注释</td>
+</tr>
+<tr>
+<td>RuntimeInvisibleTypeAnnotations</td>
+<td>52.0</td>
+<td>字段属性中, 方法属性中</td>
+<td>运行时不可见类型注释</td>
+</tr>
+<tr>
+<td>AnnotationDefault</td>
+<td>49.0</td>
+<td>方法属性中</td>
+<td>记录注解类元素默认值</td>
+</tr>
+<tr>
+<td>BootstrapMethods</td>
+<td>51.0</td>
+<td>Class文件属性表结构</td>
+<td>保存 invokedynamic 指令引用的引导方法限定符</td>
+</tr>
+<tr>
+<td>MethodParameters</td>
+<td>52.0</td>
+<td>方法属性中</td>
+<td>在 JDK 8 中增加，记录方法名称，可运行时获取 。</td>
+</tr>
+<tr>
+<td>Module</td>
+<td>53.0</td>
+<td>Class文件属性表结构</td>
+<td>记录一个 Module 的名称及相关信息</td>
+</tr>
+<tr>
+<td>ModulePackages</td>
+<td>53.0</td>
+<td>Class文件属性表结构</td>
+<td>记录模块中被 exports 或 opens 的包</td>
+</tr>
+<tr>
+<td>ModuleMainClass</td>
+<td>53.0</td>
+<td>Class文件属性表结构</td>
+<td>记录一个模块的主类</td>
+</tr>
+<tr>
+<td>NestHost</td>
+<td>55.0</td>
+<td>Class文件属性表结构</td>
+<td>用于支持嵌套类的反射和控制的 API ，内部类通过此属性得知自己的宿主类</td>
+</tr>
+<tr>
+<td>NestMembers</td>
+<td>55.0</td>
+<td>Class文件属性表结构</td>
+<td>用于支持嵌套类的反射和控制的 API ，宿主类通过此属性得知自己的内部类</td>
+</tr>
+<tr>
+<td>Record</td>
+<td>60.0</td>
+<td>Class文件属性表结构</td>
+<td>表示当前类是记录类，存储记录组件信息</td>
+</tr>
+<tr>
+<td>PermittedSubclasses</td>
+<td>61.0</td>
+<td>Class文件属性表结构</td>
+<td>属性记录了被授权直接扩展或实现当前类或接口的类和接口。</td>
+</tr>
+</tbody></table>
+<h3><span class="prefix"></span><span class="content">1. ConstantValue</span><span class="suffix"></span></h3><p>在 Class 文件中的字段里面，可能会包含 <code>ConstantValue</code> ，它是一个固定长度的属性值，其结构如下所示：</p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th>数据类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>attribute_name_index</td>
+<td>2 字节</td>
+<td>属性名常量索引</td>
+</tr>
+<tr>
+<td>attribute_length</td>
+<td>4 字节</td>
+<td>常量属性的长度， 此处固定为 <code>0x00000010</code></td>
+</tr>
+<tr>
+<td>constantvalue_index</td>
+<td>2 字节</td>
+<td>常量属性的值的索引</td>
+</tr>
+</tbody></table>
+<p>在  <code>ClassFormat</code> 中定义两个 final 的字段，代码如下：</p>
+<pre><code class="java">class ClassFormat &#123;
+    public final String CONSTANT_STRING = &quot;constant_string&quot;;
+    public static final String STATIC_CONSTANT_STRING = &quot;static_constant_string&quot;;
+&#125;
+</code></pre>
+<p>最终生成的字段信息中，会包含一个 <code>ConstantValue</code> 的属性，下图为 <code>STATIC_CONSTANT_STRING</code> 的关联关系图，可以更清晰的看清楚其关系：</p>
+<p><img src="https://img-blog.csdnimg.cn/af07f0bdf8ac4f9aa6ddd4e40a1ae7b0.png" alt="ConstantValue 关联关系" referrerpolicy="no-referrer"><figcaption class="post-image-caption">ConstantValue 关联关系</figcaption></figure></p>
+<p><code>ConstantValue</code> 的作用是通知虚拟机自动为静态变量赋值，对于非静态变量虚拟机会自动忽略此常量值。上例中的 <code>CONSTANT_STRING</code> 与 <code>STATIC_CONSTANT_STRING</code> 都包含有 <code>ConstantValue</code> 的属性，这是  Java 编译器做的事，但《Java虚拟机规范》中仅要求使用 ACC_STATIC 标志的 <code>STATIC_CONSTANT_STRING</code> 中的 <code>ConstantValue</code> 属性。</p>
+<h3><span class="prefix"></span><span class="content">2. Code</span><span class="suffix"></span></h3><p>我们编写的 Java 代码中的方法，经过编译器编译后，会生成字节码指令，这此指令会直接存储在 <code>Code</code> 属性中。但是并非所有的方法都会有  <code>Code</code> 属性，如 <code>abstract</code> 修饰的抽象方法就没有 <code>Code</code> 属性。先来看一下 <code>Code</code> 属性的结构：</p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th>数据长度</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>attribute_name_index</td>
+<td>2 字节</td>
+<td>属性名常量索引，指向 <code>Code</code></td>
+</tr>
+<tr>
+<td>attribute_length</td>
+<td>4 字节</td>
+<td>常量属性的长度，</td>
+</tr>
+<tr>
+<td>max_stack</td>
+<td>2 字节</td>
+<td>操作数栈的最大深度</td>
+</tr>
+<tr>
+<td>max_locals</td>
+<td>2 字节</td>
+<td>局部变量表的大小</td>
+</tr>
+<tr>
+<td>code_length</td>
+<td>4 字节</td>
+<td>字节码指令的长度</td>
+</tr>
+<tr>
+<td>code</td>
+<td>code_length 字节</td>
+<td>字节码指令序列</td>
+</tr>
+<tr>
+<td>exception_table_length</td>
+<td>2 字节</td>
+<td>异常表的长度</td>
+</tr>
+<tr>
+<td>exception_table</td>
+<td>exception_table_length 个</td>
+<td>异常处理表</td>
+</tr>
+<tr>
+<td>attributes_count</td>
+<td>2 字节</td>
+<td>属性表的数量</td>
+</tr>
+<tr>
+<td>attributes</td>
+<td>attributes_count 个</td>
+<td>属性表</td>
+</tr>
+</tbody></table>
+<p>从表中，可以看到 <code>Code</code> 属性中的字段还是比较多的，下面来看一下，其中的一些关键字段：</p>
+<ul>
+<li><p><code>max_stack</code> 字段表示该方法所需的操作数栈的最大深度。在执行该方法时，Java 虚拟机会为该方法分配一个大小为 <code>max_stack</code> 的操作数栈。当方法调用结束后，该操作数栈会被自动释放。</p>
+</li>
+<li><p><code>max_locals</code> 字段是指该方法所需的局部变量表的大小，当方法被调用时，Java 虚拟机会为该方法分配一个大小为 <code>max_locals</code> 的局部变量表， 执行期间，会用它来存储方法中的局部变量。局部变量表的大小以变量槽为单位计算，一个变量槽可以存储一个类型为 boolean、byte、char、short、int、float、reference 或 returnAddress 的值。对于类型为 long 或 double 的值，需要使用两个变量槽来存储。方法参数（包括实例方法中的隐藏参数 <code>this</code> ）、显式异常处理程序的参数（就是try-catch语句中catch块中所定义的异常）、方法体中定义的局部变量都需要依赖局部变量表来存放。但并不是方法体中使用了多少个变量，就会使用多少个变量槽。Java 虚拟机会对局部变量的变量槽进行重用，当代码执行超出一个局部变量的作用域时，这个局部变量所占的变量槽可以被其他局部变量所使用，示例如下：</p>
+<pre><code class="java">public void testMaxLocals(int indicate, File file) &#123;
+    for (int i = 0; i &lt; indicate; i++) &#123;
+        System.out.println(&quot;--&quot;);
+    &#125;
+    File[] listFile = file.listFiles();
+    System.out.println(listFile);
+&#125;
+</code></pre>
+<p>此段代码的变量槽个数为 4，<code>for</code> 循环中的 <code>i</code> 在循环执行完后，就会释放掉，后面定义的 <code>listFile</code> 就会重用这个变量槽。</p>
+</li>
+<li><p><code>code</code> 是一个 <code>u1</code> 类型的数组，存储着方法执行所需的所有字节码指令序列，字节码指令是一种特殊的机器指令，Java 虚拟机对其进行解释执行。每个字节码指令都具有特定的操作码和操作数。操作码用于指定该指令执行的具体操作，而操作数则用于指定该指令所需的参数。举个例子，代码如下：</p>
+<pre><code class="java">public class EmptyClass &#123;
+&#125;
+</code></pre>
+<p>对于这样一个空的类， javac 在编译的时候，会为他添加一个默认的构造方法，此方法比较简单，就以他为例，看看 <code>code</code> 中都包含哪些信息。按照前面所说的结构，可以解析出来 <code>code_length</code> 为 5，也就是 <code>code</code> 块中的内容为 5 byte 。紧接着按位读取，首先读入的指令是 <code>0x2a</code>，其助记符为 <code>aload_0</code>，此指令的含义是将第 0 个变量槽中为引用类型的本地变量推送到操作数栈顶，在其后无操作数。第二个读入的指令为 <code>0xb7</code> ，其助记符为 <code>invokespecial</code>，此指令的作用是以栈顶的引用类型所指向的对象作为方法的接收者，调用对象的实例构造器方法、私有方法或者是其父类的方法，在其后会有两个字节的 <code>index</code> ， 指向常量池中类型为 <code>CONSTANT_MethodRef</code> 的常量，在此处指向的是 <code>java.lang.Object</code> 的 <code>&lt;init&gt;</code> 方法。在其后读入的指令是 <code>0xb1</code>，其助记符为 <code>return</code>，在此处返回值为 <code>void</code>。此构造方法生成的的结构图如下：</p>
+<p><img src="https://img-blog.csdnimg.cn/99462550093a4c52bd3613e300d44a9f.png" alt="构造方法的 Code 结构" referrerpolicy="no-referrer"><figcaption class="post-image-caption">构造方法的 Code 结构</figcaption></figure></p>
+</li>
+<li><p><code>exception_table</code> 在字节码指令之后，用于存储此方法的显示异常处理表。异常表并非所有的 <code>code</code> 字段中都含有，仅代码中有显式处理异常的才会有，即有 <code>try&#123; &#125; catch(Exception e)&#123;&#125;</code> 的代码。先来看一下它的结构：</p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th>数据长度</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>start_pc</td>
+<td>2 字节</td>
+<td>字节码<code>code</code> 中的下标，从此条指令开始</td>
+</tr>
+<tr>
+<td>end_pc</td>
+<td>2 字节</td>
+<td>字节码<code>code</code> 中的下标，到此条指令前结束</td>
+</tr>
+<tr>
+<td>handler_pc</td>
+<td>2 字节</td>
+<td>字节码<code>code</code> 中的下标，当遇到异常时，转到此条指令开始执行</td>
+</tr>
+<tr>
+<td>catch_type</td>
+<td>2 字节</td>
+<td>指向常量池中异常类的索引，如果为 0， 代表任意异常</td>
+</tr>
+</tbody></table>
+<p>看一段异常表运作的例子， Java 代码如下： </p>
+<pre><code class="java">public int setup()  &#123;
+    int x;
+    try &#123;
+        x = 1;
+        return x;
+    &#125; catch (Exception e) &#123;
+        x = 2;
+        return x;
+    &#125; finally &#123;
+        x = 3;
+    &#125;
+&#125;
+</code></pre>
+<p>代码很简单，执行逻辑是先执行 <code>try &#123;&#125;</code> 中代码块，然后执行 <code>finally &#123;&#125;</code> 中代码块。虽然上述代码不会出现异常，但假设执行中会出现异常会怎么样？ </p>
+<p>从 java 代码的角度来看，一共以下几种执行路径</p>
+<ol>
+<li><code>try</code> 中的代码块正常执行完成，在执行 <code>finally</code> 中的代码块 </li>
+<li><code>try</code> 代码块中抛出了 <code>Exception</code> 后，会执行 <code>catch</code> 中的代码块，仅接着会执行 <code>finally</code> 中的代码快</li>
+<li>如果执行 <code>catch</code> 代码快时，也抛出了异常，会继续执行 <code>finally</code> 中的代码块 </li>
+<li><code>try</code> 代码块中执行的代码抛出的异常不是 <code>catch</code> 中定义的<code>Exception</code> 或其子类时，此时会继续执行 <code>finally</code> 中的代码块</li>
+</ol>
+<p>这四条路径，有一条正确的路径以及三条异常路径。在来看一下编译后的字节码指令：</p>
+<pre><code> 0 iconst_1  # x=1
+ 1 istore_1  # 将1存入变量表[1]
+ 2 iload_1   # 将变量表[1]的值压入栈顶
+ 3 istore_2  # 将1存入变量表[2]
+ 4 iconst_3  # x=3
+ 5 istore_1  # 将3存入变量表[1]
+ 6 iload_2   # 将变量表[2]的值压入栈顶
+ 7 ireturn   # 返回
+ 8 astore_2  # 将 Exception 存入变量表[2]
+ 9 iconst_2  # x=2
+10 istore_1  # 将2存入变量表[1]
+11 iload_1   # 将变量表[1]压入栈顶
+12 istore_3  # 将栈顶值存入变量表[3]
+13 iconst_3  # x = 3
+14 istore_1  # 将3存入变量表[1]
+15 iload_3   # 将变量表[3]压入栈顶
+16 ireturn   # 返回
+17 astore 4  # 将其它异常放入变量表[4]
+19 iconst_3  # x = 3
+20 istore_1  # 将3存入变量表[1]
+21 aload 4   # 将变量表[4]中的异常压入栈顶
+23 athrow    # 抛出异常
+</code></pre>
+<p>源码中的 Exception Table 如下：</p>
+<pre><code>Exception table:
+    from    to  target type
+       0     4     8   Class java/lang/Exception
+       0     4    17   any
+       8    13    17   any
+      17    19    17   any
+</code></pre>
+<p>第一条为 <code>try&#123;&#125;</code> 代码块抛出异常，且类型为 <code>java/lang/Exception</code> 或其子类时，去执行 <code>catch</code> 的逻辑。</p>
+<p>第二条为  <code>try&#123;&#125;</code> 代码块抛出异常，且其类型无法被 <code>catch</code> 时，会跳转到 17, 即将异常存储到变量表中，然后执行  <code>finally</code> 的块中的逻辑。</p>
+<p>第三条为 <code>catch&#123;&#125;</code> 代码块中会抛出异常，会跳转到 17, 即将异常存储到变量表中，然后执行  <code>finally</code> 的块中的逻辑。</p>
+<p>第四条为将异常存储到变量表中时，出现异常，此时会继续跳转到 17。</p>
+</li>
+</ul>
+<h3><span class="prefix"></span><span class="content">3. StackMapTable</span><span class="suffix"></span></h3><p><code>StackMapTable</code> 属性是存储在方法表中 <code>Code 属性</code> 里的属性字段里面。它是一个相当复杂的变长属性，在字节码验证阶段，类型检查验证器（Type Checker）会通过 <code>StackMapTable</code> 中的信息，用于确定一段字节码指令是否符合逻辑约束。<code>StackMapTable</code> 的结构如下：</p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th>数据长度</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>attribute_name_index</td>
+<td>2 字节</td>
+<td>属性名常量索引，指向 <code>StackMapTable</code></td>
+</tr>
+<tr>
+<td>attribute_length</td>
+<td>4 字节</td>
+<td>常量属性的长度</td>
+</tr>
+<tr>
+<td>number_of_entries</td>
+<td>2 字节</td>
+<td>栈帧数量</td>
+</tr>
+<tr>
+<td>stack_map_frame</td>
+<td>number_of_entries 个</td>
+<td>栈帧数量</td>
+</tr>
+</tbody></table>
+<p>此字段从  JDK6 级以上的版本都存在。在 《JVM 虚拟机规范》中，<code>Code 属性</code> 中可以不包含 <code>StackMapTable</code> 属性，虚拟机处理时，如果不包含 <code>StackMapTable</code> 属性，虚拟机会把它当作有一个隐式的 <code>StackMapTable</code> 属性，属性中的<code>number_of_entries</code> 值为 0。</p>
+<p>此结构主要是在 <code>javac</code> 以及虚拟机运行时使用，与代码无关，暂无需要过多关注，在此也不过多赘述，并于 <code>stack_map_frame</code> 内的结构信息，如你感兴趣，可以去查阅 《Java 虚拟机规范》。</p>
+<h3><span class="prefix"></span><span class="content">4. Exceptions</span><span class="suffix"></span></h3><p>Exception 是在写代码中非常常见的， <code>Exceptions</code> 属性的作用是记录方法中可能抛出的受查异常（Checked Excepitons），也就是在写代码时，<code>throws</code> 关键字后面写的所有异常类型。它的结构见表6-17。</p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th>数据长度</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>attribute_name_index</td>
+<td>2 字节</td>
+<td>属性名常量索引，指向 <code>Exceptions</code></td>
+</tr>
+<tr>
+<td>attribute_length</td>
+<td>4 字节</td>
+<td>常量属性的长度</td>
+</tr>
+<tr>
+<td>number_of_exceptions</td>
+<td>2 字节</td>
+<td>表示当前类抛出的异常个数</td>
+</tr>
+<tr>
+<td>exception_index_table</td>
+<td>number_of_exceptions个</td>
+<td>指向常量池类的名称</td>
+</tr>
+</tbody></table>
+<p>此结构比较简单，下面是我创建的内部类的测试代码：</p>
+<pre><code class="java">public void config() throws IOException, InterruptedException &#123;
+
+&#125;
+</code></pre>
+<p>编译后，生成的 <code>Exceptions</code> 属性结构如下图所示：</p>
+<p><img src="https://img-blog.csdnimg.cn/9669be5a29fd4cc38f0950d840f557b4.png" alt="方法抛出异常申明结构图" referrerpolicy="no-referrer"><figcaption class="post-image-caption">方法抛出异常申明结构图</figcaption></figure></p>
+<p>可以看到，在 <code>Exceptions</code> 属性中，有两个元素，分别是 <code>IOException</code> 和 <code>ClassNotFoundException</code>，它们都是对常量池中的 <code>CONSTANT_Class_info</code> 常量的引用。</p>
+<h3><span class="prefix"></span><span class="content">5. LineNumberTable</span><span class="suffix"></span></h3><p><code>LineNumberTable</code> 属性中存储的是 Java 代码中的行号信息，使用它们，可以将Class 文件中的字节码指令与  Java 源文件中的代码关联起来。当我们将  Java 源代码编译成字节码时，每行代码都会被编译成一段二进制字节码指令，并且这些指令在字节码文件中是按照顺序排列的。编译时，编译器会为每个指令记录下它在源代码中的行号，当代码运行时发生异常时，就可以根据行号定位到源代码中出错的地方。下面表格中为 <code>LineNumberTable</code> 属性结构：</p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th>数据长度</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>attribute_name_index</td>
+<td>2 个字节</td>
+<td>属性名常量池索引，指向值为 LineNumberTable</td>
+</tr>
+<tr>
+<td>attribute_length</td>
+<td>4 个字节</td>
+<td>属性长度</td>
+</tr>
+<tr>
+<td>line_number_table_length</td>
+<td>2 个字节</td>
+<td>行号表长度</td>
+</tr>
+<tr>
+<td>line_number_table</td>
+<td>line_number_table_length * 4 字节</td>
+<td>行号表信息</td>
+</tr>
+</tbody></table>
+<p>其中，<code>line_number_table_length</code> 表示行号表的长度，<code>line_number_table</code> 是一个数组，每个元素表示一个字节码指令和它在源代码中对应的行号。每个元素包含了以下两个字段：</p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th>数据类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>start_pc</td>
+<td>2 字节</td>
+<td>指令在字节码中的位置</td>
+</tr>
+<tr>
+<td>line_number</td>
+<td>2 字节</td>
+<td>源代码中的行号</td>
+</tr>
+</tbody></table>
+<p>下面是一个简单的 Java 示例代码：</p>
+<pre><code>package com.example.clazz.format;
+
+public class LineNumberTableExample &#123;
+
+    public static void main(String[] args) &#123;
+        int a = 0;
+        int b = 1;
+        System.out.println(a + b);
+    &#125;
+&#125;
+</code></pre>
+<p>编译后，生成的 Class 文件中包含了 <code>LineNumberTable</code> 属性信息，如下所示：</p>
+<pre><code>stack=3, locals=3, args_size=1
+   0: iconst_0
+   1: istore_1
+   2: iconst_1
+   3: istore_2
+   4: getstatic     #7                 
+   7: iload_1
+   8: iload_2
+   9: iadd
+  10: invokevirtual #13                
+  13: return
+LineNumberTable:
+  line 6: 0
+  line 7: 2
+  line 8: 4
+  line 9: 13
+</code></pre>
+<p>这意味着，在 <code>main</code> 方法中第 6 行代码<code>int a = 0;</code>对应的字节码指令的位置是 0，第 7 行代码对应的字节码指令的位置是 2，第 4 行代码对应的字节码指令的位置是 4。</p>
+<p>这样，当在运行时出现异常时，就可以根据行号表中的信息追溯到源代码中出错的位置了。</p>
+<h3><span class="prefix"></span><span class="content">6. LocalVariableTable</span><span class="suffix"></span></h3><p><code>LocalVariableTable</code> 属性用于描述局部变量表中的变量与  java 源码中定义的变量之前的关系。对于 JVM 虚拟机来说，他并不是必须参数，编译进可使用参数来去掉这项信息。如没有此项信息，在运行调试时，IDE 会使用如 <code>arg0</code>、<code>arg1</code> 等不具有意义的占位符来替代原有的参数名。下面表格为其属性结构：</p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th>数据长度</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>attribute_name_index</td>
+<td>2 个字节</td>
+<td>属性名常量池索引，指向值为 LocalVariableTable</td>
+</tr>
+<tr>
+<td>attribute_length</td>
+<td>4 个字节</td>
+<td>属性长度</td>
+</tr>
+<tr>
+<td>local_variable_table_length</td>
+<td>2 个字节</td>
+<td>局部变量表长度</td>
+</tr>
+<tr>
+<td>local_variable_table</td>
+<td>local_variable_table_length * 10 字节</td>
+<td>局部变量表信息</td>
+</tr>
+</tbody></table>
+<p>其中，<code>local_variable_table_length</code> 表示局部变量表的长度，<code>local_variable_table</code> 是一个数组，其中每个元素表示一个局部变量的信息，包含了以下 5 个字段：</p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th>数据长度</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>start_pc</td>
+<td>2 字节</td>
+<td>字节码中中第一次出现的位置</td>
+</tr>
+<tr>
+<td>length</td>
+<td>2 字节</td>
+<td>代码中出现的长度，及该字段的作用域</td>
+</tr>
+<tr>
+<td>name_index</td>
+<td>2 字节</td>
+<td>局部变量名称在常量池中的索引</td>
+</tr>
+<tr>
+<td>descriptor_index</td>
+<td>2 字节</td>
+<td>局部变量类型在常量池中的索引</td>
+</tr>
+<tr>
+<td>index</td>
+<td>2 字节</td>
+<td>在局部变量表中所在的位置</td>
+</tr>
+</tbody></table>
+<p>在 JDK 5 引入泛型后，新增了 <code>LocalVeriableTypeTable</code>，此属性与<code>LocalVariableTable</code> 及其相似，只是它用来修饰的是泛型变量，在此处就不在赘述了。 </p>
+<h3><span class="prefix"></span><span class="content">7. InnerClasses</span><span class="suffix"></span></h3><p><code>InnerClasses</code> 属性是用来记录内部类与宿主类之间的关联关系的。 当我们在代码中定义内部类的时候，编译器会为当前类以及它的内部类上添加  <code>InnerClasses</code> 属性。</p>
+<p><img src="https://img-blog.csdnimg.cn/3b1b4f5366754207b288e2b5939ef5b5.png" alt="InnerClasses 属性结构" referrerpolicy="no-referrer"><figcaption class="post-image-caption">InnerClasses 属性结构</figcaption></figure></p>
+<p>在此结构中， <code>inner_class_info_index</code> 和 <code>outer_class_info_index</code> 指向了常量池中 <code>CONSTANT_Class_info</code> 型常量的索引，分别代表内部类和宿主类。<code>inner_name_index</code> 是指向了内部类名称的索引，为 <code>CONSTANT_Utf8_info</code> 类型。</p>
+<p>需要注意的是，<code>outer_class_info_index</code> 在局部类、匿名类中，它的值为 0 。同时，在匿名类中，<code>inner_name_index</code> 也为 0 。</p>
+<p>下面是我创建的内部类的测试代码：</p>
+<pre><code class="java">public class InnerClassExample &#123;
+    public class InnerClassDemo &#123;
+    &#125;
+&#125;
+</code></pre>
+<p>编译后，生成的 <code>InnerClasses</code> 属性结构如下图所示：</p>
+<p><img src="https://img-blog.csdnimg.cn/51442a70658f4aa184b7b3d2e981adf9.png" alt="InnerClasses 结构" referrerpolicy="no-referrer"><figcaption class="post-image-caption">InnerClasses 结构</figcaption></figure></p>
+<h3><span class="prefix"></span><span class="content">8. EnclosingMethod</span><span class="suffix"></span></h3><p><code>EnclosingMethod</code> 属性是在 Class 文件结构的属性块中，他是一个定长的属性。在 Java 中，局部类（LocalClass） 与匿名内部类的 Class 文件中，必须包含 <code>EnclosingMethod</code> 属性值。</p>
+<p>匿名内部类是非常常见，但在写代码时，去很少有使用局部类。局部类一种特殊的内部类， 它定义在一个代码块中（如方法、构造函数、初始化块等）而不是类的主体中，它只在该代码块中可见，对于外部代码块是不可见的。 示例如下：</p>
+<pre><code class="java">public class EnclosingMethodExample &#123;
+    public void setup() &#123;
+        class A &#123;
+            String a = &quot;10&quot;;
+        &#125;
+        A a = new A();
+        System.out.println(a.a);
+    &#125;
+&#125;
+</code></pre>
+<p>在 <code>setup</code> 方法中，定义了 <code>class A</code> ， 编译后会生成 <code>EnclosingMethodExample$1A.class</code> 文件。</p>
+<p>EnclosingMethod 属性结构也非常的简单，在结构中，包含两个指向外部类和方法的字段，具体结构如下：</p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th>数据长度</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>attribute_name_index</td>
+<td>2 字节</td>
+<td>属性名常量索引，指向 EnclosingMethod</td>
+</tr>
+<tr>
+<td>attribute_length</td>
+<td>4 字节</td>
+<td>常量属性的长度， 此处固定为 <code>0x00000100</code></td>
+</tr>
+<tr>
+<td>class_index</td>
+<td>2 字节</td>
+<td>类常量索引，指向常量池中 Class 字段</td>
+</tr>
+<tr>
+<td>method_index</td>
+<td>2 字节</td>
+<td>方法常量索引，指向常量池中 MethodRef 字段</td>
+</tr>
+</tbody></table>
+<p>上述 <code>EnclosingMethodExample$1A.class</code>  文件中，属性字段中的第二个属性（下标为 1 的那个）便是 <code>EnclosingMethod</code>  属性，其关联结构如下图所示：</p>
+<p><img src="https://img-blog.csdnimg.cn/1f0ce4a561cc4511be2af9b45bb9f0ec.png" alt="EnclosingMethod 结构图" referrerpolicy="no-referrer"><figcaption class="post-image-caption">EnclosingMethod 结构图</figcaption></figure></p>
+<p>通过属性表，可以看到此局部类在 <code>EnclosinMethodExample.setup</code> 方法中。</p>
+<h3><span class="prefix"></span><span class="content">9. Synthetic</span><span class="suffix"></span></h3><p>Synthetic 是用来修饰类、方法、变量，表示它们不是由  Java 源代码直接产生，而是由编译器生成。它是一个标志类型的布尔属性，因此其结构中的 <code>infos </code> 长度为 0 ，因此它的内容总共只有 6 个字节，结构如下：</p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th>数据长度</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>attribute_name_index</td>
+<td>2 字节</td>
+<td>属性名常量索引， 指向常量池中 Utf8 的常量，其值为 Synthetic</td>
+</tr>
+<tr>
+<td>attribute_length</td>
+<td>4 字节</td>
+<td>常量属性的长度， 此处固定为 <code>0x00000000</code></td>
+</tr>
+</tbody></table>
+<p>不过在 JDK 5 之后，也可以使用访问标志 <code>ACC_SYNTHETIC</code> 来表示相同的功能。我尝试了 Java 中匿名内部类生成的变量，并没有 <code>Synthetic</code> 属性。</p>
+<p>编译器通过生成一些在源代码中不存在的方法、字段甚至是整个类的方式，实现了越权访问（如访问 <code>private</code> 修饰的变量）或其他绕开了语言限制的功能。除了刚提到的匿名内部类，枚举类也是一个非常典型的例子，在编译时，会生 <code>$VALUES</code>  方法，存放所有枚举元素的数组。</p>
+<p>下面是我创建的枚举类型的测试代码：</p>
+<pre><code class="java">enum TestEnum &#123;
+    TEST_ENUM_V1,
+    TEST_ENUM_V2
+&#125;
+</code></pre>
+<p>最后生成的类结构图如下所示：</p>
+<p><img src="https://img-blog.csdnimg.cn/298672ef8cbe47daa7f1db0afbdb52bc.png" alt="$VALUES字段结构" referrerpolicy="no-referrer"><figcaption class="post-image-caption">$VALUES字段结构</figcaption></figure></p>
+<h3><span class="prefix"></span><span class="content">10. Signature</span><span class="suffix"></span></h3><p>在 Java 1.5 后的版本中， Java 支持了泛型，而这个 <code>Signature</code> 属性就是用来记录类、方法、变量中的类型变量（Type Variable） 或者参与化类型（Parameterized Type）。<code>Signature</code> 是一个固定长度的属性值，结构非常简单，结构如下表：</p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th>数据长度</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>attribute_name_index</td>
+<td>2 字节</td>
+<td>属性名常量索引，指向值为 <code>Signature</code></td>
+</tr>
+<tr>
+<td>attribute_length</td>
+<td>4 字节</td>
+<td>常量属性的长度， 此处固定为 <code>0x00000010</code></td>
+</tr>
+<tr>
+<td>signature_index</td>
+<td>2 字节</td>
+<td>签名的常量索引</td>
+</tr>
+</tbody></table>
+<p>Java 在编译的过程中，会进行泛型擦除，而 <code>Signature</code> 就是用来存储这些被擦除的信息，让虚拟机能够正确处理其类型。在使用的过程中，泛型有两类，一类是自己定义的泛型参数， 如下示例代码中的 <code>T typeVariable</code>，一类是使用已经定义好的泛型类，使用时指定的具体类型，如下示例代码中的 <code>Map&lt;String, Integer&gt; parameterizedType</code>。</p>
+<pre><code class="java">public class VerboseSignature&lt;T&gt; &#123;
+    public T typeVariable;
+    Map&lt;String, Integer&gt; parameterizedType;
+&#125;
+</code></pre>
+<p>最终生成的 Class 文件中的，这两个字段的属性块中，都会有一个 <code>Signature</code> 的结构，其中 <code>typeVariable</code>  的签名信息为 <code>TT;</code> ，另一个为 <code>Ljava/util/Map&lt;Ljava/lang/String;Ljava/lang/Integer;&gt;;</code>，详细信息如下图所示：</p>
+<p><img src="https://img-blog.csdnimg.cn/e23dc2127daf46d0a08f0925b5c22371.png" alt="Signature 结构示例图" referrerpolicy="no-referrer"><figcaption class="post-image-caption">Signature 结构示例图</figcaption></figure></p>
+<h3><span class="prefix"></span><span class="content">11. SourceFile&#x2F;SourceDebugExtension</span><span class="suffix"></span></h3><p>这个属性是用来记录生成 此 Class 文件的源文件名称，此属性的结构是固定长度，结构如下：</p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th>数据长度</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>attribute_name_index</td>
+<td>2 字节</td>
+<td>属性名常量索引，指向值为 <code>SourceFile</code></td>
+</tr>
+<tr>
+<td>attribute_length</td>
+<td>4 字节</td>
+<td>常量属性的长度， 此处固定为 <code>0x00000010</code></td>
+</tr>
+<tr>
+<td>sourcefile_index</td>
+<td>2 字节</td>
+<td>源文件名称的常量池索引</td>
+</tr>
+</tbody></table>
+<p>在使用  Java 的过程中，大部份情况下，类名与文件名是一致的，但是诸如内部类等时会出现例外。此参数对于 Class 文件来说，是一个非必须参数 ，当使用 javac 编译时添加  <code>-g:none</code> 时，生成 Class 文件时，会去掉 <code>SourceFile</code> 等调试信息，可以减少程序体积并提高性能，但是需要注意的时，如果去掉后，出现异常时，不会输出错误代码对应的文件名。最后，下图为 <code>ClassFormat.class</code> 文件中的 <code>SourceFile</code> 属性结构：</p>
+<p><img src="https://img-blog.csdnimg.cn/84b691f6eee04de0883c9f89195c8d5b.png" alt="ClassFormat.class 文件中的 SourceFile 属性" referrerpolicy="no-referrer"><figcaption class="post-image-caption">ClassFormat.class 文件中的 SourceFile 属性</figcaption></figure></p>
+<p>除了 <code>SourceFile</code> 属性，在 JDK 5 时，为了方便在编译器和动态生成的 Class 中加入供程序员使用的自定义内容，新增了 <code>SourceDebugExtension</code> 属性用于存储额外的代码调试信息。典型的场景是在进行 JSP 文件调试时，无法通过 Java 堆栈来定位到 JSP 文件的行号。此时就可以用到 <code>SourceDebugExtension</code>  属性，它的结构如下：</p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th>数据长度</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>attribute_name_index</td>
+<td>2 字节</td>
+<td>属性名常量索引，指向值为 <code>SourceDebugExtension</code></td>
+</tr>
+<tr>
+<td>attribute_length</td>
+<td>4 字节</td>
+<td>常量属性的长度， 此处固定为</td>
+</tr>
+<tr>
+<td>debug_extension</td>
+<td>attribute_length字节</td>
+<td>额外调试信息，整个区域是二进制数据，可以按需进行任意填充</td>
+</tr>
+</tbody></table>
+<h3><span class="prefix"></span><span class="content">12. Deprecated</span><span class="suffix"></span></h3><p>在写 Java 代码时，使用注解 <code>@Deprecated</code> 标记的类、变量、方法，就会有这个属性值。它是一个标志类型的布尔属性，与 Synthetic 的结构一样，用来表示某个类、字段或者方法已经不在推荐使用。这个属性的存在不会改变类或接口的语义。它的结构如下：</p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th>数据长度</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>attribute_name_index</td>
+<td>2 字节</td>
+<td>属性名常量索引， 指向常量池中 Utf8 的常量，其值为 Deprecated</td>
+</tr>
+<tr>
+<td>attribute_length</td>
+<td>4 字节</td>
+<td>常量属性的长度， 此处固定为 <code>0x00000000</code></td>
+</tr>
+</tbody></table>
+<h3><span class="prefix"></span><span class="content">13.  Annotations</span><span class="suffix"></span></h3><p>注解，是 Java 中一个非常常用的功能。 注解有几类：</p>
+<ul>
+<li><strong>SOURCE</strong>：仅在源码中出现，编译时会被丢掉</li>
+<li><strong>CLASS：</strong> 编译后会存储在Class 文件中，但是 JVM 加载时会丢掉，运行时获取不到。注解默认为此行为</li>
+<li><strong>RUNTIME：</strong>在 Class 文件中存在， 在运行时 JVM 会加载进来，运行时可获取到</li>
+</ul>
+<p>根据定义，可以知道 <code>SOURCE</code> 类型的是无法写入到 Class 文件中的， 而 <code>CLASS</code> 与 <code>RUTIME</code> 的区别是一个可以在运行时使用，一个不可以。在 Class 文件中，也根据这个不同定义了 <code>RuntimeVisibleAnnotations</code> 和 <code>RuntimeInvisibleAnnotations</code>，他们俩的结构一致， 结构相对比较复杂，结构图如下：</p>
+<p><img src="https://img-blog.csdnimg.cn/7cf8e622508b498d8f30dc2d2d15a431.png" alt="RuntimeVisibleAnnotations 的结构图" referrerpolicy="no-referrer"><figcaption class="post-image-caption">RuntimeVisibleAnnotations 的结构图</figcaption></figure></p>
+<p>针对这两类注解，<code>attribute_name_index</code> 指向的是值为 <code>RuntimeVisibleAnnotations</code> 或 <code>RuntimeInvisibleAnnotations</code> 的 <code>CONSTANT_Utf8_info</code> 常量值索引。针对 Runtime 的注解，前面刚提到的的 Deprecated 也是是运行时的，但是他并不包含值。除了它，我还定义了一个包含值的运行时注解，代码如下：</p>
+<pre><code class="java">@Retention(RUNTIME)
+@Target(&#123;METHOD, PARAMETER, FIELD, LOCAL_VARIABLE, ANNOTATION_TYPE&#125;)
+public @interface IntRange &#123;
+    /**
+     * Smallest value, inclusive
+     */
+    long from() default Long.MIN_VALUE;
+
+    /**
+     * Largest value, inclusive
+     */
+    long to() default Long.MAX_VALUE;
+&#125;
+
+public class VerboseAttributes &#123;
+
+    @Deprecated
+    public int deprecatedVerbose = 1;
+
+    @IntRange(from = 1, to = 10)
+    public int value = 32767;
+&#125;
+</code></pre>
+<p>这段代码最终生成的字段属性相关的关系如下图所示：</p>
+<p><img src="https://img-blog.csdnimg.cn/d700a092cd5b4017a282daf069d84c5e.png" alt="字段属性结构" referrerpolicy="no-referrer"><figcaption class="post-image-caption">字段属性结构</figcaption></figure></p>
+<p>从 Class 结构中的定义中，可以看到，注解里面定义的 Vaule 只能使用常量。终于从底层知道为什么以前写注解的时候，注解值只能为常量了。</p>
+<h3><span class="prefix"></span><span class="content">14. ParameterAnnotations</span><span class="suffix"></span></h3><p>在方法中，参数的注解与写到方法上的注解还有一点区别，在《Java虚拟机规范》里面还定义了另外两个 <code>RuntimeVisibleParameterAnnotations</code> 和 <code>RuntimeInvisibleParameterAnnotations</code>，用来描述方法参数的结构， 结构如下图所示：</p>
+<p><img src="https://img-blog.csdnimg.cn/31c40a8f013941de838b017869a01f5a.png" alt="ParameterAnnotations 结构" referrerpolicy="no-referrer"><figcaption class="post-image-caption">ParameterAnnotations 结构</figcaption></figure></p>
+<p>可以看到，在最上层，会有一个多参数的数组结构，而每一个参数对应的注解信息与前面的 <code>RuntimeVisibleAnnotations</code> 的逻辑一致。在代码中添加如下方法：</p>
+<pre><code class="java">@Deprecated
+public void setValue(@IntRange(from = 40, to = 60) int value, @IntRange(from = 20, to = 30) int other) &#123;
+    this.value = value;
+&#125;
+</code></pre>
+<p>最终编译生成的 Class 文件中，方法体中关于注解生成的结构图如下所示：</p>
+<p><img src="https://img-blog.csdnimg.cn/124804a700d94e2597317670dd709588.png" alt="参数注解图形" referrerpolicy="no-referrer"><figcaption class="post-image-caption">参数注解图形</figcaption></figure></p>
+<h3><span class="prefix"></span><span class="content">15. AnnotationDefault</span><span class="suffix"></span></h3><p>在自定义注解时，某些注解元素会存在默认值，在使用的时候不进行设置就可以直接使用，如下代码中的注解定义：</p>
+<pre><code class="java">@Retention(CLASS)
+@Target(&#123;METHOD, PARAMETER, FIELD, LOCAL_VARIABLE, ANNOTATION_TYPE, TYPE&#125;)
+public @interface IntRange &#123;
+    /**
+     * Smallest value, inclusive
+     */
+    long from() default Long.MIN_VALUE;
+
+    /**
+     * Largest value, inclusive
+     */
+    long to() default Long.MAX_VALUE;
+&#125;
+</code></pre>
+<p>在这段代码中， <code>from</code> 指定默认值为 <code>Long.MIN_VALUE</code>，<code>to</code> 指定默认值为 <code>Long.MAX_VALUE</code> 。</p>
+<p>根据《Java虚拟机规范》中的定义，注解中的元素默认值会被存储在名为 <code>AnnotationDefault</code> 的注解属性中，上述代码最终生成的结构如下所示：</p>
+<p><img src="https://img-blog.csdnimg.cn/5624c0ce1d244f96a61e98c69128e27e.png" alt="AnnotationDefault 结构" referrerpolicy="no-referrer"><figcaption class="post-image-caption">AnnotationDefault 结构</figcaption></figure></p>
+<h3><span class="prefix"></span><span class="content">16. TypeAnnotations</span><span class="suffix"></span></h3><p>在 JDK 8 的版本中，进一步加强了 Java 语言的注解使用范围，添加 <code>TYPE_USE</code> 和 <code>TYPE_PARAMETER</code> 两个注解，在之前，Java 中的注解只能用于类、方法、变量等成员上，而不能用于泛型类型上。加入这两个注解，使得注解可以用于更加丰富的场景中。与其它注解类似，它也分为运行时可见与运行时不可见，即  <code>RuntimeVisibleTypeAnnotations</code> 和 <code>RuntimeInvisibleTypeAnnotations</code> 两个属性。其结构与 <code>RuntimeVisibleAnnotations</code> 略有区别，下图为其结构：</p>
+<p><img src="https://img-blog.csdnimg.cn/7012754561254c42b0d8ce8a44c59f85.png" alt="TypeAnnotations 的结构" referrerpolicy="no-referrer"><figcaption class="post-image-caption">TypeAnnotations 的结构</figcaption></figure></p>
+<p>图中加粗的 <code>target_info</code> 也是一个符合类型，有兴趣的同学可以参考《Java 虚拟机规范》。下面列举一个例子，其中 <code>A、B、C、D</code> 四个注解除名称外都一样，具体代码如下：</p>
+<pre><code class="java">@Retention(RetentionPolicy.RUNTIME)
+@Target(&#123;ElementType.TYPE_USE&#125;)
+@interface A &#123;
+&#125;
+// 此处省略 B 、C 、D 的代码
+public @A Map&lt;@B ? extends @C String, @D List&lt;@E Object&gt;&gt; verbose;
+</code></pre>
+<p>最后，生成出来的结构图如下所示：</p>
+<p><img src="https://img-blog.csdnimg.cn/8e41e2a7847747c1857018d2d60ab3bc.png" alt="复杂的 TypeAnnotation 结构" referrerpolicy="no-referrer"><figcaption class="post-image-caption">复杂的 TypeAnnotation 结构</figcaption></figure></p>
+<h3><span class="prefix"></span><span class="content">17. NestHost 和 NestMembers</span><span class="suffix"></span></h3><p><code>NestHost</code> 和 <code>NestMembers</code> 是 Java 11 引入的新特性，用于支持嵌套类的访问控制。在 Java 11 之前，判断一个类是否为嵌套类主要通过查看其访问修饰符和包名来确定。这些属性的引入使得 JVM 能够更好地进行嵌套类的访问控制，从而提高了代码的安全性和性能。先来看一下段示例代码：</p>
+<pre><code class="java">public class InnerClassExample &#123;
+    public class InnerClassDemo &#123;   
+    &#125;
+&#125;
+</code></pre>
+<p>上述代码编译后，会产生两个 Class 文件，它们的名称分别为 <strong>InnerClassExample.class</strong> 和 <strong>InnerClassExample$InnerClassDemo.class</strong>。其中<code>NestHost</code> 属性会出现在 <strong>InnerClassExample$InnerClassDemo.class</strong> 的属性列表中，用于标识所属的封装类，即此处的 <code>InnerClassExample</code>，它是一个可选属性。而 <code>NestMembers</code> 属性会出现在 <strong>InnerClassExample.class</strong> 的属性列表中，用于标识一个所有嵌套类的列表，此处示例中仅一个嵌套类，所以将只会有一个值  <code>InnerClassExample$InnerClassDemo</code>，它也是一个可选属性。它们的结构也相对简单，如下表所示，</p>
+<p><strong>NestHost：</strong></p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th>数据长度</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>attribute_name_index</td>
+<td>2 字节</td>
+<td>属性名常量索引， 指向常量池中 Utf8 的常量，其值为 <code>NestHost</code></td>
+</tr>
+<tr>
+<td>attribute_length</td>
+<td>4 字节</td>
+<td>常量属性的长度， 此处固定为 <code>0x00000010</code></td>
+</tr>
+<tr>
+<td>host_class_index</td>
+<td>2 字节</td>
+<td>指向类属性常量值</td>
+</tr>
+</tbody></table>
+<p><strong>NestMembers：</strong></p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th>数据长度</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>attribute_name_index</td>
+<td>2 字节</td>
+<td>属性名常量索引， 指向常量池中 Utf8 的常量，其值为 <code>NestHost</code></td>
+</tr>
+<tr>
+<td>attribute_length</td>
+<td>4 字节</td>
+<td>常量属性的长度</td>
+</tr>
+<tr>
+<td>number_of_classes</td>
+<td>2 字节</td>
+<td>嵌套类个数</td>
+</tr>
+<tr>
+<td>classes</td>
+<td>2 * number_of_classes 字节</td>
+<td>指向类属性常量值</td>
+</tr>
+</tbody></table>
+<p>将示例中的代码编译后生成如下结构：</p>
+<p><img src="https://img-blog.csdnimg.cn/5287ae4b9c2d4a47aba2d1c308943853.png" alt="InnerClassExample 的属性结构" referrerpolicy="no-referrer"><figcaption class="post-image-caption">InnerClassExample 的属性结构</figcaption></figure></p>
+<p><img src="https://img-blog.csdnimg.cn/d4d242eddc4b420cad717918eb0858db.png" alt="InnerClassExample$InnerClassDemo 的属性结构" referrerpolicy="no-referrer"><figcaption class="post-image-caption">InnerClassExample$InnerClassDemo 的属性结构</figcaption></figure></p>
+<h3><span class="prefix"></span><span class="content">18. Record</span><span class="suffix"></span></h3><p>使用<code>String</code>、<code>Integer</code>等类型的时候，这些类型都是不变类，一个不变类具有以下特点：</p>
+<ol>
+<li>定义class时使用<code>final</code>，无法派生子类；</li>
+<li>每个字段使用<code>final</code>，保证创建实例后无法修改任何字段。</li>
+</ol>
+<p>假设我们有一个 <code>Person</code> 类，有 <code>name</code> 、<code>age</code> 和 <code>hometown</code> 三个字段 ，如果要把他变成一个不变类，代码会这么写：</p>
+<pre><code class="java">public final class Person &#123;
+  private final String name;
+  private final int age;
+  private final String hometown;
+  public Person(String name, int age, String hometown) &#123;
+    this.name = name;
+    this.age = age;
+    this.hometown = hometown;
+  &#125;
+  
+  public String name() &#123;
+    return this.name;
+  &#125;
+  //... 省略部分代码
+&#125;
+</code></pre>
+<p>代码写起来还比较多，从 Java 14 开始，引入了一种新的数据类型，Record 类。定义类的时候，使用 <code>record</code> 关键字即可，代码如下：</p>
+<pre><code class="java">public record Person(String name, int age, String hometown) &#123;
+&#125;
+</code></pre>
+<p>此类与前面手写的那个类一样，字段都会标记成 <code>final</code> ，编译器还自动为我们创建了构造方法，和字段名同名的方法，以及覆写<code>toString()</code>、<code>equals()</code>和<code>hashCode()</code>方法。使用一行代码就实现了一个不变类。</p>
+<p>此类编译会生成 <code>Record</code> 属性，结构如下：</p>
+<p><img src="https://img-blog.csdnimg.cn/7058de03af6745609d51ca43bd13f504.png" alt="属性字段格式" referrerpolicy="no-referrer"><figcaption class="post-image-caption">属性字段格式</figcaption></figure></p>
+<p>上面的示例代码，编译后，生成的属性 <code>Record</code> 的结构如下图所示：</p>
+<p><img src="https://img-blog.csdnimg.cn/eed56d8d026c425696c7b7468e16a55e.png" alt="Record 属性结构" referrerpolicy="no-referrer"><figcaption class="post-image-caption">Record 属性结构</figcaption></figure></p>
+<h3><span class="prefix"></span><span class="content">19. MethodParameters</span><span class="suffix"></span></h3><p><code>MethodParameters</code> 是在 JDK 8 时新加入到 Class 文件格式中的，字段是放到方法块中的属性字段里面，是一个变长属性。<code>MethodParameters</code> 的作用是记录方法的各个形参名称和信息。</p>
+<p>在虚拟机中，执行代码时，给参数用什么名字对计算机来说没有任何区别。因此在 JDK 8 之前，基于存储空间考虑，Class 文件中默认并不存储任何方法参数名称。但没有名字就会引起如下问题：</p>
+<p><img src="https://img-blog.csdnimg.cn/0f52731ae3944dabacf4a61c081c85fd.png" alt="左图 Class 文件包含 MethodParameters, 右图不包含" referrerpolicy="no-referrer"><figcaption class="post-image-caption">左图 Class 文件包含 MethodParameters, 右图不包含</figcaption></figure></p>
+<p>上图中右边部分是不带参数的反编译结果，方法中的参数全部变成了 <code>var1</code>、<code>var2</code> 中这种无用的字段，那别人在调用的时候，就必须得通过 JavaDoc 才能知道每一个参数的含义，使用起来很不方便。</p>
+<p>在我本地 IDE 编译时，默认输出的代码依然是不带 <code>MethodParameters</code> 属性的。在编译时需要添加 <code>-parameters</code> 参数，示例命令如下：</p>
+<pre><code class="shell">javac -parameters  MethodParameter.java	
+</code></pre>
+<p>当然，在 IntelliJ IDEA 中也可以添加对应参数，如下图所示：</p>
+<p><img src="https://img-blog.csdnimg.cn/e6102575dd7a46ada6bd6281899f095e.png" alt="添加参数示例" referrerpolicy="no-referrer"><figcaption class="post-image-caption">添加参数示例</figcaption></figure></p>
+<p>通过上述设置，编译出来的代码可以生成 <code>MethodParameters</code> 参数了。在来看一下它的结构：</p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th>数据长度</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>attribute_name_index</td>
+<td>2 字节</td>
+<td>属性名常量索引， 指向值为 <code>MethodParameters</code></td>
+</tr>
+<tr>
+<td>attribute_length</td>
+<td>4 字节</td>
+<td>常量属性的长度</td>
+</tr>
+<tr>
+<td>parameters_count</td>
+<td>1 字节</td>
+<td>参数个数</td>
+</tr>
+<tr>
+<td>parameters</td>
+<td>parameters_count * 4 字节</td>
+<td>参数字段信息，见下表</td>
+</tr>
+</tbody></table>
+<p>其中 <code>parameters</code> 是一个数组，里面可能会包含有多个参数，每一个参数中包含有其名字的信息和访问标识，结构如下图所示：</p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th>数据长度</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>name_index</td>
+<td>2 字节</td>
+<td>参数名称索引， 可能为0，非0时指向常量池中字段名字</td>
+</tr>
+<tr>
+<td>access_flags</td>
+<td>2 字节</td>
+<td>访问标识，<code>ACC_FINAL</code>、<code>ACC_SYNTHETIC</code>、<code>ACC_MANDATED</code></td>
+</tr>
+</tbody></table>
+<p>针对刚提到的代码 <code>public MethodParameter(String name, int age, String hometown) &#123;&#125;</code> 生成后的结构如下所示：</p>
+<p><img src="https://img-blog.csdnimg.cn/45cca0731c5f4f1cb169e4bca81b9859.png" alt="Method Parameters 结构" referrerpolicy="no-referrer"><figcaption class="post-image-caption">Method Parameters 结构</figcaption></figure></p>
+<h3><span class="prefix"></span><span class="content">20. BootstrapMethods</span><span class="suffix"></span></h3><p><code>BootstrapMethods</code> 属性是在 JDK 7 时增加的，用于保存 <code>invokedynamic</code> 指令引用的引导方法限定符。在 《Java虚拟机规范》 中规定，如果常量池中出现 <code>CONSTANT_InvokeDynamic_info</code> 类型的常量时，那么类文件的属性中必须存在 <code>BootstrapMethod</code> 属性。<code>BootstrapMethod</code>  结构如下：</p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th>数据长度</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>attribute_name_index</td>
+<td>2 个字节</td>
+<td>属性名常量池索引，指向值为 BootstrapMethods</td>
+</tr>
+<tr>
+<td>attribute_length</td>
+<td>4 个字节</td>
+<td>属性长度</td>
+</tr>
+<tr>
+<td>num_bootstrap_methods</td>
+<td>2 个字节</td>
+<td>引导方法数量</td>
+</tr>
+<tr>
+<td>bootstrap_methods</td>
+<td>num_bootstrap_methods * 2字节</td>
+<td>引导方法数组</td>
+</tr>
+</tbody></table>
+<p>其中，<code>num_bootstrap_methods</code> 表示该属性中引导方法的数量，<code>bootstrap_methods</code> 数组中包含了所有的引导方法。每个引导方法都包含一个引导方法引用和一组引导方法参数。引导方法的结构如下：</p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th>数据长度</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>bootstrap_method_ref</td>
+<td>2 字节</td>
+<td>对常量池中的 CONSTANT_MethodHandle_info 或 CONSTANT_MethodType_info 常量的引用</td>
+</tr>
+<tr>
+<td>num_bootstrap_arguments</td>
+<td>2 字节</td>
+<td>引导方法的参数数量</td>
+</tr>
+<tr>
+<td>bootstrap_arguments</td>
+<td>2 * num_bootstrap_arguments 字节</td>
+<td>引导方法的参数列表，每个元素都是对常量池中的一个常量的引用</td>
+</tr>
+</tbody></table>
+<p>其中，<code>bootstrap_method_ref</code> 是对常量池中的 <code>CONSTANT_MethodHandle_info</code> 或 <code>CONSTANT_MethodType_info</code> 常量的引用。<code>num_bootstrap_arguments</code> 是引导方法的参数数量，<code>bootstrap_arguments</code> 是引导方法的参数列表，每个元素都是对常量池中的一个常量的引用。</p>
+<p>下面是我写的一段代码，用来查看  <code>BootstrapMethods</code> 的最终结构：</p>
+<pre><code class="java">public void print() &#123;
+    Runnable r = () -&gt; System.out.println(&quot;Hello world&quot;);
+    r.run();
+&#125;
+</code></pre>
+<p>最终生成的结构图如下：</p>
+<p><img src="https://img-blog.csdnimg.cn/9f8a3a8bc03244a5a18d4bfb886bb6fb.png" alt="BootstrapMethods 的结构图" referrerpolicy="no-referrer"><figcaption class="post-image-caption">BootstrapMethods 的结构图</figcaption></figure></p>
+<h3><span class="prefix"></span><span class="content">21. 模块化相关属性</span><span class="suffix"></span></h3><p>JDK 9 发布了一个非常重要的功能，那就是 Java 的模块化，模块化描述文件 <code>module-info.java</code> 最终也会编译成独立的 Class 文件来存储，Class 文件属性中扩展了 <code>Module</code> 、<code>ModulePackages</code> 和 <code>ModuleMainClass</code>  三个属性用于支持 Java 模块化的相关功能。其属性结构也相对较复杂，但模块化功能在开发中基本没有使用过，在此也不过多赘述，其结构信息，如你感兴趣，可以去查阅 《Java 虚拟机规范》。</p>
+<h3><span class="prefix"></span><span class="content">22. PermittedSubclasses</span><span class="suffix"></span></h3><p>在 Java 17 正式发布了 Sealed Classes， 翻译为密封类、封闭类。代表该类&#x2F;接口是一个封闭的类&#x2F;接口，只有许可的类&#x2F;接口才能继承或实现该类&#x2F;接口。如果是 <code>sealed</code> 修饰的类，就会有 <code>PermittedSubclasses</code> 属性。</p>
+<p>在没有封闭类之前，Java 控制类继承有两种方式：</p>
+<ol>
+<li>用关键字 <code>final</code> 修饰类，类就成了终态类，无法被继承；比如我们经常使用的 <code>String</code> 类</li>
+<li><code>package-private</code> 的类， 即非 <code>public</code> 类，这样只有同包下的类才能继承</li>
+</ol>
+<p>针对<code>package-private</code> 的类， 还是能被继承后并进行扩展，而封闭类能够提供了更精细粒度的可扩展性。 <code>PermittedSubclasses</code> 属性就是用来记录这些信息的：</p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th>数据长度</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>attribute_name_index</td>
+<td>2 个字节</td>
+<td>属性名索引</td>
+</tr>
+<tr>
+<td>attribute_length</td>
+<td>4 个字节</td>
+<td>属性长度</td>
+</tr>
+<tr>
+<td>number_of_classes</td>
+<td>2 个字节</td>
+<td>允许的子类数量</td>
+</tr>
+<tr>
+<td>classes</td>
+<td>number_of_classes * 2 字节</td>
+<td>子类集合</td>
+</tr>
+</tbody></table>
+<p>其中，<code>number_of_classes</code> 表示该类允许被继承的类的个数，<code>classes</code> 数组中包含了所有的指定的继承类，里面存储的为常量池指针，指向的为 <code>CONSTANT_Class_info</code> 字段。</p>
+<p>下面是我写的一段代码，用来查看  <code>PermittedSubclasses</code> 的最终结构：</p>
+<pre><code class="java">public sealed interface SealedClassInterface 
+  permits SealedClassInterfaceImpl1, SealedClassInterfaceImpl2 &#123;
+&#125;
+</code></pre>
+<p>最终生成的结构图如下：</p>
+<p><img src="https://img-blog.csdnimg.cn/9abb34b869a240c1a88b4d7c1ac148ac.png" alt="PermittedSubclasses 属性结构" referrerpolicy="no-referrer"><figcaption class="post-image-caption">PermittedSubclasses 属性结构</figcaption></figure></p>
+
+        </section>
+        </div>
+
+    
+
+</div>
+                <!-- 
+                    <div class="post_pre_next">
+    
+        <div class="post-pre">
+            <a href="/2023/05/26/Android-image-encode/">上一篇: 安卓图片编码之必备技能</a>
+        </div>
+    
+    
+        <a href="/2023/02/25/git-principle-analysis-02/">下一篇: 
+            Git 必知必会：原理剖析（二）
+        </a>
+    
+</div>
+
+
+                 -->
+                <div class="footer">
+    <span>Copyright © 2023 大罗说事</span>
+</div>
+
+<!-- 
+<link rel="stylesheet" href="/css/highlight.default.css">
+ -->
+<style type="text/css" id="atom-one-dark">pre code.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 12px;
+  font-size: 12px;
+}
+/*
+
+Atom One Dark by Daniel Gamage
+Original One Dark Syntax theme from https://github.com/atom/one-dark-syntax
+
+base:    #282c34
+mono-1:  #abb2bf
+mono-2:  #818896
+mono-3:  #5c6370
+hue-1:   #56b6c2
+hue-2:   #61aeee
+hue-3:   #c678dd
+hue-4:   #98c379
+hue-5:   #e06c75
+hue-5-2: #be5046
+hue-6:   #d19a66
+hue-6-2: #e6c07b
+
+*/
+
+.hljs {
+  color: #abb2bf;
+  background: #282c34;
+}
+
+.hljs-comment,
+.hljs-quote {
+  color: #5c6370;
+  font-style: italic;
+}
+
+.hljs-doctag,
+.hljs-keyword,
+.hljs-formula {
+  color: #c678dd;
+}
+
+.hljs-section,
+.hljs-name,
+.hljs-selector-tag,
+.hljs-deletion,
+.hljs-subst {
+  color: #e06c75;
+}
+
+.hljs-literal {
+  color: #56b6c2;
+}
+
+.hljs-string,
+.hljs-regexp,
+.hljs-addition,
+.hljs-attribute,
+.hljs-meta .hljs-string {
+  color: #98c379;
+}
+
+.hljs-attr,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-type,
+.hljs-selector-class,
+.hljs-selector-attr,
+.hljs-selector-pseudo,
+.hljs-number {
+  color: #d19a66;
+}
+
+.hljs-symbol,
+.hljs-bullet,
+.hljs-link,
+.hljs-meta,
+.hljs-selector-id,
+.hljs-title {
+  color: #61aeee;
+}
+
+.hljs-built_in,
+.hljs-title.class_,
+.hljs-class .hljs-title {
+  color: #e6c07b;
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-strong {
+  font-weight: bold;
+}
+
+.hljs-link {
+  text-decoration: underline;
+}
+
+</style>
+<style type="text/css" id="code-theme">pre::before {
+    content: '';
+    display: block;
+    background: url("http://pinned.github.io/img/mac_style.svg");
+    height: 30px;
+    width: 100%;
+    background-size: 40px;
+    background-repeat: no-repeat;
+    background-color: #282c34;
+    margin-bottom: -7px;
+    border-radius: 5px;
+    background-position: 10px 10px;
+}
+
+pre code {
+    border-radius: 5px;
+}</style>
+
+<script src="/js/highlight.min.js"></script>
+
+
+<script src="/js/highlightjs-line-numbers.js"></script>
+
+
+<script src="/js/juice.js"></script>
+
+
+<script src="/js/copy_wechat.js"></script>
+
+
+<script>
+    hljs.highlightAll();
+    window.onload = function() {
+        // 判断是否为手机浏览器
+        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+        if (!isMobile) {
+            fetch('https://pinned.github.io/bing-daily-picture/index.json')
+                .then(response => response.text())
+                .then(data => {
+                    var result = JSON.parse(data)
+                    var count = result.images.length
+                    const index = Math.floor(Math.random() * count);
+                    document.getElementById("bing-bg").src = "https://cn.bing.com" + result.images[index].url;
+                }); // 返回的结果
+        } 
+    }    
+</script>
+
+            </div>
+        </div>
+    </body>
+</html>

@@ -708,76 +708,97 @@ a {
     
     
     
-    
-    
-    
     <div class="post">
-        <a class="post-title" href="/2016/10/17/ubuntu-ruby-install/">Ubuntu中安装Ruby的一些注意事项</a>
+        <a class="post-title" href="/2022/06/30/Android-VM/">这么多年，Android 虚拟机到底干了些什么？</a>
         <div class="post-except">
             
-                使用RVM安装Ruby安装RVM
-curl -L get.rvm.io | bash -s stable
-//若提示找不到公钥，执行下边语句
-gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
-//然后，重新执行，安装完rvm之后，需配置终端，以便下次打开终端能直接只用rvm。更改终端配置方法：参见https://rvm.io/integration
+                在 Android 操作系统中，有一个非常重要的核心部分： Android Runtime。说到这个，我相信很多人都听到过 Dalvik、ART、JIT 以及 AOT。或许好多人也和我之前一样，并不了解这些名词，以及这些名词背后做了些什么事情。本文从笔者了解到的信息，记录了 Android Runtime 中设计的一些概念，以及应用。
+1. 虚拟机在了解上面提到的名词之前，我们需要先知道什么是虚拟机， 它和 Android 又有什么样的渊源。
+在 2017 年的 Google
             
-            <a class="read-more" href="/2016/10/17/ubuntu-ruby-install/"> ... </a>
+            <a class="read-more" href="/2022/06/30/Android-VM/"> ... </a>
         </div>
-        <div class="post-date">2016.10.17</div>
+        <div class="post-date">2022.06.30</div>
     </div>
     
     
     
     
     <div class="post">
-        <a class="post-title" href="/2016/10/10/Shell-Sub-String/">Shell脚本8种字符串截取方法</a>
+        <a class="post-title" href="/2019/08/10/Android-network-Configuration/">Android 网络配置</a>
         <div class="post-except">
             
-                假设有变量： var=http://blog.knero.cn/test.html
-#号截取，删除左边字符，保留右边字符示例
-var=http://blog.knero.cn/test.html
-sub=$&#123;var#*/&#125;
-echo $sub
-
-输出结果
-/blog.knero.cn/test.html
-
-其中var是变量名，**#号是运算符，&#x2F;* 表示从左边开始删除第一个**&#x2F;号及左边的所有字符即删除http:&#x2F;**结果是 
+                HTTP 与 HTTPS自2017年1月1日开始，苹果要求所有的APP都要使用 HTTPS 进行网络请求，否则无法上架。但是 HTTPS 在 2000 年就已经确定下来。10多年过去，现在依然还有很多网站使用着 HTTP 协议。
+HTTP协议以明文方式发送内容，不提供任何方式的数据加密，如果攻击者截取了Web浏览器和网站服务器之间的传输报文，就可以直接读懂其中的信息。为了数据传输的安全，HTTPS在HTTP的基础上加入了SSL协议，SSL依靠证书来验证服务器的身份，并为浏览器
             
-            <a class="read-more" href="/2016/10/10/Shell-Sub-String/"> ... </a>
+            <a class="read-more" href="/2019/08/10/Android-network-Configuration/"> ... </a>
         </div>
-        <div class="post-date">2016.10.10</div>
+        <div class="post-date">2019.08.10</div>
     </div>
     
     
     
     
     <div class="post">
-        <a class="post-title" href="/2015/12/29/Android-RelativeLayout-Gravity/">Android RelativeLayout 之 Gravity 的使用</a>
+        <a class="post-title" href="/2019/08/10/Android-network-security-configuration/">Android Network security configuration</a>
         <div class="post-except">
             
-                在xml中，ViewGroup用来控制view布局位置，我们可以使用android:gravity=&quot;center&quot;来实现。但是很少会在RelativeLayout中使用，今天碰到了一个项目中的布局使用了这个属性。但是在印象中这个属性在RelativeLayout是不生效的。但是，在项目中，这个属性生效了，并且引起了一个问题。去百度了一下，好多人在博客里面写的这个属性在RelativeLayout不生效，在这里，我在强调一下，RelativeLayout中
+                The Network Security Configuration feature lets apps customize their network security settings in a safe, declarative configuration file without modifying app code. These settings can be configured for specific domains and for a specific ap
             
-            <a class="read-more" href="/2015/12/29/Android-RelativeLayout-Gravity/"> ... </a>
+            <a class="read-more" href="/2019/08/10/Android-network-security-configuration/"> ... </a>
         </div>
-        <div class="post-date">2015.12.29</div>
+        <div class="post-date">2019.08.10</div>
     </div>
     
     
     
     
     <div class="post">
-        <a class="post-title" href="/2015/12/22/gradle-download-error/">Android Studio Gradle Download Error</a>
+        <a class="post-title" href="/2019/05/21/Android-camera-preview/">Android Camera Preview</a>
         <div class="post-except">
             
-                自从使用Android Studio 开始，就一直存在一个问题，那就是Gradle下载不下来。不仅如此，JCtener 与 mavenCentral 也是被墙了。
-
-我们先来解决gradle 下载的问题
-用浏览器挂上vpn， 将你需要的gralde-version.zip文件下载下来，放到本地。打开你的项目，找到当前目录下 gradle -&gt; wrapper -&gt; gradle-wrapper.properties , 打开这个文件，将最后一行的地址修改为如下：d
+                Android Camera Preview现如今，每一台Android设备基本都有多个摄像头，基本可以分为两类，前置摄像头与后置摄像头。在API中，每一个摄像头硬件，称之为一个 CameraDevice。我们开发者关心的是，每一个 CameraDevice 同时会输出多个数据流。
+0*ugRv8BWWMigxK03S
+此图来源于 Google I&#x2F;O 2018， 从图中，可以看到，摄像头获取到的数据流会转换不同的数据流来交由不同的逻辑模块进行处理。为什么会这样子做
             
-            <a class="read-more" href="/2015/12/22/gradle-download-error/"> ... </a>
+            <a class="read-more" href="/2019/05/21/Android-camera-preview/"> ... </a>
         </div>
-        <div class="post-date">2015.12.22</div>
+        <div class="post-date">2019.05.21</div>
+    </div>
+    
+    
+    
+    
+    <div class="post">
+        <a class="post-title" href="/2017/10/15/gradlew%20source%20analyze/">gradlew 源码分析</a>
+        <div class="post-except">
+            
+                gradlew 源码分析使用Android Studio 新建一个项目，会默认使用gradle编译项目。在编译的时候可以使用：gradle assembleRelease, 当然，如果没有安装gradle的时候，也可以使用项目文件夹下面的gradlew进行编译。
+可以看到gradlew是一个shell脚本，他读取了系统的一些环境变量，并运行了gradle&#x2F;wrapper&#x2F;gradle-wrapper.jar文件的org.gradle.wrapper.Gra
+            
+            <a class="read-more" href="/2017/10/15/gradlew%20source%20analyze/"> ... </a>
+        </div>
+        <div class="post-date">2017.10.15</div>
+    </div>
+    
+    
+    
+    
+    <div class="post">
+        <a class="post-title" href="/2017/02/10/proguard-translate/">Proguard 翻译</a>
+        <div class="post-except">
+            
+                [译] ProGuard 选项
+注：只针对 Android 平台翻译了 ProGuard 选项的相关用法，更多信息请查看官方原文。
+
+Input&#x2F;Output Options@filename简短版 -include filename
+-include filename读取指定文件的配置参数
+-basedirectory directoryname指定当前配置文件中所有相对文件路径的基础目录
+-injars class_path指定需要处理的 jar&#x2F;aa
+            
+            <a class="read-more" href="/2017/02/10/proguard-translate/"> ... </a>
+        </div>
+        <div class="post-date">2017.02.10</div>
     </div>
     
     
@@ -787,101 +808,50 @@ echo $sub
     
     
     <div class="post">
-        <a class="post-title" href="/2015/07/27/git-merge-two-project/">Git 合并两个Project</a>
+        <a class="post-title" href="/2016/10/21/ubuntu-install-tensorflow/">Ubuntu 安装 Tensorflow</a>
         <div class="post-except">
             
-                问题： 公司开始使用的是SVN进行项目管理的，现在有一个项目，有两个Project，其中一个是Application， 另一个是Library。现在要把SVN上面的项目迁移到Git服务器上去。但是Git服务器上面只有一个Proj，也就是说，现在需要将两个项目和在一起。想想，本来也应该把两个项目合在一起，不然，版本管理必然也会是一个大的问题。
-解决方式
-如果不需要保存SVN上的提交日志，那直接复制提交就行了。
+                首先贴一下官方GET STARTED地址： 传送门
+安装步骤：
 
-要保存提交日志
-首先要将SVN的项目迁移到GIT服务器上。我在本地
+安装python
+
+sudo apt-get install python-pip python-dev
+
+
+按电脑配置环境变量
+
+// Ubuntu/Linux 64-bit, CPU only, Python 2.7
+export TF_BINARY_URL=https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-0.11.0rc0-cp
             
-            <a class="read-more" href="/2015/07/27/git-merge-two-project/"> ... </a>
+            <a class="read-more" href="/2016/10/21/ubuntu-install-tensorflow/"> ... </a>
         </div>
-        <div class="post-date">2015.07.27</div>
+        <div class="post-date">2016.10.21</div>
     </div>
     
     
     
     
     <div class="post">
-        <a class="post-title" href="/2015/06/29/android-add-view/">Android加载子View</a>
+        <a class="post-title" href="/2016/10/18/android-dynamic-create-menu/">Android 动态修改菜单</a>
         <div class="post-except">
             
-                Android的一个View界面都是通过ViewGroup 加上很多子View来实现的，即viewGroup.addView(view)。
-让我一起来看看源码是如何执行的。
-addView(view)
-public void addView(View child) &#123;
-    addView(child, -1);
-&#125;
-public void addView(View child, int index) &#123;
-    if (child == nu
+                在一个Android创建菜单menu时，需要重写Activity的onCreateOptionsMenu(Menu menu)方法，这个方法只在第一次创建的时候调用一次，所以如果之后想对menu进行动态的修改，那么就不要再对onCreateOptionsMenu做什么手脚了。
+动态修改菜单就要用到onPrepareOptionsMenu(Menu menu)方法了。onPrepareOptionsMenu与onCreateOptionsMenu不同的是，他在每次按下menu硬
             
-            <a class="read-more" href="/2015/06/29/android-add-view/"> ... </a>
+            <a class="read-more" href="/2016/10/18/android-dynamic-create-menu/"> ... </a>
         </div>
-        <div class="post-date">2015.06.29</div>
+        <div class="post-date">2016.10.18</div>
     </div>
     
     
     
-    
-    <div class="post">
-        <a class="post-title" href="/2015/05/25/android-soft-keyboard/">【转】Android打开与关闭软键盘</a>
-        <div class="post-except">
-            
-                
-方法一(如果输入法在窗口上已经显示，则隐藏，反之则显示)
-
-InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS); 
-
-
-方法二(View为接受软键盘输入的视图)
-
-InputMethodManager imm = (Inpu
-            
-            <a class="read-more" href="/2015/05/25/android-soft-keyboard/"> ... </a>
-        </div>
-        <div class="post-date">2015.05.25</div>
-    </div>
-    
-    
-    
-    
-    <div class="post">
-        <a class="post-title" href="/2015/05/22/android-like-qq-input/">Android EditText软键盘显示隐藏以及“监听”</a>
-        <div class="post-except">
-            
-                
-起因
-
-本人在做类似于微信、易信等这样的输入框时，遇到了一个问题。聊天界面最下面一般有输入文字的EditText和表情按钮等。
-
-点击表情会在这下面显示表情选择，如图2，如果之前点击输入框弹出了软键盘，那么还需要隐藏软键盘；
-
-点击输入框，弹出软键盘，如果之前显示了表情选择，则还需要隐藏表情选择。
-
-
-
-解决办法
-
-
-隐藏输入法
-
- private boolean showKeyboard() &#123;
-    InputMethodManager imm = (Inp
-            
-            <a class="read-more" href="/2015/05/22/android-like-qq-input/"> ... </a>
-        </div>
-        <div class="post-date">2015.05.22</div>
-    </div>
     
     
 </div>
 
 <div class="paginator">
-    <a class="extend prev" rel="prev" href="/">上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/3/">下一页</a>
+    <a class="extend prev" rel="prev" href="/">上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/3/">下一页</a>
 </div>
 
                 <!--  -->

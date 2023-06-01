@@ -708,103 +708,73 @@ a {
     
     
     
-    
-    
-    
     <div class="post">
-        <a class="post-title" href="/2015/05/14/android-mipmap-folder/">Android mipmap文件夹</a>
+        <a class="post-title" href="/2016/10/17/ubuntu-ruby-install/">Ubuntu中安装Ruby的一些注意事项</a>
         <div class="post-except">
             
-                用Android Studio 创建项目的时候，默认创建mipmap文件夹，而不是drawable
-查看了一下官方的解释，如下：
-drawable/
-For bitmap files (PNG, JPEG, or GIF), 9-Patch image files, and XML files that describe Drawable shapes or Drawable objects that contain multiple states (normal, pres
+                使用RVM安装Ruby安装RVM
+curl -L get.rvm.io | bash -s stable
+//若提示找不到公钥，执行下边语句
+gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+//然后，重新执行，安装完rvm之后，需配置终端，以便下次打开终端能直接只用rvm。更改终端配置方法：参见https://rvm.io/integration
             
-            <a class="read-more" href="/2015/05/14/android-mipmap-folder/"> ... </a>
+            <a class="read-more" href="/2016/10/17/ubuntu-ruby-install/"> ... </a>
         </div>
-        <div class="post-date">2015.05.14</div>
+        <div class="post-date">2016.10.17</div>
     </div>
     
     
     
     
     <div class="post">
-        <a class="post-title" href="/2015/05/12/android-update-sdk-no-ui/">Android 用命令行更新SDK</a>
+        <a class="post-title" href="/2016/10/10/Shell-Sub-String/">Shell脚本8种字符串截取方法</a>
         <div class="post-except">
             
-                基本使用在使用桌面系统的时候，我们都是用的SDK Manager, 如果现在要你部署一台CI服务器呢。
-我擦，ssh上去，没有界面，怎么破。
-查找了一下，Android SDK更新是支持命令的
-如下：
-android update sdk --no-ui
+                假设有变量： var=http://blog.knero.cn/test.html
+#号截取，删除左边字符，保留右边字符示例
+var=http://blog.knero.cn/test.html
+sub=$&#123;var#*/&#125;
+echo $sub
 
-上面的方法虽然可以更新SDK，但是他会把所有的内容都下载下来，很明显我们并不想这样子。
-查看命令帮助可以看到有一个--filter属性，如下使用
-android update sdk --filter &lt;compon
+输出结果
+/blog.knero.cn/test.html
+
+其中var是变量名，**#号是运算符，&#x2F;* 表示从左边开始删除第一个**&#x2F;号及左边的所有字符即删除http:&#x2F;**结果是 
             
-            <a class="read-more" href="/2015/05/12/android-update-sdk-no-ui/"> ... </a>
+            <a class="read-more" href="/2016/10/10/Shell-Sub-String/"> ... </a>
         </div>
-        <div class="post-date">2015.05.12</div>
+        <div class="post-date">2016.10.10</div>
     </div>
     
     
     
     
     <div class="post">
-        <a class="post-title" href="/2015/05/11/android-aidl-server/">Android Service学习之AIDL, Parcelable和远程服务</a>
+        <a class="post-title" href="/2015/12/29/Android-RelativeLayout-Gravity/">Android RelativeLayout 之 Gravity 的使用</a>
         <div class="post-except">
             
-                AIDL的作用由于每个应用程序都运行在自己的进程空间，并且可以从应用程序UI运行另一个服务进程，而且经常会在不同的进程间传递对象。在Android平台，一个进程通常不能访问另一个进程的内存空间，所以要想对话，需要将对象分解成操作系统可以理解的基本单元，并且有序的通过进程边界。
-通过代码来实现这个数据传输过程是冗长乏味的，Android提供了AIDL工具来处理这项工作。
-AIDL (Android Interface Definition Language) 是一种IDL 语言
+                在xml中，ViewGroup用来控制view布局位置，我们可以使用android:gravity=&quot;center&quot;来实现。但是很少会在RelativeLayout中使用，今天碰到了一个项目中的布局使用了这个属性。但是在印象中这个属性在RelativeLayout是不生效的。但是，在项目中，这个属性生效了，并且引起了一个问题。去百度了一下，好多人在博客里面写的这个属性在RelativeLayout不生效，在这里，我在强调一下，RelativeLayout中
             
-            <a class="read-more" href="/2015/05/11/android-aidl-server/"> ... </a>
+            <a class="read-more" href="/2015/12/29/Android-RelativeLayout-Gravity/"> ... </a>
         </div>
-        <div class="post-date">2015.05.11</div>
+        <div class="post-date">2015.12.29</div>
     </div>
     
     
     
     
     <div class="post">
-        <a class="post-title" href="/2015/05/11/svn-to-git/">SVN迁移到GIT</a>
+        <a class="post-title" href="/2015/12/22/gradle-download-error/">Android Studio Gradle Download Error</a>
         <div class="post-except">
             
-                通过git svn clone将一个SVN项目克隆成一个git版本库
-# 参数--no-metadata表示阻止git导出SVN包含的一些无用信息
-git svn clone svn://localhost/proj/ --no-metadata
+                自从使用Android Studio 开始，就一直存在一个问题，那就是Gradle下载不下来。不仅如此，JCtener 与 mavenCentral 也是被墙了。
 
-提交到git库
-git remote add origin git@localhost/proj.git
-git push --set-upstream origin master
-
-
+我们先来解决gradle 下载的问题
+用浏览器挂上vpn， 将你需要的gralde-version.zip文件下载下来，放到本地。打开你的项目，找到当前目录下 gradle -&gt; wrapper -&gt; gradle-wrapper.properties , 打开这个文件，将最后一行的地址修改为如下：d
             
-            <a class="read-more" href="/2015/05/11/svn-to-git/"> ... </a>
+            <a class="read-more" href="/2015/12/22/gradle-download-error/"> ... </a>
         </div>
-        <div class="post-date">2015.05.11</div>
-    </div>
-    
-    
-    
-    
-    <div class="post">
-        <a class="post-title" href="/2015/04/30/mac-iterm2-zsh/">Mac Iterm2 zsh使用</a>
-        <div class="post-except">
-            
-                安装zshbrew install zsh
-
-下载oh my zsh项目git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
-
-设置zshcp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
-chsh -s /bin/zsh
-
-VIM 的一些配置syntax on                &quot;语法高亮
-set nu!       
-            
-            <a class="read-more" href="/2015/04/30/mac-iterm2-zsh/"> ... </a>
-        </div>
-        <div class="post-date">2015.04.30</div>
+        <div class="post-date">2015.12.22</div>
     </div>
     
     
@@ -813,34 +783,105 @@ set nu!
     
     
     
-    
-    
+    <div class="post">
+        <a class="post-title" href="/2015/07/27/git-merge-two-project/">Git 合并两个Project</a>
+        <div class="post-except">
+            
+                问题： 公司开始使用的是SVN进行项目管理的，现在有一个项目，有两个Project，其中一个是Application， 另一个是Library。现在要把SVN上面的项目迁移到Git服务器上去。但是Git服务器上面只有一个Proj，也就是说，现在需要将两个项目和在一起。想想，本来也应该把两个项目合在一起，不然，版本管理必然也会是一个大的问题。
+解决方式
+如果不需要保存SVN上的提交日志，那直接复制提交就行了。
+
+要保存提交日志
+首先要将SVN的项目迁移到GIT服务器上。我在本地
+            
+            <a class="read-more" href="/2015/07/27/git-merge-two-project/"> ... </a>
+        </div>
+        <div class="post-date">2015.07.27</div>
+    </div>
     
     
     
     
     <div class="post">
-        <a class="post-title" href="/2015/04/17/android-notification-small-icon/">Android 5.0设备中，Notification小图标是白色的</a>
+        <a class="post-title" href="/2015/06/29/android-add-view/">Android加载子View</a>
         <div class="post-except">
             
-                问题描述在使用消息推送，在通知栏中展示通知，我们会有两个图标，一个是在状态栏展示的小图标，一个是打开通知中心，展示的大图标我在我自己的测试设备中，小图标始终显示为一个白色的空白图标。
-问题解决
-原文地址：Notification bar icon turns white in Android 5 Lollipop
-
-在这里，我把文章中说的东西抄一遍：
-在Android中用来展示Notification图标的代码如下：
-// android_frameworks_base/pa
+                Android的一个View界面都是通过ViewGroup 加上很多子View来实现的，即viewGroup.addView(view)。
+让我一起来看看源码是如何执行的。
+addView(view)
+public void addView(View child) &#123;
+    addView(child, -1);
+&#125;
+public void addView(View child, int index) &#123;
+    if (child == nu
             
-            <a class="read-more" href="/2015/04/17/android-notification-small-icon/"> ... </a>
+            <a class="read-more" href="/2015/06/29/android-add-view/"> ... </a>
         </div>
-        <div class="post-date">2015.04.17</div>
+        <div class="post-date">2015.06.29</div>
     </div>
+    
+    
+    
+    
+    <div class="post">
+        <a class="post-title" href="/2015/05/25/android-soft-keyboard/">【转】Android打开与关闭软键盘</a>
+        <div class="post-except">
+            
+                
+方法一(如果输入法在窗口上已经显示，则隐藏，反之则显示)
+
+InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS); 
+
+
+方法二(View为接受软键盘输入的视图)
+
+InputMethodManager imm = (Inpu
+            
+            <a class="read-more" href="/2015/05/25/android-soft-keyboard/"> ... </a>
+        </div>
+        <div class="post-date">2015.05.25</div>
+    </div>
+    
+    
+    
+    
+    <div class="post">
+        <a class="post-title" href="/2015/05/22/android-like-qq-input/">Android EditText软键盘显示隐藏以及“监听”</a>
+        <div class="post-except">
+            
+                
+起因
+
+本人在做类似于微信、易信等这样的输入框时，遇到了一个问题。聊天界面最下面一般有输入文字的EditText和表情按钮等。
+
+点击表情会在这下面显示表情选择，如图2，如果之前点击输入框弹出了软键盘，那么还需要隐藏软键盘；
+
+点击输入框，弹出软键盘，如果之前显示了表情选择，则还需要隐藏表情选择。
+
+
+
+解决办法
+
+
+隐藏输入法
+
+ private boolean showKeyboard() &#123;
+    InputMethodManager imm = (Inp
+            
+            <a class="read-more" href="/2015/05/22/android-like-qq-input/"> ... </a>
+        </div>
+        <div class="post-date">2015.05.22</div>
+    </div>
+    
+    
+    
     
     
 </div>
 
 <div class="paginator">
-    <a class="extend prev" rel="prev" href="/page/2/">上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/4/">下一页</a>
+    <a class="extend prev" rel="prev" href="/page/2/">上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/4/">下一页</a>
 </div>
 
                 <!--  -->

@@ -709,6 +709,144 @@ a {
     
     
     <div class="post">
+        <a class="post-title" href="/2023/05/26/Android-image-encode/">安卓图片编码之必备技能</a>
+        <div class="post-except">
+            
+                在进行 Android 开发时，不可避免地会接触到许多图片格式，例如 JPEG、PNG 等。就以 JPEG 格式为例，它是一种有损压缩模式，使用 YCbCr 的颜色空间来保存色彩信息。当需要在屏幕上显示图片时，会将 JPEG 数据解码成 RGB 进行显示。本篇文章可能对初学者来说略显复杂。因此，建议读者具备一定的图像处理和 Android 开发基础知识。下面，一起来看看在 Android 中，如何使用图片编码以及对它们进行操作和处理。
+NV21 中图片数据编码首先，让我们来谈
+            
+            <a class="read-more" href="/2023/05/26/Android-image-encode/"> ... </a>
+        </div>
+        <div class="post-date">2023.05.26</div>
+    </div>
+    
+    
+    
+    
+    <div class="post">
+        <a class="post-title" href="/2023/05/23/java-class-file-format/">解密 Java Class 文件不为人知的秘密</a>
+        <div class="post-except">
+            
+                Java 诞生多年，因此在网络上，有关 Java Class 文件格式解析的文章有很多，但他们大多数都是在列举《Java 虚拟机》中定义的格式，通读下来，好像所有的东西都讲清楚了，但是我个人好像并没有看懂，不知道定义的这些东西到底是用来存储什么东西的。本文仍然是在讲《Java 虚拟机》中定义的 Class 文件的格式，但会更多的从一个应用开发者的角度，将字节码文件中定义的字段与原始的 Java 代码信息进行一些关联，让应用开发者能够更好的理解其中的内容。当然，文中也存在部分知
+            
+            <a class="read-more" href="/2023/05/23/java-class-file-format/"> ... </a>
+        </div>
+        <div class="post-date">2023.05.23</div>
+    </div>
+    
+    
+    
+    
+    <div class="post">
+        <a class="post-title" href="/2023/02/25/git-principle-analysis-02/">Git 必知必会：原理剖析（二）</a>
+        <div class="post-except">
+            
+                书接上文，在上一篇文章记录Git 必知必会：原理解析 中记录了 Git 原理中的一部分信息，但在后续的学习过程中，还有部分内容需要记录，但有了此篇内容。
+一、Git 中的引用从上面的 Git 仓库树目录存储结构图中，可以看到，通过 commit 的 SHA-1 值，我们就一步一步查看所有的提交记录，以及项目中的文件内容。但 40 位的字符串几乎不可能记忆下来，也没有什么实质性的意义。那如果我们能给这些值取上一个别名，那是不是就能够很容易找到以及使用了。
+在 Git 中，此功能
+            
+            <a class="read-more" href="/2023/02/25/git-principle-analysis-02/"> ... </a>
+        </div>
+        <div class="post-date">2023.02.25</div>
+    </div>
+    
+    
+    
+    
+    <div class="post">
+        <a class="post-title" href="/2023/02/17/git-principle-analysis-01/">Git 必知必会：原理剖析（一）</a>
+        <div class="post-except">
+            
+                作为程序员，最常用的版本管理工具便是 Git。但我相信大多数人和我一样，从没有认真了解过其具体实现的原理。但了解 Git 的原理，能有助于我们工作更好的使用 Git。下面，让我们一起来了解 Git 中的一些概念，以及实现。
+一、概念Git 是一个分布式版本控制软件，在使用的过程中，与 CVS 类不同，不需要使用服务端，就可以实现版本控制。但在我们常用的使用过程中，依然会一个中间服务器作为 original 来实现代码的托管、控制 等，整个流程如下图所示：
+Git 中代码的流转
+            
+            <a class="read-more" href="/2023/02/17/git-principle-analysis-01/"> ... </a>
+        </div>
+        <div class="post-date">2023.02.17</div>
+    </div>
+    
+    
+    
+    
+    <div class="post">
+        <a class="post-title" href="/2022/10/13/java-string-encoding/">深入理解 Java 字符串编码</a>
+        <div class="post-except">
+            
+                近期在工作中，遇到了一段历史代码，在代码中，将一个字符串进行加密，得到一个 byte 数组， 在代码中，这个 byte 数组 需要存储到 文件中，但代码却是用这个 byte 数组 创建了一个 String ，然后在将 String 写入到文件中。 聪明的你应该发现问题了，byte 数组 直接转成 String 会有问题，一般的处理方法是将 byte 数组 使用 Base64 编码，然后将编码后的字符串写入文件中，在使用的时候，先使用 Base64 解码。
+可是，为什么 byt
+            
+            <a class="read-more" href="/2022/10/13/java-string-encoding/"> ... </a>
+        </div>
+        <div class="post-date">2022.10.13</div>
+    </div>
+    
+    
+    
+    
+    <div class="post">
+        <a class="post-title" href="/2022/10/01/android-proguard-multi-module/">深入 Android 混淆实践：多模块打包爬坑之旅</a>
+        <div class="post-except">
+            
+                在做 SDK 开发的时候，会将 SDK 中不同功能进行模块化拆分，分解成不同的模块，在对外提供 SDK 时，将多个 AAR 文件交付给使用方。
+来看一下这个场景，假设现在 SDK 有 A模块、B模块 两个模块，其中 B模块 依赖 A模块 。现在，对这两个模块进行打包，并且要开启混淆。发现了吗？要让 B模块 中的类，能正常使用 A模块 中的接口&#x2F;类，我们需要将  A模块  中的接口&#x2F;类进行 keep ，才能满足相应的要求。但是 A模块 中的那些接口&#x2F
+            
+            <a class="read-more" href="/2022/10/01/android-proguard-multi-module/"> ... </a>
+        </div>
+        <div class="post-date">2022.10.01</div>
+    </div>
+    
+    
+    
+    
+    <div class="post">
+        <a class="post-title" href="/2022/09/23/android-proguard/">深入 Android 混淆实践：ProGuard 通关秘籍</a>
+        <div class="post-except">
+            
+                使用 Java 编写的源代码在编译时会生成 CLASS 文件，而 CLASS 字节码的规则非常的标准，按照对应的格式能够很好的反编译出原代码。市面上也存在很多很好用的工具，来帮助我们进行反编译并阅读 CLASS 中的代码逻辑。为了更好的保护代码安全，混淆是最容易做的一件事情。
+针对 java 的混淆，有一个开源项目 ProGuard 就是常用的混淆工具。他可以对代码进行 压缩、优化 、混淆。本文将基于在使用过程中，用到的知识点进行记录。
+ProGuard 工作流程在 ProG
+            
+            <a class="read-more" href="/2022/09/23/android-proguard/"> ... </a>
+        </div>
+        <div class="post-date">2022.09.23</div>
+    </div>
+    
+    
+    
+    
+    <div class="post">
+        <a class="post-title" href="/2022/08/20/iterm2-configuration/">iTerm2 常用配置</a>
+        <div class="post-except">
+            
+                工欲善其事，必先利其器。当我们拿到一台新电脑，为了让自己的效率更高，当然需要做一些配置。本文将介绍对于终端的一些配置。
+1. 安装 iTerm2Mac OS 有自己自带的终端软件 Terminal ，但其功能相对较弱。在 Mac 上，有一个三方终端 iTerm2 可以使用。当拿到新电脑时，当然是第一时间装上这个软件。
+iTerm2 下载地址：https://www.iterm2.com/
+对于 iTerm2 来说，我有一个非常常用的功能就是分屏，快捷键为 command + 
+            
+            <a class="read-more" href="/2022/08/20/iterm2-configuration/"> ... </a>
+        </div>
+        <div class="post-date">2022.08.20</div>
+    </div>
+    
+    
+    
+    
+    <div class="post">
+        <a class="post-title" href="/2022/07/20/android-lambda-desciption/">在 Android 中使用 Lambda 的原理解析</a>
+        <div class="post-except">
+            
+                Java 在 Android 的发展过程中，扮演了非常重要的角色。在有 Kotlin 之前，开发语言是使用的 Java ，即使现在使用的 Kotlin ， 也是会编译成 Java 的字节码。但受限于 Oracle 的版权，Google 在 Android 上针对 Java 版本的升级，支持的都很不积极。因此，在不同的 Android 版本中，对 JVM 的语法支持不一样？那要如何让高版本的语法，在低版本中的系统中运行呢？ 本文以 Java 8 中的 Lambda 表达式运行在
+            
+            <a class="read-more" href="/2022/07/20/android-lambda-desciption/"> ... </a>
+        </div>
+        <div class="post-date">2022.07.20</div>
+    </div>
+    
+    
+    
+    
+    <div class="post">
         <a class="post-title" href="/2022/07/04/Java-Base64/">干货，深度解析 Base64 !</a>
         <div class="post-except">
             
@@ -720,149 +858,10 @@ a {
     </div>
     
     
-    
-    
-    <div class="post">
-        <a class="post-title" href="/2022/06/30/Android-VM/">这么多年，Android 虚拟机到底干了些什么？</a>
-        <div class="post-except">
-            
-                在 Android 操作系统中，有一个非常重要的核心部分： Android Runtime。说到这个，我相信很多人都听到过 Dalvik、ART、JIT 以及 AOT。或许好多人也和我之前一样，并不了解这些名词，以及这些名词背后做了些什么事情。本文从笔者了解到的信息，记录了 Android Runtime 中设计的一些概念，以及应用。
-1. 虚拟机在了解上面提到的名词之前，我们需要先知道什么是虚拟机， 它和 Android 又有什么样的渊源。
-在 2017 年的 Google
-            
-            <a class="read-more" href="/2022/06/30/Android-VM/"> ... </a>
-        </div>
-        <div class="post-date">2022.06.30</div>
-    </div>
-    
-    
-    
-    
-    <div class="post">
-        <a class="post-title" href="/2019/08/10/Android-network-Configuration/">Android 网络配置</a>
-        <div class="post-except">
-            
-                HTTP 与 HTTPS自2017年1月1日开始，苹果要求所有的APP都要使用 HTTPS 进行网络请求，否则无法上架。但是 HTTPS 在 2000 年就已经确定下来。10多年过去，现在依然还有很多网站使用着 HTTP 协议。
-HTTP协议以明文方式发送内容，不提供任何方式的数据加密，如果攻击者截取了Web浏览器和网站服务器之间的传输报文，就可以直接读懂其中的信息。为了数据传输的安全，HTTPS在HTTP的基础上加入了SSL协议，SSL依靠证书来验证服务器的身份，并为浏览器
-            
-            <a class="read-more" href="/2019/08/10/Android-network-Configuration/"> ... </a>
-        </div>
-        <div class="post-date">2019.08.10</div>
-    </div>
-    
-    
-    
-    
-    <div class="post">
-        <a class="post-title" href="/2019/08/10/Android-network-security-configuration/">Android Network security configuration</a>
-        <div class="post-except">
-            
-                The Network Security Configuration feature lets apps customize their network security settings in a safe, declarative configuration file without modifying app code. These settings can be configured for specific domains and for a specific ap
-            
-            <a class="read-more" href="/2019/08/10/Android-network-security-configuration/"> ... </a>
-        </div>
-        <div class="post-date">2019.08.10</div>
-    </div>
-    
-    
-    
-    
-    <div class="post">
-        <a class="post-title" href="/2019/05/21/Android-camera-preview/">Android Camera Preview</a>
-        <div class="post-except">
-            
-                Android Camera Preview现如今，每一台Android设备基本都有多个摄像头，基本可以分为两类，前置摄像头与后置摄像头。在API中，每一个摄像头硬件，称之为一个 CameraDevice。我们开发者关心的是，每一个 CameraDevice 同时会输出多个数据流。
-0*ugRv8BWWMigxK03S
-此图来源于 Google I&#x2F;O 2018， 从图中，可以看到，摄像头获取到的数据流会转换不同的数据流来交由不同的逻辑模块进行处理。为什么会这样子做
-            
-            <a class="read-more" href="/2019/05/21/Android-camera-preview/"> ... </a>
-        </div>
-        <div class="post-date">2019.05.21</div>
-    </div>
-    
-    
-    
-    
-    <div class="post">
-        <a class="post-title" href="/2017/10/15/gradlew%20source%20analyze/">gradlew 源码分析</a>
-        <div class="post-except">
-            
-                gradlew 源码分析使用Android Studio 新建一个项目，会默认使用gradle编译项目。在编译的时候可以使用：gradle assembleRelease, 当然，如果没有安装gradle的时候，也可以使用项目文件夹下面的gradlew进行编译。
-可以看到gradlew是一个shell脚本，他读取了系统的一些环境变量，并运行了gradle&#x2F;wrapper&#x2F;gradle-wrapper.jar文件的org.gradle.wrapper.Gra
-            
-            <a class="read-more" href="/2017/10/15/gradlew%20source%20analyze/"> ... </a>
-        </div>
-        <div class="post-date">2017.10.15</div>
-    </div>
-    
-    
-    
-    
-    <div class="post">
-        <a class="post-title" href="/2017/02/10/proguard-translate/">Proguard 翻译</a>
-        <div class="post-except">
-            
-                [译] ProGuard 选项
-注：只针对 Android 平台翻译了 ProGuard 选项的相关用法，更多信息请查看官方原文。
-
-Input&#x2F;Output Options@filename简短版 -include filename
--include filename读取指定文件的配置参数
--basedirectory directoryname指定当前配置文件中所有相对文件路径的基础目录
--injars class_path指定需要处理的 jar&#x2F;aa
-            
-            <a class="read-more" href="/2017/02/10/proguard-translate/"> ... </a>
-        </div>
-        <div class="post-date">2017.02.10</div>
-    </div>
-    
-    
-    
-    
-    
-    
-    
-    <div class="post">
-        <a class="post-title" href="/2016/10/21/ubuntu-install-tensorflow/">Ubuntu 安装 Tensorflow</a>
-        <div class="post-except">
-            
-                首先贴一下官方GET STARTED地址： 传送门
-安装步骤：
-
-安装python
-
-sudo apt-get install python-pip python-dev
-
-
-按电脑配置环境变量
-
-// Ubuntu/Linux 64-bit, CPU only, Python 2.7
-export TF_BINARY_URL=https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-0.11.0rc0-cp
-            
-            <a class="read-more" href="/2016/10/21/ubuntu-install-tensorflow/"> ... </a>
-        </div>
-        <div class="post-date">2016.10.21</div>
-    </div>
-    
-    
-    
-    
-    <div class="post">
-        <a class="post-title" href="/2016/10/18/android-dynamic-create-menu/">Android 动态修改菜单</a>
-        <div class="post-except">
-            
-                在一个Android创建菜单menu时，需要重写Activity的onCreateOptionsMenu(Menu menu)方法，这个方法只在第一次创建的时候调用一次，所以如果之后想对menu进行动态的修改，那么就不要再对onCreateOptionsMenu做什么手脚了。
-动态修改菜单就要用到onPrepareOptionsMenu(Menu menu)方法了。onPrepareOptionsMenu与onCreateOptionsMenu不同的是，他在每次按下menu硬
-            
-            <a class="read-more" href="/2016/10/18/android-dynamic-create-menu/"> ... </a>
-        </div>
-        <div class="post-date">2016.10.18</div>
-    </div>
-    
-    
 </div>
 
 <div class="paginator">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
 </div>
 
                 <!--  -->

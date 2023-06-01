@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+    <link rel="alternate icon" type="image/png" href="/img/favicon.png">
+    
+        <title>Git 必知必会：原理剖析（二） </title>
+    
+    <style type="text/css" id="reset">@charset "utf-8";
+
+*,
+*::before,
+*::after
+{
+    box-sizing: border-box;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+figure,
+blockquote,
+dl,
+dd
+{
+    margin: 0;
+}
+
+ul,
+ol
+{
+    list-style: none;
+}
+
+ul
+{
+    padding-inline-start: 0;
+}
+
+html,
+body
+{
+    scroll-behavior: smooth;
+}
+
+a:not([class])
+{
+    text-decoration-skip-ink: auto;
+}
+
+img,
+picture
+{
+    width: auto;
+    max-width: 100%;
+    display: block;
+}
+
+input,
+button,
+textarea,
+select
+{
+    font: inherit;
+}
+
+@media (prefers-reduced-motion: reduce)
+{
+    html:focus-within
+    {
+        scroll-behavior: auto;
+    }
+}</style>
+    <style type="text/css" id="style">@charset "utf-8";
+
+:root {
+    --font-color-0: #04077e;
+    --font-color-1: #000;
+    --font-color-2: #666;
+    --font-color-3: #aaa;
+    --bg-color-1: #eee;
+    --line-1: #ccc;
+    --line-2: #ddd;
+}
+
+p {
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    text-align: justify;
+}
+
+body {
+    font-family: "PingFang SC", BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serifhtml, body;
+    font-size: 16px;
+    line-height: 1.75;
+    letter-spacing: 0.6px;
+    color: var(--font-color-2);
+    background: #F0F0F0;
+}
+
+a {
+    text-decoration: none;
+    color: var(--font-color-1);
+}
+
+
+
+@media screen and (max-width: 480px) {
+    body {
+        background: #fff;
+    }
+
+    .paper {
+        padding: 4vw;
+    }
+
+    .paper-main {
+        width: 100%;
+        margin: 0 auto;
+        padding: 30px 1vw 12px;
+        background: #fff;
+    }
+}
+
+@media screen and (min-width: 481px) {
+    .paper {
+        padding: 4vw;
+    }
+
+    .paper-main {
+        width: 100%;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 62px 3vw 24px;
+        background: #fff;
+        border-radius: 24px;
+    }
+}
+
+.header {
+    padding-bottom: 48px;
+    margin-bottom: 48px;
+    border-bottom: 1px solid var(--line-1);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: center;
+}
+
+.logo {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--font-color-1);
+    margin-bottom: 16px;
+    flex: 0 0 100%;
+}
+
+.nav {
+    margin: 0 0 4px;
+    flex: 0 0 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: center;
+}
+
+.nav li {
+    padding: 2px 0;
+    margin-right: 24px;
+}
+
+.nav li:last-of-type {
+    margin-right: 0;
+}
+
+.nav li a {
+    color: var(--font-color-1);
+    opacity: .6;
+    transition: opacity ease-in-out .5s;
+}
+
+.nav li a:hover {
+    opacity: 1;
+    transition: opacity ease-in-out .5s;
+}
+
+.post-header {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: center;
+}
+
+.post-header .post-title {
+    font-size: 1.375rem;
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+    line-height: 1;
+}
+
+.post-list {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: stretch;
+}
+
+.post {
+    width: 100%;
+    padding-bottom: 48px;
+    margin-bottom: 48px;
+    border-bottom: 1px dashed var(--line-2);
+}
+
+.post-title {
+    display: inline-block;
+    font-size: 1.6rem;
+    font-weight: 600;
+    line-height: 1.5;
+    margin-bottom: 12px;
+    color: var(--font-color-1);
+    /*transition: color ease-in-out .5s;*/
+}
+
+.post-title:hover {
+    color: var(--font-color-0);
+    transition: color ease-in-out .5s;
+}
+
+.post-except {
+    word-break: break-all;
+    margin-bottom: 12px;
+    text-align: justify;
+}
+
+.read-more {
+    padding: 0 4px;
+    color: var(--font-color-0);
+}
+
+.read-more:before,
+.read-more:after {
+    display: inline-block;
+    transition: transform ease-in-out .5s;
+}
+
+.read-more:before {
+    content: "{ ";
+}
+
+.read-more:after {
+    content: " }";
+}
+
+.read-more:hover:before {
+    transform: translateX(-4px);
+    transition: transform ease-in-out .25s;
+}
+
+.read-more:hover:after {
+    transform: translateX(4px);
+    transition: transform ease-in-out .25s;
+}
+
+.post-date {
+    font-size: 0.875rem;
+    color: var(--font-color-3);
+}
+
+.paginator {
+    font-size: 0.875rem;
+    width: 100%;
+    margin: 0 auto 24px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.paginator * {
+    display: block;
+    padding: 8px 16px;
+    border-radius: 18px;
+    background: #fff;
+    border: 1px solid #eee;
+}
+
+.paginator .space {
+    display: block;
+    padding: 8px 16px;
+    border-radius: 18px;
+    background: #fff;
+    border: none;
+}
+
+.paginator a {
+    margin: 4px;
+    color: var(--font-color-2);
+    transition: color ease-in-out .5s;
+}
+
+.paginator a:hover {
+    color: var(--font-color-0);
+    transition: color ease-in-out .5s;
+}
+
+.paginator .current {
+    color: var(--font-color-0);
+    border: 1px solid var(--font-color-0);
+}
+
+.footer {
+    padding: 24px 0;
+    font-size: 0.875rem;
+    color: var(--font-color-3);
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-content: center;
+}
+
+.footer span {
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.footer a {
+    color: var(--font-color-3);
+    transition: color ease-in-out .5s;
+}
+
+.footer a:hover {
+    color: var(--font-color-0);
+    transition: color ease-in-out .5s;
+}
+
+.post-main {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.post-main-title {
+    flex: 0 0 100%;
+    margin-bottom: 12px;
+    font-size: 1.6rem;
+    font-weight: 600;
+    line-height: 1.5;
+    color: var(--font-color-1);
+}
+
+.post-meta {
+    font-size: 0.875rem;
+    color: var(--font-color-3);
+    flex: 0 0 100%;
+    margin-bottom: 32px;
+}
+
+.author {
+    color: #576b95;
+}
+
+.archive {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-content: normal;
+}
+
+.archive li {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-content: center;
+    padding: 12px 0;
+}
+
+.archive li:nth-child(odd) {
+    background: #fafafa;
+}
+
+.archive li:nth-child(even) {
+    background: #fff;
+}
+
+.archive li span {
+    width: 108px;
+    color: var(--font-color-2);
+}
+
+.archive-main {
+    flex: 0 1 calc(100% - 108px);
+}
+
+.archive-title {
+    color: var(--font-color-1);
+    /*transition: color ease-in-out .5s;*/
+}
+
+.archive-title:hover {
+    color: var(--font-color-0);
+    transition: color ease-in-out .5s;
+}
+
+.post-image-caption {
+    margin-top: 5px;
+    text-align: center;
+    color: #888;
+    font-size: 0.85rem;
+    display: block;
+}
+
+#clipboardbtn {
+    cursor: pointer;
+}
+
+#beautiful p {
+    box-sizing: border-box;
+    margin-bottom: 16px;
+    font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
+    font-size: 15px;
+    text-align: justify;
+    white-space: normal;
+    text-size-adjust: auto;
+    line-height: 1.75em;
+}
+#bing-bg {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    filter: blur(10px);
+    object-fit: cover;
+  }
+</style>
+    <style type="text/css" id="markdown">@charset "utf-8";
+
+.post-md
+{
+    width: 100%;
+    letter-spacing: 0;
+}
+
+.post-md h1,
+.post-md h2,
+.post-md h3,
+.post-md h4,
+.post-md h5,
+.post-md h6
+{
+    color: var(--font-color-1);
+}
+/* 一级标题 */
+.post-md h1  {
+    display:block;
+    border-bottom: 4px solid rgb(33, 33, 34);
+    font-size: 1rem;
+}
+  
+/* 一级标题内容 */
+.post-md h1  .content {
+    display: flex;
+    color: rgb(33, 33, 34);
+    font-size: 1rem;
+}
+  
+  
+/* 一级标题后缀 */
+.post-md h1  .suffix {
+    display: flex;
+    box-sizing: border-box;
+    width: 20px;
+    height: 10px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    background: RGBA(33, 33, 34, .5);
+    color: rgb(255, 255, 255);
+    font-size: 16px;
+    letter-spacing: 0.544px;
+    justify-content: flex-end;
+    box-sizing: border-box !important;
+    overflow-wrap: break-word !important;
+    float: right;
+    margin-top: -10px;
+}
+
+/* 二级标题 */
+.post-md h2 {
+    margin: 10px auto;
+    height: 40px;
+    background-color: rgb(251, 251, 251);
+    border-bottom: 1px solid rgb(246, 246, 246);
+    box-sizing: border-box;
+    font-size: 1rem;
+}
+
+/* 二级标题内容 */
+.post-md h2 .content {
+    margin-left: -10px;
+    display: inline-block;
+    width: auto;
+    height: 40px;
+    background-color: rgb(33, 33, 34);
+    border-bottom-right-radius:100px;
+    color: rgb(255, 255, 255);
+    padding-right: 30px;
+    padding-left: 20px;
+    font-size: 1rem;
+    line-height: 40px;
+}
+
+/* 三级标题 */
+.post-md h3 {
+    margin: 20px auto 5px;
+    border-top: 1px solid rgb(221, 221, 221);
+    box-sizing: border-box;
+    font-size: 1rem;
+}
+  
+/* 三级标题内容 */
+.post-md h3 .content {
+    margin-top: -1px;
+    padding-top: 6px;
+    padding-right: 5px;
+    padding-left: 5px;
+    font-size: 1rem;
+    border-top: 2px solid rgb(33, 33, 34);
+    display: inline-block;
+    line-height: 1.1;
+}
+.post-md h4
+{
+    font-size: 1rem;
+    line-height: 1.2;
+    padding: 16px 0;
+}
+.post-md h5
+{
+    font-size: 0.83rem;
+    line-height: 1.2;
+    padding: 14px 0;
+}
+.post-md h6
+{
+    font-size: 0.67rem;
+    line-height: 1.2;
+    padding: 12px 0;
+}
+.post-md a
+{
+    color: var(--font-color-2);
+    box-shadow: 0 2px 0 var(--line-1);
+    transition: color ease-in-out .65s, box-shadow ease-in-out .65s;
+}
+.post-md a:hover
+{
+    color: var(--font-color-0);
+    box-shadow: 0 2px 0 var(--font-color-0);
+    transition: color ease-in-out .65s, box-shadow ease-in-out .65s;
+}
+.post-md strong
+{
+    font-weight: 700;
+}
+.post-md em
+{
+    font-style: italic;
+}
+.post-md kbd
+{
+    padding: 2px 4px;
+    border-radius: 2px;
+    background: #eee;
+    border: 1px solid #ddd;
+}
+.post-md ol
+{
+    list-style: decimal;
+    padding-left: 24px;
+}
+.post-md ul
+{
+    list-style: disc;
+    padding-left: 24px;
+}
+.post-md img
+{
+    border-radius: 4px;
+}
+.post-md hr
+{
+    border: none;
+    height: 1px;
+    background: var(--line-1);
+    margin: 24px 0;
+}
+
+.post-md p,
+.post-md blockquote
+{
+    width: 100%;
+    margin: 12px 0;
+}
+.post-md blockquote
+{
+    border-left: 2px solid var(--line-2);
+    padding-left: 12px;
+    word-wrap: break-word;
+}
+
+.post-md .video-container
+{
+    background: #000;
+    border-radius: 4px;
+    overflow: hidden;
+}
+.post-md iframe,
+.post-md .video-container iframe
+{
+    width: 100%;
+    height: 100vh;
+    max-height: 360px;
+    margin: 12px 0;
+}
+
+.post-md>table
+{
+    width: 100%;
+    text-align: left;
+    border-spacing: 0;
+}
+.post-md>table th
+{
+    padding: 12px 0;
+    border-bottom: 2px solid var(--line-1);
+}
+.post-md>table tr:nth-child(odd) td
+{
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line-1);
+    background: #fafafa;
+}
+.post-md>table tr:nth-child(even) td
+{
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line-1);
+    background: #fff;
+}
+
+.post-md p code
+{
+    border-radius: 4px;
+    background:rgba(27,31,35,.05);
+    padding: 2px 4px;
+    color: rgb(0, 112, 96);
+    font-size: 1rem;
+    margin-left: 1px;
+    margin-right: 1px;
+}
+
+.post-md .hljs-ln-numbers
+{
+    opacity: .5;
+    padding-right: 12px;
+}
+</style>
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body>
+        <img id="bing-bg" src="" referrerpolicy="no-referrer" />
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="post-header">
+    <p class="post-title">Git 必知必会：原理剖析（二）</p>
+</div>
+                
+                <div class="post-main">
+
+    
+        <div class="post-meta">
+            <a class='author' href="/">罗昭成</a> <span id="clipboardbtn">2023年02月25日</span>
+        </div>
+        <div class="post-md" id="copy-post-content">
+        <section id="beautiful">
+            <p>书接上文，在上一篇文章记录<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/BZhNlwkO9Qnla8cS1DMR5Q">Git 必知必会：原理解析</a> 中记录了 Git 原理中的一部分信息，但在后续的学习过程中，还有部分内容需要记录，但有了此篇内容。</p>
+<h2><span class="prefix"></span><span class="content">一、Git 中的引用</span><span class="suffix"></span></h2><p>从上面的 Git 仓库树目录存储结构图中，可以看到，通过 <code>commit</code> 的 SHA-1 值，我们就一步一步查看所有的提交记录，以及项目中的文件内容。但 40 位的字符串几乎不可能记忆下来，也没有什么实质性的意义。那如果我们能给这些值取上一个别名，那是不是就能够很容易找到以及使用了。</p>
+<p>在 Git 中，此功能是使用引用文件来实现的，在 <code>.git/refs</code> 文件下就可以找到此类引用文件。文件名就是别名，而文件内容中存储的就是对应的 SHA-1 值。在使用的时候，直接使用这个别名就可以了。</p>
+<h3><span class="prefix"></span><span class="content">HEAD 引用</span><span class="suffix"></span></h3><p>当在工作目录中执行一些 Git 相关命令的时候，Git 是如何知道当前最新提交的 SHA-1 值呢？ 这一切的答案就在 HEAD 文件中，此文件中存储的数据指向了当前分支，在我的示例中：</p>
+<pre><code class="shell">$ cat .git/HEAD
+ref: refs/heads/main
+</code></pre>
+<p>HEAD 文件中指向的是 <code>.git/refs/heads/main</code>  这个文件，此文件中存储了 <code>602ac5</code> 的 SHA-1 值。</p>
+<p>当我们在执行切换分支的时候， HEAD 文件就会被更改掉，指向的为你切换过去的分支。</p>
+<pre><code class="shell">$ git checkout -b test
+Switched to a new branch &#39;test&#39;
+$ cat .git/HEAD
+ref: refs/heads/test
+</code></pre>
+<p>因此，Git 在使用的时候，通过 HEAD 中指向的 <code>refs</code> 文件，找到当前所在的最新 <code>commit</code> 的 SHA-1 值，并进行相关操作。</p>
+<h3><span class="prefix"></span><span class="content">分支引用</span><span class="suffix"></span></h3><p>也许你已经从刚的示例中发现，本地的分支对应的引用文件都是在 <code>refs/heads</code> 目录下。那远程分支呢？ 本地分支是如何与远程分支关联的呢？</p>
+<p>在 Git 中，有三种分支类型： 本地分支、本地远程分支、远程分支。其中 <strong>本地远程分支</strong> 可以理解为 <strong>远程分支</strong> 的一个镜像，在 <code>clone</code> 或者对已有项目执行 <code>fetch</code> 时，会将 <strong>远程分支</strong> 中的信息同步到 <strong>本地远程分支</strong> 中。按照 Git Refs 的规范，默认情况下，远程分支都会放到 <code>.git/refs/remotes/origin</code> 下面。在我们使用<br><code>git remoted add origin &lt;git url&gt;</code> 时，默认会在 <code>.git/config</code> 中制定相应配置：</p>
+<pre><code>[remote &quot;origin&quot;]
+    url = &lt;git url&gt;
+    fetch = +refs/heads/*:refs/remotes/origin/*
+</code></pre>
+<p>在 fetch 的那一行中，由一个可选的 <code>+</code> 和紧随其后的 <code>&lt;src&gt;:&lt;dst&gt;</code> 组成。其中 <code>+</code> 指在不能 <code>fast forwad</code> 的时候，也要强制更新引用；<code>&lt;src&gt;</code> 指的是远程版本库中的引用，可使用通配符进行匹配；<code>&lt;dst&gt;</code>指的是本地跟踪的远程引用的位置。 所以，在本地项目中，会将远程分支的镜像存储到 <code>refs/remotes/origin</code> 下面，并且与远程分支一一对应。</p>
+<p>而我们在本地使用的时候，操作的是本地分支，大多数情况，本地分支都是需要和远程分支进行关联的。具体关联配置也是在 <code>.git/config</code> 这个文件中，可以通过命令 <code>get branch -vv</code> 查看关联关系。在配置文件中，也包含了其关联关系，内容如下：</p>
+<pre><code>[branch &quot;main&quot;]
+    remote = origin
+    merge = refs/heads/main
+[branch &quot;test&quot;]
+    remote = origin
+    merge = refs/heads/test
+</code></pre>
+<h3><span class="prefix"></span><span class="content">TAG 引用</span><span class="suffix"></span></h3><p>在 Git 中，还有一个非常常用的功能，TAG 分为两种，一种是轻量标签， 一种是带备注的标签。</p>
+<p><strong>轻量标签：</strong> </p>
+<p>仅包含一个轻量标签一个固定的引用，此固定引用只想了项目中的某一个 commit 的 SHA-1 值。在本地可以直接使用 <code>git tag &lt;tag_name&gt;</code> 创建，此时会在 <code>refs/tags</code> 下面创建 <code>&lt;tag_name&gt;</code> 命名的文件。</p>
+<p><strong>附注标签：</strong></p>
+<p>在创建标签时，也可以给标签附加一些信息，用于描述标签的细节信息。使用时，可以用如下命令进行创建：</p>
+<pre><code>git tag -a &lt;tag_name&gt; -m &quot;message&quot;
+</code></pre>
+<p>与轻量标签不同的是，这条命令会创建一个 Git 对象，放到 <code>refs/objects</code> 中，在 <code>refs/tags</code> 目录中对应的文件中，记录的便是这个 tag 对象的 SHA-1 值。 </p>
+<p>与 Commit 类似，tag 的对象中的内容也是按固定格式处理，具体格式内容如下：</p>
+<pre><code>tag &lt;content length&gt;&lt;NUL&gt;object &lt;object SHA-1&gt;
+type commit
+tag &lt;tag name&gt;
+tagger &lt;username&gt; &lt;email&gt; &lt;timestamp&gt;
+
+&lt;tag comment message&gt;
+</code></pre>
+<p>最后，在来看一下，我本地创建的两个不同的 Tag，如下图所示： <img src="https://img-blog.csdnimg.cn/753bffcdc0864bcd88fefeb1d3ed4225.png" alt="两种不同的 Tag 对比" referrerpolicy="no-referrer"><figcaption class="post-image-caption">两种不同的 Tag 对比</figcaption></figure></p>
+<h2><span class="prefix"></span><span class="content">二、Git 文件打包</span><span class="suffix"></span></h2><p>在我们写代码的时候，某些原文件会出现频繁的更改，从前面 blob 创建过程，我们知道，每一个版本的文件都会重新创建。为了更好的理解这个过程，创建一个 Git 项目，里面仅放了一个简单的 txt 文件：</p>
+<ol>
+<li>我使用了本文的第一版内容，使用命令将此文件添加到 Git 后，会生成第一个 blob : <code>7e/5968ece2093c89df8e63ff6e72fff759cc5b74</code> ，此时，此文件大约 7.8KB。</li>
+<li>经过简单的修改，在次添加到 git 中，会生成新的 blob： <code>f7/eed43792fe8d9b016e8f8a8085b1949075d299</code> ， 此文件大小也差不多 7.8KB。</li>
+</ol>
+<p>通过上面的步骤，在磁盘中，相当于保存了两个几乎完全相同的文件。如果 Git 只完整保存其中一个，在保存另一个 blob 与之前版本的差异内容，岂不是更好？</p>
+<p>事实上，Git 的做法与我们的想法一致。Git 在最初往磁盘中存储对象时，使用的格式被称为“松散”对象格式。但是为了更加高效的管理文件，Git 会时不时将这些对象打包在一起形成为一个新二进制文件。当然，我们可以通过 <code>git gc</code> 命令来触发，如下所示：</p>
+<p><img src="https://img-blog.csdnimg.cn/7633ded1ec4e48e2bd92bacaee9ea22f.png" alt="Git GC 示例" referrerpolicy="no-referrer"><figcaption class="post-image-caption">Git GC 示例</figcaption></figure></p>
+<p>经过打包后的文件大小也会变小：</p>
+<p><img src="https://img-blog.csdnimg.cn/a7825aca54834f2ba5ceff5ec64c762a.png" alt="pack file 文件大小" referrerpolicy="no-referrer"><figcaption class="post-image-caption">pack file 文件大小</figcaption></figure></p>
+<h2><span class="prefix"></span><span class="content">三、Git LFS 协议</span><span class="suffix"></span></h2><blockquote>
+<p>此部分主要内容来源于官方文档： <a target="_blank" rel="noopener" href="https://github.com/git-lfs/git-lfs/blob/main/docs/api/batch.md">https://github.com/git-lfs/git-lfs/blob/main/docs/api/batch.md</a></p>
+</blockquote>
+<p>Git LFS 有不同的语言实现的不同版本， 只要遵循 LFS 协议就可以了。从文档中我们可以看到， 当在执行 Git LFS 命令时，会先发送一个 Batch API，此接口需要使用 POST 方式进行网络请求发送，URL 地址为： <code>https://&lt;git_url&gt;/info/lfs/objects/batch</code>，其中 http headers  必须包含如下内容：</p>
+<pre><code>Accept: application/vnd.git-lfs+json
+Content-Type: application/vnd.git-lfs+json; charset=utf-8
+</code></pre>
+<p>而在 request body 里面，使用 JSON 进行编码，内容中包含如下信息：</p>
+<ul>
+<li><strong>operation：</strong> 这个值只能为 <strong>download</strong> 或者 <strong>upload</strong></li>
+<li><strong>transfers：</strong> 可选，客户端配置的、支持的传输协议，与服务端协商后续大文件传输到 CDN 使用协议方式</li>
+<li><strong>ref：</strong> 可选， 标识当前对象在服务端的哪个分支</li>
+<li><strong>objects：</strong> 要进行上传或者下载的对象数组，包含有 <code>oid</code> 和 <code>size</code> 两个信息</li>
+<li><strong>hash_algo：</strong> Git LFS 在本地计算大文件使用的 hash 算法，默认为 sha256</li>
+</ul>
+<p>而 response 的内容中，也会将 Git LFS 需要的信息下发下来，会将 request 中的 objects 的 CDN 地址，以及访问需要的 token 等信息进行下发，用于后续的请求，下面来看一下我对 LFS 下载数据抓包的过程：</p>
+<p><img src="https://img-blog.csdnimg.cn/b111f8d66c764d0db733780ad6db78dd.png" alt="LFS 下载抓包示例" referrerpolicy="no-referrer"><figcaption class="post-image-caption">LFS 下载抓包示例</figcaption></figure></p>
+<p>更多细节信息，请参考官方文档。</p>
+
+        </section>
+        </div>
+
+    
+
+</div>
+                <!-- 
+                    <div class="post_pre_next">
+    
+        <div class="post-pre">
+            <a href="/2023/05/23/java-class-file-format/">上一篇: 解密 Java Class 文件不为人知的秘密</a>
+        </div>
+    
+    
+        <a href="/2023/02/17/git-principle-analysis-01/">下一篇: 
+            Git 必知必会：原理剖析（一）
+        </a>
+    
+</div>
+
+
+                 -->
+                <div class="footer">
+    <span>Copyright © 2023 大罗说事</span>
+</div>
+
+<!-- 
+<link rel="stylesheet" href="/css/highlight.default.css">
+ -->
+<style type="text/css" id="atom-one-dark">pre code.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 12px;
+  font-size: 12px;
+}
+/*
+
+Atom One Dark by Daniel Gamage
+Original One Dark Syntax theme from https://github.com/atom/one-dark-syntax
+
+base:    #282c34
+mono-1:  #abb2bf
+mono-2:  #818896
+mono-3:  #5c6370
+hue-1:   #56b6c2
+hue-2:   #61aeee
+hue-3:   #c678dd
+hue-4:   #98c379
+hue-5:   #e06c75
+hue-5-2: #be5046
+hue-6:   #d19a66
+hue-6-2: #e6c07b
+
+*/
+
+.hljs {
+  color: #abb2bf;
+  background: #282c34;
+}
+
+.hljs-comment,
+.hljs-quote {
+  color: #5c6370;
+  font-style: italic;
+}
+
+.hljs-doctag,
+.hljs-keyword,
+.hljs-formula {
+  color: #c678dd;
+}
+
+.hljs-section,
+.hljs-name,
+.hljs-selector-tag,
+.hljs-deletion,
+.hljs-subst {
+  color: #e06c75;
+}
+
+.hljs-literal {
+  color: #56b6c2;
+}
+
+.hljs-string,
+.hljs-regexp,
+.hljs-addition,
+.hljs-attribute,
+.hljs-meta .hljs-string {
+  color: #98c379;
+}
+
+.hljs-attr,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-type,
+.hljs-selector-class,
+.hljs-selector-attr,
+.hljs-selector-pseudo,
+.hljs-number {
+  color: #d19a66;
+}
+
+.hljs-symbol,
+.hljs-bullet,
+.hljs-link,
+.hljs-meta,
+.hljs-selector-id,
+.hljs-title {
+  color: #61aeee;
+}
+
+.hljs-built_in,
+.hljs-title.class_,
+.hljs-class .hljs-title {
+  color: #e6c07b;
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-strong {
+  font-weight: bold;
+}
+
+.hljs-link {
+  text-decoration: underline;
+}
+
+</style>
+<style type="text/css" id="code-theme">pre::before {
+    content: '';
+    display: block;
+    background: url("http://pinned.github.io/img/mac_style.svg");
+    height: 30px;
+    width: 100%;
+    background-size: 40px;
+    background-repeat: no-repeat;
+    background-color: #282c34;
+    margin-bottom: -7px;
+    border-radius: 5px;
+    background-position: 10px 10px;
+}
+
+pre code {
+    border-radius: 5px;
+}</style>
+
+<script src="/js/highlight.min.js"></script>
+
+
+<script src="/js/highlightjs-line-numbers.js"></script>
+
+
+<script src="/js/juice.js"></script>
+
+
+<script src="/js/copy_wechat.js"></script>
+
+
+<script>
+    hljs.highlightAll();
+    window.onload = function() {
+        // 判断是否为手机浏览器
+        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+        if (!isMobile) {
+            fetch('https://pinned.github.io/bing-daily-picture/index.json')
+                .then(response => response.text())
+                .then(data => {
+                    var result = JSON.parse(data)
+                    var count = result.images.length
+                    const index = Math.floor(Math.random() * count);
+                    document.getElementById("bing-bg").src = "https://cn.bing.com" + result.images[index].url;
+                }); // 返回的结果
+        } 
+    }    
+</script>
+
+            </div>
+        </div>
+    </body>
+</html>

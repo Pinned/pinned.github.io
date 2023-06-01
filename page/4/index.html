@@ -708,42 +708,100 @@ a {
     
     
     
-    
-    
-    
     <div class="post">
-        <a class="post-title" href="/2015/04/13/android-best-practices-2/">Android最佳实践</a>
+        <a class="post-title" href="/2015/05/14/android-mipmap-folder/">Android mipmap文件夹</a>
         <div class="post-except">
             
-                从Futurice公司Android开发者中学到的经验。遵循以下准则，避免重复发明轮子。若您对开发iOS或Windows Phone 有兴趣，请看iOS Good Practices 和 Windows client Good Practices 这两篇文章。
-摘要
-使用 Gradle 和它推荐的工程结构
-把密码和敏感数据放在gradle.properties
-不要自己写 HTTP 客户端,使用Volley或OkHttp库
-使用Jackson库解析JSON数据
-避免使用Gua
+                用Android Studio 创建项目的时候，默认创建mipmap文件夹，而不是drawable
+查看了一下官方的解释，如下：
+drawable/
+For bitmap files (PNG, JPEG, or GIF), 9-Patch image files, and XML files that describe Drawable shapes or Drawable objects that contain multiple states (normal, pres
             
-            <a class="read-more" href="/2015/04/13/android-best-practices-2/"> ... </a>
+            <a class="read-more" href="/2015/05/14/android-mipmap-folder/"> ... </a>
         </div>
-        <div class="post-date">2015.04.13</div>
+        <div class="post-date">2015.05.14</div>
     </div>
     
     
     
     
     <div class="post">
-        <a class="post-title" href="/2015/04/10/mac-os-x-yomesite-install-rails/">Mac OS X Yosemite 安装 Rails</a>
+        <a class="post-title" href="/2015/05/12/android-update-sdk-no-ui/">Android 用命令行更新SDK</a>
         <div class="post-except">
             
-                参考文章：Install Ruby on Rails · Mac OS X Yosemite
-在安装过程中，出现错误，有关错误信息可以查看下面这一篇博客，但是他的解决办法没有解决问题：
-MAC安装Rails
-最后的解决办法就是先将ruby 升级到最新版本，然后就可以顺利安装rails了。在此记录一下。
+                基本使用在使用桌面系统的时候，我们都是用的SDK Manager, 如果现在要你部署一台CI服务器呢。
+我擦，ssh上去，没有界面，怎么破。
+查找了一下，Android SDK更新是支持命令的
+如下：
+android update sdk --no-ui
+
+上面的方法虽然可以更新SDK，但是他会把所有的内容都下载下来，很明显我们并不想这样子。
+查看命令帮助可以看到有一个--filter属性，如下使用
+android update sdk --filter &lt;compon
+            
+            <a class="read-more" href="/2015/05/12/android-update-sdk-no-ui/"> ... </a>
+        </div>
+        <div class="post-date">2015.05.12</div>
+    </div>
+    
+    
+    
+    
+    <div class="post">
+        <a class="post-title" href="/2015/05/11/android-aidl-server/">Android Service学习之AIDL, Parcelable和远程服务</a>
+        <div class="post-except">
+            
+                AIDL的作用由于每个应用程序都运行在自己的进程空间，并且可以从应用程序UI运行另一个服务进程，而且经常会在不同的进程间传递对象。在Android平台，一个进程通常不能访问另一个进程的内存空间，所以要想对话，需要将对象分解成操作系统可以理解的基本单元，并且有序的通过进程边界。
+通过代码来实现这个数据传输过程是冗长乏味的，Android提供了AIDL工具来处理这项工作。
+AIDL (Android Interface Definition Language) 是一种IDL 语言
+            
+            <a class="read-more" href="/2015/05/11/android-aidl-server/"> ... </a>
+        </div>
+        <div class="post-date">2015.05.11</div>
+    </div>
+    
+    
+    
+    
+    <div class="post">
+        <a class="post-title" href="/2015/05/11/svn-to-git/">SVN迁移到GIT</a>
+        <div class="post-except">
+            
+                通过git svn clone将一个SVN项目克隆成一个git版本库
+# 参数--no-metadata表示阻止git导出SVN包含的一些无用信息
+git svn clone svn://localhost/proj/ --no-metadata
+
+提交到git库
+git remote add origin git@localhost/proj.git
+git push --set-upstream origin master
+
 
             
-            <a class="read-more" href="/2015/04/10/mac-os-x-yomesite-install-rails/"> ... </a>
+            <a class="read-more" href="/2015/05/11/svn-to-git/"> ... </a>
         </div>
-        <div class="post-date">2015.04.10</div>
+        <div class="post-date">2015.05.11</div>
+    </div>
+    
+    
+    
+    
+    <div class="post">
+        <a class="post-title" href="/2015/04/30/mac-iterm2-zsh/">Mac Iterm2 zsh使用</a>
+        <div class="post-except">
+            
+                安装zshbrew install zsh
+
+下载oh my zsh项目git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
+
+设置zshcp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
+chsh -s /bin/zsh
+
+VIM 的一些配置syntax on                &quot;语法高亮
+set nu!       
+            
+            <a class="read-more" href="/2015/04/30/mac-iterm2-zsh/"> ... </a>
+        </div>
+        <div class="post-date">2015.04.30</div>
     </div>
     
     
@@ -758,11 +816,22 @@ MAC安装Rails
     
     
     
-    
-    
-    
-    
-    
+    <div class="post">
+        <a class="post-title" href="/2015/04/17/android-notification-small-icon/">Android 5.0设备中，Notification小图标是白色的</a>
+        <div class="post-except">
+            
+                问题描述在使用消息推送，在通知栏中展示通知，我们会有两个图标，一个是在状态栏展示的小图标，一个是打开通知中心，展示的大图标我在我自己的测试设备中，小图标始终显示为一个白色的空白图标。
+问题解决
+原文地址：Notification bar icon turns white in Android 5 Lollipop
+
+在这里，我把文章中说的东西抄一遍：
+在Android中用来展示Notification图标的代码如下：
+// android_frameworks_base/pa
+            
+            <a class="read-more" href="/2015/04/17/android-notification-small-icon/"> ... </a>
+        </div>
+        <div class="post-date">2015.04.17</div>
+    </div>
     
     
     
@@ -771,7 +840,7 @@ MAC安装Rails
 </div>
 
 <div class="paginator">
-    <a class="extend prev" rel="prev" href="/page/3/">上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/5/">下一页</a>
+    <a class="extend prev" rel="prev" href="/page/3/">上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/5/">下一页</a>
 </div>
 
                 <!--  -->
