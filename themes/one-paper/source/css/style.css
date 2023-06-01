@@ -363,3 +363,12 @@ a {
     text-size-adjust: auto;
     line-height: 1.75em;
 }
+#bing-bg {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    filter: blur(10px);
+    object-fit: cover;
+  }

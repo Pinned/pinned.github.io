@@ -11,5 +11,15 @@
 <%- js('js/copy_wechat.js') %>
 
 <script>
-    hljs.highlightAll();    
+    hljs.highlightAll();
+    window.onload = function() {
+        fetch('https://pinned.github.io/bing-daily-picture/index.json')
+        .then(response => response.text())
+        .then(data => {
+            var result = JSON.parse(data)
+            var count = result.images.length
+            const index = Math.floor(Math.random() * count);
+            document.getElementById("bing-bg").src = "https://cn.bing.com" + result.images[index].url;
+        }); // 返回的结果
+    }    
 </script>
