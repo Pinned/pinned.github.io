@@ -706,12 +706,7 @@ a {
                 
                 <div class="post-main">
     
-        <div class="post-md"><h1><span class="prefix"></span><span class="content">TextView之代码设置DrawableLeft</span><span class="suffix"></span></h1><pre><code class="java">Drawable drawable = getResources().getDrawable(R.drawable.drawable);  
-/// 这一步必须要做,否则不会显示.  
-drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());  
-myTextview.setCompoundDrawables(drawable,null,null,null);
-</code></pre>
-<h1><span class="prefix"></span><span class="content">Android 去掉Activtiy之间的切换动画</span><span class="suffix"></span></h1><pre><code class="xml">&lt;style name=&quot;NoAnimationTheme&quot;&gt;
+        <div class="post-md"><h1><span class="prefix"></span><span class="content">Android 去掉Activtiy之间的切换动画</span><span class="suffix"></span></h1><pre><code class="xml">&lt;style name=&quot;NoAnimationTheme&quot;&gt;
     &lt;item name=&quot;android:windowAnimationStyle&quot;&gt;@style/Animation&lt;/item&gt;
 &lt;/style&gt;
 &lt;style name=&quot;Animation&quot;&gt;
@@ -730,8 +725,16 @@ myTextview.setCompoundDrawables(drawable,null,null,null);
 &lt;/style&gt;
 </code></pre>
 <p>在使用的时候，只需将不需要动画的Activity的<code>style</code>设置成这个就可以了</p>
-<h1><span class="prefix"></span><span class="content">Android string.xml中的占位符</span><span class="suffix"></span></h1><pre><code class="xml">&lt;!-- .2f表示的是保留三位小数的浮点数  --&gt;
-&lt;string name=&quot;book&quot;&gt;书名 (字符串)%1$s,作者(字符串)%2$s,编号(整数)%3$d,价格(浮点型)：%4$.2f&lt;/string&gt;
+<h1><span class="prefix"></span><span class="content">TextView之代码设置DrawableLeft</span><span class="suffix"></span></h1><pre><code class="java">Drawable drawable = getResources().getDrawable(R.drawable.drawable);  
+/// 这一步必须要做,否则不会显示.  
+drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());  
+myTextview.setCompoundDrawables(drawable,null,null,null);
+</code></pre>
+<h1><span class="prefix"></span><span class="content">SD Card的大小和容量</span><span class="suffix"></span></h1><pre><code class="java">StatFs stat = new StatFs(Environment.getExternalStorageDirectory().getPath());
+long sdAvailSize = (long)stat.getAvailableBlocks()
+               * (long)stat.getBlockSize();
+long sdTotalSize =  (long)stat.getBlockCount()
+                * (long)stat.getBlockSize()
 </code></pre>
 <h1><span class="prefix"></span><span class="content">Android 按两次返回键退出应用程序</span><span class="suffix"></span></h1><pre><code class="java">public boolean onKeyDown(int keyCode, KeyEvent event) &#123;
     if (keyCode == KeyEvent.KEYCODE_BACK) &#123;
@@ -746,24 +749,6 @@ myTextview.setCompoundDrawables(drawable,null,null,null);
         return true;
     &#125;
     return super.onKeyDown(keyCode, event);
-&#125;
-</code></pre>
-<h1><span class="prefix"></span><span class="content">SD Card的大小和容量</span><span class="suffix"></span></h1><pre><code class="java">StatFs stat = new StatFs(Environment.getExternalStorageDirectory().getPath());
-long sdAvailSize = (long)stat.getAvailableBlocks()
-               * (long)stat.getBlockSize();
-long sdTotalSize =  (long)stat.getBlockCount()
-                * (long)stat.getBlockSize()
-</code></pre>
-<h1><span class="prefix"></span><span class="content">格式化文件容量代码</span><span class="suffix"></span></h1><pre><code class="java">public static String formatSize(long size) &#123;
-    if (size &lt; 1024) &#123;
-        return String.format(&quot;%dByte&quot;, size);
-    &#125; else if (size &lt; 1024 * 1024) &#123;
-        return String.format(&quot;%.2fKb&quot;, size / 1024f);
-    &#125; else if (size &lt; 1024 * 1024 * 1024) &#123;
-        return String.format(&quot;%.2fMb&quot;, size / 1024f / 1024f);
-    &#125; else &#123;
-        return String.format(&quot;%.2fGb&quot;, size / 1024f / 1024f / 1024f);
-    &#125;
 &#125;
 </code></pre>
 <h1><span class="prefix"></span><span class="content">在`values`中定义id</span><span class="suffix"></span></h1><p>在<code>values</code>文件夹中创建<code>ids.xml</code>文件， 文件目录为：<code>values/ids.xml</code></p>
@@ -783,6 +768,18 @@ long sdTotalSize =  (long)stat.getBlockCount()
     &#125;
 &#125;
 </code></pre>
+<h1><span class="prefix"></span><span class="content">格式化文件容量代码</span><span class="suffix"></span></h1><pre><code class="java">public static String formatSize(long size) &#123;
+    if (size &lt; 1024) &#123;
+        return String.format(&quot;%dByte&quot;, size);
+    &#125; else if (size &lt; 1024 * 1024) &#123;
+        return String.format(&quot;%.2fKb&quot;, size / 1024f);
+    &#125; else if (size &lt; 1024 * 1024 * 1024) &#123;
+        return String.format(&quot;%.2fMb&quot;, size / 1024f / 1024f);
+    &#125; else &#123;
+        return String.format(&quot;%.2fGb&quot;, size / 1024f / 1024f / 1024f);
+    &#125;
+&#125;
+</code></pre>
 <h1><span class="prefix"></span><span class="content">Android文字颜色选择器</span><span class="suffix"></span></h1><pre><code class="xml">//在这个地方，应该使用
 //android:textColor=&quot;@drawable/text_color&quot;
 
@@ -792,6 +789,9 @@ long sdTotalSize =  (long)stat.getBlockCount()
     &lt;item android:state_pressed=&quot;true&quot; android:color=&quot;@color/click_blue_color&quot;&gt;&lt;/item&gt;
     &lt;item android:color=&quot;@color/blue_color&quot;&gt;&lt;/item&gt;
 &lt;/selector&gt;
+</code></pre>
+<h1><span class="prefix"></span><span class="content">Android string.xml中的占位符</span><span class="suffix"></span></h1><pre><code class="xml">&lt;!-- .2f表示的是保留三位小数的浮点数  --&gt;
+&lt;string name=&quot;book&quot;&gt;书名 (字符串)%1$s,作者(字符串)%2$s,编号(整数)%3$d,价格(浮点型)：%4$.2f&lt;/string&gt;
 </code></pre>
 <h1><span class="prefix"></span><span class="content">Android 混淆记录</span><span class="suffix"></span></h1><pre><code class="bash">--keep class cn.knero.model.*&#123;
     public &lt;methods&gt;; // 不混淆public的方法
@@ -870,24 +870,6 @@ private void setRawTextSize(float size) &#123;
 </code></pre>
 <p>以上代码是<code>Android TextView</code>设置字体的源码。可以看出来，使用<code>setTextSize(float size)</code>的时候，默认单位为<code>sp</code></p>
 <p>如果你自己从<code>xml</code>中读的时候，最好使用<code>setTextSize(int unit, float size)</code>这个方法。</p>
-<h1><span class="prefix"></span><span class="content">Android显示密码</span><span class="suffix"></span></h1><pre><code class="java">
-//  方法1：
-if (mIsShowPsw) &#123;
-    mPswEdit.setTransformationMethod(HideReturnsTransformationMethod
-            .getInstance());
-&#125; else &#123;
-    mPswEdit.setTransformationMethod(PasswordTransformationMethod
-            .getInstance());
-&#125;
-
-// 方法2：
-int inputType  = mPswEdit.getInputType();
-if (inputType == 129) &#123;
-    mPswEdit.setInputType(1);
-&#125; else &#123;
-    mPswEdit.setInputType(129);
-&#125;
-</code></pre>
 <h1><span class="prefix"></span><span class="content">java反射内部类</span><span class="suffix"></span></h1><ol>
 <li>在java中反射加载类的方法如下</li>
 </ol>
@@ -905,6 +887,24 @@ if (inputType == 129) &#123;
     int unicode = Character.codePointAt(text, index);
     int skip = Character.charCount(unicode);
     mInputSquares[textCount++].setText(text.substring(index, index+skip));
+&#125;
+</code></pre>
+<h1><span class="prefix"></span><span class="content">Android显示密码</span><span class="suffix"></span></h1><pre><code class="java">
+//  方法1：
+if (mIsShowPsw) &#123;
+    mPswEdit.setTransformationMethod(HideReturnsTransformationMethod
+            .getInstance());
+&#125; else &#123;
+    mPswEdit.setTransformationMethod(PasswordTransformationMethod
+            .getInstance());
+&#125;
+
+// 方法2：
+int inputType  = mPswEdit.getInputType();
+if (inputType == 129) &#123;
+    mPswEdit.setInputType(1);
+&#125; else &#123;
+    mPswEdit.setInputType(129);
 &#125;
 </code></pre>
 <h1><span class="prefix"></span><span class="content">XML 实现 ListView divider margin</span><span class="suffix"></span></h1><pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
@@ -1117,14 +1117,19 @@ pre code {
 <script>
     hljs.highlightAll();
     window.onload = function() {
-        fetch('https://pinned.github.io/bing-daily-picture/index.json')
-        .then(response => response.text())
-        .then(data => {
-            var result = JSON.parse(data)
-            var count = result.images.length
-            const index = Math.floor(Math.random() * count);
-            document.getElementById("bing-bg").src = "https://cn.bing.com" + result.images[index].url;
-        }); // 返回的结果
+        // 判断是否为手机浏览器
+        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+        if (!isMobile) {
+            fetch('https://pinned.github.io/bing-daily-picture/index.json')
+                .then(response => response.text())
+                .then(data => {
+                    var result = JSON.parse(data)
+                    var count = result.images.length
+                    const index = Math.floor(Math.random() * count);
+                    document.getElementById("bing-bg").src = "https://cn.bing.com" + result.images[index].url;
+                }); // 返回的结果
+        } 
     }    
 </script>
 

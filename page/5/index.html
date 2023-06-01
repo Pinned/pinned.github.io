@@ -772,6 +772,25 @@ sudo apt-add-repository ppa:brightbox/ruby-n
     
     
     <div class="post">
+        <a class="post-title" href="/2015/03/16/ubuntu-unzip-encode/">Ubuntu 解压zip，文件乱码</a>
+        <div class="post-except">
+            
+                在windows上压缩的文件，是以系统默认编码中文来压缩文件。由于zip文件中没有声明其编码，所以linux上的unzip一般以默认编码解压，中文文件名会出现乱码。
+解决方式：
+unzip -O CP936 xxx.zip
+// 用GBK, GB18030也可以
+
+
+            
+            <a class="read-more" href="/2015/03/16/ubuntu-unzip-encode/"> ... </a>
+        </div>
+        <div class="post-date">2015.03.16</div>
+    </div>
+    
+    
+    
+    
+    <div class="post">
         <a class="post-title" href="/2015/03/16/adnroid-code-Snippets/">Android代码片段</a>
         <div class="post-except">
             
@@ -785,25 +804,6 @@ long sdTotalSize =  (long)stat.getBlockCount()
    
             
             <a class="read-more" href="/2015/03/16/adnroid-code-Snippets/"> ... </a>
-        </div>
-        <div class="post-date">2015.03.16</div>
-    </div>
-    
-    
-    
-    
-    <div class="post">
-        <a class="post-title" href="/2015/03/16/ubuntu-unzip-encode/">Ubuntu 解压zip，文件乱码</a>
-        <div class="post-except">
-            
-                在windows上压缩的文件，是以系统默认编码中文来压缩文件。由于zip文件中没有声明其编码，所以linux上的unzip一般以默认编码解压，中文文件名会出现乱码。
-解决方式：
-unzip -O CP936 xxx.zip
-// 用GBK, GB18030也可以
-
-
-            
-            <a class="read-more" href="/2015/03/16/ubuntu-unzip-encode/"> ... </a>
         </div>
         <div class="post-date">2015.03.16</div>
     </div>
@@ -1034,14 +1034,19 @@ pre code {
 <script>
     hljs.highlightAll();
     window.onload = function() {
-        fetch('https://pinned.github.io/bing-daily-picture/index.json')
-        .then(response => response.text())
-        .then(data => {
-            var result = JSON.parse(data)
-            var count = result.images.length
-            const index = Math.floor(Math.random() * count);
-            document.getElementById("bing-bg").src = "https://cn.bing.com" + result.images[index].url;
-        }); // 返回的结果
+        // 判断是否为手机浏览器
+        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+        if (!isMobile) {
+            fetch('https://pinned.github.io/bing-daily-picture/index.json')
+                .then(response => response.text())
+                .then(data => {
+                    var result = JSON.parse(data)
+                    var count = result.images.length
+                    const index = Math.floor(Math.random() * count);
+                    document.getElementById("bing-bg").src = "https://cn.bing.com" + result.images[index].url;
+                }); // 返回的结果
+        } 
     }    
 </script>
 

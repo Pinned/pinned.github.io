@@ -774,16 +774,16 @@ a {
         <li>
             <span class="archive-date">2016.10.18</span>
             <div class="archive-main">
-                <a class="archive-title" href="/2016/10/18/android-dynamic-create-menu/">Android 动态修改菜单</a>
-                <!-- <a class="read-more" href="/2016/10/18/android-dynamic-create-menu/"> ... </a> -->
+                <a class="archive-title" href="/2016/10/18/set-textview-textsize-big/">Android TextView setTextSize</a>
+                <!-- <a class="read-more" href="/2016/10/18/set-textview-textsize-big/"> ... </a> -->
             </div>
         </li>
         
         <li>
             <span class="archive-date">2016.10.18</span>
             <div class="archive-main">
-                <a class="archive-title" href="/2016/10/18/set-textview-textsize-big/">Android TextView setTextSize</a>
-                <!-- <a class="read-more" href="/2016/10/18/set-textview-textsize-big/"> ... </a> -->
+                <a class="archive-title" href="/2016/10/18/android-dynamic-create-menu/">Android 动态修改菜单</a>
+                <!-- <a class="read-more" href="/2016/10/18/android-dynamic-create-menu/"> ... </a> -->
             </div>
         </li>
         
@@ -937,14 +937,19 @@ pre code {
 <script>
     hljs.highlightAll();
     window.onload = function() {
-        fetch('https://pinned.github.io/bing-daily-picture/index.json')
-        .then(response => response.text())
-        .then(data => {
-            var result = JSON.parse(data)
-            var count = result.images.length
-            const index = Math.floor(Math.random() * count);
-            document.getElementById("bing-bg").src = "https://cn.bing.com" + result.images[index].url;
-        }); // 返回的结果
+        // 判断是否为手机浏览器
+        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+        if (!isMobile) {
+            fetch('https://pinned.github.io/bing-daily-picture/index.json')
+                .then(response => response.text())
+                .then(data => {
+                    var result = JSON.parse(data)
+                    var count = result.images.length
+                    const index = Math.floor(Math.random() * count);
+                    document.getElementById("bing-bg").src = "https://cn.bing.com" + result.images[index].url;
+                }); // 返回的结果
+        } 
     }    
 </script>
 

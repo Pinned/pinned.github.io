@@ -720,12 +720,12 @@ git push --set-upstream origin master
                     <div class="post_pre_next">
     
         <div class="post-pre">
-            <a href="/2015/05/11/android-aidl-server/">上一篇: Android Service学习之AIDL, Parcelable和远程服务</a>
+            <a href="/2015/05/12/android-update-sdk-no-ui/">上一篇: Android 用命令行更新SDK</a>
         </div>
     
     
-        <a href="/2015/04/30/mac-iterm2-zsh/">下一篇: 
-            Mac Iterm2 zsh使用
+        <a href="/2015/05/11/android-aidl-server/">下一篇: 
+            Android Service学习之AIDL, Parcelable和远程服务
         </a>
     
 </div>
@@ -874,14 +874,19 @@ pre code {
 <script>
     hljs.highlightAll();
     window.onload = function() {
-        fetch('https://pinned.github.io/bing-daily-picture/index.json')
-        .then(response => response.text())
-        .then(data => {
-            var result = JSON.parse(data)
-            var count = result.images.length
-            const index = Math.floor(Math.random() * count);
-            document.getElementById("bing-bg").src = "https://cn.bing.com" + result.images[index].url;
-        }); // 返回的结果
+        // 判断是否为手机浏览器
+        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+        if (!isMobile) {
+            fetch('https://pinned.github.io/bing-daily-picture/index.json')
+                .then(response => response.text())
+                .then(data => {
+                    var result = JSON.parse(data)
+                    var count = result.images.length
+                    const index = Math.floor(Math.random() * count);
+                    document.getElementById("bing-bg").src = "https://cn.bing.com" + result.images[index].url;
+                }); // 返回的结果
+        } 
     }    
 </script>
 

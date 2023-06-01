@@ -838,12 +838,12 @@ imm.hideSoftInputFromWindow(mTextView.getWindowToken(), 0);
                     <div class="post_pre_next">
     
         <div class="post-pre">
-            <a href="/2015/03/29/ubuntu-install-rails/">上一篇: Ubuntu 下安装Rails</a>
+            <a href="/2015/03/16/ubuntu-unzip-encode/">上一篇: Ubuntu 解压zip，文件乱码</a>
         </div>
     
     
-        <a href="/2015/03/16/ubuntu-unzip-encode/">下一篇: 
-            Ubuntu 解压zip，文件乱码
+        <a href="/2015/03/13/Android-override-confusion/">下一篇: 
+            Android 中方法重载遇到的问题
         </a>
     
 </div>
@@ -992,14 +992,19 @@ pre code {
 <script>
     hljs.highlightAll();
     window.onload = function() {
-        fetch('https://pinned.github.io/bing-daily-picture/index.json')
-        .then(response => response.text())
-        .then(data => {
-            var result = JSON.parse(data)
-            var count = result.images.length
-            const index = Math.floor(Math.random() * count);
-            document.getElementById("bing-bg").src = "https://cn.bing.com" + result.images[index].url;
-        }); // 返回的结果
+        // 判断是否为手机浏览器
+        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+        if (!isMobile) {
+            fetch('https://pinned.github.io/bing-daily-picture/index.json')
+                .then(response => response.text())
+                .then(data => {
+                    var result = JSON.parse(data)
+                    var count = result.images.length
+                    const index = Math.floor(Math.random() * count);
+                    document.getElementById("bing-bg").src = "https://cn.bing.com" + result.images[index].url;
+                }); // 返回的结果
+        } 
     }    
 </script>
 

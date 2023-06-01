@@ -718,12 +718,12 @@ long sdTotalSize =  (long)stat.getBlockCount()
                     <div class="post_pre_next">
     
         <div class="post-pre">
-            <a href="/2015/04/06/exit-app-by-press-twice-back/">上一篇: Android 按两次返回键退出应用程序</a>
+            <a href="/2015/04/06/android-set-textview-drawable-by-java-code/">上一篇: TextView之代码设置DrawableLeft</a>
         </div>
     
     
-        <a href="/2015/04/06/format-file-size/">下一篇: 
-            格式化文件容量代码
+        <a href="/2015/04/06/exit-app-by-press-twice-back/">下一篇: 
+            Android 按两次返回键退出应用程序
         </a>
     
 </div>
@@ -872,14 +872,19 @@ pre code {
 <script>
     hljs.highlightAll();
     window.onload = function() {
-        fetch('https://pinned.github.io/bing-daily-picture/index.json')
-        .then(response => response.text())
-        .then(data => {
-            var result = JSON.parse(data)
-            var count = result.images.length
-            const index = Math.floor(Math.random() * count);
-            document.getElementById("bing-bg").src = "https://cn.bing.com" + result.images[index].url;
-        }); // 返回的结果
+        // 判断是否为手机浏览器
+        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+        if (!isMobile) {
+            fetch('https://pinned.github.io/bing-daily-picture/index.json')
+                .then(response => response.text())
+                .then(data => {
+                    var result = JSON.parse(data)
+                    var count = result.images.length
+                    const index = Math.floor(Math.random() * count);
+                    document.getElementById("bing-bg").src = "https://cn.bing.com" + result.images[index].url;
+                }); // 返回的结果
+        } 
     }    
 </script>
 

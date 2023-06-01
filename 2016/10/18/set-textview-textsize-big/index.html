@@ -716,12 +716,12 @@ bigText.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
                     <div class="post_pre_next">
     
         <div class="post-pre">
-            <a href="/2016/10/18/android-dynamic-create-menu/">上一篇: Android 动态修改菜单</a>
+            <a href="/2016/10/21/ubuntu-install-tensorflow/">上一篇: Ubuntu 安装 Tensorflow</a>
         </div>
     
     
-        <a href="/2016/10/17/ubuntu-ruby-install/">下一篇: 
-            Ubuntu中安装Ruby的一些注意事项
+        <a href="/2016/10/18/android-dynamic-create-menu/">下一篇: 
+            Android 动态修改菜单
         </a>
     
 </div>
@@ -870,14 +870,19 @@ pre code {
 <script>
     hljs.highlightAll();
     window.onload = function() {
-        fetch('https://pinned.github.io/bing-daily-picture/index.json')
-        .then(response => response.text())
-        .then(data => {
-            var result = JSON.parse(data)
-            var count = result.images.length
-            const index = Math.floor(Math.random() * count);
-            document.getElementById("bing-bg").src = "https://cn.bing.com" + result.images[index].url;
-        }); // 返回的结果
+        // 判断是否为手机浏览器
+        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+        if (!isMobile) {
+            fetch('https://pinned.github.io/bing-daily-picture/index.json')
+                .then(response => response.text())
+                .then(data => {
+                    var result = JSON.parse(data)
+                    var count = result.images.length
+                    const index = Math.floor(Math.random() * count);
+                    document.getElementById("bing-bg").src = "https://cn.bing.com" + result.images[index].url;
+                }); // 返回的结果
+        } 
     }    
 </script>
 
