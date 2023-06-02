@@ -188,7 +188,7 @@
     margin: 12px 0;
 }
 
-.post-md>table
+/* .post-md>table
 {
     width: 100%;
     text-align: left;
@@ -210,7 +210,29 @@
     padding: 12px 0;
     border-bottom: 1px solid var(--line-1);
     background: #fff;
+} */
+
+
+.post-md table tr th,
+.post-md table tr td {
+  font-size: 16px;
+  border: 1px solid #ccc;
+  padding: 5px 10px;
+  text-align: left;
 }
+
+.post-md table tr th {
+    font-weight: bold;
+    background-color: #f0f0f0;
+}
+
+
+/* 表格最小列宽4个汉字 */
+.post-md table tr th:nth-of-type(n),
+.post-md table tr td:nth-of-type(n){
+  min-width:85px;
+}
+
 
 .post-md p code
 {

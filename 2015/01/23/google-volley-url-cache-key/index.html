@@ -642,7 +642,7 @@ a {
     margin: 12px 0;
 }
 
-.post-md>table
+/* .post-md>table
 {
     width: 100%;
     text-align: left;
@@ -664,7 +664,29 @@ a {
     padding: 12px 0;
     border-bottom: 1px solid var(--line-1);
     background: #fff;
+} */
+
+
+.post-md table tr th,
+.post-md table tr td {
+  font-size: 16px;
+  border: 1px solid #ccc;
+  padding: 5px 10px;
+  text-align: left;
 }
+
+.post-md table tr th {
+    font-weight: bold;
+    background-color: #f0f0f0;
+}
+
+
+/* 表格最小列宽4个汉字 */
+.post-md table tr th:nth-of-type(n),
+.post-md table tr td:nth-of-type(n){
+  min-width:85px;
+}
+
 
 .post-md p code
 {
@@ -1027,7 +1049,7 @@ protected Response&lt;String&gt; parseNetworkResponse(NetworkResponse response) 
 </code></pre>
 <p>就是<code>HttpHeaderParser.parseCacheHeaders(response)</code>实现<code>Response</code>向<code>Cache.Entry</code>的转换。</p>
 <p>当然，你可以实现自己的<code>parseCacheHeaders</code>的方法，来实现你自己的缓存侧略。</p>
-<p>到此为止，基本写完了我所读到的<code>Volley</code>中实现<code>Cache</code>的方法。如果你对本文或者我有什么意见或者建议。<br>请骚扰我：<a href="mailto:&#x6c;&#x6f;&#118;&#x65;&#99;&#108;&#x75;&#111;&#64;&#x6e;&#105;&#x67;&#104;&#116;&#119;&#101;&#x61;&#x76;&#101;&#x72;&#46;&#111;&#x72;&#x67;">&#x6c;&#x6f;&#118;&#x65;&#99;&#108;&#x75;&#111;&#64;&#x6e;&#105;&#x67;&#104;&#116;&#119;&#101;&#x61;&#x76;&#101;&#x72;&#46;&#111;&#x72;&#x67;</a></p>
+<p>到此为止，基本写完了我所读到的<code>Volley</code>中实现<code>Cache</code>的方法。如果你对本文或者我有什么意见或者建议。<br>请骚扰我：<a href="mailto:&#108;&#x6f;&#118;&#x65;&#x63;&#108;&#x75;&#x6f;&#64;&#x6e;&#x69;&#103;&#104;&#x74;&#x77;&#101;&#x61;&#x76;&#101;&#114;&#46;&#x6f;&#114;&#x67;">&#108;&#x6f;&#118;&#x65;&#x63;&#108;&#x75;&#x6f;&#64;&#x6e;&#x69;&#103;&#104;&#x74;&#x77;&#101;&#x61;&#x76;&#101;&#114;&#46;&#x6f;&#114;&#x67;</a></p>
 
         </section>
         </div>
@@ -1192,21 +1214,21 @@ pre code {
 
 <script>
     hljs.highlightAll();
-    window.onload = function() {
-        // 判断是否为手机浏览器
-        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    // window.onload = function() {
+    //     // 判断是否为手机浏览器
+    //     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
-        if (!isMobile) {
-            fetch('https://pinned.github.io/bing-daily-picture/index.json')
-                .then(response => response.text())
-                .then(data => {
-                    var result = JSON.parse(data)
-                    var count = result.images.length
-                    const index = Math.floor(Math.random() * count);
-                    document.getElementById("bing-bg").src = "https://cn.bing.com" + result.images[index].url;
-                }); // 返回的结果
-        } 
-    }    
+    //     if (!isMobile) {
+    //         fetch('https://pinned.github.io/bing-daily-picture/index.json')
+    //             .then(response => response.text())
+    //             .then(data => {
+    //                 var result = JSON.parse(data)
+    //                 var count = result.images.length
+    //                 const index = Math.floor(Math.random() * count);
+    //                 document.getElementById("bing-bg").src = "https://cn.bing.com" + result.images[index].url;
+    //             }); // 返回的结果
+    //     } 
+    // }    
 </script>
 
             </div>

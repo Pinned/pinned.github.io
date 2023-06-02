@@ -642,7 +642,7 @@ a {
     margin: 12px 0;
 }
 
-.post-md>table
+/* .post-md>table
 {
     width: 100%;
     text-align: left;
@@ -664,7 +664,29 @@ a {
     padding: 12px 0;
     border-bottom: 1px solid var(--line-1);
     background: #fff;
+} */
+
+
+.post-md table tr th,
+.post-md table tr td {
+  font-size: 16px;
+  border: 1px solid #ccc;
+  padding: 5px 10px;
+  text-align: left;
 }
+
+.post-md table tr th {
+    font-weight: bold;
+    background-color: #f0f0f0;
+}
+
+
+/* 表格最小列宽4个汉字 */
+.post-md table tr th:nth-of-type(n),
+.post-md table tr td:nth-of-type(n){
+  min-width:85px;
+}
+
 
 .post-md p code
 {
@@ -734,8 +756,8 @@ a {
         <li>
             <span class="archive-date">2015.04.06</span>
             <div class="archive-main">
-                <a class="archive-title" href="/2015/04/06/android-set-textview-drawable-by-java-code/">TextView之代码设置DrawableLeft</a>
-                <!-- <a class="read-more" href="/2015/04/06/android-set-textview-drawable-by-java-code/"> ... </a> -->
+                <a class="archive-title" href="/2015/04/06/exit-app-by-press-twice-back/">Android 按两次返回键退出应用程序</a>
+                <!-- <a class="read-more" href="/2015/04/06/exit-app-by-press-twice-back/"> ... </a> -->
             </div>
         </li>
         
@@ -750,16 +772,16 @@ a {
         <li>
             <span class="archive-date">2015.04.06</span>
             <div class="archive-main">
-                <a class="archive-title" href="/2015/04/06/exit-app-by-press-twice-back/">Android 按两次返回键退出应用程序</a>
-                <!-- <a class="read-more" href="/2015/04/06/exit-app-by-press-twice-back/"> ... </a> -->
+                <a class="archive-title" href="/2015/04/06/format-file-size/">格式化文件容量代码</a>
+                <!-- <a class="read-more" href="/2015/04/06/format-file-size/"> ... </a> -->
             </div>
         </li>
         
         <li>
             <span class="archive-date">2015.04.06</span>
             <div class="archive-main">
-                <a class="archive-title" href="/2015/04/06/format-file-size/">格式化文件容量代码</a>
-                <!-- <a class="read-more" href="/2015/04/06/format-file-size/"> ... </a> -->
+                <a class="archive-title" href="/2015/04/06/gradle-rename-apk-file/">gradle打包的时候，自动重命名APK文件</a>
+                <!-- <a class="read-more" href="/2015/04/06/gradle-rename-apk-file/"> ... </a> -->
             </div>
         </li>
         
@@ -774,8 +796,8 @@ a {
         <li>
             <span class="archive-date">2015.04.06</span>
             <div class="archive-main">
-                <a class="archive-title" href="/2015/04/06/gradle-rename-apk-file/">gradle打包的时候，自动重命名APK文件</a>
-                <!-- <a class="read-more" href="/2015/04/06/gradle-rename-apk-file/"> ... </a> -->
+                <a class="archive-title" href="/2015/04/06/android-set-textview-drawable-by-java-code/">TextView之代码设置DrawableLeft</a>
+                <!-- <a class="read-more" href="/2015/04/06/android-set-textview-drawable-by-java-code/"> ... </a> -->
             </div>
         </li>
         
@@ -936,21 +958,21 @@ pre code {
 
 <script>
     hljs.highlightAll();
-    window.onload = function() {
-        // 判断是否为手机浏览器
-        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    // window.onload = function() {
+    //     // 判断是否为手机浏览器
+    //     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
-        if (!isMobile) {
-            fetch('https://pinned.github.io/bing-daily-picture/index.json')
-                .then(response => response.text())
-                .then(data => {
-                    var result = JSON.parse(data)
-                    var count = result.images.length
-                    const index = Math.floor(Math.random() * count);
-                    document.getElementById("bing-bg").src = "https://cn.bing.com" + result.images[index].url;
-                }); // 返回的结果
-        } 
-    }    
+    //     if (!isMobile) {
+    //         fetch('https://pinned.github.io/bing-daily-picture/index.json')
+    //             .then(response => response.text())
+    //             .then(data => {
+    //                 var result = JSON.parse(data)
+    //                 var count = result.images.length
+    //                 const index = Math.floor(Math.random() * count);
+    //                 document.getElementById("bing-bg").src = "https://cn.bing.com" + result.images[index].url;
+    //             }); // 返回的结果
+    //     } 
+    // }    
 </script>
 
             </div>
