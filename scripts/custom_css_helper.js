@@ -15,6 +15,6 @@ hexo.extend.helper.register('css_inline', function(path) {
     var cached = fs.readFileSync(local_path);
     result += cached
     result += '</style>'
-    console.log(result)
+    // console.log(result)
     return result;
 });

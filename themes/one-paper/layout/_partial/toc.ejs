@@ -1,0 +1,11 @@
+<% if (is_post()) { %>
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>目录</h4>
+            <%- toc(page.content, {
+                class: 'post-toc',
+                list_number: false,
+            }) %>
+        </nav>
+    </aside>
+<% } %>
