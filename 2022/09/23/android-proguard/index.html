@@ -134,8 +134,7 @@ a {
     }
 
     .paper-main {
-        width: 100%;
-        max-width: 900px;
+        width: 900px;
         margin: 0 auto;
         padding: 62px 3vw 24px;
         background: #fff;
@@ -709,9 +708,20 @@ a {
     <body>
         <img id="bing-bg" src="" referrerpolicy="no-referrer" />
         <div class="paper">
+            
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>目录</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#ProGuard%20%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="post-toc-text">ProGuard 工作流程</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Android%20%E4%B8%AD%E4%BD%BF%E7%94%A8%20ProGuard"><span class="post-toc-text">Android 中使用 ProGuard</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1.%20proguard-android-optimize.txt%20%E7%9A%84%E7%94%9F%E6%88%90"><span class="post-toc-text">1. proguard-android-optimize.txt 的生成</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2.%20Android%20Proguard%20%E7%9A%84%E9%BB%98%E8%AE%A4%E9%85%8D%E7%BD%AE%E8%A7%A3%E6%9E%90"><span class="post-toc-text">2. Android Proguard 的默认配置解析</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2.1%20%3Ccode%3E-keepattributes%20*Annotation*%3C/code%3E"><span class="post-toc-text">2.1 -keepattributes *Annotation*</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2.2%20%E4%BD%BF%E7%94%A8%E6%B3%A8%E8%A7%A3%E5%AE%9E%E7%8E%B0%E7%B1%BB%E3%80%81%E6%96%B9%E6%B3%95%E3%80%81%E5%8F%98%E9%87%8F%E7%9A%84%20%3Ccode%3Ekeep%20%3C/code%3E"><span class="post-toc-text">2.2 使用注解实现类、方法、变量的 keep </span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2.3%20View%20%E5%8F%8A%20Activity%20%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE"><span class="post-toc-text">2.3 View 及 Activity 相关配置</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3.%20%E7%94%9F%E6%88%90%E8%A7%84%E5%88%99%EF%BC%8Caapt_rules.txt%E7%9A%84%E7%94%A8%E9%80%94"><span class="post-toc-text">3. 生成规则，aapt_rules.txt的用途</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4.%20%E5%85%B6%E5%AE%83%E6%9C%89%E7%94%A8%E9%85%8D%E7%BD%AE"><span class="post-toc-text">4. 其它有用配置</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#4.1%20%E5%B0%86%E6%B7%B7%E6%B7%86%E7%B1%BB%E7%A7%BB%E5%8A%A8%E5%88%B0%E6%8C%87%E5%AE%9A%E5%8C%85%E4%B8%AD"><span class="post-toc-text">4.1 将混淆类移动到指定包中</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#4.2%20%E5%88%A0%E9%99%A4%20%3Ccode%3E%E6%97%A0%E5%89%AF%E4%BD%9C%E7%94%A8%20%3C/code%3E%E7%9A%84%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8"><span class="post-toc-text">4.2 删除 无副作用 的方法调用</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#4.3%20keep%20%E7%B1%BB%EF%BC%8C%E4%BD%86%E4%B8%8D%E5%85%81%E8%AE%B8%E6%B7%B7%E6%B7%86"><span class="post-toc-text">4.3 keep 类，但不允许混淆</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%BB%93%E8%AF%AD"><span class="post-toc-text">结语</span></a></li></ol>
+        </nav>
+    </aside>
+
             <div class="paper-main">
                 
-                    <div class="post-header">
+                    
+<link rel="stylesheet" href="/css/toc.css">
+
+<div class="post-header">
     <p class="post-title">深入 Android 混淆实践：ProGuard 通关秘籍</p>
 </div>
                 
@@ -725,7 +735,7 @@ a {
         <section id="beautiful">
             <p>使用 Java 编写的源代码在编译时会生成 <code>CLASS</code> 文件，而 <code>CLASS</code> 字节码的规则非常的标准，按照对应的格式能够很好的反编译出原代码。市面上也存在很多很好用的工具，来帮助我们进行反编译并阅读 <code>CLASS</code> 中的代码逻辑。为了更好的保护代码安全，混淆是最容易做的一件事情。</p>
 <p>针对 java 的混淆，有一个开源项目 <a target="_blank" rel="noopener" href="https://github.com/Guardsquare/proguard">ProGuard</a> 就是常用的混淆工具。他可以对代码进行 <code>压缩</code>、<code>优化</code> 、<code>混淆</code>。本文将基于在使用过程中，用到的知识点进行记录。</p>
-<h2><span class="prefix"></span><span class="content">ProGuard 工作流程</span><span class="suffix"></span></h2><p>在 ProGuard 执行的过程中，有 <code>shrink</code>、<code>optimize</code>、<code>obfuscate</code> 、<code>preverify</code> 四个步骤，每一个步骤的执行都是可选的，我们可以根据想要的流程去进行配置，但此四个步骤执行的顺序是固定的，不可更改的。</p>
+<h2 id="ProGuard 工作流程"><span class="prefix"></span><span class="content">ProGuard 工作流程</span><span class="suffix"></span></h2><p>在 ProGuard 执行的过程中，有 <code>shrink</code>、<code>optimize</code>、<code>obfuscate</code> 、<code>preverify</code> 四个步骤，每一个步骤的执行都是可选的，我们可以根据想要的流程去进行配置，但此四个步骤执行的顺序是固定的，不可更改的。</p>
 <p><img src="https://img-blog.csdnimg.cn/b948011a4512492393971baace169df9.png" alt="ProGuard 工作流程" referrerpolicy="no-referrer"><figcaption class="post-image-caption">ProGuard 工作流程</figcaption></figure></p>
 <ul>
 <li><strong>shrink</strong>  检查并删除没有使用的类、字段、方法、属性。</li>
@@ -734,7 +744,7 @@ a {
 <li><strong>preverify</strong> 针对 Java 1.6 及以上版本进行预校验， 校验 StackMap &#x2F;StackMapTable 属性。但是在  Android 中，编译产生的 Class 文件会被合并成 <code>dex</code> 文件，所以不需要进行预校验， 在编译时，可以关掉，提升打包速度。</li>
 </ul>
 <p>能过上面的流程，可以对代码进行优化、压缩，删除不使用的类，减少包大小。 因为压缩是会删除没有被使用的类，如果我们有使用反射，ProGuard 是无法关联使用关系，默认情况下，反射的类可能会被删除掉，因此，我们需要在配置文件中 <code>keep</code> 反射中的类，防止被删除。</p>
-<h2><span class="prefix"></span><span class="content">Android 中使用 ProGuard</span><span class="suffix"></span></h2><p>在 Android 中使用也非常的简单，只需要在 <code>build.gradle</code> 中加入相应的配置即可。 </p>
+<h2 id="Android 中使用 ProGuard"><span class="prefix"></span><span class="content">Android 中使用 ProGuard</span><span class="suffix"></span></h2><p>在 Android 中使用也非常的简单，只需要在 <code>build.gradle</code> 中加入相应的配置即可。 </p>
 <pre><code class="groovy">buildTypes &#123;
   release &#123;
     minifyEnabled true
@@ -743,7 +753,7 @@ a {
 &#125;
 </code></pre>
 <p>配置中，使用 <code>minifEnabled = true</code> 表示开启混淆，而混淆配置文件使用的 <code>proguard-android-optimize.txt</code> 和自定义的 <code>proguard-rules.pro</code> 中定义的规则。</p>
-<h3><span class="prefix"></span><span class="content">1. proguard-android-optimize.txt 的生成</span><span class="suffix"></span></h3><p>在 Android 进行编译的时候，有一个 <code>extractProguardFiles</code> 的 Task， 它会生成三个默认 ProGuard 配置文件，并放到<code>build/intermediates/proguard-files/</code> 下面去。 这三个文件分别为:</p>
+<h3 id="1. proguard-android-optimize.txt 的生成"><span class="prefix"></span><span class="content">1. proguard-android-optimize.txt 的生成</span><span class="suffix"></span></h3><p>在 Android 进行编译的时候，有一个 <code>extractProguardFiles</code> 的 Task， 它会生成三个默认 ProGuard 配置文件，并放到<code>build/intermediates/proguard-files/</code> 下面去。 这三个文件分别为:</p>
 <ul>
 <li><code>proguard-android.txt</code></li>
 <li><code>proguard-android-optimize.txt</code></li>
@@ -761,14 +771,14 @@ a {
 <p>第二步，就是在指定的文件中，按照指定的配置将对应的配置写入到文件中。</p>
 <p><img src="https://img-blog.csdnimg.cn/f12a5826f59748b09058678a4616a4e6.png" alt="proguard-android-optimize 生成" referrerpolicy="no-referrer"><figcaption class="post-image-caption">proguard-android-optimize 生成</figcaption></figure></p>
 <p>从上图中的代码可以看到，在生成 proguard 的配置文件时，将 gradle.jar 中 <code>proguard-haader.txt</code>，  <code>proguard-optimizations.txt</code>， <code>proguard-common.txt</code> 按顺序写入目标文件。</p>
-<h3><span class="prefix"></span><span class="content">2. Android Proguard 的默认配置解析</span><span class="suffix"></span></h3><p>在默认配置中，写有 Android 中最长用的混淆规则。从这些规则中，也可以学习到一些之前不会注意到的知识点</p>
-<h4><span class="prefix"></span><span class="content">2.1 <code>-keepattributes *Annotation*</code></span><span class="suffix"></span></h4><p>根据 <a target="_blank" rel="noopener" href="https://www.guardsquare.com/manual/configuration/attributes">ProGuard 官方文档</a>文档解释，<code>*</code> 是用来匹配属性名称的通配符，<code>*Annotation*</code> 会匹配到诸如： <code>RuntimeVisibleAnnotations</code>， <code>RuntimeInvisibleAnnotations</code> 等。  </p>
+<h3 id="2. Android Proguard 的默认配置解析"><span class="prefix"></span><span class="content">2. Android Proguard 的默认配置解析</span><span class="suffix"></span></h3><p>在默认配置中，写有 Android 中最长用的混淆规则。从这些规则中，也可以学习到一些之前不会注意到的知识点</p>
+<h4 id="2.1 <code>-keepattributes *Annotation*</code>"><span class="prefix"></span><span class="content">2.1 <code>-keepattributes *Annotation*</code></span><span class="suffix"></span></h4><p>根据 <a target="_blank" rel="noopener" href="https://www.guardsquare.com/manual/configuration/attributes">ProGuard 官方文档</a>文档解释，<code>*</code> 是用来匹配属性名称的通配符，<code>*Annotation*</code> 会匹配到诸如： <code>RuntimeVisibleAnnotations</code>， <code>RuntimeInvisibleAnnotations</code> 等。  </p>
 <p>此配置在网上的一些教程中，一般都会建议加上，那这个是干什么的呢？ 在官方文档上写了，在混淆的过程中，会将那些在执行中不必要的属性进行移除。</p>
 <p>我们都知道，每一个注解，都有其应用的范围。 <code>RuntimeVisibleAnnotations</code> 就是表示的在运行时可见的注解， 这一类注解在代码执行的过程中，可通过反射去获取并使用。在混淆时，如果没有 <code>keep</code> ，就会直接删除掉，这就会导致运行时读取不了这个注解。</p>
 <p>然而，这条规则是用来保持一个类中使用的 <code>Annotation</code> 不被删除，如果要保持 <code>Annotation</code> 不被混淆，还需要加另外一条规则，例如：</p>
 <pre><code>-keep class androidx.annotation.Keep
 </code></pre>
-<h4><span class="prefix"></span><span class="content">2.2 使用注解实现类、方法、变量的 <code>keep </code></span><span class="suffix"></span></h4><p>为了让我们的代码能够正常运行，总会有一些类，一些方法是不能被 <code>keep</code> 的，但是，在编写代码之外，专门来写一些很精细化的规则处理，非常的麻烦，而且易出错。而 <code>ProGuard</code> 也支持用注解标记的类、方法、变量进行 <code>keep</code>，在 Android 的 support 包中，也有对应的注解， 定义如下：	</p>
+<h4 id="2.2 使用注解实现类、方法、变量的 <code>keep </code>"><span class="prefix"></span><span class="content">2.2 使用注解实现类、方法、变量的 <code>keep </code></span><span class="suffix"></span></h4><p>为了让我们的代码能够正常运行，总会有一些类，一些方法是不能被 <code>keep</code> 的，但是，在编写代码之外，专门来写一些很精细化的规则处理，非常的麻烦，而且易出错。而 <code>ProGuard</code> 也支持用注解标记的类、方法、变量进行 <code>keep</code>，在 Android 的 support 包中，也有对应的注解， 定义如下：	</p>
 <pre><code class="java">package androidx.annotation;
 
 @Retention(CLASS)
@@ -797,7 +807,7 @@ public @interface Keep &#123;
 &#125;
 </code></pre>
 <p>如果，你有自己定义的注解类，也可以按照上面的规则去编写自己的 keep 规则。当然，对于绝大部分项目应该都引入了 <code>support 包</code>， 所以建议直接使用 <code>support 包</code>中定义的注解。</p>
-<h4><span class="prefix"></span><span class="content">2.3 View 及 Activity 相关配置</span><span class="suffix"></span></h4><p>在 Android 底层运行中， Activity 以及 View 中，涉及到与 XML 关联的代码中，大多数方法调用都是使用反射来处理的。 因此，对于这些方法都需要进行 <code>keep</code> 的， 而在默认的配置中，有如下配置： </p>
+<h4 id="2.3 View 及 Activity 相关配置"><span class="prefix"></span><span class="content">2.3 View 及 Activity 相关配置</span><span class="suffix"></span></h4><p>在 Android 底层运行中， Activity 以及 View 中，涉及到与 XML 关联的代码中，大多数方法调用都是使用反射来处理的。 因此，对于这些方法都需要进行 <code>keep</code> 的， 而在默认的配置中，有如下配置： </p>
 <pre><code class="txt">-keepclassmembers public class * extends android.view.View &#123;
     void set*(***);
     *** get*();
@@ -808,7 +818,7 @@ public @interface Keep &#123;
 </code></pre>
 <p>可以看到，默认配置中，对于 View 的子类，将所有继承 View 类中的 <code>get</code>、<code>set</code>  方法进行了 <code>keep</code>。 而对于 Activity，仅将方法中参数为 <code>android.view.View</code>，且返回值为 void 的方法进行了 <code>keep</code>， 这类方法大多为 XML 中定义的 <code>onClick</code> 的调用。</p>
 <p>除了以上的 <code>keep</code> 规则，并没有对 View 类以及 Activity 类的其它 <code>keep</code> 规则， 在 <code>AndroidManifest.xml</code>  中所写的 Activity 名字，以及在 <code>layout</code> 中写的 View 的名字，都是通过反射构造的，而并没有相应的规则，这又是怎么回事呢？</p>
-<h3><span class="prefix"></span><span class="content">3. 生成规则，aapt_rules.txt的用途</span><span class="suffix"></span></h3><p>前面提到，在混淆规则中，并没有对 Activity 以及 View 的构造方法进行 <code>keep</code> 。但是我在打出来的 <code>release aar</code> 中， XML 中使用的 Activity 以及 View 被 keep 了， 没有被混淆。</p>
+<h3 id="3. 生成规则，aapt_rules.txt的用途"><span class="prefix"></span><span class="content">3. 生成规则，aapt_rules.txt的用途</span><span class="suffix"></span></h3><p>前面提到，在混淆规则中，并没有对 Activity 以及 View 的构造方法进行 <code>keep</code> 。但是我在打出来的 <code>release aar</code> 中， XML 中使用的 Activity 以及 View 被 keep 了， 没有被混淆。</p>
 <p>为了进一步分析，我将项目中执行的 Task 的出参与入参打应了出来，打印代码如下：</p>
 <pre><code class="groovy">gradle.taskGraph.afterTask &#123; task -&gt;
     StringBuffer taskDetails = new StringBuffer()
@@ -839,7 +849,7 @@ outputs:
 -------------
 </code></pre>
 <p>有兴趣的同学，也可以去看一下这个 Task 的原码，看看 aapt_rules.txt 文件的生成流程。 </p>
-<h3><span class="prefix"></span><span class="content">4. 其它有用配置</span><span class="suffix"></span></h3><h4><span class="prefix"></span><span class="content">4.1 将混淆类移动到指定包中</span><span class="suffix"></span></h4><p>本文中，混淆使用的是 R8 ， 而 R8 在混淆的时候，默认情况下，混淆后的类，会被放到根目录下，如下图所示：</p>
+<h3 id="4. 其它有用配置"><span class="prefix"></span><span class="content">4. 其它有用配置</span><span class="suffix"></span></h3><h4 id="4.1 将混淆类移动到指定包中"><span class="prefix"></span><span class="content">4.1 将混淆类移动到指定包中</span><span class="suffix"></span></h4><p>本文中，混淆使用的是 R8 ， 而 R8 在混淆的时候，默认情况下，混淆后的类，会被放到根目录下，如下图所示：</p>
 <p><img src="https://img-blog.csdnimg.cn/18bc36212e484d6181c1da9080a12015.png" alt="R8 输出默认 mapping" referrerpolicy="no-referrer"><figcaption class="post-image-caption">R8 输出默认 mapping</figcaption></figure></p>
 <p>但在做 SDK 的时候，我们打包的是 aar 文件，这种直接放在跟目录下， 可能会出现与其它 <code>aar</code> 的混淆类冲突，所以可以将混淆类移动到指定包中去。</p>
 <ul>
@@ -862,7 +872,7 @@ com.example.build.inner.InnerClass -&gt; com.exampe.a1.h:
     java.lang.String innerValue -&gt; a
 com.example.build.inner.sub.SubClass -&gt; com.exampe.a1.k:
 </code></pre>
-<h4><span class="prefix"></span><span class="content">4.2 删除 <code>无副作用 </code>的方法调用</span><span class="suffix"></span></h4><p>相信很多同学都使用过 ProGuard 去删除 <code>android.util.Log</code> ， 配置规则很简单，如下所示：</p>
+<h4 id="4.2 删除 <code>无副作用 </code>的方法调用"><span class="prefix"></span><span class="content">4.2 删除 <code>无副作用 </code>的方法调用</span><span class="suffix"></span></h4><p>相信很多同学都使用过 ProGuard 去删除 <code>android.util.Log</code> ， 配置规则很简单，如下所示：</p>
 <pre><code class="groovy">-assumenosideeffects class android.util.Log &#123;   
     public *** d(...);       
     public *** e(...);    
@@ -878,10 +888,10 @@ com.example.build.inner.sub.SubClass -&gt; com.exampe.a1.k:
 <p>添加对应删除的 ProGuard 规则后，结果如下图所示：</p>
 <p><img src="https://img-blog.csdnimg.cn/8904344995054bedaea388019330a5fe.png" alt="删除后的结果" referrerpolicy="no-referrer"><figcaption class="post-image-caption">删除后的结果</figcaption></figure></p>
 <p>可以看到，编译后的 class 文件中，已经将 <code>Log.d</code> 的调用删除掉了，但是需要注意的是，代码中的 <code>&quot;A&quot; + info + &quot;B&quot;</code> 会被保留下来， 因为 ProGuard 无法判断此处代码删除是否对业务逻辑有影响，所以被保留了下来。</p>
-<h4><span class="prefix"></span><span class="content">4.3 keep 类，但不允许混淆</span><span class="suffix"></span></h4><p>在混淆的过程中， 第一步为 <code>shrink</code> ， 在执行过程中，会将未使用的类、方法、变量等进行优化删除，但如果你输出的是 SDK， 有一些接口类是不会被调用的。当然，你可以直接将接口类进行 <code>keep</code> ， 这样 <code>shrink</code> 的时候，就不会删除对应的类了。但如果你和我一样，即要不删除类，但是又希望混淆类名字，你可以进行如下配置实现：</p>
+<h4 id="4.3 keep 类，但不允许混淆"><span class="prefix"></span><span class="content">4.3 keep 类，但不允许混淆</span><span class="suffix"></span></h4><p>在混淆的过程中， 第一步为 <code>shrink</code> ， 在执行过程中，会将未使用的类、方法、变量等进行优化删除，但如果你输出的是 SDK， 有一些接口类是不会被调用的。当然，你可以直接将接口类进行 <code>keep</code> ， 这样 <code>shrink</code> 的时候，就不会删除对应的类了。但如果你和我一样，即要不删除类，但是又希望混淆类名字，你可以进行如下配置实现：</p>
 <pre><code>-keep,allowobfuscation class com.example.TestApi &#123;*;&#125;
 </code></pre>
-<h2><span class="prefix"></span><span class="content">结语</span><span class="suffix"></span></h2><p>ProGuard 是在打包过程中一个非常常用的功能，但其涉及点很多，少有去花时间深入了解其实现原理。文中也仅记录使用过程中遇到的知识点。当遇到问题，多去看看官方文档，可能会发现之前从未注意到的亮点。</p>
+<h2 id="结语"><span class="prefix"></span><span class="content">结语</span><span class="suffix"></span></h2><p>ProGuard 是在打包过程中一个非常常用的功能，但其涉及点很多，少有去花时间深入了解其实现原理。文中也仅记录使用过程中遇到的知识点。当遇到问题，多去看看官方文档，可能会发现之前从未注意到的亮点。</p>
 
         </section>
         </div>

@@ -134,8 +134,7 @@ a {
     }
 
     .paper-main {
-        width: 100%;
-        max-width: 900px;
+        width: 900px;
         margin: 0 auto;
         padding: 62px 3vw 24px;
         background: #fff;
@@ -709,9 +708,20 @@ a {
     <body>
         <img id="bing-bg" src="" referrerpolicy="no-referrer" />
         <div class="paper">
+            
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>目录</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Android%E4%B9%8BNotification%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%88%E4%BA%8C%EF%BC%89"><span class="post-toc-text">Android之Notification的使用（二）</span></a></li></ol>
+        </nav>
+    </aside>
+
             <div class="paper-main">
                 
-                    <div class="post-header">
+                    
+<link rel="stylesheet" href="/css/toc.css">
+
+<div class="post-header">
     <p class="post-title">Android之Notification的使用（二）</p>
 </div>
                 
@@ -723,7 +733,7 @@ a {
         </div>
         <div class="post-md" id="copy-post-content">
         <section id="beautiful">
-            <h2><span class="prefix"></span><span class="content">Android之Notification的使用（二）</span><span class="suffix"></span></h2><p>接着上篇文章，解决了一些我在使用Notification的过程中的一些bug。但是解决这些问题是远远不够的。</p>
+            <h2 id="Android之Notification的使用（二）"><span class="prefix"></span><span class="content">Android之Notification的使用（二）</span><span class="suffix"></span></h2><p>接着上篇文章，解决了一些我在使用Notification的过程中的一些bug。但是解决这些问题是远远不够的。</p>
 <p>在上篇文章中，解决了多个Notification跳转到同一个Activity中的问题。<br>但是那样子做并不能完全解决问题，下面来看一下，我新遇到的问题。</p>
 <p><strong>先上代码</strong></p>
 <pre><code class="java">Intent intent = new Intent(this, MainActivity.class);
@@ -753,7 +763,7 @@ notification.flags|=Notification.FLAG_SHOW_LIGHTS;
 notificationManager.notify(notificationId, notification);
 </code></pre>
 <p>和上一个例子不同的是，这一个Notification跳转的位置并不是<code>OtherActiivty</code>，<br>而是直接跳转到<code>MainActivity</code>.</p>
-<p><strong>问题</strong><br>非常不幸的事，他并不能够正常接收么Intent传过来的参数。至于为什么，我也不知道。<br>如您知道这个的具体原因请告知我(邮箱：<a href="mailto:&#x6c;&#111;&#118;&#101;&#x63;&#108;&#x75;&#x6f;&#64;&#103;&#x6d;&#97;&#x69;&#x6c;&#46;&#99;&#x6f;&#109;">&#x6c;&#111;&#118;&#101;&#x63;&#108;&#x75;&#x6f;&#64;&#103;&#x6d;&#97;&#x69;&#x6c;&#46;&#99;&#x6f;&#109;</a>)。</p>
+<p><strong>问题</strong><br>非常不幸的事，他并不能够正常接收么Intent传过来的参数。至于为什么，我也不知道。<br>如您知道这个的具体原因请告知我(邮箱：<a href="mailto:&#x6c;&#x6f;&#118;&#101;&#99;&#108;&#117;&#x6f;&#x40;&#103;&#109;&#97;&#x69;&#x6c;&#46;&#99;&#111;&#x6d;">&#x6c;&#x6f;&#118;&#101;&#99;&#108;&#117;&#x6f;&#x40;&#103;&#109;&#97;&#x69;&#x6c;&#46;&#99;&#111;&#x6d;</a>)。</p>
 <p><strong>解决办法</strong></p>
 <p>虽然不知道是什么原因造成了这个问题，但是最终还是找到了解决方案：</p>
 <p>解决方法如下：</p>

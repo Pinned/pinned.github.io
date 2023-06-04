@@ -134,8 +134,7 @@ a {
     }
 
     .paper-main {
-        width: 100%;
-        max-width: 900px;
+        width: 900px;
         margin: 0 auto;
         padding: 62px 3vw 24px;
         background: #fff;
@@ -709,9 +708,20 @@ a {
     <body>
         <img id="bing-bg" src="" referrerpolicy="no-referrer" />
         <div class="paper">
+            
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>目录</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%AE%89%E8%A3%85zsh"><span class="post-toc-text">安装zsh</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%B8%8B%E8%BD%BD%3Ccode%3Eoh%20my%20zsh%3C/code%3E%E9%A1%B9%E7%9B%AE"><span class="post-toc-text">下载oh my zsh项目</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E8%AE%BE%E7%BD%AEzsh"><span class="post-toc-text">设置zsh</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#VIM%20%E7%9A%84%E4%B8%80%E4%BA%9B%E9%85%8D%E7%BD%AE"><span class="post-toc-text">VIM 的一些配置</span></a></li></ol>
+        </nav>
+    </aside>
+
             <div class="paper-main">
                 
-                    <div class="post-header">
+                    
+<link rel="stylesheet" href="/css/toc.css">
+
+<div class="post-header">
     <p class="post-title">Mac Iterm2 zsh使用</p>
 </div>
                 
@@ -723,14 +733,14 @@ a {
         </div>
         <div class="post-md" id="copy-post-content">
         <section id="beautiful">
-            <h2><span class="prefix"></span><span class="content">安装zsh</span><span class="suffix"></span></h2><pre><code class="bash">brew install zsh
+            <h2 id="安装zsh"><span class="prefix"></span><span class="content">安装zsh</span><span class="suffix"></span></h2><pre><code class="bash">brew install zsh
 </code></pre>
-<h2><span class="prefix"></span><span class="content">下载<code>oh my zsh</code>项目</span><span class="suffix"></span></h2><pre><code class="bash">git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
+<h2 id="下载<code>oh my zsh</code>项目"><span class="prefix"></span><span class="content">下载<code>oh my zsh</code>项目</span><span class="suffix"></span></h2><pre><code class="bash">git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
 </code></pre>
-<h2><span class="prefix"></span><span class="content">设置zsh</span><span class="suffix"></span></h2><pre><code class="bash">cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
+<h2 id="设置zsh"><span class="prefix"></span><span class="content">设置zsh</span><span class="suffix"></span></h2><pre><code class="bash">cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
 chsh -s /bin/zsh
 </code></pre>
-<h2><span class="prefix"></span><span class="content">VIM 的一些配置</span><span class="suffix"></span></h2><pre><code class="bash">syntax on                &quot;语法高亮
+<h2 id="VIM 的一些配置"><span class="prefix"></span><span class="content">VIM 的一些配置</span><span class="suffix"></span></h2><pre><code class="bash">syntax on                &quot;语法高亮
 set nu!                  &quot;显示行号
 set ai!                  &quot;设置自动缩进
 set ruler                &quot;在编辑过程中，在右下角显示光标位置的状态行
@@ -748,7 +758,7 @@ set hlsearch             &quot;高亮查找到的所有单词
                     <div class="post_pre_next">
     
         <div class="post-pre">
-            <a href="/2015/05/11/svn-to-git/">上一篇: SVN迁移到GIT</a>
+            <a href="/2015/05/11/android-aidl-server/">上一篇: Android Service学习之AIDL, Parcelable和远程服务</a>
         </div>
     
     

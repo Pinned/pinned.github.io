@@ -134,8 +134,7 @@ a {
     }
 
     .paper-main {
-        width: 100%;
-        max-width: 900px;
+        width: 900px;
         margin: 0 auto;
         padding: 62px 3vw 24px;
         background: #fff;
@@ -709,9 +708,20 @@ a {
     <body>
         <img id="bing-bg" src="" referrerpolicy="no-referrer" />
         <div class="paper">
+            
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>目录</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%B8%80%E3%80%81ProGuard%20%E6%B7%B7%E6%B7%86%E8%A7%84%E5%88%99%EF%BC%9A-applymapping"><span class="post-toc-text">一、ProGuard 混淆规则：-applymapping</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%BA%8C%E3%80%81ProGuard%20%E6%B7%B7%E6%B7%86%E8%A7%84%E5%88%99%EF%BC%9A-flattenpackagehierarchy"><span class="post-toc-text">二、ProGuard 混淆规则：-flattenpackagehierarchy</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%B8%89%E3%80%81%E6%96%B0%E9%97%AE%E9%A2%98%E7%9A%84%E5%BC%95%E5%85%A5%EF%BC%9A%E4%BB%A3%E7%A0%81%E6%9B%B4%E6%94%B9%E9%80%A0%E6%88%90%20Crash"><span class="post-toc-text">三、新问题的引入：代码更改造成 Crash</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%9B%9B%E3%80%81%E8%BF%99%E6%97%B6%EF%BC%8CGradle%E5%B0%B1%E8%AF%A5%E4%B8%8A%E5%9C%BA%E4%BA%86"><span class="post-toc-text">四、这时，Gradle就该上场了</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%BA%94%E3%80%81%E6%8F%92%E4%BB%B6%E7%9A%84%E7%BC%96%E5%86%99%E4%B8%8E%E5%AE%9E%E7%8E%B0"><span class="post-toc-text">五、插件的编写与实现</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1.%20%E8%AF%BB%E5%8F%96%20class%20%E6%96%87%E4%BB%B6%E4%B8%AD%E7%9A%84%E5%86%85%E5%AE%B9"><span class="post-toc-text">1. 读取 class 文件中的内容</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2.%20%E6%B7%B7%E6%B7%86%E5%90%8D%E7%A7%B0%E7%94%9F%E6%88%90%E8%A7%84%E5%88%99"><span class="post-toc-text">2. 混淆名称生成规则</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3.%20%E6%96%B9%E6%B3%95%E5%90%8D%E6%B7%B7%E6%B7%86"><span class="post-toc-text">3. 方法名混淆</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
             <div class="paper-main">
                 
-                    <div class="post-header">
+                    
+<link rel="stylesheet" href="/css/toc.css">
+
+<div class="post-header">
     <p class="post-title">深入 Android 混淆实践：多模块打包爬坑之旅</p>
 </div>
                 
@@ -726,7 +736,7 @@ a {
             <p>在做 SDK 开发的时候，会将 SDK 中不同功能进行模块化拆分，分解成不同的模块，在对外提供 SDK 时，将多个 AAR 文件交付给使用方。</p>
 <p>来看一下这个场景，假设现在 SDK 有 <code>A模块</code>、<code>B模块</code> 两个模块，其中 <code>B模块</code> 依赖 <code>A模块</code> 。现在，对这两个模块进行打包，并且要开启混淆。发现了吗？要让 <code>B模块</code> 中的类，能正常使用 <code>A模块</code> 中的接口&#x2F;类，我们需要将  <code>A模块 </code> 中的接口&#x2F;类进行 <code>keep</code> ，才能满足相应的要求。但是 <code>A模块</code> 中的那些接口&#x2F;类仅提供给我们自己的模块使用，不需要对外提供，我们希望能够将其混淆，这种情况下，混淆需要怎么处理呢？这两个模块在打包时，也可能会生成相同的混淆名称，这种情况下，又需要怎么处理呢？</p>
 <p>当然，作为 Java 混淆界首屈一指的工具，它是有相应的功能去处理这些问题。但使用这些规则就能够非常顺畅的实现需求吗？本文将围绕 ProGuard 的混淆规则 <code>-applymapping</code> 和 <code>-flattenpackagehierarchy</code> 的使用，以及解决后续问题的思考与实践过程来展开。</p>
-<h2><span class="prefix"></span><span class="content">一、ProGuard 混淆规则：-applymapping</span><span class="suffix"></span></h2><p>在文首所举的例子中，<code>A 模块</code> 和 <code>B 模块</code> 中所使用的相同 <code>class</code> 需要使用相同的规则。在 ProGuard 混淆中， 有 <code>-applymapping</code>  可以指定混淆过程中类、变量、方法的映射规则。 在映射规则中没有提到的类、变量、方法会使用新的名称进行映射。在官方文档描述中，它可以用来进行增量编译。使用方式很简单，你只需要在你的 <code>proguard-rules.txt</code> 中添加如下规则：</p>
+<h2 id="一、ProGuard 混淆规则：-applymapping"><span class="prefix"></span><span class="content">一、ProGuard 混淆规则：-applymapping</span><span class="suffix"></span></h2><p>在文首所举的例子中，<code>A 模块</code> 和 <code>B 模块</code> 中所使用的相同 <code>class</code> 需要使用相同的规则。在 ProGuard 混淆中， 有 <code>-applymapping</code>  可以指定混淆过程中类、变量、方法的映射规则。 在映射规则中没有提到的类、变量、方法会使用新的名称进行映射。在官方文档描述中，它可以用来进行增量编译。使用方式很简单，你只需要在你的 <code>proguard-rules.txt</code> 中添加如下规则：</p>
 <pre><code>-applymapping ./keep-same-proguard.txt
 </code></pre>
 <p>通过 <code>-applymapping</code> 指定要使用的映射规则所在的文件，但需要注意的是，此方式只支持一个映射文件。映射文件中的内容与 ProGuard 混淆后生成的 <code>mapping</code> 文件一致，如下所示：</p>
@@ -773,7 +783,7 @@ public class DeviceUtils &#123;
 <blockquote>
 <p> 因为 <code>setup</code> 与 <code>addTestMethod</code> 的签名不一样， 在混淆的时候，可以使用相同的方法名，所以最终混淆出来的方法为 <code>void a()</code> 和 <code>void a(Context val)</code> 。</p>
 </blockquote>
-<h2><span class="prefix"></span><span class="content">二、ProGuard 混淆规则：-flattenpackagehierarchy</span><span class="suffix"></span></h2><p>之所以要使用这个关键字，是因为模块在打包生成 aar 或者 jar 包时，无法感知到其它与此模块无关的模块，生成混淆文件是可能会存在冲突的。这么说，可能不太能理解，为了能搞清楚冲突是怎么来的，先来看一个混淆的例子，在我的项目中，有三个类，类结构如下图所示：</p>
+<h2 id="二、ProGuard 混淆规则：-flattenpackagehierarchy"><span class="prefix"></span><span class="content">二、ProGuard 混淆规则：-flattenpackagehierarchy</span><span class="suffix"></span></h2><p>之所以要使用这个关键字，是因为模块在打包生成 aar 或者 jar 包时，无法感知到其它与此模块无关的模块，生成混淆文件是可能会存在冲突的。这么说，可能不太能理解，为了能搞清楚冲突是怎么来的，先来看一个混淆的例子，在我的项目中，有三个类，类结构如下图所示：</p>
 <p><img src="https://img-blog.csdnimg.cn/13c65f57773446878b251420503f1af4.png" alt="代码结构" referrerpolicy="no-referrer"><figcaption class="post-image-caption">代码结构</figcaption></figure></p>
 <p>因为这只是三个类文件，并没有被调用到，如果我要对它们进行混淆，我需要去调优化，所以混淆配置如下：</p>
 <pre><code class="java">-dontshrink
@@ -802,7 +812,7 @@ com.example.build.inner.MainInner -&gt; a.a.a.a.a:
 com.example.build.inner.test.TestInnerClass -&gt; a.a.a.a.b.a:
 </code></pre>
 <p>可以看到 ProGuard 和 R8 的细微差别。在回头来看，不管是用 ProGuard 还是 R8，在生成类名的时候，都是用 <code>a</code> 表示，假设我在 <code>A 模块</code> 中有 <code>com.example.build.inner.MainInner</code> 这个类，在 <code>B 模块</code> 中有 <code>com.example.build.inner.SubInner</code> 这个类，那分别打包  <code>A/B模块</code> 时，这两个类生成的名字都可能是 <code> com.example.build.a.a</code>，那业务在集成的时候，会同时引入 <code>A/B模块</code> 的SDK， 编译时就会出现类冲突，而最终的原因就是混淆时，不同模块间混淆生成了两个类使用了相同的名字，造成了冲突。解决方案也很简单，使用 <code>-flattenpackagehierarchy</code> 或者 <code>-repackageclasses</code> 指定混淆后移入的包路径即可， 不同模块，给定一个不同的包路径即可解决。</p>
-<h2><span class="prefix"></span><span class="content">三、新问题的引入：代码更改造成 Crash</span><span class="suffix"></span></h2><p>按照上述的 ProGuard 规则，在本地手动编译模块的 Release 包，并将需要使用相同规则类的混淆映射拷贝到 <code>keep-same-proguard.txt</code>  中，并且在模块下的 <code>proguard-rules.pro </code> 中添加上述配置，示例如下：</p>
+<h2 id="三、新问题的引入：代码更改造成 Crash"><span class="prefix"></span><span class="content">三、新问题的引入：代码更改造成 Crash</span><span class="suffix"></span></h2><p>按照上述的 ProGuard 规则，在本地手动编译模块的 Release 包，并将需要使用相同规则类的混淆映射拷贝到 <code>keep-same-proguard.txt</code>  中，并且在模块下的 <code>proguard-rules.pro </code> 中添加上述配置，示例如下：</p>
 <pre><code class="groovy"># 在 A 模块中使用 com.example.a1 ， 在 B 模块中使用 com.example.a2
 -flattenpackagehierarchy com.exampe.a1
 -applymapping ../keep-same-proguard.txt
@@ -823,7 +833,7 @@ com.example.build.inner.test.TestInnerClass -&gt; a.a.a.a.b.a:
 <p>如果内部暴露的 API 不只在一个<code>模块</code> 里面，你需要重复执行上面1， 2步骤，直到将所有的映射信息都更新完成。在本地开发时，很少会有人将混淆打开，本地几乎感知不到这个配置的存在。如果新同事来开发，不知道需要处理这个关系，上述步骤是很容易被遗忘掉，出现问题并花很多时间去排查，这非常容易引起同事们骂声。</p>
 <p><img src="https://img-blog.csdnimg.cn/86eede62876b487eb504d30c779bb74b.png" alt="在代码里下毒" referrerpolicy="no-referrer"><figcaption class="post-image-caption">在代码里下毒</figcaption></figure></p>
 <p>刚刚我们提到，这个<code>映射关系</code> 就是 ProGuard 生成的 <code>mapping</code> 文件内容，里面分为三部份： <code>类名</code>、<code>变量名</code>、<code>方法名</code>。规则也可以简单的理解为，把这三部分名字，转换成随机生成的字符即可。因此，我们可以将上述步骤用脚本自动化，在编译时在去生成这个 <code>keep-same-proguard.txt</code> ，这就解决了 <code>类</code> 变化引起的问题。</p>
-<h2><span class="prefix"></span><span class="content">四、这时，Gradle就该上场了</span><span class="suffix"></span></h2><p>当我们决定使用自动化脚本来生成文件时，Gradle 就是我们必备的利器。为了便于朋友们更好地理解后面的内容，我先介绍一下后面写自动化脚本中涉及的 Gradle 任务相关的基础知识，如果你对 Gradle 很熟悉，可直接跳过。</p>
+<h2 id="四、这时，Gradle就该上场了"><span class="prefix"></span><span class="content">四、这时，Gradle就该上场了</span><span class="suffix"></span></h2><p>当我们决定使用自动化脚本来生成文件时，Gradle 就是我们必备的利器。为了便于朋友们更好地理解后面的内容，我先介绍一下后面写自动化脚本中涉及的 Gradle 任务相关的基础知识，如果你对 Gradle 很熟悉，可直接跳过。</p>
 <p><strong>1. Gradle 任务创建</strong></p>
 <p>Gradle 任务是编译构建过程中的原子单元，例如 <code>编译任务</code> 、<code>生成Javadoc任务</code>。而我们创建一个新的任务也非常简单，在项目中 <code>build.gradle</code> 文件中，使用如下 DSL 即可定义新的任务 ： </p>
 <pre><code class="groovy">task testCreateTask &lt;&lt; &#123;
@@ -884,7 +894,7 @@ public Task doLast(final String actionName, final Action&lt;? super Task&gt; act
 </code></pre>
 <p>运行后，控制点会启动 Gradle ，并开始执行，在正式执行编译任务是，会等待 Debug 的链接过来，这时候，点击 Debug 的图标就可以愉快地进行调试了。</p>
 <p><img src="https://img-blog.csdnimg.cn/5e51cec793cb47989e143bb436919eae.png" alt="可爱的小虫子图标" referrerpolicy="no-referrer"><figcaption class="post-image-caption">可爱的小虫子图标</figcaption></figure></p>
-<h2><span class="prefix"></span><span class="content">五、插件的编写与实现</span><span class="suffix"></span></h2><p>读到此处，我相信大家都对 Gradle 都有一定的了解，对于生成 <code>keep-same-proguard.txt</code> 也肯定有了一定的想法。文章前半段有提到，<code>keep-same-proguard.txt</code> 中的内容为<code>类名</code>、<code>变量名</code>、<code>方法名</code> 的映射关系，而这些信息我们都可以从编译后的 <code>class</code> 文件中获取到。</p>
+<h2 id="五、插件的编写与实现"><span class="prefix"></span><span class="content">五、插件的编写与实现</span><span class="suffix"></span></h2><p>读到此处，我相信大家都对 Gradle 都有一定的了解，对于生成 <code>keep-same-proguard.txt</code> 也肯定有了一定的想法。文章前半段有提到，<code>keep-same-proguard.txt</code> 中的内容为<code>类名</code>、<code>变量名</code>、<code>方法名</code> 的映射关系，而这些信息我们都可以从编译后的 <code>class</code> 文件中获取到。</p>
 <p>为了更好的复用，此处将定义一个插件，在 <code>buildSrc</code> 目录下，创建一个 <code>Plugin</code> ， 示例如下：</p>
 <pre><code class="java">package com.android.tools.build;
 public class KeepSameProguardPlugin implements Plugin&lt;Project&gt; &#123;
@@ -917,7 +927,7 @@ apply plugin: KeepSameProguardPlugin
 &#125;);
 </code></pre>
 <p>在编译模块时，它所依赖的模块中的 class 会被编译成 <code>jar</code> ，被放到 <code>compileReleaseJavaWithJavac</code> 的入参中，为了能够将依赖模块中的原代码 <code>class</code> 区分出来，所以在此处，做一个小小的改动，将 <code>BuildToolsFindAllClassTask</code> 执行的内容放到 <code>javacTask</code> 的 <code>doLast</code> 中去，编译时，被依赖模块也会执行 <code>javacTask</code>，就能将被依赖模块中的 <code>class</code> 拿出来。</p>
-<h3><span class="prefix"></span><span class="content">1. 读取 class 文件中的内容</span><span class="suffix"></span></h3><p>业界中，针对 <code>class</code> 文件的处理， ASM 库必是首选，在本项目中，我也使用它，直接在 dependencies 中添加：</p>
+<h3 id="1. 读取 class 文件中的内容"><span class="prefix"></span><span class="content">1. 读取 class 文件中的内容</span><span class="suffix"></span></h3><p>业界中，针对 <code>class</code> 文件的处理， ASM 库必是首选，在本项目中，我也使用它，直接在 dependencies 中添加：</p>
 <pre><code class="groovy">implementation &#39;org.ow2.asm:asm:7.0&#39;
 </code></pre>
 <p>当然除了使用 ASM 解析，也可以直接使用 ClassLoader 去加载，有兴趣的同学可以去试试。因为本项目中，仅对 <code>class</code> 文件进行读取，不进行修改，可直接使用最简单的数据结构进行读取，针对 jar 包和文件夹，都是遍历对应的 class 文件，最终生成 <code>ClassNode</code>。</p>
@@ -986,7 +996,7 @@ private static ClassNode readClass(InputStream is) &#123;
 &#125;
 </code></pre>
 <p>从 inputFiles 中可以获取到 <code>AppCompatActivity</code>，而这个类因为是非源码，在打包 SDK 时，从中继承过来的方法是不能被混淆的，在生成规则时， <code>onCreate</code> 方法需要保持不变。</p>
-<h3><span class="prefix"></span><span class="content">2. 混淆名称生成规则</span><span class="suffix"></span></h3><p>Java 的变量名是以<code>字母和_</code> 开头，后跟<code>字母、数字、_ 、 $</code>，为了让逻辑更简单，此处生成的名字仅用 <code>字母</code> 和 <code>_</code>，因此，变量名列表代码如下：</p>
+<h3 id="2. 混淆名称生成规则"><span class="prefix"></span><span class="content">2. 混淆名称生成规则</span><span class="suffix"></span></h3><p>Java 的变量名是以<code>字母和_</code> 开头，后跟<code>字母、数字、_ 、 $</code>，为了让逻辑更简单，此处生成的名字仅用 <code>字母</code> 和 <code>_</code>，因此，变量名列表代码如下：</p>
 <pre><code class="java">private static final String[] NAME_DIC = new String[]&#123;
   &quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;, &quot;F&quot;, &quot;G&quot;, &quot;H&quot;, &quot;I&quot;, &quot;J&quot;, &quot;K&quot;,
   &quot;L&quot;, &quot;M&quot;, &quot;N&quot;, &quot;O&quot;, &quot;P&quot;, &quot;Q&quot;, &quot;R&quot;, &quot;S&quot;, &quot;T&quot;, &quot;U&quot;, &quot;V&quot;,
@@ -1012,7 +1022,7 @@ private static ArrayList&lt;String&gt; toList() &#123;
 &#125;
 </code></pre>
 <p>在上述代码中，是通过  index 来取名称的，以类中变量名称的生成过程来说明一下上述代码的思路。在一个类中，生成变量名不可以相同，要让每一次生成的名称相同，可以先从 <code>ClassNode</code> 中拿出所有的变量，并将所有的变量名按字典排序，生成名字时，就可以使用这个变量名在排序列表中的下标，作为 index，去字典中去取，就可以得到混淆后的名字。</p>
-<h3><span class="prefix"></span><span class="content">3. 方法名混淆</span><span class="suffix"></span></h3><p>按照前面所讲的 <code>变量名</code> 的生成逻辑，类名也可以按照类似的逻辑进行排序生成，但需要注意的是，排序所使用的类名列表应该是包含了整个项目中所有需要保持一致名称类的类名。 方法名的生成核心逻辑也也是类似的，只是用于进行排序的列表存在一些特殊情况需要处理。写到这里，生成 <code>keep-same-proguard.txt</code> 的功能我们已经能够编写出来。下面在来处理方法中的特殊情况：方法重载、多接口继承、多模块冲突。</p>
+<h3 id="3. 方法名混淆"><span class="prefix"></span><span class="content">3. 方法名混淆</span><span class="suffix"></span></h3><p>按照前面所讲的 <code>变量名</code> 的生成逻辑，类名也可以按照类似的逻辑进行排序生成，但需要注意的是，排序所使用的类名列表应该是包含了整个项目中所有需要保持一致名称类的类名。 方法名的生成核心逻辑也也是类似的，只是用于进行排序的列表存在一些特殊情况需要处理。写到这里，生成 <code>keep-same-proguard.txt</code> 的功能我们已经能够编写出来。下面在来处理方法中的特殊情况：方法重载、多接口继承、多模块冲突。</p>
 <p><strong>（1）方法重载</strong></p>
 <p>在 Java 代码中，方法重载是非常方法重载与重写是非常常见的功能， 针对此类方法，你需要保持和父类一致，也就是说，在生成混淆映射时，如果父类已经生成过了，那此方法就应该直接使用此名称，直接上例子， 如有如下两个类：</p>
 <pre><code class="java">package com.example.proguard;

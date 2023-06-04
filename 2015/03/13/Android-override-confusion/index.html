@@ -134,8 +134,7 @@ a {
     }
 
     .paper-main {
-        width: 100%;
-        max-width: 900px;
+        width: 900px;
         margin: 0 auto;
         padding: 62px 3vw 24px;
         background: #fff;
@@ -709,9 +708,20 @@ a {
     <body>
         <img id="bing-bg" src="" referrerpolicy="no-referrer" />
         <div class="paper">
+            
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>目录</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0"><span class="post-toc-text">问题描述</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E8%AF%A6%E7%BB%86%E4%BB%A3%E7%A0%81"><span class="post-toc-text">详细代码</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%80%BB%E7%BB%93"><span class="post-toc-text">总结</span></a></li></ol>
+        </nav>
+    </aside>
+
             <div class="paper-main">
                 
-                    <div class="post-header">
+                    
+<link rel="stylesheet" href="/css/toc.css">
+
+<div class="post-header">
     <p class="post-title">Android 中方法重载遇到的问题</p>
 </div>
                 
@@ -723,8 +733,8 @@ a {
         </div>
         <div class="post-md" id="copy-post-content">
         <section id="beautiful">
-            <h2><span class="prefix"></span><span class="content">问题描述</span><span class="suffix"></span></h2><p> 今天在使用的一个第三方库，执行的是一个异步下载，有一个封装<code>DownloadInfo</code>的类，在下载的<code>Task</code>中，通过<code>DownloadInfo</code><br> 获取真实的下载地址。但是由于粗心，库中的<code>getRealUrl</code>方法，没有加任何方法修饰词。我在使用的时候，重写了<code>DownloadInfo</code><br> 和<code>getRealUrl</code>方法。在测试中出现了一个问题，在Android 4.4中按照预期的执行，但是在Android 5.0中，却没有按照预期的<br> 效果执行。</p>
-<h2><span class="prefix"></span><span class="content">详细代码</span><span class="suffix"></span></h2><ol>
+            <h2 id="问题描述"><span class="prefix"></span><span class="content">问题描述</span><span class="suffix"></span></h2><p> 今天在使用的一个第三方库，执行的是一个异步下载，有一个封装<code>DownloadInfo</code>的类，在下载的<code>Task</code>中，通过<code>DownloadInfo</code><br> 获取真实的下载地址。但是由于粗心，库中的<code>getRealUrl</code>方法，没有加任何方法修饰词。我在使用的时候，重写了<code>DownloadInfo</code><br> 和<code>getRealUrl</code>方法。在测试中出现了一个问题，在Android 4.4中按照预期的执行，但是在Android 5.0中，却没有按照预期的<br> 效果执行。</p>
+<h2 id="详细代码"><span class="prefix"></span><span class="content">详细代码</span><span class="suffix"></span></h2><ol>
 <li>DownloadInfo</li>
 </ol>
 <pre><code class="java">package com.testoverloading.net;
@@ -775,7 +785,7 @@ public void showText(View view) &#123;
     this.mShow.setText(new Task(downloadInfo).excute());
 &#125;
 </code></pre>
-<h2><span class="prefix"></span><span class="content">总结</span><span class="suffix"></span></h2><p><strong>重写</strong></p>
+<h2 id="总结"><span class="prefix"></span><span class="content">总结</span><span class="suffix"></span></h2><p><strong>重写</strong></p>
 <blockquote>
 <p>Method overriding, in object oriented programming, is a language feature that allows a subclass or child class to provide a specific implementation of a method that is already provided by one of its superclasses or parent classes. The implementation in the subclass overrides (replaces) the implementation in the superclass by providing a method that has same name, same parameters or signature, and same return type as the method in the parent class. The version of a method that is executed will be determined by the object that is used to invoke it. If an object of a parent class is used to invoke the method, then the version in the parent class will be executed, but if an object of the subclass is used to invoke the method, then the version in the child class will be executed. Some languages allow a programmer to prevent a method from being overridden.</p>
 </blockquote>

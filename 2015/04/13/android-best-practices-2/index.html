@@ -134,8 +134,7 @@ a {
     }
 
     .paper-main {
-        width: 100%;
-        max-width: 900px;
+        width: 900px;
         margin: 0 auto;
         padding: 62px 3vw 24px;
         background: #fff;
@@ -709,9 +708,20 @@ a {
     <body>
         <img id="bing-bg" src="" referrerpolicy="no-referrer" />
         <div class="paper">
+            
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>目录</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%91%98%E8%A6%81"><span class="post-toc-text">摘要</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Android%20SDK"><span class="post-toc-text">Android SDK</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%9E%84%E5%BB%BA%E7%B3%BB%E7%BB%9F"><span class="post-toc-text">构建系统</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%B7%A5%E7%A8%8B%E7%BB%93%E6%9E%84"><span class="post-toc-text">工程结构</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Gradle%20%E9%85%8D%E7%BD%AE"><span class="post-toc-text">Gradle 配置</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#IDEs%20and%20text%20editors"><span class="post-toc-text">IDEs and text editors</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#IDE%E9%9B%86%E6%88%90%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E5%92%8C%E6%96%87%E6%9C%AC%E7%BC%96%E8%BE%91%E5%99%A8"><span class="post-toc-text">IDE集成开发环境和文本编辑器</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E7%B1%BB%E5%BA%93"><span class="post-toc-text">类库</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Activities%20and%20Fragments"><span class="post-toc-text">Activities and Fragments</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Java%20%E5%8C%85%E7%BB%93%E6%9E%84"><span class="post-toc-text">Java 包结构</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E8%B5%84%E6%BA%90%E6%96%87%E4%BB%B6%20Resources"><span class="post-toc-text">资源文件 Resources</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6"><span class="post-toc-text">测试框架</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%A8%A1%E6%8B%9F%E5%99%A8"><span class="post-toc-text">模拟器</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%B7%B7%E6%B7%86%E9%85%8D%E7%BD%AE"><span class="post-toc-text">混淆配置</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E8%87%B4%E8%B0%A2"><span class="post-toc-text">致谢</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#License"><span class="post-toc-text">License</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Translation"><span class="post-toc-text">Translation</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
             <div class="paper-main">
                 
-                    <div class="post-header">
+                    
+<link rel="stylesheet" href="/css/toc.css">
+
+<div class="post-header">
     <p class="post-title">Android最佳实践</p>
 </div>
                 
@@ -724,7 +734,7 @@ a {
         <div class="post-md" id="copy-post-content">
         <section id="beautiful">
             <p>从<a target="_blank" rel="noopener" href="http://www.futurice.com/">Futurice</a>公司Android开发者中学到的经验。<br>遵循以下准则，避免重复发明轮子。若您对开发iOS或Windows Phone 有兴趣，<br>请看<a target="_blank" rel="noopener" href="https://github.com/futurice/ios-good-practices"><strong>iOS Good Practices</strong></a> 和 <a target="_blank" rel="noopener" href="https://github.com/futurice/win-client-dev-good-practices"><strong>Windows client Good Practices</strong></a> 这两篇文章。</p>
-<h2><span class="prefix"></span><span class="content">摘要</span><span class="suffix"></span></h2><ul>
+<h2 id="摘要"><span class="prefix"></span><span class="content">摘要</span><span class="suffix"></span></h2><ul>
 <li>使用 Gradle 和它推荐的工程结构</li>
 <li>把密码和敏感数据放在gradle.properties</li>
 <li>不要自己写 HTTP 客户端,使用Volley或OkHttp库</li>
@@ -743,8 +753,8 @@ a {
 <li>使用Genymotion 作为你的模拟器</li>
 <li>总是使用ProGuard 和 DexGuard混淆来项目</li>
 </ul>
-<h3><span class="prefix"></span><span class="content">Android SDK</span><span class="suffix"></span></h3><p>将你的<a target="_blank" rel="noopener" href="https://developer.android.com/sdk/installing/index.html?pkg=tools">Android SDK</a>放在你的home目录或其他应用程序无关的位置。<br>当安装有些包含SDK的IDE的时候，可能会将SDK放在IDE同一目录下，当你需要升级（或重新安装）IDE或更换的IDE时，会非常麻烦。<br>此外，若果你的IDE是在普通用户，不是在root下运行，还要避免吧SDK放到一下需要sudo权限的系统级别目录下。</p>
-<h3><span class="prefix"></span><span class="content">构建系统</span><span class="suffix"></span></h3><p>你的默认编译环境应该是<a target="_blank" rel="noopener" href="http://tools.android.com/tech-docs/new-build-system">Gradle</a>.<br>Ant 有很多限制，也很冗余。使用Gradle，完成以下工作很方便：</p>
+<h3 id="Android SDK"><span class="prefix"></span><span class="content">Android SDK</span><span class="suffix"></span></h3><p>将你的<a target="_blank" rel="noopener" href="https://developer.android.com/sdk/installing/index.html?pkg=tools">Android SDK</a>放在你的home目录或其他应用程序无关的位置。<br>当安装有些包含SDK的IDE的时候，可能会将SDK放在IDE同一目录下，当你需要升级（或重新安装）IDE或更换的IDE时，会非常麻烦。<br>此外，若果你的IDE是在普通用户，不是在root下运行，还要避免吧SDK放到一下需要sudo权限的系统级别目录下。</p>
+<h3 id="构建系统"><span class="prefix"></span><span class="content">构建系统</span><span class="suffix"></span></h3><p>你的默认编译环境应该是<a target="_blank" rel="noopener" href="http://tools.android.com/tech-docs/new-build-system">Gradle</a>.<br>Ant 有很多限制，也很冗余。使用Gradle，完成以下工作很方便：</p>
 <ul>
 <li>构建APP不同版本的变种</li>
 <li>制作简单类似脚本的任务</li>
@@ -753,7 +763,7 @@ a {
 <li>更多</li>
 </ul>
 <p>同时，Android Gradle插件作为新标准的构建系统正在被Google积极的开发。</p>
-<h3><span class="prefix"></span><span class="content">工程结构</span><span class="suffix"></span></h3><p>有两种流行的结构：老的Ant &amp; Eclipse ADT 工程结构，和新的Gradle &amp; Android Studio 工程结构，<br>你应该选择新的工程结构，如果你的工程还在使用老的结构，考虑放弃吧，将工程移植到新的结构。</p>
+<h3 id="工程结构"><span class="prefix"></span><span class="content">工程结构</span><span class="suffix"></span></h3><p>有两种流行的结构：老的Ant &amp; Eclipse ADT 工程结构，和新的Gradle &amp; Android Studio 工程结构，<br>你应该选择新的工程结构，如果你的工程还在使用老的结构，考虑放弃吧，将工程移植到新的结构。</p>
 <p>老的结构:</p>
 <pre><code>old-structure
 ├─ assets
@@ -787,7 +797,7 @@ a {
 </code></pre>
 <p>主要的区别在于，新的结构明确的分开了’source sets’ (<code>main</code>,<code>androidTest</code>)，Gradle的一个理念。<br>你可以做到，例如，添加源组‘paid’和‘free’在src中，这将成为您的应用程序的付费和免费的两种模式的源代码。</p>
 <p>你的项目引用第三方项目库时（例如，library-foobar），拥有一个顶级包名<code>app</code>从第三方库项目区分你的应用程序是非常有用的。<br>然后<code>settings.gradle</code>不断引用这些库项目，其中<code>app/build.gradle</code>可以引用。</p>
-<h3><span class="prefix"></span><span class="content">Gradle 配置</span><span class="suffix"></span></h3><p><strong>常用结构</strong> 参考<a target="_blank" rel="noopener" href="http://tools.android.com/tech-docs/new-build-system/user-guide">Google’s guide on Gradle for Android</a></p>
+<h3 id="Gradle 配置"><span class="prefix"></span><span class="content">Gradle 配置</span><span class="suffix"></span></h3><p><strong>常用结构</strong> 参考<a target="_blank" rel="noopener" href="http://tools.android.com/tech-docs/new-build-system/user-guide">Google’s guide on Gradle for Android</a></p>
 <p><strong>小任务</strong> 除了(shell, Python, Perl, etc)这些脚本语言，你也可以使用Gradle 制作任务。<br>更多信息请参考<a target="_blank" rel="noopener" href="http://www.gradle.org/docs/current/userguide/userguide_single.html#N10CBF">Gradle’s documentation</a>。</p>
 <p><strong>密码</strong> 在做版本release时你app的 <code>build.gradle</code>你需要定义 <code>signingConfigs</code>.此时你应该避免以下内容：</p>
 <p><em>不要做这个</em> . 这会出现在版本控制中。</p>
@@ -830,11 +840,11 @@ KEY_PASSWORD=password789
     compile &#39;com.squareup.okhttp:okhttp-urlconnection:2.0.+&#39;
 &#125;
 </code></pre>
-<h3><span class="prefix"></span><span class="content">IDEs and text editors</span><span class="suffix"></span></h3><h3><span class="prefix"></span><span class="content">IDE集成开发环境和文本编辑器</span><span class="suffix"></span></h3><p><strong>无论使用什么编辑器，一定要构建一个良好的工程结构</strong> 编辑器每个人都有自己的<br>选择，让你的编辑器根据工程结构和构建系统运作，那是你自己的责任。</p>
+<h3 id="IDEs and text editors"><span class="prefix"></span><span class="content">IDEs and text editors</span><span class="suffix"></span></h3><h3 id="IDE集成开发环境和文本编辑器"><span class="prefix"></span><span class="content">IDE集成开发环境和文本编辑器</span><span class="suffix"></span></h3><p><strong>无论使用什么编辑器，一定要构建一个良好的工程结构</strong> 编辑器每个人都有自己的<br>选择，让你的编辑器根据工程结构和构建系统运作，那是你自己的责任。</p>
 <p>当下首推<a target="_blank" rel="noopener" href="https://developer.android.com/sdk/installing/studio.html">Android Studio</a>,因为他是由谷歌开发，最接近Gradle，默认使用最新的工程结构，已经到beta阶段<br>（目前已经有release 1.0了），它就是为Android开发定制的。</p>
 <p>你也可以使用<a target="_blank" rel="noopener" href="https://developer.android.com/sdk/installing/index.html?pkg=adt">Eclipse ADT</a> ，但是你需要对它进行配置，因为它使用了旧的工程结构<br>和Ant作为构建系统。你甚至可以使用纯文版编辑器如Vim，Sublime Text，或者Emacs。如果那样的话，你需要使用Gardle和<code>adb</code>命令行。如果使用Eclipse集成Gradle<br>不适合你，你只是使用命令行构建工程，或迁移到Android Studio中来吧。</p>
 <p>无论你使用何种开发工具，只要确保Gradle和新的项目结构保持官方的方式构建应用程序，避免你的编辑器配置文件加入到版本控制。例如，避免加入Ant <code>build.xml</code>文件。<br>特别如果你改变Ant的配置，不要忘记保持<code>build.gradle</code>是最新和起作用的。同时，善待其他开发者，不要强制改变他们的开发工具和偏好。</p>
-<h3><span class="prefix"></span><span class="content">类库</span><span class="suffix"></span></h3><p><strong><a target="_blank" rel="noopener" href="http://wiki.fasterxml.com/JacksonHome">Jackson</a></strong> 是一个将java对象转换成JSON与JSON转化java类的类库。<a target="_blank" rel="noopener" href="https://code.google.com/p/google-gson/">Gson</a><br>是解决这个问题的流行方案，然而我们发现Jackson更高效,因为它支持替代的方法处理JSON:流、内存树模型,和传统JSON-POJO数据绑定。不过，请记住，<br>Jsonkson库比起GSON更大，所以根据你的情况选择，你可能选择GSON来避免APP 65k个方法限制。其它选择: <a target="_blank" rel="noopener" href="https://code.google.com/p/json-smart/">Json-smart</a> and <a target="_blank" rel="noopener" href="https://github.com/RichardHightower/boon/wiki/Boon-JSON-in-five-minutes">Boon JSON</a></p>
+<h3 id="类库"><span class="prefix"></span><span class="content">类库</span><span class="suffix"></span></h3><p><strong><a target="_blank" rel="noopener" href="http://wiki.fasterxml.com/JacksonHome">Jackson</a></strong> 是一个将java对象转换成JSON与JSON转化java类的类库。<a target="_blank" rel="noopener" href="https://code.google.com/p/google-gson/">Gson</a><br>是解决这个问题的流行方案，然而我们发现Jackson更高效,因为它支持替代的方法处理JSON:流、内存树模型,和传统JSON-POJO数据绑定。不过，请记住，<br>Jsonkson库比起GSON更大，所以根据你的情况选择，你可能选择GSON来避免APP 65k个方法限制。其它选择: <a target="_blank" rel="noopener" href="https://code.google.com/p/json-smart/">Json-smart</a> and <a target="_blank" rel="noopener" href="https://github.com/RichardHightower/boon/wiki/Boon-JSON-in-five-minutes">Boon JSON</a></p>
 <p><strong>网络请求，缓存，图片</strong> 执行请求后端服务器，有几种交互的解决方案，你应该考虑实现你自己的网络客户端。使用 <a target="_blank" rel="noopener" href="https://android.googlesource.com/platform/frameworks/volley">Volley</a><br>或<a target="_blank" rel="noopener" href="http://square.github.io/retrofit/">Retrofit</a>。Volley 同时提供图片缓存类。若果你选择使用Retrofit,那么考虑使用<a target="_blank" rel="noopener" href="http://square.github.io/picasso/">Picasso</a><br>来加载图片和缓存，同时使用<a target="_blank" rel="noopener" href="http://square.github.io/okhttp/">OkHttp</a>作为高效的网络请求。Retrofit，Picasso和OkHttp都是有同一家公司开发（注：<br>是由<a target="_blank" rel="noopener" href="https://github.com/square">Square</a> 公司开发），所以它们能很好的在一起运行。<a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/24375043/how-to-implement-android-volley-with-okhttp-2-0/24951835#24951835">OkHttp 同样可以和Volley在一起使用 Volley</a>.</p>
 <p><strong>RxJava</strong> 是函数式反应性的一个类库，换句话说，能处理异步的事件。<br>这是一个强大的和有前途的模式，同时也可能会造成混淆，因为它是如此的不同。<br>我们建议在使用这个库架构整个应用程序之前要谨慎考虑。<br>有一些项目是使用RxJava完成的，如果你需要帮助可以跟这些人取得联系：<br>Timo Tuominen, Olli Salonen, Andre Medeiros, Mark Voit, Antti Lammi, Vera Izrailit, Juha Ristolainen.<br>我们也写了一些博客：<br><a target="_blank" rel="noopener" href="http://blog.futurice.com/tech-pick-of-the-week-rx-for-net-and-rxjava-for-android">[1]</a>, <a target="_blank" rel="noopener" href="http://blog.futurice.com/top-7-tips-for-rxjava-on-android">[2]</a>,<br><a target="_blank" rel="noopener" href="https://gist.github.com/staltz/868e7e9bc2a7b8c1f754">[3]</a>,<br><a target="_blank" rel="noopener" href="http://blog.futurice.com/android-development-has-its-own-swift">[4]</a>.</p>
 <p>如若你之前有使用过Rx的经历，开始从API响应应用它。<br>另外，从简单的UI事件处理开始运用，如单击事件或在搜索栏输入事件。<br>若对你的Rx技术有信心，同时想要将它应用到你的整体架构中，那么请在复杂的部分写好Javadocs文档。<br>请记住其他不熟悉RxJava的开发人员，可能会非常难理解整个项目。<br>尽你的的全力帮助他们理解你的代码和Rx。</p>
@@ -864,7 +874,7 @@ retrolambda &#123;
 <li>如果对参数或类似有疑问，就写一个普通的匿名内部类，然后让Android Status为你生成一个lambda。</li>
 </ul>
 <p><strong>当心dex方法数限制，同时避免使用过多的类库</strong> Android apps，当打包成一个dex文件时，有一个65535个应用方法强硬限制<a target="_blank" rel="noopener" href="https://medium.com/@rotxed/dex-skys-the-limit-no-65k-methods-is-28e6cb40cf71">[1]</a> <a target="_blank" rel="noopener" href="http://blog.persistent.info/2014/05/per-package-method-counts-for-androids.html">[2]</a> <a target="_blank" rel="noopener" href="http://jakewharton.com/play-services-is-a-monolith/">[3]</a>。<br>当你突破65k限制之后你会看到一个致命错误。因此，使用一个正常范围的类库文件，同时使用<a target="_blank" rel="noopener" href="https://github.com/mihaip/dex-method-counts">dex-method-counts</a><br>工具来决定哪些类库可以再65k限制之下使用，特别的避免使用Guava类库，因为它包含超过13k个方法。</p>
-<h3><span class="prefix"></span><span class="content">Activities and Fragments</span><span class="suffix"></span></h3><p><a target="_blank" rel="noopener" href="http://developer.android.com/guide/components/fragments.html">Fragments</a>应该作为你实现UI界面默认选择。你可以重复使用Fragments用户接口来<br>组合成你的应用。我们强烈推荐使用Fragments而不是activity来呈现UI界面，理由如下：</p>
+<h3 id="Activities and Fragments"><span class="prefix"></span><span class="content">Activities and Fragments</span><span class="suffix"></span></h3><p><a target="_blank" rel="noopener" href="http://developer.android.com/guide/components/fragments.html">Fragments</a>应该作为你实现UI界面默认选择。你可以重复使用Fragments用户接口来<br>组合成你的应用。我们强烈推荐使用Fragments而不是activity来呈现UI界面，理由如下：</p>
 <ul>
 <li><p><strong>提供多窗格布局解决方案</strong> Fragments 的引入主要将手机应用延伸到平板电脑，所以在平板电脑上你可能有A、B两个窗格，但是在手机应用上A、B可能分别充满<br>  整个屏幕。如果你的应用在最初就使用了fragments，那么以后将你的应用适配到其他不同尺寸屏幕就会非常简单。</p>
 </li>
@@ -877,7 +887,7 @@ retrolambda &#123;
 </ul>
 <p>很不幸，我们不建议广泛的使用嵌套的<a target="_blank" rel="noopener" href="https://developer.android.com/about/versions/android-4.2.html#NestedFragments">fragments</a>，因为<br>有时会引起<a target="_blank" rel="noopener" href="http://delyan.me/android-s-matryoshka-problem/">matryoshka bugs</a>。我们只有当它有意义(例如，在水平滑动的ViewPager在<br>像屏幕一样fragment中)或者他的确是一个明智的选择的时候才广泛的使用fragment。</p>
 <p>在一个架构级别，你的APP应该有一个顶级的activity来包含绝大部分业务相关的fragment。你也可能还有一些辅助的activity ，这些辅助的activity与主activity<br>通信很简单限制在这两种方法<br><a target="_blank" rel="noopener" href="http://developer.android.com/reference/android/content/Intent.html#setData(android.net.Uri)"><code>Intent.setData()</code></a> 或 <a target="_blank" rel="noopener" href="http://developer.android.com/reference/android/content/Intent.html#setAction(java.lang.String)"><code>Intent.setAction()</code></a>或类似的方法。</p>
-<h3><span class="prefix"></span><span class="content">Java 包结构</span><span class="suffix"></span></h3><p>Android 应用程序在架构上大致是Java中的<a target="_blank" rel="noopener" href="http://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller">Model-View-Controller</a>结构。<br>在Android 中 Fragment和Activity通常上是控制器类(<a target="_blank" rel="noopener" href="http://www.informit.com/articles/article.aspx?p=2126865">http://www.informit.com/articles/article.aspx?p=2126865</a>).<br>换句话说，他们是用户接口的部分，同样也是Views视图的部分。</p>
+<h3 id="Java 包结构"><span class="prefix"></span><span class="content">Java 包结构</span><span class="suffix"></span></h3><p>Android 应用程序在架构上大致是Java中的<a target="_blank" rel="noopener" href="http://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller">Model-View-Controller</a>结构。<br>在Android 中 Fragment和Activity通常上是控制器类(<a target="_blank" rel="noopener" href="http://www.informit.com/articles/article.aspx?p=2126865">http://www.informit.com/articles/article.aspx?p=2126865</a>).<br>换句话说，他们是用户接口的部分，同样也是Views视图的部分。</p>
 <p>正是因为如此，才很难严格的将fragments (或者 activities) 严格的划分成 控制器controlloers还是视图 views。<br>最还是将它们放在自己单独的 <code>fragments</code> 包中。只要你遵循之前提到的建议，Activities 则可以放在顶级目录下。<br>若果你规划有2到3个以上的activity，那么还是同样新建一个<code>activities</code>包吧。</p>
 <p>然而，这种架构可以看做是另一种形式的MVC，<br>包含要被解析API响应的JSON数据，来填充的POJO的<code>models</code>包中。<br>和一个<code>views</code>包来包含你的自定义视图、通知、导航视图，widgets等等。<br>适配器Adapter是在数据和视图之间。然而他们通常需要通过<code>getView()</code>方法来导出一些视图，<br>所以你可以将<code>adapters</code>包放在<code>views</code>包里面。</p>
 <p>一些控制器角色的类是应用程序级别的，同时是接近系统的。<br>这些类放在<code>managers</code>包下面。<br>一些繁杂的数据处理类，比如说”DateUtils”,放在<code>utils</code>包下面。<br>与后端交互负责网络处理类，放在<code>network</code>包下面。</p>
@@ -894,7 +904,7 @@ retrolambda &#123;
    ├─ widgets
    └─ notifications
 </code></pre>
-<h3><span class="prefix"></span><span class="content">资源文件 Resources</span><span class="suffix"></span></h3><ul>
+<h3 id="资源文件 Resources"><span class="prefix"></span><span class="content">资源文件 Resources</span><span class="suffix"></span></h3><ul>
 <li><strong>命名</strong> 遵循前缀表明类型的习惯，形如<code>type_foo_bar.xml</code>。例如：<code>fragment_contact_details.xml</code>,<code>view_primary_button.xml</code>,<code>activity_main.xml</code>.</li>
 </ul>
 <p><strong>组织布局文件</strong> 若果你不确定如何排版一个布局文件，遵循一下规则可能会有帮助。</p>
@@ -1044,7 +1054,7 @@ retrolambda &#123;
 <p>可能会导致一系列的问题。你可能会遇到性能问题，因为处理起需要处理一个复杂的UI树结构。<br>还可能会导致以下更严重的问题<a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/2762924/java-lang-stackoverflow-error-suspected-too-many-views">StackOverflowError</a>.</p>
 <p>因此尽量保持你的视图tree：学习如何使用<a target="_blank" rel="noopener" href="https://developer.android.com/guide/topics/ui/layout/relative.html">RelativeLayout</a>,<br>如何 <a target="_blank" rel="noopener" href="http://developer.android.com/training/improving-layouts/optimizing-layout.html">optimize 你的布局</a> 和如何使用<br><a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/8834898/what-is-the-purpose-of-androids-merge-tag-in-xml-layouts"><code>&lt;merge&gt;</code> 标签</a>.</p>
 <p><strong>小心关于WebViews的问题.</strong> 如果你必须显示一个web视图，<br>比如说对于一个新闻文章，避免做客户端处理HTML的工作，<br>最好让后端工程师协助，让他返回一个 “<em>纯</em>“ HTML。<br><a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/3130654/memory-leak-in-webview">WebViews 也能导致内存泄露</a><br>当保持引他们的Activity，而不是被绑定到ApplicationContext中的时候。<br>当使用简单的文字或按钮时，避免使用WebView，这时使用TextView或Buttons更好。</p>
-<h3><span class="prefix"></span><span class="content">测试框架</span><span class="suffix"></span></h3><p>Android SDK的测试框架还处于初级阶段，特别是关于UI测试方面。Android Gradle<br>目前实现了一个叫<a target="_blank" rel="noopener" href="http://tools.android.com/tech-docs/new-build-system/user-guide#TOC-Testing"><code>connectedAndroidTest</code></a>的测试，<br>它<a target="_blank" rel="noopener" href="http://developer.android.com/reference/android/test/package-summary.html">使用一个JUnit 为Android提供的扩展插件 extension of JUnit with helpers for Android</a>.可以跑你生成的JUnit测试，</p>
+<h3 id="测试框架"><span class="prefix"></span><span class="content">测试框架</span><span class="suffix"></span></h3><p>Android SDK的测试框架还处于初级阶段，特别是关于UI测试方面。Android Gradle<br>目前实现了一个叫<a target="_blank" rel="noopener" href="http://tools.android.com/tech-docs/new-build-system/user-guide#TOC-Testing"><code>connectedAndroidTest</code></a>的测试，<br>它<a target="_blank" rel="noopener" href="http://developer.android.com/reference/android/test/package-summary.html">使用一个JUnit 为Android提供的扩展插件 extension of JUnit with helpers for Android</a>.可以跑你生成的JUnit测试，</p>
 <p><strong>只当做单元测试时使用 <a target="_blank" rel="noopener" href="http://robolectric.org/">Robolectric</a> ，views 不用</strong><br>它是一个最求提供”不连接设备的”为了加速开发的测试，<br>非常时候做 models 和 view models 的单元测试。<br>然而，使用Robolectric测试时不精确的，也不完全对UI测试。<br>当你对有关动画的UI元素、对话框等，测试时会有问题，<br>这主要是因为你是在 “在黑暗中工作”（在没有可控的界面情况下测试）</p>
 <p>**<a target="_blank" rel="noopener" href="https://code.google.com/p/robotium/">Robotium</a> 使写UI测试非常简单。<br>** 对于UI测试你不需 Robotium 跑与设备连接的测试。<br>但它可能会对你有益，是因为它有许多来帮助类的获得和分析视图，控制屏幕。<br>测试用例看起来像这样简单：</p>
 <pre><code class="java">solo.sendKey(Solo.MENU);
@@ -1053,9 +1063,9 @@ solo.clickOnText(&quot;Preferences&quot;);
 solo.clickOnText(&quot;Edit File Extensions&quot;);
 Assert.assertTrue(solo.searchText(&quot;rtf&quot;));
 </code></pre>
-<h3><span class="prefix"></span><span class="content">模拟器</span><span class="suffix"></span></h3><p>如果你全职开发Android App,那么买一个<a target="_blank" rel="noopener" href="http://www.genymotion.com/">Genymotion emulator</a>license吧。<br>Genymotion 模拟器运行更快的秒帧的速度，比起典型的AVD模拟器。他有演示你APP的工具，高质量的模拟网络连接，GPS位置，等等。它同时还有理想的连接测试。<br>你若涉及适配使用很多不同的设备，买一个Genymotion 版权是比你买很多真设备便宜多的。</p>
+<h3 id="模拟器"><span class="prefix"></span><span class="content">模拟器</span><span class="suffix"></span></h3><p>如果你全职开发Android App,那么买一个<a target="_blank" rel="noopener" href="http://www.genymotion.com/">Genymotion emulator</a>license吧。<br>Genymotion 模拟器运行更快的秒帧的速度，比起典型的AVD模拟器。他有演示你APP的工具，高质量的模拟网络连接，GPS位置，等等。它同时还有理想的连接测试。<br>你若涉及适配使用很多不同的设备，买一个Genymotion 版权是比你买很多真设备便宜多的。</p>
 <p>注意：Genymotion模拟器没有装载所有的Google服务，如Google Play Store和Maps。你也可能需<br>要测试Samsung指定的API，若这样的话你还是需要购买一个真实的Samsung设备。</p>
-<h3><span class="prefix"></span><span class="content">混淆配置</span><span class="suffix"></span></h3><p><a target="_blank" rel="noopener" href="http://proguard.sourceforge.net/">ProGuard</a> 是一个在Android项目中广泛使用的压缩和混淆打包的源码的工具。</p>
+<h3 id="混淆配置"><span class="prefix"></span><span class="content">混淆配置</span><span class="suffix"></span></h3><p><a target="_blank" rel="noopener" href="http://proguard.sourceforge.net/">ProGuard</a> 是一个在Android项目中广泛使用的压缩和混淆打包的源码的工具。</p>
 <p>你是否使用ProGuard取决你项目的配置，当你构建一个release版本的apk时，通常你应该配置gradle文件。</p>
 <pre><code class="groovy">buildTypes &#123;
     debug &#123;
@@ -1085,9 +1095,9 @@ Assert.assertTrue(solo.searchText(&quot;rtf&quot;));
 <p><strong>在构建项目之初，发布一个版本</strong> 来检查ProGuard规则是否正确的保持了重要的部分。<br>同时无论何时你添加了新的类库，做一个发布版本，同时apk在设备上跑起来测试一下。<br>不要等到你的app要发布 “1.0”版本了才做版本发布，那时候你可能会碰到好多意想不到的异常，需要一些时间去修复他们。</p>
 <p><strong>Tips</strong>每次发布新版本都要写 <code>mapping.txt</code>。每发布一个版本，如果用户遇到一个bug，同时提交了一个混淆过的堆栈跟踪。<br>通过保留<code>mapping.txt</code>文件，来确定你可以调试的问题。</p>
 <p><strong>DexGuard</strong> 若果你需要核心工具来优化，和专门混淆的发布代码，考虑使用<a target="_blank" rel="noopener" href="http://www.saikoa.com/dexguard">DexGuard</a>,<br>一个商业软件，ProGuard 也是有他们团队开发的。<br>它会很容易将Dex文件分割，来解决65K个方法限制问题。</p>
-<h3><span class="prefix"></span><span class="content">致谢</span><span class="suffix"></span></h3><p>感谢Antti Lammi, Joni Karppinen, Peter Tackage, Timo Tuominen, Vera Izrailit, Vihtori Mäntylä, Mark Voit, Andre Medeiros, Paul Houghton 这些人和Futurice 开发者分享他们的Android开发经验。</p>
-<h3><span class="prefix"></span><span class="content">License</span><span class="suffix"></span></h3><p><a href="www.futurice.com">Futurice Oy</a><br>Creative Commons Attribution 4.0 International (CC BY 4.0)</p>
-<h3><span class="prefix"></span><span class="content">Translation</span><span class="suffix"></span></h3><p>Translated to Chinese by <a target="_blank" rel="noopener" href="https://github.com/andyiac">andyiac</a></p>
+<h3 id="致谢"><span class="prefix"></span><span class="content">致谢</span><span class="suffix"></span></h3><p>感谢Antti Lammi, Joni Karppinen, Peter Tackage, Timo Tuominen, Vera Izrailit, Vihtori Mäntylä, Mark Voit, Andre Medeiros, Paul Houghton 这些人和Futurice 开发者分享他们的Android开发经验。</p>
+<h3 id="License"><span class="prefix"></span><span class="content">License</span><span class="suffix"></span></h3><p><a href="www.futurice.com">Futurice Oy</a><br>Creative Commons Attribution 4.0 International (CC BY 4.0)</p>
+<h3 id="Translation"><span class="prefix"></span><span class="content">Translation</span><span class="suffix"></span></h3><p>Translated to Chinese by <a target="_blank" rel="noopener" href="https://github.com/andyiac">andyiac</a></p>
 <hr>
 <p><strong>原文地址</strong> <a target="_blank" rel="noopener" href="https://github.com/futurice/android-best-practices/edit/master/translations/Chinese/README.cn.md">https://github.com/futurice/android-best-practices/edit/master/translations/Chinese/README.cn.md</a></p>
 

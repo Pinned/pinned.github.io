@@ -134,8 +134,7 @@ a {
     }
 
     .paper-main {
-        width: 100%;
-        max-width: 900px;
+        width: 900px;
         margin: 0 auto;
         padding: 62px 3vw 24px;
         background: #fff;
@@ -709,9 +708,20 @@ a {
     <body>
         <img id="bing-bg" src="" referrerpolicy="no-referrer" />
         <div class="paper">
+            
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>目录</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0"><span class="post-toc-text">问题描述</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E8%A7%A3%E5%86%B3%E9%97%AE%E9%A2%98"><span class="post-toc-text">解决问题</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%80%BB%E7%BB%93"><span class="post-toc-text">总结</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%86%99%E5%9C%A8%E6%9C%80%E5%90%8E"><span class="post-toc-text">写在最后</span></a></li></ol>
+        </nav>
+    </aside>
+
             <div class="paper-main">
                 
-                    <div class="post-header">
+                    
+<link rel="stylesheet" href="/css/toc.css">
+
+<div class="post-header">
     <p class="post-title">Android 项目中出现的奇葩bug, 数据NullPointExcption</p>
 </div>
                 
@@ -723,12 +733,12 @@ a {
         </div>
         <div class="post-md" id="copy-post-content">
         <section id="beautiful">
-            <h3><span class="prefix"></span><span class="content">问题描述</span><span class="suffix"></span></h3><p>在一个自定义的Form表单中，有各种控件，如文本输入框，时间选择器，城市选择器等。<br>在使用城市选择器的时候，城市的数据存储在<code>List</code>中<br>在定义的时候，我使用如下代码定义：</p>
+            <h3 id="问题描述"><span class="prefix"></span><span class="content">问题描述</span><span class="suffix"></span></h3><p>在一个自定义的Form表单中，有各种控件，如文本输入框，时间选择器，城市选择器等。<br>在使用城市选择器的时候，城市的数据存储在<code>List</code>中<br>在定义的时候，我使用如下代码定义：</p>
 <pre><code class="java">private List&lt;CityNode&gt; mCitys = null;
 </code></pre>
 <p>经过数据初始化过后，在构造方法中使用<code>mCitys</code>是正常的，但是在其它方法中使用，<br><code>mCitys</code>便成了空值.</p>
 <p>这个结果让我非常的费解。</p>
-<h3><span class="prefix"></span><span class="content">解决问题</span><span class="suffix"></span></h3><p>一开始出现了这个空指针异常，排查了好久，根本就找不到任何原因，<br>因为代码本身没有任何的逻辑错误。不知道是运气好还是怎么的。我把那个<code>List</code>的<br>定义写成如下，代码竟然可以正常运行：</p>
+<h3 id="解决问题"><span class="prefix"></span><span class="content">解决问题</span><span class="suffix"></span></h3><p>一开始出现了这个空指针异常，排查了好久，根本就找不到任何原因，<br>因为代码本身没有任何的逻辑错误。不知道是运气好还是怎么的。我把那个<code>List</code>的<br>定义写成如下，代码竟然可以正常运行：</p>
 <pre><code class="java">private List&lt;CityNode&gt; mCitys;
 </code></pre>
 <p>看到上面贴出来的代码，我顿时就无语了，太奇怪了，这两个不应该是一样的么。<br>经过一系列的测试，以下是问题解决的步骤:</p>
@@ -792,8 +802,8 @@ A constructor method excute
 class B params init
 B constructor method excute
 </code></pre>
-<h3><span class="prefix"></span><span class="content">总结</span><span class="suffix"></span></h3><p>这一次的空指针的最根本原因是在父类的构造方法中执行了子类实例变量的初始化<br>操作，这是一个非常不合理的举动。如果子类属性中的东西应该在子类中进行初始化，<br>而不是在父类中调用初始化方法。</p>
-<h3><span class="prefix"></span><span class="content">写在最后</span><span class="suffix"></span></h3><p><del>代码木有上传上来，如果你想看看这个丑陋的代码是怎么写的，你可以邮件联系我：<br><a href="mailto:&#108;&#111;&#118;&#101;&#99;&#108;&#117;&#111;&#64;&#x6e;&#x69;&#103;&#x68;&#x74;&#x77;&#101;&#x61;&#x76;&#101;&#114;&#x2e;&#111;&#114;&#103;">&#108;&#111;&#118;&#101;&#99;&#108;&#117;&#111;&#64;&#x6e;&#x69;&#103;&#x68;&#x74;&#x77;&#101;&#x61;&#x76;&#101;&#114;&#x2e;&#111;&#114;&#103;</a></del></p>
+<h3 id="总结"><span class="prefix"></span><span class="content">总结</span><span class="suffix"></span></h3><p>这一次的空指针的最根本原因是在父类的构造方法中执行了子类实例变量的初始化<br>操作，这是一个非常不合理的举动。如果子类属性中的东西应该在子类中进行初始化，<br>而不是在父类中调用初始化方法。</p>
+<h3 id="写在最后"><span class="prefix"></span><span class="content">写在最后</span><span class="suffix"></span></h3><p><del>代码木有上传上来，如果你想看看这个丑陋的代码是怎么写的，你可以邮件联系我：<br><a href="mailto:&#108;&#x6f;&#118;&#101;&#x63;&#108;&#117;&#111;&#64;&#110;&#105;&#x67;&#x68;&#x74;&#119;&#x65;&#x61;&#x76;&#x65;&#114;&#x2e;&#111;&#114;&#103;">&#108;&#x6f;&#118;&#101;&#x63;&#108;&#117;&#111;&#64;&#110;&#105;&#x67;&#x68;&#x74;&#119;&#x65;&#x61;&#x76;&#x65;&#114;&#x2e;&#111;&#114;&#103;</a></del></p>
 <p>更新代码地址：</p>
 <ul>
 <li><a href="http://pinned.github.io/assets/posts/file-2014-11-4/NullPointProject-bug.tar.gz">Bug版代码</a></li>

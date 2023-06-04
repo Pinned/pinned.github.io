@@ -134,8 +134,7 @@ a {
     }
 
     .paper-main {
-        width: 100%;
-        max-width: 900px;
+        width: 900px;
         margin: 0 auto;
         padding: 62px 3vw 24px;
         background: #fff;
@@ -709,9 +708,20 @@ a {
     <body>
         <img id="bing-bg" src="" referrerpolicy="no-referrer" />
         <div class="paper">
+            
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>目录</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#AIDL%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="post-toc-text">AIDL的作用</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E9%80%89%E6%8B%A9AIDL%E7%9A%84%E4%BD%BF%E7%94%A8%E5%9C%BA%E5%90%88"><span class="post-toc-text">选择AIDL的使用场合</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%AE%9A%E4%B9%89AIDL%E6%8E%A5%E5%8F%A3"><span class="post-toc-text">定义AIDL接口</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E9%80%9A%E8%BF%87IPC%E8%B0%83%E7%94%A8/%E4%BC%A0%E9%80%92%E6%95%B0%E6%8D%AE"><span class="post-toc-text">通过IPC调用&#x2F;传递数据</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Permission%E6%9D%83%E9%99%90"><span class="post-toc-text">Permission权限</span></a></li></ol>
+        </nav>
+    </aside>
+
             <div class="paper-main">
                 
-                    <div class="post-header">
+                    
+<link rel="stylesheet" href="/css/toc.css">
+
+<div class="post-header">
     <p class="post-title">Android Service学习之AIDL, Parcelable和远程服务</p>
 </div>
                 
@@ -723,11 +733,11 @@ a {
         </div>
         <div class="post-md" id="copy-post-content">
         <section id="beautiful">
-            <h2><span class="prefix"></span><span class="content">AIDL的作用</span><span class="suffix"></span></h2><p>由于每个应用程序都运行在自己的进程空间，并且可以从应用程序UI运行另一个服务进程，而且经常会在不同的进程间传递对象。在Android平台，一个进程通常不能访问另一个进程的内存空间，所以要想对话，需要将对象分解成操作系统可以理解的基本单元，并且有序的通过进程边界。</p>
+            <h2 id="AIDL的作用"><span class="prefix"></span><span class="content">AIDL的作用</span><span class="suffix"></span></h2><p>由于每个应用程序都运行在自己的进程空间，并且可以从应用程序UI运行另一个服务进程，而且经常会在不同的进程间传递对象。在Android平台，一个进程通常不能访问另一个进程的内存空间，所以要想对话，需要将对象分解成操作系统可以理解的基本单元，并且有序的通过进程边界。</p>
 <p>通过代码来实现这个数据传输过程是冗长乏味的，Android提供了AIDL工具来处理这项工作。</p>
 <p>AIDL (Android Interface Definition Language) 是一种IDL 语言，用于生成可以在Android设备上两个进程之间进行进程间通信(interprocess communication, IPC)的代码。如果在一个进程中（例如Activity）要调用另一个进程中（例如Service）对象的操作，就可以使用AIDL生成可序列化的参数。</p>
 <p>AIDL IPC机制是面向接口的，像COM或Corba一样，但是更加轻量级。它是使用代理类在客户端和实现端传递数据。</p>
-<h2><span class="prefix"></span><span class="content">选择AIDL的使用场合</span><span class="suffix"></span></h2><p>官方文档特别提醒我们何时使用AIDL是必要的：只有你允许客户端从不同的应用程序为了进程间的通信而去访问你的service，以及想在你的service处理多线程。</p>
+<h2 id="选择AIDL的使用场合"><span class="prefix"></span><span class="content">选择AIDL的使用场合</span><span class="suffix"></span></h2><p>官方文档特别提醒我们何时使用AIDL是必要的：只有你允许客户端从不同的应用程序为了进程间的通信而去访问你的service，以及想在你的service处理多线程。</p>
 <p>如果不需要进行不同应用程序间的并发通信(IPC)，you should create your interface by implementing a Binder；或者你想进行IPC，但不需要处理多线程的，则implement your interface using a Messenger。无论如何，在使用AIDL前，必须要理解如何绑定service——bindService。</p>
 <p>在设计AIDL接口前，要提醒的是，调用AIDL接口是直接的方法调用的，不是我们所想象的调用是发生在线程里。而调用(call)来自local进程或者remote进程，有什么区别呢？尤其是以下情况(引用原文，不作翻译了，以免翻译有误)：</p>
 <ul>
@@ -738,7 +748,7 @@ a {
 <li><p>The oneway keyword modifies the behavior of remote calls. When used, a remote call does not block; it simply sends the transaction data and immediately returns. The implementation of the interface eventually receives this as a regular call from the Binder thread pool as a normal remote call. If oneway is used with a local call, there is no impact and the call is still synchronous.</p>
 </li>
 </ul>
-<h2><span class="prefix"></span><span class="content">定义AIDL接口</span><span class="suffix"></span></h2><p>AIDL接口文件，和普通的接口内容没有什么特别，只是它的扩展名为.aidl。保存在src目录下。如果其他应用程序需要IPC，则那些应用程序的src也要带有这个文件。Android SDK tools就会在gen目录自动生成一个IBinder接口文件。service必须适当地实现这个IBinder接口。那么客户端程序就能绑定这个service并在IPC时从IBinder调用方法。</p>
+<h2 id="定义AIDL接口"><span class="prefix"></span><span class="content">定义AIDL接口</span><span class="suffix"></span></h2><p>AIDL接口文件，和普通的接口内容没有什么特别，只是它的扩展名为.aidl。保存在src目录下。如果其他应用程序需要IPC，则那些应用程序的src也要带有这个文件。Android SDK tools就会在gen目录自动生成一个IBinder接口文件。service必须适当地实现这个IBinder接口。那么客户端程序就能绑定这个service并在IPC时从IBinder调用方法。</p>
 <p>每个aidl文件只能定义一个接口，而且只能是接口的声明和方法的声明。</p>
 <ul>
 <li><strong>创建.aidl文件</strong></li>
@@ -909,7 +919,7 @@ public static com.demo.IMyService asInterface(android.os.IBinder obj) &#123;...&
 &#125;
 mIsRemoteBound = !mIsRemoteBound;
 </code></pre>
-<h2><span class="prefix"></span><span class="content">通过IPC调用&#x2F;传递数据</span><span class="suffix"></span></h2><p>客户端绑定service后就能通过IPC来调用&#x2F;传递数据了，直接调用service对象的接口方法：</p>
+<h2 id="通过IPC调用&#x2F;传递数据"><span class="prefix"></span><span class="content">通过IPC调用&#x2F;传递数据</span><span class="suffix"></span></h2><p>客户端绑定service后就能通过IPC来调用&#x2F;传递数据了，直接调用service对象的接口方法：</p>
 <pre><code class="java">addPersonButton.setOnClickListener( 
                 new View.OnClickListener()&#123; 
                         private int index = 0; 
@@ -962,7 +972,7 @@ listPersonButton.setOnClickListener(
                         &#125; 
                 &#125;);
 </code></pre>
-<h2><span class="prefix"></span><span class="content">Permission权限</span><span class="suffix"></span></h2><p>如果Service在AndroidManifest.xml中声明了全局的强制的访问权限，其他引用必须声明权限才能来start，stop或bind这个service.</p>
+<h2 id="Permission权限"><span class="prefix"></span><span class="content">Permission权限</span><span class="suffix"></span></h2><p>如果Service在AndroidManifest.xml中声明了全局的强制的访问权限，其他引用必须声明权限才能来start，stop或bind这个service.</p>
 <p>另外，service可以通过权限来保护她的IPC方法调用，通过调用checkCallingPermission(String)方法来确保可以执行这个操作。</p>
 <p><strong>AndroidManifest.xml的Service元素</strong></p>
 <pre><code class="xml">&lt;service android:name=&quot;.RemoteService&quot; android:process=&quot;:remote&quot;&gt; 
@@ -989,12 +999,12 @@ If the name assigned to this attribute begins with a colon (&#39;:&#39;), a new 
                     <div class="post_pre_next">
     
         <div class="post-pre">
-            <a href="/2015/05/12/android-update-sdk-no-ui/">上一篇: Android 用命令行更新SDK</a>
+            <a href="/2015/05/11/svn-to-git/">上一篇: SVN迁移到GIT</a>
         </div>
     
     
-        <a href="/2015/05/11/svn-to-git/">下一篇: 
-            SVN迁移到GIT
+        <a href="/2015/04/30/mac-iterm2-zsh/">下一篇: 
+            Mac Iterm2 zsh使用
         </a>
     
 </div>
