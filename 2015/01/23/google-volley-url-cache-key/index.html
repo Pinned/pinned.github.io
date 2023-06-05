@@ -6,6 +6,9 @@
     <link rel="alternate icon" type="image/png" href="/img/favicon.png">
     
         <title>Google Volley如何缓存HTTP请求文件 </title>
+        
+<link rel="stylesheet" href="/css/toc.css">
+
     
     <style type="text/css" id="reset">@charset "utf-8";
 
@@ -710,10 +713,7 @@ table td:last-child {
 
             <div class="paper-main">
                 
-                    
-<link rel="stylesheet" href="/css/toc.css">
-
-<div class="post-header">
+                    <div class="post-header">
     <p class="post-title">Google Volley如何缓存HTTP请求文件</p>
 </div>
                 
@@ -1051,7 +1051,7 @@ protected Response&lt;String&gt; parseNetworkResponse(NetworkResponse response) 
 </code></pre>
 <p>就是<code>HttpHeaderParser.parseCacheHeaders(response)</code>实现<code>Response</code>向<code>Cache.Entry</code>的转换。</p>
 <p>当然，你可以实现自己的<code>parseCacheHeaders</code>的方法，来实现你自己的缓存侧略。</p>
-<p>到此为止，基本写完了我所读到的<code>Volley</code>中实现<code>Cache</code>的方法。如果你对本文或者我有什么意见或者建议。<br>请骚扰我：<a href="mailto:&#x6c;&#x6f;&#x76;&#x65;&#99;&#x6c;&#x75;&#111;&#64;&#x6e;&#x69;&#103;&#104;&#116;&#x77;&#101;&#97;&#x76;&#x65;&#114;&#x2e;&#111;&#x72;&#103;">&#x6c;&#x6f;&#x76;&#x65;&#99;&#x6c;&#x75;&#111;&#64;&#x6e;&#x69;&#103;&#104;&#116;&#x77;&#101;&#97;&#x76;&#x65;&#114;&#x2e;&#111;&#x72;&#103;</a></p>
+<p>到此为止，基本写完了我所读到的<code>Volley</code>中实现<code>Cache</code>的方法。如果你对本文或者我有什么意见或者建议。<br>请骚扰我：<a href="mailto:&#x6c;&#111;&#x76;&#x65;&#99;&#108;&#x75;&#111;&#x40;&#x6e;&#x69;&#103;&#104;&#x74;&#x77;&#101;&#97;&#118;&#101;&#x72;&#x2e;&#111;&#114;&#x67;">&#x6c;&#111;&#x76;&#x65;&#99;&#108;&#x75;&#111;&#x40;&#x6e;&#x69;&#103;&#104;&#x74;&#x77;&#101;&#97;&#118;&#101;&#x72;&#x2e;&#111;&#114;&#x67;</a></p>
 
         </section>
         </div>
