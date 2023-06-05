@@ -18,6 +18,13 @@
     background-color: white;
     padding: 10px 5px;
     border-radius: 10px;
+    max-height: 800px;
+    overflow: auto;
+    scrollbar-width: none; /* firefox */
+    -ms-overflow-style: none; /* IE 10+ */
+}
+.post-toc-wrap::-webkit-scrollbar { /* webkit */
+    display: none;
 }
 
 .post-toc-wrap  ol,ul {
