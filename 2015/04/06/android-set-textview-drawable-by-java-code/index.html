@@ -641,49 +641,41 @@ a {
     margin: 12px 0;
 }
 
-/* .post-md>table
-{
+table {
+    padding: 0;
+    word-break: initial;
     width: 100%;
-    text-align: left;
-    border-spacing: 0;
+    page-break-inside: auto;
+    border-spacing:0px;
 }
-.post-md>table th
-{
-    padding: 12px 0;
-    border-bottom: 2px solid var(--line-1);
+table tr {
+    border: 1px solid #dfe2e5;
+    margin: 0;
+    padding: 0;
 }
-.post-md>table tr:nth-child(odd) td
-{
-    padding: 12px 0;
-    border-bottom: 1px solid var(--line-1);
-    background: #fafafa;
+table tr:nth-child(2n),
+thead {
+    background-color: #f8f8f8;
 }
-.post-md>table tr:nth-child(even) td
-{
-    padding: 12px 0;
-    border-bottom: 1px solid var(--line-1);
-    background: #fff;
-} */
-
-
-.post-md table tr th,
-.post-md table tr td {
-  font-size: 16px;
-  border: 1px solid #ccc;
-  padding: 5px 10px;
-  text-align: left;
-}
-
-.post-md table tr th {
+table th {
     font-weight: bold;
-    background-color: #f0f0f0;
+    border: 1px solid #dfe2e5;
+    border-bottom: 0;
+    margin: 0;
+    padding: 6px 13px;
 }
-
-
-/* 表格最小列宽4个汉字 */
-.post-md table tr th:nth-of-type(n),
-.post-md table tr td:nth-of-type(n){
-  min-width:85px;
+table td {
+    border: 1px solid #dfe2e5;
+    margin: 0;
+    padding: 6px 13px;
+}
+table th:first-child,
+table td:first-child {
+    margin-top: 0;
+}
+table th:last-child,
+table td:last-child {
+    margin-bottom: 0;
 }
 
 
@@ -753,8 +745,8 @@ myTextview.setCompoundDrawables(drawable,null,null,null);
         </div>
     
     
-        <a href="/2015/04/06/android-string-xml-format/">下一篇: 
-            Android string.xml中的占位符
+        <a href="/2015/04/06/android-snippet-sdcard-size/">下一篇: 
+            SD Card的大小和容量
         </a>
     
 </div>

@@ -641,49 +641,41 @@ a {
     margin: 12px 0;
 }
 
-/* .post-md>table
-{
+table {
+    padding: 0;
+    word-break: initial;
     width: 100%;
-    text-align: left;
-    border-spacing: 0;
+    page-break-inside: auto;
+    border-spacing:0px;
 }
-.post-md>table th
-{
-    padding: 12px 0;
-    border-bottom: 2px solid var(--line-1);
+table tr {
+    border: 1px solid #dfe2e5;
+    margin: 0;
+    padding: 0;
 }
-.post-md>table tr:nth-child(odd) td
-{
-    padding: 12px 0;
-    border-bottom: 1px solid var(--line-1);
-    background: #fafafa;
+table tr:nth-child(2n),
+thead {
+    background-color: #f8f8f8;
 }
-.post-md>table tr:nth-child(even) td
-{
-    padding: 12px 0;
-    border-bottom: 1px solid var(--line-1);
-    background: #fff;
-} */
-
-
-.post-md table tr th,
-.post-md table tr td {
-  font-size: 16px;
-  border: 1px solid #ccc;
-  padding: 5px 10px;
-  text-align: left;
-}
-
-.post-md table tr th {
+table th {
     font-weight: bold;
-    background-color: #f0f0f0;
+    border: 1px solid #dfe2e5;
+    border-bottom: 0;
+    margin: 0;
+    padding: 6px 13px;
 }
-
-
-/* 表格最小列宽4个汉字 */
-.post-md table tr th:nth-of-type(n),
-.post-md table tr td:nth-of-type(n){
-  min-width:85px;
+table td {
+    border: 1px solid #dfe2e5;
+    margin: 0;
+    padding: 6px 13px;
+}
+table th:first-child,
+table td:first-child {
+    margin-top: 0;
+}
+table th:last-child,
+table td:last-child {
+    margin-bottom: 0;
 }
 
 
@@ -803,7 +795,7 @@ class B params init
 B constructor method excute
 </code></pre>
 <h3 id="总结"><span class="prefix"></span><span class="content">总结</span><span class="suffix"></span></h3><p>这一次的空指针的最根本原因是在父类的构造方法中执行了子类实例变量的初始化<br>操作，这是一个非常不合理的举动。如果子类属性中的东西应该在子类中进行初始化，<br>而不是在父类中调用初始化方法。</p>
-<h3 id="写在最后"><span class="prefix"></span><span class="content">写在最后</span><span class="suffix"></span></h3><p><del>代码木有上传上来，如果你想看看这个丑陋的代码是怎么写的，你可以邮件联系我：<br><a href="mailto:&#108;&#x6f;&#118;&#101;&#x63;&#108;&#117;&#111;&#64;&#110;&#105;&#x67;&#x68;&#x74;&#119;&#x65;&#x61;&#x76;&#x65;&#114;&#x2e;&#111;&#114;&#103;">&#108;&#x6f;&#118;&#101;&#x63;&#108;&#117;&#111;&#64;&#110;&#105;&#x67;&#x68;&#x74;&#119;&#x65;&#x61;&#x76;&#x65;&#114;&#x2e;&#111;&#114;&#103;</a></del></p>
+<h3 id="写在最后"><span class="prefix"></span><span class="content">写在最后</span><span class="suffix"></span></h3><p><del>代码木有上传上来，如果你想看看这个丑陋的代码是怎么写的，你可以邮件联系我：<br><a href="mailto:&#x6c;&#111;&#118;&#101;&#x63;&#108;&#x75;&#x6f;&#x40;&#x6e;&#x69;&#x67;&#104;&#x74;&#119;&#x65;&#97;&#118;&#101;&#114;&#46;&#x6f;&#114;&#x67;">&#x6c;&#111;&#118;&#101;&#x63;&#108;&#x75;&#x6f;&#x40;&#x6e;&#x69;&#x67;&#104;&#x74;&#119;&#x65;&#97;&#118;&#101;&#114;&#46;&#x6f;&#114;&#x67;</a></del></p>
 <p>更新代码地址：</p>
 <ul>
 <li><a href="http://pinned.github.io/assets/posts/file-2014-11-4/NullPointProject-bug.tar.gz">Bug版代码</a></li>
