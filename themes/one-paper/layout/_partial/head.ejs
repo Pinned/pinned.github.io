@@ -4,6 +4,7 @@
     <link rel="alternate icon" type="image/png" href="<%- url_for('/img/favicon.png') %>">
     <% if (is_post()) { %>
         <title><%= page.title %> </title>
+        <%- css('css/toc.css') %>
     <% } else { %>
         <title><%= config.title %> </title>
     <% } %>
