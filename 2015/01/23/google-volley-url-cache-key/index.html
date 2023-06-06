@@ -644,40 +644,41 @@ a {
     margin: 12px 0;
 }
 
-table {
+.post-md table {
     padding: 0;
     word-break: initial;
     width: 100%;
     page-break-inside: auto;
     border-spacing:0px;
+    border: 0.5px solid #dfe2e5;
 }
-table tr {
-    border: 1px solid #dfe2e5;
+.post-md table tr {
+    border: 0.5px solid #dfe2e5;
     margin: 0;
     padding: 0;
 }
-table tr:nth-child(2n),
+.post-md table tr:nth-child(2n),
 thead {
     background-color: #f8f8f8;
 }
-table th {
+.post-md table th {
     font-weight: bold;
-    border: 1px solid #dfe2e5;
+    border: 0.5px solid #dfe2e5;
     border-bottom: 0;
     margin: 0;
     padding: 6px 13px;
 }
-table td {
-    border: 1px solid #dfe2e5;
+.post-md table td {
+    border: 0.5px solid #dfe2e5;
     margin: 0;
     padding: 6px 13px;
 }
-table th:first-child,
-table td:first-child {
+.post-md table th:first-child,
+.post-md table td:first-child {
     margin-top: 0;
 }
-table th:last-child,
-table td:last-child {
+.post-md table th:last-child,
+.post-md table td:last-child {
     margin-bottom: 0;
 }
 
@@ -1051,7 +1052,7 @@ protected Response&lt;String&gt; parseNetworkResponse(NetworkResponse response) 
 </code></pre>
 <p>就是<code>HttpHeaderParser.parseCacheHeaders(response)</code>实现<code>Response</code>向<code>Cache.Entry</code>的转换。</p>
 <p>当然，你可以实现自己的<code>parseCacheHeaders</code>的方法，来实现你自己的缓存侧略。</p>
-<p>到此为止，基本写完了我所读到的<code>Volley</code>中实现<code>Cache</code>的方法。如果你对本文或者我有什么意见或者建议。<br>请骚扰我：<a href="mailto:&#x6c;&#x6f;&#118;&#101;&#x63;&#x6c;&#117;&#x6f;&#64;&#x6e;&#x69;&#103;&#104;&#x74;&#x77;&#101;&#97;&#118;&#101;&#114;&#46;&#x6f;&#x72;&#103;">&#x6c;&#x6f;&#118;&#101;&#x63;&#x6c;&#117;&#x6f;&#64;&#x6e;&#x69;&#103;&#104;&#x74;&#x77;&#101;&#97;&#118;&#101;&#114;&#46;&#x6f;&#x72;&#103;</a></p>
+<p>到此为止，基本写完了我所读到的<code>Volley</code>中实现<code>Cache</code>的方法。如果你对本文或者我有什么意见或者建议。<br>请骚扰我：<a href="mailto:&#x6c;&#111;&#118;&#x65;&#x63;&#108;&#117;&#x6f;&#x40;&#x6e;&#105;&#x67;&#x68;&#116;&#119;&#101;&#97;&#x76;&#x65;&#114;&#x2e;&#x6f;&#114;&#x67;">&#x6c;&#111;&#118;&#x65;&#x63;&#108;&#117;&#x6f;&#x40;&#x6e;&#105;&#x67;&#x68;&#116;&#119;&#101;&#97;&#x76;&#x65;&#114;&#x2e;&#x6f;&#114;&#x67;</a></p>
 
         </section>
         </div>
