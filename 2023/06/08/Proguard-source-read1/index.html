@@ -5,7 +5,10 @@
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
     <link rel="alternate icon" type="image/png" href="/img/favicon.png">
     
-        <title>大罗说事 </title>
+        <title>ProGuard 进阶系列（一）源码运行 </title>
+        
+<link rel="stylesheet" href="/css/toc.css">
+
     
     <style type="text/css" id="reset">@charset "utf-8";
 
@@ -702,94 +705,88 @@ thead {
         <img id="bing-bg" src="" referrerpolicy="no-referrer" />
         <div class="paper">
             
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>目录</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1.%20ProGuard%20%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="post-toc-text">1. ProGuard 的使用</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2.%20ProGuard%20%E6%BA%90%E7%A0%81%E4%B8%8B%E8%BD%BD%E4%B8%8E%E8%BF%90%E8%A1%8C%E9%85%8D%E7%BD%AE"><span class="post-toc-text">2. ProGuard 源码下载与运行配置</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3.%20%E7%BB%93%E8%AF%AD"><span class="post-toc-text">3. 结语</span></a></li></ol>
+        </nav>
+    </aside>
+
             <div class="paper-main">
                 
-                    <div class="header">
-    <a class="logo" href="/">大罗说事</a>
-    <ul class="nav">
-        
-        <li><a href="/">首页</a></li>
-        
-        <li><a href="/archives">归档</a></li>
-        
-        <li><a href="/snippet">代码片段</a></li>
-        
-        <li><a href="/about">关于</a></li>
-        
-    </ul>
+                    <div class="post-header">
+    <p class="post-title">ProGuard 进阶系列（一）源码运行</p>
 </div>
                 
-                <div class="post-list">
-    
-    
-    
-    
-    
-    
-    <div class="post">
-        <a class="post-title" href="/2015/04/13/android-best-practices-2/">Android最佳实践</a>
-        <div class="post-except">
-            
-                从Futurice公司Android开发者中学到的经验。遵循以下准则，避免重复发明轮子。若您对开发iOS或Windows Phone 有兴趣，请看iOS Good Practices 和 Windows client Good Practices 这两篇文章。
-摘要
-使用 Gradle 和它推荐的工程结构
-把密码和敏感数据放在gradle.properties
-不要自己写 HTTP 客户端,使用Volley或OkHttp库
-使用Jackson库解析JSON数据
-避免使用Gua
-            
-            <a class="read-more" href="/2015/04/13/android-best-practices-2/"> ... </a>
-        </div>
-        <div class="post-date">2015.04.13</div>
-    </div>
-    
-    
-    
-    
-    <div class="post">
-        <a class="post-title" href="/2015/04/10/mac-os-x-yomesite-install-rails/">Mac OS X Yosemite 安装 Rails</a>
-        <div class="post-except">
-            
-                参考文章：Install Ruby on Rails · Mac OS X Yosemite
-在安装过程中，出现错误，有关错误信息可以查看下面这一篇博客，但是他的解决办法没有解决问题：
-MAC安装Rails
-最后的解决办法就是先将ruby 升级到最新版本，然后就可以顺利安装rails了。在此记录一下。
+                <div class="post-main">
 
-            
-            <a class="read-more" href="/2015/04/10/mac-os-x-yomesite-install-rails/"> ... </a>
+    
+        <div class="post-meta">
+            <a class='author' href="/">罗昭成</a> <span id="clipboardbtn">2023年06月08日</span>
         </div>
-        <div class="post-date">2015.04.10</div>
-    </div>
+        <div class="post-md" id="copy-post-content">
+        <section id="beautiful">
+            <p>在前面的文章 <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/AIKuIfLnM-4DBMJa2jmzIw">深入 Android 混淆实践：ProGuard 通关秘籍</a> 和 <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/WDgwfkijoUpI70P8JVlSAQ">深入 Android 混淆实践：多模块打包爬坑之旅</a> 中，已经讲到在 Android 中如何使用 ProGuard，以及自定义实现混淆规则的生成。为了更深入的理解 ProGuard 的细节，本系列文章从我感兴趣去的点出发，记录在阅 ProGuard 读源码过程中的思考与启发，希望对你也有所帮助。本文为此系列文章的开篇，将最基础的讲起，使用 ProGuard 源码去实现代码混淆。</p>
+<h2 id="1. ProGuard 的使用"><span class="prefix"></span><span class="content">1. ProGuard 的使用</span><span class="suffix"></span></h2><p>在之前的文章中，使用 ProGuard 的流程已经融入到 Android Gradle Tools 中了。除了自带的流程，我们也可以直接使用<code>android-sdk/tools/proguard/libs</code> 里面的  <code>proguard.jar</code> 。在 <code>android-sdk/tools/proguard/bin</code> 下有 <code>proguard.sh</code> 这个可执行文件：</p>
+<pre><code class="shell">PROGUARD_HOME=`dirname &quot;$0&quot;`/..
+java -jar $PROGUARD_HOME/lib/proguard.jar &quot;$@&quot;
+</code></pre>
+<p>可以看到，就是使用 <code>java -jar</code> 进行执行的，并且将参数直接透传。除了使用这个可执行脚本执行外，我们也可以直接使用如下命令直接运行：</p>
+<pre><code class="shell">java -jar proguard.jar [options ...]
+</code></pre>
+<p>根据使用混淆的经验，你应该可以想到，加固过程中，主要需要以下四部份内容：</p>
+<ul>
+<li>要被混淆的内容，如常见的 jar 包。</li>
+<li>被混淆内容的依赖库， 如 Android SDK。</li>
+<li>混淆的配置，哪些类、方法不被优化混淆处理。</li>
+<li>混淆后的输出内容。</li>
+</ul>
+<p>在执行命令中，必须包含这些内容，我们可以使用以下几条参数来指定：</p>
+<ul>
+<li><strong>-injars  classpath</strong>，classpath 指定当前需要混淆的 jar 包，classpath 路径中支持 apk, aab, aar, war, ear, jmod, zip 以及文件夹，支持多个输入。</li>
+<li><strong>-outjars classpath</strong>，classpath 指定当前混淆后输出的 jar 包， 格式支持与 <code>-injars</code> 一致， 一般情况下，此处仅有一个可输出的 classpath 路径</li>
+<li><strong>-libraryJars classpath</strong>， classpath 指定依赖库，支持格式与<code>-injars</code> 一致，如有多个 library 依赖，写多行就可以指定</li>
+<li><strong>-include filename，</strong>filename 指定配置文件的路径，也可使用  <code>@filename</code>  替代</li>
+</ul>
+<p>我们所编写的 <code>混淆配置</code> 通过 <code>-include filename</code> 即可指定。当然，<code>-injars</code>、<code>-outjars</code>、<code>-libraryJars</code> 和 <code>-keep 规则</code> 放到同一个配置文件中，运行时，指定对应配置文件即可，使用起来更方便，比如我将配置信息写到 <code>debug_proguard.pro</code> 文件中，即可按如下方式进行运行：</p>
+<pre><code class="shell">java -jar proguard.jar @debug_proguard.pro
+</code></pre>
+<p>当写好配置后，运行如上命令，就能将混淆后的内容输出到 <code>-outjars</code> 指定的路径中。</p>
+<h2 id="2. ProGuard 源码下载与运行配置"><span class="prefix"></span><span class="content">2. ProGuard 源码下载与运行配置</span><span class="suffix"></span></h2><p>前面的内容中，可以了解到 ProGuard 的使用，而 ProGuard 是一个开源项目，它使用的是 GPL 协议，而其还依赖了<code>ProGuard-core</code> ，此项目也为开源项目。为了了解其实现细节，可以将代码下载下来，如下所示：</p>
+<pre><code class="shell">git clone git@github.com:Guardsquare/proguard.git
+git clone git@gitcode.net:mirrors/Guardsquare/proguard.git
+</code></pre>
+<p>代码下载好后，可以直接使用 <code>Intellij IDEA</code> 打开它并且运行起来，这样我们就可以直接进行运行调试，能够更方便的去读懂  ProGuard 中的逻辑。</p>
+<blockquote>
+<p>在 ProGuard 代码仓库中写到，要编译源码，需要使用 JDK 8 ， 此处需要注意你当前使用的 JDK 版本。</p>
+</blockquote>
+<p>首先，要运行代码，就需要找到 <code>main()</code> 方法所在的类，才能执行运行。在第一节的内容中，使用 <code>java -jar proguard.jar</code> 就可以执行，从 jar 包中的 <code>MANIFEST.MF</code> 文件中，可以看到， <code>main()</code>  方法在 <code>proguard.ProGuard</code> 中， 如下图所示：</p>
+<p><img src="https://img-blog.csdnimg.cn/fd527c280bca4c7d85f0017749a1080a.png" alt="proguard.jar 中的 MANIFEST.MF 文件" referrerpolicy="no-referrer"><figcaption class="post-image-caption">proguard.jar 中的 MANIFEST.MF 文件</figcaption></figure></p>
+<p>在源码中，我们也能看到 <code>proguard/ProGuard.java</code> 的类中，正好有一个 <code>main()</code> 方法。在 <code>Intellij IDEA</code> 可以直接运行此 <code>main</code> 方法:</p>
+<p><img src="https://img-blog.csdnimg.cn/74acc10c353c4299a59bce7c62ffd902.png" alt="在 Intellij IDEA 直接运行" referrerpolicy="no-referrer"><figcaption class="post-image-caption">在 Intellij IDEA 直接运行</figcaption></figure></p>
+<p>如果直接点击绿色的 <font color="green">▶︎</font> ，运行肯定会报错。在这里，我们还需要手动将第一部分中使用的 <code>debug_proguard.pro</code> 文件路径放到参数列表中去，具体操作方法如下图所示：</p>
+<p><img src="https://img-blog.csdnimg.cn/8f48291cc59f42ff973fa31f3c03fd9c.png" alt="Intellij IDEA 中参数配置" referrerpolicy="no-referrer"><figcaption class="post-image-caption">Intellij IDEA 中参数配置</figcaption></figure></p>
+<p>配置完成后，直接点击 <code>Intellij IDEA</code> 中的  <font color="green">▶︎</font> ，输出的产物与用命令行执行出来的结果一致。 </p>
+<h2 id="3. 结语"><span class="prefix"></span><span class="content">3. 结语</span><span class="suffix"></span></h2><p>当拿到源码后，第一步就是将源码跑起来，这能够有助于我们对源码理解，以及后续分析源码时进行调试。本文内容很简单，但纸上得来终觉浅，绝知此事要躬行。朋友们可以自己去将源码下载下来，并使用你所熟知的 <code>IDE</code> 将其运行起来，相信你也有很多的收获，也欢迎各位与我交流。</p>
+
+        </section>
+        </div>
+
+    
+
+</div>
+                <!-- 
+                    <div class="post_pre_next">
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+        <a href="/2023/06/01/Android-image-encode/">下一篇: 
+            安卓图片编码之必备技能
+        </a>
     
 </div>
 
-<div class="paginator">
-    <a class="extend prev" rel="prev" href="/page/4/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/6/">下一页</a>
-</div>
 
-                <!--  -->
+                 -->
                 <div class="footer">
     <span>Copyright © 2023 大罗说事</span>
 </div>
