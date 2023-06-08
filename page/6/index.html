@@ -726,9 +726,6 @@ thead {
     
     
     
-    
-    
-    
     <div class="post">
         <a class="post-title" href="/2015/04/05/keystore-file-options/">Android Keystore 文件的密码修改</a>
         <div class="post-except">
@@ -790,25 +787,6 @@ sudo apt-add-repository ppa:brightbox/ruby-n
     
     
     <div class="post">
-        <a class="post-title" href="/2015/03/16/ubuntu-unzip-encode/">Ubuntu 解压zip，文件乱码</a>
-        <div class="post-except">
-            
-                在windows上压缩的文件，是以系统默认编码中文来压缩文件。由于zip文件中没有声明其编码，所以linux上的unzip一般以默认编码解压，中文文件名会出现乱码。
-解决方式：
-unzip -O CP936 xxx.zip
-// 用GBK, GB18030也可以
-
-
-            
-            <a class="read-more" href="/2015/03/16/ubuntu-unzip-encode/"> ... </a>
-        </div>
-        <div class="post-date">2015.03.16</div>
-    </div>
-    
-    
-    
-    
-    <div class="post">
         <a class="post-title" href="/2015/03/16/adnroid-code-Snippets/">Android代码片段</a>
         <div class="post-except">
             
@@ -822,6 +800,25 @@ long sdTotalSize =  (long)stat.getBlockCount()
    
             
             <a class="read-more" href="/2015/03/16/adnroid-code-Snippets/"> ... </a>
+        </div>
+        <div class="post-date">2015.03.16</div>
+    </div>
+    
+    
+    
+    
+    <div class="post">
+        <a class="post-title" href="/2015/03/16/ubuntu-unzip-encode/">Ubuntu 解压zip，文件乱码</a>
+        <div class="post-except">
+            
+                在windows上压缩的文件，是以系统默认编码中文来压缩文件。由于zip文件中没有声明其编码，所以linux上的unzip一般以默认编码解压，中文文件名会出现乱码。
+解决方式：
+unzip -O CP936 xxx.zip
+// 用GBK, GB18030也可以
+
+
+            
+            <a class="read-more" href="/2015/03/16/ubuntu-unzip-encode/"> ... </a>
         </div>
         <div class="post-date">2015.03.16</div>
     </div>
@@ -882,6 +879,24 @@ LinearLayoutMa
             <a class="read-more" href="/2015/03/02/android-studio-using-2/"> ... </a>
         </div>
         <div class="post-date">2015.03.02</div>
+    </div>
+    
+    
+    
+    
+    <div class="post">
+        <a class="post-title" href="/2015/01/23/google-volley-url-cache-key/">Google Volley如何缓存HTTP请求文件</a>
+        <div class="post-except">
+            
+                概述HTTP请求，是一个很长见的过程，缓存也是一个不可避免的话题。一个有好的HTTP请求，肯定会有它自己的一套缓存机制。我们要如何来做，即能方便，又能快速的实现这个功能呢？
+想法以前，自己也封装过一些简陋的HTTP框架，有的在HTTP框架中做过数据缓存，有的没有做过数据缓存。
+
+没有做数据缓存
+  在没有做数据缓存的时候，将HTTP请求的Response响应到UI之前作数据预处理，并且此过程的处理放到子线程中进行，不占用UI线程。这样可以很方便的让用户选择如何进行数据缓存，以
+            
+            <a class="read-more" href="/2015/01/23/google-volley-url-cache-key/"> ... </a>
+        </div>
+        <div class="post-date">2015.01.23</div>
     </div>
     
     
