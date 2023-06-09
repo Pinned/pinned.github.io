@@ -566,7 +566,7 @@ a {
 }
 .post-md a
 {
-    color: var(--font-color-2);
+    color: #61aeee;
     box-shadow: 0 2px 0 var(--line-1);
     transition: color ease-in-out .65s, box-shadow ease-in-out .65s;
 }
@@ -721,7 +721,12 @@ thead {
                 
                 <div class="post-main">
     
-        <div class="post-md"><h1><span class="prefix"></span><span class="content">Android 去掉Activtiy之间的切换动画</span><span class="suffix"></span></h1><pre><code class="xml">&lt;style name=&quot;NoAnimationTheme&quot;&gt;
+        <div class="post-md"><h1><span class="prefix"></span><span class="content">TextView之代码设置DrawableLeft</span><span class="suffix"></span></h1><pre><code class="java">Drawable drawable = getResources().getDrawable(R.drawable.drawable);  
+/// 这一步必须要做,否则不会显示.  
+drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());  
+myTextview.setCompoundDrawables(drawable,null,null,null);
+</code></pre>
+<h1><span class="prefix"></span><span class="content">Android 去掉Activtiy之间的切换动画</span><span class="suffix"></span></h1><pre><code class="xml">&lt;style name=&quot;NoAnimationTheme&quot;&gt;
     &lt;item name=&quot;android:windowAnimationStyle&quot;&gt;@style/Animation&lt;/item&gt;
 &lt;/style&gt;
 &lt;style name=&quot;Animation&quot;&gt;
@@ -740,25 +745,6 @@ thead {
 &lt;/style&gt;
 </code></pre>
 <p>在使用的时候，只需将不需要动画的Activity的<code>style</code>设置成这个就可以了</p>
-<h1><span class="prefix"></span><span class="content">SD Card的大小和容量</span><span class="suffix"></span></h1><pre><code class="java">StatFs stat = new StatFs(Environment.getExternalStorageDirectory().getPath());
-long sdAvailSize = (long)stat.getAvailableBlocks()
-               * (long)stat.getBlockSize();
-long sdTotalSize =  (long)stat.getBlockCount()
-                * (long)stat.getBlockSize()
-</code></pre>
-<h1><span class="prefix"></span><span class="content">Android string.xml中的占位符</span><span class="suffix"></span></h1><pre><code class="xml">&lt;!-- .2f表示的是保留三位小数的浮点数  --&gt;
-&lt;string name=&quot;book&quot;&gt;书名 (字符串)%1$s,作者(字符串)%2$s,编号(整数)%3$d,价格(浮点型)：%4$.2f&lt;/string&gt;
-</code></pre>
-<h1><span class="prefix"></span><span class="content">gradle打包的时候，自动重命名APK文件</span><span class="suffix"></span></h1><pre><code class="bash">android.applicationVariants.all &#123; variant -&gt;
-    variant.outputs.each &#123; output -&gt;
-        def outputFile = output.outputFile
-        if (outputFile != null &amp;&amp; outputFile.name.endsWith(&#39;.apk&#39;)) &#123;
-            def fileName = outputFile.name.replace(&quot;.apk&quot;, &quot;-$&#123;defaultConfig.versionName&#125;-$&#123; defaultConfig.versionCode&#125;.apk&quot;)
-            output.outputFile = new File(outputFile.parent, fileName)
-        &#125;
-    &#125;
-&#125;
-</code></pre>
 <h1><span class="prefix"></span><span class="content">在`values`中定义id</span><span class="suffix"></span></h1><p>在<code>values</code>文件夹中创建<code>ids.xml</code>文件， 文件目录为：<code>values/ids.xml</code></p>
 <p>我们有时候，会在代码中定义一个组件，如<code>TextView</code>,但是我们想给他设置一个Id，又不知道该设置一个<br>什么值比较好，就可以用上术方法来定义一个<code>id</code>, 具体代码如下:</p>
 <pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
@@ -781,48 +767,6 @@ long sdTotalSize =  (long)stat.getBlockCount()
     return super.onKeyDown(keyCode, event);
 &#125;
 </code></pre>
-<h1><span class="prefix"></span><span class="content">Android文字颜色选择器</span><span class="suffix"></span></h1><pre><code class="xml">//在这个地方，应该使用
-//android:textColor=&quot;@drawable/text_color&quot;
-
-// text_color.xml
-&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;selector xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;
-    &lt;item android:state_pressed=&quot;true&quot; android:color=&quot;@color/click_blue_color&quot;&gt;&lt;/item&gt;
-    &lt;item android:color=&quot;@color/blue_color&quot;&gt;&lt;/item&gt;
-&lt;/selector&gt;
-</code></pre>
-<h1><span class="prefix"></span><span class="content">TextView之代码设置DrawableLeft</span><span class="suffix"></span></h1><pre><code class="java">Drawable drawable = getResources().getDrawable(R.drawable.drawable);  
-/// 这一步必须要做,否则不会显示.  
-drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());  
-myTextview.setCompoundDrawables(drawable,null,null,null);
-</code></pre>
-<h1><span class="prefix"></span><span class="content">Android 混淆记录</span><span class="suffix"></span></h1><pre><code class="bash">--keep class cn.knero.model.*&#123;
-    public &lt;methods&gt;; // 不混淆public的方法
-&#125;
-
-
-# Google Gson
-#---------------Begin: proguard configuration for Gson  ----------
-# Gson uses generic type information stored in a class file when working with fields. Proguard
-# removes such information by default, so configure it to keep all of it.
--keepattributes Signature
-# Gson specific classes
--keep class sun.misc.Unsafe &#123; *; &#125;
-#-keep class com.google.gson.stream.** &#123; *; &#125;
-# Application classes that will be serialized/deserialized over Gson
--keep class com.google.gson.examples.android.model.** &#123; *; &#125;
--keep class com.google.** &#123; *; &#125;
--keep class * extends com.google.gson.reflect.TypeToken
--keep class com.google.gson.reflect.TypeToken
-##---------------End: proguard configuration for Gson  ----------
-
-
-#混淆某个方法
--keepclassmembers class cn.knero.fragment.BaseContentFragment &#123;
-    public android.view.View refreshError();
-    public android.view.View onLoading();
-&#125;
-</code></pre>
 <h1><span class="prefix"></span><span class="content">格式化文件容量代码</span><span class="suffix"></span></h1><pre><code class="java">public static String formatSize(long size) &#123;
     if (size &lt; 1024) &#123;
         return String.format(&quot;%dByte&quot;, size);
@@ -835,19 +779,35 @@ myTextview.setCompoundDrawables(drawable,null,null,null);
     &#125;
 &#125;
 </code></pre>
-<h1><span class="prefix"></span><span class="content">java反射内部类</span><span class="suffix"></span></h1><ol>
-<li>在java中反射加载类的方法如下</li>
-</ol>
-<pre><code class="java">Class rClass = Class.forName(&quot;android.R&quot;);
+<h1><span class="prefix"></span><span class="content">Android文字颜色选择器</span><span class="suffix"></span></h1><pre><code class="xml">//在这个地方，应该使用
+//android:textColor=&quot;@drawable/text_color&quot;
+
+// text_color.xml
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;selector xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;
+    &lt;item android:state_pressed=&quot;true&quot; android:color=&quot;@color/click_blue_color&quot;&gt;&lt;/item&gt;
+    &lt;item android:color=&quot;@color/blue_color&quot;&gt;&lt;/item&gt;
+&lt;/selector&gt;
 </code></pre>
-<ol start="2">
-<li>加载android.R.attr</li>
-</ol>
-<pre><code class="java">Class attrClass = Class.forName(&quot;android.R$attr&quot;);
+<h1><span class="prefix"></span><span class="content">gradle打包的时候，自动重命名APK文件</span><span class="suffix"></span></h1><pre><code class="bash">android.applicationVariants.all &#123; variant -&gt;
+    variant.outputs.each &#123; output -&gt;
+        def outputFile = output.outputFile
+        if (outputFile != null &amp;&amp; outputFile.name.endsWith(&#39;.apk&#39;)) &#123;
+            def fileName = outputFile.name.replace(&quot;.apk&quot;, &quot;-$&#123;defaultConfig.versionName&#125;-$&#123; defaultConfig.versionCode&#125;.apk&quot;)
+            output.outputFile = new File(outputFile.parent, fileName)
+        &#125;
+    &#125;
+&#125;
 </code></pre>
-<blockquote>
-<p>内部类并不是像调用那样，使用<code>.</code>, 而是使用<code>$</code></p>
-</blockquote>
+<h1><span class="prefix"></span><span class="content">Android string.xml中的占位符</span><span class="suffix"></span></h1><pre><code class="xml">&lt;!-- .2f表示的是保留三位小数的浮点数  --&gt;
+&lt;string name=&quot;book&quot;&gt;书名 (字符串)%1$s,作者(字符串)%2$s,编号(整数)%3$d,价格(浮点型)：%4$.2f&lt;/string&gt;
+</code></pre>
+<h1><span class="prefix"></span><span class="content">SD Card的大小和容量</span><span class="suffix"></span></h1><pre><code class="java">StatFs stat = new StatFs(Environment.getExternalStorageDirectory().getPath());
+long sdAvailSize = (long)stat.getAvailableBlocks()
+               * (long)stat.getBlockSize();
+long sdTotalSize =  (long)stat.getBlockCount()
+                * (long)stat.getBlockSize()
+</code></pre>
 <h1><span class="prefix"></span><span class="content">Android TextView 设置字体大小</span><span class="suffix"></span></h1><pre><code class="java">/**
  * Set the default text size to the given value, interpreted as &quot;scaled
  * pixel&quot; units.  This size is adjusted based on the current density and
@@ -898,6 +858,33 @@ private void setRawTextSize(float size) &#123;
 </code></pre>
 <p>以上代码是<code>Android TextView</code>设置字体的源码。可以看出来，使用<code>setTextSize(float size)</code>的时候，默认单位为<code>sp</code></p>
 <p>如果你自己从<code>xml</code>中读的时候，最好使用<code>setTextSize(int unit, float size)</code>这个方法。</p>
+<h1><span class="prefix"></span><span class="content">Android 混淆记录</span><span class="suffix"></span></h1><pre><code class="bash">--keep class cn.knero.model.*&#123;
+    public &lt;methods&gt;; // 不混淆public的方法
+&#125;
+
+
+# Google Gson
+#---------------Begin: proguard configuration for Gson  ----------
+# Gson uses generic type information stored in a class file when working with fields. Proguard
+# removes such information by default, so configure it to keep all of it.
+-keepattributes Signature
+# Gson specific classes
+-keep class sun.misc.Unsafe &#123; *; &#125;
+#-keep class com.google.gson.stream.** &#123; *; &#125;
+# Application classes that will be serialized/deserialized over Gson
+-keep class com.google.gson.examples.android.model.** &#123; *; &#125;
+-keep class com.google.** &#123; *; &#125;
+-keep class * extends com.google.gson.reflect.TypeToken
+-keep class com.google.gson.reflect.TypeToken
+##---------------End: proguard configuration for Gson  ----------
+
+
+#混淆某个方法
+-keepclassmembers class cn.knero.fragment.BaseContentFragment &#123;
+    public android.view.View refreshError();
+    public android.view.View onLoading();
+&#125;
+</code></pre>
 <h1><span class="prefix"></span><span class="content">Android显示密码</span><span class="suffix"></span></h1><pre><code class="java">
 //  方法1：
 if (mIsShowPsw) &#123;
@@ -916,6 +903,25 @@ if (inputType == 129) &#123;
     mPswEdit.setInputType(129);
 &#125;
 </code></pre>
+<h1><span class="prefix"></span><span class="content">java反射内部类</span><span class="suffix"></span></h1><ol>
+<li>在java中反射加载类的方法如下</li>
+</ol>
+<pre><code class="java">Class rClass = Class.forName(&quot;android.R&quot;);
+</code></pre>
+<ol start="2">
+<li>加载android.R.attr</li>
+</ol>
+<pre><code class="java">Class attrClass = Class.forName(&quot;android.R$attr&quot;);
+</code></pre>
+<blockquote>
+<p>内部类并不是像调用那样，使用<code>.</code>, 而是使用<code>$</code></p>
+</blockquote>
+<h1><span class="prefix"></span><span class="content">Android 截取EditText输入的Emoji表情</span><span class="suffix"></span></h1><pre><code class="java">public String subInputText(String inputText,int index) &#123;
+    int unicode = Character.codePointAt(text, index);
+    int skip = Character.charCount(unicode);
+    mInputSquares[textCount++].setText(text.substring(index, index+skip));
+&#125;
+</code></pre>
 <h1><span class="prefix"></span><span class="content">XML 实现 ListView divider margin</span><span class="suffix"></span></h1><pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;inset xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
     android:insetLeft=&quot;50dp&quot;
@@ -928,12 +934,6 @@ if (inputType == 129) &#123;
 </code></pre>
 <p>参考：</p>
 <p>  <a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/14054364/how-to-assign-padding-to-listview-item-divider-line?answertab=active#tab-top">How to assign padding to Listview item divider line</a></p>
-<h1><span class="prefix"></span><span class="content">Android 截取EditText输入的Emoji表情</span><span class="suffix"></span></h1><pre><code class="java">public String subInputText(String inputText,int index) &#123;
-    int unicode = Character.codePointAt(text, index);
-    int skip = Character.charCount(unicode);
-    mInputSquares[textCount++].setText(text.substring(index, index+skip));
-&#125;
-</code></pre>
 <h1><span class="prefix"></span><span class="content">Android TextView setTextSize</span><span class="suffix"></span></h1><p>Android TextView 在设置TextSize 值很大的时候，会报如下错误<code>Font size too large to fit in cache</code>。 修改方法如下：</p>
 <pre><code class="java">TextView bigText = (TextView) findViewById(R.id.bigtext);
 bigText.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
