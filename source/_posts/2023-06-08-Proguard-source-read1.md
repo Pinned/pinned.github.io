@@ -3,11 +3,11 @@ title: ProGuard 进阶系列（一）源码运行
 category: 混淆
 tags: ProGuard 
 ---
-在前面的文章 [深入 Android 混淆实践：ProGuard 通关秘籍](https://mp.weixin.qq.com/s/AIKuIfLnM-4DBMJa2jmzIw) 和 [深入 Android 混淆实践：多模块打包爬坑之旅](https://mp.weixin.qq.com/s/WDgwfkijoUpI70P8JVlSAQ) 中，已经讲到在 Android 中如何使用 ProGuard，以及自定义实现混淆规则的生成。为了更深入的理解 ProGuard 的细节，本系列文章从我感兴趣去的点出发，记录在阅 ProGuard 读源码过程中的思考与启发，希望对你也有所帮助。本文为此系列文章的开篇，将最基础的讲起，使用 ProGuard 源码去实现代码混淆。
+在前面的文章[深入 Android 混淆实践：ProGuard 通关秘籍](https://mp.weixin.qq.com/s/AIKuIfLnM-4DBMJa2jmzIw)和[深入 Android 混淆实践：多模块打包爬坑之旅](https://mp.weixin.qq.com/s/WDgwfkijoUpI70P8JVlSAQ)中，已经讲到了如何在 Android 中使用 ProGuard，以及如何自定义实现混淆规则的生成。为了更深入地理解 ProGuard 的细节，本系列文章从我感兴趣的点出发，记录在阅读 ProGuard 源码过程中的思考与启发，希望对你也有所帮助。本文为此系列文章的开篇，将最基础的讲起，使用 ProGuard 源码去实现代码混淆。
 
 ## 1. ProGuard 的使用
 
-在之前的文章中，使用 ProGuard 的流程已经融入到 Android Gradle Tools 中了。除了自带的流程，我们也可以直接使用`android-sdk/tools/proguard/libs` 里面的  `proguard.jar` 。在 `android-sdk/tools/proguard/bin` 下有 `proguard.sh` 这个可执行文件：
+在之前的文章中，使用 ProGuard 的流程已经融入到 Android Gradle Tools 中了。除了自带的流程，我们也可以直接使用 `android-sdk/tools/proguard/libs` 里面的  `proguard.jar` 。在 `android-sdk/tools/proguard/bin` 下有 `proguard.sh` 这个可执行文件：
 
 ```shell
 PROGUARD_HOME=`dirname "$0"`/..

@@ -113,7 +113,7 @@
 }
 .post-md a
 {
-    color: var(--font-color-2);
+    color: #61aeee;
     box-shadow: 0 2px 0 var(--line-1);
     transition: color ease-in-out .65s, box-shadow ease-in-out .65s;
 }
