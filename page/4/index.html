@@ -723,6 +723,37 @@ thead {
     
     
     
+    <div class="post">
+        <a class="post-title" href="/2015/05/22/android-like-qq-input/">Android EditText软键盘显示隐藏以及“监听”</a>
+        <div class="post-except">
+            
+                
+起因
+
+本人在做类似于微信、易信等这样的输入框时，遇到了一个问题。聊天界面最下面一般有输入文字的EditText和表情按钮等。
+
+点击表情会在这下面显示表情选择，如图2，如果之前点击输入框弹出了软键盘，那么还需要隐藏软键盘；
+
+点击输入框，弹出软键盘，如果之前显示了表情选择，则还需要隐藏表情选择。
+
+
+
+解决办法
+
+
+隐藏输入法
+
+ private boolean showKeyboard() &#123;
+    InputMethodManager imm = (Inp
+            
+            <a class="read-more" href="/2015/05/22/android-like-qq-input/"> ... </a>
+        </div>
+        <div class="post-date">2015.05.22</div>
+    </div>
+    
+    
+    
+    
     
     
     
@@ -766,22 +797,6 @@ android update sdk --filter &lt;compon
     
     
     <div class="post">
-        <a class="post-title" href="/2015/05/11/android-aidl-server/">Android Service学习之AIDL, Parcelable和远程服务</a>
-        <div class="post-except">
-            
-                AIDL的作用由于每个应用程序都运行在自己的进程空间，并且可以从应用程序UI运行另一个服务进程，而且经常会在不同的进程间传递对象。在Android平台，一个进程通常不能访问另一个进程的内存空间，所以要想对话，需要将对象分解成操作系统可以理解的基本单元，并且有序的通过进程边界。
-通过代码来实现这个数据传输过程是冗长乏味的，Android提供了AIDL工具来处理这项工作。
-AIDL (Android Interface Definition Language) 是一种IDL 语言
-            
-            <a class="read-more" href="/2015/05/11/android-aidl-server/"> ... </a>
-        </div>
-        <div class="post-date">2015.05.11</div>
-    </div>
-    
-    
-    
-    
-    <div class="post">
         <a class="post-title" href="/2015/05/11/svn-to-git/">SVN迁移到GIT</a>
         <div class="post-except">
             
@@ -796,6 +811,22 @@ git push --set-upstream origin master
 
             
             <a class="read-more" href="/2015/05/11/svn-to-git/"> ... </a>
+        </div>
+        <div class="post-date">2015.05.11</div>
+    </div>
+    
+    
+    
+    
+    <div class="post">
+        <a class="post-title" href="/2015/05/11/android-aidl-server/">Android Service学习之AIDL, Parcelable和远程服务</a>
+        <div class="post-except">
+            
+                AIDL的作用由于每个应用程序都运行在自己的进程空间，并且可以从应用程序UI运行另一个服务进程，而且经常会在不同的进程间传递对象。在Android平台，一个进程通常不能访问另一个进程的内存空间，所以要想对话，需要将对象分解成操作系统可以理解的基本单元，并且有序的通过进程边界。
+通过代码来实现这个数据传输过程是冗长乏味的，Android提供了AIDL工具来处理这项工作。
+AIDL (Android Interface Definition Language) 是一种IDL 语言
+            
+            <a class="read-more" href="/2015/05/11/android-aidl-server/"> ... </a>
         </div>
         <div class="post-date">2015.05.11</div>
     </div>
@@ -830,26 +861,6 @@ set nu!
     
     
     
-    
-    
-    
-    
-    <div class="post">
-        <a class="post-title" href="/2015/04/17/android-notification-small-icon/">Android 5.0设备中，Notification小图标是白色的</a>
-        <div class="post-except">
-            
-                问题描述在使用消息推送，在通知栏中展示通知，我们会有两个图标，一个是在状态栏展示的小图标，一个是打开通知中心，展示的大图标我在我自己的测试设备中，小图标始终显示为一个白色的空白图标。
-问题解决
-原文地址：Notification bar icon turns white in Android 5 Lollipop
-
-在这里，我把文章中说的东西抄一遍：
-在Android中用来展示Notification图标的代码如下：
-// android_frameworks_base/pa
-            
-            <a class="read-more" href="/2015/04/17/android-notification-small-icon/"> ... </a>
-        </div>
-        <div class="post-date">2015.04.17</div>
-    </div>
     
     
 </div>

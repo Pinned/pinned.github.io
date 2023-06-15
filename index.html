@@ -724,6 +724,23 @@ thead {
     
     
     <div class="post">
+        <a class="post-title" href="/2023/06/15/proguard-2/">ProGuard 进阶系列（二）配置解析</a>
+        <div class="post-except">
+            
+                书接上文，从开源库中把代码下载到本地后，就可以在 IDE 中进行运行了。从 main 方法入手，可以看到 ProGuard 执行的第一步就是去解析参数。本文的内容主要分析源码中我们配置的规则解析的实现。
+在上一篇文章末尾，在 IDE 中，添加了 @/Users/xxx/debug_proguard.pro 作为函数运行的入参，将配置文件的路径传递给 ProGuard 使用。先来看一下 Main 函数中的代码：
+ProGuard 的 Main 函数代码
+从这几行代码可以看出，P
+            
+            <a class="read-more" href="/2023/06/15/proguard-2/"> ... </a>
+        </div>
+        <div class="post-date">2023.06.15</div>
+    </div>
+    
+    
+    
+    
+    <div class="post">
         <a class="post-title" href="/2023/06/08/Proguard-source-read1/">ProGuard 进阶系列（一）源码运行</a>
         <div class="post-except">
             
@@ -857,20 +874,6 @@ iTerm2 下载地址：https://www.iterm2.com/
             <a class="read-more" href="/2022/08/20/iterm2-configuration/"> ... </a>
         </div>
         <div class="post-date">2022.08.20</div>
-    </div>
-    
-    
-    
-    
-    <div class="post">
-        <a class="post-title" href="/2022/07/20/android-lambda-desciption/">在 Android 中使用 Lambda 的原理解析</a>
-        <div class="post-except">
-            
-                Java 在 Android 的发展过程中，扮演了非常重要的角色。在有 Kotlin 之前，开发语言是使用的 Java ，即使现在使用的 Kotlin ， 也是会编译成 Java 的字节码。但受限于 Oracle 的版权，Google 在 Android 上针对 Java 版本的升级，支持的都很不积极。因此，在不同的 Android 版本中，对 JVM 的语法支持不一样？那要如何让高版本的语法，在低版本中的系统中运行呢？ 本文以 Java 8 中的 Lambda 表达式运行在
-            
-            <a class="read-more" href="/2022/07/20/android-lambda-desciption/"> ... </a>
-        </div>
-        <div class="post-date">2022.07.20</div>
     </div>
     
     

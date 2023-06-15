@@ -727,6 +727,21 @@ thead {
     
     
     <div class="post">
+        <a class="post-title" href="/2016/10/18/android-dynamic-create-menu/">Android 动态修改菜单</a>
+        <div class="post-except">
+            
+                在一个Android创建菜单menu时，需要重写Activity的onCreateOptionsMenu(Menu menu)方法，这个方法只在第一次创建的时候调用一次，所以如果之后想对menu进行动态的修改，那么就不要再对onCreateOptionsMenu做什么手脚了。
+动态修改菜单就要用到onPrepareOptionsMenu(Menu menu)方法了。onPrepareOptionsMenu与onCreateOptionsMenu不同的是，他在每次按下menu硬
+            
+            <a class="read-more" href="/2016/10/18/android-dynamic-create-menu/"> ... </a>
+        </div>
+        <div class="post-date">2016.10.18</div>
+    </div>
+    
+    
+    
+    
+    <div class="post">
         <a class="post-title" href="/2016/10/17/ubuntu-ruby-install/">Ubuntu中安装Ruby的一些注意事项</a>
         <div class="post-except">
             
@@ -859,37 +874,6 @@ InputMethodManager imm = (Inpu
             <a class="read-more" href="/2015/05/25/android-soft-keyboard/"> ... </a>
         </div>
         <div class="post-date">2015.05.25</div>
-    </div>
-    
-    
-    
-    
-    <div class="post">
-        <a class="post-title" href="/2015/05/22/android-like-qq-input/">Android EditText软键盘显示隐藏以及“监听”</a>
-        <div class="post-except">
-            
-                
-起因
-
-本人在做类似于微信、易信等这样的输入框时，遇到了一个问题。聊天界面最下面一般有输入文字的EditText和表情按钮等。
-
-点击表情会在这下面显示表情选择，如图2，如果之前点击输入框弹出了软键盘，那么还需要隐藏软键盘；
-
-点击输入框，弹出软键盘，如果之前显示了表情选择，则还需要隐藏表情选择。
-
-
-
-解决办法
-
-
-隐藏输入法
-
- private boolean showKeyboard() &#123;
-    InputMethodManager imm = (Inp
-            
-            <a class="read-more" href="/2015/05/22/android-like-qq-input/"> ... </a>
-        </div>
-        <div class="post-date">2015.05.22</div>
     </div>
     
     
