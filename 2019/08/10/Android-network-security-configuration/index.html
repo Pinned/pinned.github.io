@@ -82,16 +82,6 @@ select
 }</style>
     <style type="text/css" id="style">@charset "utf-8";
 
-:root {
-    --font-color-0: #04077e;
-    --font-color-1: #000;
-    --font-color-2: #666;
-    --font-color-3: #aaa;
-    --bg-color-1: #eee;
-    --line-1: #ccc;
-    --line-2: #ddd;
-}
-
 p {
     word-wrap: break-word;
     white-space: pre-wrap;
@@ -103,13 +93,13 @@ body {
     font-size: 16px;
     line-height: 1.75;
     letter-spacing: 0.6px;
-    color: var(--font-color-2);
+    color: #666;
     background: #F0F0F0;
 }
 
 a {
     text-decoration: none;
-    color: var(--font-color-1);
+    color: #000;
 }
 
 
@@ -148,7 +138,7 @@ a {
 .header {
     padding-bottom: 48px;
     margin-bottom: 48px;
-    border-bottom: 1px solid var(--line-1);
+    border-bottom: 1px solid #ccc;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -159,7 +149,7 @@ a {
 .logo {
     font-size: 2rem;
     font-weight: 600;
-    color: var(--font-color-1);
+    color: #000;
     margin-bottom: 16px;
     flex: 0 0 100%;
 }
@@ -184,7 +174,7 @@ a {
 }
 
 .nav li a {
-    color: var(--font-color-1);
+    color: #000;
     opacity: .6;
     transition: opacity ease-in-out .5s;
 }
@@ -222,7 +212,7 @@ a {
     width: 100%;
     padding-bottom: 48px;
     margin-bottom: 48px;
-    border-bottom: 1px dashed var(--line-2);
+    border-bottom: 1px dashed #ddd;
 }
 
 .post-title {
@@ -231,12 +221,12 @@ a {
     font-weight: 600;
     line-height: 1.5;
     margin-bottom: 12px;
-    color: var(--font-color-1);
+    color: #000;
     /*transition: color ease-in-out .5s;*/
 }
 
 .post-title:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
@@ -248,7 +238,7 @@ a {
 
 .read-more {
     padding: 0 4px;
-    color: var(--font-color-0);
+    color: #04077e;
 }
 
 .read-more:before,
@@ -277,7 +267,7 @@ a {
 
 .post-date {
     font-size: 0.875rem;
-    color: var(--font-color-3);
+    color: #aaa;
 }
 
 .paginator {
@@ -309,24 +299,24 @@ a {
 
 .paginator a {
     margin: 4px;
-    color: var(--font-color-2);
+    color: #666;
     transition: color ease-in-out .5s;
 }
 
 .paginator a:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
 .paginator .current {
-    color: var(--font-color-0);
-    border: 1px solid var(--font-color-0);
+    color: #04077e;
+    border: 1px solid #04077e;
 }
 
 .footer {
     padding: 24px 0;
     font-size: 0.875rem;
-    color: var(--font-color-3);
+    color: #aaa;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -340,12 +330,12 @@ a {
 }
 
 .footer a {
-    color: var(--font-color-3);
+    color: #aaa;
     transition: color ease-in-out .5s;
 }
 
 .footer a:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
@@ -364,12 +354,12 @@ a {
     font-size: 1.6rem;
     font-weight: 600;
     line-height: 1.5;
-    color: var(--font-color-1);
+    color: #000;
 }
 
 .post-meta {
     font-size: 0.875rem;
-    color: var(--font-color-3);
+    color: #aaa;
     flex: 0 0 100%;
     margin-bottom: 32px;
 }
@@ -405,7 +395,7 @@ a {
 
 .archive li span {
     width: 108px;
-    color: var(--font-color-2);
+    color: #666;
 }
 
 .archive-main {
@@ -413,12 +403,12 @@ a {
 }
 
 .archive-title {
-    color: var(--font-color-1);
+    color: #000;
     /*transition: color ease-in-out .5s;*/
 }
 
 .archive-title:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
@@ -434,16 +424,6 @@ a {
     cursor: pointer;
 }
 
-#beautiful p {
-    box-sizing: border-box;
-    margin-bottom: 16px;
-    font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
-    font-size: 15px;
-    text-align: justify;
-    white-space: normal;
-    text-size-adjust: auto;
-    line-height: 1.75em;
-}
 #bing-bg {
     width: 100%;
     position: fixed;
@@ -453,9 +433,20 @@ a {
     filter: blur(10px);
     object-fit: cover;
   }
-</style>
+#go-top {
+    cursor: pointer;
+}
+
+#beautiful {
+    font-family: "PingFang SC", BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serifhtml, body;
+    font-size: 16px;
+    line-height: 1.75;
+    letter-spacing: 0.6px;
+}</style>
     <style type="text/css" id="markdown">@charset "utf-8";
 
+#copy-post-content,
+#beautiful,
 .post-md
 {
     width: 100%;
@@ -469,7 +460,7 @@ a {
 .post-md h5,
 .post-md h6
 {
-    color: var(--font-color-1);
+    color: #000;
 }
 /* 一级标题 */
 .post-md h1  {
@@ -517,7 +508,6 @@ a {
 
 /* 二级标题内容 */
 .post-md h2 .content {
-    margin-left: -10px;
     display: inline-block;
     width: auto;
     height: 40px;
@@ -570,13 +560,13 @@ a {
 .post-md a
 {
     color: #61aeee;
-    box-shadow: 0 2px 0 var(--line-1);
+    box-shadow: 0 2px 0 #ccc;
     transition: color ease-in-out .65s, box-shadow ease-in-out .65s;
 }
 .post-md a:hover
 {
-    color: var(--font-color-0);
-    box-shadow: 0 2px 0 var(--font-color-0);
+    color: #04077e;
+    box-shadow: 0 2px 0 #04077e;
     transition: color ease-in-out .65s, box-shadow ease-in-out .65s;
 }
 .post-md strong
@@ -612,7 +602,7 @@ a {
 {
     border: none;
     height: 1px;
-    background: var(--line-1);
+    background: #ccc;
     margin: 24px 0;
 }
 
@@ -620,11 +610,11 @@ a {
 .post-md blockquote
 {
     width: 100%;
-    margin: 12px 0;
+    padding: 7px 0;
 }
 .post-md blockquote
 {
-    border-left: 2px solid var(--line-2);
+    border-left: 2px solid #ddd;
     padding-left: 12px;
     word-wrap: break-word;
 }
@@ -683,7 +673,7 @@ thead {
 }
 
 
-.post-md p code
+.inline-code
 {
     border-radius: 4px;
     background:rgba(27,31,35,.05);
@@ -707,7 +697,7 @@ thead {
             
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
-            <h4>目录</h4>
+            <h4 id="go-top">目录</h4>
             <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Add%20a%20Network%20Security%20Configuration%20file"><span class="post-toc-text">Add a Network Security Configuration file</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Customize%20trusted%20CAs"><span class="post-toc-text">Customize trusted CAs</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Configure%20a%20custom%20CA"><span class="post-toc-text">Configure a custom CA</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Limit%20the%20set%20of%20trusted%20CAs"><span class="post-toc-text">Limit the set of trusted CAs</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Trust%20additional%20CAs"><span class="post-toc-text">Trust additional CAs</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Configure%20CAs%20for%20debugging"><span class="post-toc-text">Configure CAs for debugging</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Opt%20out%20of%20cleartext%20traffic"><span class="post-toc-text">Opt out of cleartext traffic</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Pin%20certificates"><span class="post-toc-text">Pin certificates</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Configuration%20inheritance%20behavior"><span class="post-toc-text">Configuration inheritance behavior</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Configuration%20file%20format"><span class="post-toc-text">Configuration file format</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%3Cnetwork-security-config%3E"><span class="post-toc-text">&lt;network-security-config&gt;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%3Cbase-config%3E"><span class="post-toc-text">&lt;base-config&gt;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%3Cdomain-config%3E"><span class="post-toc-text">&lt;domain-config&gt;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%3Cdomain%3E"><span class="post-toc-text">&lt;domain&gt;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%3Cdebug-overrides%3E"><span class="post-toc-text">&lt;debug-overrides&gt;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%3Ctrust-anchors%3E"><span class="post-toc-text">&lt;trust-anchors&gt;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%3Ccertificates%3E"><span class="post-toc-text">&lt;certificates&gt;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%3Cpin-set%3E"><span class="post-toc-text">&lt;pin-set&gt;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%3Cpin%3E"><span class="post-toc-text">&lt;pin&gt;</span></a></li></ol></li></ol>
         </nav>
     </aside>
@@ -724,9 +714,10 @@ thead {
         <div class="post-meta">
             <a class='author' href="/">罗昭成</a> <span id="clipboardbtn">2019年08月10日</span>
         </div>
-        <div class="post-md" id="copy-post-content">
-        <section id="beautiful">
-            <p>The Network Security Configuration feature lets apps customize their network security settings in a safe, declarative configuration file without modifying app code. These settings can be configured for specific domains and for a specific app. The key capabilities of this feature are as follows:</p>
+        <div id="copy-post-content">
+            <section id="beautiful">
+            <div class="post-md" >
+                    <p>The Network Security Configuration feature lets apps customize their network security settings in a safe, declarative configuration file without modifying app code. These settings can be configured for specific domains and for a specific app. The key capabilities of this feature are as follows:</p>
 <ul>
 <li><strong>Custom trust anchors:</strong> Customize which Certificate Authorities (CA) are trusted for an app’s secure connections. For example, trusting particular self-signed certificates or restricting the set of public CAs that the app trusts.</li>
 <li><strong>Debug-only overrides:</strong> Safely debug secure connections in an app without added risk to the installed base.</li>
@@ -748,9 +739,9 @@ thead {
 <li>Limiting the set of CAs to only the CAs you trust instead of every pre-installed CA.</li>
 <li>Trusting additional CAs not included in the system.</li>
 </ul>
-<p>By default, secure connections (using protocols like TLS and HTTPS) from all apps trust the pre-installed system CAs, and apps targeting Android 6.0 (API level 23) and lower also trust the user-added CA store by default. An app can customize its own connections using <code>base-config</code> (for app-wide customization) or <code>domain-config</code> (for per-domain customization).</p>
+<p>By default, secure connections (using protocols like TLS and HTTPS) from all apps trust the pre-installed system CAs, and apps targeting Android 6.0 (API level 23) and lower also trust the user-added CA store by default. An app can customize its own connections using <code class="inline-code">base-config</code> (for app-wide customization) or <code class="inline-code">domain-config</code> (for per-domain customization).</p>
 <h3 id="Configure a custom CA"><span class="prefix"></span><span class="content">Configure a custom CA</span><span class="suffix"></span></h3><p>Assume you want to connect to your host which uses a self-signed SSL certificate or to a host whose SSL certificate is issued by a non-public CA which you trust, such as your company’s internal CA.</p>
-<p><code>res/xml/network_security_config.xml</code>:</p>
+<p><code class="inline-code">res/xml/network_security_config.xml</code>:</p>
 <pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
 &lt;network-security-config&gt;
     &lt;domain-config&gt;
@@ -761,10 +752,10 @@ thead {
     &lt;/domain-config&gt;
 &lt;/network-security-config&gt;
 </code></pre>
-<p>Add the self-signed or non-public CA certificate, in PEM or DER format, to <code>res/raw/my_ca</code>.</p>
+<p>Add the self-signed or non-public CA certificate, in PEM or DER format, to <code class="inline-code">res/raw/my_ca</code>.</p>
 <h3 id="Limit the set of trusted CAs"><span class="prefix"></span><span class="content">Limit the set of trusted CAs</span><span class="suffix"></span></h3><p>An app that does not want to trust all CAs trusted by system can instead specify its own reduced set of CAs to trust. This protects the app from fraudulent certificates issued by any of the other CAs.</p>
 <p>The configuration to limit the set of trusted CAs is similar to <a target="_blank" rel="noopener" href="https://developer.android.com/training/articles/security-config#ConfigCustom">trusting a custom CA</a> for a specific domain except that multiple CAs are provided in the resource.</p>
-<p><code>res/xml/network_security_config.xml</code>:</p>
+<p><code class="inline-code">res/xml/network_security_config.xml</code>:</p>
 <pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
 &lt;network-security-config&gt;
     &lt;domain-config&gt;
@@ -776,9 +767,9 @@ thead {
     &lt;/domain-config&gt;
 &lt;/network-security-config&gt;
 </code></pre>
-<p>Add the trusted CAs, in PEM or DER format, to <code>res/raw/trusted_roots</code>. Note that if using PEM format the file must contain <em>only</em> PEM data and no extra text. You can also provide multiple <a target="_blank" rel="noopener" href="https://developer.android.com/training/articles/security-config#certificates">&#96;&#96;</a> elements instead of one.</p>
+<p>Add the trusted CAs, in PEM or DER format, to <code class="inline-code">res/raw/trusted_roots</code>. Note that if using PEM format the file must contain <em>only</em> PEM data and no extra text. You can also provide multiple <a target="_blank" rel="noopener" href="https://developer.android.com/training/articles/security-config#certificates">&#96;&#96;</a> elements instead of one.</p>
 <h3 id="Trust additional CAs"><span class="prefix"></span><span class="content">Trust additional CAs</span><span class="suffix"></span></h3><p>An app may want to trust additional CAs not trusted by the system, this could be due to the system not yet including the CA or a CA that does not meet the requirements for inclusion into the Android system. An app can do this by specifying multiple certificate sources for a configuration.</p>
-<p><code>res/xml/network_security_config.xml</code>:</p>
+<p><code class="inline-code">res/xml/network_security_config.xml</code>:</p>
 <pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
 &lt;network-security-config&gt;
     &lt;base-config&gt;
@@ -789,9 +780,9 @@ thead {
     &lt;/base-config&gt;
 &lt;/network-security-config&gt;
 </code></pre>
-<h2 id="Configure CAs for debugging"><span class="prefix"></span><span class="content">Configure CAs for debugging</span><span class="suffix"></span></h2><p>When debugging an app that connects over HTTPS, you may want to connect to a local development server, which does not have the SSL certificate for your production server. In order to support this without any modification to your app’s code, you can specify debug-only CAs, which are trusted <em>only</em> when <a target="_blank" rel="noopener" href="https://developer.android.com/guide/topics/manifest/application-element.html#debug">android:debuggable</a> is <code>true</code>, by using <code>debug-overrides</code>. Normally, IDEs and build tools set this flag automatically for non-release builds.</p>
+<h2 id="Configure CAs for debugging"><span class="prefix"></span><span class="content">Configure CAs for debugging</span><span class="suffix"></span></h2><p>When debugging an app that connects over HTTPS, you may want to connect to a local development server, which does not have the SSL certificate for your production server. In order to support this without any modification to your app’s code, you can specify debug-only CAs, which are trusted <em>only</em> when <a target="_blank" rel="noopener" href="https://developer.android.com/guide/topics/manifest/application-element.html#debug">android:debuggable</a> is <code class="inline-code">true</code>, by using <code class="inline-code">debug-overrides</code>. Normally, IDEs and build tools set this flag automatically for non-release builds.</p>
 <p>This is safer than the usual conditional code because, as a security precaution, app stores do not accept apps which are marked debuggable.</p>
-<p><code>res/xml/network_security_config.xml</code>:</p>
+<p><code class="inline-code">res/xml/network_security_config.xml</code>:</p>
 <pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
 &lt;network-security-config&gt;
     &lt;debug-overrides&gt;
@@ -804,9 +795,9 @@ thead {
 <h2 id="Opt out of cleartext traffic"><span class="prefix"></span><span class="content">Opt out of cleartext traffic</span><span class="suffix"></span></h2><blockquote>
 <p> <strong>Note:</strong> The guidance in this section applies only to apps that target Android 8.1 (API level 27) or lower. Starting with Android 9 (API level 28), cleartext support is disabled by default.</p>
 </blockquote>
-<p>Applications intending to connect to destinations using only secure connections can opt-out of supporting cleartext (using the unencrypted HTTP protocol instead of HTTPS) to those destinations. This option helps prevent accidental regressions in apps due to changes in URLs provided by external sources such as backend servers. See <code>NetworkSecurityPolicy.isCleartextTrafficPermitted()</code> for more details.</p>
-<p>For example, an app may want to ensure that all connections to <code>secure.example.com</code> are always done over HTTPS to protect sensitive traffic from hostile networks.</p>
-<p><code>res/xml/network_security_config.xml</code>:</p>
+<p>Applications intending to connect to destinations using only secure connections can opt-out of supporting cleartext (using the unencrypted HTTP protocol instead of HTTPS) to those destinations. This option helps prevent accidental regressions in apps due to changes in URLs provided by external sources such as backend servers. See <code class="inline-code">NetworkSecurityPolicy.isCleartextTrafficPermitted()</code> for more details.</p>
+<p>For example, an app may want to ensure that all connections to <code class="inline-code">secure.example.com</code> are always done over HTTPS to protect sensitive traffic from hostile networks.</p>
+<p><code class="inline-code">res/xml/network_security_config.xml</code>:</p>
 <pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
 &lt;network-security-config&gt;
     &lt;domain-config cleartextTrafficPermitted=&quot;false&quot;&gt;
@@ -815,10 +806,10 @@ thead {
 &lt;/network-security-config&gt;
 </code></pre>
 <h2 id="Pin certificates"><span class="prefix"></span><span class="content">Pin certificates</span><span class="suffix"></span></h2><p>Normally, an app trusts all pre-installed CAs. If any of these CAs were to issue a fraudulent certificate, the app would be at risk from a man-in-the-middle attack. Some apps choose to limit the set of certificates they accept by either limiting the set of CAs they trust or by certificate pinning.</p>
-<p>Certificate pinning is done by providing a set of certificates by hash of the public key (<code>SubjectPublicKeyInfo</code> of the X.509 certificate). A certificate chain is then valid only if the certificate chain contains at least one of the pinned public keys.</p>
+<p>Certificate pinning is done by providing a set of certificates by hash of the public key (<code class="inline-code">SubjectPublicKeyInfo</code> of the X.509 certificate). A certificate chain is then valid only if the certificate chain contains at least one of the pinned public keys.</p>
 <p>Note that, when using certificate pinning, you should always include a backup key so that if you are forced to switch to new keys or change CAs (when pinning to a CA certificate or an intermediate of that CA), your app’s connectivity is unaffected. Otherwise, you must push out an update to the app to restore connectivity.</p>
 <p>Additionally, it is possible to set an expiration time for pins after which pinning is not performed. This helps prevent connectivity issues in apps which have not been updated. However, setting an expiration time on pins may enable pinning bypass.</p>
-<p><code>res/xml/network_security_config.xml</code>:</p>
+<p><code class="inline-code">res/xml/network_security_config.xml</code>:</p>
 <pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
 &lt;network-security-config&gt;
     &lt;domain-config&gt;
@@ -832,9 +823,9 @@ thead {
 &lt;/network-security-config&gt;
 </code></pre>
 <h2 id="Configuration inheritance behavior"><span class="prefix"></span><span class="content">Configuration inheritance behavior</span><span class="suffix"></span></h2><p>Values not set in a specific configuration are inherited. This behavior allows more complex configurations while keeping the configuration file readable.</p>
-<p>If a value is not set in a specific entry, then the value from the more general entry is used. For example, values not set in a <code>domain-config</code> are taken from the parent <code>domain-config</code>, if nested, or from the <code>base-config</code> if not. Values not set in the <code>base-config</code> use the platform default values.</p>
-<p>For example, consider where all connections to subdomains of <code>example.com</code> must use a custom set of CAs. Additonally, cleartext traffic to these domains is permitted <em>except</em> when connecting to <code>secure.example.com</code>. By nesting the configuration for <code>secure.example.com</code> inside the configuration for <code>example.com</code>, the <code>trust-anchors</code> does not need to be duplicated.</p>
-<p><code>res/xml/network_security_config.xml</code>:</p>
+<p>If a value is not set in a specific entry, then the value from the more general entry is used. For example, values not set in a <code class="inline-code">domain-config</code> are taken from the parent <code class="inline-code">domain-config</code>, if nested, or from the <code class="inline-code">base-config</code> if not. Values not set in the <code class="inline-code">base-config</code> use the platform default values.</p>
+<p>For example, consider where all connections to subdomains of <code class="inline-code">example.com</code> must use a custom set of CAs. Additonally, cleartext traffic to these domains is permitted <em>except</em> when connecting to <code class="inline-code">secure.example.com</code>. By nesting the configuration for <code class="inline-code">secure.example.com</code> inside the configuration for <code class="inline-code">example.com</code>, the <code class="inline-code">trust-anchors</code> does not need to be duplicated.</p>
+<p><code class="inline-code">res/xml/network_security_config.xml</code>:</p>
 <pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
 &lt;network-security-config&gt;
     &lt;domain-config&gt;
@@ -882,7 +873,7 @@ thead {
 <p>The following sections describe the syntax and other details of the file format.</p>
 <h3 id="&lt;network-security-config&gt;"><span class="prefix"></span><span class="content">&lt;network-security-config&gt;</span><span class="suffix"></span></h3><ul>
 <li><p>can contain:</p>
-<p>0 or 1 of <code>&lt;base-config&gt;</code> Any number of <code>&lt;domain-config&gt;</code> 0 or 1 of <code>&lt;debug-overrides&gt;</code></p>
+<p>0 or 1 of <code class="inline-code">&lt;base-config&gt;</code> Any number of <code class="inline-code">&lt;domain-config&gt;</code> 0 or 1 of <code class="inline-code">&lt;debug-overrides&gt;</code></p>
 </li>
 </ul>
 <h3 id="&lt;base-config&gt;"><span class="prefix"></span><span class="content">&lt;base-config&gt;</span><span class="suffix"></span></h3><ul>
@@ -894,50 +885,50 @@ thead {
 </code></pre>
 <ul>
 <li><p>can contain:</p>
-<p><code>&lt;trust-anchors&gt;</code></p>
+<p><code class="inline-code">&lt;trust-anchors&gt;</code></p>
 </li>
 <li><p>description:</p>
-<p>The default configuration used by all connections whose destination is not covered by a <a target="_blank" rel="noopener" href="https://developer.android.com/training/articles/security-config#domain-config"><code>domain-config</code></a>.Any values that are not set use the platform default values.The default configuration for apps targeting Android 9 (API level 28) and higher is as follows:<code>&lt;base-config cleartextTrafficPermitted=&quot;false&quot;&gt;    &lt;trust-anchors&gt;        &lt;certificates src=&quot;system&quot; /&gt;    &lt;/trust-anchors&gt;&lt;/base-config&gt;</code>The default configuration for apps targeting Android 7.0 (API level 24) to Android 8.1 (API level 27) is as follows:<code>&lt;base-config cleartextTrafficPermitted=&quot;true&quot;&gt;    &lt;trust-anchors&gt;        &lt;certificates src=&quot;system&quot; /&gt;    &lt;/trust-anchors&gt;&lt;/base-config&gt;</code>The default configuration for apps targeting Android 6.0 (API level 23) and lower is as follows:<code>&lt;base-config cleartextTrafficPermitted=&quot;true&quot;&gt;    &lt;trust-anchors&gt;        &lt;certificates src=&quot;system&quot; /&gt;        &lt;certificates src=&quot;user&quot; /&gt;    &lt;/trust-anchors&gt;&lt;/base-config&gt;</code></p>
+<p>The default configuration used by all connections whose destination is not covered by a <a target="_blank" rel="noopener" href="https://developer.android.com/training/articles/security-config#domain-config"><code class="inline-code">domain-config</code></a>.Any values that are not set use the platform default values.The default configuration for apps targeting Android 9 (API level 28) and higher is as follows:<code class="inline-code">&lt;base-config cleartextTrafficPermitted=&quot;false&quot;&gt;    &lt;trust-anchors&gt;        &lt;certificates src=&quot;system&quot; /&gt;    &lt;/trust-anchors&gt;&lt;/base-config&gt;</code>The default configuration for apps targeting Android 7.0 (API level 24) to Android 8.1 (API level 27) is as follows:<code class="inline-code">&lt;base-config cleartextTrafficPermitted=&quot;true&quot;&gt;    &lt;trust-anchors&gt;        &lt;certificates src=&quot;system&quot; /&gt;    &lt;/trust-anchors&gt;&lt;/base-config&gt;</code>The default configuration for apps targeting Android 6.0 (API level 23) and lower is as follows:<code class="inline-code">&lt;base-config cleartextTrafficPermitted=&quot;true&quot;&gt;    &lt;trust-anchors&gt;        &lt;certificates src=&quot;system&quot; /&gt;        &lt;certificates src=&quot;user&quot; /&gt;    &lt;/trust-anchors&gt;&lt;/base-config&gt;</code></p>
 </li>
 </ul>
 <h3 id="&lt;domain-config&gt;"><span class="prefix"></span><span class="content">&lt;domain-config&gt;</span><span class="suffix"></span></h3><ul>
 <li><p>syntax:</p>
-<p><code>&lt;domain-config cleartextTrafficPermitted=[&quot;true&quot; | &quot;false&quot;]&gt;    ...&lt;/domain-config&gt;</code></p>
+<p><code class="inline-code">&lt;domain-config cleartextTrafficPermitted=[&quot;true&quot; | &quot;false&quot;]&gt;    ...&lt;/domain-config&gt;</code></p>
 </li>
 <li><p>Can Contain:</p>
-<p>1 or more <code>&lt;domain&gt;</code>  0 or 1 <code>&lt;trust-anchors&gt;</code>  0 or 1 <code>&lt;pin-set&gt;</code>  Any number of nested <code>&lt;domain-config&gt;</code></p>
+<p>1 or more <code class="inline-code">&lt;domain&gt;</code>  0 or 1 <code class="inline-code">&lt;trust-anchors&gt;</code>  0 or 1 <code class="inline-code">&lt;pin-set&gt;</code>  Any number of nested <code class="inline-code">&lt;domain-config&gt;</code></p>
 </li>
 <li><p>Description</p>
-<p>Configuration used for connections to specific destinations, as defined by the <code>domain</code> elements.Note that if multiple <code>domain-config</code> elements cover a destination, the configuration with the most specific (longest) matching domain rule is used.</p>
+<p>Configuration used for connections to specific destinations, as defined by the <code class="inline-code">domain</code> elements.Note that if multiple <code class="inline-code">domain-config</code> elements cover a destination, the configuration with the most specific (longest) matching domain rule is used.</p>
 </li>
 </ul>
 <h3 id="&lt;domain&gt;"><span class="prefix"></span><span class="content">&lt;domain&gt;</span><span class="suffix"></span></h3><ul>
 <li><p>syntax:</p>
-<p><code>&lt;domain includeSubdomains=[&quot;true&quot; | &quot;false&quot;]&gt;example.com&lt;/domain&gt;</code></p>
+<p><code class="inline-code">&lt;domain includeSubdomains=[&quot;true&quot; | &quot;false&quot;]&gt;example.com&lt;/domain&gt;</code></p>
 </li>
 <li><p>Attributes:</p>
-<p><code>includeSubdomains</code>If <code>&quot;true&quot;</code>, then this domain rule matches the domain and all subdomains, including subdomains of subdomains. Otherwise, the rule only applies to exact matches.</p>
+<p><code class="inline-code">includeSubdomains</code>If <code class="inline-code">&quot;true&quot;</code>, then this domain rule matches the domain and all subdomains, including subdomains of subdomains. Otherwise, the rule only applies to exact matches.</p>
 </li>
 <li><p>Description:</p>
 </li>
 </ul>
 <h3 id="&lt;debug-overrides&gt;"><span class="prefix"></span><span class="content">&lt;debug-overrides&gt;</span><span class="suffix"></span></h3><ul>
 <li><p>syntax:</p>
-<p><code>&lt;debug-overrides&gt;    ...&lt;/debug-overrides&gt;</code></p>
+<p><code class="inline-code">&lt;debug-overrides&gt;    ...&lt;/debug-overrides&gt;</code></p>
 </li>
 <li><p>Can Contain:</p>
-<p>0 or 1 <code>&lt;trust-anchors&gt;</code></p>
+<p>0 or 1 <code class="inline-code">&lt;trust-anchors&gt;</code></p>
 </li>
 <li><p>Description:</p>
-<p>Overrides to be applied when <a target="_blank" rel="noopener" href="https://developer.android.com/guide/topics/manifest/application-element.html#debug">android:debuggable</a> is <code>&quot;true&quot;</code>, which is normally the case for non-release builds generated by IDEs and build tools. Trust anchors specified in <code>debug-overrides</code> are added to all other configurations, and certificate pinning is not performed when the server’s certificate chain uses one of these debug-only trust anchors. If <a target="_blank" rel="noopener" href="https://developer.android.com/guide/topics/manifest/application-element.html#debug">android:debuggable</a> is <code>&quot;false&quot;</code>, then this section is completely ignored.</p>
+<p>Overrides to be applied when <a target="_blank" rel="noopener" href="https://developer.android.com/guide/topics/manifest/application-element.html#debug">android:debuggable</a> is <code class="inline-code">&quot;true&quot;</code>, which is normally the case for non-release builds generated by IDEs and build tools. Trust anchors specified in <code class="inline-code">debug-overrides</code> are added to all other configurations, and certificate pinning is not performed when the server’s certificate chain uses one of these debug-only trust anchors. If <a target="_blank" rel="noopener" href="https://developer.android.com/guide/topics/manifest/application-element.html#debug">android:debuggable</a> is <code class="inline-code">&quot;false&quot;</code>, then this section is completely ignored.</p>
 </li>
 </ul>
 <h3 id="&lt;trust-anchors&gt;"><span class="prefix"></span><span class="content">&lt;trust-anchors&gt;</span><span class="suffix"></span></h3><ul>
 <li><p>syntax:</p>
-<p><code>&lt;trust-anchors&gt;...&lt;/trust-anchors&gt;</code></p>
+<p><code class="inline-code">&lt;trust-anchors&gt;...&lt;/trust-anchors&gt;</code></p>
 </li>
 <li><p>Can Contain:</p>
-<p>Any number of <code>&lt;certificates&gt;</code></p>
+<p>Any number of <code class="inline-code">&lt;certificates&gt;</code></p>
 </li>
 <li><p>Description:</p>
 <p>Set of trust anchors for secure connections.</p>
@@ -945,40 +936,42 @@ thead {
 </ul>
 <h3 id="&lt;certificates&gt;"><span class="prefix"></span><span class="content">&lt;certificates&gt;</span><span class="suffix"></span></h3><ul>
 <li><p>syntax:</p>
-<p><code>&lt;certificates src=[&quot;system&quot; | &quot;user&quot; | &quot;*raw resource*&quot;]              overridePins=[&quot;true&quot; | &quot;false&quot;] /&gt;</code></p>
+<p><code class="inline-code">&lt;certificates src=[&quot;system&quot; | &quot;user&quot; | &quot;*raw resource*&quot;]              overridePins=[&quot;true&quot; | &quot;false&quot;] /&gt;</code></p>
 </li>
 <li><p>description:</p>
-<p>Set of X.509 certificates for <code>trust-anchors</code> elements.</p>
+<p>Set of X.509 certificates for <code class="inline-code">trust-anchors</code> elements.</p>
 </li>
 <li><p>attributes:</p>
-<p><code>src</code>The source of CA certificates. Each certificate can be one of the following:a raw resource ID pointing to a file containing X.509 certificates. Certificates must be encoded in DER or PEM format. In the case of PEM certificates, the file <em>must not</em> contain extra non-PEM data such as comments.<code>&quot;system&quot;</code> for the pre-installed system CA certificates<code>&quot;user&quot;</code> for user-added CA certificates<code>overridePins</code>Specifies if the CAs from this source bypass certificate pinning. If <code>&quot;true&quot;</code>, then pinning is not performed on certificate chains which are signed by one of the CAs from this source. This can be useful for debugging CAs or for testing man-in-the-middle attacks on your app’s secure traffic.Default is <code>&quot;false&quot;</code> unless specified in a <code>debug-overrides</code> element, in which case the default is <code>&quot;true&quot;</code>.</p>
+<p><code class="inline-code">src</code>The source of CA certificates. Each certificate can be one of the following:a raw resource ID pointing to a file containing X.509 certificates. Certificates must be encoded in DER or PEM format. In the case of PEM certificates, the file <em>must not</em> contain extra non-PEM data such as comments.<code class="inline-code">&quot;system&quot;</code> for the pre-installed system CA certificates<code class="inline-code">&quot;user&quot;</code> for user-added CA certificates<code class="inline-code">overridePins</code>Specifies if the CAs from this source bypass certificate pinning. If <code class="inline-code">&quot;true&quot;</code>, then pinning is not performed on certificate chains which are signed by one of the CAs from this source. This can be useful for debugging CAs or for testing man-in-the-middle attacks on your app’s secure traffic.Default is <code class="inline-code">&quot;false&quot;</code> unless specified in a <code class="inline-code">debug-overrides</code> element, in which case the default is <code class="inline-code">&quot;true&quot;</code>.</p>
 </li>
 </ul>
 <h3 id="&lt;pin-set&gt;"><span class="prefix"></span><span class="content">&lt;pin-set&gt;</span><span class="suffix"></span></h3><ul>
 <li><p>syntax:</p>
-<p><code>&lt;pin-set expiration=&quot;date&quot;&gt;...&lt;/pin-set&gt;</code></p>
+<p><code class="inline-code">&lt;pin-set expiration=&quot;date&quot;&gt;...&lt;/pin-set&gt;</code></p>
 </li>
 <li><p>Can Contain:</p>
-<p>Any number of <code>&lt;pin&gt;</code></p>
+<p>Any number of <code class="inline-code">&lt;pin&gt;</code></p>
 </li>
 <li><p>Description:</p>
-<p>A set of public key pins. For a secure connection to be trusted, one of the public keys in the chain of trust must be in the set of pins. See <code>&lt;pin&gt;</code> for the format of pins.</p>
+<p>A set of public key pins. For a secure connection to be trusted, one of the public keys in the chain of trust must be in the set of pins. See <code class="inline-code">&lt;pin&gt;</code> for the format of pins.</p>
 </li>
 <li><p>Attributes:</p>
-<p><code>expiration</code>The date, in <code>yyyy-MM-dd</code> format, on which the pins expire, thus disabling pinning. If the attribute is not set, then the pins do not expire.Expiration helps prevent connectivity issues in apps which do not get updates to their pin set, such as when the user disables app updates.</p>
+<p><code class="inline-code">expiration</code>The date, in <code class="inline-code">yyyy-MM-dd</code> format, on which the pins expire, thus disabling pinning. If the attribute is not set, then the pins do not expire.Expiration helps prevent connectivity issues in apps which do not get updates to their pin set, such as when the user disables app updates.</p>
 </li>
 </ul>
 <h3 id="&lt;pin&gt;"><span class="prefix"></span><span class="content">&lt;pin&gt;</span><span class="suffix"></span></h3><ul>
 <li><p>syntax:</p>
-<p><code>&lt;pin digest=[&quot;SHA-256&quot;]&gt;base64 encoded digest of X.509    SubjectPublicKeyInfo (SPKI)&lt;/pin&gt;</code></p>
+<p><code class="inline-code">&lt;pin digest=[&quot;SHA-256&quot;]&gt;base64 encoded digest of X.509    SubjectPublicKeyInfo (SPKI)&lt;/pin&gt;</code></p>
 </li>
 <li><p>Attributes:</p>
-<p><code>digest</code>The digest algorithm used to generate the pin. Currently, only <code>&quot;SHA-256&quot;</code> is supported.</p>
+<p><code class="inline-code">digest</code>The digest algorithm used to generate the pin. Currently, only <code class="inline-code">&quot;SHA-256&quot;</code> is supported.</p>
 </li>
 </ul>
 
-        </section>
+                </div>
+            </section>
         </div>
+        <input id="copy-input" style="position: absolute; left: -1000px; z-index: -1000;">
 
     
 
@@ -987,12 +980,12 @@ thead {
                     <div class="post_pre_next">
     
         <div class="post-pre">
-            <a href="/2019/08/10/Android-network-Configuration/">上一篇: Android 网络配置</a>
+            <a href="/2022/06/30/Android-VM/">上一篇: 这么多年，Android 虚拟机到底干了些什么？</a>
         </div>
     
     
-        <a href="/2019/05/21/Android-camera-preview/">下一篇: 
-            Android Camera Preview
+        <a href="/2019/08/10/Android-network-Configuration/">下一篇: 
+            Android 网络配置
         </a>
     
 </div>

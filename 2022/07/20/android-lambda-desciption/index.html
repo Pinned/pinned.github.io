@@ -82,16 +82,6 @@ select
 }</style>
     <style type="text/css" id="style">@charset "utf-8";
 
-:root {
-    --font-color-0: #04077e;
-    --font-color-1: #000;
-    --font-color-2: #666;
-    --font-color-3: #aaa;
-    --bg-color-1: #eee;
-    --line-1: #ccc;
-    --line-2: #ddd;
-}
-
 p {
     word-wrap: break-word;
     white-space: pre-wrap;
@@ -103,13 +93,13 @@ body {
     font-size: 16px;
     line-height: 1.75;
     letter-spacing: 0.6px;
-    color: var(--font-color-2);
+    color: #666;
     background: #F0F0F0;
 }
 
 a {
     text-decoration: none;
-    color: var(--font-color-1);
+    color: #000;
 }
 
 
@@ -148,7 +138,7 @@ a {
 .header {
     padding-bottom: 48px;
     margin-bottom: 48px;
-    border-bottom: 1px solid var(--line-1);
+    border-bottom: 1px solid #ccc;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -159,7 +149,7 @@ a {
 .logo {
     font-size: 2rem;
     font-weight: 600;
-    color: var(--font-color-1);
+    color: #000;
     margin-bottom: 16px;
     flex: 0 0 100%;
 }
@@ -184,7 +174,7 @@ a {
 }
 
 .nav li a {
-    color: var(--font-color-1);
+    color: #000;
     opacity: .6;
     transition: opacity ease-in-out .5s;
 }
@@ -222,7 +212,7 @@ a {
     width: 100%;
     padding-bottom: 48px;
     margin-bottom: 48px;
-    border-bottom: 1px dashed var(--line-2);
+    border-bottom: 1px dashed #ddd;
 }
 
 .post-title {
@@ -231,12 +221,12 @@ a {
     font-weight: 600;
     line-height: 1.5;
     margin-bottom: 12px;
-    color: var(--font-color-1);
+    color: #000;
     /*transition: color ease-in-out .5s;*/
 }
 
 .post-title:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
@@ -248,7 +238,7 @@ a {
 
 .read-more {
     padding: 0 4px;
-    color: var(--font-color-0);
+    color: #04077e;
 }
 
 .read-more:before,
@@ -277,7 +267,7 @@ a {
 
 .post-date {
     font-size: 0.875rem;
-    color: var(--font-color-3);
+    color: #aaa;
 }
 
 .paginator {
@@ -309,24 +299,24 @@ a {
 
 .paginator a {
     margin: 4px;
-    color: var(--font-color-2);
+    color: #666;
     transition: color ease-in-out .5s;
 }
 
 .paginator a:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
 .paginator .current {
-    color: var(--font-color-0);
-    border: 1px solid var(--font-color-0);
+    color: #04077e;
+    border: 1px solid #04077e;
 }
 
 .footer {
     padding: 24px 0;
     font-size: 0.875rem;
-    color: var(--font-color-3);
+    color: #aaa;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -340,12 +330,12 @@ a {
 }
 
 .footer a {
-    color: var(--font-color-3);
+    color: #aaa;
     transition: color ease-in-out .5s;
 }
 
 .footer a:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
@@ -364,12 +354,12 @@ a {
     font-size: 1.6rem;
     font-weight: 600;
     line-height: 1.5;
-    color: var(--font-color-1);
+    color: #000;
 }
 
 .post-meta {
     font-size: 0.875rem;
-    color: var(--font-color-3);
+    color: #aaa;
     flex: 0 0 100%;
     margin-bottom: 32px;
 }
@@ -405,7 +395,7 @@ a {
 
 .archive li span {
     width: 108px;
-    color: var(--font-color-2);
+    color: #666;
 }
 
 .archive-main {
@@ -413,12 +403,12 @@ a {
 }
 
 .archive-title {
-    color: var(--font-color-1);
+    color: #000;
     /*transition: color ease-in-out .5s;*/
 }
 
 .archive-title:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
@@ -434,16 +424,6 @@ a {
     cursor: pointer;
 }
 
-#beautiful p {
-    box-sizing: border-box;
-    margin-bottom: 16px;
-    font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
-    font-size: 15px;
-    text-align: justify;
-    white-space: normal;
-    text-size-adjust: auto;
-    line-height: 1.75em;
-}
 #bing-bg {
     width: 100%;
     position: fixed;
@@ -453,9 +433,20 @@ a {
     filter: blur(10px);
     object-fit: cover;
   }
-</style>
+#go-top {
+    cursor: pointer;
+}
+
+#beautiful {
+    font-family: "PingFang SC", BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serifhtml, body;
+    font-size: 16px;
+    line-height: 1.75;
+    letter-spacing: 0.6px;
+}</style>
     <style type="text/css" id="markdown">@charset "utf-8";
 
+#copy-post-content,
+#beautiful,
 .post-md
 {
     width: 100%;
@@ -469,7 +460,7 @@ a {
 .post-md h5,
 .post-md h6
 {
-    color: var(--font-color-1);
+    color: #000;
 }
 /* 一级标题 */
 .post-md h1  {
@@ -517,7 +508,6 @@ a {
 
 /* 二级标题内容 */
 .post-md h2 .content {
-    margin-left: -10px;
     display: inline-block;
     width: auto;
     height: 40px;
@@ -570,13 +560,13 @@ a {
 .post-md a
 {
     color: #61aeee;
-    box-shadow: 0 2px 0 var(--line-1);
+    box-shadow: 0 2px 0 #ccc;
     transition: color ease-in-out .65s, box-shadow ease-in-out .65s;
 }
 .post-md a:hover
 {
-    color: var(--font-color-0);
-    box-shadow: 0 2px 0 var(--font-color-0);
+    color: #04077e;
+    box-shadow: 0 2px 0 #04077e;
     transition: color ease-in-out .65s, box-shadow ease-in-out .65s;
 }
 .post-md strong
@@ -612,7 +602,7 @@ a {
 {
     border: none;
     height: 1px;
-    background: var(--line-1);
+    background: #ccc;
     margin: 24px 0;
 }
 
@@ -620,11 +610,11 @@ a {
 .post-md blockquote
 {
     width: 100%;
-    margin: 12px 0;
+    padding: 7px 0;
 }
 .post-md blockquote
 {
-    border-left: 2px solid var(--line-2);
+    border-left: 2px solid #ddd;
     padding-left: 12px;
     word-wrap: break-word;
 }
@@ -683,7 +673,7 @@ thead {
 }
 
 
-.post-md p code
+.inline-code
 {
     border-radius: 4px;
     background:rgba(27,31,35,.05);
@@ -707,7 +697,7 @@ thead {
             
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
-            <h4>目录</h4>
+            <h4 id="go-top">目录</h4>
             <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1.%20invokedynamic%20%E6%8C%87%E4%BB%A4"><span class="post-toc-text">1. invokedynamic 指令</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2.%20Lambda%20%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E6%89%A7%E8%A1%8C%E9%80%BB%E8%BE%91"><span class="post-toc-text">2. Lambda 表达式的执行逻辑</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3.%20Lambda%20%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%84%B1%E7%B3%96%EF%BC%88Desugaring%EF%BC%89"><span class="post-toc-text">3. Lambda 表达式脱糖（Desugaring）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3.1%20LambdaTest.class%20%E8%AF%BB%E5%8F%96"><span class="post-toc-text">3.1 LambdaTest.class 读取</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3.2%20%20LambdaTest$$Lambda$1.class%20%E7%9A%84%E7%94%9F%E6%88%90"><span class="post-toc-text">3.2  LambdaTest$$Lambda$1.class 的生成</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3.3%20%E4%BB%A3%E7%90%86%20dummper"><span class="post-toc-text">3.3 代理 dummper</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3.4%20lambdaFactory$%20%E6%96%B9%E6%B3%95%E7%94%9F%E6%88%90"><span class="post-toc-text">3.4 lambdaFactory$ 方法生成</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3.5%20%E7%BB%93%E6%9E%9C"><span class="post-toc-text">3.5 结果</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4.%20%E6%80%9D%E8%80%83"><span class="post-toc-text">4. 思考</span></a></li></ol>
         </nav>
     </aside>
@@ -724,16 +714,17 @@ thead {
         <div class="post-meta">
             <a class='author' href="/">罗昭成</a> <span id="clipboardbtn">2022年07月20日</span>
         </div>
-        <div class="post-md" id="copy-post-content">
-        <section id="beautiful">
-            <p>Java 在 Android 的发展过程中，扮演了非常重要的角色。在有 Kotlin 之前，开发语言是使用的 Java ，即使现在使用的 Kotlin ， 也是会编译成 Java 的字节码。但受限于 Oracle 的版权，Google 在 Android 上针对 Java 版本的升级，支持的都很不积极。因此，在不同的 Android 版本中，对 JVM 的语法支持不一样？那要如何让高版本的语法，在低版本中的系统中运行呢？ 本文以 Java 8 中的 Lambda 表达式运行在 Android 中的原理，来了解编译过程中的二三事。</p>
-<h2 id="1. invokedynamic 指令"><span class="prefix"></span><span class="content">1. invokedynamic 指令</span><span class="suffix"></span></h2><p>在很久很久以前， Java 7 版本发布的时候， JVM 中添加了 <code>invokedynamic</code> 指令， 这条指令用于支持动态语言。在静态类型机制下，方法调用中的类型分析都是在编译时执行的，编译结束就固定下来。而 <code>invokedynamic</code> 允许方法调用可以在运行时指定类和方法，不必在编译的时候确定。在 Java 7 的版本中，我们无法使用 javac 编译出含有 <code>invokedynamic</code> 指令的字节码。而在 Java 8 的版本中，支持的 lambda 表达式就是通过 <code>invokedynamic</code> 关键字来实现的。</p>
+        <div id="copy-post-content">
+            <section id="beautiful">
+            <div class="post-md" >
+                    <p>Java 在 Android 的发展过程中，扮演了非常重要的角色。在有 Kotlin 之前，开发语言是使用的 Java ，即使现在使用的 Kotlin ， 也是会编译成 Java 的字节码。但受限于 Oracle 的版权，Google 在 Android 上针对 Java 版本的升级，支持的都很不积极。因此，在不同的 Android 版本中，对 JVM 的语法支持不一样？那要如何让高版本的语法，在低版本中的系统中运行呢？ 本文以 Java 8 中的 Lambda 表达式运行在 Android 中的原理，来了解编译过程中的二三事。</p>
+<h2 id="1. invokedynamic 指令"><span class="prefix"></span><span class="content">1. invokedynamic 指令</span><span class="suffix"></span></h2><p>在很久很久以前， Java 7 版本发布的时候， JVM 中添加了 <code class="inline-code">invokedynamic</code> 指令， 这条指令用于支持动态语言。在静态类型机制下，方法调用中的类型分析都是在编译时执行的，编译结束就固定下来。而 <code class="inline-code">invokedynamic</code> 允许方法调用可以在运行时指定类和方法，不必在编译的时候确定。在 Java 7 的版本中，我们无法使用 javac 编译出含有 <code class="inline-code">invokedynamic</code> 指令的字节码。而在 Java 8 的版本中，支持的 lambda 表达式就是通过 <code class="inline-code">invokedynamic</code> 关键字来实现的。</p>
 <p>为了更好地理解这个指令，我们先来看一下， Java 中另外四个指令</p>
 <ul>
-<li><code>invokevirtual</code>  用于执行对象实例方法</li>
-<li><code>invokestatic</code>  指令用于调用静态方法（即 static 关键字修饰的方法）</li>
-<li><code>invokeinterface</code>  该指令用于调用接口方法，在运行时去确定一个实现此接口的对象；</li>
-<li><code>invokespecial</code>  该指令用于三种场景：调用实例构造方法，调用私有方法（即 private关键字修饰的方法）和父类方法（即 super 关键字调用的方法）</li>
+<li><code class="inline-code">invokevirtual</code>  用于执行对象实例方法</li>
+<li><code class="inline-code">invokestatic</code>  指令用于调用静态方法（即 static 关键字修饰的方法）</li>
+<li><code class="inline-code">invokeinterface</code>  该指令用于调用接口方法，在运行时去确定一个实现此接口的对象；</li>
+<li><code class="inline-code">invokespecial</code>  该指令用于三种场景：调用实例构造方法，调用私有方法（即 private关键字修饰的方法）和父类方法（即 super 关键字调用的方法）</li>
 </ul>
 <p>先看个例子：</p>
 <pre><code class="java">import java.util.*;
@@ -756,20 +747,20 @@ class JvmInstruction &#123;
     &#125;
 &#125;
 </code></pre>
-<p>代码很简单，此处重点看一下编译生成的 <code>CLASS</code> 文件的格式， 通过命令可以输出方法以及方法调用指令， 命令如下：</p>
+<p>代码很简单，此处重点看一下编译生成的 <code class="inline-code">CLASS</code> 文件的格式， 通过命令可以输出方法以及方法调用指令， 命令如下：</p>
 <pre><code class="shell">javap -c -p JvmInstruction
 </code></pre>
-<p><img src="https://img-blog.csdnimg.cn/969bbfb8a2314d498083188ce3be6257.png" alt="JvmInstruction 中方法列表及调用栈信息" referrerpolicy="no-referrer"><figcaption class="post-image-caption">JvmInstruction 中方法列表及调用栈信息</figcaption></figure></p>
+<p><img src="https://img-blog.csdnimg.cn/969bbfb8a2314d498083188ce3be6257.png" alt="JvmInstruction 中方法列表及调用栈信息" referrerpolicy="no-referrer"></p>
 <p>从上面的截图中，可以看到：</p>
 <ol>
-<li>代码中的 <code>JvmInstruction.run();</code> 编译后变成图中 11 行的 <code>invokestatic #2</code>。</li>
-<li>代码中的 <code>instruction.start();</code> 编译后变成图中 21 行的 <code>invokevirtual #5</code></li>
-<li>代码中的 <code>list.add(&quot;List&quot;);</code> 编译后变成图中 32 行的 <code>invokeinterface #9, 2</code></li>
-<li>代码中的 <code>new JvmInstruction();</code> 编译后变成图中 18 行的 <code>invokespecial #4</code></li>
+<li>代码中的 <code class="inline-code">JvmInstruction.run();</code> 编译后变成图中 11 行的 <code class="inline-code">invokestatic #2</code>。</li>
+<li>代码中的 <code class="inline-code">instruction.start();</code> 编译后变成图中 21 行的 <code class="inline-code">invokevirtual #5</code></li>
+<li>代码中的 <code class="inline-code">list.add(&quot;List&quot;);</code> 编译后变成图中 32 行的 <code class="inline-code">invokeinterface #9, 2</code></li>
+<li>代码中的 <code class="inline-code">new JvmInstruction();</code> 编译后变成图中 18 行的 <code class="inline-code">invokespecial #4</code></li>
 </ol>
-<p>通过上面的分析，相信都能理解这几条指令的静态类型。那关于 <code>invokedynamic</code> 的动态调用是什么意思呢？ </p>
-<p>在 <code>invokedynamic</code> 指令执行中，会先找到 Bootstrap method (BSM) ，使用 <code>invokestatic</code> 的指令，获取到真实<strong>CallSite（调用点）</strong>，JVM 会直接调用 <code>CallSite</code> 中绑定的 <strong>MethodHandle(方法句柄)</strong> 执行真实的逻辑。整个过程有点类似于反射。在 JVM 虚拟机中，CallSite 被抽象成了一个 Java 的类。如果想了解其实现原码，也可以参考 JDK 里 <strong>rt.jar</strong> 中对应的类。</p>
-<h2 id="2. Lambda 表达式的执行逻辑"><span class="prefix"></span><span class="content">2. Lambda 表达式的执行逻辑</span><span class="suffix"></span></h2><p>为了更好的理解 <code>invokedynamic</code> 的执行，此处以 JAVA 8 支持的 Lambda 表达式为例，为减少内容，本例中使用了最简单的例子，先上代码： </p>
+<p>通过上面的分析，相信都能理解这几条指令的静态类型。那关于 <code class="inline-code">invokedynamic</code> 的动态调用是什么意思呢？ </p>
+<p>在 <code class="inline-code">invokedynamic</code> 指令执行中，会先找到 Bootstrap method (BSM) ，使用 <code class="inline-code">invokestatic</code> 的指令，获取到真实<strong>CallSite（调用点）</strong>，JVM 会直接调用 <code class="inline-code">CallSite</code> 中绑定的 <strong>MethodHandle(方法句柄)</strong> 执行真实的逻辑。整个过程有点类似于反射。在 JVM 虚拟机中，CallSite 被抽象成了一个 Java 的类。如果想了解其实现原码，也可以参考 JDK 里 <strong>rt.jar</strong> 中对应的类。</p>
+<h2 id="2. Lambda 表达式的执行逻辑"><span class="prefix"></span><span class="content">2. Lambda 表达式的执行逻辑</span><span class="suffix"></span></h2><p>为了更好的理解 <code class="inline-code">invokedynamic</code> 的执行，此处以 JAVA 8 支持的 Lambda 表达式为例，为减少内容，本例中使用了最简单的例子，先上代码： </p>
 <pre><code class="java">class LambdaTest &#123;
     public static void main(String[] args) &#123;
         Runnable runable = () -&gt; System.out.println(&quot;test&quot;);
@@ -777,23 +768,23 @@ class JvmInstruction &#123;
     &#125;
 &#125;
 </code></pre>
-<p>在代码中的第三行，使用了 lambda 表达式定义了一个 Runnable 对象。编译执行会输出 <code>test</code> 。</p>
+<p>在代码中的第三行，使用了 lambda 表达式定义了一个 Runnable 对象。编译执行会输出 <code class="inline-code">test</code> 。</p>
 <p>先看一下编译后的 class 文件中的内容，使用如下命令：</p>
 <pre><code class="shell">javap -c -p LambdaTest
 </code></pre>
 <p>得到如下结果：</p>
-<p><img src="https://img-blog.csdnimg.cn/f54ea5042f364961b949bc428a91618f.png" alt="CLASS 中的方法列表" referrerpolicy="no-referrer"><figcaption class="post-image-caption">CLASS 中的方法列表</figcaption></figure></p>
-<p>在上述代码与编译后的字节码中，我们可以看到，代码中的 lambda 表达式变成了字节码中的 <code>11</code> 行，即 <code>0: invokedynamic #2,  0</code>。当然，从这个字节码中，可以看到，除了代码中写的 <code>main</code> 方法，<code>System.out.println(&quot;test&quot;)</code> 被放到了 <code>lambda$main$0()</code> 这个私有的静态方法中去了。</p>
-<p>为了更好的看清楚 <code>invokedynamic</code> 的执行逻辑，可以通过：</p>
+<p><img src="https://img-blog.csdnimg.cn/f54ea5042f364961b949bc428a91618f.png" alt="CLASS 中的方法列表" referrerpolicy="no-referrer"></p>
+<p>在上述代码与编译后的字节码中，我们可以看到，代码中的 lambda 表达式变成了字节码中的 <code class="inline-code">11</code> 行，即 <code class="inline-code">0: invokedynamic #2,  0</code>。当然，从这个字节码中，可以看到，除了代码中写的 <code class="inline-code">main</code> 方法，<code class="inline-code">System.out.println(&quot;test&quot;)</code> 被放到了 <code class="inline-code">lambda$main$0()</code> 这个私有的静态方法中去了。</p>
+<p>为了更好的看清楚 <code class="inline-code">invokedynamic</code> 的执行逻辑，可以通过：</p>
 <pre><code class="shell">javap -v LambdaTest
 </code></pre>
 <p>输出CLASS 文件中的常量池等信息，因文件里面的内容信息较多，省略了一些不需要关注的点，如下图所示：</p>
-<p><img src="https://img-blog.csdnimg.cn/c3a95e1118d7495ea86f888364c62f9a.png" alt="CLASS 详细信息" referrerpolicy="no-referrer"><figcaption class="post-image-caption">CLASS 详细信息</figcaption></figure></p>
+<p><img src="https://img-blog.csdnimg.cn/c3a95e1118d7495ea86f888364c62f9a.png" alt="CLASS 详细信息" referrerpolicy="no-referrer"></p>
 <p>根据上面的信息，可以看到，整个逻辑如下图所示：</p>
-<p><img src="https://img-blog.csdnimg.cn/a0a28f6ffd564c1c8d513e233561b6a5.png" alt="Lambda 表达式的整个过程 " referrerpolicy="no-referrer"><figcaption class="post-image-caption">Lambda 表达式的整个过程 </figcaption></figure></p>
-<p>如前文所示，在执行 <code>InvokeDynamic</code> 指令会调用 BootstapMethods，返回一个 CallSite 对象，对应代码在 rt.jar 中。</p>
+<p><img src="https://img-blog.csdnimg.cn/a0a28f6ffd564c1c8d513e233561b6a5.png" alt="Lambda 表达式的整个过程 " referrerpolicy="no-referrer"></p>
+<p>如前文所示，在执行 <code class="inline-code">InvokeDynamic</code> 指令会调用 BootstapMethods，返回一个 CallSite 对象，对应代码在 rt.jar 中。</p>
 <blockquote>
-<p>PS: BootstapMethods 中，第一次执行时，会生成 <code>LambdaTest$$Lambda$1</code> 的 class，可以通过参数  <strong>-Djdk.internal.lambda.dumpProxyClasses</strong> 将生成的 class 缓存下来。</p>
+<p>PS: BootstapMethods 中，第一次执行时，会生成 <code class="inline-code">LambdaTest$$Lambda$1</code> 的 class，可以通过参数  <strong>-Djdk.internal.lambda.dumpProxyClasses</strong> 将生成的 class 缓存下来。</p>
 </blockquote>
 <p>有了整体概括，再来看一下 BootstapMethod 里面的源码逻辑：</p>
 <ol>
@@ -857,16 +848,16 @@ class JvmInstruction &#123;
   &#125;
 &#125;
 </code></pre>
-<p>因此， <code>runable.run();</code> 相当于调用了 <code>LambdaTest$$Lambda$1().run()</code>，而在生成的这个 <code>class</code> 文件中，又调用了 <code>LambdaTest.lambda$main$0()</code>。</p>
+<p>因此， <code class="inline-code">runable.run();</code> 相当于调用了 <code class="inline-code">LambdaTest$$Lambda$1().run()</code>，而在生成的这个 <code class="inline-code">class</code> 文件中，又调用了 <code class="inline-code">LambdaTest.lambda$main$0()</code>。</p>
 <h2 id="3. Lambda 表达式脱糖（Desugaring）"><span class="prefix"></span><span class="content">3. Lambda 表达式脱糖（Desugaring）</span><span class="suffix"></span></h2><p>前面讲到了 Lambda 在高版本 JVM 中，使用 InvokeDynamic 指令，得以在运行时，执行 Lambda 表达式，那针对 Android 来讲，低版本 Android OS 无法执行，要怎么样处理呢？答案是脱糖。</p>
-<p><img src="https://img-blog.csdnimg.cn/e308940a26dc4d00b5c2b4ede7191d1b.png" alt="Android 中 Java 文件变成 Dex 的过程" referrerpolicy="no-referrer"><figcaption class="post-image-caption">Android 中 Java 文件变成 Dex 的过程</figcaption></figure></p>
+<p><img src="https://img-blog.csdnimg.cn/e308940a26dc4d00b5c2b4ede7191d1b.png" alt="Android 中 Java 文件变成 Dex 的过程" referrerpolicy="no-referrer"></p>
 <p>在 D8&#x2F;R8 中，进行了 class 文件到 Dex 文件的优化，并且在这一步完成了脱糖。脱糖的实现思路是什么样子的？ 本文以开源库的 retrolambda 为例分析，脱糖的过程。</p>
 <blockquote>
 <p>PS： R8 将 Proguard 整合，故没有单独的 Proguard 流程。</p>
 </blockquote>
-<p>从前面的内容中，我们知道 Lambda 在执行中，使用的是 <code>invokedynamic</code> 来实现的，要在低版本中执行，那就需要把这个指令换成低版本 JVM 支持的指令。在前文提到， Lambda 表达式，在运行的时候，会动态生成 <code>LambdaTest$$Lambda$1.class</code> ， 在脱糖的过程中，将动态生成的逻辑，前置到编译时完成即可。</p>
-<h3 id="3.1 LambdaTest.class 读取"><span class="prefix"></span><span class="content">3.1 LambdaTest.class 读取</span><span class="suffix"></span></h3><p>为了方便读取 Class 文件的内容，在 <code>retrolambda</code> 库中使用了 <code>org.ow2.asm:asm-all:5.2</code> 进行 Class 读取与生成。 有关 asm 的使用，可以参考其官方文档，此处不进行讨论。</p>
-<p>使用 ASM 遍历现有的 class 文件，找到方法中，使用了 invokedynamic 的位置，此处使用的是BSM来查找的，Lambda 表达式编译后，使用的是 <code>java/lang/invoke/LambdaMetafactory</code>，处理代码逻辑如下：</p>
+<p>从前面的内容中，我们知道 Lambda 在执行中，使用的是 <code class="inline-code">invokedynamic</code> 来实现的，要在低版本中执行，那就需要把这个指令换成低版本 JVM 支持的指令。在前文提到， Lambda 表达式，在运行的时候，会动态生成 <code class="inline-code">LambdaTest$$Lambda$1.class</code> ， 在脱糖的过程中，将动态生成的逻辑，前置到编译时完成即可。</p>
+<h3 id="3.1 LambdaTest.class 读取"><span class="prefix"></span><span class="content">3.1 LambdaTest.class 读取</span><span class="suffix"></span></h3><p>为了方便读取 Class 文件的内容，在 <code class="inline-code">retrolambda</code> 库中使用了 <code class="inline-code">org.ow2.asm:asm-all:5.2</code> 进行 Class 读取与生成。 有关 asm 的使用，可以参考其官方文档，此处不进行讨论。</p>
+<p>使用 ASM 遍历现有的 class 文件，找到方法中，使用了 invokedynamic 的位置，此处使用的是BSM来查找的，Lambda 表达式编译后，使用的是 <code class="inline-code">java/lang/invoke/LambdaMetafactory</code>，处理代码逻辑如下：</p>
 <pre><code class="java">@Override
 public void visitInvokeDynamicInsn(String name, String desc, Handle bsm, Object... bsmArgs) &#123;
   // 此处找到 BSM 为 LambdaMetafactory 的调用点，将此处的调用使用我们生成的代码进行替换。
@@ -890,7 +881,7 @@ private void backportLambda(String invokedName, Type invokedType, Handle bsm, Ob
   super.visitMethodInsn(INVOKESTATIC, factory.getOwner(), factory.getName(), factory.getDesc(), false);
 &#125;
 </code></pre>
-<h3 id="3.2  LambdaTest$$Lambda$1.class 的生成"><span class="prefix"></span><span class="content">3.2  LambdaTest$$Lambda$1.class 的生成</span><span class="suffix"></span></h3><p>在前面的 lambda 执行的流程中，可以在运行时添加 jvm 参数 <code>-Djdk.internal.lambda.dumpProxyClasses</code> 来生成 LambdaTest$$Lambda$1.class 文件。因此，在脱糖的过程中，也可以使用它来实现 class 文件生成。</p>
+<h3 id="3.2  LambdaTest$$Lambda$1.class 的生成"><span class="prefix"></span><span class="content">3.2  LambdaTest$$Lambda$1.class 的生成</span><span class="suffix"></span></h3><p>在前面的 lambda 执行的流程中，可以在运行时添加 jvm 参数 <code class="inline-code">-Djdk.internal.lambda.dumpProxyClasses</code> 来生成 LambdaTest$$Lambda$1.class 文件。因此，在脱糖的过程中，也可以使用它来实现 class 文件生成。</p>
 <p>在步骤 1 中，通过遍历所有的 method 的内容，查找到 <strong>LambdaMetafactory</strong> 的调用点，这个时候，可以模拟调用 LambdaMetafactory， 代码实现如下： </p>
 <pre><code class="java">// 此处的 bsm 就是 class 文件中， bootstrap 中定义的那个 bsm
 private static CallSite callBootstrapMethod(Class&lt;?&gt; invoker, String invokedName, Type invokedType, Handle bsm, Object[] bsmArgs) throws Throwable &#123;
@@ -910,7 +901,7 @@ private static CallSite callBootstrapMethod(Class&lt;?&gt; invoker, String invok
   return (CallSite) bootstrapMethod.invokeWithArguments(args);
 &#125;
 </code></pre>
-<h3 id="3.3 代理 dummper"><span class="prefix"></span><span class="content">3.3 代理 dummper</span><span class="suffix"></span></h3><p>JVM 运行时使用的是 InnerClassLambdaMetafactory 进行类生成的，可以通过反射，修改实例变量  <code>dumper</code> 来实现缓存生成的 Class 文件。实现代码如下：</p>
+<h3 id="3.3 代理 dummper"><span class="prefix"></span><span class="content">3.3 代理 dummper</span><span class="suffix"></span></h3><p>JVM 运行时使用的是 InnerClassLambdaMetafactory 进行类生成的，可以通过反射，修改实例变量  <code class="inline-code">dumper</code> 来实现缓存生成的 Class 文件。实现代码如下：</p>
 <pre><code class="java">public void install() &#123;
   try &#123;
     Class&lt;?&gt; mf = Class.forName(&quot;java.lang.invoke.InnerClassLambdaMetafactory&quot;);
@@ -934,7 +925,7 @@ public static Runnable lambdaFactory$() &#123;
   return instance;
 &#125;
 </code></pre>
-<p>在 <code>visitEnd</code> 的时候，添加 <code>instance</code> 以及 <code>lambdaFactory$</code>方法到 class 文件中，实现代码如下：</p>
+<p>在 <code class="inline-code">visitEnd</code> 的时候，添加 <code class="inline-code">instance</code> 以及 <code class="inline-code">lambdaFactory$</code>方法到 class 文件中，实现代码如下：</p>
 <pre><code class="java">@Override
 public void visitEnd() &#123;
   makeSingleton();
@@ -972,13 +963,15 @@ private void generateFactoryMethod() &#123;
   mv.visitEnd();
 &#125;
 </code></pre>
-<h3 id="3.5 结果"><span class="prefix"></span><span class="content">3.5 结果</span><span class="suffix"></span></h3><p>为了更清晰地理解结果，此处使用 <code>java -c -p </code> 将 class 文件中所有的方法都打印出来，如下图所示：</p>
-<p><img src="https://img-blog.csdnimg.cn/b68bfa4e3a1b4c3b8b61fdad736eff12.png" alt="脱糖后的 LambdaTest.class" referrerpolicy="no-referrer"><figcaption class="post-image-caption">脱糖后的 LambdaTest.class</figcaption></figure></p>
-<p><img src="https://img-blog.csdnimg.cn/855cad054761409fa063dc903bc4b1ff.png" alt="生成的 LabdaTest$$Lambda$1.class" referrerpolicy="no-referrer"><figcaption class="post-image-caption">生成的 LabdaTest$$Lambda$1.class</figcaption></figure></p>
-<h2 id="4. 思考"><span class="prefix"></span><span class="content">4. 思考</span><span class="suffix"></span></h2><p>有了上面的脱糖流程，既然可以在编译时，就能实现 lambda 的逻辑，为什么还要添加 <code>invokedynamic</code> 指令呢？ 这不得不提 Java 是一种静态类型语言，所有的东西都是在编译时都已经确定好了，静态类型的语言在运行相对效率更高，但灵活性就有所降低。而 <code>invokedynamic</code> 的设计就是让 JVM 可以更加的灵活，让基于 JVM 的语言设计者，可以有更多的自由度。</p>
+<h3 id="3.5 结果"><span class="prefix"></span><span class="content">3.5 结果</span><span class="suffix"></span></h3><p>为了更清晰地理解结果，此处使用 <code class="inline-code">java -c -p </code> 将 class 文件中所有的方法都打印出来，如下图所示：</p>
+<p><img src="https://img-blog.csdnimg.cn/b68bfa4e3a1b4c3b8b61fdad736eff12.png" alt="脱糖后的 LambdaTest.class" referrerpolicy="no-referrer"></p>
+<p><img src="https://img-blog.csdnimg.cn/855cad054761409fa063dc903bc4b1ff.png" alt="生成的 LabdaTest$$Lambda$1.class" referrerpolicy="no-referrer"></p>
+<h2 id="4. 思考"><span class="prefix"></span><span class="content">4. 思考</span><span class="suffix"></span></h2><p>有了上面的脱糖流程，既然可以在编译时，就能实现 lambda 的逻辑，为什么还要添加 <code class="inline-code">invokedynamic</code> 指令呢？ 这不得不提 Java 是一种静态类型语言，所有的东西都是在编译时都已经确定好了，静态类型的语言在运行相对效率更高，但灵活性就有所降低。而 <code class="inline-code">invokedynamic</code> 的设计就是让 JVM 可以更加的灵活，让基于 JVM 的语言设计者，可以有更多的自由度。</p>
 
-        </section>
+                </div>
+            </section>
         </div>
+        <input id="copy-input" style="position: absolute; left: -1000px; z-index: -1000;">
 
     
 

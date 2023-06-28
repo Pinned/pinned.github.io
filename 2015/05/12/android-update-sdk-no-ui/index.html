@@ -82,16 +82,6 @@ select
 }</style>
     <style type="text/css" id="style">@charset "utf-8";
 
-:root {
-    --font-color-0: #04077e;
-    --font-color-1: #000;
-    --font-color-2: #666;
-    --font-color-3: #aaa;
-    --bg-color-1: #eee;
-    --line-1: #ccc;
-    --line-2: #ddd;
-}
-
 p {
     word-wrap: break-word;
     white-space: pre-wrap;
@@ -103,13 +93,13 @@ body {
     font-size: 16px;
     line-height: 1.75;
     letter-spacing: 0.6px;
-    color: var(--font-color-2);
+    color: #666;
     background: #F0F0F0;
 }
 
 a {
     text-decoration: none;
-    color: var(--font-color-1);
+    color: #000;
 }
 
 
@@ -148,7 +138,7 @@ a {
 .header {
     padding-bottom: 48px;
     margin-bottom: 48px;
-    border-bottom: 1px solid var(--line-1);
+    border-bottom: 1px solid #ccc;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -159,7 +149,7 @@ a {
 .logo {
     font-size: 2rem;
     font-weight: 600;
-    color: var(--font-color-1);
+    color: #000;
     margin-bottom: 16px;
     flex: 0 0 100%;
 }
@@ -184,7 +174,7 @@ a {
 }
 
 .nav li a {
-    color: var(--font-color-1);
+    color: #000;
     opacity: .6;
     transition: opacity ease-in-out .5s;
 }
@@ -222,7 +212,7 @@ a {
     width: 100%;
     padding-bottom: 48px;
     margin-bottom: 48px;
-    border-bottom: 1px dashed var(--line-2);
+    border-bottom: 1px dashed #ddd;
 }
 
 .post-title {
@@ -231,12 +221,12 @@ a {
     font-weight: 600;
     line-height: 1.5;
     margin-bottom: 12px;
-    color: var(--font-color-1);
+    color: #000;
     /*transition: color ease-in-out .5s;*/
 }
 
 .post-title:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
@@ -248,7 +238,7 @@ a {
 
 .read-more {
     padding: 0 4px;
-    color: var(--font-color-0);
+    color: #04077e;
 }
 
 .read-more:before,
@@ -277,7 +267,7 @@ a {
 
 .post-date {
     font-size: 0.875rem;
-    color: var(--font-color-3);
+    color: #aaa;
 }
 
 .paginator {
@@ -309,24 +299,24 @@ a {
 
 .paginator a {
     margin: 4px;
-    color: var(--font-color-2);
+    color: #666;
     transition: color ease-in-out .5s;
 }
 
 .paginator a:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
 .paginator .current {
-    color: var(--font-color-0);
-    border: 1px solid var(--font-color-0);
+    color: #04077e;
+    border: 1px solid #04077e;
 }
 
 .footer {
     padding: 24px 0;
     font-size: 0.875rem;
-    color: var(--font-color-3);
+    color: #aaa;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -340,12 +330,12 @@ a {
 }
 
 .footer a {
-    color: var(--font-color-3);
+    color: #aaa;
     transition: color ease-in-out .5s;
 }
 
 .footer a:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
@@ -364,12 +354,12 @@ a {
     font-size: 1.6rem;
     font-weight: 600;
     line-height: 1.5;
-    color: var(--font-color-1);
+    color: #000;
 }
 
 .post-meta {
     font-size: 0.875rem;
-    color: var(--font-color-3);
+    color: #aaa;
     flex: 0 0 100%;
     margin-bottom: 32px;
 }
@@ -405,7 +395,7 @@ a {
 
 .archive li span {
     width: 108px;
-    color: var(--font-color-2);
+    color: #666;
 }
 
 .archive-main {
@@ -413,12 +403,12 @@ a {
 }
 
 .archive-title {
-    color: var(--font-color-1);
+    color: #000;
     /*transition: color ease-in-out .5s;*/
 }
 
 .archive-title:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
@@ -434,16 +424,6 @@ a {
     cursor: pointer;
 }
 
-#beautiful p {
-    box-sizing: border-box;
-    margin-bottom: 16px;
-    font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
-    font-size: 15px;
-    text-align: justify;
-    white-space: normal;
-    text-size-adjust: auto;
-    line-height: 1.75em;
-}
 #bing-bg {
     width: 100%;
     position: fixed;
@@ -453,9 +433,20 @@ a {
     filter: blur(10px);
     object-fit: cover;
   }
-</style>
+#go-top {
+    cursor: pointer;
+}
+
+#beautiful {
+    font-family: "PingFang SC", BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serifhtml, body;
+    font-size: 16px;
+    line-height: 1.75;
+    letter-spacing: 0.6px;
+}</style>
     <style type="text/css" id="markdown">@charset "utf-8";
 
+#copy-post-content,
+#beautiful,
 .post-md
 {
     width: 100%;
@@ -469,7 +460,7 @@ a {
 .post-md h5,
 .post-md h6
 {
-    color: var(--font-color-1);
+    color: #000;
 }
 /* 一级标题 */
 .post-md h1  {
@@ -517,7 +508,6 @@ a {
 
 /* 二级标题内容 */
 .post-md h2 .content {
-    margin-left: -10px;
     display: inline-block;
     width: auto;
     height: 40px;
@@ -570,13 +560,13 @@ a {
 .post-md a
 {
     color: #61aeee;
-    box-shadow: 0 2px 0 var(--line-1);
+    box-shadow: 0 2px 0 #ccc;
     transition: color ease-in-out .65s, box-shadow ease-in-out .65s;
 }
 .post-md a:hover
 {
-    color: var(--font-color-0);
-    box-shadow: 0 2px 0 var(--font-color-0);
+    color: #04077e;
+    box-shadow: 0 2px 0 #04077e;
     transition: color ease-in-out .65s, box-shadow ease-in-out .65s;
 }
 .post-md strong
@@ -612,7 +602,7 @@ a {
 {
     border: none;
     height: 1px;
-    background: var(--line-1);
+    background: #ccc;
     margin: 24px 0;
 }
 
@@ -620,11 +610,11 @@ a {
 .post-md blockquote
 {
     width: 100%;
-    margin: 12px 0;
+    padding: 7px 0;
 }
 .post-md blockquote
 {
-    border-left: 2px solid var(--line-2);
+    border-left: 2px solid #ddd;
     padding-left: 12px;
     word-wrap: break-word;
 }
@@ -683,7 +673,7 @@ thead {
 }
 
 
-.post-md p code
+.inline-code
 {
     border-radius: 4px;
     background:rgba(27,31,35,.05);
@@ -707,7 +697,7 @@ thead {
             
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
-            <h4>目录</h4>
+            <h4 id="go-top">目录</h4>
             <ol class="post-toc"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="post-toc-text">基本使用</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1"><span class="post-toc-text">代理服务</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="post-toc-text">参考资料</span></a></li></ol>
         </nav>
     </aside>
@@ -724,19 +714,20 @@ thead {
         <div class="post-meta">
             <a class='author' href="/">罗昭成</a> <span id="clipboardbtn">2015年05月12日</span>
         </div>
-        <div class="post-md" id="copy-post-content">
-        <section id="beautiful">
-            <h4 id="基本使用"><span class="prefix"></span><span class="content">基本使用</span><span class="suffix"></span></h4><p>在使用桌面系统的时候，我们都是用的<code>SDK Manager</code>, 如果现在要你部署一台CI服务器呢。</p>
+        <div id="copy-post-content">
+            <section id="beautiful">
+            <div class="post-md" >
+                    <h4 id="基本使用"><span class="prefix"></span><span class="content">基本使用</span><span class="suffix"></span></h4><p>在使用桌面系统的时候，我们都是用的<code class="inline-code">SDK Manager</code>, 如果现在要你部署一台CI服务器呢。</p>
 <p>我擦，ssh上去，没有界面，怎么破。</p>
 <p>查找了一下，Android SDK更新是支持命令的</p>
 <p>如下：</p>
 <pre><code class="bash">android update sdk --no-ui
 </code></pre>
 <p>上面的方法虽然可以更新SDK，但是他会把所有的内容都下载下来，很明显我们并不想这样子。</p>
-<p>查看命令帮助可以看到有一个<code>--filter</code>属性，如下使用</p>
+<p>查看命令帮助可以看到有一个<code class="inline-code">--filter</code>属性，如下使用</p>
 <pre><code class="bash">android update sdk --filter &lt;component&gt; --no-ui
 </code></pre>
-<p>其中<code>&lt;component&gt;</code> 可以是名字，也可以是数字。查看数字的方式如下：</p>
+<p>其中<code class="inline-code">&lt;component&gt;</code> 可以是名字，也可以是数字。查看数字的方式如下：</p>
 <pre><code class="bash">ndroid list sdk --no-ui
 </code></pre>
 <p>所以你可以如下使用：</p>
@@ -753,8 +744,10 @@ thead {
 </li>
 </ol>
 
-        </section>
+                </div>
+            </section>
         </div>
+        <input id="copy-input" style="position: absolute; left: -1000px; z-index: -1000;">
 
     
 
@@ -767,8 +760,8 @@ thead {
         </div>
     
     
-        <a href="/2015/05/11/svn-to-git/">下一篇: 
-            SVN迁移到GIT
+        <a href="/2015/05/11/android-aidl-server/">下一篇: 
+            Android Service学习之AIDL, Parcelable和远程服务
         </a>
     
 </div>

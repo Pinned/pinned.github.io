@@ -82,16 +82,6 @@ select
 }</style>
     <style type="text/css" id="style">@charset "utf-8";
 
-:root {
-    --font-color-0: #04077e;
-    --font-color-1: #000;
-    --font-color-2: #666;
-    --font-color-3: #aaa;
-    --bg-color-1: #eee;
-    --line-1: #ccc;
-    --line-2: #ddd;
-}
-
 p {
     word-wrap: break-word;
     white-space: pre-wrap;
@@ -103,13 +93,13 @@ body {
     font-size: 16px;
     line-height: 1.75;
     letter-spacing: 0.6px;
-    color: var(--font-color-2);
+    color: #666;
     background: #F0F0F0;
 }
 
 a {
     text-decoration: none;
-    color: var(--font-color-1);
+    color: #000;
 }
 
 
@@ -148,7 +138,7 @@ a {
 .header {
     padding-bottom: 48px;
     margin-bottom: 48px;
-    border-bottom: 1px solid var(--line-1);
+    border-bottom: 1px solid #ccc;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -159,7 +149,7 @@ a {
 .logo {
     font-size: 2rem;
     font-weight: 600;
-    color: var(--font-color-1);
+    color: #000;
     margin-bottom: 16px;
     flex: 0 0 100%;
 }
@@ -184,7 +174,7 @@ a {
 }
 
 .nav li a {
-    color: var(--font-color-1);
+    color: #000;
     opacity: .6;
     transition: opacity ease-in-out .5s;
 }
@@ -222,7 +212,7 @@ a {
     width: 100%;
     padding-bottom: 48px;
     margin-bottom: 48px;
-    border-bottom: 1px dashed var(--line-2);
+    border-bottom: 1px dashed #ddd;
 }
 
 .post-title {
@@ -231,12 +221,12 @@ a {
     font-weight: 600;
     line-height: 1.5;
     margin-bottom: 12px;
-    color: var(--font-color-1);
+    color: #000;
     /*transition: color ease-in-out .5s;*/
 }
 
 .post-title:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
@@ -248,7 +238,7 @@ a {
 
 .read-more {
     padding: 0 4px;
-    color: var(--font-color-0);
+    color: #04077e;
 }
 
 .read-more:before,
@@ -277,7 +267,7 @@ a {
 
 .post-date {
     font-size: 0.875rem;
-    color: var(--font-color-3);
+    color: #aaa;
 }
 
 .paginator {
@@ -309,24 +299,24 @@ a {
 
 .paginator a {
     margin: 4px;
-    color: var(--font-color-2);
+    color: #666;
     transition: color ease-in-out .5s;
 }
 
 .paginator a:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
 .paginator .current {
-    color: var(--font-color-0);
-    border: 1px solid var(--font-color-0);
+    color: #04077e;
+    border: 1px solid #04077e;
 }
 
 .footer {
     padding: 24px 0;
     font-size: 0.875rem;
-    color: var(--font-color-3);
+    color: #aaa;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -340,12 +330,12 @@ a {
 }
 
 .footer a {
-    color: var(--font-color-3);
+    color: #aaa;
     transition: color ease-in-out .5s;
 }
 
 .footer a:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
@@ -364,12 +354,12 @@ a {
     font-size: 1.6rem;
     font-weight: 600;
     line-height: 1.5;
-    color: var(--font-color-1);
+    color: #000;
 }
 
 .post-meta {
     font-size: 0.875rem;
-    color: var(--font-color-3);
+    color: #aaa;
     flex: 0 0 100%;
     margin-bottom: 32px;
 }
@@ -405,7 +395,7 @@ a {
 
 .archive li span {
     width: 108px;
-    color: var(--font-color-2);
+    color: #666;
 }
 
 .archive-main {
@@ -413,12 +403,12 @@ a {
 }
 
 .archive-title {
-    color: var(--font-color-1);
+    color: #000;
     /*transition: color ease-in-out .5s;*/
 }
 
 .archive-title:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
@@ -434,16 +424,6 @@ a {
     cursor: pointer;
 }
 
-#beautiful p {
-    box-sizing: border-box;
-    margin-bottom: 16px;
-    font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
-    font-size: 15px;
-    text-align: justify;
-    white-space: normal;
-    text-size-adjust: auto;
-    line-height: 1.75em;
-}
 #bing-bg {
     width: 100%;
     position: fixed;
@@ -453,9 +433,20 @@ a {
     filter: blur(10px);
     object-fit: cover;
   }
-</style>
+#go-top {
+    cursor: pointer;
+}
+
+#beautiful {
+    font-family: "PingFang SC", BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serifhtml, body;
+    font-size: 16px;
+    line-height: 1.75;
+    letter-spacing: 0.6px;
+}</style>
     <style type="text/css" id="markdown">@charset "utf-8";
 
+#copy-post-content,
+#beautiful,
 .post-md
 {
     width: 100%;
@@ -469,7 +460,7 @@ a {
 .post-md h5,
 .post-md h6
 {
-    color: var(--font-color-1);
+    color: #000;
 }
 /* 一级标题 */
 .post-md h1  {
@@ -517,7 +508,6 @@ a {
 
 /* 二级标题内容 */
 .post-md h2 .content {
-    margin-left: -10px;
     display: inline-block;
     width: auto;
     height: 40px;
@@ -570,13 +560,13 @@ a {
 .post-md a
 {
     color: #61aeee;
-    box-shadow: 0 2px 0 var(--line-1);
+    box-shadow: 0 2px 0 #ccc;
     transition: color ease-in-out .65s, box-shadow ease-in-out .65s;
 }
 .post-md a:hover
 {
-    color: var(--font-color-0);
-    box-shadow: 0 2px 0 var(--font-color-0);
+    color: #04077e;
+    box-shadow: 0 2px 0 #04077e;
     transition: color ease-in-out .65s, box-shadow ease-in-out .65s;
 }
 .post-md strong
@@ -612,7 +602,7 @@ a {
 {
     border: none;
     height: 1px;
-    background: var(--line-1);
+    background: #ccc;
     margin: 24px 0;
 }
 
@@ -620,11 +610,11 @@ a {
 .post-md blockquote
 {
     width: 100%;
-    margin: 12px 0;
+    padding: 7px 0;
 }
 .post-md blockquote
 {
-    border-left: 2px solid var(--line-2);
+    border-left: 2px solid #ddd;
     padding-left: 12px;
     word-wrap: break-word;
 }
@@ -683,7 +673,7 @@ thead {
 }
 
 
-.post-md p code
+.inline-code
 {
     border-radius: 4px;
     background:rgba(27,31,35,.05);
@@ -707,7 +697,7 @@ thead {
             
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
-            <h4>目录</h4>
+            <h4 id="go-top">目录</h4>
             <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Android%E4%B9%8BWebview%E4%BD%BF%E7%94%A8"><span class="post-toc-text">Android之Webview使用</span></a></li></ol>
         </nav>
     </aside>
@@ -724,9 +714,10 @@ thead {
         <div class="post-meta">
             <a class='author' href="/">罗昭成</a> <span id="clipboardbtn">2014年10月13日</span>
         </div>
-        <div class="post-md" id="copy-post-content">
-        <section id="beautiful">
-            <h3 id="Android之Webview使用"><span class="prefix"></span><span class="content">Android之Webview使用</span><span class="suffix"></span></h3><p>HTML页面是一个非常重要的角色，不仅是在PC端，在移动端也是非常重要的。</p>
+        <div id="copy-post-content">
+            <section id="beautiful">
+            <div class="post-md" >
+                    <h3 id="Android之Webview使用"><span class="prefix"></span><span class="content">Android之Webview使用</span><span class="suffix"></span></h3><p>HTML页面是一个非常重要的角色，不仅是在PC端，在移动端也是非常重要的。</p>
 <p>今天使用Webview来显示一个H5页面，其中就有地图页面。如果你经常使用浏览器，<br>你会发现，浏览器在使用定位信息的时候，需要相关权限，当然，有好的提示用户是一个<br>必不可少的步骤。</p>
 <p><strong>问题</strong></p>
 <p>用Webview加载map的时候，使用地理位置，提示用户授权。</p>
@@ -799,7 +790,7 @@ private void showLocalRemidPopupWindow(final String title, final GeoListener cal
     this.mGeoPopupWindow.showAtLocation(mWebView, Gravity.BOTTOM, 0, 0);
 &#125;
 </code></pre>
-<p>当浏览器在调用地理位置信息，webView就会触发<code>onGeolocationPermissionsShowPrompt</code>这个方法的调用。<br>那浏览器中是如何调用地理位置信息的呢？这里我也去查看了一点点资料，大概了解了一下，<br>代码如下：</p>
+<p>当浏览器在调用地理位置信息，webView就会触发<code class="inline-code">onGeolocationPermissionsShowPrompt</code>这个方法的调用。<br>那浏览器中是如何调用地理位置信息的呢？这里我也去查看了一点点资料，大概了解了一下，<br>代码如下：</p>
 <pre><code class="javascript">//通过navigator.geolocation对象获取地理位置信息
 //常用的navigator.geolocation对象有以下三种方法：
 //获取当前地理位置
@@ -815,7 +806,7 @@ navigator.geolocation.watchPosition(
 //清除持续获取地理位置事件
 navigator.geolocation.clearWatch(watch_position_id)  
 </code></pre>
-<p>当然仅仅是重写<code>onGeolocationPermissionsShowPrompt</code>这个方法是不行的。<br>还要对webSetting进入相关设置，具体内容，<a target="_blank" rel="noopener" href="https://github.com/Pinned/WebViewDemo">源码</a><br>中有写相关代码。</p>
+<p>当然仅仅是重写<code class="inline-code">onGeolocationPermissionsShowPrompt</code>这个方法是不行的。<br>还要对webSetting进入相关设置，具体内容，<a target="_blank" rel="noopener" href="https://github.com/Pinned/WebViewDemo">源码</a><br>中有写相关代码。</p>
 <blockquote>
 <p><strong>WebSettings常用方法</strong></p>
 <p>setAllowFileAccess 启用或禁止WebView访问文件数据</p>
@@ -850,7 +841,7 @@ navigator.geolocation.clearWatch(watch_position_id)
 <p>onRequestFocus WebView显示焦点</p>
 </blockquote>
 <p><strong>最后结果</strong></p>
-<p><img src="../../../../assets/posts/img-2014-10-13/device-2014-10-13-200631.png" alt="result" referrerpolicy="no-referrer"><figcaption class="post-image-caption">result</figcaption></figure></p>
+<p><img src="../../../../assets/posts/img-2014-10-13/device-2014-10-13-200631.png" alt="result" referrerpolicy="no-referrer"></p>
 <p><strong>参考资料</strong></p>
 <ol>
 <li><a target="_blank" rel="noopener" href="http://blog.csdn.net/t12x3456/article/details/13769731">Android WebView常见问题及解决方案汇总</a></li>
@@ -859,8 +850,10 @@ navigator.geolocation.clearWatch(watch_position_id)
 <li><a target="_blank" rel="noopener" href="http://dev.wo.com.cn/docportal/doc_queryMdocDetail.action?mdoc.docindex=6130">Android WebView</a></li>
 </ol>
 
-        </section>
+                </div>
+            </section>
         </div>
+        <input id="copy-input" style="position: absolute; left: -1000px; z-index: -1000;">
 
     
 

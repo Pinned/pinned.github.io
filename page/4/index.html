@@ -79,16 +79,6 @@ select
 }</style>
     <style type="text/css" id="style">@charset "utf-8";
 
-:root {
-    --font-color-0: #04077e;
-    --font-color-1: #000;
-    --font-color-2: #666;
-    --font-color-3: #aaa;
-    --bg-color-1: #eee;
-    --line-1: #ccc;
-    --line-2: #ddd;
-}
-
 p {
     word-wrap: break-word;
     white-space: pre-wrap;
@@ -100,13 +90,13 @@ body {
     font-size: 16px;
     line-height: 1.75;
     letter-spacing: 0.6px;
-    color: var(--font-color-2);
+    color: #666;
     background: #F0F0F0;
 }
 
 a {
     text-decoration: none;
-    color: var(--font-color-1);
+    color: #000;
 }
 
 
@@ -145,7 +135,7 @@ a {
 .header {
     padding-bottom: 48px;
     margin-bottom: 48px;
-    border-bottom: 1px solid var(--line-1);
+    border-bottom: 1px solid #ccc;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -156,7 +146,7 @@ a {
 .logo {
     font-size: 2rem;
     font-weight: 600;
-    color: var(--font-color-1);
+    color: #000;
     margin-bottom: 16px;
     flex: 0 0 100%;
 }
@@ -181,7 +171,7 @@ a {
 }
 
 .nav li a {
-    color: var(--font-color-1);
+    color: #000;
     opacity: .6;
     transition: opacity ease-in-out .5s;
 }
@@ -219,7 +209,7 @@ a {
     width: 100%;
     padding-bottom: 48px;
     margin-bottom: 48px;
-    border-bottom: 1px dashed var(--line-2);
+    border-bottom: 1px dashed #ddd;
 }
 
 .post-title {
@@ -228,12 +218,12 @@ a {
     font-weight: 600;
     line-height: 1.5;
     margin-bottom: 12px;
-    color: var(--font-color-1);
+    color: #000;
     /*transition: color ease-in-out .5s;*/
 }
 
 .post-title:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
@@ -245,7 +235,7 @@ a {
 
 .read-more {
     padding: 0 4px;
-    color: var(--font-color-0);
+    color: #04077e;
 }
 
 .read-more:before,
@@ -274,7 +264,7 @@ a {
 
 .post-date {
     font-size: 0.875rem;
-    color: var(--font-color-3);
+    color: #aaa;
 }
 
 .paginator {
@@ -306,24 +296,24 @@ a {
 
 .paginator a {
     margin: 4px;
-    color: var(--font-color-2);
+    color: #666;
     transition: color ease-in-out .5s;
 }
 
 .paginator a:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
 .paginator .current {
-    color: var(--font-color-0);
-    border: 1px solid var(--font-color-0);
+    color: #04077e;
+    border: 1px solid #04077e;
 }
 
 .footer {
     padding: 24px 0;
     font-size: 0.875rem;
-    color: var(--font-color-3);
+    color: #aaa;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -337,12 +327,12 @@ a {
 }
 
 .footer a {
-    color: var(--font-color-3);
+    color: #aaa;
     transition: color ease-in-out .5s;
 }
 
 .footer a:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
@@ -361,12 +351,12 @@ a {
     font-size: 1.6rem;
     font-weight: 600;
     line-height: 1.5;
-    color: var(--font-color-1);
+    color: #000;
 }
 
 .post-meta {
     font-size: 0.875rem;
-    color: var(--font-color-3);
+    color: #aaa;
     flex: 0 0 100%;
     margin-bottom: 32px;
 }
@@ -402,7 +392,7 @@ a {
 
 .archive li span {
     width: 108px;
-    color: var(--font-color-2);
+    color: #666;
 }
 
 .archive-main {
@@ -410,12 +400,12 @@ a {
 }
 
 .archive-title {
-    color: var(--font-color-1);
+    color: #000;
     /*transition: color ease-in-out .5s;*/
 }
 
 .archive-title:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
@@ -431,16 +421,6 @@ a {
     cursor: pointer;
 }
 
-#beautiful p {
-    box-sizing: border-box;
-    margin-bottom: 16px;
-    font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
-    font-size: 15px;
-    text-align: justify;
-    white-space: normal;
-    text-size-adjust: auto;
-    line-height: 1.75em;
-}
 #bing-bg {
     width: 100%;
     position: fixed;
@@ -450,9 +430,20 @@ a {
     filter: blur(10px);
     object-fit: cover;
   }
-</style>
+#go-top {
+    cursor: pointer;
+}
+
+#beautiful {
+    font-family: "PingFang SC", BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serifhtml, body;
+    font-size: 16px;
+    line-height: 1.75;
+    letter-spacing: 0.6px;
+}</style>
     <style type="text/css" id="markdown">@charset "utf-8";
 
+#copy-post-content,
+#beautiful,
 .post-md
 {
     width: 100%;
@@ -466,7 +457,7 @@ a {
 .post-md h5,
 .post-md h6
 {
-    color: var(--font-color-1);
+    color: #000;
 }
 /* 一级标题 */
 .post-md h1  {
@@ -514,7 +505,6 @@ a {
 
 /* 二级标题内容 */
 .post-md h2 .content {
-    margin-left: -10px;
     display: inline-block;
     width: auto;
     height: 40px;
@@ -567,13 +557,13 @@ a {
 .post-md a
 {
     color: #61aeee;
-    box-shadow: 0 2px 0 var(--line-1);
+    box-shadow: 0 2px 0 #ccc;
     transition: color ease-in-out .65s, box-shadow ease-in-out .65s;
 }
 .post-md a:hover
 {
-    color: var(--font-color-0);
-    box-shadow: 0 2px 0 var(--font-color-0);
+    color: #04077e;
+    box-shadow: 0 2px 0 #04077e;
     transition: color ease-in-out .65s, box-shadow ease-in-out .65s;
 }
 .post-md strong
@@ -609,7 +599,7 @@ a {
 {
     border: none;
     height: 1px;
-    background: var(--line-1);
+    background: #ccc;
     margin: 24px 0;
 }
 
@@ -617,11 +607,11 @@ a {
 .post-md blockquote
 {
     width: 100%;
-    margin: 12px 0;
+    padding: 7px 0;
 }
 .post-md blockquote
 {
-    border-left: 2px solid var(--line-2);
+    border-left: 2px solid #ddd;
     padding-left: 12px;
     word-wrap: break-word;
 }
@@ -680,7 +670,7 @@ thead {
 }
 
 
-.post-md p code
+.inline-code
 {
     border-radius: 4px;
     background:rgba(27,31,35,.05);
@@ -720,6 +710,29 @@ thead {
 </div>
                 
                 <div class="post-list">
+    
+    
+    
+    <div class="post">
+        <a class="post-title" href="/2015/05/25/android-soft-keyboard/">【转】Android打开与关闭软键盘</a>
+        <div class="post-except">
+            
+                
+方法一(如果输入法在窗口上已经显示，则隐藏，反之则显示)
+
+InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS); 
+
+
+方法二(View为接受软键盘输入的视图)
+
+InputMethodManager imm = (Inpu
+            
+            <a class="read-more" href="/2015/05/25/android-soft-keyboard/"> ... </a>
+        </div>
+        <div class="post-date">2015.05.25</div>
+    </div>
+    
     
     
     
@@ -797,6 +810,22 @@ android update sdk --filter &lt;compon
     
     
     <div class="post">
+        <a class="post-title" href="/2015/05/11/android-aidl-server/">Android Service学习之AIDL, Parcelable和远程服务</a>
+        <div class="post-except">
+            
+                AIDL的作用由于每个应用程序都运行在自己的进程空间，并且可以从应用程序UI运行另一个服务进程，而且经常会在不同的进程间传递对象。在Android平台，一个进程通常不能访问另一个进程的内存空间，所以要想对话，需要将对象分解成操作系统可以理解的基本单元，并且有序的通过进程边界。
+通过代码来实现这个数据传输过程是冗长乏味的，Android提供了AIDL工具来处理这项工作。
+AIDL (Android Interface Definition Language) 是一种IDL 语言
+            
+            <a class="read-more" href="/2015/05/11/android-aidl-server/"> ... </a>
+        </div>
+        <div class="post-date">2015.05.11</div>
+    </div>
+    
+    
+    
+    
+    <div class="post">
         <a class="post-title" href="/2015/05/11/svn-to-git/">SVN迁移到GIT</a>
         <div class="post-except">
             
@@ -811,22 +840,6 @@ git push --set-upstream origin master
 
             
             <a class="read-more" href="/2015/05/11/svn-to-git/"> ... </a>
-        </div>
-        <div class="post-date">2015.05.11</div>
-    </div>
-    
-    
-    
-    
-    <div class="post">
-        <a class="post-title" href="/2015/05/11/android-aidl-server/">Android Service学习之AIDL, Parcelable和远程服务</a>
-        <div class="post-except">
-            
-                AIDL的作用由于每个应用程序都运行在自己的进程空间，并且可以从应用程序UI运行另一个服务进程，而且经常会在不同的进程间传递对象。在Android平台，一个进程通常不能访问另一个进程的内存空间，所以要想对话，需要将对象分解成操作系统可以理解的基本单元，并且有序的通过进程边界。
-通过代码来实现这个数据传输过程是冗长乏味的，Android提供了AIDL工具来处理这项工作。
-AIDL (Android Interface Definition Language) 是一种IDL 语言
-            
-            <a class="read-more" href="/2015/05/11/android-aidl-server/"> ... </a>
         </div>
         <div class="post-date">2015.05.11</div>
     </div>
@@ -852,9 +865,6 @@ set nu!
         </div>
         <div class="post-date">2015.04.30</div>
     </div>
-    
-    
-    
     
     
     

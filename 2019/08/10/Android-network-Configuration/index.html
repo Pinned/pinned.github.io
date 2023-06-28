@@ -82,16 +82,6 @@ select
 }</style>
     <style type="text/css" id="style">@charset "utf-8";
 
-:root {
-    --font-color-0: #04077e;
-    --font-color-1: #000;
-    --font-color-2: #666;
-    --font-color-3: #aaa;
-    --bg-color-1: #eee;
-    --line-1: #ccc;
-    --line-2: #ddd;
-}
-
 p {
     word-wrap: break-word;
     white-space: pre-wrap;
@@ -103,13 +93,13 @@ body {
     font-size: 16px;
     line-height: 1.75;
     letter-spacing: 0.6px;
-    color: var(--font-color-2);
+    color: #666;
     background: #F0F0F0;
 }
 
 a {
     text-decoration: none;
-    color: var(--font-color-1);
+    color: #000;
 }
 
 
@@ -148,7 +138,7 @@ a {
 .header {
     padding-bottom: 48px;
     margin-bottom: 48px;
-    border-bottom: 1px solid var(--line-1);
+    border-bottom: 1px solid #ccc;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -159,7 +149,7 @@ a {
 .logo {
     font-size: 2rem;
     font-weight: 600;
-    color: var(--font-color-1);
+    color: #000;
     margin-bottom: 16px;
     flex: 0 0 100%;
 }
@@ -184,7 +174,7 @@ a {
 }
 
 .nav li a {
-    color: var(--font-color-1);
+    color: #000;
     opacity: .6;
     transition: opacity ease-in-out .5s;
 }
@@ -222,7 +212,7 @@ a {
     width: 100%;
     padding-bottom: 48px;
     margin-bottom: 48px;
-    border-bottom: 1px dashed var(--line-2);
+    border-bottom: 1px dashed #ddd;
 }
 
 .post-title {
@@ -231,12 +221,12 @@ a {
     font-weight: 600;
     line-height: 1.5;
     margin-bottom: 12px;
-    color: var(--font-color-1);
+    color: #000;
     /*transition: color ease-in-out .5s;*/
 }
 
 .post-title:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
@@ -248,7 +238,7 @@ a {
 
 .read-more {
     padding: 0 4px;
-    color: var(--font-color-0);
+    color: #04077e;
 }
 
 .read-more:before,
@@ -277,7 +267,7 @@ a {
 
 .post-date {
     font-size: 0.875rem;
-    color: var(--font-color-3);
+    color: #aaa;
 }
 
 .paginator {
@@ -309,24 +299,24 @@ a {
 
 .paginator a {
     margin: 4px;
-    color: var(--font-color-2);
+    color: #666;
     transition: color ease-in-out .5s;
 }
 
 .paginator a:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
 .paginator .current {
-    color: var(--font-color-0);
-    border: 1px solid var(--font-color-0);
+    color: #04077e;
+    border: 1px solid #04077e;
 }
 
 .footer {
     padding: 24px 0;
     font-size: 0.875rem;
-    color: var(--font-color-3);
+    color: #aaa;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -340,12 +330,12 @@ a {
 }
 
 .footer a {
-    color: var(--font-color-3);
+    color: #aaa;
     transition: color ease-in-out .5s;
 }
 
 .footer a:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
@@ -364,12 +354,12 @@ a {
     font-size: 1.6rem;
     font-weight: 600;
     line-height: 1.5;
-    color: var(--font-color-1);
+    color: #000;
 }
 
 .post-meta {
     font-size: 0.875rem;
-    color: var(--font-color-3);
+    color: #aaa;
     flex: 0 0 100%;
     margin-bottom: 32px;
 }
@@ -405,7 +395,7 @@ a {
 
 .archive li span {
     width: 108px;
-    color: var(--font-color-2);
+    color: #666;
 }
 
 .archive-main {
@@ -413,12 +403,12 @@ a {
 }
 
 .archive-title {
-    color: var(--font-color-1);
+    color: #000;
     /*transition: color ease-in-out .5s;*/
 }
 
 .archive-title:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
@@ -434,16 +424,6 @@ a {
     cursor: pointer;
 }
 
-#beautiful p {
-    box-sizing: border-box;
-    margin-bottom: 16px;
-    font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
-    font-size: 15px;
-    text-align: justify;
-    white-space: normal;
-    text-size-adjust: auto;
-    line-height: 1.75em;
-}
 #bing-bg {
     width: 100%;
     position: fixed;
@@ -453,9 +433,20 @@ a {
     filter: blur(10px);
     object-fit: cover;
   }
-</style>
+#go-top {
+    cursor: pointer;
+}
+
+#beautiful {
+    font-family: "PingFang SC", BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serifhtml, body;
+    font-size: 16px;
+    line-height: 1.75;
+    letter-spacing: 0.6px;
+}</style>
     <style type="text/css" id="markdown">@charset "utf-8";
 
+#copy-post-content,
+#beautiful,
 .post-md
 {
     width: 100%;
@@ -469,7 +460,7 @@ a {
 .post-md h5,
 .post-md h6
 {
-    color: var(--font-color-1);
+    color: #000;
 }
 /* 一级标题 */
 .post-md h1  {
@@ -517,7 +508,6 @@ a {
 
 /* 二级标题内容 */
 .post-md h2 .content {
-    margin-left: -10px;
     display: inline-block;
     width: auto;
     height: 40px;
@@ -570,13 +560,13 @@ a {
 .post-md a
 {
     color: #61aeee;
-    box-shadow: 0 2px 0 var(--line-1);
+    box-shadow: 0 2px 0 #ccc;
     transition: color ease-in-out .65s, box-shadow ease-in-out .65s;
 }
 .post-md a:hover
 {
-    color: var(--font-color-0);
-    box-shadow: 0 2px 0 var(--font-color-0);
+    color: #04077e;
+    box-shadow: 0 2px 0 #04077e;
     transition: color ease-in-out .65s, box-shadow ease-in-out .65s;
 }
 .post-md strong
@@ -612,7 +602,7 @@ a {
 {
     border: none;
     height: 1px;
-    background: var(--line-1);
+    background: #ccc;
     margin: 24px 0;
 }
 
@@ -620,11 +610,11 @@ a {
 .post-md blockquote
 {
     width: 100%;
-    margin: 12px 0;
+    padding: 7px 0;
 }
 .post-md blockquote
 {
-    border-left: 2px solid var(--line-2);
+    border-left: 2px solid #ddd;
     padding-left: 12px;
     word-wrap: break-word;
 }
@@ -683,7 +673,7 @@ thead {
 }
 
 
-.post-md p code
+.inline-code
 {
     border-radius: 4px;
     background:rgba(27,31,35,.05);
@@ -707,7 +697,7 @@ thead {
             
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
-            <h4>目录</h4>
+            <h4 id="go-top">目录</h4>
             <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#HTTP%20%E4%B8%8E%20HTTPS"><span class="post-toc-text">HTTP 与 HTTPS</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Android%20%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E9%85%8D%E7%BD%AE"><span class="post-toc-text">Android 网络安全配置</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Android%20%E9%BB%98%E8%AE%A4%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE"><span class="post-toc-text">Android 默认网络配置</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E6%A1%A3"><span class="post-toc-text">参考文档</span></a></li></ol>
         </nav>
     </aside>
@@ -724,15 +714,16 @@ thead {
         <div class="post-meta">
             <a class='author' href="/">罗昭成</a> <span id="clipboardbtn">2019年08月10日</span>
         </div>
-        <div class="post-md" id="copy-post-content">
-        <section id="beautiful">
-            <h1 id="HTTP 与 HTTPS"><span class="prefix"></span><span class="content">HTTP 与 HTTPS</span><span class="suffix"></span></h1><p>自2017年1月1日开始，苹果要求所有的APP都要使用 HTTPS 进行网络请求，否则无法上架。但是 HTTPS 在 2000 年就已经确定下来。10多年过去，现在依然还有很多网站使用着 HTTP 协议。</p>
+        <div id="copy-post-content">
+            <section id="beautiful">
+            <div class="post-md" >
+                    <h1 id="HTTP 与 HTTPS"><span class="prefix"></span><span class="content">HTTP 与 HTTPS</span><span class="suffix"></span></h1><p>自2017年1月1日开始，苹果要求所有的APP都要使用 HTTPS 进行网络请求，否则无法上架。但是 HTTPS 在 2000 年就已经确定下来。10多年过去，现在依然还有很多网站使用着 HTTP 协议。</p>
 <p>HTTP协议以明文方式发送内容，不提供任何方式的数据加密，如果攻击者截取了Web浏览器和网站服务器之间的传输报文，就可以直接读懂其中的信息。为了数据传输的安全，HTTPS在HTTP的基础上加入了SSL协议，SSL依靠证书来验证服务器的身份，并为浏览器和服务器之间的通信加密。</p>
 <p>Android 也从 Android 9.0 开始限制 HTTP 的网路请求。</p>
 <h1 id="Android 网络安全配置"><span class="prefix"></span><span class="content">Android 网络安全配置</span><span class="suffix"></span></h1><p>在 Android App 的开发过程中，测试服务器部署到内网服务器，没有配置 HTTPS 证书，导致我们的 APP 在 Android 9.0 上进行运行测试。</p>
 <p><strong>解决方案</strong></p>
 <ol>
-<li><p>在 res&#x2F;xml 文件中创建 <code>network_security_config.xml</code> (文件名可修改)，并按如下写入</p>
+<li><p>在 res&#x2F;xml 文件中创建 <code class="inline-code">network_security_config.xml</code> (文件名可修改)，并按如下写入</p>
 <pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
 &lt;network-security-config&gt;
     &lt;base-config cleartextTrafficPermitted=&quot;true&quot;&gt;
@@ -744,7 +735,7 @@ thead {
 &lt;/network-security-config&gt;
 </code></pre>
 </li>
-<li><p>在 <code>AndroidManifest.xml</code> 的 <strong>application</strong> 标签中添加网络设置</p>
+<li><p>在 <code class="inline-code">AndroidManifest.xml</code> 的 <strong>application</strong> 标签中添加网络设置</p>
 <pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
 &lt;manifest xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
     package=&quot;com.knero.network.example&quot;&gt;
@@ -784,8 +775,10 @@ thead {
 <li><a target="_blank" rel="noopener" href="https://developer.android.com/training/articles/security-config#CleartextTrafficPermitted">Network security configuration</a></li>
 </ul>
 
-        </section>
+                </div>
+            </section>
         </div>
+        <input id="copy-input" style="position: absolute; left: -1000px; z-index: -1000;">
 
     
 
@@ -794,12 +787,12 @@ thead {
                     <div class="post_pre_next">
     
         <div class="post-pre">
-            <a href="/2022/06/30/Android-VM/">上一篇: 这么多年，Android 虚拟机到底干了些什么？</a>
+            <a href="/2019/08/10/Android-network-security-configuration/">上一篇: Android Network security configuration</a>
         </div>
     
     
-        <a href="/2019/08/10/Android-network-security-configuration/">下一篇: 
-            Android Network security configuration
+        <a href="/2019/05/21/Android-camera-preview/">下一篇: 
+            Android Camera Preview
         </a>
     
 </div>

@@ -82,16 +82,6 @@ select
 }</style>
     <style type="text/css" id="style">@charset "utf-8";
 
-:root {
-    --font-color-0: #04077e;
-    --font-color-1: #000;
-    --font-color-2: #666;
-    --font-color-3: #aaa;
-    --bg-color-1: #eee;
-    --line-1: #ccc;
-    --line-2: #ddd;
-}
-
 p {
     word-wrap: break-word;
     white-space: pre-wrap;
@@ -103,13 +93,13 @@ body {
     font-size: 16px;
     line-height: 1.75;
     letter-spacing: 0.6px;
-    color: var(--font-color-2);
+    color: #666;
     background: #F0F0F0;
 }
 
 a {
     text-decoration: none;
-    color: var(--font-color-1);
+    color: #000;
 }
 
 
@@ -148,7 +138,7 @@ a {
 .header {
     padding-bottom: 48px;
     margin-bottom: 48px;
-    border-bottom: 1px solid var(--line-1);
+    border-bottom: 1px solid #ccc;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -159,7 +149,7 @@ a {
 .logo {
     font-size: 2rem;
     font-weight: 600;
-    color: var(--font-color-1);
+    color: #000;
     margin-bottom: 16px;
     flex: 0 0 100%;
 }
@@ -184,7 +174,7 @@ a {
 }
 
 .nav li a {
-    color: var(--font-color-1);
+    color: #000;
     opacity: .6;
     transition: opacity ease-in-out .5s;
 }
@@ -222,7 +212,7 @@ a {
     width: 100%;
     padding-bottom: 48px;
     margin-bottom: 48px;
-    border-bottom: 1px dashed var(--line-2);
+    border-bottom: 1px dashed #ddd;
 }
 
 .post-title {
@@ -231,12 +221,12 @@ a {
     font-weight: 600;
     line-height: 1.5;
     margin-bottom: 12px;
-    color: var(--font-color-1);
+    color: #000;
     /*transition: color ease-in-out .5s;*/
 }
 
 .post-title:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
@@ -248,7 +238,7 @@ a {
 
 .read-more {
     padding: 0 4px;
-    color: var(--font-color-0);
+    color: #04077e;
 }
 
 .read-more:before,
@@ -277,7 +267,7 @@ a {
 
 .post-date {
     font-size: 0.875rem;
-    color: var(--font-color-3);
+    color: #aaa;
 }
 
 .paginator {
@@ -309,24 +299,24 @@ a {
 
 .paginator a {
     margin: 4px;
-    color: var(--font-color-2);
+    color: #666;
     transition: color ease-in-out .5s;
 }
 
 .paginator a:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
 .paginator .current {
-    color: var(--font-color-0);
-    border: 1px solid var(--font-color-0);
+    color: #04077e;
+    border: 1px solid #04077e;
 }
 
 .footer {
     padding: 24px 0;
     font-size: 0.875rem;
-    color: var(--font-color-3);
+    color: #aaa;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -340,12 +330,12 @@ a {
 }
 
 .footer a {
-    color: var(--font-color-3);
+    color: #aaa;
     transition: color ease-in-out .5s;
 }
 
 .footer a:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
@@ -364,12 +354,12 @@ a {
     font-size: 1.6rem;
     font-weight: 600;
     line-height: 1.5;
-    color: var(--font-color-1);
+    color: #000;
 }
 
 .post-meta {
     font-size: 0.875rem;
-    color: var(--font-color-3);
+    color: #aaa;
     flex: 0 0 100%;
     margin-bottom: 32px;
 }
@@ -405,7 +395,7 @@ a {
 
 .archive li span {
     width: 108px;
-    color: var(--font-color-2);
+    color: #666;
 }
 
 .archive-main {
@@ -413,12 +403,12 @@ a {
 }
 
 .archive-title {
-    color: var(--font-color-1);
+    color: #000;
     /*transition: color ease-in-out .5s;*/
 }
 
 .archive-title:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
@@ -434,16 +424,6 @@ a {
     cursor: pointer;
 }
 
-#beautiful p {
-    box-sizing: border-box;
-    margin-bottom: 16px;
-    font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
-    font-size: 15px;
-    text-align: justify;
-    white-space: normal;
-    text-size-adjust: auto;
-    line-height: 1.75em;
-}
 #bing-bg {
     width: 100%;
     position: fixed;
@@ -453,9 +433,20 @@ a {
     filter: blur(10px);
     object-fit: cover;
   }
-</style>
+#go-top {
+    cursor: pointer;
+}
+
+#beautiful {
+    font-family: "PingFang SC", BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serifhtml, body;
+    font-size: 16px;
+    line-height: 1.75;
+    letter-spacing: 0.6px;
+}</style>
     <style type="text/css" id="markdown">@charset "utf-8";
 
+#copy-post-content,
+#beautiful,
 .post-md
 {
     width: 100%;
@@ -469,7 +460,7 @@ a {
 .post-md h5,
 .post-md h6
 {
-    color: var(--font-color-1);
+    color: #000;
 }
 /* 一级标题 */
 .post-md h1  {
@@ -517,7 +508,6 @@ a {
 
 /* 二级标题内容 */
 .post-md h2 .content {
-    margin-left: -10px;
     display: inline-block;
     width: auto;
     height: 40px;
@@ -570,13 +560,13 @@ a {
 .post-md a
 {
     color: #61aeee;
-    box-shadow: 0 2px 0 var(--line-1);
+    box-shadow: 0 2px 0 #ccc;
     transition: color ease-in-out .65s, box-shadow ease-in-out .65s;
 }
 .post-md a:hover
 {
-    color: var(--font-color-0);
-    box-shadow: 0 2px 0 var(--font-color-0);
+    color: #04077e;
+    box-shadow: 0 2px 0 #04077e;
     transition: color ease-in-out .65s, box-shadow ease-in-out .65s;
 }
 .post-md strong
@@ -612,7 +602,7 @@ a {
 {
     border: none;
     height: 1px;
-    background: var(--line-1);
+    background: #ccc;
     margin: 24px 0;
 }
 
@@ -620,11 +610,11 @@ a {
 .post-md blockquote
 {
     width: 100%;
-    margin: 12px 0;
+    padding: 7px 0;
 }
 .post-md blockquote
 {
-    border-left: 2px solid var(--line-2);
+    border-left: 2px solid #ddd;
     padding-left: 12px;
     word-wrap: break-word;
 }
@@ -683,7 +673,7 @@ thead {
 }
 
 
-.post-md p code
+.inline-code
 {
     border-radius: 4px;
     background:rgba(27,31,35,.05);
@@ -707,7 +697,7 @@ thead {
             
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
-            <h4>目录</h4>
+            <h4 id="go-top">目录</h4>
             
         </nav>
     </aside>
@@ -724,12 +714,13 @@ thead {
         <div class="post-meta">
             <a class='author' href="/">罗昭成</a> <span id="clipboardbtn">2014年10月27日</span>
         </div>
-        <div class="post-md" id="copy-post-content">
-        <section id="beautiful">
-            <p>ProgressBar是一个经常使用的组件，但很多时候，它的外观看起来并不能满足我们的需求。<br>对它进行自定义也很麻烦。</p>
+        <div id="copy-post-content">
+            <section id="beautiful">
+            <div class="post-md" >
+                    <p>ProgressBar是一个经常使用的组件，但很多时候，它的外观看起来并不能满足我们的需求。<br>对它进行自定义也很麻烦。</p>
 <p>有一个很简单的解决办法就是用GIF动画，不使用系统提供的ProgressBar。</p>
 <p>有关显示GIF动画，网上有很多例子，这里只介绍将GIF动态图按每一帧切出来，然后在使用<br>Frame Animation将它展示出来。</p>
-<p>先上代码<code>loading.xml</code>：</p>
+<p>先上代码<code class="inline-code">loading.xml</code>：</p>
 <pre><code class="html">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
 &lt;animation-list android:id=&quot;@+id/loading_animation&quot; android:oneshot=&quot;false&quot;
   xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;
@@ -754,7 +745,7 @@ thead {
 <p>其中:</p>
 <pre><code class="html">&lt;integer name=&quot;loading_frame_interval&quot;&gt;30&lt;/integer&gt;
 </code></pre>
-<p>在使用的时候，因为网上说的种种bug，我直接自定义了一个<code>ImageView</code>，用来显示Loading View。 看源码：</p>
+<p>在使用的时候，因为网上说的种种bug，我直接自定义了一个<code class="inline-code">ImageView</code>，用来显示Loading View。 看源码：</p>
 <pre><code class="java">package cn.lovecluo.widget;
 
 import android.content.Context;
@@ -798,7 +789,7 @@ public class CustomeImageView extends ImageView &#123;
     &#125;
 &#125;
 </code></pre>
-<p>使用的时候也很简单，在XML中添加这个<code>CustomeImageView</code>即可，代码如下：</p>
+<p>使用的时候也很简单，在XML中添加这个<code class="inline-code">CustomeImageView</code>即可，代码如下：</p>
 <pre><code class="html">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
 &lt;RelativeLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
     style=&quot;@style/fillall&quot;
@@ -809,8 +800,8 @@ public class CustomeImageView extends ImageView &#123;
         android:layout_centerInParent=&quot;true&quot; /&gt;
 &lt;/RelativeLayout&gt;
 </code></pre>
-<p>当然使用场景并不仅仅是这么简单，有时候， 我们会需要在一个Button后面添加一<code>loading</code>动画,<br>就比如说在登录的时候，当然你可以定义几个组件，用代码控制每个组件的显示，但是这样子过于的麻烦。</p>
-<p>就上述情况，我们还是用上面定义的<code>loading.xml</code>的动画效果来做展示:<br>在TextView中有这么几个属性:<code>drawableLeft</code>、<code>drawableRight</code>、<code>drawableTop</code>、<code>drawableBottom</code></p>
+<p>当然使用场景并不仅仅是这么简单，有时候， 我们会需要在一个Button后面添加一<code class="inline-code">loading</code>动画,<br>就比如说在登录的时候，当然你可以定义几个组件，用代码控制每个组件的显示，但是这样子过于的麻烦。</p>
+<p>就上述情况，我们还是用上面定义的<code class="inline-code">loading.xml</code>的动画效果来做展示:<br>在TextView中有这么几个属性:<code class="inline-code">drawableLeft</code>、<code class="inline-code">drawableRight</code>、<code class="inline-code">drawableTop</code>、<code class="inline-code">drawableBottom</code></p>
 <p>在这里，我们要动态控制，所以不能将这些写到xml中去，所以只能写代码了。</p>
 <pre><code class="java">Drawable drawable= mContext.getResources().getDrawable(R.drawable.loading);
 /// 这一步必须要做,否则不会显示.
@@ -819,7 +810,7 @@ mSubmitBtn.setCompoundDrawables(drawable, null, null, null);
 AnimationDrawable loadingAnimation = (AnimationDrawable) mSubmitBtn.getCompoundDrawables()[0];
 loadingAnimation.start();
 </code></pre>
-<p>是不是很简单，当然，如果你觉得图片和文字离的太近，你可以在xml中加上<code>android:drawablePadding=&quot;8dip&quot;</code></p>
+<p>是不是很简单，当然，如果你觉得图片和文字离的太近，你可以在xml中加上<code class="inline-code">android:drawablePadding=&quot;8dip&quot;</code></p>
 <p>看XML代码 ：</p>
 <pre><code class="html">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
 &lt;FrameLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
@@ -843,8 +834,10 @@ loadingAnimation.start();
 </code></pre>
 <p>看了代码，你就会觉得特别的简单。</p>
 
-        </section>
+                </div>
+            </section>
         </div>
+        <input id="copy-input" style="position: absolute; left: -1000px; z-index: -1000;">
 
     
 

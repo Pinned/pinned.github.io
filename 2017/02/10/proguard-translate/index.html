@@ -82,16 +82,6 @@ select
 }</style>
     <style type="text/css" id="style">@charset "utf-8";
 
-:root {
-    --font-color-0: #04077e;
-    --font-color-1: #000;
-    --font-color-2: #666;
-    --font-color-3: #aaa;
-    --bg-color-1: #eee;
-    --line-1: #ccc;
-    --line-2: #ddd;
-}
-
 p {
     word-wrap: break-word;
     white-space: pre-wrap;
@@ -103,13 +93,13 @@ body {
     font-size: 16px;
     line-height: 1.75;
     letter-spacing: 0.6px;
-    color: var(--font-color-2);
+    color: #666;
     background: #F0F0F0;
 }
 
 a {
     text-decoration: none;
-    color: var(--font-color-1);
+    color: #000;
 }
 
 
@@ -148,7 +138,7 @@ a {
 .header {
     padding-bottom: 48px;
     margin-bottom: 48px;
-    border-bottom: 1px solid var(--line-1);
+    border-bottom: 1px solid #ccc;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -159,7 +149,7 @@ a {
 .logo {
     font-size: 2rem;
     font-weight: 600;
-    color: var(--font-color-1);
+    color: #000;
     margin-bottom: 16px;
     flex: 0 0 100%;
 }
@@ -184,7 +174,7 @@ a {
 }
 
 .nav li a {
-    color: var(--font-color-1);
+    color: #000;
     opacity: .6;
     transition: opacity ease-in-out .5s;
 }
@@ -222,7 +212,7 @@ a {
     width: 100%;
     padding-bottom: 48px;
     margin-bottom: 48px;
-    border-bottom: 1px dashed var(--line-2);
+    border-bottom: 1px dashed #ddd;
 }
 
 .post-title {
@@ -231,12 +221,12 @@ a {
     font-weight: 600;
     line-height: 1.5;
     margin-bottom: 12px;
-    color: var(--font-color-1);
+    color: #000;
     /*transition: color ease-in-out .5s;*/
 }
 
 .post-title:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
@@ -248,7 +238,7 @@ a {
 
 .read-more {
     padding: 0 4px;
-    color: var(--font-color-0);
+    color: #04077e;
 }
 
 .read-more:before,
@@ -277,7 +267,7 @@ a {
 
 .post-date {
     font-size: 0.875rem;
-    color: var(--font-color-3);
+    color: #aaa;
 }
 
 .paginator {
@@ -309,24 +299,24 @@ a {
 
 .paginator a {
     margin: 4px;
-    color: var(--font-color-2);
+    color: #666;
     transition: color ease-in-out .5s;
 }
 
 .paginator a:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
 .paginator .current {
-    color: var(--font-color-0);
-    border: 1px solid var(--font-color-0);
+    color: #04077e;
+    border: 1px solid #04077e;
 }
 
 .footer {
     padding: 24px 0;
     font-size: 0.875rem;
-    color: var(--font-color-3);
+    color: #aaa;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -340,12 +330,12 @@ a {
 }
 
 .footer a {
-    color: var(--font-color-3);
+    color: #aaa;
     transition: color ease-in-out .5s;
 }
 
 .footer a:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
@@ -364,12 +354,12 @@ a {
     font-size: 1.6rem;
     font-weight: 600;
     line-height: 1.5;
-    color: var(--font-color-1);
+    color: #000;
 }
 
 .post-meta {
     font-size: 0.875rem;
-    color: var(--font-color-3);
+    color: #aaa;
     flex: 0 0 100%;
     margin-bottom: 32px;
 }
@@ -405,7 +395,7 @@ a {
 
 .archive li span {
     width: 108px;
-    color: var(--font-color-2);
+    color: #666;
 }
 
 .archive-main {
@@ -413,12 +403,12 @@ a {
 }
 
 .archive-title {
-    color: var(--font-color-1);
+    color: #000;
     /*transition: color ease-in-out .5s;*/
 }
 
 .archive-title:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
@@ -434,16 +424,6 @@ a {
     cursor: pointer;
 }
 
-#beautiful p {
-    box-sizing: border-box;
-    margin-bottom: 16px;
-    font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
-    font-size: 15px;
-    text-align: justify;
-    white-space: normal;
-    text-size-adjust: auto;
-    line-height: 1.75em;
-}
 #bing-bg {
     width: 100%;
     position: fixed;
@@ -453,9 +433,20 @@ a {
     filter: blur(10px);
     object-fit: cover;
   }
-</style>
+#go-top {
+    cursor: pointer;
+}
+
+#beautiful {
+    font-family: "PingFang SC", BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serifhtml, body;
+    font-size: 16px;
+    line-height: 1.75;
+    letter-spacing: 0.6px;
+}</style>
     <style type="text/css" id="markdown">@charset "utf-8";
 
+#copy-post-content,
+#beautiful,
 .post-md
 {
     width: 100%;
@@ -469,7 +460,7 @@ a {
 .post-md h5,
 .post-md h6
 {
-    color: var(--font-color-1);
+    color: #000;
 }
 /* 一级标题 */
 .post-md h1  {
@@ -517,7 +508,6 @@ a {
 
 /* 二级标题内容 */
 .post-md h2 .content {
-    margin-left: -10px;
     display: inline-block;
     width: auto;
     height: 40px;
@@ -570,13 +560,13 @@ a {
 .post-md a
 {
     color: #61aeee;
-    box-shadow: 0 2px 0 var(--line-1);
+    box-shadow: 0 2px 0 #ccc;
     transition: color ease-in-out .65s, box-shadow ease-in-out .65s;
 }
 .post-md a:hover
 {
-    color: var(--font-color-0);
-    box-shadow: 0 2px 0 var(--font-color-0);
+    color: #04077e;
+    box-shadow: 0 2px 0 #04077e;
     transition: color ease-in-out .65s, box-shadow ease-in-out .65s;
 }
 .post-md strong
@@ -612,7 +602,7 @@ a {
 {
     border: none;
     height: 1px;
-    background: var(--line-1);
+    background: #ccc;
     margin: 24px 0;
 }
 
@@ -620,11 +610,11 @@ a {
 .post-md blockquote
 {
     width: 100%;
-    margin: 12px 0;
+    padding: 7px 0;
 }
 .post-md blockquote
 {
-    border-left: 2px solid var(--line-2);
+    border-left: 2px solid #ddd;
     padding-left: 12px;
     word-wrap: break-word;
 }
@@ -683,7 +673,7 @@ thead {
 }
 
 
-.post-md p code
+.inline-code
 {
     border-radius: 4px;
     background:rgba(27,31,35,.05);
@@ -707,7 +697,7 @@ thead {
             
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
-            <h4>目录</h4>
+            <h4 id="go-top">目录</h4>
             <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%5B%E8%AF%91%5D%20ProGuard%20%E9%80%89%E9%A1%B9"><span class="post-toc-text">[译] ProGuard 选项</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Input/Output%20Options"><span class="post-toc-text">Input&#x2F;Output Options</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%3Ca%20href="><span class="post-toc-text">Keep Options&quot;&gt;Keep Options</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%3Ca%20href="><span class="post-toc-text">Keep Option Modifiers&quot;&gt;Keep Option Modifiers</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%3Ca%20href="><span class="post-toc-text">Shrinking Options&quot;&gt;Shrinking Options</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%3Ca%20href="><span class="post-toc-text">Optimization Options&quot;&gt;Optimization Options</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%3Ca%20href="><span class="post-toc-text">Obfuscation Options&quot;&gt;Obfuscation Options</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%3Ca%20href="><span class="post-toc-text">Preverification Options&quot;&gt;Preverification Options</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%3Ca%20href="><span class="post-toc-text">General Options&quot;&gt;General Options</span></a></li></ol></li></ol>
         </nav>
     </aside>
@@ -724,12 +714,13 @@ thead {
         <div class="post-meta">
             <a class='author' href="/">罗昭成</a> <span id="clipboardbtn">2017年02月10日</span>
         </div>
-        <div class="post-md" id="copy-post-content">
-        <section id="beautiful">
-            <h1 id="[译] ProGuard 选项"><span class="prefix"></span><span class="content">[译] ProGuard 选项</span><span class="suffix"></span></h1><blockquote>
+        <div id="copy-post-content">
+            <section id="beautiful">
+            <div class="post-md" >
+                    <h1 id="[译] ProGuard 选项"><span class="prefix"></span><span class="content">[译] ProGuard 选项</span><span class="suffix"></span></h1><blockquote>
 <p>注：只针对 Android 平台翻译了 ProGuard 选项的相关用法，更多信息请查看<a target="_blank" rel="noopener" href="http://proguard.sourceforge.net/">官方原文</a>。</p>
 </blockquote>
-<h2 id="Input&#x2F;Output Options"><span class="prefix"></span><span class="content">Input&#x2F;Output Options</span><span class="suffix"></span></h2><p><strong>@filename</strong><br>简短版 <code>-include filename</code></p>
+<h2 id="Input&#x2F;Output Options"><span class="prefix"></span><span class="content">Input&#x2F;Output Options</span><span class="suffix"></span></h2><p><strong>@filename</strong><br>简短版 <code class="inline-code">-include filename</code></p>
 <p><strong>-include</strong> <em>filename</em><br>读取指定文件的配置参数</p>
 <p><strong>-basedirectory</strong> <em>directoryname</em><br>指定当前配置文件中所有相对文件路径的基础目录</p>
 <p><strong>-injars</strong> <em>class_path</em><br>指定需要处理的 jar&#x2F;aar&#x2F;war&#x2F;ear&#x2F;zip&#x2F;apk&#x2F;dir。文件(目录)内的类文件会被处理并写入到输出的文件(目录)。默认情况下，非类文件会直接复制而不会被修改。在 <em>class_path</em> 中的内容可以过滤，在 filters 部分会详细说明。为了更好的可读性，建议使用多个 <strong>-injars</strong> 来指定多个 <em>class_path</em></p>
@@ -738,15 +729,15 @@ thead {
 <p><strong>-skipnonpubliclibraryclasses</strong><br>指定读取类库时跳过非公有类，该操作可以加快处理及减少 ProGuard 的内存使用。默认情况下 ProGuard 会读取非公有类。然而，大多时候非公有类不会与 injars 有关联，如果它不会影响到 injars 的文件，建议使用该选项。如果使用该选项导致找不到类，ProGuard 会输出相应的警告信息。</p>
 <p><strong>-dontskipnonpubliclibraryclasses</strong><br>指定不忽略非公有的 library 类。4.5 版后，该选项默认开启。</p>
 <p><strong>-dontskipnonpubliclibraryclassmembers</strong><br>指定不忽略包内可见的 library 类的成员(字段及方法)。默认情况下，ProGuard 解析类库时会跳过这些成员，因为 injars 一般不会使用它们。然而有时 injars 与 library 的类同属一个包，并且 jnjars 的类使用了这些包内可见成员。在这种情况下，这些类成员是有用的。</p>
-<p><strong>-keepdirectories</strong> [<em>directory_filter</em>]<br>指定要保留在输出文件内的目录。默认情况下，目录会被移除。这会减少输出文件的大小，但如果你的代码引用到它们时可能会导致程序崩溃（例：<code>mypackage.MyCalss.class.getResource(&quot;&quot;)</code>）。这时就需要指定 <code>-keepdirectories mypackage</code>。如果没有指定过滤器，所有目录会被保留。例如，<code>-keepdirectories mydirectory</code> 匹配 mydirectory 目录；<code>-keepdirectories mydirectory/*</code> 匹配 mydirectory 的直接子目录；<code>-keepdirectorie mydirectory/**</code> 匹配所有子目录。</p>
+<p><strong>-keepdirectories</strong> [<em>directory_filter</em>]<br>指定要保留在输出文件内的目录。默认情况下，目录会被移除。这会减少输出文件的大小，但如果你的代码引用到它们时可能会导致程序崩溃（例：<code class="inline-code">mypackage.MyCalss.class.getResource(&quot;&quot;)</code>）。这时就需要指定 <code class="inline-code">-keepdirectories mypackage</code>。如果没有指定过滤器，所有目录会被保留。例如，<code class="inline-code">-keepdirectories mydirectory</code> 匹配 mydirectory 目录；<code class="inline-code">-keepdirectories mydirectory/*</code> 匹配 mydirectory 的直接子目录；<code class="inline-code">-keepdirectorie mydirectory/**</code> 匹配所有子目录。</p>
 <p><strong>-target</strong> <em>version</em><br>指定类文件的版本号。版本号可以是 1.0，1.1，1.2，1.3，1.4，1.5(or 5)，1.6(or 6)，1.7(or 7)，1.8(or 8)。默认情况下，类文件的版本号保持不变。一般不应降低类文件的版本号，因为可能包含部分旧版本不支持的代码。</p>
 <p><strong>-forceprocessing</strong><br>指定即使输出是一样的，也强制处理 injars。一致性判断是基于指定的输入，输出和配置文件或配置文件夹的时间戳比较的。</p>
 <h2 id="<a href="#Keep-Options" title="Keep Options"></a>Keep Options"><span class="prefix"></span><span class="content"><a href="#Keep-Options" title="Keep Options"></a>Keep Options</span><span class="suffix"></span></h2><p><strong>-keep</strong> [,<em>modifier</em>,…] <em>class_specification</em><br>保留指定的类及类成员</p>
 <p><strong>-keepclassmembers</strong> [,<em>modifier</em>,…] <em>class_specification</em><br>保留指定的类的成员</p>
 <p><strong>-keepclasseswithmembers</strong> [,<em>modifier</em>,…] <em>class_specification</em><br>保留满足指定条件的类和类成员</p>
-<p><strong>-keepnames</strong> <em>class_specification</em><br>简短版 <code>-keep,allowshrinking class_specification</code><br>如果指定的类和类成员在压缩期没被移除，则保留它们的名称。只有开启混淆时可用。</p>
-<p><strong>-keepclassmembernames</strong> <em>class_specification</em><br>简短版 <code>-keepclassmembers,allowshrinking class_specification</code><br>如果指定的类的成员在压缩期没被移除，则保留它们的名称。只有开启混淆时可用。</p>
-<p><strong>-keepclasseswithmembernames</strong> <em>class_specification</em><br>简短版 <code>-keepclasseswithmembers,allowshrinking class_specification</code><br>如果满足指定条件的类和类成员在压缩期没被移除，则保留它们的名称。只有开启混淆时可用。</p>
+<p><strong>-keepnames</strong> <em>class_specification</em><br>简短版 <code class="inline-code">-keep,allowshrinking class_specification</code><br>如果指定的类和类成员在压缩期没被移除，则保留它们的名称。只有开启混淆时可用。</p>
+<p><strong>-keepclassmembernames</strong> <em>class_specification</em><br>简短版 <code class="inline-code">-keepclassmembers,allowshrinking class_specification</code><br>如果指定的类的成员在压缩期没被移除，则保留它们的名称。只有开启混淆时可用。</p>
+<p><strong>-keepclasseswithmembernames</strong> <em>class_specification</em><br>简短版 <code class="inline-code">-keepclasseswithmembers,allowshrinking class_specification</code><br>如果满足指定条件的类和类成员在压缩期没被移除，则保留它们的名称。只有开启混淆时可用。</p>
 <p><strong>-printseeds</strong> [<em>filename</em>]<br>详尽地列出类和类成员匹配的 -keep 选项清单，标准输出到指定的文件中。该清单可用于验证预期的类和类成员是否真正被找到，特别是使用了通配符的情况下。</p>
 <h2 id="<a href="#Keep-Option-Modifiers" title="Keep Option Modifiers"></a>Keep Option Modifiers"><span class="prefix"></span><span class="content"><a href="#Keep-Option-Modifiers" title="Keep Option Modifiers"></a>Keep Option Modifiers</span><span class="suffix"></span></h2><p><strong>includedescriptorclasses</strong><br>指定保留 -keep 选项保留的方法、字段的类型描述符对应的类。通常用于保留 Native 方法。</p>
 <p><strong>allowshrinking</strong><br>允许压缩</p>
@@ -758,24 +749,24 @@ thead {
 <h2 id="<a href="#Optimization-Options" title="Optimization Options"></a>Optimization Options"><span class="prefix"></span><span class="content"><a href="#Optimization-Options" title="Optimization Options"></a>Optimization Options</span><span class="suffix"></span></h2><p><strong>-dontoptimize</strong><br>指定不优化输入的类文件，默认开启。所有的方法进行字节码级优化。</p>
 <p><strong>-optimizations</strong> <em>optimization_filter</em><br>开启或关闭更细粒度的优化。只有开启优化时可用。高级选项。</p>
 <p><strong>-optimizationpasses</strong> <em>n</em><br>指定优化次数，默认执行一次优化。多次优化可能会得到更好的结果。如果某次优化后没有变化，优化会自动结束。只有开启优化时可用。</p>
-<p><strong>-assumenosideeffects</strong> <em>class_specification</em><br>假定某些方法可以移除。在优化步骤，如果可以确定返回值没被使用，ProGuard 会移除这些方法。ProGuard 会分析你的代码以查找相关调用。例如：指定 <code>System.currentTimeMillis()</code>，任何返回值没有被使用的调用均会删除。某些情况下，你可以使用该选项删除日志代码。只有开启优化时可用。一般情况下该操作比较危险，可能轻易导致程序崩溃，<strong>请明确该操作的影响时使用该选项</strong></p>
-<p><strong>-allowaccessmodification</strong><br>优化时允许扩大类和类成员的访问修饰符。该选项可以改善优化的结果。例如，内联公有 getter 可能需要将字段也改成公有。只有开启优化（并开启了 <code>-repackageclasses</code>）。</p>
+<p><strong>-assumenosideeffects</strong> <em>class_specification</em><br>假定某些方法可以移除。在优化步骤，如果可以确定返回值没被使用，ProGuard 会移除这些方法。ProGuard 会分析你的代码以查找相关调用。例如：指定 <code class="inline-code">System.currentTimeMillis()</code>，任何返回值没有被使用的调用均会删除。某些情况下，你可以使用该选项删除日志代码。只有开启优化时可用。一般情况下该操作比较危险，可能轻易导致程序崩溃，<strong>请明确该操作的影响时使用该选项</strong></p>
+<p><strong>-allowaccessmodification</strong><br>优化时允许扩大类和类成员的访问修饰符。该选项可以改善优化的结果。例如，内联公有 getter 可能需要将字段也改成公有。只有开启优化（并开启了 <code class="inline-code">-repackageclasses</code>）。</p>
 <p><strong>-mergeinterfacesaggressively</strong><br>指定接口可以合并，即使实现类没实现所有的方法。该选项可以通过减少类的总数减少输出文件的大小。只有开启优化时可用。</p>
 <h2 id="<a href="#Obfuscation-Options" title="Obfuscation Options"></a>Obfuscation Options"><span class="prefix"></span><span class="content"><a href="#Obfuscation-Options" title="Obfuscation Options"></a>Obfuscation Options</span><span class="suffix"></span></h2><p><strong>-dontobfuscate</strong><br>指定不混淆类文件，默认开启。</p>
 <p><strong>-printmapping</strong> [<em>filename</em>]<br>输出类和类成员新旧名字之间的映射到指定文件中。只有开启混淆时可用。</p>
-<p><strong>-applymapping</strong> <em>filename</em><br>重用映射，映射文件未列出的类和类成员会使用随机的名称。如果代码结构从根本上发生变化，ProGuard 可能会输出映射会引起冲突警告。你可以通过添加 <code>-useuniqueclassmembernames</code> 选项来降低风险。只能指定一个映射文件。只有开启混淆时可用。</p>
+<p><strong>-applymapping</strong> <em>filename</em><br>重用映射，映射文件未列出的类和类成员会使用随机的名称。如果代码结构从根本上发生变化，ProGuard 可能会输出映射会引起冲突警告。你可以通过添加 <code class="inline-code">-useuniqueclassmembernames</code> 选项来降低风险。只能指定一个映射文件。只有开启混淆时可用。</p>
 <p><strong>-obfuscationdictionary</strong> <em>filename</em><br>使用文件中的关键字作为方法及字段混淆后的名称。默认使用 ‘a’，’b’ 等短名称作为混淆后的名称。你可以指定保留关键字或不相关的标识符。文件中的空格、标点符号、重复的单词及注释会被忽略。只有开启混淆时可用。</p>
-<p><strong>-classobfuscationdictionary</strong> <em>filename</em><br>使用文件中的关键字作为类混淆后的名称，类似于 <code>-obfuscationdictionary</code>。只有开启混淆时可用。</p>
-<p><strong>-packageobfuscationdictionary</strong> <em>filename</em><br>使用文件中的关键字作为包混淆后的名称，类似于 <code>-obfuscationdictionary</code>。只有开启混淆时可用。</p>
+<p><strong>-classobfuscationdictionary</strong> <em>filename</em><br>使用文件中的关键字作为类混淆后的名称，类似于 <code class="inline-code">-obfuscationdictionary</code>。只有开启混淆时可用。</p>
+<p><strong>-packageobfuscationdictionary</strong> <em>filename</em><br>使用文件中的关键字作为包混淆后的名称，类似于 <code class="inline-code">-obfuscationdictionary</code>。只有开启混淆时可用。</p>
 <p><strong>-overloadaggressively</strong><br>开启侵入性重载混淆。多个字段及方法允许同名，只要它们的参数及返回值类型不同。该选项可使处理后的代码更小（及更难阅读）。只有开启混淆时可用。<br>注：Dalvik 不能处理重载的静态字段</p>
 <p><strong>-useuniqueclassmembernames</strong><br>方法同名混淆后亦同名，方法不同名混淆后亦不同名。不使用该选项时，类成员可被映射到相同的名称。因此该选项会增加些许输出文件的大小。只有开启混淆时可用。</p>
 <p><strong>-dontusemixedcaseclassnames</strong><br>混淆时不会产生大小写混合的类名。默认混淆后的类名可以包含大写及小写。如果 jar 被解压到非大小写敏感的系统（比如 Windows），解压工具可能会将命名类似的文件覆盖另一个文件。只有开启混淆时可用。</p>
 <p><strong>-keeppackagenames</strong> [<em>package_filter</em>]<br>不混淆指定的包名。过滤器是由逗号分隔的包名列表。包名可以包含 ？、<em>、</em>* 通配符，并且可以在包名前加上 ! 否定符。只有开启混淆时可用。</p>
 <p><strong>-flattenpackagehierarchy</strong> [<em>package_name</em>]<br>重新打包所有重命名的包到给定的包中。如果没参数或字符串为空，包移动到根包下。该选项是进一步混淆包名的例子，可以使处理后的代码更小更难阅读。只有开启混淆时可用。</p>
-<p><strong>-repackageclasses</strong> [<em>package_name</em>]<br>重新打包所有重命名的类到给定的包中。如果没参数或字符串为空，类的包会被完全移除。该选项覆盖 <code>-flattenpackagehierarchy</code> ，是进一步混淆包名的另一个例子，可以使处理后的代码更小更难阅读。曾用名为 <code>-defaultpackage</code>。只有开启混淆时可用。</p>
-<p><strong>-keepattributes</strong> [<em>attribute_filter</em>]<br>保留任何可选属性。过滤器是由逗号分隔的 JVM 及 ProGuard 支持的属性列表。属性名可以包含 ？、<em>、</em>* 通配符，并且可以在属性名前加上 ! 否定符。例如：处理库文件时应该加上 <code>Exceptions</code>,<code>InnerClasses</code>,<code>Signature</code> 属性。同时保留 <code>SourceFile</code> 及 <code>LineNumberTable</code> 属性使混淆后仍能获取准确的堆栈信息。同时如果你的代码有使用注解你可能会保留 <code>annotations</code> 属性。只有开启混淆时可用。</p>
+<p><strong>-repackageclasses</strong> [<em>package_name</em>]<br>重新打包所有重命名的类到给定的包中。如果没参数或字符串为空，类的包会被完全移除。该选项覆盖 <code class="inline-code">-flattenpackagehierarchy</code> ，是进一步混淆包名的另一个例子，可以使处理后的代码更小更难阅读。曾用名为 <code class="inline-code">-defaultpackage</code>。只有开启混淆时可用。</p>
+<p><strong>-keepattributes</strong> [<em>attribute_filter</em>]<br>保留任何可选属性。过滤器是由逗号分隔的 JVM 及 ProGuard 支持的属性列表。属性名可以包含 ？、<em>、</em>* 通配符，并且可以在属性名前加上 ! 否定符。例如：处理库文件时应该加上 <code class="inline-code">Exceptions</code>,<code class="inline-code">InnerClasses</code>,<code class="inline-code">Signature</code> 属性。同时保留 <code class="inline-code">SourceFile</code> 及 <code class="inline-code">LineNumberTable</code> 属性使混淆后仍能获取准确的堆栈信息。同时如果你的代码有使用注解你可能会保留 <code class="inline-code">annotations</code> 属性。只有开启混淆时可用。</p>
 <p><strong>-keepparameternames</strong><br>保留已保留方法的参数的名称及类型。只有开启混淆时可用。</p>
-<p><strong>-renamesourcefileattribute</strong> [<em>string</em>]<br>指定一个常量字符串作为 <code>SourceFile</code>（和 <code>SourceDir</code>）属性的值。需要被 <code>-keepattributes</code> 选项指定保留。只有开启混淆时可用。</p>
+<p><strong>-renamesourcefileattribute</strong> [<em>string</em>]<br>指定一个常量字符串作为 <code class="inline-code">SourceFile</code>（和 <code class="inline-code">SourceDir</code>）属性的值。需要被 <code class="inline-code">-keepattributes</code> 选项指定保留。只有开启混淆时可用。</p>
 <p><strong>-adaptclassstrings</strong> [<em>class_filter</em>]<br>混淆与完整类名一致的字符串。没指定过滤器时，所有符合现有类的完整类名的字符串常量均会混淆。只有开启混淆时可用。</p>
 <p><strong>-adaptresourcefilenames</strong> [<em>file_filter</em>]<br>以混淆后的类文件作为样本重命名指定的源文件。没指定过滤器时，所有源文件都会重命名。只有开启混淆时可用。</p>
 <p><strong>-adaptresourcefilecontents</strong> [<em>file_filter</em>]<br>以混淆后的类文件作为样本混淆指定的源文件中与完整类名一致的内容。没指定过滤器时，所有源文件中与完整类名一致的内容均会混淆。只有开启混淆时可用。</p>
@@ -791,8 +782,10 @@ thead {
 <p>使用参考：</p>
 <p><a target="_blank" rel="noopener" href="https://www.guardsquare.com/en/proguard/manual/examples">传送门</a></p>
 
-        </section>
+                </div>
+            </section>
         </div>
+        <input id="copy-input" style="position: absolute; left: -1000px; z-index: -1000;">
 
     
 

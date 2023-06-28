@@ -82,16 +82,6 @@ select
 }</style>
     <style type="text/css" id="style">@charset "utf-8";
 
-:root {
-    --font-color-0: #04077e;
-    --font-color-1: #000;
-    --font-color-2: #666;
-    --font-color-3: #aaa;
-    --bg-color-1: #eee;
-    --line-1: #ccc;
-    --line-2: #ddd;
-}
-
 p {
     word-wrap: break-word;
     white-space: pre-wrap;
@@ -103,13 +93,13 @@ body {
     font-size: 16px;
     line-height: 1.75;
     letter-spacing: 0.6px;
-    color: var(--font-color-2);
+    color: #666;
     background: #F0F0F0;
 }
 
 a {
     text-decoration: none;
-    color: var(--font-color-1);
+    color: #000;
 }
 
 
@@ -148,7 +138,7 @@ a {
 .header {
     padding-bottom: 48px;
     margin-bottom: 48px;
-    border-bottom: 1px solid var(--line-1);
+    border-bottom: 1px solid #ccc;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -159,7 +149,7 @@ a {
 .logo {
     font-size: 2rem;
     font-weight: 600;
-    color: var(--font-color-1);
+    color: #000;
     margin-bottom: 16px;
     flex: 0 0 100%;
 }
@@ -184,7 +174,7 @@ a {
 }
 
 .nav li a {
-    color: var(--font-color-1);
+    color: #000;
     opacity: .6;
     transition: opacity ease-in-out .5s;
 }
@@ -222,7 +212,7 @@ a {
     width: 100%;
     padding-bottom: 48px;
     margin-bottom: 48px;
-    border-bottom: 1px dashed var(--line-2);
+    border-bottom: 1px dashed #ddd;
 }
 
 .post-title {
@@ -231,12 +221,12 @@ a {
     font-weight: 600;
     line-height: 1.5;
     margin-bottom: 12px;
-    color: var(--font-color-1);
+    color: #000;
     /*transition: color ease-in-out .5s;*/
 }
 
 .post-title:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
@@ -248,7 +238,7 @@ a {
 
 .read-more {
     padding: 0 4px;
-    color: var(--font-color-0);
+    color: #04077e;
 }
 
 .read-more:before,
@@ -277,7 +267,7 @@ a {
 
 .post-date {
     font-size: 0.875rem;
-    color: var(--font-color-3);
+    color: #aaa;
 }
 
 .paginator {
@@ -309,24 +299,24 @@ a {
 
 .paginator a {
     margin: 4px;
-    color: var(--font-color-2);
+    color: #666;
     transition: color ease-in-out .5s;
 }
 
 .paginator a:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
 .paginator .current {
-    color: var(--font-color-0);
-    border: 1px solid var(--font-color-0);
+    color: #04077e;
+    border: 1px solid #04077e;
 }
 
 .footer {
     padding: 24px 0;
     font-size: 0.875rem;
-    color: var(--font-color-3);
+    color: #aaa;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -340,12 +330,12 @@ a {
 }
 
 .footer a {
-    color: var(--font-color-3);
+    color: #aaa;
     transition: color ease-in-out .5s;
 }
 
 .footer a:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
@@ -364,12 +354,12 @@ a {
     font-size: 1.6rem;
     font-weight: 600;
     line-height: 1.5;
-    color: var(--font-color-1);
+    color: #000;
 }
 
 .post-meta {
     font-size: 0.875rem;
-    color: var(--font-color-3);
+    color: #aaa;
     flex: 0 0 100%;
     margin-bottom: 32px;
 }
@@ -405,7 +395,7 @@ a {
 
 .archive li span {
     width: 108px;
-    color: var(--font-color-2);
+    color: #666;
 }
 
 .archive-main {
@@ -413,12 +403,12 @@ a {
 }
 
 .archive-title {
-    color: var(--font-color-1);
+    color: #000;
     /*transition: color ease-in-out .5s;*/
 }
 
 .archive-title:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
@@ -434,16 +424,6 @@ a {
     cursor: pointer;
 }
 
-#beautiful p {
-    box-sizing: border-box;
-    margin-bottom: 16px;
-    font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
-    font-size: 15px;
-    text-align: justify;
-    white-space: normal;
-    text-size-adjust: auto;
-    line-height: 1.75em;
-}
 #bing-bg {
     width: 100%;
     position: fixed;
@@ -453,9 +433,20 @@ a {
     filter: blur(10px);
     object-fit: cover;
   }
-</style>
+#go-top {
+    cursor: pointer;
+}
+
+#beautiful {
+    font-family: "PingFang SC", BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serifhtml, body;
+    font-size: 16px;
+    line-height: 1.75;
+    letter-spacing: 0.6px;
+}</style>
     <style type="text/css" id="markdown">@charset "utf-8";
 
+#copy-post-content,
+#beautiful,
 .post-md
 {
     width: 100%;
@@ -469,7 +460,7 @@ a {
 .post-md h5,
 .post-md h6
 {
-    color: var(--font-color-1);
+    color: #000;
 }
 /* 一级标题 */
 .post-md h1  {
@@ -517,7 +508,6 @@ a {
 
 /* 二级标题内容 */
 .post-md h2 .content {
-    margin-left: -10px;
     display: inline-block;
     width: auto;
     height: 40px;
@@ -570,13 +560,13 @@ a {
 .post-md a
 {
     color: #61aeee;
-    box-shadow: 0 2px 0 var(--line-1);
+    box-shadow: 0 2px 0 #ccc;
     transition: color ease-in-out .65s, box-shadow ease-in-out .65s;
 }
 .post-md a:hover
 {
-    color: var(--font-color-0);
-    box-shadow: 0 2px 0 var(--font-color-0);
+    color: #04077e;
+    box-shadow: 0 2px 0 #04077e;
     transition: color ease-in-out .65s, box-shadow ease-in-out .65s;
 }
 .post-md strong
@@ -612,7 +602,7 @@ a {
 {
     border: none;
     height: 1px;
-    background: var(--line-1);
+    background: #ccc;
     margin: 24px 0;
 }
 
@@ -620,11 +610,11 @@ a {
 .post-md blockquote
 {
     width: 100%;
-    margin: 12px 0;
+    padding: 7px 0;
 }
 .post-md blockquote
 {
-    border-left: 2px solid var(--line-2);
+    border-left: 2px solid #ddd;
     padding-left: 12px;
     word-wrap: break-word;
 }
@@ -683,7 +673,7 @@ thead {
 }
 
 
-.post-md p code
+.inline-code
 {
     border-radius: 4px;
     background:rgba(27,31,35,.05);
@@ -707,7 +697,7 @@ thead {
             
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
-            <h4>目录</h4>
+            <h4 id="go-top">目录</h4>
             <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Volley%20%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82"><span class="post-toc-text">Volley 网络请求</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Volley%20%E8%AF%B7%E6%B1%82%E9%87%8D%E8%AF%95%E6%9C%BA%E5%88%B6"><span class="post-toc-text">Volley 请求重试机制</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%86%99%E5%9C%A8%E6%9C%80%E5%90%8E"><span class="post-toc-text">写在最后</span></a></li></ol>
         </nav>
     </aside>
@@ -724,9 +714,10 @@ thead {
         <div class="post-meta">
             <a class='author' href="/">罗昭成</a> <span id="clipboardbtn">2014年11月05日</span>
         </div>
-        <div class="post-md" id="copy-post-content">
-        <section id="beautiful">
-            <p>Volley是在Google I&#x2F;O 2013上发布的，说来惭愧，都快一年了，才知道有这么个东西。</p>
+        <div id="copy-post-content">
+            <section id="beautiful">
+            <div class="post-md" >
+                    <p>Volley是在Google I&#x2F;O 2013上发布的，说来惭愧，都快一年了，才知道有这么个东西。</p>
 <p>有关Volley相关的使用及详细内容，我就不说了。如果还不会用的，但是又想用的可以移步<br>其它地方。</p>
 <p><strong>传送门</strong> (感谢“郭霖”大神)</p>
 <blockquote>
@@ -747,8 +738,8 @@ thead {
 <p>当然，如果你非常了解源码，你肯定知道是怎么引起的。但是我不知道源码啊。肿么破啊。</p>
 <p>于是，硬着头皮去看Volley源码，才发现，人家这个比我也得好是有原因的。</p>
 <h3 id="Volley 网络请求"><span class="prefix"></span><span class="content">Volley 网络请求</span><span class="suffix"></span></h3><p>先看一下官方给出的架构图嘛，虽然我也不怎么明白是怎么实现的。</p>
-<p><img src="http://pinned.github.io/assets/posts/file-2014-11-05/volley-request.png" alt="Google Volley illustrates the life of a request" referrerpolicy="no-referrer"><figcaption class="post-image-caption">Google Volley illustrates the life of a request</figcaption></figure></p>
-<p>当你建立一个<code>Request</code>，将<code>Request</code>添加到<code>RequestQuene</code>中去，Volley 首先会去找Cache里面有没有存在有效的<br>请求，如果存在，则直接处理里面请求返回的数据并响应回去，如果没有，则把<code>Request</code>放到网络请求队列里面去，<br>执行异步请求并响应。</p>
+<p><img src="http://pinned.github.io/assets/posts/file-2014-11-05/volley-request.png" alt="Google Volley illustrates the life of a request" referrerpolicy="no-referrer"></p>
+<p>当你建立一个<code class="inline-code">Request</code>，将<code class="inline-code">Request</code>添加到<code class="inline-code">RequestQuene</code>中去，Volley 首先会去找Cache里面有没有存在有效的<br>请求，如果存在，则直接处理里面请求返回的数据并响应回去，如果没有，则把<code class="inline-code">Request</code>放到网络请求队列里面去，<br>执行异步请求并响应。</p>
 <p>以上就是我暂时对Volley的理解了。</p>
 <h3 id="Volley 请求重试机制"><span class="prefix"></span><span class="content">Volley 请求重试机制</span><span class="suffix"></span></h3><p>一个完整的网络请求框架，肯定会有请求失败重试的机制。</p>
 <p>开始使用的时候，没有注意过请求重试的相关东西。自己也封装过一些网络请求的简单框架。也没有使用过。<br>最近在使用Volley的时候，它的网络请求是有一个重试机制的，并且你可以自己写重试的条件和次数等。</p>
@@ -827,13 +818,13 @@ public NetworkResponse performRequest(Request&lt;?&gt; request) throws VolleyErr
     &#125;
 &#125;
 </code></pre>
-<p>Volley的网络请求是在上述代码中进行执行的。一个<code>while(true)</code>循环包含了太多东西。</p>
-<p>网络请求发出去的了，但是如果网络超时怎么办，当然是<code>重试</code>呢，可是上述代码是怎么实现重试的呢？<br>我们可以看到，在<code>catch</code>里面有两个超时的Exception:</p>
+<p>Volley的网络请求是在上述代码中进行执行的。一个<code class="inline-code">while(true)</code>循环包含了太多东西。</p>
+<p>网络请求发出去的了，但是如果网络超时怎么办，当然是<code class="inline-code">重试</code>呢，可是上述代码是怎么实现重试的呢？<br>我们可以看到，在<code class="inline-code">catch</code>里面有两个超时的Exception:</p>
 <ul>
-<li><code>SocketTimeoutException</code></li>
-<li><code>ConnectTimeoutException</code></li>
+<li><code class="inline-code">SocketTimeoutException</code></li>
+<li><code class="inline-code">ConnectTimeoutException</code></li>
 </ul>
-<p>我们在继续往下面看，当它捕获到超时的时候执行了<code>attemptRetryOnException(&quot;connection&quot;, request, new TimeoutError());</code></p>
+<p>我们在继续往下面看，当它捕获到超时的时候执行了<code class="inline-code">attemptRetryOnException(&quot;connection&quot;, request, new TimeoutError());</code></p>
 <p>在看一下这个方法的源码:</p>
 <pre><code class="java">/**
  * Attempts to prepare the request for a retry. If there are no more attempts remaining in the
@@ -855,7 +846,7 @@ private static void attemptRetryOnException(String logPrefix, Request&lt;?&gt; r
     request.addMarker(String.format(&quot;%s-retry [timeout=%s]&quot;, logPrefix, oldTimeout));
 &#125;
 </code></pre>
-<p>看方法上面的注释就可以清晰的看到，给网络请求建立重试，如果重试的次数已经用完了，则抛出一个<br><code>timeout exception</code>.</p>
+<p>看方法上面的注释就可以清晰的看到，给网络请求建立重试，如果重试的次数已经用完了，则抛出一个<br><code class="inline-code">timeout exception</code>.</p>
 <p>在来看一下，默认的重试是怎么进行验证的。</p>
 <pre><code class="java"> /**
  * Prepares for the next retry by applying a backoff to the timeout.
@@ -877,15 +868,17 @@ protected boolean hasAttemptRemaining() &#123;
     return mCurrentRetryCount &lt;= mMaxNumRetries;
 &#125;
 </code></pre>
-<p>首先将当前重试的次数加1，如果重试的次数小于等于最大次数，则不管，回到上面那个<code>while(true)</code><br>循环继续执行，反之，则抛出异常，最后终止循环。</p>
+<p>首先将当前重试的次数加1，如果重试的次数小于等于最大次数，则不管，回到上面那个<code class="inline-code">while(true)</code><br>循环继续执行，反之，则抛出异常，最后终止循环。</p>
 <blockquote>
 <p>PS：默认的重试最大次数是1</p>
 </blockquote>
 <h3 id="写在最后"><span class="prefix"></span><span class="content">写在最后</span><span class="suffix"></span></h3><p>多了解一下最新的技术，多去看看那些大神写的Blog，对自己的提升会比较大，虽然你不能很好的<br>去读懂官方给出的英文文档，但是很多技术牛人会将新技术以简单通俗的例子告诉给你。</p>
 <p>最后，感谢“郭霖”大神，他的技术博客地址:<a target="_blank" rel="noopener" href="http://blog.csdn.net/guolin_blog">传送门</a></p>
 
-        </section>
+                </div>
+            </section>
         </div>
+        <input id="copy-input" style="position: absolute; left: -1000px; z-index: -1000;">
 
     
 
@@ -898,8 +891,8 @@ protected boolean hasAttemptRemaining() &#123;
         </div>
     
     
-        <a href="/2014/11/04/eclipse-shutdown/">下一篇: 
-            Ubuntu-14.04下Eclipse闪退解决办法
+        <a href="/2014/11/04/butterknife-useing/">下一篇: 
+            Andorid UI注入工具的使用(ButterKnife)
         </a>
     
 </div>

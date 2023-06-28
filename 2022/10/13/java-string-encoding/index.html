@@ -82,16 +82,6 @@ select
 }</style>
     <style type="text/css" id="style">@charset "utf-8";
 
-:root {
-    --font-color-0: #04077e;
-    --font-color-1: #000;
-    --font-color-2: #666;
-    --font-color-3: #aaa;
-    --bg-color-1: #eee;
-    --line-1: #ccc;
-    --line-2: #ddd;
-}
-
 p {
     word-wrap: break-word;
     white-space: pre-wrap;
@@ -103,13 +93,13 @@ body {
     font-size: 16px;
     line-height: 1.75;
     letter-spacing: 0.6px;
-    color: var(--font-color-2);
+    color: #666;
     background: #F0F0F0;
 }
 
 a {
     text-decoration: none;
-    color: var(--font-color-1);
+    color: #000;
 }
 
 
@@ -148,7 +138,7 @@ a {
 .header {
     padding-bottom: 48px;
     margin-bottom: 48px;
-    border-bottom: 1px solid var(--line-1);
+    border-bottom: 1px solid #ccc;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -159,7 +149,7 @@ a {
 .logo {
     font-size: 2rem;
     font-weight: 600;
-    color: var(--font-color-1);
+    color: #000;
     margin-bottom: 16px;
     flex: 0 0 100%;
 }
@@ -184,7 +174,7 @@ a {
 }
 
 .nav li a {
-    color: var(--font-color-1);
+    color: #000;
     opacity: .6;
     transition: opacity ease-in-out .5s;
 }
@@ -222,7 +212,7 @@ a {
     width: 100%;
     padding-bottom: 48px;
     margin-bottom: 48px;
-    border-bottom: 1px dashed var(--line-2);
+    border-bottom: 1px dashed #ddd;
 }
 
 .post-title {
@@ -231,12 +221,12 @@ a {
     font-weight: 600;
     line-height: 1.5;
     margin-bottom: 12px;
-    color: var(--font-color-1);
+    color: #000;
     /*transition: color ease-in-out .5s;*/
 }
 
 .post-title:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
@@ -248,7 +238,7 @@ a {
 
 .read-more {
     padding: 0 4px;
-    color: var(--font-color-0);
+    color: #04077e;
 }
 
 .read-more:before,
@@ -277,7 +267,7 @@ a {
 
 .post-date {
     font-size: 0.875rem;
-    color: var(--font-color-3);
+    color: #aaa;
 }
 
 .paginator {
@@ -309,24 +299,24 @@ a {
 
 .paginator a {
     margin: 4px;
-    color: var(--font-color-2);
+    color: #666;
     transition: color ease-in-out .5s;
 }
 
 .paginator a:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
 .paginator .current {
-    color: var(--font-color-0);
-    border: 1px solid var(--font-color-0);
+    color: #04077e;
+    border: 1px solid #04077e;
 }
 
 .footer {
     padding: 24px 0;
     font-size: 0.875rem;
-    color: var(--font-color-3);
+    color: #aaa;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -340,12 +330,12 @@ a {
 }
 
 .footer a {
-    color: var(--font-color-3);
+    color: #aaa;
     transition: color ease-in-out .5s;
 }
 
 .footer a:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
@@ -364,12 +354,12 @@ a {
     font-size: 1.6rem;
     font-weight: 600;
     line-height: 1.5;
-    color: var(--font-color-1);
+    color: #000;
 }
 
 .post-meta {
     font-size: 0.875rem;
-    color: var(--font-color-3);
+    color: #aaa;
     flex: 0 0 100%;
     margin-bottom: 32px;
 }
@@ -405,7 +395,7 @@ a {
 
 .archive li span {
     width: 108px;
-    color: var(--font-color-2);
+    color: #666;
 }
 
 .archive-main {
@@ -413,12 +403,12 @@ a {
 }
 
 .archive-title {
-    color: var(--font-color-1);
+    color: #000;
     /*transition: color ease-in-out .5s;*/
 }
 
 .archive-title:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
@@ -434,16 +424,6 @@ a {
     cursor: pointer;
 }
 
-#beautiful p {
-    box-sizing: border-box;
-    margin-bottom: 16px;
-    font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
-    font-size: 15px;
-    text-align: justify;
-    white-space: normal;
-    text-size-adjust: auto;
-    line-height: 1.75em;
-}
 #bing-bg {
     width: 100%;
     position: fixed;
@@ -453,9 +433,20 @@ a {
     filter: blur(10px);
     object-fit: cover;
   }
-</style>
+#go-top {
+    cursor: pointer;
+}
+
+#beautiful {
+    font-family: "PingFang SC", BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serifhtml, body;
+    font-size: 16px;
+    line-height: 1.75;
+    letter-spacing: 0.6px;
+}</style>
     <style type="text/css" id="markdown">@charset "utf-8";
 
+#copy-post-content,
+#beautiful,
 .post-md
 {
     width: 100%;
@@ -469,7 +460,7 @@ a {
 .post-md h5,
 .post-md h6
 {
-    color: var(--font-color-1);
+    color: #000;
 }
 /* 一级标题 */
 .post-md h1  {
@@ -517,7 +508,6 @@ a {
 
 /* 二级标题内容 */
 .post-md h2 .content {
-    margin-left: -10px;
     display: inline-block;
     width: auto;
     height: 40px;
@@ -570,13 +560,13 @@ a {
 .post-md a
 {
     color: #61aeee;
-    box-shadow: 0 2px 0 var(--line-1);
+    box-shadow: 0 2px 0 #ccc;
     transition: color ease-in-out .65s, box-shadow ease-in-out .65s;
 }
 .post-md a:hover
 {
-    color: var(--font-color-0);
-    box-shadow: 0 2px 0 var(--font-color-0);
+    color: #04077e;
+    box-shadow: 0 2px 0 #04077e;
     transition: color ease-in-out .65s, box-shadow ease-in-out .65s;
 }
 .post-md strong
@@ -612,7 +602,7 @@ a {
 {
     border: none;
     height: 1px;
-    background: var(--line-1);
+    background: #ccc;
     margin: 24px 0;
 }
 
@@ -620,11 +610,11 @@ a {
 .post-md blockquote
 {
     width: 100%;
-    margin: 12px 0;
+    padding: 7px 0;
 }
 .post-md blockquote
 {
-    border-left: 2px solid var(--line-2);
+    border-left: 2px solid #ddd;
     padding-left: 12px;
     word-wrap: break-word;
 }
@@ -683,7 +673,7 @@ thead {
 }
 
 
-.post-md p code
+.inline-code
 {
     border-radius: 4px;
     background:rgba(27,31,35,.05);
@@ -707,7 +697,7 @@ thead {
             
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
-            <h4>目录</h4>
+            <h4 id="go-top">目录</h4>
             <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1.%20%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%BC%96%E7%A0%81"><span class="post-toc-text">1. 字符串编码</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2.%20String%20%E4%B8%AD%E5%AD%97%E7%AC%A6%E6%98%AF%E5%A6%82%E4%BD%95%E5%AD%98%E5%82%A8%E7%9A%84%EF%BC%9F"><span class="post-toc-text">2. String 中字符是如何存储的？</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3.%20%E4%BB%A3%E7%A0%81%E8%B0%83%E8%AF%95%EF%BC%8Cbyte%20%E6%95%B0%E7%BB%84%E5%88%9B%E5%BB%BA%20String%20%E7%9A%84%E8%BF%87%E7%A8%8B"><span class="post-toc-text">3. 代码调试，byte 数组创建 String 的过程</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%80%BB%E7%BB%93"><span class="post-toc-text">总结</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E9%99%84%E5%BD%95%EF%BC%9A%E5%A6%82%E4%BD%95%E5%9C%A8%20IDEA%20%E4%B8%AD%E6%9F%A5%E7%9C%8B%E4%B8%8E%E8%B0%83%E8%AF%95%20rt.jar%20%E4%B8%AD%E7%9A%84%E6%BA%90%E7%A0%81"><span class="post-toc-text">附录：如何在 IDEA 中查看与调试 rt.jar 中的源码</span></a></li></ol>
         </nav>
     </aside>
@@ -724,12 +714,13 @@ thead {
         <div class="post-meta">
             <a class='author' href="/">罗昭成</a> <span id="clipboardbtn">2022年10月13日</span>
         </div>
-        <div class="post-md" id="copy-post-content">
-        <section id="beautiful">
-            <p>近期在工作中，遇到了一段历史代码，在代码中，将一个字符串进行加密，得到一个 <code>byte 数组</code>， 在代码中，这个 <code>byte 数组</code> 需要存储到 文件中，但代码却是用这个 <code>byte 数组</code> 创建了一个 <code>String</code> ，然后在将 <code>String</code> 写入到文件中。 聪明的你应该发现问题了，<code>byte 数组</code> 直接转成 <code>String</code> 会有问题，一般的处理方法是将 <code>byte 数组</code> 使用 <code>Base64</code> 编码，然后将编码后的字符串写入文件中，在使用的时候，先使用 <code>Base64</code> 解码。</p>
-<p>可是，为什么 <code>byte 数组 </code>直接使用 <code>String</code> 会有问题呢？要想深入解答这个问题，本文将从字符串编码， 以及分析 Java 中<code>String</code>处理逻辑，来尝试回答这个问题。</p>
-<h2 id="1. 字符串编码"><span class="prefix"></span><span class="content">1. 字符串编码</span><span class="suffix"></span></h2><p>在计算机的世界中，存储任何信息都是按照二进制数字来处理的，因此字符都需要编码成数字，才能在计算机中正常的处理。在计算机中，一个 <code>byte</code> 有 <code>8 bit</code>， 能表示 0~255 范围的数字，应运而生的就是 ASCII 编码，此编码使用了 <code>7 个 bit</code>，共定义了 128 个字符，但对于中文，一个 <code>byte</code> 肯定是表示不了的，因此需要新的编码方式去支持。  我们现在在编码过程中，最常用的是 UTF-8，说到 UTF-8 ， 就不得不先讲一下 <code>Unicode</code> ，它一种在计算机上使用的字符编码，它为每种语言中的每个字符设定了统一并且唯一的二进制编码，以满足跨语言、跨平台进行文本转换、处理的要求。<code>Unicode</code> 是一个字符集， 它只规定了每个字符的二进制值，但是字符具体如何存储并没有规定，<code>Unicode</code> 编码范围为 <code>0 - 0x10FFFF</code> ，需要使用了其中的 <code>21 bit</code>， 如按此标准，每一个字符需要使用 3 个 <code>byte</code> 进行编码 。那 UTF-8 和 Unicode 有什么关系呢？</p>
-<p>刚讲到， 如每一个 Unicode 字符都需要 3 个 <code>byte</code> 进行编码，但对于 ASCII 中的那些字符只需要 1 个 <code>byte</code> 就能表示，这样编码就会造成很多空间浪费。 UTF-8 就是以字节为单位对 Unicode 字符进行的编码，它的特点是对不同范围的字符使用不同长度的编码， 如下表所示：</p>
+        <div id="copy-post-content">
+            <section id="beautiful">
+            <div class="post-md" >
+                    <p>近期在工作中，遇到了一段历史代码，在代码中，将一个字符串进行加密，得到一个 <code class="inline-code">byte 数组</code>， 在代码中，这个 <code class="inline-code">byte 数组</code> 需要存储到 文件中，但代码却是用这个 <code class="inline-code">byte 数组</code> 创建了一个 <code class="inline-code">String</code> ，然后在将 <code class="inline-code">String</code> 写入到文件中。 聪明的你应该发现问题了，<code class="inline-code">byte 数组</code> 直接转成 <code class="inline-code">String</code> 会有问题，一般的处理方法是将 <code class="inline-code">byte 数组</code> 使用 <code class="inline-code">Base64</code> 编码，然后将编码后的字符串写入文件中，在使用的时候，先使用 <code class="inline-code">Base64</code> 解码。</p>
+<p>可是，为什么 <code class="inline-code">byte 数组 </code>直接使用 <code class="inline-code">String</code> 会有问题呢？要想深入解答这个问题，本文将从字符串编码， 以及分析 Java 中<code class="inline-code">String</code>处理逻辑，来尝试回答这个问题。</p>
+<h2 id="1. 字符串编码"><span class="prefix"></span><span class="content">1. 字符串编码</span><span class="suffix"></span></h2><p>在计算机的世界中，存储任何信息都是按照二进制数字来处理的，因此字符都需要编码成数字，才能在计算机中正常的处理。在计算机中，一个 <code class="inline-code">byte</code> 有 <code class="inline-code">8 bit</code>， 能表示 0~255 范围的数字，应运而生的就是 ASCII 编码，此编码使用了 <code class="inline-code">7 个 bit</code>，共定义了 128 个字符，但对于中文，一个 <code class="inline-code">byte</code> 肯定是表示不了的，因此需要新的编码方式去支持。  我们现在在编码过程中，最常用的是 UTF-8，说到 UTF-8 ， 就不得不先讲一下 <code class="inline-code">Unicode</code> ，它一种在计算机上使用的字符编码，它为每种语言中的每个字符设定了统一并且唯一的二进制编码，以满足跨语言、跨平台进行文本转换、处理的要求。<code class="inline-code">Unicode</code> 是一个字符集， 它只规定了每个字符的二进制值，但是字符具体如何存储并没有规定，<code class="inline-code">Unicode</code> 编码范围为 <code class="inline-code">0 - 0x10FFFF</code> ，需要使用了其中的 <code class="inline-code">21 bit</code>， 如按此标准，每一个字符需要使用 3 个 <code class="inline-code">byte</code> 进行编码 。那 UTF-8 和 Unicode 有什么关系呢？</p>
+<p>刚讲到， 如每一个 Unicode 字符都需要 3 个 <code class="inline-code">byte</code> 进行编码，但对于 ASCII 中的那些字符只需要 1 个 <code class="inline-code">byte</code> 就能表示，这样编码就会造成很多空间浪费。 UTF-8 就是以字节为单位对 Unicode 字符进行的编码，它的特点是对不同范围的字符使用不同长度的编码， 如下表所示：</p>
 <table>
 <thead>
 <tr>
@@ -764,50 +755,52 @@ thead {
 <td align="center">65536 - 2097151</td>
 </tr>
 </tbody></table>
-<p>图表中，<code>x</code> 表示编码 <code>Unicode</code> 所使用的位，举几个例子：</p>
+<p>图表中，<code class="inline-code">x</code> 表示编码 <code class="inline-code">Unicode</code> 所使用的位，举几个例子：</p>
 <ul>
-<li>字符 <code>A</code> ：它的 <code>Unicode</code> 编码为 <code>U+000041</code> ，在 UTF-8 格式下，只需要 <code>1 byte</code> 就能存储，将数字 <code>0x41</code> 转换为二进制为 <code>01000001</code>， 因此在 UTF-8 编码格式中，数据为 <code>01000001</code></li>
-<li>字符<code>¥</code>：它的 <code>Unicode</code> 编码为 <code>U+0000A5</code>， 在 UTF-8 格式下，需要 <code>2 byte</code> 才能够存储，将数字 <code>0xA5</code> 转换为二进制为 <code>10100101</code>， 因此在 UTF-8 编码格式中，数据为 <code>11000010</code> <code>10100101</code> 。</li>
-<li>字符 <code>中</code>： 它的  <code>Unicode</code> 编码为 <code>U+004E2D</code>，在 UTF-8 格式下，需要 <code>3 byte</code>  才能够存储，将 <code>0x4E2D</code> 转换为二进制为 <code>01001110</code> 和<code>00101101</code>， 因此在 UTF-8 编码格式中，数据为 <code>11100100</code> <code>10111000</code> <code>10101101</code>。</li>
-<li>字符 <code>🎃</code>：它的 <code>Unicode</code> 编码为 <code>U+01F383</code>，在 UTF-8 格式下，需要 <code>4 byte</code> 才能够存储，将 <code>0xD83C</code> 转换为二进制为 <code>00000001</code> 和 <code>11110011</code> <code>10000011</code>，因此在 UTF-8 编码格式中，数据为 <code>11110000</code> <code>10011111</code> <code>10001110</code> <code>10000011</code>。</li>
+<li>字符 <code class="inline-code">A</code> ：它的 <code class="inline-code">Unicode</code> 编码为 <code class="inline-code">U+000041</code> ，在 UTF-8 格式下，只需要 <code class="inline-code">1 byte</code> 就能存储，将数字 <code class="inline-code">0x41</code> 转换为二进制为 <code class="inline-code">01000001</code>， 因此在 UTF-8 编码格式中，数据为 <code class="inline-code">01000001</code></li>
+<li>字符<code class="inline-code">¥</code>：它的 <code class="inline-code">Unicode</code> 编码为 <code class="inline-code">U+0000A5</code>， 在 UTF-8 格式下，需要 <code class="inline-code">2 byte</code> 才能够存储，将数字 <code class="inline-code">0xA5</code> 转换为二进制为 <code class="inline-code">10100101</code>， 因此在 UTF-8 编码格式中，数据为 <code class="inline-code">11000010</code> <code class="inline-code">10100101</code> 。</li>
+<li>字符 <code class="inline-code">中</code>： 它的  <code class="inline-code">Unicode</code> 编码为 <code class="inline-code">U+004E2D</code>，在 UTF-8 格式下，需要 <code class="inline-code">3 byte</code>  才能够存储，将 <code class="inline-code">0x4E2D</code> 转换为二进制为 <code class="inline-code">01001110</code> 和<code class="inline-code">00101101</code>， 因此在 UTF-8 编码格式中，数据为 <code class="inline-code">11100100</code> <code class="inline-code">10111000</code> <code class="inline-code">10101101</code>。</li>
+<li>字符 <code class="inline-code">🎃</code>：它的 <code class="inline-code">Unicode</code> 编码为 <code class="inline-code">U+01F383</code>，在 UTF-8 格式下，需要 <code class="inline-code">4 byte</code> 才能够存储，将 <code class="inline-code">0xD83C</code> 转换为二进制为 <code class="inline-code">00000001</code> 和 <code class="inline-code">11110011</code> <code class="inline-code">10000011</code>，因此在 UTF-8 编码格式中，数据为 <code class="inline-code">11110000</code> <code class="inline-code">10011111</code> <code class="inline-code">10001110</code> <code class="inline-code">10000011</code>。</li>
 </ul>
-<p>通过上面的例子，可以大体了解其编码过程，下图将  <code>🎃</code> 从 <code>Unicode</code> 编码转换成 <code>UTF-8</code> 编码的转化图，可以更好的理解转换过程。</p>
-<p><img src="https://img-blog.csdnimg.cn/ca4c6e51326b428ba9ad818c968d2e82.png" alt="UTF-8编码过程" referrerpolicy="no-referrer"><figcaption class="post-image-caption">UTF-8编码过程</figcaption></figure></p>
+<p>通过上面的例子，可以大体了解其编码过程，下图将  <code class="inline-code">🎃</code> 从 <code class="inline-code">Unicode</code> 编码转换成 <code class="inline-code">UTF-8</code> 编码的转化图，可以更好的理解转换过程。</p>
+<p><img src="https://img-blog.csdnimg.cn/ca4c6e51326b428ba9ad818c968d2e82.png" alt="UTF-8编码过程" referrerpolicy="no-referrer"></p>
 <p>相信读到这里，大家对计算机系统中字符编码有了初步的了解。下面紧接着来看看在 Java 中，String 相关的一些细节。</p>
-<h2 id="2. String 中字符是如何存储的？"><span class="prefix"></span><span class="content">2. String 中字符是如何存储的？</span><span class="suffix"></span></h2><p>在 Java 中，String 类定义在 <code>java.lang</code> 这 个包下面，在 <code>Intellij IDEA</code> 直接跳转，就可以看到  <code>String</code> 的源码，下图截取了一部分内容：</p>
-<p><img src="https://img-blog.csdnimg.cn/69399bb46d874926ac137af67892f854.png" alt="String 类" referrerpolicy="no-referrer"><figcaption class="post-image-caption">String 类</figcaption></figure></p>
-<p>从图中 <code>value</code> 的注释可以看到， String 内部存储数据是用 <code>char</code> 数组来表示的。</p>
+<h2 id="2. String 中字符是如何存储的？"><span class="prefix"></span><span class="content">2. String 中字符是如何存储的？</span><span class="suffix"></span></h2><p>在 Java 中，String 类定义在 <code class="inline-code">java.lang</code> 这 个包下面，在 <code class="inline-code">Intellij IDEA</code> 直接跳转，就可以看到  <code class="inline-code">String</code> 的源码，下图截取了一部分内容：</p>
+<p><img src="https://img-blog.csdnimg.cn/69399bb46d874926ac137af67892f854.png" alt="String 类" referrerpolicy="no-referrer"></p>
+<p>从图中 <code class="inline-code">value</code> 的注释可以看到， String 内部存储数据是用 <code class="inline-code">char</code> 数组来表示的。</p>
 <blockquote>
-<p> PS： 上图截图内容为 JDK 1.8 版本，在 1.9 过后的版本中，已经将 <code>char</code> 数组改为 <code>byte</code> 数组来存储数据。如有兴趣可以参看知乎这篇回答：jdk9为何要将String的底层实现由char[]改成了byte[]? (<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/447224628/answer/1824574900">https://www.zhihu.com/question/447224628/answer/1824574900</a>)</p>
+<p> PS： 上图截图内容为 JDK 1.8 版本，在 1.9 过后的版本中，已经将 <code class="inline-code">char</code> 数组改为 <code class="inline-code">byte</code> 数组来存储数据。如有兴趣可以参看知乎这篇回答：jdk9为何要将String的底层实现由char[]改成了byte[]? (<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/447224628/answer/1824574900">https://www.zhihu.com/question/447224628/answer/1824574900</a>)</p>
 </blockquote>
-<p><code>char</code> 在 JAVA 中定义为 <code>16 bit</code> ， 所以在存储的时候使用的是 <code>UTF-16</code> 的编码，针对 <code>16 bit</code> 可以表示的字符（Basic Multilingual Plane (BMP)），就直接使用一个 <code>char</code> 表示；如果是 <code>16 bit</code> 表示不下的字符，使两个 <code>char</code> 表示，在进行编码时，会将 <code>Unicode</code> 的值的 <code>21 bit</code> 拆分成 <code>11 bit</code> 和 <code>10 bit</code>， 分别放入两个 <code>char</code> 中： 第一个 <code>char</code> 表示 <code> high-surrogates</code>， 范围为 <code>U+D800 - U+DBFF</code>；另一个 <code>char</code> 表示 <code>low-surrogates</code> ，范围为 <code>U+DC00 - U+DCFF</code>。</p>
-<h2 id="3. 代码调试，byte 数组创建 String 的过程"><span class="prefix"></span><span class="content">3. 代码调试，byte 数组创建 String 的过程</span><span class="suffix"></span></h2><p>回到文章开头的问题，使用 <code>byte 数组</code> 直接创建 <code>String</code> 的过程，在 JVM 执行过程中，是如何执行的呢？ 要知道创建的细节，可以直接使用 <code>Intellij IDEA</code> 进行调试，跟进一下逻辑。</p>
+<p><code class="inline-code">char</code> 在 JAVA 中定义为 <code class="inline-code">16 bit</code> ， 所以在存储的时候使用的是 <code class="inline-code">UTF-16</code> 的编码，针对 <code class="inline-code">16 bit</code> 可以表示的字符（Basic Multilingual Plane (BMP)），就直接使用一个 <code class="inline-code">char</code> 表示；如果是 <code class="inline-code">16 bit</code> 表示不下的字符，使两个 <code class="inline-code">char</code> 表示，在进行编码时，会将 <code class="inline-code">Unicode</code> 的值的 <code class="inline-code">21 bit</code> 拆分成 <code class="inline-code">11 bit</code> 和 <code class="inline-code">10 bit</code>， 分别放入两个 <code class="inline-code">char</code> 中： 第一个 <code class="inline-code">char</code> 表示 <code class="inline-code"> high-surrogates</code>， 范围为 <code class="inline-code">U+D800 - U+DBFF</code>；另一个 <code class="inline-code">char</code> 表示 <code class="inline-code">low-surrogates</code> ，范围为 <code class="inline-code">U+DC00 - U+DCFF</code>。</p>
+<h2 id="3. 代码调试，byte 数组创建 String 的过程"><span class="prefix"></span><span class="content">3. 代码调试，byte 数组创建 String 的过程</span><span class="suffix"></span></h2><p>回到文章开头的问题，使用 <code class="inline-code">byte 数组</code> 直接创建 <code class="inline-code">String</code> 的过程，在 JVM 执行过程中，是如何执行的呢？ 要知道创建的细节，可以直接使用 <code class="inline-code">Intellij IDEA</code> 进行调试，跟进一下逻辑。</p>
 <p>为了方便调试，可以用以下测试代码进行调试：</p>
 <pre><code class="java">byte[] data = new byte[]&#123;(byte) 0b11110000, (byte) 0b10011111, (byte) 0b10001110, (byte) 0b10000011&#125;;
 String createStr = new String(data);
 </code></pre>
-<p>断点运行进去，在下图中，高亮行中，会调用 <code>StringCoding.decode</code> 去解码对应的 <code>bytes</code> 。</p>
-<p><img src="https://img-blog.csdnimg.cn/1a1de76a888a4b05acfe27fcca751b7b.png" alt="String 构造方法" referrerpolicy="no-referrer"><figcaption class="post-image-caption">String 构造方法</figcaption></figure></p>
-<p>在 <code>StringCoding</code> 中，使用当前默认的编码格式去进行解码，在我的机器上，默认使用的是 <code>UTF-8</code>， 因此，在调试中，可以看到使用的是 <code>UTF_8</code> 和 <code>UTF_8$Decoder</code> 去进行解码。</p>
-<p><img src="https://img-blog.csdnimg.cn/e6fbd7e701b6403f983bc8007df58c77.png" alt="decode" referrerpolicy="no-referrer"><figcaption class="post-image-caption">decode</figcaption></figure></p>
-<p>进一步跟进去，会跟到 <code>UTF_8.java</code> 这个类，这个类在 <code>rt.jar</code> 包中，JDK 中默认不包含其源代码，为了更好的调试，可以参看<strong>「 附录：如何在 IDEA 中查看与调试 rt.jar 中的源码 」</strong> 。</p>
-<p><img src="https://img-blog.csdnimg.cn/cc4a2b7b8b354a1dba489ed441897909.png" alt="Decode byte 的逻辑" referrerpolicy="no-referrer"><figcaption class="post-image-caption">Decode byte 的逻辑</figcaption></figure></p>
-<p>从代码中可以看到， UTF-8 的解码过程，按照<code>一个byte</code>、<code>两个byte</code>、<code>三个byte</code>、<code>四个byte</code> 分别去计算，此计算方式与<strong>「 字符串编码 」</strong>中讲到的映射关系一致。到此，基本了解 <code>byte 数组</code> 到 <code>String</code> 的过程。也可以清晰的理解到，在创建 <code>String</code> 的过程中，传过来的 <code>byte 数组</code> 就是对应编码的二进制数据。</p>
-<p>重点来了，如果传过来的 <code>byte 数组</code> 中的编码并不是按照  UTF-8 编码规则来的数组，会是什么样的结果呢？我也做了一个测试，测试代码如下：</p>
+<p>断点运行进去，在下图中，高亮行中，会调用 <code class="inline-code">StringCoding.decode</code> 去解码对应的 <code class="inline-code">bytes</code> 。</p>
+<p><img src="https://img-blog.csdnimg.cn/1a1de76a888a4b05acfe27fcca751b7b.png" alt="String 构造方法" referrerpolicy="no-referrer"></p>
+<p>在 <code class="inline-code">StringCoding</code> 中，使用当前默认的编码格式去进行解码，在我的机器上，默认使用的是 <code class="inline-code">UTF-8</code>， 因此，在调试中，可以看到使用的是 <code class="inline-code">UTF_8</code> 和 <code class="inline-code">UTF_8$Decoder</code> 去进行解码。</p>
+<p><img src="https://img-blog.csdnimg.cn/e6fbd7e701b6403f983bc8007df58c77.png" alt="decode" referrerpolicy="no-referrer"></p>
+<p>进一步跟进去，会跟到 <code class="inline-code">UTF_8.java</code> 这个类，这个类在 <code class="inline-code">rt.jar</code> 包中，JDK 中默认不包含其源代码，为了更好的调试，可以参看<strong>「 附录：如何在 IDEA 中查看与调试 rt.jar 中的源码 」</strong> 。</p>
+<p><img src="https://img-blog.csdnimg.cn/cc4a2b7b8b354a1dba489ed441897909.png" alt="Decode byte 的逻辑" referrerpolicy="no-referrer"></p>
+<p>从代码中可以看到， UTF-8 的解码过程，按照<code class="inline-code">一个byte</code>、<code class="inline-code">两个byte</code>、<code class="inline-code">三个byte</code>、<code class="inline-code">四个byte</code> 分别去计算，此计算方式与<strong>「 字符串编码 」</strong>中讲到的映射关系一致。到此，基本了解 <code class="inline-code">byte 数组</code> 到 <code class="inline-code">String</code> 的过程。也可以清晰的理解到，在创建 <code class="inline-code">String</code> 的过程中，传过来的 <code class="inline-code">byte 数组</code> 就是对应编码的二进制数据。</p>
+<p>重点来了，如果传过来的 <code class="inline-code">byte 数组</code> 中的编码并不是按照  UTF-8 编码规则来的数组，会是什么样的结果呢？我也做了一个测试，测试代码如下：</p>
 <pre><code class="java">byte[] data = new byte[]&#123;(byte) 0b10011111, (byte) 0b10001110, (byte) 0b10000011&#125;;
 String createStr = new String(data);
 </code></pre>
-<p><img src="https://img-blog.csdnimg.cn/34719390793a4d1eaf07bff5d083511b.png" alt="无法解码时的逻辑" referrerpolicy="no-referrer"><figcaption class="post-image-caption">无法解码时的逻辑</figcaption></figure></p>
-<p>代码中，第一个 <code>byte</code> 为 <code>0b10011111</code> ，这个数不满足前面的判断规则， 会直接进入 <code>else</code>  中，就将直接将当前字符设置成 <code>65533</code> 这个字符，从而丢掉了真实的 <code>byte</code> 数据。当然，除了第一个 <code>byte</code> 有问题，其它 <code>byte</code> 有问题时，也会使用 <code>65533</code> 来进行替换，有兴趣的同学可以去尝试看看对应的代码。</p>
-<p>最后，在回到文章开始的那个问题，<code>byte 数组</code> 在创建 <code>String</code> 时，如果 <code>byte</code> 中的数据不符合 <code>UTF-8</code> 的规则，原始数据会被丢掉，也就导致 <code>new String(data)</code>  中传入的 <code>data</code> 与 <code>getBytes()</code> 拿到的二进制不一致，因此，在处理 <code>byte 数组</code> 数据时，需要先进行 <code>Base64</code> 编码处理。</p>
+<p><img src="https://img-blog.csdnimg.cn/34719390793a4d1eaf07bff5d083511b.png" alt="无法解码时的逻辑" referrerpolicy="no-referrer"></p>
+<p>代码中，第一个 <code class="inline-code">byte</code> 为 <code class="inline-code">0b10011111</code> ，这个数不满足前面的判断规则， 会直接进入 <code class="inline-code">else</code>  中，就将直接将当前字符设置成 <code class="inline-code">65533</code> 这个字符，从而丢掉了真实的 <code class="inline-code">byte</code> 数据。当然，除了第一个 <code class="inline-code">byte</code> 有问题，其它 <code class="inline-code">byte</code> 有问题时，也会使用 <code class="inline-code">65533</code> 来进行替换，有兴趣的同学可以去尝试看看对应的代码。</p>
+<p>最后，在回到文章开始的那个问题，<code class="inline-code">byte 数组</code> 在创建 <code class="inline-code">String</code> 时，如果 <code class="inline-code">byte</code> 中的数据不符合 <code class="inline-code">UTF-8</code> 的规则，原始数据会被丢掉，也就导致 <code class="inline-code">new String(data)</code>  中传入的 <code class="inline-code">data</code> 与 <code class="inline-code">getBytes()</code> 拿到的二进制不一致，因此，在处理 <code class="inline-code">byte 数组</code> 数据时，需要先进行 <code class="inline-code">Base64</code> 编码处理。</p>
 <h2 id="总结"><span class="prefix"></span><span class="content">总结</span><span class="suffix"></span></h2><p>初入计算机行业时，也曾被各种不同的编码格式搞得头大，但也从未去了解过其底层设计原理。本文以 UTF-8 以及 Java 内部 String 处理的机制着手，对计算机中编解码的细节作了一定的了解，希望给读者朋友们带来一定的启发，如果有什么新奇的想法，也欢迎与我沟通交流。</p>
-<h2 id="附录：如何在 IDEA 中查看与调试 rt.jar 中的源码"><span class="prefix"></span><span class="content">附录：如何在 IDEA 中查看与调试 rt.jar 中的源码</span><span class="suffix"></span></h2><p>前面所提到的字符串编码，在 Java 中，用于实现编码是 <code>Charset</code> 相关的类， 其源代码在 <code>rt.jar</code> 中。JDK 中默认不包含对应的源码，在调试的时候，可以去 openjdk 中去把下载下来，我当前使用的版本为 JDK 8，下载地址为：<a target="_blank" rel="noopener" href="http://hg.openjdk.java.net/jdk8u/jdk8u-dev/jdk/">http://hg.openjdk.java.net/jdk8u/jdk8u-dev/jdk/</a> ， 点击下图中的 zip ，即可下载。</p>
-<p><img src="https://img-blog.csdnimg.cn/ae23a74bd82a47b5b74af9f1c0b9d67c.png" alt="JDK 下载" referrerpolicy="no-referrer"><figcaption class="post-image-caption">JDK 下载</figcaption></figure> </p>
-<p>下载完成后，在 <code>Intellij IDEA</code> 中为 JDK 添加 <code>sourcepath</code> 后，就可以非常愉快的调试看代码了，具体设置步骤可以看下图红框圈出来的部分。</p>
-<p><img src="https://img-blog.csdnimg.cn/823739724b1542a9862a1b75e2bc9fe5.png" alt="Sorcepath 添加示例" referrerpolicy="no-referrer"><figcaption class="post-image-caption">Sorcepath 添加示例</figcaption></figure></p>
+<h2 id="附录：如何在 IDEA 中查看与调试 rt.jar 中的源码"><span class="prefix"></span><span class="content">附录：如何在 IDEA 中查看与调试 rt.jar 中的源码</span><span class="suffix"></span></h2><p>前面所提到的字符串编码，在 Java 中，用于实现编码是 <code class="inline-code">Charset</code> 相关的类， 其源代码在 <code class="inline-code">rt.jar</code> 中。JDK 中默认不包含对应的源码，在调试的时候，可以去 openjdk 中去把下载下来，我当前使用的版本为 JDK 8，下载地址为：<a target="_blank" rel="noopener" href="http://hg.openjdk.java.net/jdk8u/jdk8u-dev/jdk/">http://hg.openjdk.java.net/jdk8u/jdk8u-dev/jdk/</a> ， 点击下图中的 zip ，即可下载。</p>
+<p><img src="https://img-blog.csdnimg.cn/ae23a74bd82a47b5b74af9f1c0b9d67c.png" alt="JDK 下载" referrerpolicy="no-referrer"> </p>
+<p>下载完成后，在 <code class="inline-code">Intellij IDEA</code> 中为 JDK 添加 <code class="inline-code">sourcepath</code> 后，就可以非常愉快的调试看代码了，具体设置步骤可以看下图红框圈出来的部分。</p>
+<p><img src="https://img-blog.csdnimg.cn/823739724b1542a9862a1b75e2bc9fe5.png" alt="Sorcepath 添加示例" referrerpolicy="no-referrer"></p>
 
-        </section>
+                </div>
+            </section>
         </div>
+        <input id="copy-input" style="position: absolute; left: -1000px; z-index: -1000;">
 
     
 

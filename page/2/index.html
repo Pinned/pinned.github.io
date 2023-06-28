@@ -79,16 +79,6 @@ select
 }</style>
     <style type="text/css" id="style">@charset "utf-8";
 
-:root {
-    --font-color-0: #04077e;
-    --font-color-1: #000;
-    --font-color-2: #666;
-    --font-color-3: #aaa;
-    --bg-color-1: #eee;
-    --line-1: #ccc;
-    --line-2: #ddd;
-}
-
 p {
     word-wrap: break-word;
     white-space: pre-wrap;
@@ -100,13 +90,13 @@ body {
     font-size: 16px;
     line-height: 1.75;
     letter-spacing: 0.6px;
-    color: var(--font-color-2);
+    color: #666;
     background: #F0F0F0;
 }
 
 a {
     text-decoration: none;
-    color: var(--font-color-1);
+    color: #000;
 }
 
 
@@ -145,7 +135,7 @@ a {
 .header {
     padding-bottom: 48px;
     margin-bottom: 48px;
-    border-bottom: 1px solid var(--line-1);
+    border-bottom: 1px solid #ccc;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -156,7 +146,7 @@ a {
 .logo {
     font-size: 2rem;
     font-weight: 600;
-    color: var(--font-color-1);
+    color: #000;
     margin-bottom: 16px;
     flex: 0 0 100%;
 }
@@ -181,7 +171,7 @@ a {
 }
 
 .nav li a {
-    color: var(--font-color-1);
+    color: #000;
     opacity: .6;
     transition: opacity ease-in-out .5s;
 }
@@ -219,7 +209,7 @@ a {
     width: 100%;
     padding-bottom: 48px;
     margin-bottom: 48px;
-    border-bottom: 1px dashed var(--line-2);
+    border-bottom: 1px dashed #ddd;
 }
 
 .post-title {
@@ -228,12 +218,12 @@ a {
     font-weight: 600;
     line-height: 1.5;
     margin-bottom: 12px;
-    color: var(--font-color-1);
+    color: #000;
     /*transition: color ease-in-out .5s;*/
 }
 
 .post-title:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
@@ -245,7 +235,7 @@ a {
 
 .read-more {
     padding: 0 4px;
-    color: var(--font-color-0);
+    color: #04077e;
 }
 
 .read-more:before,
@@ -274,7 +264,7 @@ a {
 
 .post-date {
     font-size: 0.875rem;
-    color: var(--font-color-3);
+    color: #aaa;
 }
 
 .paginator {
@@ -306,24 +296,24 @@ a {
 
 .paginator a {
     margin: 4px;
-    color: var(--font-color-2);
+    color: #666;
     transition: color ease-in-out .5s;
 }
 
 .paginator a:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
 .paginator .current {
-    color: var(--font-color-0);
-    border: 1px solid var(--font-color-0);
+    color: #04077e;
+    border: 1px solid #04077e;
 }
 
 .footer {
     padding: 24px 0;
     font-size: 0.875rem;
-    color: var(--font-color-3);
+    color: #aaa;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -337,12 +327,12 @@ a {
 }
 
 .footer a {
-    color: var(--font-color-3);
+    color: #aaa;
     transition: color ease-in-out .5s;
 }
 
 .footer a:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
@@ -361,12 +351,12 @@ a {
     font-size: 1.6rem;
     font-weight: 600;
     line-height: 1.5;
-    color: var(--font-color-1);
+    color: #000;
 }
 
 .post-meta {
     font-size: 0.875rem;
-    color: var(--font-color-3);
+    color: #aaa;
     flex: 0 0 100%;
     margin-bottom: 32px;
 }
@@ -402,7 +392,7 @@ a {
 
 .archive li span {
     width: 108px;
-    color: var(--font-color-2);
+    color: #666;
 }
 
 .archive-main {
@@ -410,12 +400,12 @@ a {
 }
 
 .archive-title {
-    color: var(--font-color-1);
+    color: #000;
     /*transition: color ease-in-out .5s;*/
 }
 
 .archive-title:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
@@ -431,16 +421,6 @@ a {
     cursor: pointer;
 }
 
-#beautiful p {
-    box-sizing: border-box;
-    margin-bottom: 16px;
-    font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
-    font-size: 15px;
-    text-align: justify;
-    white-space: normal;
-    text-size-adjust: auto;
-    line-height: 1.75em;
-}
 #bing-bg {
     width: 100%;
     position: fixed;
@@ -450,9 +430,20 @@ a {
     filter: blur(10px);
     object-fit: cover;
   }
-</style>
+#go-top {
+    cursor: pointer;
+}
+
+#beautiful {
+    font-family: "PingFang SC", BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serifhtml, body;
+    font-size: 16px;
+    line-height: 1.75;
+    letter-spacing: 0.6px;
+}</style>
     <style type="text/css" id="markdown">@charset "utf-8";
 
+#copy-post-content,
+#beautiful,
 .post-md
 {
     width: 100%;
@@ -466,7 +457,7 @@ a {
 .post-md h5,
 .post-md h6
 {
-    color: var(--font-color-1);
+    color: #000;
 }
 /* 一级标题 */
 .post-md h1  {
@@ -514,7 +505,6 @@ a {
 
 /* 二级标题内容 */
 .post-md h2 .content {
-    margin-left: -10px;
     display: inline-block;
     width: auto;
     height: 40px;
@@ -567,13 +557,13 @@ a {
 .post-md a
 {
     color: #61aeee;
-    box-shadow: 0 2px 0 var(--line-1);
+    box-shadow: 0 2px 0 #ccc;
     transition: color ease-in-out .65s, box-shadow ease-in-out .65s;
 }
 .post-md a:hover
 {
-    color: var(--font-color-0);
-    box-shadow: 0 2px 0 var(--font-color-0);
+    color: #04077e;
+    box-shadow: 0 2px 0 #04077e;
     transition: color ease-in-out .65s, box-shadow ease-in-out .65s;
 }
 .post-md strong
@@ -609,7 +599,7 @@ a {
 {
     border: none;
     height: 1px;
-    background: var(--line-1);
+    background: #ccc;
     margin: 24px 0;
 }
 
@@ -617,11 +607,11 @@ a {
 .post-md blockquote
 {
     width: 100%;
-    margin: 12px 0;
+    padding: 7px 0;
 }
 .post-md blockquote
 {
-    border-left: 2px solid var(--line-2);
+    border-left: 2px solid #ddd;
     padding-left: 12px;
     word-wrap: break-word;
 }
@@ -680,7 +670,7 @@ thead {
 }
 
 
-.post-md p code
+.inline-code
 {
     border-radius: 4px;
     background:rgba(27,31,35,.05);
@@ -720,6 +710,23 @@ thead {
 </div>
                 
                 <div class="post-list">
+    
+    
+    
+    <div class="post">
+        <a class="post-title" href="/2022/08/20/iterm2-configuration/">iTerm2 常用配置</a>
+        <div class="post-except">
+            
+                工欲善其事，必先利其器。当我们拿到一台新电脑，为了让自己的效率更高，当然需要做一些配置。本文将介绍对于终端的一些配置。
+1. 安装 iTerm2Mac OS 有自己自带的终端软件 Terminal ，但其功能相对较弱。在 Mac 上，有一个三方终端 iTerm2 可以使用。当拿到新电脑时，当然是第一时间装上这个软件。
+iTerm2 下载地址：https://www.iterm2.com/
+对于 iTerm2 来说，我有一个非常常用的功能就是分屏，快捷键为 command + 
+            
+            <a class="read-more" href="/2022/08/20/iterm2-configuration/"> ... </a>
+        </div>
+        <div class="post-date">2022.08.20</div>
+    </div>
+    
     
     
     
@@ -768,6 +775,20 @@ thead {
     
     
     <div class="post">
+        <a class="post-title" href="/2019/08/10/Android-network-security-configuration/">Android Network security configuration</a>
+        <div class="post-except">
+            
+                The Network Security Configuration feature lets apps customize their network security settings in a safe, declarative configuration file without modifying app code. These settings can be configured for specific domains and for a specific ap
+            
+            <a class="read-more" href="/2019/08/10/Android-network-security-configuration/"> ... </a>
+        </div>
+        <div class="post-date">2019.08.10</div>
+    </div>
+    
+    
+    
+    
+    <div class="post">
         <a class="post-title" href="/2019/08/10/Android-network-Configuration/">Android 网络配置</a>
         <div class="post-except">
             
@@ -783,26 +804,12 @@ HTTP协议以明文方式发送内容，不提供任何方式的数据加密，�
     
     
     <div class="post">
-        <a class="post-title" href="/2019/08/10/Android-network-security-configuration/">Android Network security configuration</a>
-        <div class="post-except">
-            
-                The Network Security Configuration feature lets apps customize their network security settings in a safe, declarative configuration file without modifying app code. These settings can be configured for specific domains and for a specific ap
-            
-            <a class="read-more" href="/2019/08/10/Android-network-security-configuration/"> ... </a>
-        </div>
-        <div class="post-date">2019.08.10</div>
-    </div>
-    
-    
-    
-    
-    <div class="post">
         <a class="post-title" href="/2019/05/21/Android-camera-preview/">Android Camera Preview</a>
         <div class="post-except">
             
                 Android Camera Preview现如今，每一台Android设备基本都有多个摄像头，基本可以分为两类，前置摄像头与后置摄像头。在API中，每一个摄像头硬件，称之为一个 CameraDevice。我们开发者关心的是，每一个 CameraDevice 同时会输出多个数据流。
-0*ugRv8BWWMigxK03S
-此图来源于 Google I&#x2F;O 2018， 从图中，可以看到，摄像头获取到的数据流会转换不同的数据流来交由不同的逻辑模块进行处理。为什么会这样子做
+
+此图来源于 Google I&#x2F;O 2018， 从图中，可以看到，摄像头获取到的数据流会转换不同的数据流来交由不同的逻辑模块进行处理。为什么会这样子做呢？在不用的场景中，数据可能会有不同
             
             <a class="read-more" href="/2019/05/21/Android-camera-preview/"> ... </a>
         </div>
@@ -846,31 +853,6 @@ Input&#x2F;Output Options@filename简短版 -include filename
     
     
     
-    
-    
-    
-    
-    <div class="post">
-        <a class="post-title" href="/2016/10/21/ubuntu-install-tensorflow/">Ubuntu 安装 Tensorflow</a>
-        <div class="post-except">
-            
-                首先贴一下官方GET STARTED地址： 传送门
-安装步骤：
-
-安装python
-
-sudo apt-get install python-pip python-dev
-
-
-按电脑配置环境变量
-
-// Ubuntu/Linux 64-bit, CPU only, Python 2.7
-export TF_BINARY_URL=https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-0.11.0rc0-cp
-            
-            <a class="read-more" href="/2016/10/21/ubuntu-install-tensorflow/"> ... </a>
-        </div>
-        <div class="post-date">2016.10.21</div>
-    </div>
     
     
 </div>

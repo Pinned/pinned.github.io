@@ -82,16 +82,6 @@ select
 }</style>
     <style type="text/css" id="style">@charset "utf-8";
 
-:root {
-    --font-color-0: #04077e;
-    --font-color-1: #000;
-    --font-color-2: #666;
-    --font-color-3: #aaa;
-    --bg-color-1: #eee;
-    --line-1: #ccc;
-    --line-2: #ddd;
-}
-
 p {
     word-wrap: break-word;
     white-space: pre-wrap;
@@ -103,13 +93,13 @@ body {
     font-size: 16px;
     line-height: 1.75;
     letter-spacing: 0.6px;
-    color: var(--font-color-2);
+    color: #666;
     background: #F0F0F0;
 }
 
 a {
     text-decoration: none;
-    color: var(--font-color-1);
+    color: #000;
 }
 
 
@@ -148,7 +138,7 @@ a {
 .header {
     padding-bottom: 48px;
     margin-bottom: 48px;
-    border-bottom: 1px solid var(--line-1);
+    border-bottom: 1px solid #ccc;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -159,7 +149,7 @@ a {
 .logo {
     font-size: 2rem;
     font-weight: 600;
-    color: var(--font-color-1);
+    color: #000;
     margin-bottom: 16px;
     flex: 0 0 100%;
 }
@@ -184,7 +174,7 @@ a {
 }
 
 .nav li a {
-    color: var(--font-color-1);
+    color: #000;
     opacity: .6;
     transition: opacity ease-in-out .5s;
 }
@@ -222,7 +212,7 @@ a {
     width: 100%;
     padding-bottom: 48px;
     margin-bottom: 48px;
-    border-bottom: 1px dashed var(--line-2);
+    border-bottom: 1px dashed #ddd;
 }
 
 .post-title {
@@ -231,12 +221,12 @@ a {
     font-weight: 600;
     line-height: 1.5;
     margin-bottom: 12px;
-    color: var(--font-color-1);
+    color: #000;
     /*transition: color ease-in-out .5s;*/
 }
 
 .post-title:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
@@ -248,7 +238,7 @@ a {
 
 .read-more {
     padding: 0 4px;
-    color: var(--font-color-0);
+    color: #04077e;
 }
 
 .read-more:before,
@@ -277,7 +267,7 @@ a {
 
 .post-date {
     font-size: 0.875rem;
-    color: var(--font-color-3);
+    color: #aaa;
 }
 
 .paginator {
@@ -309,24 +299,24 @@ a {
 
 .paginator a {
     margin: 4px;
-    color: var(--font-color-2);
+    color: #666;
     transition: color ease-in-out .5s;
 }
 
 .paginator a:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
 .paginator .current {
-    color: var(--font-color-0);
-    border: 1px solid var(--font-color-0);
+    color: #04077e;
+    border: 1px solid #04077e;
 }
 
 .footer {
     padding: 24px 0;
     font-size: 0.875rem;
-    color: var(--font-color-3);
+    color: #aaa;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -340,12 +330,12 @@ a {
 }
 
 .footer a {
-    color: var(--font-color-3);
+    color: #aaa;
     transition: color ease-in-out .5s;
 }
 
 .footer a:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
@@ -364,12 +354,12 @@ a {
     font-size: 1.6rem;
     font-weight: 600;
     line-height: 1.5;
-    color: var(--font-color-1);
+    color: #000;
 }
 
 .post-meta {
     font-size: 0.875rem;
-    color: var(--font-color-3);
+    color: #aaa;
     flex: 0 0 100%;
     margin-bottom: 32px;
 }
@@ -405,7 +395,7 @@ a {
 
 .archive li span {
     width: 108px;
-    color: var(--font-color-2);
+    color: #666;
 }
 
 .archive-main {
@@ -413,12 +403,12 @@ a {
 }
 
 .archive-title {
-    color: var(--font-color-1);
+    color: #000;
     /*transition: color ease-in-out .5s;*/
 }
 
 .archive-title:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
@@ -434,16 +424,6 @@ a {
     cursor: pointer;
 }
 
-#beautiful p {
-    box-sizing: border-box;
-    margin-bottom: 16px;
-    font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
-    font-size: 15px;
-    text-align: justify;
-    white-space: normal;
-    text-size-adjust: auto;
-    line-height: 1.75em;
-}
 #bing-bg {
     width: 100%;
     position: fixed;
@@ -453,9 +433,20 @@ a {
     filter: blur(10px);
     object-fit: cover;
   }
-</style>
+#go-top {
+    cursor: pointer;
+}
+
+#beautiful {
+    font-family: "PingFang SC", BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serifhtml, body;
+    font-size: 16px;
+    line-height: 1.75;
+    letter-spacing: 0.6px;
+}</style>
     <style type="text/css" id="markdown">@charset "utf-8";
 
+#copy-post-content,
+#beautiful,
 .post-md
 {
     width: 100%;
@@ -469,7 +460,7 @@ a {
 .post-md h5,
 .post-md h6
 {
-    color: var(--font-color-1);
+    color: #000;
 }
 /* 一级标题 */
 .post-md h1  {
@@ -517,7 +508,6 @@ a {
 
 /* 二级标题内容 */
 .post-md h2 .content {
-    margin-left: -10px;
     display: inline-block;
     width: auto;
     height: 40px;
@@ -570,13 +560,13 @@ a {
 .post-md a
 {
     color: #61aeee;
-    box-shadow: 0 2px 0 var(--line-1);
+    box-shadow: 0 2px 0 #ccc;
     transition: color ease-in-out .65s, box-shadow ease-in-out .65s;
 }
 .post-md a:hover
 {
-    color: var(--font-color-0);
-    box-shadow: 0 2px 0 var(--font-color-0);
+    color: #04077e;
+    box-shadow: 0 2px 0 #04077e;
     transition: color ease-in-out .65s, box-shadow ease-in-out .65s;
 }
 .post-md strong
@@ -612,7 +602,7 @@ a {
 {
     border: none;
     height: 1px;
-    background: var(--line-1);
+    background: #ccc;
     margin: 24px 0;
 }
 
@@ -620,11 +610,11 @@ a {
 .post-md blockquote
 {
     width: 100%;
-    margin: 12px 0;
+    padding: 7px 0;
 }
 .post-md blockquote
 {
-    border-left: 2px solid var(--line-2);
+    border-left: 2px solid #ddd;
     padding-left: 12px;
     word-wrap: break-word;
 }
@@ -683,7 +673,7 @@ thead {
 }
 
 
-.post-md p code
+.inline-code
 {
     border-radius: 4px;
     background:rgba(27,31,35,.05);
@@ -707,7 +697,7 @@ thead {
             
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
-            <h4>目录</h4>
+            <h4 id="go-top">目录</h4>
             <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1.%20%E8%99%9A%E6%8B%9F%E6%9C%BA"><span class="post-toc-text">1. 虚拟机</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2.%20Dalvik"><span class="post-toc-text">2. Dalvik</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3.%20ART"><span class="post-toc-text">3. ART</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4.%20Hybrid:%20AOT%20+%20JIT"><span class="post-toc-text">4. Hybrid: AOT + JIT</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#5.%20Baseline%20Profiles"><span class="post-toc-text">5. Baseline Profiles</span></a></li></ol>
         </nav>
     </aside>
@@ -724,13 +714,14 @@ thead {
         <div class="post-meta">
             <a class='author' href="/">罗昭成</a> <span id="clipboardbtn">2022年06月30日</span>
         </div>
-        <div class="post-md" id="copy-post-content">
-        <section id="beautiful">
-            <p>在 Android 操作系统中，有一个非常重要的核心部分： Android Runtime。说到这个，我相信很多人都听到过 <strong>Dalvik</strong>、<strong>ART</strong>、<strong>JIT</strong> 以及 <strong>AOT</strong>。或许好多人也和我之前一样，并不了解这些名词，以及这些名词背后做了些什么事情。本文从笔者了解到的信息，记录了 Android Runtime 中设计的一些概念，以及应用。</p>
+        <div id="copy-post-content">
+            <section id="beautiful">
+            <div class="post-md" >
+                    <p>在 Android 操作系统中，有一个非常重要的核心部分： Android Runtime。说到这个，我相信很多人都听到过 <strong>Dalvik</strong>、<strong>ART</strong>、<strong>JIT</strong> 以及 <strong>AOT</strong>。或许好多人也和我之前一样，并不了解这些名词，以及这些名词背后做了些什么事情。本文从笔者了解到的信息，记录了 Android Runtime 中设计的一些概念，以及应用。</p>
 <h2 id="1. 虚拟机"><span class="prefix"></span><span class="content">1. 虚拟机</span><span class="suffix"></span></h2><p>在了解上面提到的名词之前，我们需要先知道什么是<strong>虚拟机</strong>， 它和 Android 又有什么样的渊源。</p>
 <p>在 2017 年的 Google I&#x2F;O 大会上，Google 正式宣布 Kotlin-fist，Kotlin 正式成为 Android 的主要开发语言。在这之前， Android 开发者们都是使用 Java 来进行 Android 应用程序开发的。 Kotlin 和 Java 都是基于 JVM 的 <strong>CLASS格式</strong> 实现的语言，开发者通过他们编写出来的源代码都会被编译成 CLASS 文件。在 Android 中，也有相似的流程。</p>
 <p>“一次编写，到处运行” 是 Java 的宣传口号，而 JVM 正是实现此目标的关键所在。 JVM 即 Java 虚拟机，它将物理机器中的资源（CPU、内存、输入输出等）进行抽象 ，实现相同的代码，可以在不同的硬件资源上进行执行。</p>
-<p>在 Android 开发中，我们使用 Java&#x2F;Kotlin 写的代码，会先编译成 class 文件，在通过 dx 工具转换成 <code>classes.dex</code>，运行时，在 Android 系统中，也使用了<code>虚拟机</code>来执行 APK 文件中的代码的。</p>
+<p>在 Android 开发中，我们使用 Java&#x2F;Kotlin 写的代码，会先编译成 class 文件，在通过 dx 工具转换成 <code class="inline-code">classes.dex</code>，运行时，在 Android 系统中，也使用了<code class="inline-code">虚拟机</code>来执行 APK 文件中的代码的。</p>
 <h2 id="2. Dalvik"><span class="prefix"></span><span class="content">2. Dalvik</span><span class="suffix"></span></h2><p>在 Android 5.0 以前，Android Runtime 叫 Dalvik， 用于 Android 运行 APK 的虚拟机，开发者写的所有代码都是通过它进行执行的。 </p>
 <p>DVM 的基本思想与 JVM 大体相同，但是在早期，Android 的智能手机只有很小的内存，因此 DVM 被设计用于手机端时，进行了很多独有的优化措施，其中最主要的目标就是减少内存使用。 </p>
 <blockquote>
@@ -744,15 +735,15 @@ thead {
 </blockquote>
 <p>这种 AOT 的模式，一直持续到 Android 6 的系统，在 Android 7.0 后，又进行了一次较大的升级。</p>
 <h2 id="4. Hybrid: AOT + JIT"><span class="prefix"></span><span class="content">4. Hybrid: AOT + JIT</span><span class="suffix"></span></h2><p>从前面可以看到， AOT 和 JIT 的优缺点是反过来的，因此 Google 将这两种方式进行了结合，搞了一个混合编译的方案。ART 下的 JIT 架构如下：</p>
-<p><img src="https://img-blog.csdnimg.cn/6374c0794d554ed481e471398bd97a40.png" alt="AOT+JIT 架构" referrerpolicy="no-referrer"><figcaption class="post-image-caption">AOT+JIT 架构</figcaption></figure></p>
+<p><img src="https://img-blog.csdnimg.cn/6374c0794d554ed481e471398bd97a40.png" alt="AOT+JIT 架构" referrerpolicy="no-referrer"></p>
 <p>从整个流程可以看到， 未经过编译的代码，如果是非热点代码，会直接进行解释执行，如果是热点代码，会经过 JIT 编译成机器码，再进行执行。JIT编译而来的机器码是存储到内存中的，不是在硬盘上。所以，在应用重新启动时，所有的热点代码也都需要使用 JIT 重新编译成机器码。代码在整个 ART 虚拟机中的执行流程如下图所示：</p>
-<p><img src="https://img-blog.csdnimg.cn/55b4f782f5b943b1a00c6f7e9e01dae5.png" alt="JIT 工作流程" referrerpolicy="no-referrer"><figcaption class="post-image-caption">JIT 工作流程</figcaption></figure></p>
-<p>在上图中，可以看到，没有经过编译的函数调用，在首次执行的时候，会直接使用 JIT 解释执行，并且会对相应的代码执行进行采样，统计出热点代码，并将统计出来的信息存放到 <code>/data/misc/profiles/cur/0/packageName/primary.prof</code> 下，这个文件有什么用呢？ 在上图中，可以看到了 JIT 的整个运行流程，但没有 .oat 文件编译生成的流程。既然是  AOT 与 JIT 混合模式，那肯定还是有 AOT 相关的流程， AOT 编译的守护进程会在设备空闲以及充电的时候，使用生成的 <code>primary.prof</code> 文件进行部分代码编译。</p>
+<p><img src="https://img-blog.csdnimg.cn/55b4f782f5b943b1a00c6f7e9e01dae5.png" alt="JIT 工作流程" referrerpolicy="no-referrer"></p>
+<p>在上图中，可以看到，没有经过编译的函数调用，在首次执行的时候，会直接使用 JIT 解释执行，并且会对相应的代码执行进行采样，统计出热点代码，并将统计出来的信息存放到 <code class="inline-code">/data/misc/profiles/cur/0/packageName/primary.prof</code> 下，这个文件有什么用呢？ 在上图中，可以看到了 JIT 的整个运行流程，但没有 .oat 文件编译生成的流程。既然是  AOT 与 JIT 混合模式，那肯定还是有 AOT 相关的流程， AOT 编译的守护进程会在设备空闲以及充电的时候，使用生成的 <code class="inline-code">primary.prof</code> 文件进行部分代码编译。</p>
 <h2 id="5. Baseline Profiles"><span class="prefix"></span><span class="content">5. Baseline Profiles</span><span class="suffix"></span></h2><p>在前面的流程中，已经可以知道 Profile 的配置信息，可以帮助 AOT 编译，提高应用程序性能。但是，应用程序需要在本地运行一段时间后，才能统计出热点代码。而 Baseline Profiles 的原理就是让开发者自己将热点代码统计出来生成配置文件，在 APP 运行的时候，将配置写入到指定位置，帮助 AOT 编译出热点代码的机器码。更好地提高使用效率。</p>
 <ol>
 <li>生成 profile</li>
 </ol>
-<p>按照官方文档，可以使用 Jetpack 当中的 <a href="https://link.juejin.cn/?target=https://developer.android.com/studio/profile/macrobenchmark-intro">Macrobenchmark</a>，生成 <code>Baseline Profile 配置文件</code>，按如下代码就可以生成了：</p>
+<p>按照官方文档，可以使用 Jetpack 当中的 <a href="https://link.juejin.cn/?target=https://developer.android.com/studio/profile/macrobenchmark-intro">Macrobenchmark</a>，生成 <code class="inline-code">Baseline Profile 配置文件</code>，按如下代码就可以生成了：</p>
 <pre><code class="java">@ExperimentalBaselineProfilesApi
 @RunWith(AndroidJUnit4::class)
 class BaselineProfileGenerator &#123;
@@ -783,14 +774,16 @@ class BaselineProfileGenerator &#123;
 <p>PS:  <strong>com.android.tools.build:gradle</strong> 需要使用 7.1.0-alpha01 及以上的版本，官方推荐使用 7.3.0-beta01 以上的版本。</p>
 </blockquote>
 <ol start="3">
-<li>将第一步生成的 proflie 文件重命名为 <code>baseline-prof.txt</code> 放入到 <code>src/main</code> 目录下，与 AndroidManifest.xml 文件统计。</li>
+<li>将第一步生成的 proflie 文件重命名为 <code class="inline-code">baseline-prof.txt</code> 放入到 <code class="inline-code">src/main</code> 目录下，与 AndroidManifest.xml 文件统计。</li>
 </ol>
 <p>简单几步就能使用 Baseline Profile能力了。让应用程序运行性能更好。 </p>
 <hr>
 <p>以上为 Android 操作系统中虚拟机的进化过程，以及开发者可以在加速 APP 运行可以做的事情。</p>
 
-        </section>
+                </div>
+            </section>
         </div>
+        <input id="copy-input" style="position: absolute; left: -1000px; z-index: -1000;">
 
     
 
@@ -803,8 +796,8 @@ class BaselineProfileGenerator &#123;
         </div>
     
     
-        <a href="/2019/08/10/Android-network-Configuration/">下一篇: 
-            Android 网络配置
+        <a href="/2019/08/10/Android-network-security-configuration/">下一篇: 
+            Android Network security configuration
         </a>
     
 </div>

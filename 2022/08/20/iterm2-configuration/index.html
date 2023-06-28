@@ -82,16 +82,6 @@ select
 }</style>
     <style type="text/css" id="style">@charset "utf-8";
 
-:root {
-    --font-color-0: #04077e;
-    --font-color-1: #000;
-    --font-color-2: #666;
-    --font-color-3: #aaa;
-    --bg-color-1: #eee;
-    --line-1: #ccc;
-    --line-2: #ddd;
-}
-
 p {
     word-wrap: break-word;
     white-space: pre-wrap;
@@ -103,13 +93,13 @@ body {
     font-size: 16px;
     line-height: 1.75;
     letter-spacing: 0.6px;
-    color: var(--font-color-2);
+    color: #666;
     background: #F0F0F0;
 }
 
 a {
     text-decoration: none;
-    color: var(--font-color-1);
+    color: #000;
 }
 
 
@@ -148,7 +138,7 @@ a {
 .header {
     padding-bottom: 48px;
     margin-bottom: 48px;
-    border-bottom: 1px solid var(--line-1);
+    border-bottom: 1px solid #ccc;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -159,7 +149,7 @@ a {
 .logo {
     font-size: 2rem;
     font-weight: 600;
-    color: var(--font-color-1);
+    color: #000;
     margin-bottom: 16px;
     flex: 0 0 100%;
 }
@@ -184,7 +174,7 @@ a {
 }
 
 .nav li a {
-    color: var(--font-color-1);
+    color: #000;
     opacity: .6;
     transition: opacity ease-in-out .5s;
 }
@@ -222,7 +212,7 @@ a {
     width: 100%;
     padding-bottom: 48px;
     margin-bottom: 48px;
-    border-bottom: 1px dashed var(--line-2);
+    border-bottom: 1px dashed #ddd;
 }
 
 .post-title {
@@ -231,12 +221,12 @@ a {
     font-weight: 600;
     line-height: 1.5;
     margin-bottom: 12px;
-    color: var(--font-color-1);
+    color: #000;
     /*transition: color ease-in-out .5s;*/
 }
 
 .post-title:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
@@ -248,7 +238,7 @@ a {
 
 .read-more {
     padding: 0 4px;
-    color: var(--font-color-0);
+    color: #04077e;
 }
 
 .read-more:before,
@@ -277,7 +267,7 @@ a {
 
 .post-date {
     font-size: 0.875rem;
-    color: var(--font-color-3);
+    color: #aaa;
 }
 
 .paginator {
@@ -309,24 +299,24 @@ a {
 
 .paginator a {
     margin: 4px;
-    color: var(--font-color-2);
+    color: #666;
     transition: color ease-in-out .5s;
 }
 
 .paginator a:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
 .paginator .current {
-    color: var(--font-color-0);
-    border: 1px solid var(--font-color-0);
+    color: #04077e;
+    border: 1px solid #04077e;
 }
 
 .footer {
     padding: 24px 0;
     font-size: 0.875rem;
-    color: var(--font-color-3);
+    color: #aaa;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -340,12 +330,12 @@ a {
 }
 
 .footer a {
-    color: var(--font-color-3);
+    color: #aaa;
     transition: color ease-in-out .5s;
 }
 
 .footer a:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
@@ -364,12 +354,12 @@ a {
     font-size: 1.6rem;
     font-weight: 600;
     line-height: 1.5;
-    color: var(--font-color-1);
+    color: #000;
 }
 
 .post-meta {
     font-size: 0.875rem;
-    color: var(--font-color-3);
+    color: #aaa;
     flex: 0 0 100%;
     margin-bottom: 32px;
 }
@@ -405,7 +395,7 @@ a {
 
 .archive li span {
     width: 108px;
-    color: var(--font-color-2);
+    color: #666;
 }
 
 .archive-main {
@@ -413,12 +403,12 @@ a {
 }
 
 .archive-title {
-    color: var(--font-color-1);
+    color: #000;
     /*transition: color ease-in-out .5s;*/
 }
 
 .archive-title:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
@@ -434,16 +424,6 @@ a {
     cursor: pointer;
 }
 
-#beautiful p {
-    box-sizing: border-box;
-    margin-bottom: 16px;
-    font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
-    font-size: 15px;
-    text-align: justify;
-    white-space: normal;
-    text-size-adjust: auto;
-    line-height: 1.75em;
-}
 #bing-bg {
     width: 100%;
     position: fixed;
@@ -453,9 +433,20 @@ a {
     filter: blur(10px);
     object-fit: cover;
   }
-</style>
+#go-top {
+    cursor: pointer;
+}
+
+#beautiful {
+    font-family: "PingFang SC", BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serifhtml, body;
+    font-size: 16px;
+    line-height: 1.75;
+    letter-spacing: 0.6px;
+}</style>
     <style type="text/css" id="markdown">@charset "utf-8";
 
+#copy-post-content,
+#beautiful,
 .post-md
 {
     width: 100%;
@@ -469,7 +460,7 @@ a {
 .post-md h5,
 .post-md h6
 {
-    color: var(--font-color-1);
+    color: #000;
 }
 /* 一级标题 */
 .post-md h1  {
@@ -517,7 +508,6 @@ a {
 
 /* 二级标题内容 */
 .post-md h2 .content {
-    margin-left: -10px;
     display: inline-block;
     width: auto;
     height: 40px;
@@ -570,13 +560,13 @@ a {
 .post-md a
 {
     color: #61aeee;
-    box-shadow: 0 2px 0 var(--line-1);
+    box-shadow: 0 2px 0 #ccc;
     transition: color ease-in-out .65s, box-shadow ease-in-out .65s;
 }
 .post-md a:hover
 {
-    color: var(--font-color-0);
-    box-shadow: 0 2px 0 var(--font-color-0);
+    color: #04077e;
+    box-shadow: 0 2px 0 #04077e;
     transition: color ease-in-out .65s, box-shadow ease-in-out .65s;
 }
 .post-md strong
@@ -612,7 +602,7 @@ a {
 {
     border: none;
     height: 1px;
-    background: var(--line-1);
+    background: #ccc;
     margin: 24px 0;
 }
 
@@ -620,11 +610,11 @@ a {
 .post-md blockquote
 {
     width: 100%;
-    margin: 12px 0;
+    padding: 7px 0;
 }
 .post-md blockquote
 {
-    border-left: 2px solid var(--line-2);
+    border-left: 2px solid #ddd;
     padding-left: 12px;
     word-wrap: break-word;
 }
@@ -683,7 +673,7 @@ thead {
 }
 
 
-.post-md p code
+.inline-code
 {
     border-radius: 4px;
     background:rgba(27,31,35,.05);
@@ -707,8 +697,8 @@ thead {
             
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
-            <h4>目录</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1.%20%E5%AE%89%E8%A3%85%20iTerm2"><span class="post-toc-text">1. 安装 iTerm2</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2.%20%E5%AE%89%E8%A3%85%20HomeBrew"><span class="post-toc-text">2. 安装 HomeBrew</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2.1%20%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="post-toc-text">2.1 配置环境变量</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2.2%20%E4%BD%BF%E7%94%A8%20%20jsDelivr%20CDN%20%E4%B8%AD%E7%9A%84%20%3Ccode%3Einstall.sh%3C/code%3E%20%E8%BF%9B%E8%A1%8C%E5%AE%89%E8%A3%85"><span class="post-toc-text">2.2 使用  jsDelivr CDN 中的 install.sh 进行安装</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3.%20%E5%AE%89%E8%A3%85%20zsh"><span class="post-toc-text">3. 安装 zsh</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4.%20%E5%AE%89%E8%A3%85%20oh-my-zsh%20plugin"><span class="post-toc-text">4. 安装 oh-my-zsh plugin</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4.1%20zsh-autosuggestions"><span class="post-toc-text">4.1 zsh-autosuggestions</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4.2%20zsh-syntax-highlighting"><span class="post-toc-text">4.2 zsh-syntax-highlighting</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#5.%20%E6%9B%B4%E6%94%B9%20ZSH_THEME"><span class="post-toc-text">5. 更改 ZSH_THEME</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#6.%20%E9%85%8D%E7%BD%AE%E8%87%AA%E5%B7%B1%E7%9A%84%20%3Ccode%3Eprofile%3C/code%3E%20%E6%96%87%E4%BB%B6"><span class="post-toc-text">6. 配置自己的 profile 文件</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#7.%20%E9%85%8D%E7%BD%AE%E8%87%AA%E5%B7%B1%E7%9A%84%E5%91%BD%E4%BB%A4"><span class="post-toc-text">7. 配置自己的命令</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#8.%20%E5%86%99%E5%9C%A8%E6%9C%80%E5%90%8E"><span class="post-toc-text">8. 写在最后</span></a></li></ol>
+            <h4 id="go-top">目录</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1.%20%E5%AE%89%E8%A3%85%20iTerm2"><span class="post-toc-text">1. 安装 iTerm2</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2.%20%E5%AE%89%E8%A3%85%20HomeBrew"><span class="post-toc-text">2. 安装 HomeBrew</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2.1%20%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="post-toc-text">2.1 配置环境变量</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2.2%20%E4%BD%BF%E7%94%A8%20%20jsDelivr%20CDN%20%E4%B8%AD%E7%9A%84%20%3Ccode%20class="><span class="post-toc-text">install.sh 进行安装&quot;&gt;2.2 使用  jsDelivr CDN 中的 install.sh 进行安装</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3.%20%E5%AE%89%E8%A3%85%20zsh"><span class="post-toc-text">3. 安装 zsh</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4.%20%E5%AE%89%E8%A3%85%20oh-my-zsh%20plugin"><span class="post-toc-text">4. 安装 oh-my-zsh plugin</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4.1%20zsh-autosuggestions"><span class="post-toc-text">4.1 zsh-autosuggestions</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4.2%20zsh-syntax-highlighting"><span class="post-toc-text">4.2 zsh-syntax-highlighting</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#5.%20%E6%9B%B4%E6%94%B9%20ZSH_THEME"><span class="post-toc-text">5. 更改 ZSH_THEME</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#6.%20%E9%85%8D%E7%BD%AE%E8%87%AA%E5%B7%B1%E7%9A%84%20%3Ccode%20class="><span class="post-toc-text">profile 文件&quot;&gt;6. 配置自己的 profile 文件</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#7.%20%E9%85%8D%E7%BD%AE%E8%87%AA%E5%B7%B1%E7%9A%84%E5%91%BD%E4%BB%A4"><span class="post-toc-text">7. 配置自己的命令</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#8.%20%E5%86%99%E5%9C%A8%E6%9C%80%E5%90%8E"><span class="post-toc-text">8. 写在最后</span></a></li></ol>
         </nav>
     </aside>
 
@@ -724,13 +714,14 @@ thead {
         <div class="post-meta">
             <a class='author' href="/">罗昭成</a> <span id="clipboardbtn">2022年08月20日</span>
         </div>
-        <div class="post-md" id="copy-post-content">
-        <section id="beautiful">
-            <p>工欲善其事，必先利其器。当我们拿到一台新电脑，为了让自己的效率更高，当然需要做一些配置。本文将介绍对于终端的一些配置。</p>
+        <div id="copy-post-content">
+            <section id="beautiful">
+            <div class="post-md" >
+                    <p>工欲善其事，必先利其器。当我们拿到一台新电脑，为了让自己的效率更高，当然需要做一些配置。本文将介绍对于终端的一些配置。</p>
 <h2 id="1. 安装 iTerm2"><span class="prefix"></span><span class="content">1. 安装 iTerm2</span><span class="suffix"></span></h2><p>Mac OS 有自己自带的终端软件 Terminal ，但其功能相对较弱。在 Mac 上，有一个三方终端 iTerm2 可以使用。当拿到新电脑时，当然是第一时间装上这个软件。</p>
 <p>iTerm2 下载地址：<a target="_blank" rel="noopener" href="https://www.iterm2.com/">https://www.iterm2.com/</a></p>
-<p>对于 iTerm2 来说，我有一个非常常用的功能就是分屏，快捷键为 <code>command + D</code></p>
-<h2 id="2. 安装 HomeBrew"><span class="prefix"></span><span class="content">2. 安装 HomeBrew</span><span class="suffix"></span></h2><p>HomeBrew 是 Mac OS 上一个非常常用的软件包管理工具。它包含安装、卸载、更新、查看、搜索等很多实用的功能。使用简单的 <code>install</code>指令，就可以实现软件包安装，软件包的各种依赖和文件路径都会帮你处理好，十分方便快捷。因此，这也是“利其器”首选工具。</p>
+<p>对于 iTerm2 来说，我有一个非常常用的功能就是分屏，快捷键为 <code class="inline-code">command + D</code></p>
+<h2 id="2. 安装 HomeBrew"><span class="prefix"></span><span class="content">2. 安装 HomeBrew</span><span class="suffix"></span></h2><p>HomeBrew 是 Mac OS 上一个非常常用的软件包管理工具。它包含安装、卸载、更新、查看、搜索等很多实用的功能。使用简单的 <code class="inline-code">install</code>指令，就可以实现软件包安装，软件包的各种依赖和文件路径都会帮你处理好，十分方便快捷。因此，这也是“利其器”首选工具。</p>
 <p>HomeBrew 官方网站：<a target="_blank" rel="noopener" href="https://brew.sh/">https://brew.sh</a> , <a target="_blank" rel="noopener" href="https://github.com/Homebrew/brew">https://github.com/Homebrew/brew</a></p>
 <p>安装可以使用如下命令：</p>
 <pre><code class="shell">/bin/bash -c &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)&quot;
@@ -739,23 +730,23 @@ thead {
 <p>但是，在国内，你懂的，基本下载不下来，此处使用科大源安装，详细教程可直接参考原文：</p>
 <p><a target="_blank" rel="noopener" href="https://mirrors.ustc.edu.cn/help/brew.git.html#homebrew-linuxbrew">使用科大源安装 Homebrew &#x2F; Linuxbrew: https://mirrors.ustc.edu.cn/help/brew.git.html#homebrew-linuxbrew</a></p>
 <p>此处仅记录关键步骤：</p>
-<h3 id="2.1 配置环境变量"><span class="prefix"></span><span class="content">2.1 配置环境变量</span><span class="suffix"></span></h3><p>首先在命令行运行如下几条命令设置环境变量，这些环境变量是 <code>brew</code> 的安装脚本里面使用，用它们替换原 github.com 上的仓库地址：</p>
+<h3 id="2.1 配置环境变量"><span class="prefix"></span><span class="content">2.1 配置环境变量</span><span class="suffix"></span></h3><p>首先在命令行运行如下几条命令设置环境变量，这些环境变量是 <code class="inline-code">brew</code> 的安装脚本里面使用，用它们替换原 github.com 上的仓库地址：</p>
 <pre><code class="shell">export HOMEBREW_BREW_GIT_REMOTE=&quot;https://mirrors.ustc.edu.cn/brew.git&quot;
 export HOMEBREW_CORE_GIT_REMOTE=&quot;https://mirrors.ustc.edu.cn/homebrew-core.git&quot;
 export HOMEBREW_BOTTLE_DOMAIN=&quot;https://mirrors.ustc.edu.cn/homebrew-bottles&quot;
 </code></pre>
-<h3 id="2.2 使用  jsDelivr CDN 中的 <code>install.sh</code> 进行安装"><span class="prefix"></span><span class="content">2.2 使用  jsDelivr CDN 中的 <code>install.sh</code> 进行安装</span><span class="suffix"></span></h3><p> 直接使用下面脚本进行安装：</p>
+<h3 id="2.2 使用  jsDelivr CDN 中的 <code class="inline-code">install.sh</code> 进行安装"><span class="prefix"></span><span class="content">2.2 使用  jsDelivr CDN 中的 <code class="inline-code">install.sh</code> 进行安装</span><span class="suffix"></span></h3><p> 直接使用下面脚本进行安装：</p>
 <pre><code class="shell">/bin/bash -c &quot;$(curl -fsSL https://cdn.jsdelivr.net/gh/Homebrew/install@HEAD/install.sh)&quot;
 </code></pre>
 <p>等待脚本执行完成即可。</p>
-<h2 id="3. 安装 zsh"><span class="prefix"></span><span class="content">3. 安装 zsh</span><span class="suffix"></span></h2><p>在 Mac OS 中，默认使用的是 <code>/bin/bash</code> 作为默认终端工具。而在这里，我喜欢使用 <code>zsh</code> 来替换，它支持更多的扩展。安装命令如下： </p>
+<h2 id="3. 安装 zsh"><span class="prefix"></span><span class="content">3. 安装 zsh</span><span class="suffix"></span></h2><p>在 Mac OS 中，默认使用的是 <code class="inline-code">/bin/bash</code> 作为默认终端工具。而在这里，我喜欢使用 <code class="inline-code">zsh</code> 来替换，它支持更多的扩展。安装命令如下： </p>
 <pre><code class="shell">brew install zsh	
 </code></pre>
-<p>安装好了 zsh， 下面接着安装 <code>oh-my-zsh</code>，让你的终端更好看。安装命令：</p>
+<p>安装好了 zsh， 下面接着安装 <code class="inline-code">oh-my-zsh</code>，让你的终端更好看。安装命令：</p>
 <pre><code class="shell">sh -c &quot;$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)&quot;
 </code></pre>
-<p>但是，在国内，你懂的，基本下载不下来。而 <code>oh-my-zsh</code>是使用 git 来管理，并且是直接下载代码使用的。所以可以使用 <code>gitcode.net</code> 中的镜像库进行下载，配置方式：</p>
-<pre><code>git config --global url.&quot;https://gitcode.net/mirrors/&quot;.insteadOf https://github.com
+<p>但是，在国内，你懂的，基本下载不下来。而 <code class="inline-code">oh-my-zsh</code>是使用 git 来管理，并且是直接下载代码使用的。所以可以使用 <code class="inline-code">gitcode.net</code> 中的镜像库进行下载，配置方式：</p>
+<pre><code class="inline-code">git config --global url.&quot;https://gitcode.net/mirrors/&quot;.insteadOf https://github.com
 </code></pre>
 <blockquote>
 <p>上面命令最终会在 ~&#x2F;.gitconfig 中添加对应配置，使用完成后手动删除即可。</p>
@@ -764,8 +755,8 @@ export HOMEBREW_BOTTLE_DOMAIN=&quot;https://mirrors.ustc.edu.cn/homebrew-bottles
 <h3 id="4.1 zsh-autosuggestions"><span class="prefix"></span><span class="content">4.1 zsh-autosuggestions</span><span class="suffix"></span></h3><p>a. 将 zsh-autosuggestions 的代码下载到 on-my-zsh 的 plugins 文件夹中</p>
 <pre><code class="shell">git clone https://github.com/zsh-users/zsh-autosuggestions $&#123;ZSH_CUSTOM:-~/.oh-my-zsh/custom&#125;/plugins/zsh-autosuggestions
 </code></pre>
-<p>b. 在 <code>~/.zshrc</code> 中添加到 <code>plugins</code> 列表中</p>
-<pre><code>plugins=( 
+<p>b. 在 <code class="inline-code">~/.zshrc</code> 中添加到 <code class="inline-code">plugins</code> 列表中</p>
+<pre><code class="inline-code">plugins=( 
     # other plugins...
     zsh-autosuggestions
 )
@@ -773,16 +764,16 @@ export HOMEBREW_BOTTLE_DOMAIN=&quot;https://mirrors.ustc.edu.cn/homebrew-bottles
 <h3 id="4.2 zsh-syntax-highlighting"><span class="prefix"></span><span class="content">4.2 zsh-syntax-highlighting</span><span class="suffix"></span></h3><p>a. 将 zsh-syntax-highlighting 的代码下载到 on-my-zsh 的 plugins 文件夹中</p>
 <pre><code class="shell">git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $&#123;ZSH_CUSTOM:-~/.oh-my-zsh/custom&#125;/plugins/zsh-syntax-highlighting
 </code></pre>
-<p>b. 在 <code>~/.zshrc</code> 中添加到 <code>plugins</code> 列表中</p>
-<pre><code>plugins=( 
+<p>b. 在 <code class="inline-code">~/.zshrc</code> 中添加到 <code class="inline-code">plugins</code> 列表中</p>
+<pre><code class="inline-code">plugins=( 
     # other plugins...
     zsh-syntax-highlighting
 )
 </code></pre>
-<h2 id="5. 更改 ZSH_THEME"><span class="prefix"></span><span class="content">5. 更改 ZSH_THEME</span><span class="suffix"></span></h2><p>在使用终端的时候，我喜欢能够一眼直接看到当前的路径。而 <code>oh-my-zsh</code> 默认使用的是 <code>robbyrussell</code>。经过测试，我想要的主题是 <code>apple</code>，只需要在 <code>.zshrc</code> 中配置对应主题为 apple 就可以，示例如下：</p>
-<p><img src="https://img-blog.csdnimg.cn/cdf5701da677489d8effbe2a15b8b9fb.png" alt="主题修改示例" referrerpolicy="no-referrer"><figcaption class="post-image-caption">主题修改示例</figcaption></figure></p>
-<h2 id="6. 配置自己的 <code>profile</code> 文件"><span class="prefix"></span><span class="content">6. 配置自己的 <code>profile</code> 文件</span><span class="suffix"></span></h2><p>环境变量是一个经常修改的东西，我们当然可以直接修改 <code>.profile</code> 或者直接修改 <code>.zshrc</code> 文件，但是，这些配置文件里面都会存在一些原有的配置。 我的习惯是创建一个我自己的 profile 文件来配置我自己的环境变量。</p>
-<p>因为前面使用的是 zsh， 因此默认使用的环境变量在 <code>.zshrc</code> 中，在<code>.zshrc</code>文件中添加我自己文件的引用，代码如下： </p>
+<h2 id="5. 更改 ZSH_THEME"><span class="prefix"></span><span class="content">5. 更改 ZSH_THEME</span><span class="suffix"></span></h2><p>在使用终端的时候，我喜欢能够一眼直接看到当前的路径。而 <code class="inline-code">oh-my-zsh</code> 默认使用的是 <code class="inline-code">robbyrussell</code>。经过测试，我想要的主题是 <code class="inline-code">apple</code>，只需要在 <code class="inline-code">.zshrc</code> 中配置对应主题为 apple 就可以，示例如下：</p>
+<p><img src="https://img-blog.csdnimg.cn/cdf5701da677489d8effbe2a15b8b9fb.png" alt="主题修改示例" referrerpolicy="no-referrer"></p>
+<h2 id="6. 配置自己的 <code class="inline-code">profile</code> 文件"><span class="prefix"></span><span class="content">6. 配置自己的 <code class="inline-code">profile</code> 文件</span><span class="suffix"></span></h2><p>环境变量是一个经常修改的东西，我们当然可以直接修改 <code class="inline-code">.profile</code> 或者直接修改 <code class="inline-code">.zshrc</code> 文件，但是，这些配置文件里面都会存在一些原有的配置。 我的习惯是创建一个我自己的 profile 文件来配置我自己的环境变量。</p>
+<p>因为前面使用的是 zsh， 因此默认使用的环境变量在 <code class="inline-code">.zshrc</code> 中，在<code class="inline-code">.zshrc</code>文件中添加我自己文件的引用，代码如下： </p>
 <pre><code class="shell"># 添加自己的环境变量文件
 if [ -f &quot;$HOME/.lzcrc&quot; ]; then
    source $HOME/.lzcrc
@@ -791,12 +782,12 @@ fi
 <p>添加完成并保存文件，并使用 source 命令使配置生效：</p>
 <pre><code class="shell">source ~/.zshrc
 </code></pre>
-<h2 id="7. 配置自己的命令"><span class="prefix"></span><span class="content">7. 配置自己的命令</span><span class="suffix"></span></h2><p>在日常工作中，会有一些常用的工具命令使用，比如我常用的 <code>base64</code>。</p>
-<p>在系统中，可以使用 <code>openssl</code> 进行 base64 的编码，实现命令如下：</p>
+<h2 id="7. 配置自己的命令"><span class="prefix"></span><span class="content">7. 配置自己的命令</span><span class="suffix"></span></h2><p>在日常工作中，会有一些常用的工具命令使用，比如我常用的 <code class="inline-code">base64</code>。</p>
+<p>在系统中，可以使用 <code class="inline-code">openssl</code> 进行 base64 的编码，实现命令如下：</p>
 <pre><code class="shell">//.将 LZC 编码成 base64
 echo -n &#39;LZC&#39; | openssl base64 ; echo
 </code></pre>
-<p>使用起来还是很方便的，但是还是有点复杂，因此，我在 <code>~/.lzcrc</code> 添加 <code>base64_encode</code> 函数，将这个长长的命令封装起来，如下所示：</p>
+<p>使用起来还是很方便的，但是还是有点复杂，因此，我在 <code class="inline-code">~/.lzcrc</code> 添加 <code class="inline-code">base64_encode</code> 函数，将这个长长的命令封装起来，如下所示：</p>
 <pre><code class="shell"># base64 tools
 
 base64_decode () &#123;
@@ -808,11 +799,13 @@ base64_encode () &#123;
 &#125;
 </code></pre>
 <p>使用如下：</p>
-<p><img src="https://img-blog.csdnimg.cn/7000c6905d684d48baf6de60afb5a97e.png" alt="base64 编码示例" referrerpolicy="no-referrer"><figcaption class="post-image-caption">base64 编码示例</figcaption></figure></p>
+<p><img src="https://img-blog.csdnimg.cn/7000c6905d684d48baf6de60afb5a97e.png" alt="base64 编码示例" referrerpolicy="no-referrer"></p>
 <h2 id="8. 写在最后"><span class="prefix"></span><span class="content">8. 写在最后</span><span class="suffix"></span></h2><p>一个好的环境，能够帮助我们提高工作中的效率，也能让自己的电脑使用起来更加的舒心。当然在使用电脑的过程中，也需要不断优化自己的环境，让电脑更加方便使用。</p>
 
-        </section>
+                </div>
+            </section>
         </div>
+        <input id="copy-input" style="position: absolute; left: -1000px; z-index: -1000;">
 
     
 

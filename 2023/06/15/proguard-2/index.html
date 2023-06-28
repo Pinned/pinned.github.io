@@ -82,16 +82,6 @@ select
 }</style>
     <style type="text/css" id="style">@charset "utf-8";
 
-:root {
-    --font-color-0: #04077e;
-    --font-color-1: #000;
-    --font-color-2: #666;
-    --font-color-3: #aaa;
-    --bg-color-1: #eee;
-    --line-1: #ccc;
-    --line-2: #ddd;
-}
-
 p {
     word-wrap: break-word;
     white-space: pre-wrap;
@@ -103,13 +93,13 @@ body {
     font-size: 16px;
     line-height: 1.75;
     letter-spacing: 0.6px;
-    color: var(--font-color-2);
+    color: #666;
     background: #F0F0F0;
 }
 
 a {
     text-decoration: none;
-    color: var(--font-color-1);
+    color: #000;
 }
 
 
@@ -148,7 +138,7 @@ a {
 .header {
     padding-bottom: 48px;
     margin-bottom: 48px;
-    border-bottom: 1px solid var(--line-1);
+    border-bottom: 1px solid #ccc;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -159,7 +149,7 @@ a {
 .logo {
     font-size: 2rem;
     font-weight: 600;
-    color: var(--font-color-1);
+    color: #000;
     margin-bottom: 16px;
     flex: 0 0 100%;
 }
@@ -184,7 +174,7 @@ a {
 }
 
 .nav li a {
-    color: var(--font-color-1);
+    color: #000;
     opacity: .6;
     transition: opacity ease-in-out .5s;
 }
@@ -222,7 +212,7 @@ a {
     width: 100%;
     padding-bottom: 48px;
     margin-bottom: 48px;
-    border-bottom: 1px dashed var(--line-2);
+    border-bottom: 1px dashed #ddd;
 }
 
 .post-title {
@@ -231,12 +221,12 @@ a {
     font-weight: 600;
     line-height: 1.5;
     margin-bottom: 12px;
-    color: var(--font-color-1);
+    color: #000;
     /*transition: color ease-in-out .5s;*/
 }
 
 .post-title:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
@@ -248,7 +238,7 @@ a {
 
 .read-more {
     padding: 0 4px;
-    color: var(--font-color-0);
+    color: #04077e;
 }
 
 .read-more:before,
@@ -277,7 +267,7 @@ a {
 
 .post-date {
     font-size: 0.875rem;
-    color: var(--font-color-3);
+    color: #aaa;
 }
 
 .paginator {
@@ -309,24 +299,24 @@ a {
 
 .paginator a {
     margin: 4px;
-    color: var(--font-color-2);
+    color: #666;
     transition: color ease-in-out .5s;
 }
 
 .paginator a:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
 .paginator .current {
-    color: var(--font-color-0);
-    border: 1px solid var(--font-color-0);
+    color: #04077e;
+    border: 1px solid #04077e;
 }
 
 .footer {
     padding: 24px 0;
     font-size: 0.875rem;
-    color: var(--font-color-3);
+    color: #aaa;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -340,12 +330,12 @@ a {
 }
 
 .footer a {
-    color: var(--font-color-3);
+    color: #aaa;
     transition: color ease-in-out .5s;
 }
 
 .footer a:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
@@ -364,12 +354,12 @@ a {
     font-size: 1.6rem;
     font-weight: 600;
     line-height: 1.5;
-    color: var(--font-color-1);
+    color: #000;
 }
 
 .post-meta {
     font-size: 0.875rem;
-    color: var(--font-color-3);
+    color: #aaa;
     flex: 0 0 100%;
     margin-bottom: 32px;
 }
@@ -405,7 +395,7 @@ a {
 
 .archive li span {
     width: 108px;
-    color: var(--font-color-2);
+    color: #666;
 }
 
 .archive-main {
@@ -413,12 +403,12 @@ a {
 }
 
 .archive-title {
-    color: var(--font-color-1);
+    color: #000;
     /*transition: color ease-in-out .5s;*/
 }
 
 .archive-title:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
@@ -434,16 +424,6 @@ a {
     cursor: pointer;
 }
 
-#beautiful p {
-    box-sizing: border-box;
-    margin-bottom: 16px;
-    font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
-    font-size: 15px;
-    text-align: justify;
-    white-space: normal;
-    text-size-adjust: auto;
-    line-height: 1.75em;
-}
 #bing-bg {
     width: 100%;
     position: fixed;
@@ -453,9 +433,20 @@ a {
     filter: blur(10px);
     object-fit: cover;
   }
-</style>
+#go-top {
+    cursor: pointer;
+}
+
+#beautiful {
+    font-family: "PingFang SC", BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serifhtml, body;
+    font-size: 16px;
+    line-height: 1.75;
+    letter-spacing: 0.6px;
+}</style>
     <style type="text/css" id="markdown">@charset "utf-8";
 
+#copy-post-content,
+#beautiful,
 .post-md
 {
     width: 100%;
@@ -469,7 +460,7 @@ a {
 .post-md h5,
 .post-md h6
 {
-    color: var(--font-color-1);
+    color: #000;
 }
 /* 一级标题 */
 .post-md h1  {
@@ -517,7 +508,6 @@ a {
 
 /* 二级标题内容 */
 .post-md h2 .content {
-    margin-left: -10px;
     display: inline-block;
     width: auto;
     height: 40px;
@@ -570,13 +560,13 @@ a {
 .post-md a
 {
     color: #61aeee;
-    box-shadow: 0 2px 0 var(--line-1);
+    box-shadow: 0 2px 0 #ccc;
     transition: color ease-in-out .65s, box-shadow ease-in-out .65s;
 }
 .post-md a:hover
 {
-    color: var(--font-color-0);
-    box-shadow: 0 2px 0 var(--font-color-0);
+    color: #04077e;
+    box-shadow: 0 2px 0 #04077e;
     transition: color ease-in-out .65s, box-shadow ease-in-out .65s;
 }
 .post-md strong
@@ -612,7 +602,7 @@ a {
 {
     border: none;
     height: 1px;
-    background: var(--line-1);
+    background: #ccc;
     margin: 24px 0;
 }
 
@@ -620,11 +610,11 @@ a {
 .post-md blockquote
 {
     width: 100%;
-    margin: 12px 0;
+    padding: 7px 0;
 }
 .post-md blockquote
 {
-    border-left: 2px solid var(--line-2);
+    border-left: 2px solid #ddd;
     padding-left: 12px;
     word-wrap: break-word;
 }
@@ -683,7 +673,7 @@ thead {
 }
 
 
-.post-md p code
+.inline-code
 {
     border-radius: 4px;
     background:rgba(27,31,35,.05);
@@ -707,7 +697,7 @@ thead {
             
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
-            <h4>目录</h4>
+            <h4 id="go-top">目录</h4>
             <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#try-with-resources%20%E8%AF%AD%E6%B3%95"><span class="post-toc-text">try-with-resources 语法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E9%85%8D%E7%BD%AE%E8%AF%BB%E5%8F%96"><span class="post-toc-text">配置读取</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E9%85%8D%E7%BD%AE%E8%A7%A3%E6%9E%90"><span class="post-toc-text">配置解析</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E8%BE%93%E5%85%A5/%E8%BE%93%E5%87%BA%E9%80%89%E9%A1%B9"><span class="post-toc-text">输入&#x2F;输出选项</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#-keep%20%E9%80%89%E9%A1%B9"><span class="post-toc-text">-keep 选项</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%BB%93%E8%AF%AD"><span class="post-toc-text">结语</span></a></li></ol>
         </nav>
     </aside>
@@ -724,13 +714,14 @@ thead {
         <div class="post-meta">
             <a class='author' href="/">罗昭成</a> <span id="clipboardbtn">2023年06月15日</span>
         </div>
-        <div class="post-md" id="copy-post-content">
-        <section id="beautiful">
-            <p>书接<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/LlJja-Sw47xwNB4Woj969g">上文</a>，从开源库中把代码下载到本地后，就可以在 <code>IDE</code> 中进行运行了。从 <code>main</code> 方法入手，可以看到 ProGuard 执行的第一步就是去解析参数。本文的内容主要分析源码中我们配置的规则解析的实现。</p>
-<p>在上一篇文章末尾，在 <code>IDE</code> 中，添加了 <code>@/Users/xxx/debug_proguard.pro</code> 作为函数运行的入参，将配置文件的路径传递给 ProGuard 使用。先来看一下 Main 函数中的代码：</p>
-<p><img src="https://img-blog.csdnimg.cn/a6e28e1f98e44ec8ba32e84fcd692e56.png" alt="ProGuard 的 Main 函数代码" referrerpolicy="no-referrer"><figcaption class="post-image-caption">ProGuard 的 Main 函数代码</figcaption></figure></p>
-<p>从这几行代码可以看出，ProGuard 的大体运行逻辑。在代码 518 行中，通过入参 <code>args</code> 和 <code>系统属性配置</code> 创建了一个配置解析器 <code>ConfigurationParser</code> ，随后调用其 <code>parse</code> 方法，解析传入的参数，并将结果放到 <code>configuration</code> 中，以供后续混淆逻辑使用。</p>
-<h2 id="try-with-resources 语法"><span class="prefix"></span><span class="content">try-with-resources 语法</span><span class="suffix"></span></h2><p>在代码 518 行处，创建 <code>ConfigurationParser</code> 时，使用了 Java 1.7 中提供的 <code>try-with-resources</code> 语法。此语法可以帮助我们关闭流。举个例子，我们现在需要从一个文件中读取第一行内容。在 Java 1.7 之前，代码将会如下：</p>
+        <div id="copy-post-content">
+            <section id="beautiful">
+            <div class="post-md" >
+                    <p>书接<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/LlJja-Sw47xwNB4Woj969g">上文</a>，从开源库中把代码下载到本地后，就可以在 <code class="inline-code">IDE</code> 中进行运行了。从 <code class="inline-code">main</code> 方法入手，可以看到 ProGuard 执行的第一步就是去解析参数。本文的内容主要分析源码中我们配置的规则解析的实现。</p>
+<p>在上一篇文章末尾，在 <code class="inline-code">IDE</code> 中，添加了 <code class="inline-code">@/Users/xxx/debug_proguard.pro</code> 作为函数运行的入参，将配置文件的路径传递给 ProGuard 使用。先来看一下 Main 函数中的代码：</p>
+<p><img src="https://img-blog.csdnimg.cn/a6e28e1f98e44ec8ba32e84fcd692e56.png" alt="ProGuard 的 Main 函数代码" referrerpolicy="no-referrer"></p>
+<p>从这几行代码可以看出，ProGuard 的大体运行逻辑。在代码 518 行中，通过入参 <code class="inline-code">args</code> 和 <code class="inline-code">系统属性配置</code> 创建了一个配置解析器 <code class="inline-code">ConfigurationParser</code> ，随后调用其 <code class="inline-code">parse</code> 方法，解析传入的参数，并将结果放到 <code class="inline-code">configuration</code> 中，以供后续混淆逻辑使用。</p>
+<h2 id="try-with-resources 语法"><span class="prefix"></span><span class="content">try-with-resources 语法</span><span class="suffix"></span></h2><p>在代码 518 行处，创建 <code class="inline-code">ConfigurationParser</code> 时，使用了 Java 1.7 中提供的 <code class="inline-code">try-with-resources</code> 语法。此语法可以帮助我们关闭流。举个例子，我们现在需要从一个文件中读取第一行内容。在 Java 1.7 之前，代码将会如下：</p>
 <pre><code class="java">static String readFirstLineFromFile(String path) throws IOException &#123;
     FileReader fr = new FileReader(path);
     BufferedReader br = new BufferedReader(fr);
@@ -742,17 +733,17 @@ thead {
     &#125;
 &#125;
 </code></pre>
-<p>从代码中可以看到，在 <code>finally</code> 代码块中，需要手动对 <code>FileReader</code> 、<code>BufferedReader</code> 进行关闭。而使用 <code>try-with-resources</code> 语法后，就无需手动调用 <code>close</code> 方法。示例代码如下：</p>
+<p>从代码中可以看到，在 <code class="inline-code">finally</code> 代码块中，需要手动对 <code class="inline-code">FileReader</code> 、<code class="inline-code">BufferedReader</code> 进行关闭。而使用 <code class="inline-code">try-with-resources</code> 语法后，就无需手动调用 <code class="inline-code">close</code> 方法。示例代码如下：</p>
 <pre><code class="java">static String readFirstLineFromFile(String path) throws IOException &#123;
     try (FileReader fr = new FileReader(path); BufferedReader br = new BufferedReader(fr)) &#123;
         return br.readLine();
     &#125;
 &#125;
 </code></pre>
-<p>这样，代码能精简很多，<code>close</code> 也不会因为开发者的疏忽而被遗漏。</p>
-<h2 id="配置读取"><span class="prefix"></span><span class="content">配置读取</span><span class="suffix"></span></h2><p>为了更好地理解整个读取与解析的内容，我画了一个简单的流程图。在 ProGuard 中读取配置文件的逻辑中，会按照一个个<code>单词</code> 为单位进行读取，根据代码中的流程，绘制如下流程图，能够更好地理解代码内容。</p>
-<p><img src="https://img-blog.csdnimg.cn/51cc52159c484cfa9d3e6e401cb2a2b4.png" alt="解析流程图" referrerpolicy="no-referrer"><figcaption class="post-image-caption">解析流程图</figcaption></figure></p>
-<p>根据上面的流程图，在来看源码实现。首先是 <code>ConfigurationParser</code> 的构造方法，实现代码如下：</p>
+<p>这样，代码能精简很多，<code class="inline-code">close</code> 也不会因为开发者的疏忽而被遗漏。</p>
+<h2 id="配置读取"><span class="prefix"></span><span class="content">配置读取</span><span class="suffix"></span></h2><p>为了更好地理解整个读取与解析的内容，我画了一个简单的流程图。在 ProGuard 中读取配置文件的逻辑中，会按照一个个<code class="inline-code">单词</code> 为单位进行读取，根据代码中的流程，绘制如下流程图，能够更好地理解代码内容。</p>
+<p><img src="https://img-blog.csdnimg.cn/51cc52159c484cfa9d3e6e401cb2a2b4.png" alt="解析流程图" referrerpolicy="no-referrer"></p>
+<p>根据上面的流程图，在来看源码实现。首先是 <code class="inline-code">ConfigurationParser</code> 的构造方法，实现代码如下：</p>
 <pre><code class="java">public ConfigurationParser(String[] args, Properties properties) throws IOException &#123;
   this(args, null, properties);
 &#125;
@@ -767,10 +758,10 @@ public ConfigurationParser(WordReader reader, Properties properties) throws IOEx
     readNextWord();
 &#125;
 </code></pre>
-<p>在构造方法中，使用入参中的 <code>args</code> 和 <code>系统属性配置</code> 创建了一个 <code>ArgumentWordReader</code>。顾名思义，它是用来读取运行代码时传入的程序参数的。</p>
-<p><img src="https://img-blog.csdnimg.cn/7ccab00b50914784a3d233be63380dcc.png" alt="WordReader 类图" referrerpolicy="no-referrer"><figcaption class="post-image-caption">WordReader 类图</figcaption></figure></p>
-<p>在 <code>WordReader</code> 的设计中，内容读取是按行读取的。在 <code>LineWordReader</code> 和 <code>FileWordReader</code> 中，直接使用 <code>LineNumberReader</code> 按行读取。而对于 <code>ArgumentWordReader</code>，实现逻辑会更简单一些，直接将前面提到的 <code>args</code> 数组中的每一个 <code>String</code> 作为一行字符串处理。</p>
-<p>接下来，在看构造方法的最末尾：调用了 <code>readNextWord()</code> 方法，此为流程中<code>开始读取下一个单词</code>，也是为了获取第一个 「单词」。来看一下代码是如何实现的：</p>
+<p>在构造方法中，使用入参中的 <code class="inline-code">args</code> 和 <code class="inline-code">系统属性配置</code> 创建了一个 <code class="inline-code">ArgumentWordReader</code>。顾名思义，它是用来读取运行代码时传入的程序参数的。</p>
+<p><img src="https://img-blog.csdnimg.cn/7ccab00b50914784a3d233be63380dcc.png" alt="WordReader 类图" referrerpolicy="no-referrer"></p>
+<p>在 <code class="inline-code">WordReader</code> 的设计中，内容读取是按行读取的。在 <code class="inline-code">LineWordReader</code> 和 <code class="inline-code">FileWordReader</code> 中，直接使用 <code class="inline-code">LineNumberReader</code> 按行读取。而对于 <code class="inline-code">ArgumentWordReader</code>，实现逻辑会更简单一些，直接将前面提到的 <code class="inline-code">args</code> 数组中的每一个 <code class="inline-code">String</code> 作为一行字符串处理。</p>
+<p>接下来，在看构造方法的最末尾：调用了 <code class="inline-code">readNextWord()</code> 方法，此为流程中<code class="inline-code">开始读取下一个单词</code>，也是为了获取第一个 「单词」。来看一下代码是如何实现的：</p>
 <pre><code class="java">private void readNextWord() throws IOException &#123;
   readNextWord(false, false);
 &#125;
@@ -779,7 +770,7 @@ private void readNextWord(boolean isFileName, boolean expectSingleFile) throws I
   nextWord = reader.nextWord(isFileName, expectSingleFile);
 &#125;
 </code></pre>
-<p>代码的逻辑里最终调用了 <code>reader.nextWord</code>，此处的 <code>reader</code> 就是刚才提到的 <code>ArgumentWordReader</code>。运行时会使用它去读取第一个「单词」。讲到这里，不由得让我想起了大学时编译原理中讲的 <strong>词法分析器</strong>。有感兴趣的同学可以去巩固一下《编译原理》。因为 ProGuard 定义的规则相对简单，所以此处的逻辑比一门编程语言简单许多。在运行代码时，只传了一个参数：<code>@/Users/xxx/debug_proguard.pro</code>。在解析时，它会作为一行直接进行处理。先来看一下代码：</p>
+<p>代码的逻辑里最终调用了 <code class="inline-code">reader.nextWord</code>，此处的 <code class="inline-code">reader</code> 就是刚才提到的 <code class="inline-code">ArgumentWordReader</code>。运行时会使用它去读取第一个「单词」。讲到这里，不由得让我想起了大学时编译原理中讲的 <strong>词法分析器</strong>。有感兴趣的同学可以去巩固一下《编译原理》。因为 ProGuard 定义的规则相对简单，所以此处的逻辑比一门编程语言简单许多。在运行代码时，只传了一个参数：<code class="inline-code">@/Users/xxx/debug_proguard.pro</code>。在解析时，它会作为一行直接进行处理。先来看一下代码：</p>
 <pre><code class="java">public String nextWord(boolean isFileName, boolean expectSingleFile) throws IOException &#123;
   currentWord = null;
   // 省略部分代码
@@ -829,7 +820,7 @@ private boolean isNonStartDelimiter(char character) &#123;
           character == File.pathSeparatorChar;
 &#125;
 </code></pre>
-<p>在读取的过程中，首先将整行数据存储在 <code>currentLine</code> 中，当前此处为 <code>@/Users/xxx/debug_proguard.pro</code>，紧接着会从 <code>currentLine</code> 中取 <code>第一个</code> 字符，因为 <code>@</code>  是分隔符，因此会将它作为第一个 「单词」。代码执行到这里，构造方法里面涉及的逻辑也执行结束，<code>ConfigurationParser</code> 创建完成。下一步就是调用 <code>parse</code> 方法，去执行解析操作，代码如下：</p>
+<p>在读取的过程中，首先将整行数据存储在 <code class="inline-code">currentLine</code> 中，当前此处为 <code class="inline-code">@/Users/xxx/debug_proguard.pro</code>，紧接着会从 <code class="inline-code">currentLine</code> 中取 <code class="inline-code">第一个</code> 字符，因为 <code class="inline-code">@</code>  是分隔符，因此会将它作为第一个 「单词」。代码执行到这里，构造方法里面涉及的逻辑也执行结束，<code class="inline-code">ConfigurationParser</code> 创建完成。下一步就是调用 <code class="inline-code">parse</code> 方法，去执行解析操作，代码如下：</p>
 <pre><code class="java">public void parse(Configuration configuration) throws ParseException, IOException &#123;
   while (nextWord != null) &#123;
     // 是 @ 或者是 -include 执行
@@ -840,7 +831,7 @@ private boolean isNonStartDelimiter(char character) &#123;
   &#125;
 &#125;
 </code></pre>
-<p>在 <code>parse</code> 方法中，会循环遍历所有的 「单词」，直到所有单词都处理完毕。现在只需要看 <code>@</code> 的处理逻辑，在代码中，如果当前 「单词」为 <code>@</code> 和 <code>-include</code> 时，会调用 <code>parseIncludeArgument</code> 去实现解析的逻辑。  <code>@</code> 符号的定义是 <strong>以递归的方式从给定的文件中读取配置选项</strong> ， 从它的定义就可以看出来， <code>parseIncludeArgument</code> 会去解析 <code>@</code> 后指的文件名称，并读取文件内容。</p>
+<p>在 <code class="inline-code">parse</code> 方法中，会循环遍历所有的 「单词」，直到所有单词都处理完毕。现在只需要看 <code class="inline-code">@</code> 的处理逻辑，在代码中，如果当前 「单词」为 <code class="inline-code">@</code> 和 <code class="inline-code">-include</code> 时，会调用 <code class="inline-code">parseIncludeArgument</code> 去实现解析的逻辑。  <code class="inline-code">@</code> 符号的定义是 <strong>以递归的方式从给定的文件中读取配置选项</strong> ， 从它的定义就可以看出来， <code class="inline-code">parseIncludeArgument</code> 会去解析 <code class="inline-code">@</code> 后指的文件名称，并读取文件内容。</p>
 <pre><code class="java">private long parseIncludeArgument(long lastModified) throws ParseException, IOException&#123;
   // 读取 @ 后面跟着的文件名
   readNextWord(&quot;configuration file name&quot;, true, true, false);
@@ -859,7 +850,7 @@ private boolean isNonStartDelimiter(char character) &#123;
   return lastModified;
 &#125;
 </code></pre>
-<p>代码中可以看到，在执行时，首先会调用 <code>readNextWord</code> 去获取文件名。与前面 <code>@</code> 获取类似，从 <code>currentLine</code> 中读取出剩下的部分，作为文件名称。获取到文件名称后，就会直接使用这个名称去创建一个 <code>FileWordReader</code>，用于读取此文件中的内容。当然，这里创建的 <code>FileWordReader</code> 还需要赋值给 <code>ArgumentWordReader</code> 的成员变量 <code>includeWordReader</code>。调用 <code>ArgumentWordReader</code> 的 <code>nextWord</code> 方法时，会先调用 <code>includeWordReader.nextWord(xx, xx)</code> 方法，以此来实现递归读取配置文件，实现 <code>@</code> 符号所定义的功能，如前面的流程图所示。调用 <code>includeWordReader</code> 去获取下一个「单词」的逻辑如下：</p>
+<p>代码中可以看到，在执行时，首先会调用 <code class="inline-code">readNextWord</code> 去获取文件名。与前面 <code class="inline-code">@</code> 获取类似，从 <code class="inline-code">currentLine</code> 中读取出剩下的部分，作为文件名称。获取到文件名称后，就会直接使用这个名称去创建一个 <code class="inline-code">FileWordReader</code>，用于读取此文件中的内容。当然，这里创建的 <code class="inline-code">FileWordReader</code> 还需要赋值给 <code class="inline-code">ArgumentWordReader</code> 的成员变量 <code class="inline-code">includeWordReader</code>。调用 <code class="inline-code">ArgumentWordReader</code> 的 <code class="inline-code">nextWord</code> 方法时，会先调用 <code class="inline-code">includeWordReader.nextWord(xx, xx)</code> 方法，以此来实现递归读取配置文件，实现 <code class="inline-code">@</code> 符号所定义的功能，如前面的流程图所示。调用 <code class="inline-code">includeWordReader</code> 去获取下一个「单词」的逻辑如下：</p>
 <pre><code class="java">if (includeWordReader != null) &#123;
   // 读取下一个字符
   currentWord = includeWordReader.nextWord(isFileName, expectSingleFile);
@@ -871,15 +862,15 @@ private boolean isNonStartDelimiter(char character) &#123;
   includeWordReader = null;
 &#125;
 </code></pre>
-<p>此处的 <code>FileWordReader</code> 和 <code>ArgumentWordReader</code> 的核心逻辑基本相似。在 <code>FileWordReader</code> 中，<code>nextLine</code> 方法从指定的文件中读取真实的数据行，而文件行读取使用的是 JDK 中的 <code>LineNumberReader</code>。逻辑不复杂，有兴趣的朋友可自行查阅原文。</p>
+<p>此处的 <code class="inline-code">FileWordReader</code> 和 <code class="inline-code">ArgumentWordReader</code> 的核心逻辑基本相似。在 <code class="inline-code">FileWordReader</code> 中，<code class="inline-code">nextLine</code> 方法从指定的文件中读取真实的数据行，而文件行读取使用的是 JDK 中的 <code class="inline-code">LineNumberReader</code>。逻辑不复杂，有兴趣的朋友可自行查阅原文。</p>
 <h2 id="配置解析"><span class="prefix"></span><span class="content">配置解析</span><span class="suffix"></span></h2><p>从文件中读取到配置信息后，需要解析当前的「单词」，并按照固定的逻辑进行处理。在前面的内容中，已经涉及到了配置解析。在 ProGuard 中，有许多配置和不同的规则，可以通过查看源代码来了解。在 ProGuard 中，配置规则分为多个类别。下面将从 <strong>输入&#x2F;输出选项</strong> 和 <strong>-keep 选项</strong> 这两个部分进行分析，以点带面，了解 ProGuard 中配置解析的逻辑。</p>
-<h3 id="输入&#x2F;输出选项"><span class="prefix"></span><span class="content">输入&#x2F;输出选项</span><span class="suffix"></span></h3><p>先来看 <code>-injars</code> 、<code>-outjars</code> 、<code>-libraryjars</code> 的实现，当读取到这几个单词时，解析的执行如下：</p>
-<p><img src="https://img-blog.csdnimg.cn/31699938925e44f0b1b647b70f075ffd.png" alt="jars 相关解析" referrerpolicy="no-referrer"><figcaption class="post-image-caption">jars 相关解析</figcaption></figure></p>
-<p>可以看到，这三个参数的解析，都是调用的 <code>parseClassPathArgument</code>  来实现的，且 <code>-injars</code> 和<code>-outjars</code> 都是放在 <code>configuration.programJars</code> 中的。 以 Android 的项目为例，编译结束时，会生成 <code>R.jar</code> 文件，以及一个 <code>classes</code> 文件夹，因此 <code>-injars</code> 的配置如下：</p>
-<pre><code>-injars /project_dir/build/intermediates/compile_r_class_jar/release/R.jar
+<h3 id="输入&#x2F;输出选项"><span class="prefix"></span><span class="content">输入&#x2F;输出选项</span><span class="suffix"></span></h3><p>先来看 <code class="inline-code">-injars</code> 、<code class="inline-code">-outjars</code> 、<code class="inline-code">-libraryjars</code> 的实现，当读取到这几个单词时，解析的执行如下：</p>
+<p><img src="https://img-blog.csdnimg.cn/31699938925e44f0b1b647b70f075ffd.png" alt="jars 相关解析" referrerpolicy="no-referrer"></p>
+<p>可以看到，这三个参数的解析，都是调用的 <code class="inline-code">parseClassPathArgument</code>  来实现的，且 <code class="inline-code">-injars</code> 和<code class="inline-code">-outjars</code> 都是放在 <code class="inline-code">configuration.programJars</code> 中的。 以 Android 的项目为例，编译结束时，会生成 <code class="inline-code">R.jar</code> 文件，以及一个 <code class="inline-code">classes</code> 文件夹，因此 <code class="inline-code">-injars</code> 的配置如下：</p>
+<pre><code class="inline-code">-injars /project_dir/build/intermediates/compile_r_class_jar/release/R.jar
 -injars /project_dir/build/intermediates/javac/release/classes
 </code></pre>
-<p>因此，在解析方法中，按文件路径读取下一个「单词」，然后添加到对应的 <code>classpath</code> 中即可。在源代码中，还会存在文件分割符等逻辑，直接上代码：</p>
+<p>因此，在解析方法中，按文件路径读取下一个「单词」，然后添加到对应的 <code class="inline-code">classpath</code> 中即可。在源代码中，还会存在文件分割符等逻辑，直接上代码：</p>
 <pre><code class="java">private ClassPath parseClassPathArgument(ClassPath classPath, boolean isOutput, boolean allowFeatureName) &#123;
     // 读取第一个文件路径
     readNextWord(&quot;jar or directory name&quot;, true, false, false);
@@ -907,11 +898,11 @@ private boolean isNonStartDelimiter(char character) &#123;
 &#125;
 </code></pre>
 <h3 id="-keep 选项"><span class="prefix"></span><span class="content">-keep 选项</span><span class="suffix"></span></h3><p>在写 ProGuard 规则中， keep 的规则是相对比较复杂的，根据个人的理解，将 keep 的解析规则用 EBNF 进行描述，如下所示，能够更好的理解其逻辑。</p>
-<p><img src="https://img-blog.csdnimg.cn/d562482881344613a65e95dda7070d24.png" alt="ProGuard EBNF 描述" referrerpolicy="no-referrer"><figcaption class="post-image-caption">ProGuard EBNF 描述</figcaption></figure></p>
-<p>解析思路与 <strong>输入&#x2F;输出选项</strong> 类似，先根据当前的单词判断是否为 <code>keep_keywords</code> ，代码如下：</p>
-<p><img src="https://img-blog.csdnimg.cn/cda15d9c3677485fa2f415a6602c21df.png" alt="keep 解析分支代码" referrerpolicy="no-referrer"><figcaption class="post-image-caption">keep 解析分支代码</figcaption></figure></p>
-<p>从代码中可以看到，所有 <code>keep_keywords</code> 的解析都调用到了 <code>parseKeepClassSpecificationArguments</code> 中，些方法的解析逻辑，与 EBNF 中描述的基本一致，先看代码执行的流程图：</p>
-<p><img src="https://img-blog.csdnimg.cn/10a1ee034279420085a4bbae34075ec8.png" alt="解析 Keep 后的描述符" referrerpolicy="no-referrer"><figcaption class="post-image-caption">解析 Keep 后的描述符</figcaption></figure></p>
+<p><img src="https://img-blog.csdnimg.cn/d562482881344613a65e95dda7070d24.png" alt="ProGuard EBNF 描述" referrerpolicy="no-referrer"></p>
+<p>解析思路与 <strong>输入&#x2F;输出选项</strong> 类似，先根据当前的单词判断是否为 <code class="inline-code">keep_keywords</code> ，代码如下：</p>
+<p><img src="https://img-blog.csdnimg.cn/cda15d9c3677485fa2f415a6602c21df.png" alt="keep 解析分支代码" referrerpolicy="no-referrer"></p>
+<p>从代码中可以看到，所有 <code class="inline-code">keep_keywords</code> 的解析都调用到了 <code class="inline-code">parseKeepClassSpecificationArguments</code> 中，些方法的解析逻辑，与 EBNF 中描述的基本一致，先看代码执行的流程图：</p>
+<p><img src="https://img-blog.csdnimg.cn/10a1ee034279420085a4bbae34075ec8.png" alt="解析 Keep 后的描述符" referrerpolicy="no-referrer"></p>
 <p>代码中实现逻辑与上述流程图一致， 源码如下：</p>
 <pre><code class="java">while (true) &#123;
     // 1. 读取 -keep 后的单词，
@@ -946,17 +937,17 @@ private boolean isNonStartDelimiter(char character) &#123;
 // 5. 解析配置规则后的 class_specification
 ClassSpecification classSpecification = parseClassSpecificationArguments(false, true, false);
 </code></pre>
-<p>有前面的 EBNF 描述以及流程图，代码逻辑看起来就会非常的简单。紧接着是解析 <code>class_specification</code> ，先来看一下它的 EBNF 描述，如下图所示：</p>
-<p><img src="https://img-blog.csdnimg.cn/92c85753402543db909f59466abf0a5e.png" alt="class EBNF 描述" referrerpolicy="no-referrer"><figcaption class="post-image-caption">class EBNF 描述</figcaption></figure></p>
+<p>有前面的 EBNF 描述以及流程图，代码逻辑看起来就会非常的简单。紧接着是解析 <code class="inline-code">class_specification</code> ，先来看一下它的 EBNF 描述，如下图所示：</p>
+<p><img src="https://img-blog.csdnimg.cn/92c85753402543db909f59466abf0a5e.png" alt="class EBNF 描述" referrerpolicy="no-referrer"></p>
 <blockquote>
 <p>PS： 在 ProGuard 的使用文档中，也有描述 class_specification 的信息，但是并非是 EBNF 格式，有兴趣的同学可以看看： <a target="_blank" rel="noopener" href="https://www.guardsquare.com/manual/configuration/usage#classspecification">https://www.guardsquare.com/manual/configuration/usage#classspecification</a></p>
 </blockquote>
-<p>根据 EBNF 的描述，就可以按照其描述规则进行解析。但上面的描述中，还有 <code>annotation_name</code> 、<code>class_name</code> 、<code>method_name</code> 、<code>return_type</code> 、<code>argument_type</code>、<code>field_type</code> 等标识符的描述并没有写出来。这里，写需要对他们进行简单的梳理。因为这个名称都是用来描述 <code>Java</code> 中相应的 <code>类名</code> 、<code>方法名</code> 、<code>变量名</code> 的信息，所以：</p>
+<p>根据 EBNF 的描述，就可以按照其描述规则进行解析。但上面的描述中，还有 <code class="inline-code">annotation_name</code> 、<code class="inline-code">class_name</code> 、<code class="inline-code">method_name</code> 、<code class="inline-code">return_type</code> 、<code class="inline-code">argument_type</code>、<code class="inline-code">field_type</code> 等标识符的描述并没有写出来。这里，写需要对他们进行简单的梳理。因为这个名称都是用来描述 <code class="inline-code">Java</code> 中相应的 <code class="inline-code">类名</code> 、<code class="inline-code">方法名</code> 、<code class="inline-code">变量名</code> 的信息，所以：</p>
 <ol>
-<li>这些名称一定是符合 java 标识符的规则，即它们由数字（0～9）、字母（a<del>z 和 A</del>Z）以及 <code>$</code> 和 <code> _</code> 组成，且第一个符号只能是字母、 <code>$</code> 或 <code>_</code> 中的一个。</li>
-<li>在 <code>annotation_name</code> 、<code>class_name</code> 、<code>field_type</code> 等实际描述的是 Java 类名时，使用的是全路径信息，其中包含包名路径，因此名称会出现 <code>.</code> 这个符号 ， 例如： <code>com.example.Test</code> 、<code>java.lang.Object</code></li>
-<li>在描述方法返回值（retrun_type）、方法参数(argument_type)或变量类型(field_type) 时，可能会有数组存在，所以 <code>[]</code> 也可能会出现，例如： <code>public java.lang.Object[] getList();</code></li>
-<li>在 ProGuard 规则中，名称还能使用通配符，其中包括 <code>*</code> 、<code>？</code> 、<code>.</code> 、<code>&lt;n&gt;</code> 、<code>%</code></li>
+<li>这些名称一定是符合 java 标识符的规则，即它们由数字（0～9）、字母（a<del>z 和 A</del>Z）以及 <code class="inline-code">$</code> 和 <code class="inline-code"> _</code> 组成，且第一个符号只能是字母、 <code class="inline-code">$</code> 或 <code class="inline-code">_</code> 中的一个。</li>
+<li>在 <code class="inline-code">annotation_name</code> 、<code class="inline-code">class_name</code> 、<code class="inline-code">field_type</code> 等实际描述的是 Java 类名时，使用的是全路径信息，其中包含包名路径，因此名称会出现 <code class="inline-code">.</code> 这个符号 ， 例如： <code class="inline-code">com.example.Test</code> 、<code class="inline-code">java.lang.Object</code></li>
+<li>在描述方法返回值（retrun_type）、方法参数(argument_type)或变量类型(field_type) 时，可能会有数组存在，所以 <code class="inline-code">[]</code> 也可能会出现，例如： <code class="inline-code">public java.lang.Object[] getList();</code></li>
+<li>在 ProGuard 规则中，名称还能使用通配符，其中包括 <code class="inline-code">*</code> 、<code class="inline-code">？</code> 、<code class="inline-code">.</code> 、<code class="inline-code">&lt;n&gt;</code> 、<code class="inline-code">%</code></li>
 </ol>
 <p>基于这些规则，先来看一下代码实现：</p>
 <pre><code class="java">private void checkJavaIdentifier(String expectedDescription, boolean allowGenerics) throws ParseException &#123;
@@ -985,33 +976,39 @@ public boolean isJavaIdentifier(String word) &#123;
     return true;
 &#125;
 </code></pre>
-<p>看完标识符的匹配规则，在来看完整定义的 <code>annotation_name</code>、<code>class_name</code> 等名称的读取逻辑，在代码中，都会调用到 <code>parseCommaSeparatedList</code> 里面去，顾名思义，此方法会根据 <code>,</code> 解析一个列表出来，直接看代码：</p>
-<p><img src="https://img-blog.csdnimg.cn/a11a816ba74b4d92ad7b0df66e95e6b1.png" alt="annotation type 读取" referrerpolicy="no-referrer"><figcaption class="post-image-caption">annotation type 读取</figcaption></figure></p>
-<p>代码中仅保留了关键代码，从注释中可以看到，拿到「单词」后，会先检查是否为一个合法标识符，如果符合，就添加到列表中去，并读取下一个「单词」，如果是 <code>,</code> 会继续上述逻辑进行添加，反之返回列表。</p>
-<p>在回到上层的解析逻辑中来，根据 EBNF 的描述， 需要先判断是否有 <code>annotation_type</code>  和  <code>access_flag</code>， 这一块的逻辑如下： </p>
-<p><img src="https://img-blog.csdnimg.cn/d85b15eb96b749f285c3e4321d1ec084.png" alt="annotation type 解析" referrerpolicy="no-referrer"><figcaption class="post-image-caption">annotation type 解析</figcaption></figure></p>
-<p>其中当解析到当前单词为 <code>@</code> 时，会去解析 <code>annotation_name</code> 的列表， 并且重新用 <code>,</code> 拼接成一个字符串存储起来。 剩下的 <code>access_flag</code> 就简单多了，直接使用一个 <code>int</code> 型的值，按位将存起来就可以了，当然，我们还需要注意 <code>!</code> ，因此，在存储的时候，会有两个变量：</p>
+<p>看完标识符的匹配规则，在来看完整定义的 <code class="inline-code">annotation_name</code>、<code class="inline-code">class_name</code> 等名称的读取逻辑，在代码中，都会调用到 <code class="inline-code">parseCommaSeparatedList</code> 里面去，顾名思义，此方法会根据 <code class="inline-code">,</code> 解析一个列表出来，直接看代码：</p>
+<p><img src="https://img-blog.csdnimg.cn/a11a816ba74b4d92ad7b0df66e95e6b1.png" alt="annotation type 读取" referrerpolicy="no-referrer"></p>
+<p>代码中仅保留了关键代码，从注释中可以看到，拿到「单词」后，会先检查是否为一个合法标识符，如果符合，就添加到列表中去，并读取下一个「单词」，如果是 <code class="inline-code">,</code> 会继续上述逻辑进行添加，反之返回列表。</p>
+<p>在回到上层的解析逻辑中来，根据 EBNF 的描述， 需要先判断是否有 <code class="inline-code">annotation_type</code>  和  <code class="inline-code">access_flag</code>， 这一块的逻辑如下： </p>
+<p><img src="https://img-blog.csdnimg.cn/d85b15eb96b749f285c3e4321d1ec084.png" alt="annotation type 解析" referrerpolicy="no-referrer"></p>
+<p>其中当解析到当前单词为 <code class="inline-code">@</code> 时，会去解析 <code class="inline-code">annotation_name</code> 的列表， 并且重新用 <code class="inline-code">,</code> 拼接成一个字符串存储起来。 剩下的 <code class="inline-code">access_flag</code> 就简单多了，直接使用一个 <code class="inline-code">int</code> 型的值，按位将存起来就可以了，当然，我们还需要注意 <code class="inline-code">!</code> ，因此，在存储的时候，会有两个变量：</p>
 <pre><code class="java">if (!negated) &#123;
   requiredSetClassAccessFlags |= accessFlag;
 &#125; else &#123;
   requiredUnsetClassAccessFlags |= accessFlag;
 &#125;
 </code></pre>
-<p>后面的 <code>class_name</code> 、<code>extends</code>  等逻辑读取就比较简单了，如下：</p>
-<p><img src="https://img-blog.csdnimg.cn/526aa022c9d1486f9163f1be6b178e1a.png" alt="解析 ClassName 以及 extends 父类" referrerpolicy="no-referrer"><figcaption class="post-image-caption">解析 ClassName 以及 extends 父类</figcaption></figure></p>
-<p>当父类相关信息解析完成后，下一步便是解析方法和变量相关的信息，也就是 EBNF 中描述 <code>field_specification</code> 和 <code>method_specification</code> 的内容。在 ProGuard 中，这两部份类容统一放到了 <code>parseMemberSpecificationArguments</code> 中去实现了，先来看一下代码逻辑： </p>
-<p><img src="https://img-blog.csdnimg.cn/24b901de74524b1b8d8a312a4d246bdd.png" alt="类成员解析入口" referrerpolicy="no-referrer"><figcaption class="post-image-caption">类成员解析入口</figcaption></figure></p>
+<p>后面的 <code class="inline-code">class_name</code> 、<code class="inline-code">extends</code>  等逻辑读取就比较简单了，如下：</p>
+<p><img src="https://img-blog.csdnimg.cn/526aa022c9d1486f9163f1be6b178e1a.png" alt="解析 ClassName 以及 extends 父类" referrerpolicy="no-referrer"></p>
+<p>当父类相关信息解析完成后，下一步便是解析方法和变量相关的信息，也就是 EBNF 中描述 <code class="inline-code">field_specification</code> 和 <code class="inline-code">method_specification</code> 的内容。在 ProGuard 中，这两部份类容统一放到了 <code class="inline-code">parseMemberSpecificationArguments</code> 中去实现了，先来看一下代码逻辑： </p>
+<p><img src="https://img-blog.csdnimg.cn/24b901de74524b1b8d8a312a4d246bdd.png" alt="类成员解析入口" referrerpolicy="no-referrer"></p>
 <p>剩下解析类成员的逻辑与前面类解析的逻辑相似，按照 EBNF 格式进行解析即可， 感兴趣的同学可以自行阅读源码。</p>
 <h2 id="结语"><span class="prefix"></span><span class="content">结语</span><span class="suffix"></span></h2><p>ProGuard 配置文件解析是非常重要的一部分内容，在 ProGuard 后续的执行逻辑中，会经常使用到本文中解析出来配置信息，可从官方文档详细了解一下各配置选项的作用级使用方法，以便能更好的理解后面的内容。在解析配置文件中，提到的 EBNF 是描述计算机编程语言的上下文无关文法的符号表示法，在编程语言开发中可能会经常遇到，此语法不复杂，可以去百科上读一读，相信你会有很多的收获。</p>
 
-        </section>
+                </div>
+            </section>
         </div>
+        <input id="copy-input" style="position: absolute; left: -1000px; z-index: -1000;">
 
     
 
 </div>
                 <!-- 
                     <div class="post_pre_next">
+    
+        <div class="post-pre">
+            <a href="/2023/06/20/proguard-3/">上一篇: ProGuard 进阶系列（三） Java 类文件解析</a>
+        </div>
     
     
         <a href="/2023/06/08/Proguard-source-read1/">下一篇: 

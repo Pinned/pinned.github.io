@@ -82,16 +82,6 @@ select
 }</style>
     <style type="text/css" id="style">@charset "utf-8";
 
-:root {
-    --font-color-0: #04077e;
-    --font-color-1: #000;
-    --font-color-2: #666;
-    --font-color-3: #aaa;
-    --bg-color-1: #eee;
-    --line-1: #ccc;
-    --line-2: #ddd;
-}
-
 p {
     word-wrap: break-word;
     white-space: pre-wrap;
@@ -103,13 +93,13 @@ body {
     font-size: 16px;
     line-height: 1.75;
     letter-spacing: 0.6px;
-    color: var(--font-color-2);
+    color: #666;
     background: #F0F0F0;
 }
 
 a {
     text-decoration: none;
-    color: var(--font-color-1);
+    color: #000;
 }
 
 
@@ -148,7 +138,7 @@ a {
 .header {
     padding-bottom: 48px;
     margin-bottom: 48px;
-    border-bottom: 1px solid var(--line-1);
+    border-bottom: 1px solid #ccc;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -159,7 +149,7 @@ a {
 .logo {
     font-size: 2rem;
     font-weight: 600;
-    color: var(--font-color-1);
+    color: #000;
     margin-bottom: 16px;
     flex: 0 0 100%;
 }
@@ -184,7 +174,7 @@ a {
 }
 
 .nav li a {
-    color: var(--font-color-1);
+    color: #000;
     opacity: .6;
     transition: opacity ease-in-out .5s;
 }
@@ -222,7 +212,7 @@ a {
     width: 100%;
     padding-bottom: 48px;
     margin-bottom: 48px;
-    border-bottom: 1px dashed var(--line-2);
+    border-bottom: 1px dashed #ddd;
 }
 
 .post-title {
@@ -231,12 +221,12 @@ a {
     font-weight: 600;
     line-height: 1.5;
     margin-bottom: 12px;
-    color: var(--font-color-1);
+    color: #000;
     /*transition: color ease-in-out .5s;*/
 }
 
 .post-title:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
@@ -248,7 +238,7 @@ a {
 
 .read-more {
     padding: 0 4px;
-    color: var(--font-color-0);
+    color: #04077e;
 }
 
 .read-more:before,
@@ -277,7 +267,7 @@ a {
 
 .post-date {
     font-size: 0.875rem;
-    color: var(--font-color-3);
+    color: #aaa;
 }
 
 .paginator {
@@ -309,24 +299,24 @@ a {
 
 .paginator a {
     margin: 4px;
-    color: var(--font-color-2);
+    color: #666;
     transition: color ease-in-out .5s;
 }
 
 .paginator a:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
 .paginator .current {
-    color: var(--font-color-0);
-    border: 1px solid var(--font-color-0);
+    color: #04077e;
+    border: 1px solid #04077e;
 }
 
 .footer {
     padding: 24px 0;
     font-size: 0.875rem;
-    color: var(--font-color-3);
+    color: #aaa;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -340,12 +330,12 @@ a {
 }
 
 .footer a {
-    color: var(--font-color-3);
+    color: #aaa;
     transition: color ease-in-out .5s;
 }
 
 .footer a:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
@@ -364,12 +354,12 @@ a {
     font-size: 1.6rem;
     font-weight: 600;
     line-height: 1.5;
-    color: var(--font-color-1);
+    color: #000;
 }
 
 .post-meta {
     font-size: 0.875rem;
-    color: var(--font-color-3);
+    color: #aaa;
     flex: 0 0 100%;
     margin-bottom: 32px;
 }
@@ -405,7 +395,7 @@ a {
 
 .archive li span {
     width: 108px;
-    color: var(--font-color-2);
+    color: #666;
 }
 
 .archive-main {
@@ -413,12 +403,12 @@ a {
 }
 
 .archive-title {
-    color: var(--font-color-1);
+    color: #000;
     /*transition: color ease-in-out .5s;*/
 }
 
 .archive-title:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
@@ -434,16 +424,6 @@ a {
     cursor: pointer;
 }
 
-#beautiful p {
-    box-sizing: border-box;
-    margin-bottom: 16px;
-    font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
-    font-size: 15px;
-    text-align: justify;
-    white-space: normal;
-    text-size-adjust: auto;
-    line-height: 1.75em;
-}
 #bing-bg {
     width: 100%;
     position: fixed;
@@ -453,9 +433,20 @@ a {
     filter: blur(10px);
     object-fit: cover;
   }
-</style>
+#go-top {
+    cursor: pointer;
+}
+
+#beautiful {
+    font-family: "PingFang SC", BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serifhtml, body;
+    font-size: 16px;
+    line-height: 1.75;
+    letter-spacing: 0.6px;
+}</style>
     <style type="text/css" id="markdown">@charset "utf-8";
 
+#copy-post-content,
+#beautiful,
 .post-md
 {
     width: 100%;
@@ -469,7 +460,7 @@ a {
 .post-md h5,
 .post-md h6
 {
-    color: var(--font-color-1);
+    color: #000;
 }
 /* 一级标题 */
 .post-md h1  {
@@ -517,7 +508,6 @@ a {
 
 /* 二级标题内容 */
 .post-md h2 .content {
-    margin-left: -10px;
     display: inline-block;
     width: auto;
     height: 40px;
@@ -570,13 +560,13 @@ a {
 .post-md a
 {
     color: #61aeee;
-    box-shadow: 0 2px 0 var(--line-1);
+    box-shadow: 0 2px 0 #ccc;
     transition: color ease-in-out .65s, box-shadow ease-in-out .65s;
 }
 .post-md a:hover
 {
-    color: var(--font-color-0);
-    box-shadow: 0 2px 0 var(--font-color-0);
+    color: #04077e;
+    box-shadow: 0 2px 0 #04077e;
     transition: color ease-in-out .65s, box-shadow ease-in-out .65s;
 }
 .post-md strong
@@ -612,7 +602,7 @@ a {
 {
     border: none;
     height: 1px;
-    background: var(--line-1);
+    background: #ccc;
     margin: 24px 0;
 }
 
@@ -620,11 +610,11 @@ a {
 .post-md blockquote
 {
     width: 100%;
-    margin: 12px 0;
+    padding: 7px 0;
 }
 .post-md blockquote
 {
-    border-left: 2px solid var(--line-2);
+    border-left: 2px solid #ddd;
     padding-left: 12px;
     word-wrap: break-word;
 }
@@ -683,7 +673,7 @@ thead {
 }
 
 
-.post-md p code
+.inline-code
 {
     border-radius: 4px;
     background:rgba(27,31,35,.05);
@@ -707,7 +697,7 @@ thead {
             
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
-            <h4>目录</h4>
+            <h4 id="go-top">目录</h4>
             <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#gradlew%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90"><span class="post-toc-text">gradlew 源码分析</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#gradle-wrapper.jar"><span class="post-toc-text">gradle-wrapper.jar</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E8%AF%BB%E5%8F%96%E7%B3%BB%E7%BB%9F%E7%9A%84%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="post-toc-text">读取系统的配置文件</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#gradle%E7%9A%84%E6%A3%80%E6%B5%8B%E4%B8%8E%E4%B8%8B%E8%BD%BD"><span class="post-toc-text">gradle的检测与下载</span></a></li></ol></li></ol>
         </nav>
     </aside>
@@ -724,10 +714,11 @@ thead {
         <div class="post-meta">
             <a class='author' href="/">罗昭成</a> <span id="clipboardbtn">2017年10月15日</span>
         </div>
-        <div class="post-md" id="copy-post-content">
-        <section id="beautiful">
-            <h1 id="gradlew 源码分析"><span class="prefix"></span><span class="content">gradlew 源码分析</span><span class="suffix"></span></h1><p>使用Android Studio 新建一个项目，会默认使用gradle编译项目。在编译的时候可以使用：<code>gradle assembleRelease</code>, 当然，如果没有安装<code>gradle</code>的时候，也可以使用项目文件夹下面的<code>gradlew</code>进行编译。</p>
-<p>可以看到<code>gradlew</code>是一个shell脚本，他读取了系统的一些环境变量，并运行了<strong>gradle&#x2F;wrapper&#x2F;gradle-wrapper.jar</strong>文件的<code>org.gradle.wrapper.GradleWrapperMain</code>。执行编译。</p>
+        <div id="copy-post-content">
+            <section id="beautiful">
+            <div class="post-md" >
+                    <h1 id="gradlew 源码分析"><span class="prefix"></span><span class="content">gradlew 源码分析</span><span class="suffix"></span></h1><p>使用Android Studio 新建一个项目，会默认使用gradle编译项目。在编译的时候可以使用：<code class="inline-code">gradle assembleRelease</code>, 当然，如果没有安装<code class="inline-code">gradle</code>的时候，也可以使用项目文件夹下面的<code class="inline-code">gradlew</code>进行编译。</p>
+<p>可以看到<code class="inline-code">gradlew</code>是一个shell脚本，他读取了系统的一些环境变量，并运行了<strong>gradle&#x2F;wrapper&#x2F;gradle-wrapper.jar</strong>文件的<code class="inline-code">org.gradle.wrapper.GradleWrapperMain</code>。执行编译。</p>
 <h2 id="gradle-wrapper.jar"><span class="prefix"></span><span class="content">gradle-wrapper.jar</span><span class="suffix"></span></h2><p>在<strong>org.gradle.wrapper.GradleWrapperMain</strong>的main如下：</p>
 <pre><code class="java">public static void main(String[] args) throws Exception &#123;
     // 第一步
@@ -764,14 +755,14 @@ thead {
 &#125;
 </code></pre>
 <ol>
-<li>先根据 <strong>GradleWrapperMain</strong> 这个类找到<code>gradle-wrapper.jar</code>,<code>gradle-wrapper.properties</code>,<code>root dir</code></li>
+<li>先根据 <strong>GradleWrapperMain</strong> 这个类找到<code class="inline-code">gradle-wrapper.jar</code>,<code class="inline-code">gradle-wrapper.properties</code>,<code class="inline-code">root dir</code></li>
 <li>读取系统环境的配置</li>
-<li>读取系统的gradle 配置的路径<code>gradle user home</code></li>
-<li>检测gradle-launcher-version.jar（如果不存在，先下载）, 并运行<code>org.gradle.launcher.GradleMain</code></li>
+<li>读取系统的gradle 配置的路径<code class="inline-code">gradle user home</code></li>
+<li>检测gradle-launcher-version.jar（如果不存在，先下载）, 并运行<code class="inline-code">org.gradle.launcher.GradleMain</code></li>
 </ol>
 <h2 id="读取系统的配置文件"><span class="prefix"></span><span class="content">读取系统的配置文件</span><span class="suffix"></span></h2><ol>
-<li>如果在使用<code>gradlew</code>编译的时候，参数中包含<code>g</code>, 则使用这个参数的值来作为<code>gradle user home</code></li>
-<li>如果不存在<code>g</code>这个参数， 先读取<code>gradle.user.home</code>, 如果没有，读取环境变量中的<code>GRADLE_USER_HOME</code>，如果依然不存在，使用默认值<code>~/.gradle/</code></li>
+<li>如果在使用<code class="inline-code">gradlew</code>编译的时候，参数中包含<code class="inline-code">g</code>, 则使用这个参数的值来作为<code class="inline-code">gradle user home</code></li>
+<li>如果不存在<code class="inline-code">g</code>这个参数， 先读取<code class="inline-code">gradle.user.home</code>, 如果没有，读取环境变量中的<code class="inline-code">GRADLE_USER_HOME</code>，如果依然不存在，使用默认值<code class="inline-code">~/.gradle/</code></li>
 </ol>
 <pre><code class="java">public class GradleUserHomeLookup &#123;
     public static final String DEFAULT_GRADLE_USER_HOME = System.getProperty(&quot;user.home&quot;) + &quot;/.gradle&quot;;
@@ -790,16 +781,18 @@ thead {
     &#125;
 &#125;
 </code></pre>
-<h2 id="gradle的检测与下载"><span class="prefix"></span><span class="content">gradle的检测与下载</span><span class="suffix"></span></h2><p>从<code>gradle-wrapper.properties</code>中读取到<code>distributionUrl</code>,使用md5作为hash值，找到<code>gradleUserHome/gradle_dest_name/gradle_hash</code>的文件夹下</p>
+<h2 id="gradle的检测与下载"><span class="prefix"></span><span class="content">gradle的检测与下载</span><span class="suffix"></span></h2><p>从<code class="inline-code">gradle-wrapper.properties</code>中读取到<code class="inline-code">distributionUrl</code>,使用md5作为hash值，找到<code class="inline-code">gradleUserHome/gradle_dest_name/gradle_hash</code>的文件夹下</p>
 <pre><code class="java">final File markerFile = new File(localZipFile.getParentFile(), localZipFile.getName() + &quot;.ok&quot;);
 if (distDir.isDirectory() &amp;&amp; markerFile.isFile()) &#123;
     return getAndVerifyDistributionRoot(distDir, distDir.getAbsolutePath());
 &#125;
 </code></pre>
-<p>如果文件夹下面有<code>.ok</code>文件，说明下载成功，直接使用。<br>如果不存在，则执行下载任务，下载完成，解压，在使用。</p>
+<p>如果文件夹下面有<code class="inline-code">.ok</code>文件，说明下载成功，直接使用。<br>如果不存在，则执行下载任务，下载完成，解压，在使用。</p>
 
-        </section>
+                </div>
+            </section>
         </div>
+        <input id="copy-input" style="position: absolute; left: -1000px; z-index: -1000;">
 
     
 

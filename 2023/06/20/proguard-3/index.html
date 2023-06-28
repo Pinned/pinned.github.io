@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+    <link rel="alternate icon" type="image/png" href="/img/favicon.png">
+    
+        <title>ProGuard 进阶系列（三） Java 类文件解析 </title>
+        
+<link rel="stylesheet" href="/css/toc.css">
+
+    
+    <style type="text/css" id="reset">@charset "utf-8";
+
+*,
+*::before,
+*::after
+{
+    box-sizing: border-box;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+figure,
+blockquote,
+dl,
+dd
+{
+    margin: 0;
+}
+
+ul,
+ol
+{
+    list-style: none;
+}
+
+ul
+{
+    padding-inline-start: 0;
+}
+
+html,
+body
+{
+    scroll-behavior: smooth;
+}
+
+a:not([class])
+{
+    text-decoration-skip-ink: auto;
+}
+
+img,
+picture
+{
+    width: auto;
+    max-width: 100%;
+    display: block;
+}
+
+input,
+button,
+textarea,
+select
+{
+    font: inherit;
+}
+
+@media (prefers-reduced-motion: reduce)
+{
+    html:focus-within
+    {
+        scroll-behavior: auto;
+    }
+}</style>
+    <style type="text/css" id="style">@charset "utf-8";
+
+p {
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    text-align: justify;
+}
+
+body {
+    font-family: "PingFang SC", BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serifhtml, body;
+    font-size: 16px;
+    line-height: 1.75;
+    letter-spacing: 0.6px;
+    color: #666;
+    background: #F0F0F0;
+}
+
+a {
+    text-decoration: none;
+    color: #000;
+}
+
+
+
+@media screen and (max-width: 480px) {
+    body {
+        background: #fff;
+    }
+
+    .paper {
+        padding: 4vw;
+    }
+
+    .paper-main {
+        width: 100%;
+        margin: 0 auto;
+        padding: 30px 1vw 12px;
+        background: #fff;
+    }
+}
+
+@media screen and (min-width: 481px) {
+    .paper {
+        padding: 4vw;
+    }
+
+    .paper-main {
+        width: 900px;
+        margin: 0 auto;
+        padding: 62px 3vw 24px;
+        background: #fff;
+        border-radius: 24px;
+    }
+}
+
+.header {
+    padding-bottom: 48px;
+    margin-bottom: 48px;
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: center;
+}
+
+.logo {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #000;
+    margin-bottom: 16px;
+    flex: 0 0 100%;
+}
+
+.nav {
+    margin: 0 0 4px;
+    flex: 0 0 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: center;
+}
+
+.nav li {
+    padding: 2px 0;
+    margin-right: 24px;
+}
+
+.nav li:last-of-type {
+    margin-right: 0;
+}
+
+.nav li a {
+    color: #000;
+    opacity: .6;
+    transition: opacity ease-in-out .5s;
+}
+
+.nav li a:hover {
+    opacity: 1;
+    transition: opacity ease-in-out .5s;
+}
+
+.post-header {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: center;
+}
+
+.post-header .post-title {
+    font-size: 1.375rem;
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+    line-height: 1;
+}
+
+.post-list {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: stretch;
+}
+
+.post {
+    width: 100%;
+    padding-bottom: 48px;
+    margin-bottom: 48px;
+    border-bottom: 1px dashed #ddd;
+}
+
+.post-title {
+    display: inline-block;
+    font-size: 1.6rem;
+    font-weight: 600;
+    line-height: 1.5;
+    margin-bottom: 12px;
+    color: #000;
+    /*transition: color ease-in-out .5s;*/
+}
+
+.post-title:hover {
+    color: #04077e;
+    transition: color ease-in-out .5s;
+}
+
+.post-except {
+    word-break: break-all;
+    margin-bottom: 12px;
+    text-align: justify;
+}
+
+.read-more {
+    padding: 0 4px;
+    color: #04077e;
+}
+
+.read-more:before,
+.read-more:after {
+    display: inline-block;
+    transition: transform ease-in-out .5s;
+}
+
+.read-more:before {
+    content: "{ ";
+}
+
+.read-more:after {
+    content: " }";
+}
+
+.read-more:hover:before {
+    transform: translateX(-4px);
+    transition: transform ease-in-out .25s;
+}
+
+.read-more:hover:after {
+    transform: translateX(4px);
+    transition: transform ease-in-out .25s;
+}
+
+.post-date {
+    font-size: 0.875rem;
+    color: #aaa;
+}
+
+.paginator {
+    font-size: 0.875rem;
+    width: 100%;
+    margin: 0 auto 24px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.paginator * {
+    display: block;
+    padding: 8px 16px;
+    border-radius: 18px;
+    background: #fff;
+    border: 1px solid #eee;
+}
+
+.paginator .space {
+    display: block;
+    padding: 8px 16px;
+    border-radius: 18px;
+    background: #fff;
+    border: none;
+}
+
+.paginator a {
+    margin: 4px;
+    color: #666;
+    transition: color ease-in-out .5s;
+}
+
+.paginator a:hover {
+    color: #04077e;
+    transition: color ease-in-out .5s;
+}
+
+.paginator .current {
+    color: #04077e;
+    border: 1px solid #04077e;
+}
+
+.footer {
+    padding: 24px 0;
+    font-size: 0.875rem;
+    color: #aaa;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-content: center;
+}
+
+.footer span {
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.footer a {
+    color: #aaa;
+    transition: color ease-in-out .5s;
+}
+
+.footer a:hover {
+    color: #04077e;
+    transition: color ease-in-out .5s;
+}
+
+.post-main {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.post-main-title {
+    flex: 0 0 100%;
+    margin-bottom: 12px;
+    font-size: 1.6rem;
+    font-weight: 600;
+    line-height: 1.5;
+    color: #000;
+}
+
+.post-meta {
+    font-size: 0.875rem;
+    color: #aaa;
+    flex: 0 0 100%;
+    margin-bottom: 32px;
+}
+
+.author {
+    color: #576b95;
+}
+
+.archive {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-content: normal;
+}
+
+.archive li {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-content: center;
+    padding: 12px 0;
+}
+
+.archive li:nth-child(odd) {
+    background: #fafafa;
+}
+
+.archive li:nth-child(even) {
+    background: #fff;
+}
+
+.archive li span {
+    width: 108px;
+    color: #666;
+}
+
+.archive-main {
+    flex: 0 1 calc(100% - 108px);
+}
+
+.archive-title {
+    color: #000;
+    /*transition: color ease-in-out .5s;*/
+}
+
+.archive-title:hover {
+    color: #04077e;
+    transition: color ease-in-out .5s;
+}
+
+.post-image-caption {
+    margin-top: 5px;
+    text-align: center;
+    color: #888;
+    font-size: 0.85rem;
+    display: block;
+}
+
+#clipboardbtn {
+    cursor: pointer;
+}
+
+#bing-bg {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    filter: blur(10px);
+    object-fit: cover;
+  }
+#go-top {
+    cursor: pointer;
+}
+
+#beautiful {
+    font-family: "PingFang SC", BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serifhtml, body;
+    font-size: 16px;
+    line-height: 1.75;
+    letter-spacing: 0.6px;
+}</style>
+    <style type="text/css" id="markdown">@charset "utf-8";
+
+#copy-post-content,
+#beautiful,
+.post-md
+{
+    width: 100%;
+    letter-spacing: 0;
+}
+
+.post-md h1,
+.post-md h2,
+.post-md h3,
+.post-md h4,
+.post-md h5,
+.post-md h6
+{
+    color: #000;
+}
+/* 一级标题 */
+.post-md h1  {
+    display:block;
+    border-bottom: 4px solid rgb(33, 33, 34);
+    font-size: 1rem;
+}
+  
+/* 一级标题内容 */
+.post-md h1  .content {
+    display: flex;
+    color: rgb(33, 33, 34);
+    font-size: 1rem;
+}
+  
+  
+/* 一级标题后缀 */
+.post-md h1  .suffix {
+    display: flex;
+    box-sizing: border-box;
+    width: 20px;
+    height: 10px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    background: RGBA(33, 33, 34, .5);
+    color: rgb(255, 255, 255);
+    font-size: 16px;
+    letter-spacing: 0.544px;
+    justify-content: flex-end;
+    box-sizing: border-box !important;
+    overflow-wrap: break-word !important;
+    float: right;
+    margin-top: -10px;
+}
+
+/* 二级标题 */
+.post-md h2 {
+    margin: 10px auto;
+    height: 40px;
+    background-color: rgb(251, 251, 251);
+    border-bottom: 1px solid rgb(246, 246, 246);
+    box-sizing: border-box;
+    font-size: 1rem;
+}
+
+/* 二级标题内容 */
+.post-md h2 .content {
+    display: inline-block;
+    width: auto;
+    height: 40px;
+    background-color: rgb(33, 33, 34);
+    border-bottom-right-radius:100px;
+    color: rgb(255, 255, 255);
+    padding-right: 30px;
+    padding-left: 20px;
+    font-size: 1rem;
+    line-height: 40px;
+}
+
+/* 三级标题 */
+.post-md h3 {
+    margin: 20px auto 5px;
+    border-top: 1px solid rgb(221, 221, 221);
+    box-sizing: border-box;
+    font-size: 1rem;
+}
+  
+/* 三级标题内容 */
+.post-md h3 .content {
+    margin-top: -1px;
+    padding-top: 6px;
+    padding-right: 5px;
+    padding-left: 5px;
+    font-size: 1rem;
+    border-top: 2px solid rgb(33, 33, 34);
+    display: inline-block;
+    line-height: 1.1;
+}
+.post-md h4
+{
+    font-size: 1rem;
+    line-height: 1.2;
+    padding: 16px 0;
+}
+.post-md h5
+{
+    font-size: 0.83rem;
+    line-height: 1.2;
+    padding: 14px 0;
+}
+.post-md h6
+{
+    font-size: 0.67rem;
+    line-height: 1.2;
+    padding: 12px 0;
+}
+.post-md a
+{
+    color: #61aeee;
+    box-shadow: 0 2px 0 #ccc;
+    transition: color ease-in-out .65s, box-shadow ease-in-out .65s;
+}
+.post-md a:hover
+{
+    color: #04077e;
+    box-shadow: 0 2px 0 #04077e;
+    transition: color ease-in-out .65s, box-shadow ease-in-out .65s;
+}
+.post-md strong
+{
+    font-weight: 700;
+}
+.post-md em
+{
+    font-style: italic;
+}
+.post-md kbd
+{
+    padding: 2px 4px;
+    border-radius: 2px;
+    background: #eee;
+    border: 1px solid #ddd;
+}
+.post-md ol
+{
+    list-style: decimal;
+    padding-left: 24px;
+}
+.post-md ul
+{
+    list-style: disc;
+    padding-left: 24px;
+}
+.post-md img
+{
+    border-radius: 4px;
+}
+.post-md hr
+{
+    border: none;
+    height: 1px;
+    background: #ccc;
+    margin: 24px 0;
+}
+
+.post-md p,
+.post-md blockquote
+{
+    width: 100%;
+    padding: 7px 0;
+}
+.post-md blockquote
+{
+    border-left: 2px solid #ddd;
+    padding-left: 12px;
+    word-wrap: break-word;
+}
+
+.post-md .video-container
+{
+    background: #000;
+    border-radius: 4px;
+    overflow: hidden;
+}
+.post-md iframe,
+.post-md .video-container iframe
+{
+    width: 100%;
+    height: 100vh;
+    max-height: 360px;
+    margin: 12px 0;
+}
+
+.post-md table {
+    padding: 0;
+    word-break: initial;
+    width: 100%;
+    page-break-inside: auto;
+    border-spacing:0px;
+    border: 0.5px solid #dfe2e5;
+}
+.post-md table tr {
+    border: 0.5px solid #dfe2e5;
+    margin: 0;
+    padding: 0;
+}
+.post-md table tr:nth-child(2n),
+thead {
+    background-color: #f8f8f8;
+}
+.post-md table th {
+    font-weight: bold;
+    border: 0.5px solid #dfe2e5;
+    border-bottom: 0;
+    margin: 0;
+    padding: 6px 13px;
+}
+.post-md table td {
+    border: 0.5px solid #dfe2e5;
+    margin: 0;
+    padding: 6px 13px;
+}
+.post-md table th:first-child,
+.post-md table td:first-child {
+    margin-top: 0;
+}
+.post-md table th:last-child,
+.post-md table td:last-child {
+    margin-bottom: 0;
+}
+
+
+.inline-code
+{
+    border-radius: 4px;
+    background:rgba(27,31,35,.05);
+    padding: 2px 4px;
+    color: rgb(0, 112, 96);
+    font-size: 1rem;
+    margin-left: 1px;
+    margin-right: 1px;
+}
+
+.post-md .hljs-ln-numbers
+{
+    opacity: .5;
+    padding-right: 12px;
+}
+</style>
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body>
+        <img id="bing-bg" src="" referrerpolicy="no-referrer" />
+        <div class="paper">
+            
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4 id="go-top">目录</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%B8%80%E3%80%81%E6%96%87%E4%BB%B6%E7%9A%84%E8%AF%BB%E5%8F%96"><span class="post-toc-text">一、文件的读取</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%BA%8C%E3%80%81CLASS%20%E6%96%87%E4%BB%B6%E7%9A%84%E8%AF%BB%E5%8F%96%E4%B8%8E%E8%A7%A3%E6%9E%90"><span class="post-toc-text">二、CLASS 文件的读取与解析</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%BB%93%E8%AF%AD"><span class="post-toc-text">结语</span></a></li></ol>
+        </nav>
+    </aside>
+
+            <div class="paper-main">
+                
+                    <div class="post-header">
+    <p class="post-title">ProGuard 进阶系列（三） Java 类文件解析</p>
+</div>
+                
+                <div class="post-main">
+
+    
+        <div class="post-meta">
+            <a class='author' href="/">罗昭成</a> <span id="clipboardbtn">2023年06月20日</span>
+        </div>
+        <div id="copy-post-content">
+            <section id="beautiful">
+            <div class="post-md" >
+                    <p>书接<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/CqizzHNTXMquZVh1rT6F9A">上文</a>，当我们从用户的配置文件中读取到所有的配置信息后，下一步便是将配置中的指定的类文件进行读取，构建需要混淆的 Java 类文件的语法树。在阅读类文件之前，先来看一下<strong>输入输出参数</strong>中的内容，我使用的是一个 Android 项目的输出产物，使用 <code class="inline-code">-injars</code>、<code class="inline-code">-outjars</code>、<code class="inline-code">-libraryjars</code> 指定了相关的信息，运行起来，这些信息会放到 <code class="inline-code">Configuration</code> 中，具体信息看下图：</p>
+<p><img src="https://img-blog.csdnimg.cn/f7778aaaed4c484bb6f2ed4e60a88351.png" alt="programJars 与 libraryJars" referrerpolicy="no-referrer"></p>
+<p>Java 代码源文件在编译后会转换成 Class 文件，格式定义是固定的，可以使用 ASM 等开源工具进行读取和解析，本文将分析 ProGuard 中，是如何进行类文件读取的。</p>
+<p>让我们把目光拉回到 ProGuard 的 <code class="inline-code">main</code> 方法中：</p>
+<p><img src="https://img-blog.csdnimg.cn/48d7c8c4fdc049adbda004fb8daafbc5.png" alt="ProGuard 的 Main 函数代码" referrerpolicy="no-referrer"></p>
+<p>从代码中可以看到，配置信息解析结束后，就会执行 ProGuard 的 <code class="inline-code">execute</code> 方法。继续执行下去，除去一些前置校验的操作，下一步便是本文关注的 <code class="inline-code">readInput</code>，读取 Class 文件的内容。</p>
+<pre><code class="java">private void readInput() throws Exception &#123;
+  // Fill the program class pool and the library class pool.
+  passRunner.run(new InputReader(configuration), appView);
+&#125;
+</code></pre>
+<p>在这几行代码中，有几个信息：<code class="inline-code">passRunner</code>、<code class="inline-code">InputReader</code> 和 <code class="inline-code">appView</code></p>
+<p>先来看<code class="inline-code">passRunner</code>，它只有很少的几行代码：</p>
+<pre><code class="java">public class PassRunner &#123;
+    private static final Logger logger = LogManager.getLogger(PassRunner.class);
+    private final Benchmark benchmark = new Benchmark();
+
+    public void run(Pass pass, AppView appView) throws Exception &#123;
+        benchmark.start();
+        pass.execute(appView);
+        benchmark.stop();
+
+        logger.debug(&quot;Pass &#123;&#125; completed in &#123;&#125;&quot;, pass::getName, () -&gt; TimeUtil.millisecondsToMinSecReadable(benchmark.getElapsedTimeMs()));
+    &#125;
+&#125;
+</code></pre>
+<p>当执行 <code class="inline-code">run</code> 方法是，会执行 <code class="inline-code">pass.execute</code> 方法，并且记录其执行时间。</p>
+<p>其次是 <code class="inline-code">appView</code>，它是一个 POJO 类，主要用来存储类信息和资源信息。</p>
+<p>而 <code class="inline-code">InputReader</code> 就是本文的重点，顾名思义，它是用来读取输入信息的，就是用来读取文章开头提到的 <code class="inline-code">libraryJars</code> 和 <code class="inline-code">programJars</code> ：</p>
+<ul>
+<li><code class="inline-code">libraryJars</code> ，指的是依赖库，如在 Android 中使用的 Android SDK ，Support 包等依赖库</li>
+<li><code class="inline-code">programJars</code>，指的是我们自己编写的代码，要进行混淆的目标类文件</li>
+</ul>
+<p>虽然此处叫 <code class="inline-code">jar</code> ，但其本质上不仅支持 jar 文件，还支持文件夹、war 等各种格式。</p>
+<h2 id="一、文件的读取"><span class="prefix"></span><span class="content">一、文件的读取</span><span class="suffix"></span></h2><p>在文章的开头，<code class="inline-code">programJars</code>  里面有两个 <code class="inline-code">ClassPathEntry</code>， 分别指向了 <code class="inline-code">R.jar</code> 文件和 <code class="inline-code">classes</code> 文件夹。在 <code class="inline-code">InputReader</code>  的 <code class="inline-code">execute</code> 方法中，我们先跳过 <code class="inline-code">ClassReader</code> 相关的创建逻辑，直接来看 <code class="inline-code">readInput</code> 方法：</p>
+<pre><code class="java">// InputReader.java, 省略不相关的代码
+private void readInput(String messagePrefix, ClassPathEntry classPathEntry, DataEntryReader dataEntryReader) throws IOException &#123;
+    try &#123;
+      
+        DataEntryReader reader = new DataEntryReaderFactory(configuration.android).createDataEntryReader(classPathEntry, dataEntryReader);
+
+        DataEntrySource source = new DirectorySource(classPathEntry.getFile());
+
+        source.pumpDataEntries(reader);
+    &#125; catch (IOException ex) &#123;
+        throw new IOException(&quot;Can&#39;t read [&quot; + classPathEntry + &quot;] (&quot; + ex.getMessage() + &quot;)&quot;, ex);
+    &#125;
+&#125;
+</code></pre>
+<p>此方法的入参 <code class="inline-code">dataEntryReader</code> 就是用于读取 Class 的实现，后面会讲到。从 <code class="inline-code">readInput</code> 的方法实现中可以看到，需要先创建  <code class="inline-code">reader</code>，代码中此处使用了工厂模式。先来回忆一下工厂模式：</p>
+<p>工厂模式是一种创建型设计模式，它通过委托给一个工厂类来实例化对象，而不是直接使用 <code class="inline-code">new</code> 关键字。这一模式可以避免调用方的复杂性，提供一个抽象的接口来创建实例，让调用方不必关心创建对象的细节。使用工厂模式可以提高代码复用性，更容易维护代码，让调用方只关注业务逻辑实现细节。</p>
+<p>在 <code class="inline-code">DataEntryReaderFactory</code> 中将 <code class="inline-code">DataEntryReader</code> 的创建过程封装起来，调用的时候，不需要感知创建的过程。前面提到了，<code class="inline-code">programJars</code> 支持多种格式，如 <code class="inline-code">apk</code>、<code class="inline-code">aab</code> 、<code class="inline-code">jar</code> 等，所以在工厂方法里面会根据文件后缀名去创建不同类型的 <code class="inline-code">DataEntryReader</code> ，代码如下：</p>
+<pre><code class="java">public DataEntryReader createDataEntryReader(ClassPathEntry classPathEntry, DataEntryReader reader) &#123;
+    // 省略部分代码
+    // Unzip any apks, if necessary.
+    reader = wrapInJarReader(reader, false, false, isApk, apkFilter, &quot;.apk&quot;);
+    if (!isApk) &#123;
+        // Unzip any aabs, if necessary.
+        reader = wrapInJarReader(reader, false, false, isAab, aabFilter, &quot;.aab&quot;);
+        if(!isAab) &#123;
+            // Unzip any jars, if necessary.
+            reader = wrapInJarReader(reader, false, false, isJar, jarFilter, &quot;.jar&quot;);
+            // 省略部分代码
+        &#125;
+    &#125;
+    return reader;
+&#125;
+private DataEntryReader wrapInJarReader(DataEntryReader reader,
+                                        boolean stripClassesPrefix,
+                                        boolean stripJmodHeader,
+                                        boolean isJar,
+                                        List&lt;String&gt; jarFilter,
+                                        String jarExtension) &#123;
+    // 不管当前格式是什么，直接创建 JarReader
+  DataEntryReader jarReader = new JarReader(stripJmodHeader, reader);
+
+  if (isJar) &#123;
+    // 如果当前需要读取的文件格式是对应后缀格式，直接返回 
+    return jarReader;
+  &#125; else &#123;
+    // 创建一个后缀匹配器
+    StringMatcher jarMatcher = new ExtensionMatcher(jarExtension);
+        // 返回一个格式判断的 Reader
+    return new FilteredDataEntryReader(
+      new DataEntryNameFilter(jarMatcher),
+      jarReader,
+      reader);
+  &#125;
+&#125;
+</code></pre>
+<p>在代码中，创建 <code class="inline-code">reader</code> 的时候构建了一个嵌套的结构，此处以 Android 项目中，生成的 <code class="inline-code">R.jar</code> 文件为例，其执行创建过程如下（执行路径参考红色部分）：</p>
+<p><img src="https://img-blog.csdnimg.cn/e8b0978143134cd999fb48559693ad74.png" alt="Reader 创建流程" referrerpolicy="no-referrer"></p>
+<p> 为了验证最后的产物结构，调试可以查看最终生成的 <code class="inline-code">DataEntryReader</code> 的结构信息截图如下， 可以与上面创建的图进行对照理解：</p>
+<p><img src="https://img-blog.csdnimg.cn/c0f2566b9eb840de8edb41a3688a5b48.png" alt="DataEntryReader 示例" referrerpolicy="no-referrer"></p>
+<p>当你理解 <code class="inline-code">Reader</code> 的创建逻辑后，可能会有和我一样的困惑，为什么此处需要使用嵌套的结构呢？既然已经知道文件格式了，为什么不直接创建对应的 <code class="inline-code">JarReader</code> 呢？按照我个人的理解，代码可能会这样子写：</p>
+<pre><code class="java">// 此处非项目中源代码，仅个人思路。
+public DataEntryReader createDataEntryReader(ClassPathEntry classPathEntry, DataEntryReader reader) &#123;
+    // 省略部分代码
+    // Unzip any apks, if necessary.
+    if (isApk) &#123;
+        reader = wrapInJarReader(reader, false, false, isApk, apkFilter, &quot;.apk&quot;);
+    &#125; else if(isAab) &#123;
+        reader = wrapInJarReader(reader, false, false, isAab, aabFilter, &quot;.aab&quot;);
+    &#125; else if (isJar) &#123;
+        reader = wrapInJarReader(reader, false, false, isJar, jarFilter, &quot;.jar&quot;);
+    &#125;
+    // 省略部分代码
+    return reader;
+&#125;
+</code></pre>
+<p>但经过多方查证，在读取文件的时候，可能会出现嵌套的问题，拿 Android 来说，在 <code class="inline-code">aar</code> 格式的文件中，会存在有 <code class="inline-code">jar</code> 格式的文件 <code class="inline-code">classes.jar</code> ， 示例如下：</p>
+<p><img src="https://img-blog.csdnimg.cn/0ff9418da911444c93db09f8f1d148b0.png" alt="example.aar 文件列表" referrerpolicy="no-referrer"></p>
+<p>因此，在读取内容的时候，还需要一个可以读取 <code class="inline-code">jar</code> 文件的  <code class="inline-code">Reader</code> 。虽然源代码中那样写可以正常执行逻辑，但我觉得它可能还是不够优雅，也许是我没有看懂原作者的用意，如你对此有不同的理解，欢迎与我交流。</p>
+<p>继续回到源代码，当 <code class="inline-code">Reader</code> 创建成功后，会直接调用 <code class="inline-code">source</code> 的 <code class="inline-code">pumpDataEntries</code> 方法，实现文件解析与类文件读取，从源码中可以看到，在 <code class="inline-code">pumpDataEntries</code> 中，是直接调用前面使用工厂模式创建出来的 <code class="inline-code">Reader</code> 实例中的 <code class="inline-code">read</code> 方法：</p>
+<pre><code class="java">public void pumpDataEntries(DataEntryReader dataEntryReader) throws IOException &#123;
+    readFiles(directory, dataEntryReader);
+&#125;
+
+private void readFiles(File file, DataEntryReader dataEntryReader) throws IOException &#123;
+    // 直接调用 read 方法
+    dataEntryReader.read(new FileDataEntry(directory, file));
+    // 如果是文件夹，则遍历读取所有的子文件
+    if (file.isDirectory()) &#123;
+        File[] listedFiles = file.listFiles();
+        for (int index = 0; index &lt; listedFiles.length; index++) &#123;
+            File listedFile = listedFiles[index];
+            readFiles(listedFile, dataEntryReader);
+        &#125;
+    &#125;
+&#125;
+</code></pre>
+<p>在前面的例子中，传入的 <code class="inline-code">jar</code> 文件，最后返回的 <code class="inline-code">Reader</code> 就是 <code class="inline-code">JarReader</code>， 而它会将传入的文件进行解压读取，并使用 <code class="inline-code">dataEntryReader</code> 去读取压缩包中的其它文件，代码如下：</p>
+<pre><code class="java">public void read(DataEntry dataEntry) throws IOException &#123;
+    // 省略部分代码
+    FileDataEntry fileDataEntry = (FileDataEntry)dataEntry;
+    // 处理 zip 文件
+    ZipFile zipFile = new ZipFile(fileDataEntry.getFile(), StandardCharsets.UTF_8);
+    try &#123;
+        Enumeration entries = zipFile.entries();
+        // 读取压缩包中的所有文件
+        while (entries.hasMoreElements()) &#123;
+            ZipEntry zipEntry = (ZipEntry)entries.nextElement();
+            // 转换成真实的 reader 去读取类容。
+            dataEntryReader.read(new ZipFileDataEntry(dataEntry, zipEntry, zipFile));
+        &#125;
+    &#125; finally &#123;
+        zipFile.close();
+    &#125;
+    // 省略部分代码
+&#125;
+</code></pre>
+<p>在本例中，<code class="inline-code">R.jar</code> 文件包含的内容如下图所示：</p>
+<p><img src="https://img-blog.csdnimg.cn/5ac1871cce14457b840bb2d2b8a69d18.png" alt="R.jar 文件内容" referrerpolicy="no-referrer"></p>
+<p>当读取到此文件的第一个 <code class="inline-code">ZipEntry</code> ： <code class="inline-code">com/example/demo/R$style.class</code> 文件时，源码会调用<code class="inline-code">dataEntryReader</code> 去读取内容，根据前面创建<code class="inline-code">Reader</code> 的流程，可以知道当前的 <code class="inline-code">dataEntryReader</code> 是 <code class="inline-code">FilteredDataEntryReader</code> ，它在执行读取时，会根据当前文件的后缀名去处理，如果后缀名匹配， 则会使用 <code class="inline-code">acceptedDataEntryReader</code> 去处理，反之会使用 <code class="inline-code">rejectedDataEntryReader</code> 去读取文件：</p>
+<p><img src="https://img-blog.csdnimg.cn/f4dee61fbf884074a15895bc28636fbe.png" alt="FilteredDataEntryReader 读取" referrerpolicy="no-referrer"></p>
+<p>因此，<code class="inline-code">com/example/demo/R$style.class</code> 文件的读取会一直嵌套调用，直到可以处理 <code class="inline-code">class</code> 文件的 <code class="inline-code">ClassReader</code> ，文件读取逻辑如下（图中红色部分）：</p>
+<p><img src="https://img-blog.csdnimg.cn/545ab19e73fd41dfae8fe477341b440d.png" alt="文件读取嵌套逻辑" referrerpolicy="no-referrer"></p>
+<h2 id="二、CLASS 文件的读取与解析"><span class="prefix"></span><span class="content">二、CLASS 文件的读取与解析</span><span class="suffix"></span></h2><p>在之前的文章 《<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/WDgwfkijoUpI70P8JVlSAQ">深入 Android 混淆实践：多模块打包爬坑之旅</a> 》中，使用了 <code class="inline-code">ASM</code> 去解析 <code class="inline-code">class</code> 文件，而在 ProGuard 中，自己实现了一套，源代码在开源库 <a target="_blank" rel="noopener" href="https://github.com/Guardsquare/proguard-core">proguard-core</a> 中。</p>
+<p>Java 的 <code class="inline-code">class</code> 文件格式在 JVM 规范中，有明确的定义，不论是在开源库 <code class="inline-code">ASM</code> 中，还是在 <code class="inline-code">proguard-core</code> 中，实现对 <code class="inline-code">class</code> 文件的读取与处理，都使用了访问者模式，有关访问者模式，将在后面的文章进行详细的讲解。下面在来看看 <code class="inline-code">ClassReader</code> 里面干了些什么事情。</p>
+<pre><code class="java">public void read(DataEntry dataEntry) throws IOException &#123;
+    try &#123;
+        // 获取当前数据流
+        InputStream inputStream = dataEntry.getInputStream();
+
+        // 在包一层，使用 DataInputStream
+        DataInputStream dataInputStream = new DataInputStream(inputStream);
+                // 创建 ProgramClass
+        Clazz clazz = new ProgramClass();
+        // 创建访问者 ProgramClassReader
+        ClassVisitor programClassReader = new ProgramClassReader(
+                dataInputStream,
+                ignoreStackMapAttributes
+        );
+        
+          // 调用 accept 方法，实现派发，让 programClassReader 执行 visitProgramClass 方法
+        clazz.accept(programClassReader);
+        
+
+        // 如果解析 class 成功
+        String className = clazz.getName();
+        if (className != null) &#123;
+            // 省略部分代码
+              // 用过 Visistor 模式，将 ProgramClass 添加到 AppView 的 programClassPool 中
+            clazz.accept(classVisitor);
+        &#125;
+        dataEntry.closeInputStream();
+    &#125; catch (Exception ex) &#123;
+                // ......
+    &#125;
+&#125;
+</code></pre>
+<p>代码中，通过访问者模式，触发 <code class="inline-code">ProgramClassReader</code>  从输入数据流中读取 <code class="inline-code">class</code> 文件的内容。此处读取的逻辑相对比较简单，按照 <code class="inline-code">class</code> 格式定义，按字节读取就可以了。我将 <code class="inline-code">CLASS</code> 格式的定义和读取代码做了一个截图，可以对比看看，加深理解。</p>
+<p><img src="https://img-blog.csdnimg.cn/bddd4984a28e4cd0ab76560213ff7d08.png" alt="class文件读取逻辑，左测为读取代码，右测为代码结构" referrerpolicy="no-referrer"></p>
+<h2 id="结语"><span class="prefix"></span><span class="content">结语</span><span class="suffix"></span></h2><p>在本文的开头，提到的 <code class="inline-code">AppView</code> 就是用来存储类数据的，代码逻辑会将输入参数中的 <code class="inline-code">programJars</code> 和 <code class="inline-code">libraryJars</code> 里包含的所有类解析出来，构建生成 <code class="inline-code">ProgramClass</code>，分别存储在 <code class="inline-code">AppView</code> 这个类中的 <code class="inline-code">programClassPool</code> 以及<code class="inline-code">libraryClassPool</code> 中， 用于后续混淆使用。当然，除了 <code class="inline-code">class</code> 文件，还存在一些资源文件的读取逻辑，如果你感兴趣，可以去翻翻源码。</p>
+<p>以上为 ProGuard 中 Java 类文件的读取与解析的内容，如果本文中有描述得不清楚或不对的地方，欢迎各位朋友一起交流讨论。</p>
+
+                </div>
+            </section>
+        </div>
+        <input id="copy-input" style="position: absolute; left: -1000px; z-index: -1000;">
+
+    
+
+</div>
+                <!-- 
+                    <div class="post_pre_next">
+    
+    
+        <a href="/2023/06/15/proguard-2/">下一篇: 
+            ProGuard 进阶系列（二）配置解析
+        </a>
+    
+</div>
+
+
+                 -->
+                <div class="footer">
+    <span>Copyright © 2023 大罗说事</span>
+</div>
+
+<!-- 
+<link rel="stylesheet" href="/css/highlight.default.css">
+ -->
+<style type="text/css" id="atom-one-dark">pre code.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 12px;
+  font-size: 12px;
+}
+/*
+
+Atom One Dark by Daniel Gamage
+Original One Dark Syntax theme from https://github.com/atom/one-dark-syntax
+
+base:    #282c34
+mono-1:  #abb2bf
+mono-2:  #818896
+mono-3:  #5c6370
+hue-1:   #56b6c2
+hue-2:   #61aeee
+hue-3:   #c678dd
+hue-4:   #98c379
+hue-5:   #e06c75
+hue-5-2: #be5046
+hue-6:   #d19a66
+hue-6-2: #e6c07b
+
+*/
+
+.hljs {
+  color: #abb2bf;
+  background: #282c34;
+}
+
+.hljs-comment,
+.hljs-quote {
+  color: #5c6370;
+  font-style: italic;
+}
+
+.hljs-doctag,
+.hljs-keyword,
+.hljs-formula {
+  color: #c678dd;
+}
+
+.hljs-section,
+.hljs-name,
+.hljs-selector-tag,
+.hljs-deletion,
+.hljs-subst {
+  color: #e06c75;
+}
+
+.hljs-literal {
+  color: #56b6c2;
+}
+
+.hljs-string,
+.hljs-regexp,
+.hljs-addition,
+.hljs-attribute,
+.hljs-meta .hljs-string {
+  color: #98c379;
+}
+
+.hljs-attr,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-type,
+.hljs-selector-class,
+.hljs-selector-attr,
+.hljs-selector-pseudo,
+.hljs-number {
+  color: #d19a66;
+}
+
+.hljs-symbol,
+.hljs-bullet,
+.hljs-link,
+.hljs-meta,
+.hljs-selector-id,
+.hljs-title {
+  color: #61aeee;
+}
+
+.hljs-built_in,
+.hljs-title.class_,
+.hljs-class .hljs-title {
+  color: #e6c07b;
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-strong {
+  font-weight: bold;
+}
+
+.hljs-link {
+  text-decoration: underline;
+}
+
+</style>
+<style type="text/css" id="code-theme">pre::before {
+    content: '';
+    display: block;
+    background: url("http://pinned.github.io/img/mac_style.svg");
+    height: 30px;
+    width: 100%;
+    background-size: 40px;
+    background-repeat: no-repeat;
+    background-color: #282c34;
+    margin-bottom: -7px;
+    border-radius: 5px;
+    background-position: 10px 10px;
+}
+
+pre code {
+    border-radius: 5px;
+}</style>
+
+<script src="/js/highlight.min.js"></script>
+
+
+<script src="/js/highlightjs-line-numbers.js"></script>
+
+
+<script src="/js/juice.js"></script>
+
+
+<script src="/js/copy_wechat.js"></script>
+
+
+<script>
+    hljs.highlightAll();
+    // window.onload = function() {
+    //     // 判断是否为手机浏览器
+    //     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+    //     if (!isMobile) {
+    //         fetch('https://pinned.github.io/bing-daily-picture/index.json')
+    //             .then(response => response.text())
+    //             .then(data => {
+    //                 var result = JSON.parse(data)
+    //                 var count = result.images.length
+    //                 const index = Math.floor(Math.random() * count);
+    //                 document.getElementById("bing-bg").src = "https://cn.bing.com" + result.images[index].url;
+    //             }); // 返回的结果
+    //     } 
+    // }    
+</script>
+
+            </div>
+        </div>
+    </body>
+</html>

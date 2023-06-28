@@ -82,16 +82,6 @@ select
 }</style>
     <style type="text/css" id="style">@charset "utf-8";
 
-:root {
-    --font-color-0: #04077e;
-    --font-color-1: #000;
-    --font-color-2: #666;
-    --font-color-3: #aaa;
-    --bg-color-1: #eee;
-    --line-1: #ccc;
-    --line-2: #ddd;
-}
-
 p {
     word-wrap: break-word;
     white-space: pre-wrap;
@@ -103,13 +93,13 @@ body {
     font-size: 16px;
     line-height: 1.75;
     letter-spacing: 0.6px;
-    color: var(--font-color-2);
+    color: #666;
     background: #F0F0F0;
 }
 
 a {
     text-decoration: none;
-    color: var(--font-color-1);
+    color: #000;
 }
 
 
@@ -148,7 +138,7 @@ a {
 .header {
     padding-bottom: 48px;
     margin-bottom: 48px;
-    border-bottom: 1px solid var(--line-1);
+    border-bottom: 1px solid #ccc;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -159,7 +149,7 @@ a {
 .logo {
     font-size: 2rem;
     font-weight: 600;
-    color: var(--font-color-1);
+    color: #000;
     margin-bottom: 16px;
     flex: 0 0 100%;
 }
@@ -184,7 +174,7 @@ a {
 }
 
 .nav li a {
-    color: var(--font-color-1);
+    color: #000;
     opacity: .6;
     transition: opacity ease-in-out .5s;
 }
@@ -222,7 +212,7 @@ a {
     width: 100%;
     padding-bottom: 48px;
     margin-bottom: 48px;
-    border-bottom: 1px dashed var(--line-2);
+    border-bottom: 1px dashed #ddd;
 }
 
 .post-title {
@@ -231,12 +221,12 @@ a {
     font-weight: 600;
     line-height: 1.5;
     margin-bottom: 12px;
-    color: var(--font-color-1);
+    color: #000;
     /*transition: color ease-in-out .5s;*/
 }
 
 .post-title:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
@@ -248,7 +238,7 @@ a {
 
 .read-more {
     padding: 0 4px;
-    color: var(--font-color-0);
+    color: #04077e;
 }
 
 .read-more:before,
@@ -277,7 +267,7 @@ a {
 
 .post-date {
     font-size: 0.875rem;
-    color: var(--font-color-3);
+    color: #aaa;
 }
 
 .paginator {
@@ -309,24 +299,24 @@ a {
 
 .paginator a {
     margin: 4px;
-    color: var(--font-color-2);
+    color: #666;
     transition: color ease-in-out .5s;
 }
 
 .paginator a:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
 .paginator .current {
-    color: var(--font-color-0);
-    border: 1px solid var(--font-color-0);
+    color: #04077e;
+    border: 1px solid #04077e;
 }
 
 .footer {
     padding: 24px 0;
     font-size: 0.875rem;
-    color: var(--font-color-3);
+    color: #aaa;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -340,12 +330,12 @@ a {
 }
 
 .footer a {
-    color: var(--font-color-3);
+    color: #aaa;
     transition: color ease-in-out .5s;
 }
 
 .footer a:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
@@ -364,12 +354,12 @@ a {
     font-size: 1.6rem;
     font-weight: 600;
     line-height: 1.5;
-    color: var(--font-color-1);
+    color: #000;
 }
 
 .post-meta {
     font-size: 0.875rem;
-    color: var(--font-color-3);
+    color: #aaa;
     flex: 0 0 100%;
     margin-bottom: 32px;
 }
@@ -405,7 +395,7 @@ a {
 
 .archive li span {
     width: 108px;
-    color: var(--font-color-2);
+    color: #666;
 }
 
 .archive-main {
@@ -413,12 +403,12 @@ a {
 }
 
 .archive-title {
-    color: var(--font-color-1);
+    color: #000;
     /*transition: color ease-in-out .5s;*/
 }
 
 .archive-title:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
@@ -434,16 +424,6 @@ a {
     cursor: pointer;
 }
 
-#beautiful p {
-    box-sizing: border-box;
-    margin-bottom: 16px;
-    font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
-    font-size: 15px;
-    text-align: justify;
-    white-space: normal;
-    text-size-adjust: auto;
-    line-height: 1.75em;
-}
 #bing-bg {
     width: 100%;
     position: fixed;
@@ -453,9 +433,20 @@ a {
     filter: blur(10px);
     object-fit: cover;
   }
-</style>
+#go-top {
+    cursor: pointer;
+}
+
+#beautiful {
+    font-family: "PingFang SC", BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serifhtml, body;
+    font-size: 16px;
+    line-height: 1.75;
+    letter-spacing: 0.6px;
+}</style>
     <style type="text/css" id="markdown">@charset "utf-8";
 
+#copy-post-content,
+#beautiful,
 .post-md
 {
     width: 100%;
@@ -469,7 +460,7 @@ a {
 .post-md h5,
 .post-md h6
 {
-    color: var(--font-color-1);
+    color: #000;
 }
 /* 一级标题 */
 .post-md h1  {
@@ -517,7 +508,6 @@ a {
 
 /* 二级标题内容 */
 .post-md h2 .content {
-    margin-left: -10px;
     display: inline-block;
     width: auto;
     height: 40px;
@@ -570,13 +560,13 @@ a {
 .post-md a
 {
     color: #61aeee;
-    box-shadow: 0 2px 0 var(--line-1);
+    box-shadow: 0 2px 0 #ccc;
     transition: color ease-in-out .65s, box-shadow ease-in-out .65s;
 }
 .post-md a:hover
 {
-    color: var(--font-color-0);
-    box-shadow: 0 2px 0 var(--font-color-0);
+    color: #04077e;
+    box-shadow: 0 2px 0 #04077e;
     transition: color ease-in-out .65s, box-shadow ease-in-out .65s;
 }
 .post-md strong
@@ -612,7 +602,7 @@ a {
 {
     border: none;
     height: 1px;
-    background: var(--line-1);
+    background: #ccc;
     margin: 24px 0;
 }
 
@@ -620,11 +610,11 @@ a {
 .post-md blockquote
 {
     width: 100%;
-    margin: 12px 0;
+    padding: 7px 0;
 }
 .post-md blockquote
 {
-    border-left: 2px solid var(--line-2);
+    border-left: 2px solid #ddd;
     padding-left: 12px;
     word-wrap: break-word;
 }
@@ -683,7 +673,7 @@ thead {
 }
 
 
-.post-md p code
+.inline-code
 {
     border-radius: 4px;
     background:rgba(27,31,35,.05);
@@ -707,7 +697,7 @@ thead {
             
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
-            <h4>目录</h4>
+            <h4 id="go-top">目录</h4>
             <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E6%A6%82%E8%BF%B0"><span class="post-toc-text">概述</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E6%83%B3%E6%B3%95"><span class="post-toc-text">想法</span></a></li></ol>
         </nav>
     </aside>
@@ -724,9 +714,10 @@ thead {
         <div class="post-meta">
             <a class='author' href="/">罗昭成</a> <span id="clipboardbtn">2015年01月23日</span>
         </div>
-        <div class="post-md" id="copy-post-content">
-        <section id="beautiful">
-            <h1 id="概述"><span class="prefix"></span><span class="content">概述</span><span class="suffix"></span></h1><p>HTTP请求，是一个很长见的过程，缓存也是一个不可避免的话题。一个有好的HTTP请<br>求，肯定会有它自己的一套缓存机制。我们要如何来做，即能方便，又能快速的实现这<br>个功能呢？</p>
+        <div id="copy-post-content">
+            <section id="beautiful">
+            <div class="post-md" >
+                    <h1 id="概述"><span class="prefix"></span><span class="content">概述</span><span class="suffix"></span></h1><p>HTTP请求，是一个很长见的过程，缓存也是一个不可避免的话题。一个有好的HTTP请<br>求，肯定会有它自己的一套缓存机制。我们要如何来做，即能方便，又能快速的实现这<br>个功能呢？</p>
 <h1 id="想法"><span class="prefix"></span><span class="content">想法</span><span class="suffix"></span></h1><p>以前，自己也封装过一些简陋的HTTP框架，有的在HTTP框架中做过数据缓存，有的没有<br>做过数据缓存。</p>
 <ul>
 <li><p>没有做数据缓存</p>
@@ -735,9 +726,9 @@ thead {
 <li><p>做数据缓存</p>
 <p>  在本处，做数据缓存，有一个通用的做法就是将HTTP请求的Response作为文件来存储。虽然很简单，但是还是有一个小的细节需要注意，那就是如何建立HTTP请求与文件之间的映射。前面我去面试的时候，也遇到过这个问题。我的想法如下：</p>
 <ul>
-<li><p>直接使用URL地址作为文件名称，考虑到URL地址有可能存在过长的情况，可以使用URL<br>地址的<code>MD5</code>值来作为KEY</p>
+<li><p>直接使用URL地址作为文件名称，考虑到URL地址有可能存在过长的情况，可以使用URL<br>地址的<code class="inline-code">MD5</code>值来作为KEY</p>
 </li>
-<li><p>建立数据库，用来存储URL地址与文件名的映射关系，文件名使用<code>UUID</code>来存储</p>
+<li><p>建立数据库，用来存储URL地址与文件名的映射关系，文件名使用<code class="inline-code">UUID</code>来存储</p>
 </li>
 </ul>
 </li>
@@ -803,14 +794,14 @@ thead {
   &#125;
 &#125;
 </code></pre>
-<p>如上述代码，先从<code>mQuene</code>中拿出一个<code>Request</code>，然后经过一系列的预处理，分发出网络请求。</p>
+<p>如上述代码，先从<code class="inline-code">mQuene</code>中拿出一个<code class="inline-code">Request</code>，然后经过一系列的预处理，分发出网络请求。</p>
 <p>在下述地方进行了数据缓存：</p>
 <pre><code class="java">if (request.shouldCache() &amp;&amp; response.cacheEntry != null) &#123;
     mCache.put(request.getCacheKey(), response.cacheEntry);
     request.addMarker(&quot;network-cache-written&quot;);
 &#125;
 </code></pre>
-<p>如果当前的<code>Request</code>是应该被缓存（PS:request 默认是要进行数据缓存的），并且<code>cache</code>不为空<br>的时候，进行数据缓存。</p>
+<p>如果当前的<code class="inline-code">Request</code>是应该被缓存（PS:request 默认是要进行数据缓存的），并且<code class="inline-code">cache</code>不为空<br>的时候，进行数据缓存。</p>
 <p>紧接着便是把数据写到文件里面去，代码如下：</p>
 <pre><code class="java">/**
  * Puts the entry with the specified key into the cache.
@@ -840,8 +831,8 @@ public synchronized void put(String key, Entry entry) &#123;
     &#125;
 &#125;
 </code></pre>
-<p>代码很简单，就是通过<code>key</code>来生成一个对应的文件名，然后将我们要<code>cache</code>的数据存储到文件中。</p>
-<p>先看一下<code>request.getCacheKey()</code>的默认实现：</p>
+<p>代码很简单，就是通过<code class="inline-code">key</code>来生成一个对应的文件名，然后将我们要<code class="inline-code">cache</code>的数据存储到文件中。</p>
+<p>先看一下<code class="inline-code">request.getCacheKey()</code>的默认实现：</p>
 <pre><code class="java">/**
  * Returns the URL of this request.
  */
@@ -856,7 +847,7 @@ public String getCacheKey() &#123;
     return getUrl();
 &#125;
 </code></pre>
-<p>我那个X，它的默认实现就是直接取的URL地址。下面我们在看一下<code>getFileForKey(key)</code>是如何实现<br>的。</p>
+<p>我那个X，它的默认实现就是直接取的URL地址。下面我们在看一下<code class="inline-code">getFileForKey(key)</code>是如何实现<br>的。</p>
 <pre><code class="java">
 /**
  * Creates a pseudo-unique filename for the specified cache key.
@@ -877,14 +868,14 @@ public File getFileForKey(String key) &#123;
     return new File(mRootDirectory, getFilenameForKey(key));
 &#125;
 </code></pre>
-<p>可以看到，文件名的取值是将URL地址分成两部分，分别取<code>hashcode</code>然后在合在一起行成一个字符串。</p>
+<p>可以看到，文件名的取值是将URL地址分成两部分，分别取<code class="inline-code">hashcode</code>然后在合在一起行成一个字符串。</p>
 <p>存储HTTP请求缓存竟然如些的简单，为何我不曾想到呢。</p>
 <blockquote>
 <p>PS: 这个地方为什么要分成两部分来取hashcode值呢?我也不知道，我猜是为了尽可能唯一吧。</p>
 </blockquote>
 <p>#Google Volley 使用本地缓存</p>
-<p>如果你读过<code>Volley</code>的源码，想必你肯定知道，在<code>Volley</code>初始化的时候，创建了一个<br><code>CacheDispatcher</code>和五个<code>NetworkDispatcher</code></p>
-<p>当一个<code>Request</code>通过<code>RequestQuene.add</code>添加进来的时候，首先是将<code>Request</code>放入到缓存队列里面<br>去的，除非这个请求被设置成不使用缓存，先看下<code>add</code>的源码：</p>
+<p>如果你读过<code class="inline-code">Volley</code>的源码，想必你肯定知道，在<code class="inline-code">Volley</code>初始化的时候，创建了一个<br><code class="inline-code">CacheDispatcher</code>和五个<code class="inline-code">NetworkDispatcher</code></p>
+<p>当一个<code class="inline-code">Request</code>通过<code class="inline-code">RequestQuene.add</code>添加进来的时候，首先是将<code class="inline-code">Request</code>放入到缓存队列里面<br>去的，除非这个请求被设置成不使用缓存，先看下<code class="inline-code">add</code>的源码：</p>
 <pre><code class="java">/**
  * Adds a Request to the dispatch queue.
  * @param request The request to service
@@ -931,8 +922,8 @@ public &lt;T&gt; Request&lt;T&gt; add(Request&lt;T&gt; request) &#123;
     &#125;
 &#125;
 </code></pre>
-<p>可以很清淅的看出来。如果在等待队列中已经有相同<code>cacheKey</code>的request,只需要将它加入到等侍队列中去就行了。</p>
-<p>在来看一下，在<code>CacheDispatcher</code>中是如何做数据分发的。</p>
+<p>可以很清淅的看出来。如果在等待队列中已经有相同<code class="inline-code">cacheKey</code>的request,只需要将它加入到等侍队列中去就行了。</p>
+<p>在来看一下，在<code class="inline-code">CacheDispatcher</code>中是如何做数据分发的。</p>
 <ul>
 <li>首先是读取当前已经存在的缓存文件</li>
 </ul>
@@ -1036,9 +1027,9 @@ if (!entry.refreshNeeded()) &#123;
     &#125;);
 &#125;
 </code></pre>
-<p>从内存中找对应的<code>cache</code>,如果<code>entry == null</code>，将<code>Request</code>加入<code>Network Queue</code>。<br>如果<code>entry.isExpired</code>，将<code>Request</code>加入到<code>Network Queue</code>。<br>当然，如果读取到数据是需要刷新的，也是要加入到<code>Network Queue</code>。</p>
-<p>当然，还有最后一个问题，这尼玛，这个<code>Entry</code>到底是怎么来的。</p>
-<p>我仔细研究了一下代码才找到，他是在我们<code>Requet</code>的<code>parseNetworkResponse</code>中实现的，代码如下：</p>
+<p>从内存中找对应的<code class="inline-code">cache</code>,如果<code class="inline-code">entry == null</code>，将<code class="inline-code">Request</code>加入<code class="inline-code">Network Queue</code>。<br>如果<code class="inline-code">entry.isExpired</code>，将<code class="inline-code">Request</code>加入到<code class="inline-code">Network Queue</code>。<br>当然，如果读取到数据是需要刷新的，也是要加入到<code class="inline-code">Network Queue</code>。</p>
+<p>当然，还有最后一个问题，这尼玛，这个<code class="inline-code">Entry</code>到底是怎么来的。</p>
+<p>我仔细研究了一下代码才找到，他是在我们<code class="inline-code">Requet</code>的<code class="inline-code">parseNetworkResponse</code>中实现的，代码如下：</p>
 <pre><code class="java">@Override
 protected Response&lt;String&gt; parseNetworkResponse(NetworkResponse response) &#123;
     String parsed;
@@ -1050,12 +1041,14 @@ protected Response&lt;String&gt; parseNetworkResponse(NetworkResponse response) 
     return Response.success(parsed, HttpHeaderParser.parseCacheHeaders(response));
 &#125;
 </code></pre>
-<p>就是<code>HttpHeaderParser.parseCacheHeaders(response)</code>实现<code>Response</code>向<code>Cache.Entry</code>的转换。</p>
-<p>当然，你可以实现自己的<code>parseCacheHeaders</code>的方法，来实现你自己的缓存侧略。</p>
-<p>到此为止，基本写完了我所读到的<code>Volley</code>中实现<code>Cache</code>的方法。如果你对本文或者我有什么意见或者建议。<br>请骚扰我：<a href="mailto:&#108;&#111;&#118;&#x65;&#99;&#108;&#117;&#x6f;&#64;&#110;&#x69;&#103;&#x68;&#x74;&#x77;&#x65;&#97;&#x76;&#x65;&#114;&#46;&#111;&#114;&#x67;">&#108;&#111;&#118;&#x65;&#99;&#108;&#117;&#x6f;&#64;&#110;&#x69;&#103;&#x68;&#x74;&#x77;&#x65;&#97;&#x76;&#x65;&#114;&#46;&#111;&#114;&#x67;</a></p>
+<p>就是<code class="inline-code">HttpHeaderParser.parseCacheHeaders(response)</code>实现<code class="inline-code">Response</code>向<code class="inline-code">Cache.Entry</code>的转换。</p>
+<p>当然，你可以实现自己的<code class="inline-code">parseCacheHeaders</code>的方法，来实现你自己的缓存侧略。</p>
+<p>到此为止，基本写完了我所读到的<code class="inline-code">Volley</code>中实现<code class="inline-code">Cache</code>的方法。如果你对本文或者我有什么意见或者建议。<br>请骚扰我：<a href="mailto:&#108;&#111;&#118;&#101;&#x63;&#108;&#x75;&#x6f;&#x40;&#110;&#x69;&#103;&#104;&#x74;&#119;&#101;&#97;&#118;&#x65;&#114;&#x2e;&#x6f;&#x72;&#103;">&#108;&#111;&#118;&#101;&#x63;&#108;&#x75;&#x6f;&#x40;&#110;&#x69;&#103;&#104;&#x74;&#119;&#101;&#97;&#118;&#x65;&#114;&#x2e;&#x6f;&#x72;&#103;</a></p>
 
-        </section>
+                </div>
+            </section>
         </div>
+        <input id="copy-input" style="position: absolute; left: -1000px; z-index: -1000;">
 
     
 

@@ -82,16 +82,6 @@ select
 }</style>
     <style type="text/css" id="style">@charset "utf-8";
 
-:root {
-    --font-color-0: #04077e;
-    --font-color-1: #000;
-    --font-color-2: #666;
-    --font-color-3: #aaa;
-    --bg-color-1: #eee;
-    --line-1: #ccc;
-    --line-2: #ddd;
-}
-
 p {
     word-wrap: break-word;
     white-space: pre-wrap;
@@ -103,13 +93,13 @@ body {
     font-size: 16px;
     line-height: 1.75;
     letter-spacing: 0.6px;
-    color: var(--font-color-2);
+    color: #666;
     background: #F0F0F0;
 }
 
 a {
     text-decoration: none;
-    color: var(--font-color-1);
+    color: #000;
 }
 
 
@@ -148,7 +138,7 @@ a {
 .header {
     padding-bottom: 48px;
     margin-bottom: 48px;
-    border-bottom: 1px solid var(--line-1);
+    border-bottom: 1px solid #ccc;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -159,7 +149,7 @@ a {
 .logo {
     font-size: 2rem;
     font-weight: 600;
-    color: var(--font-color-1);
+    color: #000;
     margin-bottom: 16px;
     flex: 0 0 100%;
 }
@@ -184,7 +174,7 @@ a {
 }
 
 .nav li a {
-    color: var(--font-color-1);
+    color: #000;
     opacity: .6;
     transition: opacity ease-in-out .5s;
 }
@@ -222,7 +212,7 @@ a {
     width: 100%;
     padding-bottom: 48px;
     margin-bottom: 48px;
-    border-bottom: 1px dashed var(--line-2);
+    border-bottom: 1px dashed #ddd;
 }
 
 .post-title {
@@ -231,12 +221,12 @@ a {
     font-weight: 600;
     line-height: 1.5;
     margin-bottom: 12px;
-    color: var(--font-color-1);
+    color: #000;
     /*transition: color ease-in-out .5s;*/
 }
 
 .post-title:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
@@ -248,7 +238,7 @@ a {
 
 .read-more {
     padding: 0 4px;
-    color: var(--font-color-0);
+    color: #04077e;
 }
 
 .read-more:before,
@@ -277,7 +267,7 @@ a {
 
 .post-date {
     font-size: 0.875rem;
-    color: var(--font-color-3);
+    color: #aaa;
 }
 
 .paginator {
@@ -309,24 +299,24 @@ a {
 
 .paginator a {
     margin: 4px;
-    color: var(--font-color-2);
+    color: #666;
     transition: color ease-in-out .5s;
 }
 
 .paginator a:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
 .paginator .current {
-    color: var(--font-color-0);
-    border: 1px solid var(--font-color-0);
+    color: #04077e;
+    border: 1px solid #04077e;
 }
 
 .footer {
     padding: 24px 0;
     font-size: 0.875rem;
-    color: var(--font-color-3);
+    color: #aaa;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -340,12 +330,12 @@ a {
 }
 
 .footer a {
-    color: var(--font-color-3);
+    color: #aaa;
     transition: color ease-in-out .5s;
 }
 
 .footer a:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
@@ -364,12 +354,12 @@ a {
     font-size: 1.6rem;
     font-weight: 600;
     line-height: 1.5;
-    color: var(--font-color-1);
+    color: #000;
 }
 
 .post-meta {
     font-size: 0.875rem;
-    color: var(--font-color-3);
+    color: #aaa;
     flex: 0 0 100%;
     margin-bottom: 32px;
 }
@@ -405,7 +395,7 @@ a {
 
 .archive li span {
     width: 108px;
-    color: var(--font-color-2);
+    color: #666;
 }
 
 .archive-main {
@@ -413,12 +403,12 @@ a {
 }
 
 .archive-title {
-    color: var(--font-color-1);
+    color: #000;
     /*transition: color ease-in-out .5s;*/
 }
 
 .archive-title:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
@@ -434,16 +424,6 @@ a {
     cursor: pointer;
 }
 
-#beautiful p {
-    box-sizing: border-box;
-    margin-bottom: 16px;
-    font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
-    font-size: 15px;
-    text-align: justify;
-    white-space: normal;
-    text-size-adjust: auto;
-    line-height: 1.75em;
-}
 #bing-bg {
     width: 100%;
     position: fixed;
@@ -453,9 +433,20 @@ a {
     filter: blur(10px);
     object-fit: cover;
   }
-</style>
+#go-top {
+    cursor: pointer;
+}
+
+#beautiful {
+    font-family: "PingFang SC", BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serifhtml, body;
+    font-size: 16px;
+    line-height: 1.75;
+    letter-spacing: 0.6px;
+}</style>
     <style type="text/css" id="markdown">@charset "utf-8";
 
+#copy-post-content,
+#beautiful,
 .post-md
 {
     width: 100%;
@@ -469,7 +460,7 @@ a {
 .post-md h5,
 .post-md h6
 {
-    color: var(--font-color-1);
+    color: #000;
 }
 /* 一级标题 */
 .post-md h1  {
@@ -517,7 +508,6 @@ a {
 
 /* 二级标题内容 */
 .post-md h2 .content {
-    margin-left: -10px;
     display: inline-block;
     width: auto;
     height: 40px;
@@ -570,13 +560,13 @@ a {
 .post-md a
 {
     color: #61aeee;
-    box-shadow: 0 2px 0 var(--line-1);
+    box-shadow: 0 2px 0 #ccc;
     transition: color ease-in-out .65s, box-shadow ease-in-out .65s;
 }
 .post-md a:hover
 {
-    color: var(--font-color-0);
-    box-shadow: 0 2px 0 var(--font-color-0);
+    color: #04077e;
+    box-shadow: 0 2px 0 #04077e;
     transition: color ease-in-out .65s, box-shadow ease-in-out .65s;
 }
 .post-md strong
@@ -612,7 +602,7 @@ a {
 {
     border: none;
     height: 1px;
-    background: var(--line-1);
+    background: #ccc;
     margin: 24px 0;
 }
 
@@ -620,11 +610,11 @@ a {
 .post-md blockquote
 {
     width: 100%;
-    margin: 12px 0;
+    padding: 7px 0;
 }
 .post-md blockquote
 {
-    border-left: 2px solid var(--line-2);
+    border-left: 2px solid #ddd;
     padding-left: 12px;
     word-wrap: break-word;
 }
@@ -683,7 +673,7 @@ thead {
 }
 
 
-.post-md p code
+.inline-code
 {
     border-radius: 4px;
     background:rgba(27,31,35,.05);
@@ -707,7 +697,7 @@ thead {
             
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
-            <h4>目录</h4>
+            <h4 id="go-top">目录</h4>
             <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#NV21%20%E4%B8%AD%E5%9B%BE%E7%89%87%E6%95%B0%E6%8D%AE%E7%BC%96%E7%A0%81"><span class="post-toc-text">NV21 中图片数据编码</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Bitmap%20%E7%9A%84%E7%BC%96%E7%A0%81%E6%A0%BC%E5%BC%8F"><span class="post-toc-text">Bitmap 的编码格式</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#RGB%20%E4%B8%8E%20YUV%20%E8%BD%AC%E6%8D%A2"><span class="post-toc-text">RGB 与 YUV 转换</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#YUV420SP%20%20%E6%97%8B%E8%BD%AC"><span class="post-toc-text">YUV420SP  旋转</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%BC%A9%E5%B0%8F%E5%9B%BE%E7%89%87%E5%88%86%E8%BE%A8%E7%8E%87"><span class="post-toc-text">缩小图片分辨率</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%86%99%E5%9C%A8%E6%9C%80%E5%90%8E"><span class="post-toc-text">写在最后</span></a></li></ol>
         </nav>
     </aside>
@@ -724,23 +714,24 @@ thead {
         <div class="post-meta">
             <a class='author' href="/">罗昭成</a> <span id="clipboardbtn">2023年06月01日</span>
         </div>
-        <div class="post-md" id="copy-post-content">
-        <section id="beautiful">
-            <p>在进行 Android 开发时，不可避免地会接触到许多图片格式，例如 JPEG、PNG 等。就以 JPEG 格式为例，它是一种有损压缩模式，使用 YCbCr 的颜色空间来保存色彩信息。当需要在屏幕上显示图片时，会将 JPEG 数据解码成 RGB 进行显示。本篇文章可能对初学者来说略显复杂。因此，建议读者具备一定的图像处理和 Android 开发基础知识。下面，一起来看看在 Android 中，如何使用图片编码以及对它们进行操作和处理。</p>
+        <div id="copy-post-content">
+            <section id="beautiful">
+            <div class="post-md" >
+                    <p>在进行 Android 开发时，不可避免地会接触到许多图片格式，例如 JPEG、PNG 等。就以 JPEG 格式为例，它是一种有损压缩模式，使用 YCbCr 的颜色空间来保存色彩信息。当需要在屏幕上显示图片时，会将 JPEG 数据解码成 RGB 进行显示。本篇文章可能对初学者来说略显复杂。因此，建议读者具备一定的图像处理和 Android 开发基础知识。下面，一起来看看在 Android 中，如何使用图片编码以及对它们进行操作和处理。</p>
 <h2 id="NV21 中图片数据编码"><span class="prefix"></span><span class="content">NV21 中图片数据编码</span><span class="suffix"></span></h2><p>首先，让我们来谈谈 NV21。在 Android 中，相机返回的图像格式默认使用的是 NV21，它属于 YUV420SP。YUV 是一种常见的颜色编码方法，经常用于影像处理的逻辑中。其中，<strong>Y</strong> 表示明亮度，<strong>U</strong> 和 <strong>V</strong> 表示色度和浓度。YUV 模型有很多种编码方式，其中 YUV420P 和 YUV420SP 最为常见。YUV420P 采用平面存储方式，即将 Y、U、V 三个分量分开存储，处理起来较为方便。而 YUV420SP 则采用分离存储方式，即将 Y 分量存储在一块连续的内存中，而 U 和 V 分量则交替存储在另一块连续内存中，有关这两种编码方式的区别，请参见下图：</p>
-<p><img src="https://img-blog.csdnimg.cn/3dfefc789ece48a2bb73e17363a4d6a1.png" alt="YUV420P 与 YUV420SP 的区别" referrerpolicy="no-referrer"><figcaption class="post-image-caption">YUV420P 与 YUV420SP 的区别</figcaption></figure></p>
-<p> YUV420P 与 YUV420SP 主要在 UV 的编码方式上。但是采样都是一样的数据。名字中的 <code>P</code> 与 <code>SP</code> 代表如下含义：</p>
+<p><img src="https://img-blog.csdnimg.cn/3dfefc789ece48a2bb73e17363a4d6a1.png" alt="YUV420P 与 YUV420SP 的区别" referrerpolicy="no-referrer"></p>
+<p> YUV420P 与 YUV420SP 主要在 UV 的编码方式上。但是采样都是一样的数据。名字中的 <code class="inline-code">P</code> 与 <code class="inline-code">SP</code> 代表如下含义：</p>
 <ul>
 <li>P：指将 YUV 数据分为 3 个平面，Y&#x2F;U&#x2F;V 各占一个平面</li>
 <li>SP: Semi Planar二维平面，指 YUV 数据分为 2 个平面，Y 数据一个平面，UV 数据合用一个平面</li>
 </ul>
 <p>YUV 的发明，是由于彩色电视与黑白电视的过渡时期。黑白电视中只有 Y，也就是只有灰阶值。而彩色电视中，把 UV 处理成彩度，如果忽略 UV，就只剩下 Y，这就和之前黑白电视信号相同，从而解决兼容问题。并且 YUV 在传输中只需要占极少的带宽。</p>
 <p>讲了半天的 YUV，那么这个 YUV 和 RGB 编码的 bitmap 有什么关系呢？</p>
-<p><img src="https://img-blog.csdnimg.cn/20211201001533871.png" alt="摸不着头脑" referrerpolicy="no-referrer"><figcaption class="post-image-caption">摸不着头脑</figcaption></figure></p>
-<h2 id="Bitmap 的编码格式"><span class="prefix"></span><span class="content">Bitmap 的编码格式</span><span class="suffix"></span></h2><p>做过 Android 应该都体会过 OOM 带来的痛苦吧？在处理图片时，都会使用 <code>SampleSize</code> 进行缩放，来减少图片加载过程中占用的内存大小。图片在内存中按像素点进行加载，每个像素点中又包含着 A、R、G、B 四个通道，因此一张图的大小就相当于需要计算出像素点的个数，再乘以每个像素点所需要的内存大小。因此，一张图加载到内存中所占大小按如下方式进行计算：</p>
+<p><img src="https://img-blog.csdnimg.cn/20211201001533871.png" alt="摸不着头脑" referrerpolicy="no-referrer"></p>
+<h2 id="Bitmap 的编码格式"><span class="prefix"></span><span class="content">Bitmap 的编码格式</span><span class="suffix"></span></h2><p>做过 Android 应该都体会过 OOM 带来的痛苦吧？在处理图片时，都会使用 <code class="inline-code">SampleSize</code> 进行缩放，来减少图片加载过程中占用的内存大小。图片在内存中按像素点进行加载，每个像素点中又包含着 A、R、G、B 四个通道，因此一张图的大小就相当于需要计算出像素点的个数，再乘以每个像素点所需要的内存大小。因此，一张图加载到内存中所占大小按如下方式进行计算：</p>
 <pre><code class="java">width * height * size(ARGB)
 </code></pre>
-<p>前面提到的 <code>SampleSize</code> 进行缩放，就是修改了 width 和 height 的大小，来减小内存的大小。还有一种方式，就是减少每一个像素点所占的内存大小，来降低内存占用的总大小。</p>
+<p>前面提到的 <code class="inline-code">SampleSize</code> 进行缩放，就是修改了 width 和 height 的大小，来减小内存的大小。还有一种方式，就是减少每一个像素点所占的内存大小，来降低内存占用的总大小。</p>
 <p>在 Android 中，RGB_565 、ARGB_8888、ARGB_4444 等编码方式，在这里，我介绍常用的前两个：</p>
 <ul>
 <li>RGB_565：总共只占两个字节，Red 占 5 个 Bit，Green 占 6 个 Bit，Blue 占 5 个  Bit。</li>
@@ -748,7 +739,7 @@ thead {
 </ul>
 <p>因此，如果图片使用的是 ARGB_8888 的方式加载，那么到内存中的大小为 <strong>width * height * 4</strong> 。Android 默认加载 Bitmap 时，也是使用这种编码格式。</p>
 <p>ARGB_8888 很好理解，全量存储了 Alpha、Red 、Green、Blue。每一个值都取 0~255 的值。那么问题来了，在 RGB_565 中，R、G、B 三个颜色分量所占的位数都不够去存储全量的数据，所以在转换的过程中一定会存在数据丢失。 在实际的操作中，通常使用的办法就是将低位数据直接进行丢弃，这样 R&#x2F;B 两通道分别能表示为 0 ~ 248 , 中间值间隔为 8 。 Green 能够显示更多信息。RGB_888 与 RGB_565 映射示例如下， 其中 RGB_888 的数据就被丢弃掉了：</p>
-<p><img src="https://img-blog.csdnimg.cn/20211204101817139.png" alt="RGB_565 与 RGB_888 映射关系" referrerpolicy="no-referrer"><figcaption class="post-image-caption">RGB_565 与 RGB_888 映射关系</figcaption></figure></p>
+<p><img src="https://img-blog.csdnimg.cn/20211204101817139.png" alt="RGB_565 与 RGB_888 映射关系" referrerpolicy="no-referrer"></p>
 <h2 id="RGB 与 YUV 转换"><span class="prefix"></span><span class="content">RGB 与 YUV 转换</span><span class="suffix"></span></h2><p>在前面，介绍了 RGB 与 YUV 之间的存储区别，将 RGB 转成 YUV 格式的公式也已经存在很久了，只需要照抄公式就行了。</p>
 <ul>
 <li>RGB 转 YUV</li>
@@ -760,7 +751,7 @@ V = 0.5 * R - 0.419 * G - 0.081 * B + 128
 <ul>
 <li>YUV 转 RGB</li>
 </ul>
-<pre><code>R = Y + 1.13983 * (V - 128)
+<pre><code class="inline-code">R = Y + 1.13983 * (V - 128)
 G = Y - 0.39465 * (U - 128) - 0.58060 * (V - 128)
 B = Y + 2.03211 * (U - 128)
 </code></pre>
@@ -768,7 +759,7 @@ B = Y + 2.03211 * (U - 128)
 <p>PS， 以上公式摘抄于维基百科。</p>
 </blockquote>
 <h2 id="YUV420SP  旋转"><span class="prefix"></span><span class="content">YUV420SP  旋转</span><span class="suffix"></span></h2><p>众所周知，Android 从相机中输出的图像是横向的。为了能够正常播放视频，需要将 NV21 格式的图像旋转 270 度。由于 Y 与像素点的对应关系为 1:1，因此旋转后的图像格式如下所示：</p>
-<p><img src="https://img-blog.csdnimg.cn/449c347f1c0647969c33e9dd18eaaae3.png" alt="YUV420SP 旋转 270 度 " referrerpolicy="no-referrer"><figcaption class="post-image-caption">YUV420SP 旋转 270 度 </figcaption></figure></p>
+<p><img src="https://img-blog.csdnimg.cn/449c347f1c0647969c33e9dd18eaaae3.png" alt="YUV420SP 旋转 270 度 " referrerpolicy="no-referrer"></p>
 <p>如上图，所以旋转的代码如下： </p>
 <pre><code class="java">public byte[] rotate270(byte[] original, int width, int height) &#123;
 
@@ -796,7 +787,7 @@ B = Y + 2.03211 * (U - 128)
 &#125;
 </code></pre>
 <h2 id="缩小图片分辨率"><span class="prefix"></span><span class="content">缩小图片分辨率</span><span class="suffix"></span></h2><p>在使用 Bitmap 时，我们可以使用 Matrix 进行缩放。那么，现在只有一个 NV21 的图片数据，要如何进行缩放呢？根据前面的内容，我们可以很容易地想到，直接对 NV21 的数据进行固定间隔取样就可以实现图像的缩放。根据缩放的比例，取对应点的 YUV 值。如下图所示，将 8 x 4 的图转换成 4 x 2 的大小：</p>
-<p><img src="https://img-blog.csdnimg.cn/246dd71fcf9c45c9bfbc98bfe3b4df51.png" alt="YUV 缩放" referrerpolicy="no-referrer"><figcaption class="post-image-caption">YUV 缩放</figcaption></figure></p>
+<p><img src="https://img-blog.csdnimg.cn/246dd71fcf9c45c9bfbc98bfe3b4df51.png" alt="YUV 缩放" referrerpolicy="no-referrer"></p>
 <p>当想明白这个图后，代码就很简单了，示例代码如下：</p>
 <pre><code class="java">public byte[] scaleYUV(byte[] yuv, int width, int height, int newWidth, int newHeight) &#123;
     byte[] result = new byte[newWidth * newHeight * 3 / 2];
@@ -827,8 +818,10 @@ B = Y + 2.03211 * (U - 128)
 </code></pre>
 <h2 id="写在最后"><span class="prefix"></span><span class="content">写在最后</span><span class="suffix"></span></h2><p>到目前为止，我们已经学会了在 Android 上使用图片编码并对其进行操作和处理的必要技能。希望这篇文章有助于您更好地理解 Android 中的图片编码，让您在开发时能够更加得心应手。</p>
 
-        </section>
+                </div>
+            </section>
         </div>
+        <input id="copy-input" style="position: absolute; left: -1000px; z-index: -1000;">
 
     
 

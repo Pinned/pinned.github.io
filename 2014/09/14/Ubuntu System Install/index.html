@@ -82,16 +82,6 @@ select
 }</style>
     <style type="text/css" id="style">@charset "utf-8";
 
-:root {
-    --font-color-0: #04077e;
-    --font-color-1: #000;
-    --font-color-2: #666;
-    --font-color-3: #aaa;
-    --bg-color-1: #eee;
-    --line-1: #ccc;
-    --line-2: #ddd;
-}
-
 p {
     word-wrap: break-word;
     white-space: pre-wrap;
@@ -103,13 +93,13 @@ body {
     font-size: 16px;
     line-height: 1.75;
     letter-spacing: 0.6px;
-    color: var(--font-color-2);
+    color: #666;
     background: #F0F0F0;
 }
 
 a {
     text-decoration: none;
-    color: var(--font-color-1);
+    color: #000;
 }
 
 
@@ -148,7 +138,7 @@ a {
 .header {
     padding-bottom: 48px;
     margin-bottom: 48px;
-    border-bottom: 1px solid var(--line-1);
+    border-bottom: 1px solid #ccc;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -159,7 +149,7 @@ a {
 .logo {
     font-size: 2rem;
     font-weight: 600;
-    color: var(--font-color-1);
+    color: #000;
     margin-bottom: 16px;
     flex: 0 0 100%;
 }
@@ -184,7 +174,7 @@ a {
 }
 
 .nav li a {
-    color: var(--font-color-1);
+    color: #000;
     opacity: .6;
     transition: opacity ease-in-out .5s;
 }
@@ -222,7 +212,7 @@ a {
     width: 100%;
     padding-bottom: 48px;
     margin-bottom: 48px;
-    border-bottom: 1px dashed var(--line-2);
+    border-bottom: 1px dashed #ddd;
 }
 
 .post-title {
@@ -231,12 +221,12 @@ a {
     font-weight: 600;
     line-height: 1.5;
     margin-bottom: 12px;
-    color: var(--font-color-1);
+    color: #000;
     /*transition: color ease-in-out .5s;*/
 }
 
 .post-title:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
@@ -248,7 +238,7 @@ a {
 
 .read-more {
     padding: 0 4px;
-    color: var(--font-color-0);
+    color: #04077e;
 }
 
 .read-more:before,
@@ -277,7 +267,7 @@ a {
 
 .post-date {
     font-size: 0.875rem;
-    color: var(--font-color-3);
+    color: #aaa;
 }
 
 .paginator {
@@ -309,24 +299,24 @@ a {
 
 .paginator a {
     margin: 4px;
-    color: var(--font-color-2);
+    color: #666;
     transition: color ease-in-out .5s;
 }
 
 .paginator a:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
 .paginator .current {
-    color: var(--font-color-0);
-    border: 1px solid var(--font-color-0);
+    color: #04077e;
+    border: 1px solid #04077e;
 }
 
 .footer {
     padding: 24px 0;
     font-size: 0.875rem;
-    color: var(--font-color-3);
+    color: #aaa;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -340,12 +330,12 @@ a {
 }
 
 .footer a {
-    color: var(--font-color-3);
+    color: #aaa;
     transition: color ease-in-out .5s;
 }
 
 .footer a:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
@@ -364,12 +354,12 @@ a {
     font-size: 1.6rem;
     font-weight: 600;
     line-height: 1.5;
-    color: var(--font-color-1);
+    color: #000;
 }
 
 .post-meta {
     font-size: 0.875rem;
-    color: var(--font-color-3);
+    color: #aaa;
     flex: 0 0 100%;
     margin-bottom: 32px;
 }
@@ -405,7 +395,7 @@ a {
 
 .archive li span {
     width: 108px;
-    color: var(--font-color-2);
+    color: #666;
 }
 
 .archive-main {
@@ -413,12 +403,12 @@ a {
 }
 
 .archive-title {
-    color: var(--font-color-1);
+    color: #000;
     /*transition: color ease-in-out .5s;*/
 }
 
 .archive-title:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
@@ -434,16 +424,6 @@ a {
     cursor: pointer;
 }
 
-#beautiful p {
-    box-sizing: border-box;
-    margin-bottom: 16px;
-    font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
-    font-size: 15px;
-    text-align: justify;
-    white-space: normal;
-    text-size-adjust: auto;
-    line-height: 1.75em;
-}
 #bing-bg {
     width: 100%;
     position: fixed;
@@ -453,9 +433,20 @@ a {
     filter: blur(10px);
     object-fit: cover;
   }
-</style>
+#go-top {
+    cursor: pointer;
+}
+
+#beautiful {
+    font-family: "PingFang SC", BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serifhtml, body;
+    font-size: 16px;
+    line-height: 1.75;
+    letter-spacing: 0.6px;
+}</style>
     <style type="text/css" id="markdown">@charset "utf-8";
 
+#copy-post-content,
+#beautiful,
 .post-md
 {
     width: 100%;
@@ -469,7 +460,7 @@ a {
 .post-md h5,
 .post-md h6
 {
-    color: var(--font-color-1);
+    color: #000;
 }
 /* 一级标题 */
 .post-md h1  {
@@ -517,7 +508,6 @@ a {
 
 /* 二级标题内容 */
 .post-md h2 .content {
-    margin-left: -10px;
     display: inline-block;
     width: auto;
     height: 40px;
@@ -570,13 +560,13 @@ a {
 .post-md a
 {
     color: #61aeee;
-    box-shadow: 0 2px 0 var(--line-1);
+    box-shadow: 0 2px 0 #ccc;
     transition: color ease-in-out .65s, box-shadow ease-in-out .65s;
 }
 .post-md a:hover
 {
-    color: var(--font-color-0);
-    box-shadow: 0 2px 0 var(--font-color-0);
+    color: #04077e;
+    box-shadow: 0 2px 0 #04077e;
     transition: color ease-in-out .65s, box-shadow ease-in-out .65s;
 }
 .post-md strong
@@ -612,7 +602,7 @@ a {
 {
     border: none;
     height: 1px;
-    background: var(--line-1);
+    background: #ccc;
     margin: 24px 0;
 }
 
@@ -620,11 +610,11 @@ a {
 .post-md blockquote
 {
     width: 100%;
-    margin: 12px 0;
+    padding: 7px 0;
 }
 .post-md blockquote
 {
-    border-left: 2px solid var(--line-2);
+    border-left: 2px solid #ddd;
     padding-left: 12px;
     word-wrap: break-word;
 }
@@ -683,7 +673,7 @@ thead {
 }
 
 
-.post-md p code
+.inline-code
 {
     border-radius: 4px;
     background:rgba(27,31,35,.05);
@@ -707,7 +697,7 @@ thead {
             
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
-            <h4>目录</h4>
+            <h4 id="go-top">目录</h4>
             <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%AE%89%E8%A3%85Ubuntu%E5%8D%95%E7%B3%BB%E7%BB%9F"><span class="post-toc-text">安装Ubuntu单系统</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E8%83%8C%E6%99%AF%E4%BB%8B%E7%BB%8D"><span class="post-toc-text">背景介绍</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B"><span class="post-toc-text">安装过程</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E8%AE%B0%E5%BD%95"><span class="post-toc-text">记录</span></a></li></ol></li></ol>
         </nav>
     </aside>
@@ -724,9 +714,10 @@ thead {
         <div class="post-meta">
             <a class='author' href="/">罗昭成</a> <span id="clipboardbtn">2014年09月14日</span>
         </div>
-        <div class="post-md" id="copy-post-content">
-        <section id="beautiful">
-            <h2 id="安装Ubuntu单系统"><span class="prefix"></span><span class="content">安装Ubuntu单系统</span><span class="suffix"></span></h2><h3 id="背景介绍"><span class="prefix"></span><span class="content">背景介绍</span><span class="suffix"></span></h3><p>本人是一个程序员，但是由于各种原因，使用的是Windows操作系统。一次偶然的机会，使用了Linux Ubuntu系统，才发现，还是一个很不错的东东。从那个时候开始就开始使用Ubuntu系统。但是鉴于Ubuntu不怎么会用，所以安装的是Windows和Linux的双系统。上班的时候，在公司拿了一张Ubuntu 13.04的系统安装光盘，虽然不怎么会使用Linux系统，但是一次尝试也是未尝不可的啊。于是开始安装起了我的系统。</p>
+        <div id="copy-post-content">
+            <section id="beautiful">
+            <div class="post-md" >
+                    <h2 id="安装Ubuntu单系统"><span class="prefix"></span><span class="content">安装Ubuntu单系统</span><span class="suffix"></span></h2><h3 id="背景介绍"><span class="prefix"></span><span class="content">背景介绍</span><span class="suffix"></span></h3><p>本人是一个程序员，但是由于各种原因，使用的是Windows操作系统。一次偶然的机会，使用了Linux Ubuntu系统，才发现，还是一个很不错的东东。从那个时候开始就开始使用Ubuntu系统。但是鉴于Ubuntu不怎么会用，所以安装的是Windows和Linux的双系统。上班的时候，在公司拿了一张Ubuntu 13.04的系统安装光盘，虽然不怎么会使用Linux系统，但是一次尝试也是未尝不可的啊。于是开始安装起了我的系统。</p>
 <h3 id="安装过程"><span class="prefix"></span><span class="content">安装过程</span><span class="suffix"></span></h3><ul>
 <li><p>安装过程非常的简单。很快就装上了Ubuntu 13.04的系统。安装上和系统，第一件事是什么？那还用说，当然是装输入法咯。可是，问题来了。也不知道是怎么回事，输入法死活就安不上，什么修改软件源什么的。反正搞了一大堆，就是装不上。百度上也没得好多关于13.04的信息，于是呼，我就把系统升级了。</p>
 </li>
@@ -734,39 +725,39 @@ thead {
 </li>
 <li><p>系统重装到了13.04,我什么事情都没干，直接一个劲的把系统升级到14.04了。又出现了一个大大的问题。非常的严重。还好找到了解决办法。</p>
 </li>
-<li><p>问题： 升级到了14.04后，开机卡屏，连鼠标都不能动，这怎么能行呢。然后我重启进了recovy模式，有一个选项好像是<code>图形安全模式</code>，进去看了一下，报了个<code>显卡驱动</code>的错误。查找百度，最后还是找到了解决方案。</p>
+<li><p>问题： 升级到了14.04后，开机卡屏，连鼠标都不能动，这怎么能行呢。然后我重启进了recovy模式，有一个选项好像是<code class="inline-code">图形安全模式</code>，进去看了一下，报了个<code class="inline-code">显卡驱动</code>的错误。查找百度，最后还是找到了解决方案。</p>
 </li>
 <li><p>添加swap:</p>
 </li>
 </ul>
 <blockquote>
 <ul>
-<li><code> sudo dd if=/dev/zero of=/swap bs=1024 count=8</code>(从&#x2F;分区中分出8×1024M大小的空间，挂在&#x2F;swap分区中)</li>
-<li><code> mkswap /swap</code> (格式化成&#x2F;swap格式)</li>
-<li><code> swapon /swap</code> (激活&#x2F;swap，加入到swap分区中)</li>
+<li><code class="inline-code"> sudo dd if=/dev/zero of=/swap bs=1024 count=8</code>(从&#x2F;分区中分出8×1024M大小的空间，挂在&#x2F;swap分区中)</li>
+<li><code class="inline-code"> mkswap /swap</code> (格式化成&#x2F;swap格式)</li>
+<li><code class="inline-code"> swapon /swap</code> (激活&#x2F;swap，加入到swap分区中)</li>
 </ul>
-<p>执行以上步骤只会在这一次生效配置，如果要永久生效还须进行修改<br><code> sudo vim /etc/fstab</code>(添加swap分区到开机启动中)<br>–&gt; <code>/swap swap swap defaults  0 0 </code> (添加到文件中的语句)</p>
+<p>执行以上步骤只会在这一次生效配置，如果要永久生效还须进行修改<br><code class="inline-code"> sudo vim /etc/fstab</code>(添加swap分区到开机启动中)<br>–&gt; <code class="inline-code">/swap swap swap defaults  0 0 </code> (添加到文件中的语句)</p>
 </blockquote>
 <ul>
 <li>安装显卡驱动和配置</li>
 </ul>
 <blockquote>
-<p>开机启动，在输入密码的界面停住，按<code>ctrl + alt + F2</code>进入控制台中：</p>
+<p>开机启动，在输入密码的界面停住，按<code class="inline-code">ctrl + alt + F2</code>进入控制台中：</p>
 <ul>
 <li>重新安装fgirx</li>
 </ul>
 <blockquote>
-<p><code>sudo apt-get install fglrx</code></p>
-<p><code>sudo reboot</code></p>
-<p>或者 <code>sudo apt-get install --reinstall ubuntu-desktop</code><br>重启过后，无效。继续后面的方法</p>
+<p><code class="inline-code">sudo apt-get install fglrx</code></p>
+<p><code class="inline-code">sudo reboot</code></p>
+<p>或者 <code class="inline-code">sudo apt-get install --reinstall ubuntu-desktop</code><br>重启过后，无效。继续后面的方法</p>
 </blockquote>
 <ul>
 <li>桌面文件授权</li>
 </ul>
 <blockquote>
-<p><code> sudo chown lightdm:lightdm -R /var/lib/lightdm</code></p>
-<p><code> sudo chown avahi-autoipd:avahi-autoipd -R /var/lib/avahi-autoipd</code></p>
-<p><code> sudo chown colord:colord -R /var/lib/colord</code></p>
+<p><code class="inline-code"> sudo chown lightdm:lightdm -R /var/lib/lightdm</code></p>
+<p><code class="inline-code"> sudo chown avahi-autoipd:avahi-autoipd -R /var/lib/avahi-autoipd</code></p>
+<p><code class="inline-code"> sudo chown colord:colord -R /var/lib/colord</code></p>
 <p>使用无效</p>
 </blockquote>
 <ul>
@@ -774,32 +765,34 @@ thead {
 </ul>
 <blockquote>
 <p>对于新的Nvidia二进制驱动：</p>
-<p><code>sudo add-apt-repository ppa:ubuntu-x-swat/x-updates</code></p>
-<p><code>sudo apt-get update </code></p>
-<p><code>sudo apt-get install nvidia-current nvidia-settings</code></p>
+<p><code class="inline-code">sudo add-apt-repository ppa:ubuntu-x-swat/x-updates</code></p>
+<p><code class="inline-code">sudo apt-get update </code></p>
+<p><code class="inline-code">sudo apt-get install nvidia-current nvidia-settings</code></p>
 <p>重启，系统成功运行，无卡顿现象</p>
 </blockquote>
 </blockquote>
 <h3 id="记录"><span class="prefix"></span><span class="content">记录</span><span class="suffix"></span></h3><ul>
 <li><p>对于新的ATI&#x2F;AMD二进制驱动：</p>
 <blockquote>
-<p><code>sudo add-apt-repository ppa:ubuntu-x-swat/x-updates</code></p>
-<p><code>sudo apt-get update </code></p>
-<p><code>sudo apt-get install fglrx</code></p>
+<p><code class="inline-code">sudo add-apt-repository ppa:ubuntu-x-swat/x-updates</code></p>
+<p><code class="inline-code">sudo apt-get update </code></p>
+<p><code class="inline-code">sudo apt-get install fglrx</code></p>
 </blockquote>
 </li>
 <li><p>如果机器上之前有一个老版本，请按如下来做</p>
 <blockquote>
 <p>Nvidia 和 ATI&#x2F;AMD 显卡的命令都一样：</p>
-<p><code>sudo add-apt-repository ppa:ubuntu-x-swat/x-updates</code></p>
-<p><code>sudo apt-get update </code></p>
-<p><code>sudo apt-get upgrade</code></p>
+<p><code class="inline-code">sudo add-apt-repository ppa:ubuntu-x-swat/x-updates</code></p>
+<p><code class="inline-code">sudo apt-get update </code></p>
+<p><code class="inline-code">sudo apt-get upgrade</code></p>
 </blockquote>
 </li>
 </ul>
 
-        </section>
+                </div>
+            </section>
         </div>
+        <input id="copy-input" style="position: absolute; left: -1000px; z-index: -1000;">
 
     
 

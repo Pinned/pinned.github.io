@@ -79,16 +79,6 @@ select
 }</style>
     <style type="text/css" id="style">@charset "utf-8";
 
-:root {
-    --font-color-0: #04077e;
-    --font-color-1: #000;
-    --font-color-2: #666;
-    --font-color-3: #aaa;
-    --bg-color-1: #eee;
-    --line-1: #ccc;
-    --line-2: #ddd;
-}
-
 p {
     word-wrap: break-word;
     white-space: pre-wrap;
@@ -100,13 +90,13 @@ body {
     font-size: 16px;
     line-height: 1.75;
     letter-spacing: 0.6px;
-    color: var(--font-color-2);
+    color: #666;
     background: #F0F0F0;
 }
 
 a {
     text-decoration: none;
-    color: var(--font-color-1);
+    color: #000;
 }
 
 
@@ -145,7 +135,7 @@ a {
 .header {
     padding-bottom: 48px;
     margin-bottom: 48px;
-    border-bottom: 1px solid var(--line-1);
+    border-bottom: 1px solid #ccc;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -156,7 +146,7 @@ a {
 .logo {
     font-size: 2rem;
     font-weight: 600;
-    color: var(--font-color-1);
+    color: #000;
     margin-bottom: 16px;
     flex: 0 0 100%;
 }
@@ -181,7 +171,7 @@ a {
 }
 
 .nav li a {
-    color: var(--font-color-1);
+    color: #000;
     opacity: .6;
     transition: opacity ease-in-out .5s;
 }
@@ -219,7 +209,7 @@ a {
     width: 100%;
     padding-bottom: 48px;
     margin-bottom: 48px;
-    border-bottom: 1px dashed var(--line-2);
+    border-bottom: 1px dashed #ddd;
 }
 
 .post-title {
@@ -228,12 +218,12 @@ a {
     font-weight: 600;
     line-height: 1.5;
     margin-bottom: 12px;
-    color: var(--font-color-1);
+    color: #000;
     /*transition: color ease-in-out .5s;*/
 }
 
 .post-title:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
@@ -245,7 +235,7 @@ a {
 
 .read-more {
     padding: 0 4px;
-    color: var(--font-color-0);
+    color: #04077e;
 }
 
 .read-more:before,
@@ -274,7 +264,7 @@ a {
 
 .post-date {
     font-size: 0.875rem;
-    color: var(--font-color-3);
+    color: #aaa;
 }
 
 .paginator {
@@ -306,24 +296,24 @@ a {
 
 .paginator a {
     margin: 4px;
-    color: var(--font-color-2);
+    color: #666;
     transition: color ease-in-out .5s;
 }
 
 .paginator a:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
 .paginator .current {
-    color: var(--font-color-0);
-    border: 1px solid var(--font-color-0);
+    color: #04077e;
+    border: 1px solid #04077e;
 }
 
 .footer {
     padding: 24px 0;
     font-size: 0.875rem;
-    color: var(--font-color-3);
+    color: #aaa;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -337,12 +327,12 @@ a {
 }
 
 .footer a {
-    color: var(--font-color-3);
+    color: #aaa;
     transition: color ease-in-out .5s;
 }
 
 .footer a:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
@@ -361,12 +351,12 @@ a {
     font-size: 1.6rem;
     font-weight: 600;
     line-height: 1.5;
-    color: var(--font-color-1);
+    color: #000;
 }
 
 .post-meta {
     font-size: 0.875rem;
-    color: var(--font-color-3);
+    color: #aaa;
     flex: 0 0 100%;
     margin-bottom: 32px;
 }
@@ -402,7 +392,7 @@ a {
 
 .archive li span {
     width: 108px;
-    color: var(--font-color-2);
+    color: #666;
 }
 
 .archive-main {
@@ -410,12 +400,12 @@ a {
 }
 
 .archive-title {
-    color: var(--font-color-1);
+    color: #000;
     /*transition: color ease-in-out .5s;*/
 }
 
 .archive-title:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
@@ -431,16 +421,6 @@ a {
     cursor: pointer;
 }
 
-#beautiful p {
-    box-sizing: border-box;
-    margin-bottom: 16px;
-    font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
-    font-size: 15px;
-    text-align: justify;
-    white-space: normal;
-    text-size-adjust: auto;
-    line-height: 1.75em;
-}
 #bing-bg {
     width: 100%;
     position: fixed;
@@ -450,9 +430,20 @@ a {
     filter: blur(10px);
     object-fit: cover;
   }
-</style>
+#go-top {
+    cursor: pointer;
+}
+
+#beautiful {
+    font-family: "PingFang SC", BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serifhtml, body;
+    font-size: 16px;
+    line-height: 1.75;
+    letter-spacing: 0.6px;
+}</style>
     <style type="text/css" id="markdown">@charset "utf-8";
 
+#copy-post-content,
+#beautiful,
 .post-md
 {
     width: 100%;
@@ -466,7 +457,7 @@ a {
 .post-md h5,
 .post-md h6
 {
-    color: var(--font-color-1);
+    color: #000;
 }
 /* 一级标题 */
 .post-md h1  {
@@ -514,7 +505,6 @@ a {
 
 /* 二级标题内容 */
 .post-md h2 .content {
-    margin-left: -10px;
     display: inline-block;
     width: auto;
     height: 40px;
@@ -567,13 +557,13 @@ a {
 .post-md a
 {
     color: #61aeee;
-    box-shadow: 0 2px 0 var(--line-1);
+    box-shadow: 0 2px 0 #ccc;
     transition: color ease-in-out .65s, box-shadow ease-in-out .65s;
 }
 .post-md a:hover
 {
-    color: var(--font-color-0);
-    box-shadow: 0 2px 0 var(--font-color-0);
+    color: #04077e;
+    box-shadow: 0 2px 0 #04077e;
     transition: color ease-in-out .65s, box-shadow ease-in-out .65s;
 }
 .post-md strong
@@ -609,7 +599,7 @@ a {
 {
     border: none;
     height: 1px;
-    background: var(--line-1);
+    background: #ccc;
     margin: 24px 0;
 }
 
@@ -617,11 +607,11 @@ a {
 .post-md blockquote
 {
     width: 100%;
-    margin: 12px 0;
+    padding: 7px 0;
 }
 .post-md blockquote
 {
-    border-left: 2px solid var(--line-2);
+    border-left: 2px solid #ddd;
     padding-left: 12px;
     word-wrap: break-word;
 }
@@ -680,7 +670,7 @@ thead {
 }
 
 
-.post-md p code
+.inline-code
 {
     border-radius: 4px;
     background:rgba(27,31,35,.05);
@@ -724,13 +714,29 @@ thead {
     
     
     <div class="post">
+        <a class="post-title" href="/2023/06/20/proguard-3/">ProGuard 进阶系列（三） Java 类文件解析</a>
+        <div class="post-except">
+            
+                书接上文，当我们从用户的配置文件中读取到所有的配置信息后，下一步便是将配置中的指定的类文件进行读取，构建需要混淆的 Java 类文件的语法树。在阅读类文件之前，先来看一下输入输出参数中的内容，我使用的是一个 Android 项目的输出产物，使用 -injars、-outjars、-libraryjars 指定了相关的信息，运行起来，这些信息会放到 Configuration 中，具体信息看下图：
+
+Java 代码源文件在编译后会转换成 Class 文件，格式定义是固定的，可以
+            
+            <a class="read-more" href="/2023/06/20/proguard-3/"> ... </a>
+        </div>
+        <div class="post-date">2023.06.20</div>
+    </div>
+    
+    
+    
+    
+    <div class="post">
         <a class="post-title" href="/2023/06/15/proguard-2/">ProGuard 进阶系列（二）配置解析</a>
         <div class="post-except">
             
                 书接上文，从开源库中把代码下载到本地后，就可以在 IDE 中进行运行了。从 main 方法入手，可以看到 ProGuard 执行的第一步就是去解析参数。本文的内容主要分析源码中我们配置的规则解析的实现。
 在上一篇文章末尾，在 IDE 中，添加了 @/Users/xxx/debug_proguard.pro 作为函数运行的入参，将配置文件的路径传递给 ProGuard 使用。先来看一下 Main 函数中的代码：
-ProGuard 的 Main 函数代码
-从这几行代码可以看出，P
+
+从这几行代码可以看出，ProGuard 的大体运行逻辑。在代码 
             
             <a class="read-more" href="/2023/06/15/proguard-2/"> ... </a>
         </div>
@@ -806,7 +812,8 @@ NV21 中图片数据编码首先，让我们来谈
             
                 作为程序员，最常用的版本管理工具便是 Git。但我相信大多数人和我一样，从没有认真了解过其具体实现的原理。但了解 Git 的原理，能有助于我们工作更好的使用 Git。下面，让我们一起来了解 Git 中的一些概念，以及实现。
 一、概念Git 是一个分布式版本控制软件，在使用的过程中，与 CVS 类不同，不需要使用服务端，就可以实现版本控制。但在我们常用的使用过程中，依然会一个中间服务器作为 original 来实现代码的托管、控制 等，整个流程如下图所示：
-Git 中代码的流转
+
+从图中可以看到，虽
             
             <a class="read-more" href="/2023/02/17/git-principle-analysis-01/"> ... </a>
         </div>
@@ -857,23 +864,6 @@ ProGuard 工作流程在 ProG
             <a class="read-more" href="/2022/09/23/android-proguard/"> ... </a>
         </div>
         <div class="post-date">2022.09.23</div>
-    </div>
-    
-    
-    
-    
-    <div class="post">
-        <a class="post-title" href="/2022/08/20/iterm2-configuration/">iTerm2 常用配置</a>
-        <div class="post-except">
-            
-                工欲善其事，必先利其器。当我们拿到一台新电脑，为了让自己的效率更高，当然需要做一些配置。本文将介绍对于终端的一些配置。
-1. 安装 iTerm2Mac OS 有自己自带的终端软件 Terminal ，但其功能相对较弱。在 Mac 上，有一个三方终端 iTerm2 可以使用。当拿到新电脑时，当然是第一时间装上这个软件。
-iTerm2 下载地址：https://www.iterm2.com/
-对于 iTerm2 来说，我有一个非常常用的功能就是分屏，快捷键为 command + 
-            
-            <a class="read-more" href="/2022/08/20/iterm2-configuration/"> ... </a>
-        </div>
-        <div class="post-date">2022.08.20</div>
     </div>
     
     

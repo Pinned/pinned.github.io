@@ -82,16 +82,6 @@ select
 }</style>
     <style type="text/css" id="style">@charset "utf-8";
 
-:root {
-    --font-color-0: #04077e;
-    --font-color-1: #000;
-    --font-color-2: #666;
-    --font-color-3: #aaa;
-    --bg-color-1: #eee;
-    --line-1: #ccc;
-    --line-2: #ddd;
-}
-
 p {
     word-wrap: break-word;
     white-space: pre-wrap;
@@ -103,13 +93,13 @@ body {
     font-size: 16px;
     line-height: 1.75;
     letter-spacing: 0.6px;
-    color: var(--font-color-2);
+    color: #666;
     background: #F0F0F0;
 }
 
 a {
     text-decoration: none;
-    color: var(--font-color-1);
+    color: #000;
 }
 
 
@@ -148,7 +138,7 @@ a {
 .header {
     padding-bottom: 48px;
     margin-bottom: 48px;
-    border-bottom: 1px solid var(--line-1);
+    border-bottom: 1px solid #ccc;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -159,7 +149,7 @@ a {
 .logo {
     font-size: 2rem;
     font-weight: 600;
-    color: var(--font-color-1);
+    color: #000;
     margin-bottom: 16px;
     flex: 0 0 100%;
 }
@@ -184,7 +174,7 @@ a {
 }
 
 .nav li a {
-    color: var(--font-color-1);
+    color: #000;
     opacity: .6;
     transition: opacity ease-in-out .5s;
 }
@@ -222,7 +212,7 @@ a {
     width: 100%;
     padding-bottom: 48px;
     margin-bottom: 48px;
-    border-bottom: 1px dashed var(--line-2);
+    border-bottom: 1px dashed #ddd;
 }
 
 .post-title {
@@ -231,12 +221,12 @@ a {
     font-weight: 600;
     line-height: 1.5;
     margin-bottom: 12px;
-    color: var(--font-color-1);
+    color: #000;
     /*transition: color ease-in-out .5s;*/
 }
 
 .post-title:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
@@ -248,7 +238,7 @@ a {
 
 .read-more {
     padding: 0 4px;
-    color: var(--font-color-0);
+    color: #04077e;
 }
 
 .read-more:before,
@@ -277,7 +267,7 @@ a {
 
 .post-date {
     font-size: 0.875rem;
-    color: var(--font-color-3);
+    color: #aaa;
 }
 
 .paginator {
@@ -309,24 +299,24 @@ a {
 
 .paginator a {
     margin: 4px;
-    color: var(--font-color-2);
+    color: #666;
     transition: color ease-in-out .5s;
 }
 
 .paginator a:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
 .paginator .current {
-    color: var(--font-color-0);
-    border: 1px solid var(--font-color-0);
+    color: #04077e;
+    border: 1px solid #04077e;
 }
 
 .footer {
     padding: 24px 0;
     font-size: 0.875rem;
-    color: var(--font-color-3);
+    color: #aaa;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -340,12 +330,12 @@ a {
 }
 
 .footer a {
-    color: var(--font-color-3);
+    color: #aaa;
     transition: color ease-in-out .5s;
 }
 
 .footer a:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
@@ -364,12 +354,12 @@ a {
     font-size: 1.6rem;
     font-weight: 600;
     line-height: 1.5;
-    color: var(--font-color-1);
+    color: #000;
 }
 
 .post-meta {
     font-size: 0.875rem;
-    color: var(--font-color-3);
+    color: #aaa;
     flex: 0 0 100%;
     margin-bottom: 32px;
 }
@@ -405,7 +395,7 @@ a {
 
 .archive li span {
     width: 108px;
-    color: var(--font-color-2);
+    color: #666;
 }
 
 .archive-main {
@@ -413,12 +403,12 @@ a {
 }
 
 .archive-title {
-    color: var(--font-color-1);
+    color: #000;
     /*transition: color ease-in-out .5s;*/
 }
 
 .archive-title:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
@@ -434,16 +424,6 @@ a {
     cursor: pointer;
 }
 
-#beautiful p {
-    box-sizing: border-box;
-    margin-bottom: 16px;
-    font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
-    font-size: 15px;
-    text-align: justify;
-    white-space: normal;
-    text-size-adjust: auto;
-    line-height: 1.75em;
-}
 #bing-bg {
     width: 100%;
     position: fixed;
@@ -453,9 +433,20 @@ a {
     filter: blur(10px);
     object-fit: cover;
   }
-</style>
+#go-top {
+    cursor: pointer;
+}
+
+#beautiful {
+    font-family: "PingFang SC", BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serifhtml, body;
+    font-size: 16px;
+    line-height: 1.75;
+    letter-spacing: 0.6px;
+}</style>
     <style type="text/css" id="markdown">@charset "utf-8";
 
+#copy-post-content,
+#beautiful,
 .post-md
 {
     width: 100%;
@@ -469,7 +460,7 @@ a {
 .post-md h5,
 .post-md h6
 {
-    color: var(--font-color-1);
+    color: #000;
 }
 /* 一级标题 */
 .post-md h1  {
@@ -517,7 +508,6 @@ a {
 
 /* 二级标题内容 */
 .post-md h2 .content {
-    margin-left: -10px;
     display: inline-block;
     width: auto;
     height: 40px;
@@ -570,13 +560,13 @@ a {
 .post-md a
 {
     color: #61aeee;
-    box-shadow: 0 2px 0 var(--line-1);
+    box-shadow: 0 2px 0 #ccc;
     transition: color ease-in-out .65s, box-shadow ease-in-out .65s;
 }
 .post-md a:hover
 {
-    color: var(--font-color-0);
-    box-shadow: 0 2px 0 var(--font-color-0);
+    color: #04077e;
+    box-shadow: 0 2px 0 #04077e;
     transition: color ease-in-out .65s, box-shadow ease-in-out .65s;
 }
 .post-md strong
@@ -612,7 +602,7 @@ a {
 {
     border: none;
     height: 1px;
-    background: var(--line-1);
+    background: #ccc;
     margin: 24px 0;
 }
 
@@ -620,11 +610,11 @@ a {
 .post-md blockquote
 {
     width: 100%;
-    margin: 12px 0;
+    padding: 7px 0;
 }
 .post-md blockquote
 {
-    border-left: 2px solid var(--line-2);
+    border-left: 2px solid #ddd;
     padding-left: 12px;
     word-wrap: break-word;
 }
@@ -683,7 +673,7 @@ thead {
 }
 
 
-.post-md p code
+.inline-code
 {
     border-radius: 4px;
     background:rgba(27,31,35,.05);
@@ -707,7 +697,7 @@ thead {
             
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
-            <h4>目录</h4>
+            <h4 id="go-top">目录</h4>
             <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E4%BD%BF%E7%94%A8%E6%AD%A5%E9%AA%A4"><span class="post-toc-text">使用步骤</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95"><span class="post-toc-text">解决办法</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="post-toc-text">参考资料</span></a></li></ol>
         </nav>
     </aside>
@@ -724,9 +714,10 @@ thead {
         <div class="post-meta">
             <a class='author' href="/">罗昭成</a> <span id="clipboardbtn">2014年11月04日</span>
         </div>
-        <div class="post-md" id="copy-post-content">
-        <section id="beautiful">
-            <p>一个Android项目中，必不可少有很多UI，并且<code>Activity</code>要控制这些UI，当然，我们会用到以下代码:</p>
+        <div id="copy-post-content">
+            <section id="beautiful">
+            <div class="post-md" >
+                    <p>一个Android项目中，必不可少有很多UI，并且<code class="inline-code">Activity</code>要控制这些UI，当然，我们会用到以下代码:</p>
 <pre><code class="java">// 获取View的引用
 Button mBtn = (Button) this.findViewById(R.id.btn);
 // 给Button添加事件
@@ -749,7 +740,7 @@ mBtn.setOnClickListener(new OnClickListener() &#123;
 <p>用上面的注解会更加简单的组织我们的代码结构，代码量更少。<br>在这里我使用<a target="_blank" rel="noopener" href="http://jakewharton.github.io/butterknife/">Butter Knife</a></p>
 <h3 id="使用步骤"><span class="prefix"></span><span class="content">使用步骤</span><span class="suffix"></span></h3><ol>
 <li>去GitHub下载ButterKnife的源码或者jar包  –&gt;  <a target="_blank" rel="noopener" href="https://github.com/JakeWharton/butterknife">传送门</a></li>
-<li>在这里，我是去下载的jar包，将jar包添加到项目的<code>libs</code>文件夹下面就可以使用了</li>
+<li>在这里，我是去下载的jar包，将jar包添加到项目的<code class="inline-code">libs</code>文件夹下面就可以使用了</li>
 </ol>
 <p>先上代码,一个很简单的布局文件:</p>
 <pre><code class="html">&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
@@ -777,7 +768,7 @@ mBtn.setOnClickListener(new OnClickListener() &#123;
 
 &lt;/LinearLayout&gt;
 </code></pre>
-<p>简单到不能在简单的布局了，一个<code>TextView</code>， 一个<code>Button</code></p>
+<p>简单到不能在简单的布局了，一个<code class="inline-code">TextView</code>， 一个<code class="inline-code">Button</code></p>
 <p>看Activity的代码，如下：</p>
 <pre><code class="java">public class MainActivity extends Activity &#123;
 
@@ -800,22 +791,24 @@ mBtn.setOnClickListener(new OnClickListener() &#123;
 <pre><code class="java">mShowTv.setText(&quot;Default Text&quot;)
 </code></pre>
 <p>这儿报了一个空指针。如下图：</p>
-<p><img src="http://pinned.github.io/assets/posts/file-2014-11-4/inject_nullpoint.png" alt="Alt text" referrerpolicy="no-referrer"><figcaption class="post-image-caption">Alt text</figcaption></figure></p>
+<p><img src="http://pinned.github.io/assets/posts/file-2014-11-4/inject_nullpoint.png" alt="Alt text" referrerpolicy="no-referrer"></p>
 <h3 id="解决办法"><span class="prefix"></span><span class="content">解决办法</span><span class="suffix"></span></h3><p>因为使用注解，编译的时候，要进行相应的设置，才可以正常的编译,步骤如下：</p>
-<p>右键<code>项目</code>，选择<code>Properities</code>,然后选择<code>Java Compiler</code>下的<code>Annotation Processing</code>。<br>可是我找了半天，也没有找到它的踪影。不要着急，更新一下<code>Eclipse Java Development Tools</code>就可以了</p>
-<p><img src="http://pinned.github.io/assets/posts/file-2014-11-4/install_eclipse_tools.png" alt="Install Eclipse Java Development Tools" referrerpolicy="no-referrer"><figcaption class="post-image-caption">Install Eclipse Java Development Tools</figcaption></figure></p>
+<p>右键<code class="inline-code">项目</code>，选择<code class="inline-code">Properities</code>,然后选择<code class="inline-code">Java Compiler</code>下的<code class="inline-code">Annotation Processing</code>。<br>可是我找了半天，也没有找到它的踪影。不要着急，更新一下<code class="inline-code">Eclipse Java Development Tools</code>就可以了</p>
+<p><img src="http://pinned.github.io/assets/posts/file-2014-11-4/install_eclipse_tools.png" alt="Install Eclipse Java Development Tools" referrerpolicy="no-referrer"></p>
 <p>等到安装完成过后，你就可以进行如下设置了:</p>
-<p><img src="http://pinned.github.io/assets/posts/file-2014-11-4/eclipse_setting_01.png" alt="Step 01" referrerpolicy="no-referrer"><figcaption class="post-image-caption">Step 01</figcaption></figure></p>
-<p><img src="http://pinned.github.io/assets/posts/file-2014-11-4/eclipse_setting_02.png" alt="Step 02" referrerpolicy="no-referrer"><figcaption class="post-image-caption">Step 02</figcaption></figure></p>
-<p><img src="http://pinned.github.io/assets/posts/file-2014-11-4/eclipse_setting_03.png" alt="Step 03" referrerpolicy="no-referrer"><figcaption class="post-image-caption">Step 03</figcaption></figure></p>
-<p><img src="http://pinned.github.io/assets/posts/file-2014-11-4/eclipse_setting_04.png" alt="Step 04" referrerpolicy="no-referrer"><figcaption class="post-image-caption">Step 04</figcaption></figure></p>
+<p><img src="http://pinned.github.io/assets/posts/file-2014-11-4/eclipse_setting_01.png" alt="Step 01" referrerpolicy="no-referrer"></p>
+<p><img src="http://pinned.github.io/assets/posts/file-2014-11-4/eclipse_setting_02.png" alt="Step 02" referrerpolicy="no-referrer"></p>
+<p><img src="http://pinned.github.io/assets/posts/file-2014-11-4/eclipse_setting_03.png" alt="Step 03" referrerpolicy="no-referrer"></p>
+<p><img src="http://pinned.github.io/assets/posts/file-2014-11-4/eclipse_setting_04.png" alt="Step 04" referrerpolicy="no-referrer"></p>
 <h3 id="参考资料"><span class="prefix"></span><span class="content">参考资料</span><span class="suffix"></span></h3><ul>
 <li><a target="_blank" rel="noopener" href="http://www.it165.net/pro/html/201404/12375.html">ButterKnife Android程序员的一大利器</a></li>
 <li><a target="_blank" rel="noopener" href="http://jakewharton.github.io/butterknife/">ButterKnife Doc</a></li>
 </ul>
 
-        </section>
+                </div>
+            </section>
         </div>
+        <input id="copy-input" style="position: absolute; left: -1000px; z-index: -1000;">
 
     
 
@@ -824,12 +817,12 @@ mBtn.setOnClickListener(new OnClickListener() &#123;
                     <div class="post_pre_next">
     
         <div class="post-pre">
-            <a href="/2014/11/04/eclipse-shutdown/">上一篇: Ubuntu-14.04下Eclipse闪退解决办法</a>
+            <a href="/2014/11/05/google%20volley%20retry/">上一篇: Google Volley 网络请求框架(一)</a>
         </div>
     
     
-        <a href="/2014/11/03/NullPointException%20Analysis/">下一篇: 
-            Android 项目中出现的奇葩bug, 数据NullPointExcption
+        <a href="/2014/11/04/eclipse-shutdown/">下一篇: 
+            Ubuntu-14.04下Eclipse闪退解决办法
         </a>
     
 </div>

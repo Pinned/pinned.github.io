@@ -82,16 +82,6 @@ select
 }</style>
     <style type="text/css" id="style">@charset "utf-8";
 
-:root {
-    --font-color-0: #04077e;
-    --font-color-1: #000;
-    --font-color-2: #666;
-    --font-color-3: #aaa;
-    --bg-color-1: #eee;
-    --line-1: #ccc;
-    --line-2: #ddd;
-}
-
 p {
     word-wrap: break-word;
     white-space: pre-wrap;
@@ -103,13 +93,13 @@ body {
     font-size: 16px;
     line-height: 1.75;
     letter-spacing: 0.6px;
-    color: var(--font-color-2);
+    color: #666;
     background: #F0F0F0;
 }
 
 a {
     text-decoration: none;
-    color: var(--font-color-1);
+    color: #000;
 }
 
 
@@ -148,7 +138,7 @@ a {
 .header {
     padding-bottom: 48px;
     margin-bottom: 48px;
-    border-bottom: 1px solid var(--line-1);
+    border-bottom: 1px solid #ccc;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -159,7 +149,7 @@ a {
 .logo {
     font-size: 2rem;
     font-weight: 600;
-    color: var(--font-color-1);
+    color: #000;
     margin-bottom: 16px;
     flex: 0 0 100%;
 }
@@ -184,7 +174,7 @@ a {
 }
 
 .nav li a {
-    color: var(--font-color-1);
+    color: #000;
     opacity: .6;
     transition: opacity ease-in-out .5s;
 }
@@ -222,7 +212,7 @@ a {
     width: 100%;
     padding-bottom: 48px;
     margin-bottom: 48px;
-    border-bottom: 1px dashed var(--line-2);
+    border-bottom: 1px dashed #ddd;
 }
 
 .post-title {
@@ -231,12 +221,12 @@ a {
     font-weight: 600;
     line-height: 1.5;
     margin-bottom: 12px;
-    color: var(--font-color-1);
+    color: #000;
     /*transition: color ease-in-out .5s;*/
 }
 
 .post-title:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
@@ -248,7 +238,7 @@ a {
 
 .read-more {
     padding: 0 4px;
-    color: var(--font-color-0);
+    color: #04077e;
 }
 
 .read-more:before,
@@ -277,7 +267,7 @@ a {
 
 .post-date {
     font-size: 0.875rem;
-    color: var(--font-color-3);
+    color: #aaa;
 }
 
 .paginator {
@@ -309,24 +299,24 @@ a {
 
 .paginator a {
     margin: 4px;
-    color: var(--font-color-2);
+    color: #666;
     transition: color ease-in-out .5s;
 }
 
 .paginator a:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
 .paginator .current {
-    color: var(--font-color-0);
-    border: 1px solid var(--font-color-0);
+    color: #04077e;
+    border: 1px solid #04077e;
 }
 
 .footer {
     padding: 24px 0;
     font-size: 0.875rem;
-    color: var(--font-color-3);
+    color: #aaa;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -340,12 +330,12 @@ a {
 }
 
 .footer a {
-    color: var(--font-color-3);
+    color: #aaa;
     transition: color ease-in-out .5s;
 }
 
 .footer a:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
@@ -364,12 +354,12 @@ a {
     font-size: 1.6rem;
     font-weight: 600;
     line-height: 1.5;
-    color: var(--font-color-1);
+    color: #000;
 }
 
 .post-meta {
     font-size: 0.875rem;
-    color: var(--font-color-3);
+    color: #aaa;
     flex: 0 0 100%;
     margin-bottom: 32px;
 }
@@ -405,7 +395,7 @@ a {
 
 .archive li span {
     width: 108px;
-    color: var(--font-color-2);
+    color: #666;
 }
 
 .archive-main {
@@ -413,12 +403,12 @@ a {
 }
 
 .archive-title {
-    color: var(--font-color-1);
+    color: #000;
     /*transition: color ease-in-out .5s;*/
 }
 
 .archive-title:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
@@ -434,16 +424,6 @@ a {
     cursor: pointer;
 }
 
-#beautiful p {
-    box-sizing: border-box;
-    margin-bottom: 16px;
-    font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
-    font-size: 15px;
-    text-align: justify;
-    white-space: normal;
-    text-size-adjust: auto;
-    line-height: 1.75em;
-}
 #bing-bg {
     width: 100%;
     position: fixed;
@@ -453,9 +433,20 @@ a {
     filter: blur(10px);
     object-fit: cover;
   }
-</style>
+#go-top {
+    cursor: pointer;
+}
+
+#beautiful {
+    font-family: "PingFang SC", BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serifhtml, body;
+    font-size: 16px;
+    line-height: 1.75;
+    letter-spacing: 0.6px;
+}</style>
     <style type="text/css" id="markdown">@charset "utf-8";
 
+#copy-post-content,
+#beautiful,
 .post-md
 {
     width: 100%;
@@ -469,7 +460,7 @@ a {
 .post-md h5,
 .post-md h6
 {
-    color: var(--font-color-1);
+    color: #000;
 }
 /* 一级标题 */
 .post-md h1  {
@@ -517,7 +508,6 @@ a {
 
 /* 二级标题内容 */
 .post-md h2 .content {
-    margin-left: -10px;
     display: inline-block;
     width: auto;
     height: 40px;
@@ -570,13 +560,13 @@ a {
 .post-md a
 {
     color: #61aeee;
-    box-shadow: 0 2px 0 var(--line-1);
+    box-shadow: 0 2px 0 #ccc;
     transition: color ease-in-out .65s, box-shadow ease-in-out .65s;
 }
 .post-md a:hover
 {
-    color: var(--font-color-0);
-    box-shadow: 0 2px 0 var(--font-color-0);
+    color: #04077e;
+    box-shadow: 0 2px 0 #04077e;
     transition: color ease-in-out .65s, box-shadow ease-in-out .65s;
 }
 .post-md strong
@@ -612,7 +602,7 @@ a {
 {
     border: none;
     height: 1px;
-    background: var(--line-1);
+    background: #ccc;
     margin: 24px 0;
 }
 
@@ -620,11 +610,11 @@ a {
 .post-md blockquote
 {
     width: 100%;
-    margin: 12px 0;
+    padding: 7px 0;
 }
 .post-md blockquote
 {
-    border-left: 2px solid var(--line-2);
+    border-left: 2px solid #ddd;
     padding-left: 12px;
     word-wrap: break-word;
 }
@@ -683,7 +673,7 @@ thead {
 }
 
 
-.post-md p code
+.inline-code
 {
     border-radius: 4px;
     background:rgba(27,31,35,.05);
@@ -707,7 +697,7 @@ thead {
             
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
-            <h4>目录</h4>
+            <h4 id="go-top">目录</h4>
             <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Base64%20%E5%AE%9A%E4%B9%89"><span class="post-toc-text">Base64 定义</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Base64%20%E8%BD%AC%E6%8D%A2"><span class="post-toc-text">Base64 转换</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Base64%20encode%20%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0%EF%BC%88Java%20%E7%89%88%EF%BC%89"><span class="post-toc-text">Base64 encode 代码实现（Java 版）</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%80%9D%E8%80%83%E4%B8%80%EF%BC%9ABase64%20%E7%BC%96%E7%A0%81%E4%B8%80%E5%AE%9A%E8%A6%81%E6%B7%BB%E5%8A%A0%E5%A1%AB%E5%85%85%EF%BC%88Padding%EF%BC%89%E5%90%97%EF%BC%9F"><span class="post-toc-text">思考一：Base64 编码一定要添加填充（Padding）吗？</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%80%9D%E8%80%83%E4%BA%8C%EF%BC%9ABase64%20%E6%98%AF%E5%90%A6%E5%8F%AF%E4%BB%A5%E8%AE%A4%E4%B8%BA%E6%98%AF%E4%B8%80%E7%A7%8D%E5%8A%A0%E5%AF%86%E6%96%B9%E5%BC%8F%E5%91%A2%EF%BC%9F"><span class="post-toc-text">思考二：Base64 是否可以认为是一种加密方式呢？</span></a></li></ol>
         </nav>
     </aside>
@@ -724,26 +714,27 @@ thead {
         <div class="post-meta">
             <a class='author' href="/">罗昭成</a> <span id="clipboardbtn">2022年07月04日</span>
         </div>
-        <div class="post-md" id="copy-post-content">
-        <section id="beautiful">
-            <p>Base64 是一种常见数据编码方式，常用于数据传输。对于移动开发者来讲，网络请求中会经常使用到。对 JSON 熟悉的同学都知道，JSON 的序列化工具都不支持将 <code>byte</code> 数组直接放入 JSON 数据中，针对这种二进制数据，在处理的时候，都需要进行 Base64 编码，然后将编码后的字符串放入到 JSON 中。 从刚入行到现在，Base64 是一个非常常用的功能，从网上“搬运” Base64 编解码工具到使用 Android SDK 中内置的 Base64。虽熟练使用，但终未深入了解 Base64 的底层机制。</p>
+        <div id="copy-post-content">
+            <section id="beautiful">
+            <div class="post-md" >
+                    <p>Base64 是一种常见数据编码方式，常用于数据传输。对于移动开发者来讲，网络请求中会经常使用到。对 JSON 熟悉的同学都知道，JSON 的序列化工具都不支持将 <code class="inline-code">byte</code> 数组直接放入 JSON 数据中，针对这种二进制数据，在处理的时候，都需要进行 Base64 编码，然后将编码后的字符串放入到 JSON 中。 从刚入行到现在，Base64 是一个非常常用的功能，从网上“搬运” Base64 编解码工具到使用 Android SDK 中内置的 Base64。虽熟练使用，但终未深入了解 Base64 的底层机制。</p>
 <p>巧的是，近期工作中，又遇到了 Base64 的相关事情，于是去相对深入了解了 Base64 的相关内容。以下仅作为自身学习记录。</p>
-<h2 id="Base64 定义"><span class="prefix"></span><span class="content">Base64 定义</span><span class="suffix"></span></h2><p><strong>Base64</strong> 是一种基于 64 个可打印字符来表示二进制数据的表示方法，用人话讲叫可以把<code>二进制</code>数据打印在控制台上，可以很好的拷贝以及传输。</p>
+<h2 id="Base64 定义"><span class="prefix"></span><span class="content">Base64 定义</span><span class="suffix"></span></h2><p><strong>Base64</strong> 是一种基于 64 个可打印字符来表示二进制数据的表示方法，用人话讲叫可以把<code class="inline-code">二进制</code>数据打印在控制台上，可以很好的拷贝以及传输。</p>
 <p>在编码中使用的 64 个可打印字符只需要 6 个 Bit 位就可以表示： $2^6 &#x3D; 64$</p>
 <p>在计算机世界中，3 个 Byte 的二进制数据相当于 24 个 Bit ， 因此在编码时需要对应 4 个 Base64 的字符来表示。</p>
-<p>Base64 的可打印字符集包含了字母 <code>A-Z</code>、<code>a-Z</code>、数字 <code>0-9</code>， 这样就有了 26 个字符，另外两个在不同的系统中可能会不同，我们一般使用的为 <code>+</code> 、 <code>/</code>，在 URL Safe 的模式下为 <code>-</code>、<code>_</code></p>
+<p>Base64 的可打印字符集包含了字母 <code class="inline-code">A-Z</code>、<code class="inline-code">a-Z</code>、数字 <code class="inline-code">0-9</code>， 这样就有了 26 个字符，另外两个在不同的系统中可能会不同，我们一般使用的为 <code class="inline-code">+</code> 、 <code class="inline-code">/</code>，在 URL Safe 的模式下为 <code class="inline-code">-</code>、<code class="inline-code">_</code></p>
 <p><strong>Base64 码表：</strong></p>
-<p><img src="https://img-blog.csdnimg.cn/6d10a3f876b844448e60bda6bb5c64fb.png" alt="Base64 码表" referrerpolicy="no-referrer"><figcaption class="post-image-caption">Base64 码表</figcaption></figure></p>
+<p><img src="https://img-blog.csdnimg.cn/6d10a3f876b844448e60bda6bb5c64fb.png" alt="Base64 码表" referrerpolicy="no-referrer"></p>
 <h2 id="Base64 转换"><span class="prefix"></span><span class="content">Base64 转换</span><span class="suffix"></span></h2><p>我们将 byte 数组中的每一个 byte 都转换成 8 位 bit， 组成一串二进制数据，然后按 6 位进行分割，再将每 6 位转换成一个 bit ，将转换后的 bit 作为 index ，去码表中查找对应显示的字符。</p>
 <p>编码示例如下： </p>
-<p><img src="https://img-blog.csdnimg.cn/4a1b6af183234bf18309ee139172b35c.png" alt="编码示例" referrerpolicy="no-referrer"><figcaption class="post-image-caption">编码示例</figcaption></figure></p>
-<p>如上图所示，将 <code>LZC</code> 转换成 Base64 编码的可打印的字符串为 <code>TFpD</code>。 从这个示例可以看出来，刚好可以将 3 个 byte 转成 4 个 byte。</p>
-<p>聪明的你可能已经发现存在的问题，如果要编码的原始 <code>byte[]</code> 的长度不能被三整除应该怎么处理呢？ </p>
-<p>在码表中，除了编码中用到的 64 个字符，在末尾还有一个填充字符： <code>=</code> ，用来填充不足的位数。</p>
+<p><img src="https://img-blog.csdnimg.cn/4a1b6af183234bf18309ee139172b35c.png" alt="编码示例" referrerpolicy="no-referrer"></p>
+<p>如上图所示，将 <code class="inline-code">LZC</code> 转换成 Base64 编码的可打印的字符串为 <code class="inline-code">TFpD</code>。 从这个示例可以看出来，刚好可以将 3 个 byte 转成 4 个 byte。</p>
+<p>聪明的你可能已经发现存在的问题，如果要编码的原始 <code class="inline-code">byte[]</code> 的长度不能被三整除应该怎么处理呢？ </p>
+<p>在码表中，除了编码中用到的 64 个字符，在末尾还有一个填充字符： <code class="inline-code">=</code> ，用来填充不足的位数。</p>
 <p>举例说明:</p>
-<p><img src="https://img-blog.csdnimg.cn/638de894feb84899b016394d0f61ee69.png" alt="Padding 处理" referrerpolicy="no-referrer"><figcaption class="post-image-caption">Padding 处理</figcaption></figure></p>
+<p><img src="https://img-blog.csdnimg.cn/638de894feb84899b016394d0f61ee69.png" alt="Padding 处理" referrerpolicy="no-referrer"></p>
 <h2 id="Base64 encode 代码实现（Java 版）"><span class="prefix"></span><span class="content">Base64 encode 代码实现（Java 版）</span><span class="suffix"></span></h2><ol>
-<li>将现有的 3 个 byte <code>a, b, c</code>编码成 Base64 的串</li>
+<li>将现有的 3 个 byte <code class="inline-code">a, b, c</code>编码成 Base64 的串</li>
 </ol>
 <pre><code class="java">final char[] base64 = &#123;
     &#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;, &#39;E&#39;, &#39;F&#39;, &#39;G&#39;, &#39;H&#39;, &#39;I&#39;, &#39;J&#39;, &#39;K&#39;, &#39;L&#39;, &#39;M&#39;,
@@ -769,7 +760,7 @@ System.out.println(new String(result));
 // TFpD
 </code></pre>
 <ol start="2">
-<li>将现有的 2 个 byte <code>a, b</code> 编码成 Base64 的串</li>
+<li>将现有的 2 个 byte <code class="inline-code">a, b</code> 编码成 Base64 的串</li>
 </ol>
 <pre><code class="java">byte a = &#39;Z&#39;;
 byte b = &#39;C&#39;;
@@ -785,7 +776,7 @@ System.out.println(new String(result));
 // WkM=
 </code></pre>
 <ol start="3">
-<li>将现有的 1 个 byte <code>a</code> 编码成 Base64 的串</li>
+<li>将现有的 1 个 byte <code class="inline-code">a</code> 编码成 Base64 的串</li>
 </ol>
 <pre><code class="java">byte a = &#39;L&#39;;
 int index1 = (a &gt;&gt; 2) &amp; 0b00111111;
@@ -798,10 +789,10 @@ System.out.println(new String(result));
 // TA==
 </code></pre>
 <p>​    </p>
-<p>从代码中，可以看到前文所述的转换步骤。 但在计算 <code>index2</code> 以及 <code>index3</code> 的时候，还是有点绕，有没有更好的计算方式呢？ </p>
-<p>在 <code>JDK</code> 的 Base64 的实现中，看到了一种新的实现方式。 在 <code>Java</code> 中，一个 <code>int</code> 型的数占 4 个 <code>byte</code> ，因此可以将要转换的 <code>3 位 byte</code> 放在一个 <code>int</code> 数据中。</p>
-<p>如下图所示，将 <code>LZC</code> 三个 byte 放入一个 int 型变量中去： </p>
-<p><img src="https://img-blog.csdnimg.cn/e86cb6a83f91418aa0cefbc2334fa577.png" alt="int 型变量存储三个 byte" referrerpolicy="no-referrer"><figcaption class="post-image-caption">int 型变量存储三个 byte</figcaption></figure></p>
+<p>从代码中，可以看到前文所述的转换步骤。 但在计算 <code class="inline-code">index2</code> 以及 <code class="inline-code">index3</code> 的时候，还是有点绕，有没有更好的计算方式呢？ </p>
+<p>在 <code class="inline-code">JDK</code> 的 Base64 的实现中，看到了一种新的实现方式。 在 <code class="inline-code">Java</code> 中，一个 <code class="inline-code">int</code> 型的数占 4 个 <code class="inline-code">byte</code> ，因此可以将要转换的 <code class="inline-code">3 位 byte</code> 放在一个 <code class="inline-code">int</code> 数据中。</p>
+<p>如下图所示，将 <code class="inline-code">LZC</code> 三个 byte 放入一个 int 型变量中去： </p>
+<p><img src="https://img-blog.csdnimg.cn/e86cb6a83f91418aa0cefbc2334fa577.png" alt="int 型变量存储三个 byte" referrerpolicy="no-referrer"></p>
 <p>代码实现：</p>
 <pre><code class="java">byte a = &#39;L&#39;;
 byte b = &#39;Z&#39;;
@@ -810,7 +801,7 @@ int bits = (a &amp; 0xFF) &lt;&lt; 16 | (b &amp; 0xFF) &lt;&lt; 8 | (c &amp; 0xF
 
 // 10011000101101001000011
 </code></pre>
-<p>拿到 <code>bits</code> 后，就可以直接进行位运算，取出对应的 4 个 6 位二进制数。 代码实现如下：</p>
+<p>拿到 <code class="inline-code">bits</code> 后，就可以直接进行位运算，取出对应的 4 个 6 位二进制数。 代码实现如下：</p>
 <pre><code class="java">// 0x3f == 0b00111111
 int index1 = (bits &gt;&gt; 18) &amp; 0x3F;
 int index2 = (bits &gt;&gt; 12) &amp; 0x3F;
@@ -823,10 +814,10 @@ byte[] result = new byte[]&#123;
 &#125;;
 System.out.println(new String(result));
 </code></pre>
-<h2 id="思考一：Base64 编码一定要添加填充（Padding）吗？"><span class="prefix"></span><span class="content">思考一：Base64 编码一定要添加填充（Padding）吗？</span><span class="suffix"></span></h2><p>在前文中，对于不足 3 个 byte 的数据转换过程中，需要在编码后的串中加入填充字符 <code>=</code> ，让最后输出的 Base64 的串正好是 4 的整数倍。那么问题来了，为什么要使用 <code>=</code> 号进行填充？不填充可以吗？</p>
-<p>在 <code>android.utils.Base64</code> 的实现中，有一个叫 <code>NO_PADDING</code> 的 flag。如果在使用的过程中，传入了这个 flag，最后的输出结果就是没有埋充 <code>=</code> 的结果。 因此，在进行编码的时候，对于不足 3 个 byte 的数据处理时，也可以不进行填充。</p>
+<h2 id="思考一：Base64 编码一定要添加填充（Padding）吗？"><span class="prefix"></span><span class="content">思考一：Base64 编码一定要添加填充（Padding）吗？</span><span class="suffix"></span></h2><p>在前文中，对于不足 3 个 byte 的数据转换过程中，需要在编码后的串中加入填充字符 <code class="inline-code">=</code> ，让最后输出的 Base64 的串正好是 4 的整数倍。那么问题来了，为什么要使用 <code class="inline-code">=</code> 号进行填充？不填充可以吗？</p>
+<p>在 <code class="inline-code">android.utils.Base64</code> 的实现中，有一个叫 <code class="inline-code">NO_PADDING</code> 的 flag。如果在使用的过程中，传入了这个 flag，最后的输出结果就是没有埋充 <code class="inline-code">=</code> 的结果。 因此，在进行编码的时候，对于不足 3 个 byte 的数据处理时，也可以不进行填充。</p>
 <p>当然，如果进行填充，在解码的时候，能够更加简单的去处理，直接将编码的串，4 个字符一组进行处理，而不用判断字符数量，走不同的解码逻辑。当然，Padding 还可以用来标识编码结束，来防止多个 Base64 拼接到一起后，解码失败。 </p>
-<h2 id="思考二：Base64 是否可以认为是一种加密方式呢？"><span class="prefix"></span><span class="content">思考二：Base64 是否可以认为是一种加密方式呢？</span><span class="suffix"></span></h2><p>Base64 是一种编码方式，将原始数据转换成了一种可打印的字符串。 在工作中，也经常会有人称之为 <code>Base64 加密</code> ，按照 <code>加密</code> 的定义：</p>
+<h2 id="思考二：Base64 是否可以认为是一种加密方式呢？"><span class="prefix"></span><span class="content">思考二：Base64 是否可以认为是一种加密方式呢？</span><span class="suffix"></span></h2><p>Base64 是一种编码方式，将原始数据转换成了一种可打印的字符串。 在工作中，也经常会有人称之为 <code class="inline-code">Base64 加密</code> ，按照 <code class="inline-code">加密</code> 的定义：</p>
 <blockquote>
 <p>以某种特殊的算法改变原有的信息数据，使得未授权的用户即使获得了已加密的信息，但因不知解密的方法，仍然无法了解信息的内容。</p>
 </blockquote>
@@ -834,8 +825,10 @@ System.out.println(new String(result));
 <hr>
 <p>以上。</p>
 
-        </section>
+                </div>
+            </section>
         </div>
+        <input id="copy-input" style="position: absolute; left: -1000px; z-index: -1000;">
 
     
 

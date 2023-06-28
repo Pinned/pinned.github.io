@@ -82,16 +82,6 @@ select
 }</style>
     <style type="text/css" id="style">@charset "utf-8";
 
-:root {
-    --font-color-0: #04077e;
-    --font-color-1: #000;
-    --font-color-2: #666;
-    --font-color-3: #aaa;
-    --bg-color-1: #eee;
-    --line-1: #ccc;
-    --line-2: #ddd;
-}
-
 p {
     word-wrap: break-word;
     white-space: pre-wrap;
@@ -103,13 +93,13 @@ body {
     font-size: 16px;
     line-height: 1.75;
     letter-spacing: 0.6px;
-    color: var(--font-color-2);
+    color: #666;
     background: #F0F0F0;
 }
 
 a {
     text-decoration: none;
-    color: var(--font-color-1);
+    color: #000;
 }
 
 
@@ -148,7 +138,7 @@ a {
 .header {
     padding-bottom: 48px;
     margin-bottom: 48px;
-    border-bottom: 1px solid var(--line-1);
+    border-bottom: 1px solid #ccc;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -159,7 +149,7 @@ a {
 .logo {
     font-size: 2rem;
     font-weight: 600;
-    color: var(--font-color-1);
+    color: #000;
     margin-bottom: 16px;
     flex: 0 0 100%;
 }
@@ -184,7 +174,7 @@ a {
 }
 
 .nav li a {
-    color: var(--font-color-1);
+    color: #000;
     opacity: .6;
     transition: opacity ease-in-out .5s;
 }
@@ -222,7 +212,7 @@ a {
     width: 100%;
     padding-bottom: 48px;
     margin-bottom: 48px;
-    border-bottom: 1px dashed var(--line-2);
+    border-bottom: 1px dashed #ddd;
 }
 
 .post-title {
@@ -231,12 +221,12 @@ a {
     font-weight: 600;
     line-height: 1.5;
     margin-bottom: 12px;
-    color: var(--font-color-1);
+    color: #000;
     /*transition: color ease-in-out .5s;*/
 }
 
 .post-title:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
@@ -248,7 +238,7 @@ a {
 
 .read-more {
     padding: 0 4px;
-    color: var(--font-color-0);
+    color: #04077e;
 }
 
 .read-more:before,
@@ -277,7 +267,7 @@ a {
 
 .post-date {
     font-size: 0.875rem;
-    color: var(--font-color-3);
+    color: #aaa;
 }
 
 .paginator {
@@ -309,24 +299,24 @@ a {
 
 .paginator a {
     margin: 4px;
-    color: var(--font-color-2);
+    color: #666;
     transition: color ease-in-out .5s;
 }
 
 .paginator a:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
 .paginator .current {
-    color: var(--font-color-0);
-    border: 1px solid var(--font-color-0);
+    color: #04077e;
+    border: 1px solid #04077e;
 }
 
 .footer {
     padding: 24px 0;
     font-size: 0.875rem;
-    color: var(--font-color-3);
+    color: #aaa;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -340,12 +330,12 @@ a {
 }
 
 .footer a {
-    color: var(--font-color-3);
+    color: #aaa;
     transition: color ease-in-out .5s;
 }
 
 .footer a:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
@@ -364,12 +354,12 @@ a {
     font-size: 1.6rem;
     font-weight: 600;
     line-height: 1.5;
-    color: var(--font-color-1);
+    color: #000;
 }
 
 .post-meta {
     font-size: 0.875rem;
-    color: var(--font-color-3);
+    color: #aaa;
     flex: 0 0 100%;
     margin-bottom: 32px;
 }
@@ -405,7 +395,7 @@ a {
 
 .archive li span {
     width: 108px;
-    color: var(--font-color-2);
+    color: #666;
 }
 
 .archive-main {
@@ -413,12 +403,12 @@ a {
 }
 
 .archive-title {
-    color: var(--font-color-1);
+    color: #000;
     /*transition: color ease-in-out .5s;*/
 }
 
 .archive-title:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
@@ -434,16 +424,6 @@ a {
     cursor: pointer;
 }
 
-#beautiful p {
-    box-sizing: border-box;
-    margin-bottom: 16px;
-    font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
-    font-size: 15px;
-    text-align: justify;
-    white-space: normal;
-    text-size-adjust: auto;
-    line-height: 1.75em;
-}
 #bing-bg {
     width: 100%;
     position: fixed;
@@ -453,9 +433,20 @@ a {
     filter: blur(10px);
     object-fit: cover;
   }
-</style>
+#go-top {
+    cursor: pointer;
+}
+
+#beautiful {
+    font-family: "PingFang SC", BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serifhtml, body;
+    font-size: 16px;
+    line-height: 1.75;
+    letter-spacing: 0.6px;
+}</style>
     <style type="text/css" id="markdown">@charset "utf-8";
 
+#copy-post-content,
+#beautiful,
 .post-md
 {
     width: 100%;
@@ -469,7 +460,7 @@ a {
 .post-md h5,
 .post-md h6
 {
-    color: var(--font-color-1);
+    color: #000;
 }
 /* 一级标题 */
 .post-md h1  {
@@ -517,7 +508,6 @@ a {
 
 /* 二级标题内容 */
 .post-md h2 .content {
-    margin-left: -10px;
     display: inline-block;
     width: auto;
     height: 40px;
@@ -570,13 +560,13 @@ a {
 .post-md a
 {
     color: #61aeee;
-    box-shadow: 0 2px 0 var(--line-1);
+    box-shadow: 0 2px 0 #ccc;
     transition: color ease-in-out .65s, box-shadow ease-in-out .65s;
 }
 .post-md a:hover
 {
-    color: var(--font-color-0);
-    box-shadow: 0 2px 0 var(--font-color-0);
+    color: #04077e;
+    box-shadow: 0 2px 0 #04077e;
     transition: color ease-in-out .65s, box-shadow ease-in-out .65s;
 }
 .post-md strong
@@ -612,7 +602,7 @@ a {
 {
     border: none;
     height: 1px;
-    background: var(--line-1);
+    background: #ccc;
     margin: 24px 0;
 }
 
@@ -620,11 +610,11 @@ a {
 .post-md blockquote
 {
     width: 100%;
-    margin: 12px 0;
+    padding: 7px 0;
 }
 .post-md blockquote
 {
-    border-left: 2px solid var(--line-2);
+    border-left: 2px solid #ddd;
     padding-left: 12px;
     word-wrap: break-word;
 }
@@ -683,7 +673,7 @@ thead {
 }
 
 
-.post-md p code
+.inline-code
 {
     border-radius: 4px;
     background:rgba(27,31,35,.05);
@@ -707,7 +697,7 @@ thead {
             
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
-            <h4>目录</h4>
+            <h4 id="go-top">目录</h4>
             <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Android%20Camera%20Preview"><span class="post-toc-text">Android Camera Preview</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#SurfaceView"><span class="post-toc-text">SurfaceView</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Surface"><span class="post-toc-text">Surface</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#SurfaceHolder"><span class="post-toc-text">SurfaceHolder</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#GLSurfaceView"><span class="post-toc-text">GLSurfaceView</span></a></li></ol>
         </nav>
     </aside>
@@ -724,10 +714,11 @@ thead {
         <div class="post-meta">
             <a class='author' href="/">罗昭成</a> <span id="clipboardbtn">2019年05月21日</span>
         </div>
-        <div class="post-md" id="copy-post-content">
-        <section id="beautiful">
-            <h3 id="Android Camera Preview"><span class="prefix"></span><span class="content">Android Camera Preview</span><span class="suffix"></span></h3><p>现如今，每一台Android设备基本都有多个摄像头，基本可以分为两类，前置摄像头与后置摄像头。在API中，每一个摄像头硬件，称之为一个 CameraDevice。我们开发者关心的是，每一个 CameraDevice 同时会输出多个数据流。</p>
-<p><img src="../../../../assets/2019-05-21-Android-camera-preview.assets/0*ugRv8BWWMigxK03S.png" alt="0*ugRv8BWWMigxK03S" referrerpolicy="no-referrer"><figcaption class="post-image-caption">0*ugRv8BWWMigxK03S</figcaption></figure></p>
+        <div id="copy-post-content">
+            <section id="beautiful">
+            <div class="post-md" >
+                    <h3 id="Android Camera Preview"><span class="prefix"></span><span class="content">Android Camera Preview</span><span class="suffix"></span></h3><p>现如今，每一台Android设备基本都有多个摄像头，基本可以分为两类，前置摄像头与后置摄像头。在API中，每一个摄像头硬件，称之为一个 CameraDevice。我们开发者关心的是，每一个 CameraDevice 同时会输出多个数据流。</p>
+<p><img src="../../../../assets/2019-05-21-Android-camera-preview.assets/0*ugRv8BWWMigxK03S.png" alt="0*ugRv8BWWMigxK03S" referrerpolicy="no-referrer"></p>
 <p>此图来源于 Google I&#x2F;O 2018， 从图中，可以看到，摄像头获取到的数据流会转换不同的数据流来交由不同的逻辑模块进行处理。为什么会这样子做呢？在不用的场景中，数据可能会有不同的优化策略，用来更好的适应对应的场景。</p>
 <h3 id="SurfaceView"><span class="prefix"></span><span class="content">SurfaceView</span><span class="suffix"></span></h3><p> 顾名思义，SurfaceView 是一个视图，继承自 View。同时内嵌 Surface 。SurfaceView 可以通过 SurfaceHolder 去访问对应的 Surface。</p>
 <p>SurfaceView 的生命周期：</p>
@@ -735,7 +726,7 @@ thead {
 <li>当 SurfaceView 可见时， Surface 就会被创建</li>
 <li>当SufaceView 不可见时， Surface 就会被销毁</li>
 </ul>
-<p>我们可以通过实现 <code>SurfaceHolder.Callback</code>可以获得对应生命周期的回调：</p>
+<p>我们可以通过实现 <code class="inline-code">SurfaceHolder.Callback</code>可以获得对应生命周期的回调：</p>
 <pre><code class="java">public interface Callback &#123;
     /**
      * 在Surface第一次创建后，立即回调到这个方法中
@@ -761,7 +752,7 @@ mCamera.setPreviewDisplay(surfaceView.getHolder()); // 设置 Preview 的View
 // mCamera.setPreviewTexture(SurfaceTexture); 使用surfaceTexture 来显示 
 mCamera.startPreview();
 </code></pre>
-<p>在上述代码中，就可以实现相机启动，并且在 <code>surfaceView</code> 中显示预览。</p>
+<p>在上述代码中，就可以实现相机启动，并且在 <code class="inline-code">surfaceView</code> 中显示预览。</p>
 <pre><code class="java">/**
  * Sets the &#123;@link Surface&#125; to be used for live preview.
  * Either a surface or surface texture is necessary for preview, and
@@ -806,8 +797,10 @@ public native final void setPreviewSurface(Surface surface) throws IOException;
 </ul>
 <p>SurfaceTexture 在创建时即会创建作为消费者的 BufferQueue,后面的 updateTexImage 即从 BufferQueue 中取出一个 buffer。</p>
 
-        </section>
+                </div>
+            </section>
         </div>
+        <input id="copy-input" style="position: absolute; left: -1000px; z-index: -1000;">
 
     
 
@@ -816,7 +809,7 @@ public native final void setPreviewSurface(Surface surface) throws IOException;
                     <div class="post_pre_next">
     
         <div class="post-pre">
-            <a href="/2019/08/10/Android-network-security-configuration/">上一篇: Android Network security configuration</a>
+            <a href="/2019/08/10/Android-network-Configuration/">上一篇: Android 网络配置</a>
         </div>
     
     

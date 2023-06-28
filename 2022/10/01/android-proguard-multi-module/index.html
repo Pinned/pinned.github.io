@@ -82,16 +82,6 @@ select
 }</style>
     <style type="text/css" id="style">@charset "utf-8";
 
-:root {
-    --font-color-0: #04077e;
-    --font-color-1: #000;
-    --font-color-2: #666;
-    --font-color-3: #aaa;
-    --bg-color-1: #eee;
-    --line-1: #ccc;
-    --line-2: #ddd;
-}
-
 p {
     word-wrap: break-word;
     white-space: pre-wrap;
@@ -103,13 +93,13 @@ body {
     font-size: 16px;
     line-height: 1.75;
     letter-spacing: 0.6px;
-    color: var(--font-color-2);
+    color: #666;
     background: #F0F0F0;
 }
 
 a {
     text-decoration: none;
-    color: var(--font-color-1);
+    color: #000;
 }
 
 
@@ -148,7 +138,7 @@ a {
 .header {
     padding-bottom: 48px;
     margin-bottom: 48px;
-    border-bottom: 1px solid var(--line-1);
+    border-bottom: 1px solid #ccc;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -159,7 +149,7 @@ a {
 .logo {
     font-size: 2rem;
     font-weight: 600;
-    color: var(--font-color-1);
+    color: #000;
     margin-bottom: 16px;
     flex: 0 0 100%;
 }
@@ -184,7 +174,7 @@ a {
 }
 
 .nav li a {
-    color: var(--font-color-1);
+    color: #000;
     opacity: .6;
     transition: opacity ease-in-out .5s;
 }
@@ -222,7 +212,7 @@ a {
     width: 100%;
     padding-bottom: 48px;
     margin-bottom: 48px;
-    border-bottom: 1px dashed var(--line-2);
+    border-bottom: 1px dashed #ddd;
 }
 
 .post-title {
@@ -231,12 +221,12 @@ a {
     font-weight: 600;
     line-height: 1.5;
     margin-bottom: 12px;
-    color: var(--font-color-1);
+    color: #000;
     /*transition: color ease-in-out .5s;*/
 }
 
 .post-title:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
@@ -248,7 +238,7 @@ a {
 
 .read-more {
     padding: 0 4px;
-    color: var(--font-color-0);
+    color: #04077e;
 }
 
 .read-more:before,
@@ -277,7 +267,7 @@ a {
 
 .post-date {
     font-size: 0.875rem;
-    color: var(--font-color-3);
+    color: #aaa;
 }
 
 .paginator {
@@ -309,24 +299,24 @@ a {
 
 .paginator a {
     margin: 4px;
-    color: var(--font-color-2);
+    color: #666;
     transition: color ease-in-out .5s;
 }
 
 .paginator a:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
 .paginator .current {
-    color: var(--font-color-0);
-    border: 1px solid var(--font-color-0);
+    color: #04077e;
+    border: 1px solid #04077e;
 }
 
 .footer {
     padding: 24px 0;
     font-size: 0.875rem;
-    color: var(--font-color-3);
+    color: #aaa;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -340,12 +330,12 @@ a {
 }
 
 .footer a {
-    color: var(--font-color-3);
+    color: #aaa;
     transition: color ease-in-out .5s;
 }
 
 .footer a:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
@@ -364,12 +354,12 @@ a {
     font-size: 1.6rem;
     font-weight: 600;
     line-height: 1.5;
-    color: var(--font-color-1);
+    color: #000;
 }
 
 .post-meta {
     font-size: 0.875rem;
-    color: var(--font-color-3);
+    color: #aaa;
     flex: 0 0 100%;
     margin-bottom: 32px;
 }
@@ -405,7 +395,7 @@ a {
 
 .archive li span {
     width: 108px;
-    color: var(--font-color-2);
+    color: #666;
 }
 
 .archive-main {
@@ -413,12 +403,12 @@ a {
 }
 
 .archive-title {
-    color: var(--font-color-1);
+    color: #000;
     /*transition: color ease-in-out .5s;*/
 }
 
 .archive-title:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
@@ -434,16 +424,6 @@ a {
     cursor: pointer;
 }
 
-#beautiful p {
-    box-sizing: border-box;
-    margin-bottom: 16px;
-    font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
-    font-size: 15px;
-    text-align: justify;
-    white-space: normal;
-    text-size-adjust: auto;
-    line-height: 1.75em;
-}
 #bing-bg {
     width: 100%;
     position: fixed;
@@ -453,9 +433,20 @@ a {
     filter: blur(10px);
     object-fit: cover;
   }
-</style>
+#go-top {
+    cursor: pointer;
+}
+
+#beautiful {
+    font-family: "PingFang SC", BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serifhtml, body;
+    font-size: 16px;
+    line-height: 1.75;
+    letter-spacing: 0.6px;
+}</style>
     <style type="text/css" id="markdown">@charset "utf-8";
 
+#copy-post-content,
+#beautiful,
 .post-md
 {
     width: 100%;
@@ -469,7 +460,7 @@ a {
 .post-md h5,
 .post-md h6
 {
-    color: var(--font-color-1);
+    color: #000;
 }
 /* 一级标题 */
 .post-md h1  {
@@ -517,7 +508,6 @@ a {
 
 /* 二级标题内容 */
 .post-md h2 .content {
-    margin-left: -10px;
     display: inline-block;
     width: auto;
     height: 40px;
@@ -570,13 +560,13 @@ a {
 .post-md a
 {
     color: #61aeee;
-    box-shadow: 0 2px 0 var(--line-1);
+    box-shadow: 0 2px 0 #ccc;
     transition: color ease-in-out .65s, box-shadow ease-in-out .65s;
 }
 .post-md a:hover
 {
-    color: var(--font-color-0);
-    box-shadow: 0 2px 0 var(--font-color-0);
+    color: #04077e;
+    box-shadow: 0 2px 0 #04077e;
     transition: color ease-in-out .65s, box-shadow ease-in-out .65s;
 }
 .post-md strong
@@ -612,7 +602,7 @@ a {
 {
     border: none;
     height: 1px;
-    background: var(--line-1);
+    background: #ccc;
     margin: 24px 0;
 }
 
@@ -620,11 +610,11 @@ a {
 .post-md blockquote
 {
     width: 100%;
-    margin: 12px 0;
+    padding: 7px 0;
 }
 .post-md blockquote
 {
-    border-left: 2px solid var(--line-2);
+    border-left: 2px solid #ddd;
     padding-left: 12px;
     word-wrap: break-word;
 }
@@ -683,7 +673,7 @@ thead {
 }
 
 
-.post-md p code
+.inline-code
 {
     border-radius: 4px;
     background:rgba(27,31,35,.05);
@@ -707,7 +697,7 @@ thead {
             
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
-            <h4>目录</h4>
+            <h4 id="go-top">目录</h4>
             <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%B8%80%E3%80%81ProGuard%20%E6%B7%B7%E6%B7%86%E8%A7%84%E5%88%99%EF%BC%9A-applymapping"><span class="post-toc-text">一、ProGuard 混淆规则：-applymapping</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%BA%8C%E3%80%81ProGuard%20%E6%B7%B7%E6%B7%86%E8%A7%84%E5%88%99%EF%BC%9A-flattenpackagehierarchy"><span class="post-toc-text">二、ProGuard 混淆规则：-flattenpackagehierarchy</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%B8%89%E3%80%81%E6%96%B0%E9%97%AE%E9%A2%98%E7%9A%84%E5%BC%95%E5%85%A5%EF%BC%9A%E4%BB%A3%E7%A0%81%E6%9B%B4%E6%94%B9%E9%80%A0%E6%88%90%20Crash"><span class="post-toc-text">三、新问题的引入：代码更改造成 Crash</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%9B%9B%E3%80%81%E8%BF%99%E6%97%B6%EF%BC%8CGradle%E5%B0%B1%E8%AF%A5%E4%B8%8A%E5%9C%BA%E4%BA%86"><span class="post-toc-text">四、这时，Gradle就该上场了</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%BA%94%E3%80%81%E6%8F%92%E4%BB%B6%E7%9A%84%E7%BC%96%E5%86%99%E4%B8%8E%E5%AE%9E%E7%8E%B0"><span class="post-toc-text">五、插件的编写与实现</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1.%20%E8%AF%BB%E5%8F%96%20class%20%E6%96%87%E4%BB%B6%E4%B8%AD%E7%9A%84%E5%86%85%E5%AE%B9"><span class="post-toc-text">1. 读取 class 文件中的内容</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2.%20%E6%B7%B7%E6%B7%86%E5%90%8D%E7%A7%B0%E7%94%9F%E6%88%90%E8%A7%84%E5%88%99"><span class="post-toc-text">2. 混淆名称生成规则</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3.%20%E6%96%B9%E6%B3%95%E5%90%8D%E6%B7%B7%E6%B7%86"><span class="post-toc-text">3. 方法名混淆</span></a></li></ol></li></ol>
         </nav>
     </aside>
@@ -724,15 +714,16 @@ thead {
         <div class="post-meta">
             <a class='author' href="/">罗昭成</a> <span id="clipboardbtn">2022年10月01日</span>
         </div>
-        <div class="post-md" id="copy-post-content">
-        <section id="beautiful">
-            <p>在做 SDK 开发的时候，会将 SDK 中不同功能进行模块化拆分，分解成不同的模块，在对外提供 SDK 时，将多个 AAR 文件交付给使用方。</p>
-<p>来看一下这个场景，假设现在 SDK 有 <code>A模块</code>、<code>B模块</code> 两个模块，其中 <code>B模块</code> 依赖 <code>A模块</code> 。现在，对这两个模块进行打包，并且要开启混淆。发现了吗？要让 <code>B模块</code> 中的类，能正常使用 <code>A模块</code> 中的接口&#x2F;类，我们需要将  <code>A模块 </code> 中的接口&#x2F;类进行 <code>keep</code> ，才能满足相应的要求。但是 <code>A模块</code> 中的那些接口&#x2F;类仅提供给我们自己的模块使用，不需要对外提供，我们希望能够将其混淆，这种情况下，混淆需要怎么处理呢？这两个模块在打包时，也可能会生成相同的混淆名称，这种情况下，又需要怎么处理呢？</p>
-<p>当然，作为 Java 混淆界首屈一指的工具，它是有相应的功能去处理这些问题。但使用这些规则就能够非常顺畅的实现需求吗？本文将围绕 ProGuard 的混淆规则 <code>-applymapping</code> 和 <code>-flattenpackagehierarchy</code> 的使用，以及解决后续问题的思考与实践过程来展开。</p>
-<h2 id="一、ProGuard 混淆规则：-applymapping"><span class="prefix"></span><span class="content">一、ProGuard 混淆规则：-applymapping</span><span class="suffix"></span></h2><p>在文首所举的例子中，<code>A 模块</code> 和 <code>B 模块</code> 中所使用的相同 <code>class</code> 需要使用相同的规则。在 ProGuard 混淆中， 有 <code>-applymapping</code>  可以指定混淆过程中类、变量、方法的映射规则。 在映射规则中没有提到的类、变量、方法会使用新的名称进行映射。在官方文档描述中，它可以用来进行增量编译。使用方式很简单，你只需要在你的 <code>proguard-rules.txt</code> 中添加如下规则：</p>
-<pre><code>-applymapping ./keep-same-proguard.txt
+        <div id="copy-post-content">
+            <section id="beautiful">
+            <div class="post-md" >
+                    <p>在做 SDK 开发的时候，会将 SDK 中不同功能进行模块化拆分，分解成不同的模块，在对外提供 SDK 时，将多个 AAR 文件交付给使用方。</p>
+<p>来看一下这个场景，假设现在 SDK 有 <code class="inline-code">A模块</code>、<code class="inline-code">B模块</code> 两个模块，其中 <code class="inline-code">B模块</code> 依赖 <code class="inline-code">A模块</code> 。现在，对这两个模块进行打包，并且要开启混淆。发现了吗？要让 <code class="inline-code">B模块</code> 中的类，能正常使用 <code class="inline-code">A模块</code> 中的接口&#x2F;类，我们需要将  <code class="inline-code">A模块 </code> 中的接口&#x2F;类进行 <code class="inline-code">keep</code> ，才能满足相应的要求。但是 <code class="inline-code">A模块</code> 中的那些接口&#x2F;类仅提供给我们自己的模块使用，不需要对外提供，我们希望能够将其混淆，这种情况下，混淆需要怎么处理呢？这两个模块在打包时，也可能会生成相同的混淆名称，这种情况下，又需要怎么处理呢？</p>
+<p>当然，作为 Java 混淆界首屈一指的工具，它是有相应的功能去处理这些问题。但使用这些规则就能够非常顺畅的实现需求吗？本文将围绕 ProGuard 的混淆规则 <code class="inline-code">-applymapping</code> 和 <code class="inline-code">-flattenpackagehierarchy</code> 的使用，以及解决后续问题的思考与实践过程来展开。</p>
+<h2 id="一、ProGuard 混淆规则：-applymapping"><span class="prefix"></span><span class="content">一、ProGuard 混淆规则：-applymapping</span><span class="suffix"></span></h2><p>在文首所举的例子中，<code class="inline-code">A 模块</code> 和 <code class="inline-code">B 模块</code> 中所使用的相同 <code class="inline-code">class</code> 需要使用相同的规则。在 ProGuard 混淆中， 有 <code class="inline-code">-applymapping</code>  可以指定混淆过程中类、变量、方法的映射规则。 在映射规则中没有提到的类、变量、方法会使用新的名称进行映射。在官方文档描述中，它可以用来进行增量编译。使用方式很简单，你只需要在你的 <code class="inline-code">proguard-rules.txt</code> 中添加如下规则：</p>
+<pre><code class="inline-code">-applymapping ./keep-same-proguard.txt
 </code></pre>
-<p>通过 <code>-applymapping</code> 指定要使用的映射规则所在的文件，但需要注意的是，此方式只支持一个映射文件。映射文件中的内容与 ProGuard 混淆后生成的 <code>mapping</code> 文件一致，如下所示：</p>
+<p>通过 <code class="inline-code">-applymapping</code> 指定要使用的映射规则所在的文件，但需要注意的是，此方式只支持一个映射文件。映射文件中的内容与 ProGuard 混淆后生成的 <code class="inline-code">mapping</code> 文件一致，如下所示：</p>
 <pre><code class="java">com.example.build.DeviceUtils -&gt; a.a.a.x:
     java.lang.String deviceName -&gt; c
     java.lang.String deviceId -&gt; b
@@ -740,7 +731,7 @@ thead {
     void setup(android.content.Context) -&gt; a
     java.lang.String getDeviceName() -&gt; c
 </code></pre>
-<p>假设，我在 <code>DeviceUtils</code> 这个类中添加一个方法和一个变量，最终类信息如下：</p>
+<p>假设，我在 <code class="inline-code">DeviceUtils</code> 这个类中添加一个方法和一个变量，最终类信息如下：</p>
 <pre><code class="java">import android.content.Context;
 
 public class DeviceUtils &#123;
@@ -763,7 +754,7 @@ public class DeviceUtils &#123;
     &#125;
 &#125;
 </code></pre>
-<p>编译混淆后的 <code>mapping</code> 信息如下： </p>
+<p>编译混淆后的 <code class="inline-code">mapping</code> 信息如下： </p>
 <pre><code class="java">com.example.build.DeviceUtils -&gt; a.a.a.x:
     java.lang.String deviceName -&gt; c
     java.lang.String deviceId -&gt; b
@@ -774,19 +765,19 @@ public class DeviceUtils &#123;
     java.lang.String getDeviceId() -&gt; x
 </code></pre>
 <blockquote>
-<p> 因为 <code>setup</code> 与 <code>addTestMethod</code> 的签名不一样， 在混淆的时候，可以使用相同的方法名，所以最终混淆出来的方法为 <code>void a()</code> 和 <code>void a(Context val)</code> 。</p>
+<p> 因为 <code class="inline-code">setup</code> 与 <code class="inline-code">addTestMethod</code> 的签名不一样， 在混淆的时候，可以使用相同的方法名，所以最终混淆出来的方法为 <code class="inline-code">void a()</code> 和 <code class="inline-code">void a(Context val)</code> 。</p>
 </blockquote>
 <h2 id="二、ProGuard 混淆规则：-flattenpackagehierarchy"><span class="prefix"></span><span class="content">二、ProGuard 混淆规则：-flattenpackagehierarchy</span><span class="suffix"></span></h2><p>之所以要使用这个关键字，是因为模块在打包生成 aar 或者 jar 包时，无法感知到其它与此模块无关的模块，生成混淆文件是可能会存在冲突的。这么说，可能不太能理解，为了能搞清楚冲突是怎么来的，先来看一个混淆的例子，在我的项目中，有三个类，类结构如下图所示：</p>
-<p><img src="https://img-blog.csdnimg.cn/13c65f57773446878b251420503f1af4.png" alt="代码结构" referrerpolicy="no-referrer"><figcaption class="post-image-caption">代码结构</figcaption></figure></p>
+<p><img src="https://img-blog.csdnimg.cn/13c65f57773446878b251420503f1af4.png" alt="代码结构" referrerpolicy="no-referrer"></p>
 <p>因为这只是三个类文件，并没有被调用到，如果我要对它们进行混淆，我需要去调优化，所以混淆配置如下：</p>
 <pre><code class="java">-dontshrink
 -keep public class com.example.build.DeviceUtils &#123;
     public *;
 &#125;	
 </code></pre>
-<p>在我做测试的时候发现，ProGuard 与 R8 的混淆还有一些细微的差别。而在使用的 Android Gradle Tools 的版本在 3.4.0 以及以上时，默认将不再使用 ProGuard 执行编译时代码优化，而是使用 R8 进行协同处理<code>代码压缩</code>，<code>资源缩减</code>，<code>混淆</code>， <code>优化</code>。因此，我将两种混淆产生的 <code>mapping</code> 文件都贴在下面，可以做一个简单的对比。</p>
+<p>在我做测试的时候发现，ProGuard 与 R8 的混淆还有一些细微的差别。而在使用的 Android Gradle Tools 的版本在 3.4.0 以及以上时，默认将不再使用 ProGuard 执行编译时代码优化，而是使用 R8 进行协同处理<code class="inline-code">代码压缩</code>，<code class="inline-code">资源缩减</code>，<code class="inline-code">混淆</code>， <code class="inline-code">优化</code>。因此，我将两种混淆产生的 <code class="inline-code">mapping</code> 文件都贴在下面，可以做一个简单的对比。</p>
 <p>在使用 ProGuard 的时候，对于一个类的全路径包名，会去与当前 keep 的包名匹配，只会混淆没有被 keep 的包名， 混淆结果如下：</p>
-<pre><code>com.example.build.DeviceUtils -&gt; com.example.build.DeviceUtils:
+<pre><code class="inline-code">com.example.build.DeviceUtils -&gt; com.example.build.DeviceUtils:
     int testPrivateVerbose -&gt; a
     void &lt;init&gt;() -&gt; &lt;init&gt;
     int testPrivateMethod() -&gt; a
@@ -797,46 +788,46 @@ com.example.build.inner.test.TestInnerClass -&gt; com.example.build.a.a.a:
     void &lt;init&gt;() -&gt; &lt;init&gt;
 </code></pre>
 <p>而在使用 R8 是，混淆得比 ProGuard 更多，上面的例子，输出如下结果：</p>
-<pre><code>com.example.build.DeviceUtils -&gt; com.example.build.DeviceUtils:
+<pre><code class="inline-code">com.example.build.DeviceUtils -&gt; com.example.build.DeviceUtils:
     int testPrivateVerbose -&gt; a
     int testPrivateMethod() -&gt; a
 com.example.build.inner.MainInner -&gt; a.a.a.a.a:
     java.lang.String inner -&gt; a
 com.example.build.inner.test.TestInnerClass -&gt; a.a.a.a.b.a:
 </code></pre>
-<p>可以看到 ProGuard 和 R8 的细微差别。在回头来看，不管是用 ProGuard 还是 R8，在生成类名的时候，都是用 <code>a</code> 表示，假设我在 <code>A 模块</code> 中有 <code>com.example.build.inner.MainInner</code> 这个类，在 <code>B 模块</code> 中有 <code>com.example.build.inner.SubInner</code> 这个类，那分别打包  <code>A/B模块</code> 时，这两个类生成的名字都可能是 <code> com.example.build.a.a</code>，那业务在集成的时候，会同时引入 <code>A/B模块</code> 的SDK， 编译时就会出现类冲突，而最终的原因就是混淆时，不同模块间混淆生成了两个类使用了相同的名字，造成了冲突。解决方案也很简单，使用 <code>-flattenpackagehierarchy</code> 或者 <code>-repackageclasses</code> 指定混淆后移入的包路径即可， 不同模块，给定一个不同的包路径即可解决。</p>
-<h2 id="三、新问题的引入：代码更改造成 Crash"><span class="prefix"></span><span class="content">三、新问题的引入：代码更改造成 Crash</span><span class="suffix"></span></h2><p>按照上述的 ProGuard 规则，在本地手动编译模块的 Release 包，并将需要使用相同规则类的混淆映射拷贝到 <code>keep-same-proguard.txt</code>  中，并且在模块下的 <code>proguard-rules.pro </code> 中添加上述配置，示例如下：</p>
+<p>可以看到 ProGuard 和 R8 的细微差别。在回头来看，不管是用 ProGuard 还是 R8，在生成类名的时候，都是用 <code class="inline-code">a</code> 表示，假设我在 <code class="inline-code">A 模块</code> 中有 <code class="inline-code">com.example.build.inner.MainInner</code> 这个类，在 <code class="inline-code">B 模块</code> 中有 <code class="inline-code">com.example.build.inner.SubInner</code> 这个类，那分别打包  <code class="inline-code">A/B模块</code> 时，这两个类生成的名字都可能是 <code class="inline-code"> com.example.build.a.a</code>，那业务在集成的时候，会同时引入 <code class="inline-code">A/B模块</code> 的SDK， 编译时就会出现类冲突，而最终的原因就是混淆时，不同模块间混淆生成了两个类使用了相同的名字，造成了冲突。解决方案也很简单，使用 <code class="inline-code">-flattenpackagehierarchy</code> 或者 <code class="inline-code">-repackageclasses</code> 指定混淆后移入的包路径即可， 不同模块，给定一个不同的包路径即可解决。</p>
+<h2 id="三、新问题的引入：代码更改造成 Crash"><span class="prefix"></span><span class="content">三、新问题的引入：代码更改造成 Crash</span><span class="suffix"></span></h2><p>按照上述的 ProGuard 规则，在本地手动编译模块的 Release 包，并将需要使用相同规则类的混淆映射拷贝到 <code class="inline-code">keep-same-proguard.txt</code>  中，并且在模块下的 <code class="inline-code">proguard-rules.pro </code> 中添加上述配置，示例如下：</p>
 <pre><code class="groovy"># 在 A 模块中使用 com.example.a1 ， 在 B 模块中使用 com.example.a2
 -flattenpackagehierarchy com.exampe.a1
 -applymapping ../keep-same-proguard.txt
 </code></pre>
-<p>多个模块使用同一个  <code>keep-same-proguard.txt</code> 文件， 我们可以将此文件放置到项目根目录下面，方便所有项目访问使用。编译时，模块间直接使用源码依赖即可。</p>
+<p>多个模块使用同一个  <code class="inline-code">keep-same-proguard.txt</code> 文件， 我们可以将此文件放置到项目根目录下面，方便所有项目访问使用。编译时，模块间直接使用源码依赖即可。</p>
 <p>在上述配置中，编译出来的 SDK 满足了混淆的需求，也可以正常使用，一切都是那么的美好。</p>
-<p>直到有一天，我们修改了那几个要共用的类，导致在 <code>keep-same-proguard.txt</code> 中的配置不能和新的代码匹配。但其引发的错误需要打 Release 包运行，才能发现。如果是一个新同学，可能需要花很久的时间，才能找到问题的根源。 每一次代码的变更都可能会引发 Crash ， 这是一个非常严重的问题，要如何解决它呢？</p>
-<p><img src="https://img-blog.csdnimg.cn/7965c336f339406abf8ee606ab148e7c.png" alt="一脸懵" referrerpolicy="no-referrer"><figcaption class="post-image-caption">一脸懵</figcaption></figure></p>
-<p>再来细看一下， <code>keep-same-proguard.txt</code> 生成的方式：</p>
+<p>直到有一天，我们修改了那几个要共用的类，导致在 <code class="inline-code">keep-same-proguard.txt</code> 中的配置不能和新的代码匹配。但其引发的错误需要打 Release 包运行，才能发现。如果是一个新同学，可能需要花很久的时间，才能找到问题的根源。 每一次代码的变更都可能会引发 Crash ， 这是一个非常严重的问题，要如何解决它呢？</p>
+<p><img src="https://img-blog.csdnimg.cn/7965c336f339406abf8ee606ab148e7c.png" alt="一脸懵" referrerpolicy="no-referrer"></p>
+<p>再来细看一下， <code class="inline-code">keep-same-proguard.txt</code> 生成的方式：</p>
 <ol>
-<li><p>在本地编译 Release 包，获取编译产物中的 <code>build/outputs/mapping/release/mapping.txt</code> 文件</p>
+<li><p>在本地编译 Release 包，获取编译产物中的 <code class="inline-code">build/outputs/mapping/release/mapping.txt</code> 文件</p>
 </li>
-<li><p>从 <code>mapping</code> 文件中拷贝出需要的 <code>映射关系</code>，将新的映射关系替换掉<code>keep-dame-proguard.txt</code> 中原有的映射关系</p>
+<li><p>从 <code class="inline-code">mapping</code> 文件中拷贝出需要的 <code class="inline-code">映射关系</code>，将新的映射关系替换掉<code class="inline-code">keep-dame-proguard.txt</code> 中原有的映射关系</p>
 </li>
 <li><p>将此映射文件提交到代码仓库，用于 SDK 打包时使用</p>
 </li>
 </ol>
-<p>如果内部暴露的 API 不只在一个<code>模块</code> 里面，你需要重复执行上面1， 2步骤，直到将所有的映射信息都更新完成。在本地开发时，很少会有人将混淆打开，本地几乎感知不到这个配置的存在。如果新同事来开发，不知道需要处理这个关系，上述步骤是很容易被遗忘掉，出现问题并花很多时间去排查，这非常容易引起同事们骂声。</p>
-<p><img src="https://img-blog.csdnimg.cn/86eede62876b487eb504d30c779bb74b.png" alt="在代码里下毒" referrerpolicy="no-referrer"><figcaption class="post-image-caption">在代码里下毒</figcaption></figure></p>
-<p>刚刚我们提到，这个<code>映射关系</code> 就是 ProGuard 生成的 <code>mapping</code> 文件内容，里面分为三部份： <code>类名</code>、<code>变量名</code>、<code>方法名</code>。规则也可以简单的理解为，把这三部分名字，转换成随机生成的字符即可。因此，我们可以将上述步骤用脚本自动化，在编译时在去生成这个 <code>keep-same-proguard.txt</code> ，这就解决了 <code>类</code> 变化引起的问题。</p>
+<p>如果内部暴露的 API 不只在一个<code class="inline-code">模块</code> 里面，你需要重复执行上面1， 2步骤，直到将所有的映射信息都更新完成。在本地开发时，很少会有人将混淆打开，本地几乎感知不到这个配置的存在。如果新同事来开发，不知道需要处理这个关系，上述步骤是很容易被遗忘掉，出现问题并花很多时间去排查，这非常容易引起同事们骂声。</p>
+<p><img src="https://img-blog.csdnimg.cn/86eede62876b487eb504d30c779bb74b.png" alt="在代码里下毒" referrerpolicy="no-referrer"></p>
+<p>刚刚我们提到，这个<code class="inline-code">映射关系</code> 就是 ProGuard 生成的 <code class="inline-code">mapping</code> 文件内容，里面分为三部份： <code class="inline-code">类名</code>、<code class="inline-code">变量名</code>、<code class="inline-code">方法名</code>。规则也可以简单的理解为，把这三部分名字，转换成随机生成的字符即可。因此，我们可以将上述步骤用脚本自动化，在编译时在去生成这个 <code class="inline-code">keep-same-proguard.txt</code> ，这就解决了 <code class="inline-code">类</code> 变化引起的问题。</p>
 <h2 id="四、这时，Gradle就该上场了"><span class="prefix"></span><span class="content">四、这时，Gradle就该上场了</span><span class="suffix"></span></h2><p>当我们决定使用自动化脚本来生成文件时，Gradle 就是我们必备的利器。为了便于朋友们更好地理解后面的内容，我先介绍一下后面写自动化脚本中涉及的 Gradle 任务相关的基础知识，如果你对 Gradle 很熟悉，可直接跳过。</p>
 <p><strong>1. Gradle 任务创建</strong></p>
-<p>Gradle 任务是编译构建过程中的原子单元，例如 <code>编译任务</code> 、<code>生成Javadoc任务</code>。而我们创建一个新的任务也非常简单，在项目中 <code>build.gradle</code> 文件中，使用如下 DSL 即可定义新的任务 ： </p>
+<p>Gradle 任务是编译构建过程中的原子单元，例如 <code class="inline-code">编译任务</code> 、<code class="inline-code">生成Javadoc任务</code>。而我们创建一个新的任务也非常简单，在项目中 <code class="inline-code">build.gradle</code> 文件中，使用如下 DSL 即可定义新的任务 ： </p>
 <pre><code class="groovy">task testCreateTask &lt;&lt; &#123;
   print &quot;这是一个使用 DSL 创建的测试 Task &quot;
 &#125;
 </code></pre>
-<p>在项目目录下，执行 <code>./gradlew testCreateTask</code> 即可执行对应的任务。这种方式很简单，针对一些复杂的场景，我们也可以使用 Java 代码编写自定义任务。</p>
+<p>在项目目录下，执行 <code class="inline-code">./gradlew testCreateTask</code> 即可执行对应的任务。这种方式很简单，针对一些复杂的场景，我们也可以使用 Java 代码编写自定义任务。</p>
 <ul>
-<li>定义一个类，继承自 <code>DefaultTask</code> 或者其它父类</li>
-<li>给任务执行的入口函数添加 <code>@TaskAction</code> 注解，如下示例</li>
+<li>定义一个类，继承自 <code class="inline-code">DefaultTask</code> 或者其它父类</li>
+<li>给任务执行的入口函数添加 <code class="inline-code">@TaskAction</code> 注解，如下示例</li>
 </ul>
 <pre><code class="java">public class TestCreateTaskByJavaCode extends DefaultTask &#123;
       @TaskAction
@@ -847,11 +838,11 @@ com.example.build.inner.test.TestInnerClass -&gt; a.a.a.a.b.a:
 <p>定义完成后，还需要将任务添加到 Project 中:</p>
 <pre><code class="java">project.getTasks().create(&quot;testCreateTask&quot;, TestCreateTaskByJavaCode.class)
 </code></pre>
-<p>当在使用 <code>./gradlew testCreateTask</code> 时，会执行到 <code>@TaskAction</code> 标注的  <code>process</code> 方法，自定义任务的执行逻辑都可以放到这里面。</p>
+<p>当在使用 <code class="inline-code">./gradlew testCreateTask</code> 时，会执行到 <code class="inline-code">@TaskAction</code> 标注的  <code class="inline-code">process</code> 方法，自定义任务的执行逻辑都可以放到这里面。</p>
 <p><strong>2. 任务执行顺序</strong></p>
-<p>当定义了多个任务时，在执行时，我们希望这些任务能够按照指定的顺序去执行。Gradle 有很好的支持，可以使用任务的 <code>dependsOn</code> 去指定任务间的依赖关系，当前任务被执行时，它所依赖的其它任务都会被先执行。除此之外，当任务依赖的任务中，也需要指定他们的执行顺序，但又不想对任务进行依赖指定时，也可以使用 <code>mustRunAfter</code>、<code>shouldRunAfter</code> 去设置，也能让任务执行有先后顺序之分。</p>
+<p>当定义了多个任务时，在执行时，我们希望这些任务能够按照指定的顺序去执行。Gradle 有很好的支持，可以使用任务的 <code class="inline-code">dependsOn</code> 去指定任务间的依赖关系，当前任务被执行时，它所依赖的其它任务都会被先执行。除此之外，当任务依赖的任务中，也需要指定他们的执行顺序，但又不想对任务进行依赖指定时，也可以使用 <code class="inline-code">mustRunAfter</code>、<code class="inline-code">shouldRunAfter</code> 去设置，也能让任务执行有先后顺序之分。</p>
 <p><strong>3. 任务的 doFirst 和 doLast</strong></p>
-<p><code>doFirst</code> 和 <code>doLast</code> 针对的是任务执行阶段，我们可以通过 doFirst  让一个已经存在的任务执行之前先执行对应 <code>Action</code> 中的逻辑，doLast 与之相反，会在任务执行之前执行对应 <code>Action</code> 中的逻辑。在源码中也可以看到：</p>
+<p><code class="inline-code">doFirst</code> 和 <code class="inline-code">doLast</code> 针对的是任务执行阶段，我们可以通过 doFirst  让一个已经存在的任务执行之前先执行对应 <code class="inline-code">Action</code> 中的逻辑，doLast 与之相反，会在任务执行之前执行对应 <code class="inline-code">Action</code> 中的逻辑。在源码中也可以看到：</p>
 <pre><code class="java">public Task doFirst(final String actionName, final Action&lt;? super Task&gt; action) &#123;
   hasCustomActions = true;
   if (action == null) &#123;
@@ -879,16 +870,16 @@ public Task doLast(final String actionName, final Action&lt;? super Task&gt; act
 </code></pre>
 <p>doFirst 是将 Action 添加到列表的第 0 位，而 doLast 是直接添加到最后。</p>
 <p><strong>4. buildSrc 目录</strong></p>
-<p>在我们编写脚本文件时，可以创建一个独立的工程项目来进行代码编写以及代码管理，但是在开发过程中，会有一些打包调试的工作，独立项目相对会麻烦一些。而在 Gradle 的项目中，可直接在当前项目中，创建 <code>buildSrc</code> 文件夹，用来存放编写的代码 。使用时，在 build.gradle 中，可直接 <code>import</code>  并使用。</p>
-<p>调试也是在编写 Gradle 脚本中，必不可少的手段，要想调试 Gradle 脚本，首先在项目运行的配置中添加<code>Remote JVM Debug</code> 如下图所示：</p>
-<p><img src="https://img-blog.csdnimg.cn/833ac442940740f292fd5f59d82341f1.png" alt="调试设置" referrerpolicy="no-referrer"><figcaption class="post-image-caption">调试设置</figcaption></figure> </p>
+<p>在我们编写脚本文件时，可以创建一个独立的工程项目来进行代码编写以及代码管理，但是在开发过程中，会有一些打包调试的工作，独立项目相对会麻烦一些。而在 Gradle 的项目中，可直接在当前项目中，创建 <code class="inline-code">buildSrc</code> 文件夹，用来存放编写的代码 。使用时，在 build.gradle 中，可直接 <code class="inline-code">import</code>  并使用。</p>
+<p>调试也是在编写 Gradle 脚本中，必不可少的手段，要想调试 Gradle 脚本，首先在项目运行的配置中添加<code class="inline-code">Remote JVM Debug</code> 如下图所示：</p>
+<p><img src="https://img-blog.csdnimg.cn/833ac442940740f292fd5f59d82341f1.png" alt="调试设置" referrerpolicy="no-referrer"> </p>
 <p>配置好上面的信息后，在控制台执行编译脚本，添加 debug 参数，如下：</p>
 <pre><code class="shell">./gradlew assembleDebug -Dorg.gradle.daemon=false -Dorg.gradle.debug=true 
 </code></pre>
 <p>运行后，控制点会启动 Gradle ，并开始执行，在正式执行编译任务是，会等待 Debug 的链接过来，这时候，点击 Debug 的图标就可以愉快地进行调试了。</p>
-<p><img src="https://img-blog.csdnimg.cn/5e51cec793cb47989e143bb436919eae.png" alt="可爱的小虫子图标" referrerpolicy="no-referrer"><figcaption class="post-image-caption">可爱的小虫子图标</figcaption></figure></p>
-<h2 id="五、插件的编写与实现"><span class="prefix"></span><span class="content">五、插件的编写与实现</span><span class="suffix"></span></h2><p>读到此处，我相信大家都对 Gradle 都有一定的了解，对于生成 <code>keep-same-proguard.txt</code> 也肯定有了一定的想法。文章前半段有提到，<code>keep-same-proguard.txt</code> 中的内容为<code>类名</code>、<code>变量名</code>、<code>方法名</code> 的映射关系，而这些信息我们都可以从编译后的 <code>class</code> 文件中获取到。</p>
-<p>为了更好的复用，此处将定义一个插件，在 <code>buildSrc</code> 目录下，创建一个 <code>Plugin</code> ， 示例如下：</p>
+<p><img src="https://img-blog.csdnimg.cn/5e51cec793cb47989e143bb436919eae.png" alt="可爱的小虫子图标" referrerpolicy="no-referrer"></p>
+<h2 id="五、插件的编写与实现"><span class="prefix"></span><span class="content">五、插件的编写与实现</span><span class="suffix"></span></h2><p>读到此处，我相信大家都对 Gradle 都有一定的了解，对于生成 <code class="inline-code">keep-same-proguard.txt</code> 也肯定有了一定的想法。文章前半段有提到，<code class="inline-code">keep-same-proguard.txt</code> 中的内容为<code class="inline-code">类名</code>、<code class="inline-code">变量名</code>、<code class="inline-code">方法名</code> 的映射关系，而这些信息我们都可以从编译后的 <code class="inline-code">class</code> 文件中获取到。</p>
+<p>为了更好的复用，此处将定义一个插件，在 <code class="inline-code">buildSrc</code> 目录下，创建一个 <code class="inline-code">Plugin</code> ， 示例如下：</p>
 <pre><code class="java">package com.android.tools.build;
 public class KeepSameProguardPlugin implements Plugin&lt;Project&gt; &#123;
     @Override
@@ -897,12 +888,12 @@ public class KeepSameProguardPlugin implements Plugin&lt;Project&gt; &#123;
     &#125;
 &#125;
 </code></pre>
-<p>在引入时在对应模块的 <code>build.gradle</code> 中添加 <code>import</code>， 使用如下：</p>
+<p>在引入时在对应模块的 <code class="inline-code">build.gradle</code> 中添加 <code class="inline-code">import</code>， 使用如下：</p>
 <pre><code class="groovy">import com.android.tools.build.KeepSameProguardPlugin
 apply plugin: KeepSameProguardPlugin
 </code></pre>
-<p>现在分析一下整个脚本执行的流程， 第一步需要将所有源代码中所有的 <code>class</code> 都遍历出来，并解析这个 <code>class</code> 文件的中的内容，在根据 <code>class</code> 中的内容去生成我们想要的 <code>keep-same-proguard.txt</code> 文件，生成文件后，在将这个文件应用于 ProGuard 流程中。因此可以将流程分为三个任务：<code>BuildToolsFindAllClassTask</code>， <code>BuildToolsGenerateProguardTask</code>，<code>BuildToolsAddToProguardRulesTask</code>。这个三个任务需要添加到整个编译的流程中去，所以，我需要找到我想要加入任务的点。针对这个需求，我们需要编译后的 <code>class</code> 文件，那 <code>class</code> 文件又从哪儿来呢？你可能想到了，在 Android 的编译的过程中，肯定会有 <code>javac</code> 的任务。因此，我们的任务执行需要在 <code>javac</code> 之后。而生成的的 <code>keep-same-proguard.txt</code> 是给混淆使用的，也就是说，我的这些任务需要在 <code>混淆任务</code> 之前。</p>
-<p>在本文中，我使用的是 AGT 4.1.0 （不同的 AGT 版本， 编译过程中的名称可能会存在不同），经过查看编译日志，很容易就能找到 <code>compileReleaseJavaWithJavac</code> 和 <code>minifyReleaseWithR8</code> ，因此，上面所说的三个任务就可以放到这两个任务之中，示例代码如下：</p>
+<p>现在分析一下整个脚本执行的流程， 第一步需要将所有源代码中所有的 <code class="inline-code">class</code> 都遍历出来，并解析这个 <code class="inline-code">class</code> 文件的中的内容，在根据 <code class="inline-code">class</code> 中的内容去生成我们想要的 <code class="inline-code">keep-same-proguard.txt</code> 文件，生成文件后，在将这个文件应用于 ProGuard 流程中。因此可以将流程分为三个任务：<code class="inline-code">BuildToolsFindAllClassTask</code>， <code class="inline-code">BuildToolsGenerateProguardTask</code>，<code class="inline-code">BuildToolsAddToProguardRulesTask</code>。这个三个任务需要添加到整个编译的流程中去，所以，我需要找到我想要加入任务的点。针对这个需求，我们需要编译后的 <code class="inline-code">class</code> 文件，那 <code class="inline-code">class</code> 文件又从哪儿来呢？你可能想到了，在 Android 的编译的过程中，肯定会有 <code class="inline-code">javac</code> 的任务。因此，我们的任务执行需要在 <code class="inline-code">javac</code> 之后。而生成的的 <code class="inline-code">keep-same-proguard.txt</code> 是给混淆使用的，也就是说，我的这些任务需要在 <code class="inline-code">混淆任务</code> 之前。</p>
+<p>在本文中，我使用的是 AGT 4.1.0 （不同的 AGT 版本， 编译过程中的名称可能会存在不同），经过查看编译日志，很容易就能找到 <code class="inline-code">compileReleaseJavaWithJavac</code> 和 <code class="inline-code">minifyReleaseWithR8</code> ，因此，上面所说的三个任务就可以放到这两个任务之中，示例代码如下：</p>
 <pre><code class="java">target.afterEvaluate(project -&gt; &#123;
     Task javacTask = project.getTasks().findByName(&quot;compileReleaseJavaWithJavac&quot;);
     Task proguardTask = project.getTasks().findByName(&quot;minifyReleaseWithR8&quot;);
@@ -919,11 +910,11 @@ apply plugin: KeepSameProguardPlugin
 
 &#125;);
 </code></pre>
-<p>在编译模块时，它所依赖的模块中的 class 会被编译成 <code>jar</code> ，被放到 <code>compileReleaseJavaWithJavac</code> 的入参中，为了能够将依赖模块中的原代码 <code>class</code> 区分出来，所以在此处，做一个小小的改动，将 <code>BuildToolsFindAllClassTask</code> 执行的内容放到 <code>javacTask</code> 的 <code>doLast</code> 中去，编译时，被依赖模块也会执行 <code>javacTask</code>，就能将被依赖模块中的 <code>class</code> 拿出来。</p>
-<h3 id="1. 读取 class 文件中的内容"><span class="prefix"></span><span class="content">1. 读取 class 文件中的内容</span><span class="suffix"></span></h3><p>业界中，针对 <code>class</code> 文件的处理， ASM 库必是首选，在本项目中，我也使用它，直接在 dependencies 中添加：</p>
+<p>在编译模块时，它所依赖的模块中的 class 会被编译成 <code class="inline-code">jar</code> ，被放到 <code class="inline-code">compileReleaseJavaWithJavac</code> 的入参中，为了能够将依赖模块中的原代码 <code class="inline-code">class</code> 区分出来，所以在此处，做一个小小的改动，将 <code class="inline-code">BuildToolsFindAllClassTask</code> 执行的内容放到 <code class="inline-code">javacTask</code> 的 <code class="inline-code">doLast</code> 中去，编译时，被依赖模块也会执行 <code class="inline-code">javacTask</code>，就能将被依赖模块中的 <code class="inline-code">class</code> 拿出来。</p>
+<h3 id="1. 读取 class 文件中的内容"><span class="prefix"></span><span class="content">1. 读取 class 文件中的内容</span><span class="suffix"></span></h3><p>业界中，针对 <code class="inline-code">class</code> 文件的处理， ASM 库必是首选，在本项目中，我也使用它，直接在 dependencies 中添加：</p>
 <pre><code class="groovy">implementation &#39;org.ow2.asm:asm:7.0&#39;
 </code></pre>
-<p>当然除了使用 ASM 解析，也可以直接使用 ClassLoader 去加载，有兴趣的同学可以去试试。因为本项目中，仅对 <code>class</code> 文件进行读取，不进行修改，可直接使用最简单的数据结构进行读取，针对 jar 包和文件夹，都是遍历对应的 class 文件，最终生成 <code>ClassNode</code>。</p>
+<p>当然除了使用 ASM 解析，也可以直接使用 ClassLoader 去加载，有兴趣的同学可以去试试。因为本项目中，仅对 <code class="inline-code">class</code> 文件进行读取，不进行修改，可直接使用最简单的数据结构进行读取，针对 jar 包和文件夹，都是遍历对应的 class 文件，最终生成 <code class="inline-code">ClassNode</code>。</p>
 <pre><code class="java">public static Map&lt;String, ClassNode&gt; readJarFile(File file) &#123;
     Map&lt;String, ClassNode&gt; result = new HashMap&lt;&gt;();
     try &#123;
@@ -976,7 +967,7 @@ private static ClassNode readClass(InputStream is) &#123;
     return node;
 &#125;
 </code></pre>
-<p>通过上述代码，就可以轻松的读取出所有的  <code>class</code> 文件的内容，需要注意的是，在 <code>compileReleaseJavaWithJavac</code> 这个任务的 <code>inputFiles</code> 包含了当前模块的所有依赖库（Android SDK、jdk、二方&#x2F;三方库）， <code>outputFiles</code> 才是当前模块的输出产物。在生成混淆时，如果是二方&#x2F;三方库或者是Android SDK 中继承的方法，这些方法名称是不能被混淆的。以 Activity 举个例子，如下所示：</p>
+<p>通过上述代码，就可以轻松的读取出所有的  <code class="inline-code">class</code> 文件的内容，需要注意的是，在 <code class="inline-code">compileReleaseJavaWithJavac</code> 这个任务的 <code class="inline-code">inputFiles</code> 包含了当前模块的所有依赖库（Android SDK、jdk、二方&#x2F;三方库）， <code class="inline-code">outputFiles</code> 才是当前模块的输出产物。在生成混淆时，如果是二方&#x2F;三方库或者是Android SDK 中继承的方法，这些方法名称是不能被混淆的。以 Activity 举个例子，如下所示：</p>
 <pre><code class="java">public class TestActivity extends AppCompatActivity &#123;
     public int value = 1;
     public void testMethod() &#123;
@@ -988,8 +979,8 @@ private static ClassNode readClass(InputStream is) &#123;
     &#125;
 &#125;
 </code></pre>
-<p>从 inputFiles 中可以获取到 <code>AppCompatActivity</code>，而这个类因为是非源码，在打包 SDK 时，从中继承过来的方法是不能被混淆的，在生成规则时， <code>onCreate</code> 方法需要保持不变。</p>
-<h3 id="2. 混淆名称生成规则"><span class="prefix"></span><span class="content">2. 混淆名称生成规则</span><span class="suffix"></span></h3><p>Java 的变量名是以<code>字母和_</code> 开头，后跟<code>字母、数字、_ 、 $</code>，为了让逻辑更简单，此处生成的名字仅用 <code>字母</code> 和 <code>_</code>，因此，变量名列表代码如下：</p>
+<p>从 inputFiles 中可以获取到 <code class="inline-code">AppCompatActivity</code>，而这个类因为是非源码，在打包 SDK 时，从中继承过来的方法是不能被混淆的，在生成规则时， <code class="inline-code">onCreate</code> 方法需要保持不变。</p>
+<h3 id="2. 混淆名称生成规则"><span class="prefix"></span><span class="content">2. 混淆名称生成规则</span><span class="suffix"></span></h3><p>Java 的变量名是以<code class="inline-code">字母和_</code> 开头，后跟<code class="inline-code">字母、数字、_ 、 $</code>，为了让逻辑更简单，此处生成的名字仅用 <code class="inline-code">字母</code> 和 <code class="inline-code">_</code>，因此，变量名列表代码如下：</p>
 <pre><code class="java">private static final String[] NAME_DIC = new String[]&#123;
   &quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;, &quot;F&quot;, &quot;G&quot;, &quot;H&quot;, &quot;I&quot;, &quot;J&quot;, &quot;K&quot;,
   &quot;L&quot;, &quot;M&quot;, &quot;N&quot;, &quot;O&quot;, &quot;P&quot;, &quot;Q&quot;, &quot;R&quot;, &quot;S&quot;, &quot;T&quot;, &quot;U&quot;, &quot;V&quot;,
@@ -999,7 +990,7 @@ private static ClassNode readClass(InputStream is) &#123;
   &quot;w&quot;, &quot;x&quot;, &quot;y&quot;, &quot;z&quot;, &quot;_&quot;
 &#125;;
 </code></pre>
-<p>在混淆中，生成名字以短、无意义为主，所以我们在生成规则时，也是这种思路，按顺序从<code>NAME_DIC</code> 中取就行。为了更随机的去生成名字，还可以将 <code>NAME_DIC</code> 中的字母进行随机排序，可使用 <code>Collections</code> 中的 <code>shuffle</code> 算法实现，并且传入一个伪随机数，只要随机种子一致，就可以得到一样的字典。示例代码如下：</p>
+<p>在混淆中，生成名字以短、无意义为主，所以我们在生成规则时，也是这种思路，按顺序从<code class="inline-code">NAME_DIC</code> 中取就行。为了更随机的去生成名字，还可以将 <code class="inline-code">NAME_DIC</code> 中的字母进行随机排序，可使用 <code class="inline-code">Collections</code> 中的 <code class="inline-code">shuffle</code> 算法实现，并且传入一个伪随机数，只要随机种子一致，就可以得到一样的字典。示例代码如下：</p>
 <pre><code class="java">private static String getValue(int index, int seed) &#123;
     ArrayList&lt;String&gt; dic = toList();
     Collections.shuffle(dic, new Random(seed));
@@ -1014,8 +1005,8 @@ private static ArrayList&lt;String&gt; toList() &#123;
     return items;
 &#125;
 </code></pre>
-<p>在上述代码中，是通过  index 来取名称的，以类中变量名称的生成过程来说明一下上述代码的思路。在一个类中，生成变量名不可以相同，要让每一次生成的名称相同，可以先从 <code>ClassNode</code> 中拿出所有的变量，并将所有的变量名按字典排序，生成名字时，就可以使用这个变量名在排序列表中的下标，作为 index，去字典中去取，就可以得到混淆后的名字。</p>
-<h3 id="3. 方法名混淆"><span class="prefix"></span><span class="content">3. 方法名混淆</span><span class="suffix"></span></h3><p>按照前面所讲的 <code>变量名</code> 的生成逻辑，类名也可以按照类似的逻辑进行排序生成，但需要注意的是，排序所使用的类名列表应该是包含了整个项目中所有需要保持一致名称类的类名。 方法名的生成核心逻辑也也是类似的，只是用于进行排序的列表存在一些特殊情况需要处理。写到这里，生成 <code>keep-same-proguard.txt</code> 的功能我们已经能够编写出来。下面在来处理方法中的特殊情况：方法重载、多接口继承、多模块冲突。</p>
+<p>在上述代码中，是通过  index 来取名称的，以类中变量名称的生成过程来说明一下上述代码的思路。在一个类中，生成变量名不可以相同，要让每一次生成的名称相同，可以先从 <code class="inline-code">ClassNode</code> 中拿出所有的变量，并将所有的变量名按字典排序，生成名字时，就可以使用这个变量名在排序列表中的下标，作为 index，去字典中去取，就可以得到混淆后的名字。</p>
+<h3 id="3. 方法名混淆"><span class="prefix"></span><span class="content">3. 方法名混淆</span><span class="suffix"></span></h3><p>按照前面所讲的 <code class="inline-code">变量名</code> 的生成逻辑，类名也可以按照类似的逻辑进行排序生成，但需要注意的是，排序所使用的类名列表应该是包含了整个项目中所有需要保持一致名称类的类名。 方法名的生成核心逻辑也也是类似的，只是用于进行排序的列表存在一些特殊情况需要处理。写到这里，生成 <code class="inline-code">keep-same-proguard.txt</code> 的功能我们已经能够编写出来。下面在来处理方法中的特殊情况：方法重载、多接口继承、多模块冲突。</p>
 <p><strong>（1）方法重载</strong></p>
 <p>在 Java 代码中，方法重载是非常方法重载与重写是非常常见的功能， 针对此类方法，你需要保持和父类一致，也就是说，在生成混淆映射时，如果父类已经生成过了，那此方法就应该直接使用此名称，直接上例子， 如有如下两个类：</p>
 <pre><code class="java">package com.example.proguard;
@@ -1034,7 +1025,7 @@ public class Son extends Person &#123;
   public void study() &#123;&#125;
 &#125;
 </code></pre>
-<p>在例子中可以看到，在 <code>Person</code> 这个类中，有两个方法，一个是 <code>name</code> ， 一个是 <code>work</code>， 那生成映射规则时，方法名按字母排序，则生成出来的配置文件如下：</p>
+<p>在例子中可以看到，在 <code class="inline-code">Person</code> 这个类中，有两个方法，一个是 <code class="inline-code">name</code> ， 一个是 <code class="inline-code">work</code>， 那生成映射规则时，方法名按字母排序，则生成出来的配置文件如下：</p>
 <pre><code class="java">com.example.proguard.Person -&gt; com.example.A:
     void name() -&gt; A
   void work() -&gt; B
@@ -1042,13 +1033,13 @@ public class Son extends Person &#123;
 <blockquote>
 <p>PS: 在 Java 中，不同签名的方法，是可以处理成同名的，但为了逻辑简单，直接让不同的方法，使用不同的混淆名称。</p>
 </blockquote>
-<p>所以，当 <code>Son</code> 这个类在生成混淆配置的时候，<code>name()</code> 方法需要使用想同的名称 <code>A()</code> 。</p>
+<p>所以，当 <code class="inline-code">Son</code> 这个类在生成混淆配置的时候，<code class="inline-code">name()</code> 方法需要使用想同的名称 <code class="inline-code">A()</code> 。</p>
 <p>针对这种方法重载的情况，在子类生成混淆配置的时候，需要判断当前方法是否从父类继承。翻变了 ASM 的 API， 没有查找到相应判断的方法，最终使用了一个笨办法，直接比较子类方法与父类方法的签名是否一致，如果签名一致，则认为这个方法是从父类继承来的。</p>
-<p>除了父类中混淆的方法，还有父类中不可混淆的方法，举个例子，比如我在 <code>Person</code> 中重载了 <code>toString</code> 方法，此方法就不能被混淆，生成的规则中就必须要写明：</p>
+<p>除了父类中混淆的方法，还有父类中不可混淆的方法，举个例子，比如我在 <code class="inline-code">Person</code> 中重载了 <code class="inline-code">toString</code> 方法，此方法就不能被混淆，生成的规则中就必须要写明：</p>
 <pre><code class="java">void toString() -&gt; toString
 </code></pre>
 <p><strong>（2）子类方法名与父类中的方法名应该互斥</strong></p>
-<p>还是上面的那个例子，除了 <code>name()</code> 被映射成了 <code>A</code> 以外，<code>work()</code> 也被映射成了 <code>B</code> ，那对于子类中的 <code>cry()</code> 方法，以及 <code>study()</code> 方法，是都不可以使用 <code>A</code>， <code>B</code> 这两个名字，不然就会存在冲突。</p>
+<p>还是上面的那个例子，除了 <code class="inline-code">name()</code> 被映射成了 <code class="inline-code">A</code> 以外，<code class="inline-code">work()</code> 也被映射成了 <code class="inline-code">B</code> ，那对于子类中的 <code class="inline-code">cry()</code> 方法，以及 <code class="inline-code">study()</code> 方法，是都不可以使用 <code class="inline-code">A</code>， <code class="inline-code">B</code> 这两个名字，不然就会存在冲突。</p>
 <p>为了解决这个冲突的问题，也找了一个取巧的方法，如前面变量名一样，在生成方法名的时候，也是按字典排序，而 index 不从 0 开始，而是把它所有父类（有接口的继承，所以可能会存在多个）中实现的方法数加在一起，用这个值作为 index 的起始坐标，所以示例中的子类会生成如下结果：</p>
 <pre><code class="java">com.example.proguard.Son -&gt; com.example.B:
   void cry() -&gt; C
@@ -1056,10 +1047,10 @@ public class Son extends Person &#123;
   void study() -&gt; E
 </code></pre>
 <blockquote>
-<p>示例中，如果<code>name()</code> 方法使用生成的，此处会使用 <code>D</code>， 因为此方法为重载父类的，所以使用父类中的 <code>A</code> ，在计算 <code>study()</code> 方法时，index 会继续加一，使用 3 来生成其名称，所以此处为 <code>E</code></p>
+<p>示例中，如果<code class="inline-code">name()</code> 方法使用生成的，此处会使用 <code class="inline-code">D</code>， 因为此方法为重载父类的，所以使用父类中的 <code class="inline-code">A</code> ，在计算 <code class="inline-code">study()</code> 方法时，index 会继续加一，使用 3 来生成其名称，所以此处为 <code class="inline-code">E</code></p>
 </blockquote>
 <p><strong>（3）多继承中方法冲突</strong></p>
-<p>前面的例子，只写了一个父类，现在，对 <code>Son</code> 类进行扩展，除了继承 <code>Person</code> ， 还实现了接口 <code>Walkable</code> 接口，如下所示：</p>
+<p>前面的例子，只写了一个父类，现在，对 <code class="inline-code">Son</code> 类进行扩展，除了继承 <code class="inline-code">Person</code> ， 还实现了接口 <code class="inline-code">Walkable</code> 接口，如下所示：</p>
 <pre><code class="java">package com.example.proguard;
 public interface Walkable &#123;
   void walk();
@@ -1071,8 +1062,10 @@ package com.example.proguard;
 public class Son extends Person implements Walkable 
 </code></pre>
 
-        </section>
+                </div>
+            </section>
         </div>
+        <input id="copy-input" style="position: absolute; left: -1000px; z-index: -1000;">
 
     
 

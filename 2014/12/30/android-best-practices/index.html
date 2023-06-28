@@ -82,16 +82,6 @@ select
 }</style>
     <style type="text/css" id="style">@charset "utf-8";
 
-:root {
-    --font-color-0: #04077e;
-    --font-color-1: #000;
-    --font-color-2: #666;
-    --font-color-3: #aaa;
-    --bg-color-1: #eee;
-    --line-1: #ccc;
-    --line-2: #ddd;
-}
-
 p {
     word-wrap: break-word;
     white-space: pre-wrap;
@@ -103,13 +93,13 @@ body {
     font-size: 16px;
     line-height: 1.75;
     letter-spacing: 0.6px;
-    color: var(--font-color-2);
+    color: #666;
     background: #F0F0F0;
 }
 
 a {
     text-decoration: none;
-    color: var(--font-color-1);
+    color: #000;
 }
 
 
@@ -148,7 +138,7 @@ a {
 .header {
     padding-bottom: 48px;
     margin-bottom: 48px;
-    border-bottom: 1px solid var(--line-1);
+    border-bottom: 1px solid #ccc;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -159,7 +149,7 @@ a {
 .logo {
     font-size: 2rem;
     font-weight: 600;
-    color: var(--font-color-1);
+    color: #000;
     margin-bottom: 16px;
     flex: 0 0 100%;
 }
@@ -184,7 +174,7 @@ a {
 }
 
 .nav li a {
-    color: var(--font-color-1);
+    color: #000;
     opacity: .6;
     transition: opacity ease-in-out .5s;
 }
@@ -222,7 +212,7 @@ a {
     width: 100%;
     padding-bottom: 48px;
     margin-bottom: 48px;
-    border-bottom: 1px dashed var(--line-2);
+    border-bottom: 1px dashed #ddd;
 }
 
 .post-title {
@@ -231,12 +221,12 @@ a {
     font-weight: 600;
     line-height: 1.5;
     margin-bottom: 12px;
-    color: var(--font-color-1);
+    color: #000;
     /*transition: color ease-in-out .5s;*/
 }
 
 .post-title:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
@@ -248,7 +238,7 @@ a {
 
 .read-more {
     padding: 0 4px;
-    color: var(--font-color-0);
+    color: #04077e;
 }
 
 .read-more:before,
@@ -277,7 +267,7 @@ a {
 
 .post-date {
     font-size: 0.875rem;
-    color: var(--font-color-3);
+    color: #aaa;
 }
 
 .paginator {
@@ -309,24 +299,24 @@ a {
 
 .paginator a {
     margin: 4px;
-    color: var(--font-color-2);
+    color: #666;
     transition: color ease-in-out .5s;
 }
 
 .paginator a:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
 .paginator .current {
-    color: var(--font-color-0);
-    border: 1px solid var(--font-color-0);
+    color: #04077e;
+    border: 1px solid #04077e;
 }
 
 .footer {
     padding: 24px 0;
     font-size: 0.875rem;
-    color: var(--font-color-3);
+    color: #aaa;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -340,12 +330,12 @@ a {
 }
 
 .footer a {
-    color: var(--font-color-3);
+    color: #aaa;
     transition: color ease-in-out .5s;
 }
 
 .footer a:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
@@ -364,12 +354,12 @@ a {
     font-size: 1.6rem;
     font-weight: 600;
     line-height: 1.5;
-    color: var(--font-color-1);
+    color: #000;
 }
 
 .post-meta {
     font-size: 0.875rem;
-    color: var(--font-color-3);
+    color: #aaa;
     flex: 0 0 100%;
     margin-bottom: 32px;
 }
@@ -405,7 +395,7 @@ a {
 
 .archive li span {
     width: 108px;
-    color: var(--font-color-2);
+    color: #666;
 }
 
 .archive-main {
@@ -413,12 +403,12 @@ a {
 }
 
 .archive-title {
-    color: var(--font-color-1);
+    color: #000;
     /*transition: color ease-in-out .5s;*/
 }
 
 .archive-title:hover {
-    color: var(--font-color-0);
+    color: #04077e;
     transition: color ease-in-out .5s;
 }
 
@@ -434,16 +424,6 @@ a {
     cursor: pointer;
 }
 
-#beautiful p {
-    box-sizing: border-box;
-    margin-bottom: 16px;
-    font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
-    font-size: 15px;
-    text-align: justify;
-    white-space: normal;
-    text-size-adjust: auto;
-    line-height: 1.75em;
-}
 #bing-bg {
     width: 100%;
     position: fixed;
@@ -453,9 +433,20 @@ a {
     filter: blur(10px);
     object-fit: cover;
   }
-</style>
+#go-top {
+    cursor: pointer;
+}
+
+#beautiful {
+    font-family: "PingFang SC", BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serifhtml, body;
+    font-size: 16px;
+    line-height: 1.75;
+    letter-spacing: 0.6px;
+}</style>
     <style type="text/css" id="markdown">@charset "utf-8";
 
+#copy-post-content,
+#beautiful,
 .post-md
 {
     width: 100%;
@@ -469,7 +460,7 @@ a {
 .post-md h5,
 .post-md h6
 {
-    color: var(--font-color-1);
+    color: #000;
 }
 /* 一级标题 */
 .post-md h1  {
@@ -517,7 +508,6 @@ a {
 
 /* 二级标题内容 */
 .post-md h2 .content {
-    margin-left: -10px;
     display: inline-block;
     width: auto;
     height: 40px;
@@ -570,13 +560,13 @@ a {
 .post-md a
 {
     color: #61aeee;
-    box-shadow: 0 2px 0 var(--line-1);
+    box-shadow: 0 2px 0 #ccc;
     transition: color ease-in-out .65s, box-shadow ease-in-out .65s;
 }
 .post-md a:hover
 {
-    color: var(--font-color-0);
-    box-shadow: 0 2px 0 var(--font-color-0);
+    color: #04077e;
+    box-shadow: 0 2px 0 #04077e;
     transition: color ease-in-out .65s, box-shadow ease-in-out .65s;
 }
 .post-md strong
@@ -612,7 +602,7 @@ a {
 {
     border: none;
     height: 1px;
-    background: var(--line-1);
+    background: #ccc;
     margin: 24px 0;
 }
 
@@ -620,11 +610,11 @@ a {
 .post-md blockquote
 {
     width: 100%;
-    margin: 12px 0;
+    padding: 7px 0;
 }
 .post-md blockquote
 {
-    border-left: 2px solid var(--line-2);
+    border-left: 2px solid #ddd;
     padding-left: 12px;
     word-wrap: break-word;
 }
@@ -683,7 +673,7 @@ thead {
 }
 
 
-.post-md p code
+.inline-code
 {
     border-radius: 4px;
     background:rgba(27,31,35,.05);
@@ -707,7 +697,7 @@ thead {
             
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
-            <h4>目录</h4>
+            <h4 id="go-top">目录</h4>
             <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Summary"><span class="post-toc-text">Summary</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Use%20Gradle%20and%20its%20recommended%20project%20structure"><span class="post-toc-text">Use Gradle and its recommended project structure</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Put%20passwords%20and%20sensitive%20data%20in%20gradle.properties"><span class="post-toc-text">Put passwords and sensitive data in gradle.properties</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Don%E2%80%99t%20write%20your%20own%20HTTP%20client,%20use%20Volley%20or%20OkHttp%20libraries"><span class="post-toc-text">Don’t write your own HTTP client, use Volley or OkHttp libraries</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Use%20the%20Jackson%20library%20to%20parse%20JSON%20data"><span class="post-toc-text">Use the Jackson library to parse JSON data</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Avoid%20Guava%20and%20use%20only%20a%20few%20libraries%20due%20to%20the%20%3Cem%3E65k%20method%20limit%3C/em%3E"><span class="post-toc-text">Avoid Guava and use only a few libraries due to the 65k method limit</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Use%20Fragments%20to%20represent%20a%20UI%20screen"><span class="post-toc-text">Use Fragments to represent a UI screen</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Use%20Activities%20just%20to%20manage%20Fragments"><span class="post-toc-text">Use Activities just to manage Fragments</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Layout%20XMLs%20are%20code,%20organize%20them%20well"><span class="post-toc-text">Layout XMLs are code, organize them well</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Use%20styles%20to%20avoid%20duplicate%20attributes%20in%20layout%20XMLs"><span class="post-toc-text">Use styles to avoid duplicate attributes in layout XMLs</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Use%20multiple%20style%20files%20to%20avoid%20a%20single%20huge%20one"><span class="post-toc-text">Use multiple style files to avoid a single huge one</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Keep%20your%20colors.xml%20short%20and%20DRY,%20just%20define%20the%20palette"><span class="post-toc-text">Keep your colors.xml short and DRY, just define the palette</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Also%20keep%20dimens.xml%20DRY,%20define%20generic%20constants"><span class="post-toc-text">Also keep dimens.xml DRY, define generic constants</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Do%20not%20make%20a%20deep%20hierarchy%20of%20ViewGroups"><span class="post-toc-text">Do not make a deep hierarchy of ViewGroups</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Avoid%20client-side%20processing%20for%20WebViews,%20and%20beware%20of%20leaks"><span class="post-toc-text">Avoid client-side processing for WebViews, and beware of leaks</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Use%20Robolectric%20for%20unit%20tests,%20Robotium%20for%20connected%20(UI)%20tests"><span class="post-toc-text">Use Robolectric for unit tests, Robotium for connected (UI) tests</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Use%20Genymotion%20as%20your%20emulator"><span class="post-toc-text">Use Genymotion as your emulator</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Always%20use%20ProGuard%20or%20DexGuard"><span class="post-toc-text">Always use ProGuard or DexGuard</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Android%20SDK"><span class="post-toc-text">Android SDK</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Build%20system"><span class="post-toc-text">Build system</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Project%20structure"><span class="post-toc-text">Project structure</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Gradle%20configuration"><span class="post-toc-text">Gradle configuration</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#IDEs%20and%20text%20editors"><span class="post-toc-text">IDEs and text editors</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Libraries"><span class="post-toc-text">Libraries</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Activities%20and%20Fragments"><span class="post-toc-text">Activities and Fragments</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Java%20packages%20architecture"><span class="post-toc-text">Java packages architecture</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Resources"><span class="post-toc-text">Resources</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Test%20frameworks"><span class="post-toc-text">Test frameworks</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Emulators"><span class="post-toc-text">Emulators</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Proguard%20configuration"><span class="post-toc-text">Proguard configuration</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Thanks%20to"><span class="post-toc-text">Thanks to</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#License"><span class="post-toc-text">License</span></a></li></ol></li></ol>
         </nav>
     </aside>
@@ -724,9 +714,10 @@ thead {
         <div class="post-meta">
             <a class='author' href="/">罗昭成</a> <span id="clipboardbtn">2014年12月30日</span>
         </div>
-        <div class="post-md" id="copy-post-content">
-        <section id="beautiful">
-            <p>Lessons learned from Android developers in <a target="_blank" rel="noopener" href="http://www.futurice.com/">Futurice</a>. Avoid reinventing the wheel by following these guidelines. If you are interested in iOS or Windows Phone development, be sure to check also our <a target="_blank" rel="noopener" href="https://github.com/futurice/ios-good-practices"><strong>iOS Good Practices</strong></a> and <a target="_blank" rel="noopener" href="https://github.com/futurice/win-client-dev-good-practices"><strong>Windows client Good Practices</strong></a> documents.</p>
+        <div id="copy-post-content">
+            <section id="beautiful">
+            <div class="post-md" >
+                    <p>Lessons learned from Android developers in <a target="_blank" rel="noopener" href="http://www.futurice.com/">Futurice</a>. Avoid reinventing the wheel by following these guidelines. If you are interested in iOS or Windows Phone development, be sure to check also our <a target="_blank" rel="noopener" href="https://github.com/futurice/ios-good-practices"><strong>iOS Good Practices</strong></a> and <a target="_blank" rel="noopener" href="https://github.com/futurice/win-client-dev-good-practices"><strong>Windows client Good Practices</strong></a> documents.</p>
 <h2 id="Summary"><span class="prefix"></span><span class="content">Summary</span><span class="suffix"></span></h2><h4 id="Use Gradle and its recommended project structure"><span class="prefix"></span><span class="content">Use Gradle and its recommended project structure</span><span class="suffix"></span></h4><h4 id="Put passwords and sensitive data in gradle.properties"><span class="prefix"></span><span class="content">Put passwords and sensitive data in gradle.properties</span><span class="suffix"></span></h4><h4 id="Don’t write your own HTTP client, use Volley or OkHttp libraries"><span class="prefix"></span><span class="content">Don’t write your own HTTP client, use Volley or OkHttp libraries</span><span class="suffix"></span></h4><h4 id="Use the Jackson library to parse JSON data"><span class="prefix"></span><span class="content">Use the Jackson library to parse JSON data</span><span class="suffix"></span></h4><h4 id="Avoid Guava and use only a few libraries due to the <em>65k method limit</em>"><span class="prefix"></span><span class="content">Avoid Guava and use only a few libraries due to the <em>65k method limit</em></span><span class="suffix"></span></h4><h4 id="Use Fragments to represent a UI screen"><span class="prefix"></span><span class="content">Use Fragments to represent a UI screen</span><span class="suffix"></span></h4><h4 id="Use Activities just to manage Fragments"><span class="prefix"></span><span class="content">Use Activities just to manage Fragments</span><span class="suffix"></span></h4><h4 id="Layout XMLs are code, organize them well"><span class="prefix"></span><span class="content">Layout XMLs are code, organize them well</span><span class="suffix"></span></h4><h4 id="Use styles to avoid duplicate attributes in layout XMLs"><span class="prefix"></span><span class="content">Use styles to avoid duplicate attributes in layout XMLs</span><span class="suffix"></span></h4><h4 id="Use multiple style files to avoid a single huge one"><span class="prefix"></span><span class="content">Use multiple style files to avoid a single huge one</span><span class="suffix"></span></h4><h4 id="Keep your colors.xml short and DRY, just define the palette"><span class="prefix"></span><span class="content">Keep your colors.xml short and DRY, just define the palette</span><span class="suffix"></span></h4><h4 id="Also keep dimens.xml DRY, define generic constants"><span class="prefix"></span><span class="content">Also keep dimens.xml DRY, define generic constants</span><span class="suffix"></span></h4><h4 id="Do not make a deep hierarchy of ViewGroups"><span class="prefix"></span><span class="content">Do not make a deep hierarchy of ViewGroups</span><span class="suffix"></span></h4><h4 id="Avoid client-side processing for WebViews, and beware of leaks"><span class="prefix"></span><span class="content">Avoid client-side processing for WebViews, and beware of leaks</span><span class="suffix"></span></h4><h4 id="Use Robolectric for unit tests, Robotium for connected (UI) tests"><span class="prefix"></span><span class="content">Use Robolectric for unit tests, Robotium for connected (UI) tests</span><span class="suffix"></span></h4><h4 id="Use Genymotion as your emulator"><span class="prefix"></span><span class="content">Use Genymotion as your emulator</span><span class="suffix"></span></h4><h4 id="Always use ProGuard or DexGuard"><span class="prefix"></span><span class="content">Always use ProGuard or DexGuard</span><span class="suffix"></span></h4><hr>
 <h3 id="Android SDK"><span class="prefix"></span><span class="content">Android SDK</span><span class="suffix"></span></h3><p>Place your <a target="_blank" rel="noopener" href="https://developer.android.com/sdk/installing/index.html?pkg=tools">Android SDK</a> somewhere in your home directory or some other application-independent location. Some IDEs include the SDK when installed, and may place it under the same directory as the IDE. This can be bad when you need to upgrade (or reinstall) the IDE, or when changing IDEs. Also avoid putting the SDK in another system-level directory that might need sudo permissions, if your IDE is running under your user and not under root.</p>
 <h3 id="Build system"><span class="prefix"></span><span class="content">Build system</span><span class="suffix"></span></h3><p>Your default option should be <a target="_blank" rel="noopener" href="http://tools.android.com/tech-docs/new-build-system">Gradle</a>. Ant is much more limited and also more verbose. With Gradle, it’s simple to:</p>
@@ -740,7 +731,7 @@ thead {
 <p>Android’s Gradle plugin is also being actively developed by Google as the new standard build system.</p>
 <h3 id="Project structure"><span class="prefix"></span><span class="content">Project structure</span><span class="suffix"></span></h3><p>There are two popular options: the old Ant &amp; Eclipse ADT project structure, and the new Gradle &amp; Android Studio project structure. You should choose the new project structure. If your project uses the old structure, consider it legacy and start porting it to the new structure.</p>
 <p>Old structure:</p>
-<pre><code>old-structure
+<pre><code class="inline-code">old-structure
 ├─ assets
 ├─ libs
 ├─ res
@@ -752,7 +743,7 @@ thead {
 └─ proguard-rules.pro
 </code></pre>
 <p>New structure:</p>
-<pre><code>new-structure
+<pre><code class="inline-code">new-structure
 ├─ library-foobar
 ├─ app
 │  ├─ libs
@@ -770,11 +761,11 @@ thead {
 ├─ build.gradle
 └─ settings.gradle
 </code></pre>
-<p>The main difference is that the new structure explicitly separates ‘source sets’ (<code>main</code>, <code>androidTest</code>), a concept from Gradle. You could, for instance, add source sets ‘paid’ and ‘free’ into <code>src</code> which will have source code for the paid and free flavours of your app.</p>
-<p>Having a top-level <code>app</code> is useful to distinguish your app from other library projects (e.g., <code>library-foobar</code>) that will be referenced in your app. The <code>settings.gradle</code> then keeps references to these library projects, which <code>app/build.gradle</code> can reference to.</p>
+<p>The main difference is that the new structure explicitly separates ‘source sets’ (<code class="inline-code">main</code>, <code class="inline-code">androidTest</code>), a concept from Gradle. You could, for instance, add source sets ‘paid’ and ‘free’ into <code class="inline-code">src</code> which will have source code for the paid and free flavours of your app.</p>
+<p>Having a top-level <code class="inline-code">app</code> is useful to distinguish your app from other library projects (e.g., <code class="inline-code">library-foobar</code>) that will be referenced in your app. The <code class="inline-code">settings.gradle</code> then keeps references to these library projects, which <code class="inline-code">app/build.gradle</code> can reference to.</p>
 <h3 id="Gradle configuration"><span class="prefix"></span><span class="content">Gradle configuration</span><span class="suffix"></span></h3><p><strong>General structure.</strong> Follow <a target="_blank" rel="noopener" href="http://tools.android.com/tech-docs/new-build-system/user-guide">Google’s guide on Gradle for Android</a></p>
 <p><strong>Small tasks.</strong> Instead of (shell, Python, Perl, etc) scripts, you can make tasks in Gradle. Just follow <a target="_blank" rel="noopener" href="http://www.gradle.org/docs/current/userguide/userguide_single.html#N10CBF">Gradle’s documentation</a> for more details.</p>
-<p><strong>Passwords.</strong> In your app’s <code>build.gradle</code> you will need to define the <code>signingConfigs</code> for the release build. Here is what you should avoid:</p>
+<p><strong>Passwords.</strong> In your app’s <code class="inline-code">build.gradle</code> you will need to define the <code class="inline-code">signingConfigs</code> for the release build. Here is what you should avoid:</p>
 <p><em>Don’t do this</em>. This would appear in the version control system.</p>
 <pre><code class="groovy">signingConfigs &#123;
     release &#123;
@@ -785,11 +776,11 @@ thead {
     &#125;
 &#125;
 </code></pre>
-<p>Instead, make a <code>gradle.properties</code> file which should <em>not</em> be added to the version control system:</p>
-<pre><code>KEYSTORE_PASSWORD=password123
+<p>Instead, make a <code class="inline-code">gradle.properties</code> file which should <em>not</em> be added to the version control system:</p>
+<pre><code class="inline-code">KEYSTORE_PASSWORD=password123
 KEY_PASSWORD=password789
 </code></pre>
-<p>That file is automatically imported by gradle, so you can use it in <code>build.gradle</code> as such:</p>
+<p>That file is automatically imported by gradle, so you can use it in <code class="inline-code">build.gradle</code> as such:</p>
 <pre><code class="groovy">signingConfigs &#123;
     release &#123;
         try &#123;
@@ -804,7 +795,7 @@ KEY_PASSWORD=password789
     &#125;
 &#125;
 </code></pre>
-<p><strong>Prefer Maven dependency resolution instead of importing jar files.</strong> If you explicitly include jar files in your project, they will be of some specific frozen version, such as <code>2.1.1</code>. Downloading jars and handling updates is cumbersome, this is a problem that Maven solves properly, and is also encouraged in Android Gradle builds. You can specify a range of versions, such as <code>2.1.+</code> and Maven will handle the automatic update to the most recent version matching that pattern. Example:</p>
+<p><strong>Prefer Maven dependency resolution instead of importing jar files.</strong> If you explicitly include jar files in your project, they will be of some specific frozen version, such as <code class="inline-code">2.1.1</code>. Downloading jars and handling updates is cumbersome, this is a problem that Maven solves properly, and is also encouraged in Android Gradle builds. You can specify a range of versions, such as <code class="inline-code">2.1.+</code> and Maven will handle the automatic update to the most recent version matching that pattern. Example:</p>
 <pre><code class="groovy">dependencies &#123;
     compile &#39;com.netflix.rxjava:rxjava-core:0.19.+&#39;
     compile &#39;com.netflix.rxjava:rxjava-android:0.19.+&#39;
@@ -817,13 +808,13 @@ KEY_PASSWORD=password789
 </code></pre>
 <h3 id="IDEs and text editors"><span class="prefix"></span><span class="content">IDEs and text editors</span><span class="suffix"></span></h3><p><strong>Use whatever editor, but it must play nicely with the project structure.</strong> Editors are a personal choice, and it’s your responsibility to get your editor functioning according to the project structure and build system.</p>
 <p>The most recommended IDE at the moment is <a target="_blank" rel="noopener" href="https://developer.android.com/sdk/installing/studio.html">Android Studio</a>, because it is developed by Google, is closest to Gradle, uses the new project structure by default, is finally in beta stage, and is tailored for Android development.</p>
-<p>You can use <a target="_blank" rel="noopener" href="https://developer.android.com/sdk/installing/index.html?pkg=adt">Eclipse ADT</a> if you wish, but you need to configure it, since it expects the old project structure and Ant for building. You can even use a plain text editor like Vim, Sublime Text, or Emacs. In that case, you will need to use Gradle and <code>adb</code> on the command line. If Eclipse’s integration with Gradle is not working for you, your options are using the command line just to build, or migrating to Android Studio.</p>
-<p>Whatever you use, just make sure Gradle and the new project structure remain as the official way of building the application, and avoid adding your editor-specific configuration files to the version control system. For instance, avoid adding an Ant <code>build.xml</code> file. Especially don’t forget to keep <code>build.gradle</code> up-to-date and functioning if you are changing build configurations in Ant. Also, be kind to other developers, don’t force them to change their tool of preference.</p>
+<p>You can use <a target="_blank" rel="noopener" href="https://developer.android.com/sdk/installing/index.html?pkg=adt">Eclipse ADT</a> if you wish, but you need to configure it, since it expects the old project structure and Ant for building. You can even use a plain text editor like Vim, Sublime Text, or Emacs. In that case, you will need to use Gradle and <code class="inline-code">adb</code> on the command line. If Eclipse’s integration with Gradle is not working for you, your options are using the command line just to build, or migrating to Android Studio.</p>
+<p>Whatever you use, just make sure Gradle and the new project structure remain as the official way of building the application, and avoid adding your editor-specific configuration files to the version control system. For instance, avoid adding an Ant <code class="inline-code">build.xml</code> file. Especially don’t forget to keep <code class="inline-code">build.gradle</code> up-to-date and functioning if you are changing build configurations in Ant. Also, be kind to other developers, don’t force them to change their tool of preference.</p>
 <h3 id="Libraries"><span class="prefix"></span><span class="content">Libraries</span><span class="suffix"></span></h3><p><strong><a target="_blank" rel="noopener" href="http://wiki.fasterxml.com/JacksonHome">Jackson</a></strong> is a Java library for converting Objects into JSON and vice-versa. <a target="_blank" rel="noopener" href="https://code.google.com/p/google-gson/">Gson</a> is a popular choice for solving this problem, however we find Jackson to be more performant since it supports alternative ways of processing JSON: streaming, in-memory tree model, and traditional JSON-POJO data binding. Keep in mind, though, that Jackson is a larger library than GSON, so depending on your case, you might prefer GSON to avoid 65k methods limitation. Other alternatives: <a target="_blank" rel="noopener" href="https://code.google.com/p/json-smart/">Json-smart</a> and <a target="_blank" rel="noopener" href="https://github.com/RichardHightower/boon/wiki/Boon-JSON-in-five-minutes">Boon JSON</a></p>
 <p><strong>Networking, caching, and images.</strong> There are a couple of battle-proven solutions for performing requests to backend servers, which you should use perform considering implementing your own client. Use <a target="_blank" rel="noopener" href="https://android.googlesource.com/platform/frameworks/volley">Volley</a> or <a target="_blank" rel="noopener" href="http://square.github.io/retrofit/">Retrofit</a>. Volley also provides helpers to load and cache images. If you choose Retrofit, consider <a target="_blank" rel="noopener" href="http://square.github.io/picasso/">Picasso</a> for loading and caching images, and <a target="_blank" rel="noopener" href="http://square.github.io/okhttp/">OkHttp</a> for efficient HTTP requests. All three Retrofit, Picasso and OkHttp are created by the same company, so they complement each other nicely. <a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/24375043/how-to-implement-android-volley-with-okhttp-2-0/24951835#24951835">OkHttp can also be used in connection with Volley</a>.</p>
 <p><strong>RxJava</strong> is a library for Reactive Programming, in other words, handling asynchronous events. It is a powerful and promising paradigm, which can also be confusing since it’s so different. We recommend to take some caution before using this library to architect the entire application. There are some projects done by us using RxJava, if you need help talk to one of these people: Timo Tuominen, Olli Salonen, Andre Medeiros, Mark Voit, Antti Lammi, Vera Izrailit, Juha Ristolainen. We have written some blog posts on it: <a target="_blank" rel="noopener" href="http://blog.futurice.com/tech-pick-of-the-week-rx-for-net-and-rxjava-for-android">[1]</a>, <a target="_blank" rel="noopener" href="http://blog.futurice.com/top-7-tips-for-rxjava-on-android">[2]</a>, <a target="_blank" rel="noopener" href="https://gist.github.com/staltz/868e7e9bc2a7b8c1f754">[3]</a>, <a target="_blank" rel="noopener" href="http://blog.futurice.com/android-development-has-its-own-swift">[4]</a>.</p>
 <p>If you have no previous experience with Rx, start by applying it only for responses from the API. Alternatively, start by applying it for simple UI event handling, like click events or typing events on a search field. If you are confident in your Rx skills and want to apply it to the whole architecture, then write Javadocs on all the tricky parts. Keep in mind that another programmer unfamiliar to RxJava might have a very hard time maintaining the project. Do your best to help them understand your code and also Rx.</p>
-<p><strong><a target="_blank" rel="noopener" href="https://github.com/evant/gradle-retrolambda">Retrolambda</a></strong> is a Java library for using Lambda expression syntax in Android and other pre-JDK8 platforms. It helps keep your code tight and readable especially if you use a functional style with for example with RxJava. To use it, install JDK8, set that as your SDK Location in the Android Studio Project Structure dialog, and set <code>JAVA8_HOME</code> and <code>JAVA7_HOME</code> environment variables, then in the project root build.gradle:</p>
+<p><strong><a target="_blank" rel="noopener" href="https://github.com/evant/gradle-retrolambda">Retrolambda</a></strong> is a Java library for using Lambda expression syntax in Android and other pre-JDK8 platforms. It helps keep your code tight and readable especially if you use a functional style with for example with RxJava. To use it, install JDK8, set that as your SDK Location in the Android Studio Project Structure dialog, and set <code class="inline-code">JAVA8_HOME</code> and <code class="inline-code">JAVA7_HOME</code> environment variables, then in the project root build.gradle:</p>
 <pre><code class="groovy">dependencies &#123;
     classpath &#39;me.tatarka:gradle-retrolambda:2.4.+&#39;
 &#125;
@@ -861,13 +852,13 @@ retrolambda &#123;
 </li>
 </ul>
 <p>That being said, we advise not to use <a target="_blank" rel="noopener" href="https://developer.android.com/about/versions/android-4.2.html#NestedFragments">nested fragments</a> extensively, because <a target="_blank" rel="noopener" href="http://delyan.me/android-s-matryoshka-problem/">matryoshka bugs</a> can occur. Use nested fragments only when it makes sense (for instance, fragments in a horizontally-sliding ViewPager inside a screen-like fragment) or if it’s a well-informed decision.</p>
-<p>On an architectural level, your app should have a top-level activity that contains most of the business-related fragments. You can also have some other supporting activities, as long as their communication with the main activity is simple and can be limited to <a target="_blank" rel="noopener" href="http://developer.android.com/reference/android/content/Intent.html#setData(android.net.Uri)"><code>Intent.setData()</code></a> or <a target="_blank" rel="noopener" href="http://developer.android.com/reference/android/content/Intent.html#setAction(java.lang.String)"><code>Intent.setAction()</code></a> or similar.</p>
+<p>On an architectural level, your app should have a top-level activity that contains most of the business-related fragments. You can also have some other supporting activities, as long as their communication with the main activity is simple and can be limited to <a target="_blank" rel="noopener" href="http://developer.android.com/reference/android/content/Intent.html#setData(android.net.Uri)"><code class="inline-code">Intent.setData()</code></a> or <a target="_blank" rel="noopener" href="http://developer.android.com/reference/android/content/Intent.html#setAction(java.lang.String)"><code class="inline-code">Intent.setAction()</code></a> or similar.</p>
 <h3 id="Java packages architecture"><span class="prefix"></span><span class="content">Java packages architecture</span><span class="suffix"></span></h3><p>Java architectures for Android applications can be roughly approximated in <a target="_blank" rel="noopener" href="http://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller">Model-View-Controller</a>. In Android, <a target="_blank" rel="noopener" href="http://www.informit.com/articles/article.aspx?p=2126865">Fragment and Activity are actually controller classes</a>. On the other hand, they are explicity part of the user interface, hence are also views.</p>
-<p>For this reason, it is hard to classify fragments (or activities) as strictly controllers or views. It’s better to let them stay in their own <code>fragments</code> package. Activities can stay on the top-level package as long as you follow the advice of the previous section. If you are planning to have more than 2 or 3 activities, then make also an <code>activities</code> package.</p>
-<p>Otherwise, the architecture can look like a typical MVC, with a <code>models</code> package containing POJOs to be populated through the JSON parser with API responses, and a <code>views</code> package containing your custom Views, notifications, action bar views, widgets, etc. Adapters are a gray matter, living between data and views. However, they typically need to export some View via <code>getView()</code>, so you can include the <code>adapters</code> subpackage inside <code>views</code>.</p>
-<p>Some controller classes are application-wide and close to the Android system. These can live in a <code>managers</code> package. Miscellaneous data processing classes, such as “DateUtils”, stay in the <code>utils</code> package. Classes that are responsible for interacting with the backend stay in the <code>network</code> package.</p>
+<p>For this reason, it is hard to classify fragments (or activities) as strictly controllers or views. It’s better to let them stay in their own <code class="inline-code">fragments</code> package. Activities can stay on the top-level package as long as you follow the advice of the previous section. If you are planning to have more than 2 or 3 activities, then make also an <code class="inline-code">activities</code> package.</p>
+<p>Otherwise, the architecture can look like a typical MVC, with a <code class="inline-code">models</code> package containing POJOs to be populated through the JSON parser with API responses, and a <code class="inline-code">views</code> package containing your custom Views, notifications, action bar views, widgets, etc. Adapters are a gray matter, living between data and views. However, they typically need to export some View via <code class="inline-code">getView()</code>, so you can include the <code class="inline-code">adapters</code> subpackage inside <code class="inline-code">views</code>.</p>
+<p>Some controller classes are application-wide and close to the Android system. These can live in a <code class="inline-code">managers</code> package. Miscellaneous data processing classes, such as “DateUtils”, stay in the <code class="inline-code">utils</code> package. Classes that are responsible for interacting with the backend stay in the <code class="inline-code">network</code> package.</p>
 <p>All in all, ordered from the closest-to-backend to the closest-to-the-user:</p>
-<pre><code>com.futurice.project
+<pre><code class="inline-code">com.futurice.project
 ├─ network
 ├─ models
 ├─ managers
@@ -879,15 +870,15 @@ retrolambda &#123;
    ├─ widgets
    └─ notifications
 </code></pre>
-<h3 id="Resources"><span class="prefix"></span><span class="content">Resources</span><span class="suffix"></span></h3><p><strong>Naming.</strong> Follow the convention of prefixing the type, as in <code>type_foo_bar.xml</code>. Examples: <code>fragment_contact_details.xml</code>, <code>view_primary_button.xml</code>, <code>activity_main.xml</code>.</p>
+<h3 id="Resources"><span class="prefix"></span><span class="content">Resources</span><span class="suffix"></span></h3><p><strong>Naming.</strong> Follow the convention of prefixing the type, as in <code class="inline-code">type_foo_bar.xml</code>. Examples: <code class="inline-code">fragment_contact_details.xml</code>, <code class="inline-code">view_primary_button.xml</code>, <code class="inline-code">activity_main.xml</code>.</p>
 <p><strong>Organizing layout XMLs.</strong> If you’re unsure how to format a layout XML, the following convention may help.</p>
 <ul>
 <li>One attribute per line, indented by 4 spaces</li>
-<li><code>android:id</code> as the first attribute always</li>
-<li><code>android:layout_****</code> attributes at the top</li>
-<li><code>style</code> attribute at the bottom</li>
-<li>Tag closer <code>/&gt;</code> on its own line, to facilitate ordering and adding attributes.</li>
-<li>Rather than hard coding <code>android:text</code>, consider using <a target="_blank" rel="noopener" href="http://tools.android.com/tips/layout-designtime-attributes">Designtime attributes</a> available for Android Studio.</li>
+<li><code class="inline-code">android:id</code> as the first attribute always</li>
+<li><code class="inline-code">android:layout_****</code> attributes at the top</li>
+<li><code class="inline-code">style</code> attribute at the bottom</li>
+<li>Tag closer <code class="inline-code">/&gt;</code> on its own line, to facilitate ordering and adding attributes.</li>
+<li>Rather than hard coding <code class="inline-code">android:text</code>, consider using <a target="_blank" rel="noopener" href="http://tools.android.com/tips/layout-designtime-attributes">Designtime attributes</a> available for Android Studio.</li>
 </ul>
 <pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
 &lt;LinearLayout
@@ -911,13 +902,13 @@ retrolambda &#123;
 
 &lt;/LinearLayout&gt;
 </code></pre>
-<p>As a rule of thumb, attributes <code>android:layout_****</code> should be defined in the layout XML, while other attributes <code>android:****</code> should stay in a style XML. This rule has exceptions, but in general works fine. The idea is to keep only layout (positioning, margin, sizing) and content attributes in the layout files, while keeping all appearance details (colors, padding, font) in styles files.</p>
+<p>As a rule of thumb, attributes <code class="inline-code">android:layout_****</code> should be defined in the layout XML, while other attributes <code class="inline-code">android:****</code> should stay in a style XML. This rule has exceptions, but in general works fine. The idea is to keep only layout (positioning, margin, sizing) and content attributes in the layout files, while keeping all appearance details (colors, padding, font) in styles files.</p>
 <p>The exceptions are:</p>
 <ul>
-<li><code>android:id</code> should obviously be in the layout files</li>
-<li><code>android:orientation</code> for a <code>LinearLayout</code> normally makes more sense in layout files</li>
-<li><code>android:text</code> should be in layout files because it defines content</li>
-<li>Sometimes it will make sense to make a generic style defining <code>android:layout_width</code> and <code>android:layout_height</code> but by default these should appear in the layout files</li>
+<li><code class="inline-code">android:id</code> should obviously be in the layout files</li>
+<li><code class="inline-code">android:orientation</code> for a <code class="inline-code">LinearLayout</code> normally makes more sense in layout files</li>
+<li><code class="inline-code">android:text</code> should be in layout files because it defines content</li>
+<li>Sometimes it will make sense to make a generic style defining <code class="inline-code">android:layout_width</code> and <code class="inline-code">android:layout_height</code> but by default these should appear in the layout files</li>
 </ul>
 <p><strong>Use styles.</strong> Almost every project needs to properly use styles, because it is very common to have a repeated appearance for a view. At least you should have a common style for most text content in the application, for example:</p>
 <pre><code class="xml">&lt;style name=&quot;ContentText&quot;&gt;
@@ -933,9 +924,9 @@ retrolambda &#123;
     style=&quot;@style/ContentText&quot;
     /&gt;
 </code></pre>
-<p>You probably will need to do the same for buttons, but don’t stop there yet. Go beyond and move a group of related and repeated <code>android:****</code> attributes to a common style.</p>
-<p><strong>Split a large style file into other files.</strong> You don’t need to have a single <code>styles.xml</code> file. Android SDK supports other files out of the box, there is nothing magical about the name <code>styles</code>, what matters are the XML tags <code>&lt;style&gt;</code> inside the file. Hence you can have files <code>styles.xml</code>, <code>styles_home.xml</code>, <code>styles_item_details.xml</code>, <code>styles_forms.xml</code>. Unlike resource directory names which carry some meaning for the build system, filenames in <code>res/values</code> can be arbitrary.</p>
-<p><strong><code>colors.xml</code> is a color palette.</strong> There should be nothing else in your <code>colors.xml</code> than just a mapping from a color name to an RGBA value. Do not use it to define RGBA values for different types of buttons.</p>
+<p>You probably will need to do the same for buttons, but don’t stop there yet. Go beyond and move a group of related and repeated <code class="inline-code">android:****</code> attributes to a common style.</p>
+<p><strong>Split a large style file into other files.</strong> You don’t need to have a single <code class="inline-code">styles.xml</code> file. Android SDK supports other files out of the box, there is nothing magical about the name <code class="inline-code">styles</code>, what matters are the XML tags <code class="inline-code">&lt;style&gt;</code> inside the file. Hence you can have files <code class="inline-code">styles.xml</code>, <code class="inline-code">styles_home.xml</code>, <code class="inline-code">styles_item_details.xml</code>, <code class="inline-code">styles_forms.xml</code>. Unlike resource directory names which carry some meaning for the build system, filenames in <code class="inline-code">res/values</code> can be arbitrary.</p>
+<p><strong><code class="inline-code">colors.xml</code> is a color palette.</strong> There should be nothing else in your <code class="inline-code">colors.xml</code> than just a mapping from a color name to an RGBA value. Do not use it to define RGBA values for different types of buttons.</p>
 <p><em>Don’t do this:</em></p>
 <pre><code class="xml">&lt;resources&gt;
     &lt;color name=&quot;button_foreground&quot;&gt;#FFFFFF&lt;/color&gt;
@@ -947,7 +938,7 @@ retrolambda &#123;
     ...
     &lt;color name=&quot;comment_shadow&quot;&gt;#323232&lt;/color&gt;
 </code></pre>
-<p>You can easily start repeating RGBA values in this format, and that makes it complicated to change a basic color if needed. Also, those definitions are related to some context, like “button” or “comment”, and should live in a button style, not in <code>colors.xml</code>.</p>
+<p>You can easily start repeating RGBA values in this format, and that makes it complicated to change a basic color if needed. Also, those definitions are related to some context, like “button” or “comment”, and should live in a button style, not in <code class="inline-code">colors.xml</code>.</p>
 <p>Instead, do this:</p>
 <pre><code class="xml">&lt;resources&gt;
 
@@ -990,7 +981,7 @@ retrolambda &#123;
 
 &lt;/resources&gt;
 </code></pre>
-<p>You should use the <code>spacing_****</code> dimensions for layouting, in margins and paddings, instead of hard-coded values, much like strings are normally treated. This will give a consistent look-and-feel, while making it easier to organize and change styles and layouts.</p>
+<p>You should use the <code class="inline-code">spacing_****</code> dimensions for layouting, in margins and paddings, instead of hard-coded values, much like strings are normally treated. This will give a consistent look-and-feel, while making it easier to organize and change styles and layouts.</p>
 <p><strong>Avoid a deep hierarchy of views.</strong> Sometimes you might be tempted to just add yet another LinearLayout, to be able to accomplish an arrangement of views. This kind of situation may occur:</p>
 <pre><code class="xml">&lt;LinearLayout
     android:layout_width=&quot;match_parent&quot;
@@ -1025,9 +1016,9 @@ retrolambda &#123;
 </code></pre>
 <p>Even if you don’t witness this explicitly in a layout file, it might end up happening if you are inflating (in Java) views into other views.</p>
 <p>A couple of problems may occur. You might experience performance problems, because there are is a complex UI tree that the processor needs to handle. Another more serious issue is a possibility of <a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/2762924/java-lang-stackoverflow-error-suspected-too-many-views">StackOverflowError</a>.</p>
-<p>Therefore, try to keep your views hierarchy as flat as possible: learn how to use <a target="_blank" rel="noopener" href="https://developer.android.com/guide/topics/ui/layout/relative.html">RelativeLayout</a>, how to <a target="_blank" rel="noopener" href="http://developer.android.com/training/improving-layouts/optimizing-layout.html">optimize your layouts</a> and to use the <a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/8834898/what-is-the-purpose-of-androids-merge-tag-in-xml-layouts"><code>&lt;merge&gt;</code> tag</a>.</p>
+<p>Therefore, try to keep your views hierarchy as flat as possible: learn how to use <a target="_blank" rel="noopener" href="https://developer.android.com/guide/topics/ui/layout/relative.html">RelativeLayout</a>, how to <a target="_blank" rel="noopener" href="http://developer.android.com/training/improving-layouts/optimizing-layout.html">optimize your layouts</a> and to use the <a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/8834898/what-is-the-purpose-of-androids-merge-tag-in-xml-layouts"><code class="inline-code">&lt;merge&gt;</code> tag</a>.</p>
 <p><strong>Beware of problems related to WebViews.</strong> When you must display a web page, for instance for a news article, avoid doing client-side processing to clean the HTML, rather ask for a “<em>pure</em>“ HTML from the backend programmers. <a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/3130654/memory-leak-in-webview">WebViews can also leak memory</a> when they keep a reference to their Activity, instead of being bound to the ApplicationContext. Avoid using a WebView for simple texts or buttons, prefer TextViews or Buttons.</p>
-<h3 id="Test frameworks"><span class="prefix"></span><span class="content">Test frameworks</span><span class="suffix"></span></h3><p>Android SDK’s testing framework is still infant, specially regarding UI tests. Android Gradle currently implements a test task called <a target="_blank" rel="noopener" href="http://tools.android.com/tech-docs/new-build-system/user-guide#TOC-Testing"><code>connectedAndroidTest</code></a> which runs JUnit tests that you created, using an <a target="_blank" rel="noopener" href="http://developer.android.com/reference/android/test/package-summary.html">extension of JUnit with helpers for Android</a>. This means you will need to run tests connected to a device, or an emulator. Follow the official guide <a target="_blank" rel="noopener" href="http://developer.android.com/tools/testing/testing_android.html">[1]</a> <a target="_blank" rel="noopener" href="http://developer.android.com/tools/testing/activity_test.html">[2]</a> for testing.</p>
+<h3 id="Test frameworks"><span class="prefix"></span><span class="content">Test frameworks</span><span class="suffix"></span></h3><p>Android SDK’s testing framework is still infant, specially regarding UI tests. Android Gradle currently implements a test task called <a target="_blank" rel="noopener" href="http://tools.android.com/tech-docs/new-build-system/user-guide#TOC-Testing"><code class="inline-code">connectedAndroidTest</code></a> which runs JUnit tests that you created, using an <a target="_blank" rel="noopener" href="http://developer.android.com/reference/android/test/package-summary.html">extension of JUnit with helpers for Android</a>. This means you will need to run tests connected to a device, or an emulator. Follow the official guide <a target="_blank" rel="noopener" href="http://developer.android.com/tools/testing/testing_android.html">[1]</a> <a target="_blank" rel="noopener" href="http://developer.android.com/tools/testing/activity_test.html">[2]</a> for testing.</p>
 <p><strong>Use <a target="_blank" rel="noopener" href="http://robolectric.org/">Robolectric</a> only for unit tests, not for views.</strong> It is a test framework seeking to provide tests “disconnected from device” for the sake of development speed, suitable specially for unit tests on models and view models. However, testing under Robolectric is inaccurate and incomplete regarding UI tests. You will have problems testing UI elements related to animations, dialogs, etc, and this will be complicated by the fact that you are “walking in the dark” (testing without seeing the screen being controlled).</p>
 <p><strong><a target="_blank" rel="noopener" href="https://code.google.com/p/robotium/">Robotium</a> makes writing UI tests easy.</strong> You do not need Robotium for running connected tests for UI cases, but it will probably be beneficial to you because of its many helpers to get and analyse views, and control the screen. Test cases will look as simple as:</p>
 <pre><code class="java">solo.sendKey(Solo.MENU);
@@ -1051,29 +1042,31 @@ Assert.assertTrue(solo.searchText(&quot;rtf&quot;));
     &#125;
 &#125;
 </code></pre>
-<p>In order to determine which code has to be preserved and which code can be discarded or obfuscated, you have to specify one or more entry points to your code. These entry points are typically classes with main methods, applets, midlets, activities, etc.<br>Android framework uses a default configuration which can be found from <code>SDK_HOME/tools/proguard/proguard-android.txt</code>. Custom project-specific proguard rules, as defined in <code>my-project/app/proguard-rules.pro</code>, will be appended to the default configuration.</p>
-<p>A common problem related to ProGuard is to see the application crashing on startup with <code>ClassNotFoundException</code> or <code>NoSuchFieldException</code> or similar, even though the build command (i.e. <code>assembleRelease</code>) succeeded without warnings.<br>This means one out of two things:</p>
+<p>In order to determine which code has to be preserved and which code can be discarded or obfuscated, you have to specify one or more entry points to your code. These entry points are typically classes with main methods, applets, midlets, activities, etc.<br>Android framework uses a default configuration which can be found from <code class="inline-code">SDK_HOME/tools/proguard/proguard-android.txt</code>. Custom project-specific proguard rules, as defined in <code class="inline-code">my-project/app/proguard-rules.pro</code>, will be appended to the default configuration.</p>
+<p>A common problem related to ProGuard is to see the application crashing on startup with <code class="inline-code">ClassNotFoundException</code> or <code class="inline-code">NoSuchFieldException</code> or similar, even though the build command (i.e. <code class="inline-code">assembleRelease</code>) succeeded without warnings.<br>This means one out of two things:</p>
 <ol>
 <li>ProGuard has removed the class, enum, method, field or annotation, considering it’s not required.</li>
 <li>ProGuard has obfuscated (renamed) the class, enum or field name, but it’s being used indirectly by its original name, i.e. through Java reflection.</li>
 </ol>
-<p>Check <code>app/build/outputs/proguard/release/usage.txt</code> to see if the object in question has been removed.<br>Check <code>app/build/outputs/proguard/release/mapping.txt</code> to see if the object in question has been obfuscated.</p>
-<p>In order to prevent ProGuard from <em>stripping away</em> needed classes or class members, add a <code>keep</code> options to your proguard config:</p>
-<pre><code>-keep class com.futurice.project.MyClass &#123; *; &#125;
+<p>Check <code class="inline-code">app/build/outputs/proguard/release/usage.txt</code> to see if the object in question has been removed.<br>Check <code class="inline-code">app/build/outputs/proguard/release/mapping.txt</code> to see if the object in question has been obfuscated.</p>
+<p>In order to prevent ProGuard from <em>stripping away</em> needed classes or class members, add a <code class="inline-code">keep</code> options to your proguard config:</p>
+<pre><code class="inline-code">-keep class com.futurice.project.MyClass &#123; *; &#125;
 </code></pre>
-<p>To prevent ProGuard from <em>obfuscating</em> classes or class members, add a <code>keepnames</code>:</p>
-<pre><code>-keepnames class com.futurice.project.MyClass &#123; *; &#125;
+<p>To prevent ProGuard from <em>obfuscating</em> classes or class members, add a <code class="inline-code">keepnames</code>:</p>
+<pre><code class="inline-code">-keepnames class com.futurice.project.MyClass &#123; *; &#125;
 </code></pre>
 <p>Check <a target="_blank" rel="noopener" href="https://github.com/futurice/android-best-practices/blob/master/templates/rx-architecture/app/proguard-rules.pro">this template’s ProGuard config</a> for some examples.<br>Read more at <a target="_blank" rel="noopener" href="http://proguard.sourceforge.net/#manual/examples.html">Proguard</a> for examples.</p>
-<p><strong>Tip.</strong> Save the <code>mapping.txt</code> file for every release that you publish to your users. By retaining a copy of the <code>mapping.txt</code> file for each release build, you ensure that you can debug a problem if a user encounters a bug and submits an obfuscated stack trace.</p>
+<p><strong>Tip.</strong> Save the <code class="inline-code">mapping.txt</code> file for every release that you publish to your users. By retaining a copy of the <code class="inline-code">mapping.txt</code> file for each release build, you ensure that you can debug a problem if a user encounters a bug and submits an obfuscated stack trace.</p>
 <p><strong>DexGuard</strong>. If you need hard-core tools for optimizing, and specially obfuscating release code, consider <a target="_blank" rel="noopener" href="http://www.saikoa.com/dexguard">DexGuard</a>, a commercial software made by the same team that built ProGuard. It can also easily split Dex files to solve the 65k methods limitation.</p>
 <h3 id="Thanks to"><span class="prefix"></span><span class="content">Thanks to</span><span class="suffix"></span></h3><p>Antti Lammi, Joni Karppinen, Peter Tackage, Timo Tuominen, Vera Izrailit, Vihtori Mäntylä, Mark Voit, Andre Medeiros, Paul Houghton and other Futurice developers for sharing their knowledge on Android development.</p>
 <h3 id="License"><span class="prefix"></span><span class="content">License</span><span class="suffix"></span></h3><p><a href="www.futurice.com">Futurice Oy</a><br>Creative Commons Attribution 4.0 International (CC BY 4.0)</p>
 <hr>
 <p><strong>原文地址</strong> <a target="_blank" rel="noopener" href="https://github.com/futurice/android-best-practices">https://github.com/futurice/android-best-practices</a></p>
 
-        </section>
+                </div>
+            </section>
         </div>
+        <input id="copy-input" style="position: absolute; left: -1000px; z-index: -1000;">
 
     
 
