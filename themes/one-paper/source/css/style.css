@@ -1,10 +1,5 @@
 @charset "utf-8";
 
-:root {
-
-    --line-2: #ddd;
-}
-
 p {
     word-wrap: break-word;
     white-space: pre-wrap;
@@ -135,7 +130,7 @@ a {
     width: 100%;
     padding-bottom: 48px;
     margin-bottom: 48px;
-    border-bottom: 1px dashed var(--line-2);
+    border-bottom: 1px dashed #ddd;
 }
 
 .post-title {
