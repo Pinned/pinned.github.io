@@ -371,3 +371,6 @@ a {
     filter: blur(10px);
     object-fit: cover;
   }
+#go-top {
+    cursor: pointer;
+}

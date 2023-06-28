@@ -73,3 +73,15 @@ if (clipboard_item) {
         copyWechat();
     })
 }
+
+
+var go_top = document.getElementById("go-top")
+if (go_top) {  
+    // 将整个页面滚动到顶部
+    go_top.addEventListener("click", function () {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+        });
+    });
+}
