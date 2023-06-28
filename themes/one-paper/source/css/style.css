@@ -1,7 +1,6 @@
 @charset "utf-8";
 
 :root {
-    --font-color-2: #666;
     --font-color-3: #aaa;
     --bg-color-1: #eee;
     --line-1: #ccc;
@@ -19,7 +18,7 @@ body {
     font-size: 16px;
     line-height: 1.75;
     letter-spacing: 0.6px;
-    color: var(--font-color-2);
+    color: #666;
     background: #F0F0F0;
 }
 
@@ -225,7 +224,7 @@ a {
 
 .paginator a {
     margin: 4px;
-    color: var(--font-color-2);
+    color: #666;
     transition: color ease-in-out .5s;
 }
 
@@ -321,7 +320,7 @@ a {
 
 .archive li span {
     width: 108px;
-    color: var(--font-color-2);
+    color: #666;
 }
 
 .archive-main {
