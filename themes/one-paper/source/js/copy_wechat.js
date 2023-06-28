@@ -46,6 +46,7 @@ if (clipboard_item) {
     
         const inner = element.children[0].children;
         let html = element.innerHTML;
+        console.log(html)
         html = html.replace(/<mjx-container (class="inline.+?)<\/mjx-container>/g, "<span $1</span>");
         html = html.replace(/\s<span class="inline/g, '&nbsp;<span class="inline');
         html = html.replace(/svg><\/span>\s/g, "svg></span>&nbsp;");
@@ -64,10 +65,18 @@ if (clipboard_item) {
                 inlinePseudoElements: true,
                 preserveImportant: true,
             });
+            console.log(res)
         } catch (e) {
             message.error("请检查 CSS 文件是否编写正确！");
         }
-        return res;
+        var lines = res.split("\n");
+        var trimmedText = lines.map(function(line) {
+            return line.trim();
+        }).join("\n");
+        // res = res.replace(/^\s+|\s+$/g, "");
+        console.log(trimmedText)
+        console.log(res)
+        return trimmedText;
     };
     clipboard_item.addEventListener("click", function () {
         copyWechat();
@@ -84,4 +93,30 @@ if (go_top) {
             behavior: "smooth",
         });
     });
+}
+
+window.onload = function () {
+    var imgs = document.getElementsByTagName("img")
+    for (var i = 0; i < imgs.length; i++) {
+        var alt = imgs[i].alt
+        if (imgs[i].id == "bing-bg") {
+            continue;
+        }
+        // <figcaption class="post-image-caption">解析 Keep 后的描述符</figcaption>
+        var figcaption = document.createElement("figcaption")
+        figcaption.className = "post-image-caption"
+        figcaption.innerHTML = alt
+        imgs[i].parentNode.insertBefore(figcaption, imgs[i].nextSibling)
+
+
+        var figure = document.createElement("figure")
+
+        var parentNode = imgs[i].parentNode
+        
+        imgs[i].parentNode.parentNode.insertBefore(figure, imgs[i].parentNode.nextSibling)
+        figure.appendChild(imgs[i])
+        figure.appendChild(figcaption)
+        parentNode.remove()
+        // imgs[i].setAttribute("data-action", "zoom")
+    }
 }

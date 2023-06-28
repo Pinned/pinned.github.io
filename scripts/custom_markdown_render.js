@@ -14,7 +14,7 @@ hexo.extend.filter.register('marked:renderer', function (renderer) {
     out +=  ` referrerpolicy="no-referrer"`;
     out += '>';
     var className = hexo.config.image_caption.class_name || 'image-caption';
-    out += `<figcaption class="${className}">${text}</figcaption>`
+    // out += `<figcaption class="${className}">${text}</figcaption>`
     return out;
   }
 })
