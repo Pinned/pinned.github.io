@@ -7,16 +7,19 @@ hexo.extend.filter.register('marked:renderer', function (renderer) {
   }
 
   renderer.image = function (href, title, text) {
-    // console.log(href)
-    let out = '<figure>'
-    out = `<img src="${encodeURL(href)}"`;
+    let out = '';
+    out += `<img src="${encodeURL(href)}"`;
     if (text) out += ` alt="${text}"`;
     if (title) out += ` title="${title}"`;
     out +=  ` referrerpolicy="no-referrer"`;
     out += '>';
     var className = hexo.config.image_caption.class_name || 'image-caption';
     out += `<figcaption class="${className}">${text}</figcaption>`
-    out += '</figure>';
     return out;
   }
 })
+
+hexo.extend.filter.register('after_post_render', function(data) {
+  data.content = data.content.replace(/<code>([^<]*)<\/code>/g, '<code class="inline-code">$1</code>');
+  return data;
+});
