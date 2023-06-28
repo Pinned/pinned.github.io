@@ -1,8 +1,7 @@
 @charset "utf-8";
 
 :root {
-    --bg-color-1: #eee;
-    --line-1: #ccc;
+
     --line-2: #ddd;
 }
 
@@ -62,7 +61,7 @@ a {
 .header {
     padding-bottom: 48px;
     margin-bottom: 48px;
-    border-bottom: 1px solid var(--line-1);
+    border-bottom: 1px solid #ccc;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
