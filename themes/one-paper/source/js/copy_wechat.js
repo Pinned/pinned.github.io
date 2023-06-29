@@ -73,10 +73,10 @@ if (clipboard_item) {
         var trimmedText = lines.map(function(line) {
             return line.trim();
         }).join("\n");
-        // res = res.replace(/^\s+|\s+$/g, "");
-        console.log(trimmedText)
-        console.log(res)
-        return trimmedText;
+        
+        // console.log(trimmedText)
+        // console.log(res)
+        return res;
     };
     clipboard_item.addEventListener("click", function () {
         copyWechat();
