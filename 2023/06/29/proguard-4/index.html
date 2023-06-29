@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+    <link rel="alternate icon" type="image/png" href="/img/favicon.png">
+    
+        <title>ProGuard 进阶系列（四）访问者模式 </title>
+        
+<link rel="stylesheet" href="/css/toc.css">
+
+    
+    <style type="text/css" id="reset">@charset "utf-8";
+
+*,
+*::before,
+*::after
+{
+    box-sizing: border-box;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+figure,
+blockquote,
+dl,
+dd
+{
+    margin: 0;
+}
+
+ul,
+ol
+{
+    list-style: none;
+}
+
+ul
+{
+    padding-inline-start: 0;
+}
+
+html,
+body
+{
+    scroll-behavior: smooth;
+}
+
+a:not([class])
+{
+    text-decoration-skip-ink: auto;
+}
+
+img,
+picture
+{
+    width: auto;
+    max-width: 100%;
+    display: block;
+}
+
+input,
+button,
+textarea,
+select
+{
+    font: inherit;
+}
+
+@media (prefers-reduced-motion: reduce)
+{
+    html:focus-within
+    {
+        scroll-behavior: auto;
+    }
+}</style>
+    <style type="text/css" id="style">@charset "utf-8";
+
+p {
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    text-align: justify;
+}
+
+body {
+    font-family: "PingFang SC", BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serifhtml, body;
+    font-size: 16px;
+    line-height: 1.75;
+    letter-spacing: 0.6px;
+    color: #666;
+    background: #F0F0F0;
+}
+
+a {
+    text-decoration: none;
+    color: #000;
+}
+
+
+
+@media screen and (max-width: 480px) {
+    body {
+        background: #fff;
+    }
+
+    .paper {
+        padding: 4vw;
+    }
+
+    .paper-main {
+        width: 100%;
+        margin: 0 auto;
+        padding: 30px 1vw 12px;
+        background: #fff;
+    }
+}
+
+@media screen and (min-width: 481px) {
+    .paper {
+        padding: 4vw;
+    }
+
+    .paper-main {
+        width: 900px;
+        margin: 0 auto;
+        padding: 62px 3vw 24px;
+        background: #fff;
+        border-radius: 24px;
+    }
+}
+
+.header {
+    padding-bottom: 48px;
+    margin-bottom: 48px;
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: center;
+}
+
+.logo {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #000;
+    margin-bottom: 16px;
+    flex: 0 0 100%;
+}
+
+.nav {
+    margin: 0 0 4px;
+    flex: 0 0 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: center;
+}
+
+.nav li {
+    padding: 2px 0;
+    margin-right: 24px;
+}
+
+.nav li:last-of-type {
+    margin-right: 0;
+}
+
+.nav li a {
+    color: #000;
+    opacity: .6;
+    transition: opacity ease-in-out .5s;
+}
+
+.nav li a:hover {
+    opacity: 1;
+    transition: opacity ease-in-out .5s;
+}
+
+.post-header {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: center;
+}
+
+.post-header .post-title {
+    font-size: 1.375rem;
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+    line-height: 1;
+}
+
+.post-list {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: stretch;
+}
+
+.post {
+    width: 100%;
+    padding-bottom: 48px;
+    margin-bottom: 48px;
+    border-bottom: 1px dashed #ddd;
+}
+
+.post-title {
+    display: inline-block;
+    font-size: 1.6rem;
+    font-weight: 600;
+    line-height: 1.5;
+    margin-bottom: 12px;
+    color: #000;
+    /*transition: color ease-in-out .5s;*/
+}
+
+.post-title:hover {
+    color: #04077e;
+    transition: color ease-in-out .5s;
+}
+
+.post-except {
+    word-break: break-all;
+    margin-bottom: 12px;
+    text-align: justify;
+}
+
+.read-more {
+    padding: 0 4px;
+    color: #04077e;
+}
+
+.read-more:before,
+.read-more:after {
+    display: inline-block;
+    transition: transform ease-in-out .5s;
+}
+
+.read-more:before {
+    content: "{ ";
+}
+
+.read-more:after {
+    content: " }";
+}
+
+.read-more:hover:before {
+    transform: translateX(-4px);
+    transition: transform ease-in-out .25s;
+}
+
+.read-more:hover:after {
+    transform: translateX(4px);
+    transition: transform ease-in-out .25s;
+}
+
+.post-date {
+    font-size: 0.875rem;
+    color: #aaa;
+}
+
+.paginator {
+    font-size: 0.875rem;
+    width: 100%;
+    margin: 0 auto 24px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.paginator * {
+    display: block;
+    padding: 8px 16px;
+    border-radius: 18px;
+    background: #fff;
+    border: 1px solid #eee;
+}
+
+.paginator .space {
+    display: block;
+    padding: 8px 16px;
+    border-radius: 18px;
+    background: #fff;
+    border: none;
+}
+
+.paginator a {
+    margin: 4px;
+    color: #666;
+    transition: color ease-in-out .5s;
+}
+
+.paginator a:hover {
+    color: #04077e;
+    transition: color ease-in-out .5s;
+}
+
+.paginator .current {
+    color: #04077e;
+    border: 1px solid #04077e;
+}
+
+.footer {
+    padding: 24px 0;
+    font-size: 0.875rem;
+    color: #aaa;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-content: center;
+}
+
+.footer span {
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.footer a {
+    color: #aaa;
+    transition: color ease-in-out .5s;
+}
+
+.footer a:hover {
+    color: #04077e;
+    transition: color ease-in-out .5s;
+}
+
+.post-main {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.post-main-title {
+    flex: 0 0 100%;
+    margin-bottom: 12px;
+    font-size: 1.6rem;
+    font-weight: 600;
+    line-height: 1.5;
+    color: #000;
+}
+
+.post-meta {
+    font-size: 0.875rem;
+    color: #aaa;
+    flex: 0 0 100%;
+    margin-bottom: 32px;
+}
+
+.author {
+    color: #576b95;
+}
+
+.archive {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-content: normal;
+}
+
+.archive li {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-content: center;
+    padding: 12px 0;
+}
+
+.archive li:nth-child(odd) {
+    background: #fafafa;
+}
+
+.archive li:nth-child(even) {
+    background: #fff;
+}
+
+.archive li span {
+    width: 108px;
+    color: #666;
+}
+
+.archive-main {
+    flex: 0 1 calc(100% - 108px);
+}
+
+.archive-title {
+    color: #000;
+    /*transition: color ease-in-out .5s;*/
+}
+
+.archive-title:hover {
+    color: #04077e;
+    transition: color ease-in-out .5s;
+}
+
+.post-image-caption {
+    margin-top: 5px;
+    text-align: center;
+    color: #888;
+    font-size: 0.85rem;
+    display: block;
+}
+
+#clipboardbtn {
+    cursor: pointer;
+}
+
+#bing-bg {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    filter: blur(10px);
+    object-fit: cover;
+  }
+#go-top {
+    cursor: pointer;
+}
+
+#beautiful {
+    font-family: "PingFang SC", BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serifhtml, body;
+    font-size: 16px;
+    line-height: 1.75;
+    letter-spacing: 0.6px;
+}</style>
+    <style type="text/css" id="markdown">@charset "utf-8";
+
+#copy-post-content,
+#beautiful,
+.post-md
+{
+    width: 100%;
+    letter-spacing: 0;
+}
+
+.post-md h1,
+.post-md h2,
+.post-md h3,
+.post-md h4,
+.post-md h5,
+.post-md h6
+{
+    color: #000;
+}
+/* 一级标题 */
+.post-md h1  {
+    display:block;
+    border-bottom: 4px solid rgb(33, 33, 34);
+    font-size: 1rem;
+}
+  
+/* 一级标题内容 */
+.post-md h1  .content {
+    display: flex;
+    color: rgb(33, 33, 34);
+    font-size: 1rem;
+}
+  
+  
+/* 一级标题后缀 */
+.post-md h1  .suffix {
+    display: flex;
+    box-sizing: border-box;
+    width: 20px;
+    height: 10px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    background: RGBA(33, 33, 34, .5);
+    color: rgb(255, 255, 255);
+    font-size: 16px;
+    letter-spacing: 0.544px;
+    justify-content: flex-end;
+    box-sizing: border-box !important;
+    overflow-wrap: break-word !important;
+    float: right;
+    margin-top: -10px;
+}
+
+/* 二级标题 */
+.post-md h2 {
+    margin: 10px auto;
+    height: 40px;
+    background-color: rgb(251, 251, 251);
+    border-bottom: 1px solid rgb(246, 246, 246);
+    box-sizing: border-box;
+    font-size: 1rem;
+}
+
+/* 二级标题内容 */
+.post-md h2 .content {
+    display: inline-block;
+    width: auto;
+    height: 40px;
+    background-color: rgb(33, 33, 34);
+    border-bottom-right-radius:100px;
+    color: rgb(255, 255, 255);
+    padding-right: 30px;
+    padding-left: 20px;
+    font-size: 1rem;
+    line-height: 40px;
+}
+
+/* 三级标题 */
+.post-md h3 {
+    margin: 20px auto 5px;
+    border-top: 1px solid rgb(221, 221, 221);
+    box-sizing: border-box;
+    font-size: 1rem;
+}
+  
+/* 三级标题内容 */
+.post-md h3 .content {
+    margin-top: -1px;
+    padding-top: 6px;
+    padding-right: 5px;
+    padding-left: 5px;
+    font-size: 1rem;
+    border-top: 2px solid rgb(33, 33, 34);
+    display: inline-block;
+    line-height: 1.1;
+}
+.post-md h4
+{
+    font-size: 1rem;
+    line-height: 1.2;
+    padding: 16px 0;
+}
+.post-md h5
+{
+    font-size: 0.83rem;
+    line-height: 1.2;
+    padding: 14px 0;
+}
+.post-md h6
+{
+    font-size: 0.67rem;
+    line-height: 1.2;
+    padding: 12px 0;
+}
+.post-md a
+{
+    color: #61aeee;
+    box-shadow: 0 2px 0 #ccc;
+    transition: color ease-in-out .65s, box-shadow ease-in-out .65s;
+}
+.post-md a:hover
+{
+    color: #04077e;
+    box-shadow: 0 2px 0 #04077e;
+    transition: color ease-in-out .65s, box-shadow ease-in-out .65s;
+}
+.post-md strong
+{
+    font-weight: 700;
+}
+.post-md em
+{
+    font-style: italic;
+}
+.post-md kbd
+{
+    padding: 2px 4px;
+    border-radius: 2px;
+    background: #eee;
+    border: 1px solid #ddd;
+}
+.post-md ol
+{
+    list-style: decimal;
+    padding-left: 24px;
+}
+.post-md ul
+{
+    list-style: disc;
+    padding-left: 24px;
+}
+.post-md img
+{
+    border-radius: 4px;
+}
+.post-md hr
+{
+    border: none;
+    height: 1px;
+    background: #ccc;
+    margin: 24px 0;
+}
+
+.post-md p,
+.post-md blockquote
+{
+    width: 100%;
+    padding: 7px 0;
+}
+.post-md blockquote
+{
+    border-left: 2px solid #ddd;
+    padding-left: 12px;
+    word-wrap: break-word;
+}
+
+.post-md .video-container
+{
+    background: #000;
+    border-radius: 4px;
+    overflow: hidden;
+}
+.post-md iframe,
+.post-md .video-container iframe
+{
+    width: 100%;
+    height: 100vh;
+    max-height: 360px;
+    margin: 12px 0;
+}
+
+.post-md table {
+    padding: 0;
+    word-break: initial;
+    width: 100%;
+    page-break-inside: auto;
+    border-spacing:0px;
+    border: 0.5px solid #dfe2e5;
+}
+.post-md table tr {
+    border: 0.5px solid #dfe2e5;
+    margin: 0;
+    padding: 0;
+}
+.post-md table tr:nth-child(2n),
+thead {
+    background-color: #f8f8f8;
+}
+.post-md table th {
+    font-weight: bold;
+    border: 0.5px solid #dfe2e5;
+    border-bottom: 0;
+    margin: 0;
+    padding: 6px 13px;
+}
+.post-md table td {
+    border: 0.5px solid #dfe2e5;
+    margin: 0;
+    padding: 6px 13px;
+}
+.post-md table th:first-child,
+.post-md table td:first-child {
+    margin-top: 0;
+}
+.post-md table th:last-child,
+.post-md table td:last-child {
+    margin-bottom: 0;
+}
+
+
+.inline-code
+{
+    border-radius: 4px;
+    background:rgba(27,31,35,.05);
+    padding: 2px 4px;
+    color: rgb(0, 112, 96);
+    font-size: 1rem;
+    margin-left: 1px;
+    margin-right: 1px;
+}
+
+.post-md .hljs-ln-numbers
+{
+    opacity: .5;
+    padding-right: 12px;
+}
+</style>
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body>
+        <img id="bing-bg" src="" referrerpolicy="no-referrer" />
+        <div class="paper">
+            
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4 id="go-top">目录</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%B8%80%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF%E8%AE%BF%E9%97%AE%E8%80%85%E6%A8%A1%E5%BC%8F"><span class="post-toc-text">一、什么是访问者模式</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%BA%8C%E3%80%81%E8%AE%BF%E9%97%AE%E8%80%85%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%AF%9E%E7%94%9F%E8%BF%87%E7%A8%8B"><span class="post-toc-text">二、访问者模式的诞生过程</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%B8%89%E3%80%81%E6%80%BB%E7%BB%93"><span class="post-toc-text">三、总结</span></a></li></ol>
+        </nav>
+    </aside>
+
+            <div class="paper-main">
+                
+                    <div class="post-header">
+    <p class="post-title">ProGuard 进阶系列（四）访问者模式</p>
+</div>
+                
+                <div class="post-main">
+
+    
+        <div class="post-meta">
+            <a class='author' href="/">罗昭成</a> <span id="clipboardbtn">2023年06月29日</span>
+        </div>
+        <div id="copy-post-content">
+            <section id="beautiful">
+            <div class="post-md" >
+                    <p>在进行后面的内容分析之前，不得不讲到访问者模式，这是 GOF 23 个设计模式中最难的几个模式之一。如果能够很好的理解访问者模式， 后续源码解读会相对容易一些。本文将结合 ProGuard 的部分源码，理解分析访问者模式的用途及使用场景。</p>
+<h2 id="一、什么是访问者模式"><span class="prefix"></span><span class="content">一、什么是访问者模式</span><span class="suffix"></span></h2><p>先来看定义，访问者模式是一种将对象操作算法与对象结构分离的设计模式。这句话很抽象，不是很好理解。用通俗的话来讲就是：我们在写代码的时候，一般情况下，会将对象的操作算法定义此对象内部，直接通过对象的某个方法去获取信息或进行对象操作，当有新需求变更时，就需要对此对象的代码进行修改，来满足新的需求。但在访问者模式中，会将对象结构固定下来，并且后续不在对其修改。面对新的需求时，不需要去修改对象结构，通过添加新的访问者去实现对象操作。访问者模式遵从「开闭原则」。当然，并不是所有场景都适合使用访问者模式，一般使用访问者模式的场景如下：</p>
+<ol>
+<li>对象结构比较稳定，但经常需要在此对象结构上定义新的操作。 如 Class 文件，它的结构基本不会修改。</li>
+<li>需要对一个对象结构中的对象进行很多不同且不相关的操作，为避免这些操作“污染”这些对象的类，也不希望在增加新操作时修改这些类。 如读取 Class 文件中的方法、属性等信息。</li>
+</ol>
+<p>在来看一下访问者模式的类图：</p>
+<p><img src="https://img-blog.csdnimg.cn/0647baeb4471484fb7264b6f5b9a038d.png" alt="访问者模式类图" referrerpolicy="no-referrer"></p>
+<p>介绍一下，类图中最重要的两个角色：</p>
+<ul>
+<li><p><strong>Visitor</strong>：接口或者抽象类，定义对 <code class="inline-code">Element</code> 的访问行为，<code class="inline-code">visit</code> 方法的参数为要访问的 <code class="inline-code">Element</code>。理论上，它的方法数与要访问的 <code class="inline-code">Element</code> 个数一致。因此，访问者模式要求的类型要稳定，如果经常添加、移除 <code class="inline-code">Element</code>，必然会导致频繁地修改 <code class="inline-code">Visitor</code> 接口，如果出现这种情况，则说明不适合使用访问者模式。</p>
+</li>
+<li><p><strong>Element</strong>：元素接口或者抽象类，它定义了一个接受访问者（accept）的方法，其意义是指每一个元素都要可以被访问者访问。</p>
+</li>
+</ul>
+<p>看到这里，依然很抽象，但是我相信应该有一个大体的了解，为了更好的理解这个模式，下面将从 ProGuard中对 class 文件的部分操作，还原访问者模式的诞生过程。</p>
+<h2 id="二、访问者模式的诞生过程"><span class="prefix"></span><span class="content">二、访问者模式的诞生过程</span><span class="suffix"></span></h2><p>要想更好的理解访问者模式，还是得从真实案例入手。在 ProGuard 中， 主要操作的是 Class 文件，而 Class 文件的格式非常固定，Oracle 文档中，对 Class 文件定义如下：</p>
+<p><img src="https://img-blog.csdnimg.cn/000d5946f8774a7a9e7e414e4a8513ed.png" alt="ClassFile 的定义" referrerpolicy="no-referrer"></p>
+<p>并且在 ProGuard 的执行过程中，可能会源源不断的增加对 <code class="inline-code">ClassFile</code> 的操作。 这就很好的对应上了使用访问者模式的两个条件。</p>
+<p>先来思考一下，在 ProGuard 中，对 Class 文件的操作有哪些？ </p>
+<ol>
+<li>从文件中读取 Class 的内容，并填充到  <code class="inline-code">ProgramClass</code>  对象中</li>
+<li>对 <code class="inline-code">ProgramClass</code> 对象进行修改，如修改类名、变量名、方法名、方法参数类型等</li>
+<li>将 <code class="inline-code">ProgramClass</code> 对象的信息写入到 Class 文件</li>
+</ol>
+<p>在这里，看一下从文件中读取 Class 的内容，根据定义，在 ClassFile 中，会有一个常量池，常量池中可能会有各种不同的常量, 如 <code class="inline-code">IntegerConstant</code> 、<code class="inline-code">FloatConstant</code>、<code class="inline-code">StringConstant</code> 、<code class="inline-code">Utf8Constant</code> 等。现在要实现从 Class 文件中，读取这些信息出来。如果让你来实现，你会怎么做呢？ </p>
+<p>实现这个功能并不难，不同的人有不同的写法，我将其中一种实现方式代码贴在下面。其中，<code class="inline-code">Constant</code> 是一个接口，包含一个方法 <code class="inline-code">readFromResource</code></p>
+<pre><code class="java">abstract class Constant &#123;
+    abstract void readFromResource(DataInput dataInput) throws Exception;
+&#125;
+
+class IntegerConstant extends Constant &#123;
+    public int u4value;
+
+    @Override
+    void readFromResource(DataInput dataInput) throws Exception &#123;
+        this.u4value = dataInput.readInt();
+    &#125;
+&#125;
+
+class Utf8Constant extends Constant &#123;
+    public byte[] bytes;
+    @Override
+    void readFromResource(DataInput dataInput) throws Exception &#123;
+        int u2length = dataInput.readUnsignedShort();
+        System.out.println(u2length);
+        byte[] bytes = new byte[u2length];
+        dataInput.readFully(bytes);
+        this.bytes = bytes;
+    &#125;
+&#125;
+
+public class VisitorV1 &#123;
+    public static void main(String[] args) throws Exception &#123;
+        File clazzFile = new File(&quot;visit.class&quot;);
+        DataInput dataInput = new DataInputStream(new FileInputStream(clazzFile));
+        for (Constant constant : listAllConstant()) &#123;
+            constant.readFromResource(dataInput);
+            System.out.println(constant);
+        &#125;
+    &#125;
+    public static List&lt;Constant&gt; listAllConstant() &#123;
+        List&lt;Constant&gt; list = new ArrayList&lt;&gt;();
+        list.add(new IntegerConstant());
+        list.add(new Utf8Constant());
+        return list;
+    &#125;
+&#125;
+</code></pre>
+<p>针对这些 Constant ，我们不仅需要读取，还需要修改、写文件等逻辑。如果继续按照这个思路写下去，我们需要在添加 <code class="inline-code">modify</code>、<code class="inline-code">save</code>  等方法，这将带来一些新的问题：</p>
+<ul>
+<li>违背开闭原则，添加新功能，所有类的代码都需要进行更改。</li>
+<li>随着功能增多，每个类的代码也会不断膨胀，可读性和可维护性都会变差</li>
+<li>上层的业务逻辑与具体的类耦合在一起，会导致类的职责不单一</li>
+</ul>
+<p>要解决这个问题，常用的解决方法就是拆分解藕，把业务操作与数据结构进行解藕，设计成独立的类。这里我们按照访问者模式的演进思路对代码进行重构，重构后代码如下：</p>
+<pre><code class="java">abstract class Constant &#123;
+&#125;
+
+class IntegerConstant extends Constant &#123;
+    public int u4value;
+&#125;
+
+class Utf8Constant extends Constant &#123;
+    public byte[] bytes;
+&#125;
+
+
+class Reader &#123;
+    public DataInput dataInput;
+
+    public Reader(DataInput dataInput) &#123;
+        this.dataInput = dataInput;
+    &#125;
+
+    public void readFromResource(IntegerConstant constant) throws Exception &#123;
+        constant.u4value = dataInput.readInt();
+    &#125;
+
+    public void readFromResource(Utf8Constant constant) throws Exception &#123;
+        int u2length = dataInput.readUnsignedShort();
+        byte[] bytes = new byte[u2length];
+        dataInput.readFully(bytes);
+        constant.bytes = bytes;
+    &#125;
+&#125;
+
+public class VisitorV2 &#123;
+    public static void main(String[] args) throws Exception &#123;
+        File clazzFile = new File(&quot;visit.class&quot;);
+        DataInput dataInput = new DataInputStream(new FileInputStream(clazzFile));
+        Reader reader = new Reader(dataInput);
+        for (Constant constant : listAllConstant()) &#123;
+            reader.readFromResource(constant);
+            System.out.println(constant);
+        &#125;
+    &#125;
+
+    public static List&lt;Constant&gt; listAllConstant() &#123;
+        List&lt;Constant&gt; list = new ArrayList&lt;&gt;();
+        list.add(new IntegerConstant());
+        list.add(new Utf8Constant());
+        return list;
+    &#125;
+&#125;
+</code></pre>
+<p>这其中最关键的一点设计是， 我们将读取不同类型常量的操作，设计成了三个重载函数。众所周知，重载函数是指在同一个类中函数名相同、参数不同的一组函数。</p>
+<p>针对重构后的代码，如果你足够细心，就会发现上面的代码，其实是无法编译通过。</p>
+<pre><code class="java">reader.readFromResource(constant);
+</code></pre>
+<p>此行代码编译会报错，报错如下：</p>
+<p><img src="https://img-blog.csdnimg.cn/102ca55c0e454a74b3f682443f8faabb.png" alt="编译报错信息" referrerpolicy="no-referrer"></p>
+<p>这是为什么呢？</p>
+<p>要解释这个问题，先说一下 Java 中的多态，它是一种动态绑定，在运行时可以获取对象的具体类型，然后在运行其实际类型对应的方法。我们就是希望代码在运行的时候，能够像多态那样，在运行时能够根据参数类型去调不同的 <code class="inline-code">readFromResource</code> 方法。然而在代码实现中使用的是函数重载，它是一种静态绑定。代码在编译时并不能识别对象的具体类型，因此上面代码编译时就会出现「找不到合适的方法」这个错误。</p>
+<p>解决办法就是访问者模式的精髓，先来看一下代码：</p>
+<pre><code class="java">abstract class Constant &#123;
+    public abstract void accept(Reader reader) throws Exception;
+&#125;
+
+class IntegerConstant extends Constant &#123;
+    public int u4value;
+
+    @Override
+    public void accept(Reader reader) throws Exception &#123;
+        reader.readFromResource(this);
+    &#125;
+&#125;
+
+class Utf8Constant extends Constant &#123;
+    public byte[] bytes;
+
+    @Override
+    public void accept(Reader reader) throws Exception &#123;
+        reader.readFromResource(this);
+    &#125;
+&#125;
+
+// 与前面 Reader 一样
+
+public class VisitorV3 &#123;
+    public static void main(String[] args) throws Exception &#123;
+        File clazzFile = new File(&quot;visit.class&quot;);
+        DataInput dataInput = new DataInputStream(new FileInputStream(clazzFile));
+        Reader reader = new Reader(dataInput);
+        for (Constant constant : listAllConstant()) &#123;
+            constant.accept(reader);
+            System.out.println(constant);
+        &#125;
+    &#125;
+&#125;
+</code></pre>
+<p>在执行 <code class="inline-code">constant.accept(reader)</code> 的时候，根据  Java 的多态性，在运行时，就会调用实际类型的 <code class="inline-code">accept</code> 函数， 比如 <code class="inline-code">Utf8Constant</code> 的 <code class="inline-code">accept</code> 函数，而此时在 <code class="inline-code">Utf8Constant</code> 中会调用 <code class="inline-code">Reader</code> 的 <code class="inline-code">readFromResource</code> 方法，此处的参数 <code class="inline-code">this</code> 类型就是 <code class="inline-code">Utf8Constant</code> ，在编译时就确定了，所以会调用 <code class="inline-code">readFromResource(Utf8Constant constant)</code> 这个重载函数。</p>
+<p>如果，你看懂了这个，就基本已经理解了访问者模式。现在，我们继续添加新的功能， 例如我需要对 <code class="inline-code">Constant</code>  进行修改或重新写入新的文件。此时，实现可以参考前面的 <code class="inline-code">Reader</code> ，实现新的 <code class="inline-code">Modifier</code> 和 <code class="inline-code">Writer</code>，并且给这两个类分别定义二个重载方法，以实现对不同 <code class="inline-code">Constant</code> 进行操作。当然，还需要在 <code class="inline-code">Constant</code> 中添加新的 <code class="inline-code">accept</code> 方法，具体实现如下：</p>
+<pre><code class="java">abstract class Constant &#123;
+    public abstract void accept(Reader reader) throws Exception;
+    public void accept(Writer writer) throws Exception;
+&#125;
+
+class IntegerConstant extends Constant &#123;
+    public int u4value;
+
+    @Override
+    public void accept(Reader reader) throws Exception &#123;
+        reader.readFromResource(this);
+    &#125;
+    @Override
+    public void accept(Writer writer) throws Exception &#123;
+        writer.writeToResource(this);
+    &#125;
+&#125;
+// ... 省略部分代码 
+
+class Writer &#123;
+    public DataOutput dataOutput;
+
+    public Writer(DataOutput dataOutput) &#123;
+        this.dataOutput = dataOutput;
+    &#125;
+
+    public void writeToResource(IntegerConstant constant) throws Exception &#123;
+                dataOutput.writeInt(constant.u4value);
+    &#125;
+
+    public void readFromResource(Utf8Constant constant) throws Exception &#123;
+          dataOutput.writeShort(constant.bytes.length);
+                dataOutput.write(constant.bytes);
+    &#125;
+&#125;
+// ... 省略测试入口
+</code></pre>
+<p>不同的操作已经抽象到不同的实现类中去了，但是每一次添加新的功能，都需要去修改对应的资源文件，不仅工作量巨大，而且违反了开闭原则。针对这个问题，可以回到文件的那个类图，我们可以设计一个 <code class="inline-code">Visitor</code> 的接口，并在接口中定义访问这些不同常量的 <code class="inline-code">visit</code> 方法，按照这个思路，重构后的代码示例如下：</p>
+<pre><code class="java">abstract class Constant &#123;
+    public abstract void accept(Visitor visitor) throws Exception;
+&#125;
+
+class IntegerConstant extends Constant &#123;
+    public int u4value;
+
+    @Override
+    public void accept(Visitor visitor) throws Exception &#123;
+        visitor.visit(this);
+    &#125;
+&#125;
+
+class Utf8Constant extends Constant &#123;
+    public byte[] bytes;
+
+    @Override
+    public void accept(Visitor visitor) throws Exception &#123;
+        visitor.visit(this);
+    &#125;
+&#125;
+
+interface Visitor &#123;
+    void visit(IntegerConstant constant) throws Exception;
+
+    void visit(Utf8Constant constant) throws Exception;
+&#125;
+
+class Reader implements Visitor &#123;
+    public DataInput dataInput;
+
+    public Reader(DataInput dataInput) &#123;
+        this.dataInput = dataInput;
+    &#125;
+
+    public void visit(IntegerConstant constant) throws Exception &#123;
+        constant.u4value = dataInput.readInt();
+    &#125;
+
+    public void visit(Utf8Constant constant) throws Exception &#123;
+        int u2length = dataInput.readUnsignedShort();
+        byte[] bytes = new byte[u2length];
+        dataInput.readFully(bytes);
+        constant.bytes = bytes;
+    &#125;
+&#125;
+
+class Writer implements Visitor &#123;
+
+    public DataOutput dataOutput;
+
+    public Writer(DataOutput dataOutput) &#123;
+        this.dataOutput = dataOutput;
+    &#125;
+
+    @Override
+    public void visit(IntegerConstant constant) throws Exception &#123;
+        dataOutput.writeInt(constant.u4value);
+    &#125;
+
+    @Override
+    public void visit(Utf8Constant constant) throws Exception &#123;
+        dataOutput.writeShort(constant.bytes.length);
+        dataOutput.write(constant.bytes);
+    &#125;
+&#125;
+</code></pre>
+<h2 id="三、总结"><span class="prefix"></span><span class="content">三、总结</span><span class="suffix"></span></h2><p>从上面例子中代码迭代中，应该能够很好地理解访问者模式了。访问者模式在日常开发工作中，很少会用到。访问者模式实现了一个或多个操作应用到一组对象上，设计意图是解耦操作与对象本身，保持类职责单一，满足开闭原则以应对直接修改代码带来的复杂性。 </p>
+<p>因为访问者模式实现非常的不好理解，在项目中使用此模式会导致代码的可读性降低。所以在项目中是否需要使用此模式，需要谨慎评估。</p>
+<p>最后，ASM 以及 ProGuard 中对 Class 文件操作都很好地应用了访问者模式，有兴趣可以深度理解一下其源码实现，相信有不一样的收获。</p>
+
+                </div>
+            </section>
+        </div>
+        <input id="copy-input" style="position: absolute; left: -1000px; z-index: -1000;">
+
+    
+
+</div>
+                <!-- 
+                    <div class="post_pre_next">
+    
+    
+        <a href="/2023/06/20/proguard-3/">下一篇: 
+            ProGuard 进阶系列（三） Java 类文件解析
+        </a>
+    
+</div>
+
+
+                 -->
+                <div class="footer">
+    <span>Copyright © 2023 大罗说事</span>
+</div>
+
+<!-- 
+<link rel="stylesheet" href="/css/highlight.default.css">
+ -->
+<style type="text/css" id="atom-one-dark">pre code.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 12px;
+  font-size: 12px;
+}
+/*
+
+Atom One Dark by Daniel Gamage
+Original One Dark Syntax theme from https://github.com/atom/one-dark-syntax
+
+base:    #282c34
+mono-1:  #abb2bf
+mono-2:  #818896
+mono-3:  #5c6370
+hue-1:   #56b6c2
+hue-2:   #61aeee
+hue-3:   #c678dd
+hue-4:   #98c379
+hue-5:   #e06c75
+hue-5-2: #be5046
+hue-6:   #d19a66
+hue-6-2: #e6c07b
+
+*/
+
+.hljs {
+  color: #abb2bf;
+  background: #282c34;
+}
+
+.hljs-comment,
+.hljs-quote {
+  color: #5c6370;
+  font-style: italic;
+}
+
+.hljs-doctag,
+.hljs-keyword,
+.hljs-formula {
+  color: #c678dd;
+}
+
+.hljs-section,
+.hljs-name,
+.hljs-selector-tag,
+.hljs-deletion,
+.hljs-subst {
+  color: #e06c75;
+}
+
+.hljs-literal {
+  color: #56b6c2;
+}
+
+.hljs-string,
+.hljs-regexp,
+.hljs-addition,
+.hljs-attribute,
+.hljs-meta .hljs-string {
+  color: #98c379;
+}
+
+.hljs-attr,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-type,
+.hljs-selector-class,
+.hljs-selector-attr,
+.hljs-selector-pseudo,
+.hljs-number {
+  color: #d19a66;
+}
+
+.hljs-symbol,
+.hljs-bullet,
+.hljs-link,
+.hljs-meta,
+.hljs-selector-id,
+.hljs-title {
+  color: #61aeee;
+}
+
+.hljs-built_in,
+.hljs-title.class_,
+.hljs-class .hljs-title {
+  color: #e6c07b;
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-strong {
+  font-weight: bold;
+}
+
+.hljs-link {
+  text-decoration: underline;
+}
+
+</style>
+<style type="text/css" id="code-theme">pre::before {
+    content: '';
+    display: block;
+    background: url("http://pinned.github.io/img/mac_style.svg");
+    height: 30px;
+    width: 100%;
+    background-size: 40px;
+    background-repeat: no-repeat;
+    background-color: #282c34;
+    margin-bottom: -7px;
+    border-radius: 5px;
+    background-position: 10px 10px;
+}
+
+pre code {
+    border-radius: 5px;
+}</style>
+
+<script src="/js/highlight.min.js"></script>
+
+
+<script src="/js/highlightjs-line-numbers.js"></script>
+
+
+<script src="/js/juice.js"></script>
+
+
+<script src="/js/copy_wechat.js"></script>
+
+
+<script>
+    hljs.highlightAll();
+    // window.onload = function() {
+    //     // 判断是否为手机浏览器
+    //     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+    //     if (!isMobile) {
+    //         fetch('https://pinned.github.io/bing-daily-picture/index.json')
+    //             .then(response => response.text())
+    //             .then(data => {
+    //                 var result = JSON.parse(data)
+    //                 var count = result.images.length
+    //                 const index = Math.floor(Math.random() * count);
+    //                 document.getElementById("bing-bg").src = "https://cn.bing.com" + result.images[index].url;
+    //             }); // 返回的结果
+    //     } 
+    // }    
+</script>
+
+            </div>
+        </div>
+    </body>
+</html>
