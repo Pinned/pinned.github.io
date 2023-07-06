@@ -741,7 +741,7 @@ thead {
 <p>我在本地建了一个项目，添加了几个文件，以及两次提交。在 objects 目录下，存储的文件类容如下：</p>
 <p><img src="https://img-blog.csdnimg.cn/106777ee76b54d3eb677e99bb78f53a0.png" alt="objects 目录示例" referrerpolicy="no-referrer"></p>
 <p>初看这个会一脸懵，其实很简单，以 <code class="inline-code">objects/78/ace89700a69e490c86f54fbe9d12f0cfb2dbdb</code> 这个文件为例，其中 <code class="inline-code">78ace89700a69e490c86f54fbe9d12f0cfb2dbdb</code> 这一串为这个文件的 Hash 值，计算时使用的是 SHA-1 的算法，其计算结果为 20 个字节组成，通常表示成 40 个 16 进制的形式的字符。对比 Hash 与文件结构可以看出，Git 使用的 Hash 前两个字符作为文件夹名称，后 38 个字符作为文件名，即表示为 <code class="inline-code">hash[0,2]/hash[2:]</code>  格式。在 git 中，也有相应的工具查看 Hash 文件存储的数据类型以及数据内容，可以使用如下命令进行查看：</p>
-<pre><code class="shell"># 查看文件类弄
+<pre><code class="shell"># 查看文件类型
 git cat-file -t 78ace89700a69e490c86f54fbe9d12f0cfb2dbdb
 # 查看文件内容
 git cat-file -p 78ace89700a69e490c86f54fbe9d12f0cfb2dbdb
