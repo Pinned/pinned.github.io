@@ -43,7 +43,7 @@ Git 是一个分布式版本控制软件，在使用的过程中，与 CVS 类�
 初看这个会一脸懵，其实很简单，以 `objects/78/ace89700a69e490c86f54fbe9d12f0cfb2dbdb` 这个文件为例，其中 `78ace89700a69e490c86f54fbe9d12f0cfb2dbdb` 这一串为这个文件的 Hash 值，计算时使用的是 SHA-1 的算法，其计算结果为 20 个字节组成，通常表示成 40 个 16 进制的形式的字符。对比 Hash 与文件结构可以看出，Git 使用的 Hash 前两个字符作为文件夹名称，后 38 个字符作为文件名，即表示为 `hash[0,2]/hash[2:]`  格式。在 git 中，也有相应的工具查看 Hash 文件存储的数据类型以及数据内容，可以使用如下命令进行查看：
 
 ```shell
-# 查看文件类弄
+# 查看文件类型
 git cat-file -t 78ace89700a69e490c86f54fbe9d12f0cfb2dbdb
 # 查看文件内容
 git cat-file -p 78ace89700a69e490c86f54fbe9d12f0cfb2dbdb
