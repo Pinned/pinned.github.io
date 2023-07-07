@@ -698,7 +698,7 @@ thead {
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
             <h4 id="go-top">目录</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%B8%80%E3%80%81ProGuard%20%E6%B7%B7%E6%B7%86%E8%A7%84%E5%88%99%EF%BC%9A-applymapping"><span class="post-toc-text">一、ProGuard 混淆规则：-applymapping</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%BA%8C%E3%80%81ProGuard%20%E6%B7%B7%E6%B7%86%E8%A7%84%E5%88%99%EF%BC%9A-flattenpackagehierarchy"><span class="post-toc-text">二、ProGuard 混淆规则：-flattenpackagehierarchy</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%B8%89%E3%80%81%E6%96%B0%E9%97%AE%E9%A2%98%E7%9A%84%E5%BC%95%E5%85%A5%EF%BC%9A%E4%BB%A3%E7%A0%81%E6%9B%B4%E6%94%B9%E9%80%A0%E6%88%90%20Crash"><span class="post-toc-text">三、新问题的引入：代码更改造成 Crash</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%9B%9B%E3%80%81%E8%BF%99%E6%97%B6%EF%BC%8CGradle%E5%B0%B1%E8%AF%A5%E4%B8%8A%E5%9C%BA%E4%BA%86"><span class="post-toc-text">四、这时，Gradle就该上场了</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%BA%94%E3%80%81%E6%8F%92%E4%BB%B6%E7%9A%84%E7%BC%96%E5%86%99%E4%B8%8E%E5%AE%9E%E7%8E%B0"><span class="post-toc-text">五、插件的编写与实现</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1.%20%E8%AF%BB%E5%8F%96%20class%20%E6%96%87%E4%BB%B6%E4%B8%AD%E7%9A%84%E5%86%85%E5%AE%B9"><span class="post-toc-text">1. 读取 class 文件中的内容</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2.%20%E6%B7%B7%E6%B7%86%E5%90%8D%E7%A7%B0%E7%94%9F%E6%88%90%E8%A7%84%E5%88%99"><span class="post-toc-text">2. 混淆名称生成规则</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3.%20%E6%96%B9%E6%B3%95%E5%90%8D%E6%B7%B7%E6%B7%86"><span class="post-toc-text">3. 方法名混淆</span></a></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%B8%80%E3%80%81ProGuard%20%E6%B7%B7%E6%B7%86%E8%A7%84%E5%88%99%EF%BC%9A-applymapping"><span class="post-toc-text">一、ProGuard 混淆规则：-applymapping</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%BA%8C%E3%80%81ProGuard%20%E6%B7%B7%E6%B7%86%E8%A7%84%E5%88%99%EF%BC%9A-flattenpackagehierarchy"><span class="post-toc-text">二、ProGuard 混淆规则：-flattenpackagehierarchy</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%B8%89%E3%80%81%E6%96%B0%E9%97%AE%E9%A2%98%E7%9A%84%E5%BC%95%E5%85%A5%EF%BC%9A%E4%BB%A3%E7%A0%81%E6%9B%B4%E6%94%B9%E9%80%A0%E6%88%90%20Crash"><span class="post-toc-text">三、新问题的引入：代码更改造成 Crash</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%9B%9B%E3%80%81%E8%BF%99%E6%97%B6%EF%BC%8CGradle%E5%B0%B1%E8%AF%A5%E4%B8%8A%E5%9C%BA%E4%BA%86"><span class="post-toc-text">四、这时，Gradle就该上场了</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%BA%94%E3%80%81%E6%8F%92%E4%BB%B6%E7%9A%84%E7%BC%96%E5%86%99%E4%B8%8E%E5%AE%9E%E7%8E%B0"><span class="post-toc-text">五、插件的编写与实现</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1.%20%E8%AF%BB%E5%8F%96%20class%20%E6%96%87%E4%BB%B6%E4%B8%AD%E7%9A%84%E5%86%85%E5%AE%B9"><span class="post-toc-text">1. 读取 class 文件中的内容</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2.%20%E6%B7%B7%E6%B7%86%E5%90%8D%E7%A7%B0%E7%94%9F%E6%88%90%E8%A7%84%E5%88%99"><span class="post-toc-text">2. 混淆名称生成规则</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3.%20%E6%96%B9%E6%B3%95%E5%90%8D%E6%B7%B7%E6%B7%86"><span class="post-toc-text">3. 方法名混淆</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4.%20%E6%B7%BB%E5%8A%A0%E6%B7%B7%E6%B7%86%E8%A7%84%E5%88%99%E7%BB%99%E6%B7%B7%E6%B7%86%E4%BB%BB%E5%8A%A1%E4%BD%BF%E7%94%A8"><span class="post-toc-text">4. 添加混淆规则给混淆任务使用</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%85%AD%E3%80%81%E6%80%BB%E7%BB%93"><span class="post-toc-text">六、总结</span></a></li></ol>
         </nav>
     </aside>
 
@@ -1059,8 +1059,46 @@ public interface Walkable &#123;
 ////////////分割线\\\\\\\\\\\\\\\
 
 package com.example.proguard;
-public class Son extends Person implements Walkable 
+public class Son extends Person implements Walkable &#123;
+  public void cry() &#123;&#125;
+  @Override
+  public void name() &#123;&#125;
+  public void study() &#123;&#125;
+  @Override
+  public void walk() &#123;&#125;
+&#125;
 </code></pre>
+<p><code class="inline-code">walk()</code> 这个方法名，在 <code class="inline-code">Son</code> 的混淆中，混淆后的名字必须与 <code class="inline-code">Walkable</code> 中的名字相同。 如果不做处理，<code class="inline-code">Walkable</code> 生成的混淆结果为：</p>
+<pre><code class="java">com.example.proguard.Walkable -&gt; com.example.C:
+    void walk() -&gt; A
+</code></pre>
+<p>那在生成 <code class="inline-code">Son</code> 的时候，就会出现两个一模一样的 <code class="inline-code">A</code>  方法，分别来自 <code class="inline-code">Person.name()</code> 和 <code class="inline-code">Walkable.walk()</code>， 这就会导致冲突。这种情况下，在生成混淆名称时，出现 <code class="inline-code">关联</code> 的多个类之间，不同签名的方法必须要使用不同的名称才行。知道问题后，解决方案当然也很简单，找到有关联的接口、类，将他们所有的方法进行去重排序， 生成名字时，用整个方法列表中的 index 去生成即可。</p>
+<p><strong>（4）多模块中，类关联无法识别出来</strong><br>生成 <code class="inline-code">keep-same-proguard.txt</code> 本就是为了解决，在多模块打包中，使用相同的混淆配置。生成规则的核心目标时，在分别打包 <code class="inline-code">A模块</code> <code class="inline-code">B模块</code>时，他们共用的类生成的混淆配置是一样的。</p>
+<p>在多模块中，有两种情况，下面分别介绍，假设，还是上面三个类 <code class="inline-code">Person</code> 、<code class="inline-code">Walkable</code> 、<code class="inline-code">Son</code> </p>
+<ul>
+<li><p>情况一</p>
+<p>现在有两个模块，分别为 <code class="inline-code">A模块</code>  、<code class="inline-code">B 模块</code>，其中 <code class="inline-code">Person</code> 和 <code class="inline-code">Walkable</code> 在 <code class="inline-code">A模块</code> 中，而 <code class="inline-code">Son</code> 在 <code class="inline-code">B模块</code> 中。当打包 <code class="inline-code">A模块</code> 时，从编译后的结果中，无法分析出 <code class="inline-code">Person</code> 与 <code class="inline-code">Walkable</code> 是有关联的，这种情况下，生成配置时，就无法实现方法名不一样。当然，我在解决此问题的时候也使用了简单粗暴的办法，将所有类中的方法进行排序生成混淆后的名字，让所有方法都使用不同的名字。</p>
+</li>
+<li><p>情况二</p>
+<p>现在有三个模块，分别是 <code class="inline-code">A模块</code>、<code class="inline-code">B模块</code>、<code class="inline-code">C模块</code>， 其中 <code class="inline-code">Person</code> 在 <code class="inline-code">A模块</code> 中， <code class="inline-code">Walkable</code> 在 <code class="inline-code">B模块</code> 中， 而 <code class="inline-code">Son</code> 在 <code class="inline-code">C模块</code> 中，  <code class="inline-code">C模块</code>  依赖 <code class="inline-code">A模块</code>、<code class="inline-code">B模块</code>。在这种情况下，对 <code class="inline-code">A模块</code> 或 <code class="inline-code">B模块</code> 进行打包时，都无法感知到对方的存在，在生成名字的时候就无法做到方法名互斥。那针对这种情况，要怎么处理呢？要让每一个模块中生成的方法名不一致，有一个简单的办法，给每一个方法名前加一个前缀，而不同模块的前缀可以使用 <code class="inline-code">模块名</code>  的混淆结果来做。</p>
+</li>
+</ul>
+<p>方法名的混淆之所以复杂，是因为在编译模块时，无法窥得项目全貌，无法将所有模块中的 class 获取到并构建成一个图。综上所述，在方法名做混淆的时候，为降低逻辑复杂度，解决冲突问题，需要遵循一下几条规则：</p>
+<ol>
+<li>子类中与父类中，名称和方法签名一致的方法，使用相同的混淆名称，忽略访问控制修饰符</li>
+<li>一个模块类的所有方法名互斥，生成时，使用 <code class="inline-code">模块中</code> 全量方法名进行排序</li>
+<li>模块类生成的混淆方法名统一添加前缀，前缀使用当前模块按基础混淆规则生成的混淆名称</li>
+</ol>
+<p>按照以上规则，方法混淆处理起来就非常方便，可以很快速的实现方法名的生成。</p>
+<h3 id="4. 添加混淆规则给混淆任务使用"><span class="prefix"></span><span class="content">4. 添加混淆规则给混淆任务使用</span><span class="suffix"></span></h3><p>到此，已经可以很方便的将混淆配置生成，并写入到文件中，在本项目中，生成的文件写入到 <code class="inline-code">build/generated/proguard/keep-same-proguard.txt</code> 文件中，也可以方便的去查看。下一步是将这个文件给 <code class="inline-code">minifyReleaseWithR8</code> 这个任务使用。</p>
+<p>刚开始，我天真的以为，我直接将输出的文件地址放入到 <code class="inline-code">minifyReleaseWithR8</code> 任务的 <code class="inline-code">inputFiles</code> 里面，就可以使用我的混淆配置，经过多翻尝试后，发现这样并不能让 <code class="inline-code">minifyReleaseWithR8</code> 使用我的配置。正当我一筹莫展时，我发现了 <code class="inline-code">build.gradle</code> 里面的一个配置：</p>
+<pre><code class="groovy">proguardFiles getDefaultProguardFile(&#39;proguard-android-optimize.txt&#39;), &#39;proguard-rules.pro&#39;
+</code></pre>
+<p>我可以在我的任务中，直接将混淆规则配置文件添加到 <code class="inline-code">proguardFiles</code> 中，如下所示：</p>
+<pre><code class="groovy">project.android.buildTypes.release.proguardFiles += &quot;generate-proguard-rules.txt&quot;;
+</code></pre>
+<p>将生成的混淆配置添加到 <code class="inline-code">proguardFiles</code> 里面，就可以将生成的规则应用于混淆的流程中。</p>
+<h2 id="六、总结"><span class="prefix"></span><span class="content">六、总结</span><span class="suffix"></span></h2><p>以上，本文从 SDK 打包混淆所遇到的问题开始，记录了使用 ProGuard 以及编写自动化脚本过程所遇到的问题、我自己的思考、以及解决方案。在这之中，针对遇到的问题，我所提到的解决方案并不一定是最佳或最优方案，只是在那个时候，实现最方便，也能满足我的需求。如果朋友们有什么新奇的想法，欢迎与我沟通交流。</p>
 
                 </div>
             </section>
