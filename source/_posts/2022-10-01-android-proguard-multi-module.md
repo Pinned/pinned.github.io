@@ -476,7 +476,7 @@ public interface Walkable {
 ////////////分割线\\\\\\\\\\\\\\\
 
 package com.example.proguard;
-public class Son extends Person implements Walkable {{
+public class Son extends Person implements Walkable {
   public void cry() {}
   @Override
   public void name() {}
