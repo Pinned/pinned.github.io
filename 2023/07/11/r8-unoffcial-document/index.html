@@ -1,0 +1,1318 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+    <link rel="alternate icon" type="image/png" href="/img/favicon.png">
+    
+        <title>（转） The Unofficial R8 Document </title>
+        
+<link rel="stylesheet" href="/css/toc.css">
+
+    
+    <style type="text/css" id="reset">@charset "utf-8";
+
+*,
+*::before,
+*::after
+{
+    box-sizing: border-box;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+figure,
+blockquote,
+dl,
+dd
+{
+    margin: 0;
+}
+
+ul,
+ol
+{
+    list-style: none;
+}
+
+ul
+{
+    padding-inline-start: 0;
+}
+
+html,
+body
+{
+    scroll-behavior: smooth;
+}
+
+a:not([class])
+{
+    text-decoration-skip-ink: auto;
+}
+
+img,
+picture
+{
+    width: auto;
+    max-width: 100%;
+    display: block;
+}
+
+input,
+button,
+textarea,
+select
+{
+    font: inherit;
+}
+
+@media (prefers-reduced-motion: reduce)
+{
+    html:focus-within
+    {
+        scroll-behavior: auto;
+    }
+}</style>
+    <style type="text/css" id="style">@charset "utf-8";
+
+p {
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    text-align: justify;
+}
+
+body {
+    font-family: "PingFang SC", BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serifhtml, body;
+    font-size: 16px;
+    line-height: 1.75;
+    letter-spacing: 0.6px;
+    color: #666;
+    background: #F0F0F0;
+}
+
+a {
+    text-decoration: none;
+    color: #000;
+}
+
+
+
+@media screen and (max-width: 480px) {
+    body {
+        background: #fff;
+    }
+
+    .paper {
+        padding: 4vw;
+    }
+
+    .paper-main {
+        width: 100%;
+        margin: 0 auto;
+        padding: 30px 1vw 12px;
+        background: #fff;
+    }
+}
+
+@media screen and (min-width: 481px) {
+    .paper {
+        padding: 4vw;
+    }
+
+    .paper-main {
+        width: 900px;
+        margin: 0 auto;
+        padding: 62px 3vw 24px;
+        background: #fff;
+        border-radius: 24px;
+    }
+}
+
+.header {
+    padding-bottom: 48px;
+    margin-bottom: 48px;
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: center;
+}
+
+.logo {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #000;
+    margin-bottom: 16px;
+    flex: 0 0 100%;
+}
+
+.nav {
+    margin: 0 0 4px;
+    flex: 0 0 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: center;
+}
+
+.nav li {
+    padding: 2px 0;
+    margin-right: 24px;
+}
+
+.nav li:last-of-type {
+    margin-right: 0;
+}
+
+.nav li a {
+    color: #000;
+    opacity: .6;
+    transition: opacity ease-in-out .5s;
+}
+
+.nav li a:hover {
+    opacity: 1;
+    transition: opacity ease-in-out .5s;
+}
+
+.post-header {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: center;
+}
+
+.post-header .post-title {
+    font-size: 1.375rem;
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+    line-height: 1;
+}
+
+.post-list {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: stretch;
+}
+
+.post {
+    width: 100%;
+    padding-bottom: 48px;
+    margin-bottom: 48px;
+    border-bottom: 1px dashed #ddd;
+}
+
+.post-title {
+    display: inline-block;
+    font-size: 1.6rem;
+    font-weight: 600;
+    line-height: 1.5;
+    margin-bottom: 12px;
+    color: #000;
+    /*transition: color ease-in-out .5s;*/
+}
+
+.post-title:hover {
+    color: #04077e;
+    transition: color ease-in-out .5s;
+}
+
+.post-except {
+    word-break: break-all;
+    margin-bottom: 12px;
+    text-align: justify;
+}
+
+.read-more {
+    padding: 0 4px;
+    color: #04077e;
+}
+
+.read-more:before,
+.read-more:after {
+    display: inline-block;
+    transition: transform ease-in-out .5s;
+}
+
+.read-more:before {
+    content: "{ ";
+}
+
+.read-more:after {
+    content: " }";
+}
+
+.read-more:hover:before {
+    transform: translateX(-4px);
+    transition: transform ease-in-out .25s;
+}
+
+.read-more:hover:after {
+    transform: translateX(4px);
+    transition: transform ease-in-out .25s;
+}
+
+.post-date {
+    font-size: 0.875rem;
+    color: #aaa;
+}
+
+.paginator {
+    font-size: 0.875rem;
+    width: 100%;
+    margin: 0 auto 24px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.paginator * {
+    display: block;
+    padding: 8px 16px;
+    border-radius: 18px;
+    background: #fff;
+    border: 1px solid #eee;
+}
+
+.paginator .space {
+    display: block;
+    padding: 8px 16px;
+    border-radius: 18px;
+    background: #fff;
+    border: none;
+}
+
+.paginator a {
+    margin: 4px;
+    color: #666;
+    transition: color ease-in-out .5s;
+}
+
+.paginator a:hover {
+    color: #04077e;
+    transition: color ease-in-out .5s;
+}
+
+.paginator .current {
+    color: #04077e;
+    border: 1px solid #04077e;
+}
+
+.footer {
+    padding: 24px 0;
+    font-size: 0.875rem;
+    color: #aaa;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-content: center;
+}
+
+.footer span {
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.footer a {
+    color: #aaa;
+    transition: color ease-in-out .5s;
+}
+
+.footer a:hover {
+    color: #04077e;
+    transition: color ease-in-out .5s;
+}
+
+.post-main {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.post-main-title {
+    flex: 0 0 100%;
+    margin-bottom: 12px;
+    font-size: 1.6rem;
+    font-weight: 600;
+    line-height: 1.5;
+    color: #000;
+}
+
+.post-meta {
+    font-size: 0.875rem;
+    color: #aaa;
+    flex: 0 0 100%;
+    margin-bottom: 32px;
+}
+
+.author {
+    color: #576b95;
+}
+
+.archive {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-content: normal;
+}
+
+.archive li {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-content: center;
+    padding: 12px 0;
+}
+
+.archive li:nth-child(odd) {
+    background: #fafafa;
+}
+
+.archive li:nth-child(even) {
+    background: #fff;
+}
+
+.archive li span {
+    width: 108px;
+    color: #666;
+}
+
+.archive-main {
+    flex: 0 1 calc(100% - 108px);
+}
+
+.archive-title {
+    color: #000;
+    /*transition: color ease-in-out .5s;*/
+}
+
+.archive-title:hover {
+    color: #04077e;
+    transition: color ease-in-out .5s;
+}
+
+.post-image-caption {
+    margin-top: 5px;
+    text-align: center;
+    color: #888;
+    font-size: 0.85rem;
+    display: block;
+}
+
+#clipboardbtn {
+    cursor: pointer;
+}
+
+#bing-bg {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    filter: blur(10px);
+    object-fit: cover;
+  }
+#go-top {
+    cursor: pointer;
+}
+
+#beautiful {
+    font-family: "PingFang SC", BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serifhtml, body;
+    font-size: 16px;
+    line-height: 1.75;
+    letter-spacing: 0.6px;
+}</style>
+    <style type="text/css" id="markdown">@charset "utf-8";
+
+#copy-post-content,
+#beautiful,
+.post-md
+{
+    width: 100%;
+    letter-spacing: 0;
+}
+
+.post-md h1,
+.post-md h2,
+.post-md h3,
+.post-md h4,
+.post-md h5,
+.post-md h6
+{
+    color: #000;
+}
+/* 一级标题 */
+.post-md h1  {
+    display:block;
+    border-bottom: 4px solid rgb(33, 33, 34);
+    font-size: 1rem;
+}
+  
+/* 一级标题内容 */
+.post-md h1  .content {
+    display: flex;
+    color: rgb(33, 33, 34);
+    font-size: 1rem;
+}
+  
+  
+/* 一级标题后缀 */
+.post-md h1  .suffix {
+    display: flex;
+    box-sizing: border-box;
+    width: 20px;
+    height: 10px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    background: RGBA(33, 33, 34, .5);
+    color: rgb(255, 255, 255);
+    font-size: 16px;
+    letter-spacing: 0.544px;
+    justify-content: flex-end;
+    box-sizing: border-box !important;
+    overflow-wrap: break-word !important;
+    float: right;
+    margin-top: -10px;
+}
+
+/* 二级标题 */
+.post-md h2 {
+    margin: 10px auto;
+    height: 40px;
+    background-color: rgb(251, 251, 251);
+    border-bottom: 1px solid rgb(246, 246, 246);
+    box-sizing: border-box;
+    font-size: 1rem;
+}
+
+/* 二级标题内容 */
+.post-md h2 .content {
+    display: inline-block;
+    width: auto;
+    height: 40px;
+    background-color: rgb(33, 33, 34);
+    border-bottom-right-radius:100px;
+    color: rgb(255, 255, 255);
+    padding-right: 30px;
+    padding-left: 20px;
+    font-size: 1rem;
+    line-height: 40px;
+}
+
+/* 三级标题 */
+.post-md h3 {
+    margin: 20px auto 5px;
+    border-top: 1px solid rgb(221, 221, 221);
+    box-sizing: border-box;
+    font-size: 1rem;
+}
+  
+/* 三级标题内容 */
+.post-md h3 .content {
+    margin-top: -1px;
+    padding-top: 6px;
+    padding-right: 5px;
+    padding-left: 5px;
+    font-size: 1rem;
+    border-top: 2px solid rgb(33, 33, 34);
+    display: inline-block;
+    line-height: 1.1;
+}
+.post-md h4
+{
+    font-size: 1rem;
+    line-height: 1.2;
+    padding: 16px 0;
+}
+.post-md h5
+{
+    font-size: 0.83rem;
+    line-height: 1.2;
+    padding: 14px 0;
+}
+.post-md h6
+{
+    font-size: 0.67rem;
+    line-height: 1.2;
+    padding: 12px 0;
+}
+.post-md a
+{
+    color: #61aeee;
+    box-shadow: 0 2px 0 #ccc;
+    transition: color ease-in-out .65s, box-shadow ease-in-out .65s;
+}
+.post-md a:hover
+{
+    color: #04077e;
+    box-shadow: 0 2px 0 #04077e;
+    transition: color ease-in-out .65s, box-shadow ease-in-out .65s;
+}
+.post-md strong
+{
+    font-weight: 700;
+}
+.post-md em
+{
+    font-style: italic;
+}
+.post-md kbd
+{
+    padding: 2px 4px;
+    border-radius: 2px;
+    background: #eee;
+    border: 1px solid #ddd;
+}
+.post-md ol
+{
+    list-style: decimal;
+    padding-left: 24px;
+}
+.post-md ul
+{
+    list-style: disc;
+    padding-left: 24px;
+}
+.post-md img
+{
+    border-radius: 4px;
+}
+.post-md hr
+{
+    border: none;
+    height: 1px;
+    background: #ccc;
+    margin: 24px 0;
+}
+
+.post-md p,
+.post-md blockquote
+{
+    width: 100%;
+    padding: 7px 0;
+}
+.post-md blockquote
+{
+    border-left: 2px solid #ddd;
+    padding-left: 12px;
+    word-wrap: break-word;
+}
+
+.post-md .video-container
+{
+    background: #000;
+    border-radius: 4px;
+    overflow: hidden;
+}
+.post-md iframe,
+.post-md .video-container iframe
+{
+    width: 100%;
+    height: 100vh;
+    max-height: 360px;
+    margin: 12px 0;
+}
+
+.post-md table {
+    padding: 0;
+    word-break: initial;
+    width: 100%;
+    page-break-inside: auto;
+    border-spacing:0px;
+    border: 0.5px solid #dfe2e5;
+}
+.post-md table tr {
+    border: 0.5px solid #dfe2e5;
+    margin: 0;
+    padding: 0;
+}
+.post-md table tr:nth-child(2n),
+thead {
+    background-color: #f8f8f8;
+}
+.post-md table th {
+    font-weight: bold;
+    border: 0.5px solid #dfe2e5;
+    border-bottom: 0;
+    margin: 0;
+    padding: 6px 13px;
+}
+.post-md table td {
+    border: 0.5px solid #dfe2e5;
+    margin: 0;
+    padding: 6px 13px;
+}
+.post-md table th:first-child,
+.post-md table td:first-child {
+    margin-top: 0;
+}
+.post-md table th:last-child,
+.post-md table td:last-child {
+    margin-bottom: 0;
+}
+
+
+.inline-code
+{
+    border-radius: 4px;
+    background:rgba(27,31,35,.05);
+    padding: 2px 4px;
+    color: rgb(0, 112, 96);
+    font-size: 1rem;
+    margin-left: 1px;
+    margin-right: 1px;
+}
+
+.post-md .hljs-ln-numbers
+{
+    opacity: .5;
+    padding-right: 12px;
+}
+</style>
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body>
+        <img id="bing-bg" src="" referrerpolicy="no-referrer" />
+        <div class="paper">
+            
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4 id="go-top">目录</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Introduction"><span class="post-toc-text">Introduction</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Assumptions"><span class="post-toc-text">Assumptions</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Obfuscation,%20Shrinking,%20Renaming,%20and%20Minification%20-%20What%E2%80%99s%20the%20Difference?"><span class="post-toc-text">Obfuscation, Shrinking, Renaming, and Minification - What’s the Difference?</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#General%20Rules"><span class="post-toc-text">General Rules</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Keep%20Rules"><span class="post-toc-text">Keep Rules</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Class%20Specification"><span class="post-toc-text">Class Specification</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Wildcards%20and%20Special%20Characters"><span class="post-toc-text">Wildcards and Special Characters</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Modifiers"><span class="post-toc-text">Modifiers</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Subtype%20Matching%20and%20Annotated%20Matching"><span class="post-toc-text">Subtype Matching and Annotated Matching</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Renaming%20Configuration"><span class="post-toc-text">Renaming Configuration</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Flatten%20vs.%20Repackage"><span class="post-toc-text">Flatten vs. Repackage</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Dictionaries"><span class="post-toc-text">Dictionaries</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Dictionary%20Files"><span class="post-toc-text">Dictionary Files</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Mapping%20Files"><span class="post-toc-text">Mapping Files</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#-printmapping"><span class="post-toc-text">-printmapping</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Unsupported%20Rules"><span class="post-toc-text">Unsupported Rules</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Not%20Applicable"><span class="post-toc-text">Not Applicable</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Troubleshooting"><span class="post-toc-text">Troubleshooting</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#ProGuard%20appears%20to%20be%20running%20instead%20of%20R8"><span class="post-toc-text">ProGuard appears to be running instead of R8</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#D8: Unsupported option: -skipnonpubliclibraryclasses"><span class="post-toc-text">D8: Unsupported option: -skipnonpubliclibraryclasses</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Custom%20rules%20don%E2%80%99t%20appear%20to%20be%20used"><span class="post-toc-text">Custom rules don’t appear to be used</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#The%20rule%20%5Bsome%20rule%5D%20uses%20extends%20but%20actually%20matches%20implements"><span class="post-toc-text">The rule [some rule] uses extends but actually matches implements</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+            <div class="paper-main">
+                
+                    <div class="post-header">
+    <p class="post-title">（转） The Unofficial R8 Document</p>
+</div>
+                
+                <div class="post-main">
+
+    
+        <div class="post-meta">
+            <a class='author' href="/">罗昭成</a> <span id="clipboardbtn">2023年07月11日</span>
+        </div>
+        <div id="copy-post-content">
+            <section id="beautiful">
+            <div class="post-md" >
+                    <h2 id="Introduction"><span class="prefix"></span><span class="content">Introduction</span><span class="suffix"></span></h2><p>This is unofficial documentation for <a target="_blank" rel="noopener" href="https://android-developers.googleblog.com/2018/11/r8-new-code-shrinker-from-google-is.html">R8</a>, Google’s code shrinker for Android&amp;trade;.<br>Google intends R8 to be a drop-in replacement for <a target="_blank" rel="noopener" href="https://www.guardsquare.com/en/products/proguard">ProGuard</a>, and has provided <a target="_blank" rel="noopener" href="https://developer.android.com/studio/build/shrink-code">documentation in the Android Studio User Guide</a> to help you get started with it.<br>However, they rely on the <a href="pg_man">ProGuard Manual</a> for detailed documentation, even though there are substantial differences between R8 and ProGuard.<br>This documentation is meant to supplement the Android Studio User Guide and the ProGuard Manual to fill that gap.</p>
+<p>This site is <a target="_blank" rel="noopener" href="https://github.com/preemptive/r8-docs">open source on GitHub&amp;trade;</a> and we encourage you to contribute by opening <a target="_blank" rel="noopener" href="https://github.com/preemptive/r8-docs/issues">issues</a> or submitting pull requests.</p>
+<h3 id="Assumptions"><span class="prefix"></span><span class="content">Assumptions</span><span class="suffix"></span></h3><p>This documentation assumes that you are using the standard Gradle&amp;trade; build process of an Android application or library with version 3.4 or later of the Android Gradle Plugin.<br>It is not suitable if you are using R8 directly in a custom build process.</p>
+<blockquote>
+<p><strong>Note:</strong> Known issues reflected in this document were last tested on R8 v1.6.67 using Android Gradle Plugin v3.6.1.</p>
+</blockquote>
+<h3 id="Obfuscation, Shrinking, Renaming, and Minification - What’s the Difference?"><span class="prefix"></span><span class="content">Obfuscation, Shrinking, Renaming, and Minification - What’s the Difference?</span><span class="suffix"></span></h3><p>The <a target="_blank" rel="noopener" href="https://developer.android.com/studio/build/shrink-code">Android Studio documentation</a> and the R8 ruleset itself use the term “obfuscation” in a way that isn’t very precise.<br>As <a target="_blank" rel="noopener" href="https://www.preemptive.com/products/dasho/overview">we make an Android Obfuscator</a>, we think it’s important to understand the distinction between <em>Obfuscation</em>, <em>Renaming</em>, <em>Shrinking</em>, and <em>Minification</em>.</p>
+<ul>
+<li><em>Obfuscation</em> generally refers to a broad set of techniques that make code more difficult to understand and reverse engineer, but in the context of R8 rules and documentation it specifically refers to <em>Renaming</em> of packages, classes, methods, and fields that R8 performs.<br>R8 employs renaming primarily to reduce the size of the application or library on which it is operating, not to protect it from reverse engineering.<br>We avoid using the term “obfuscation” in this documentation in favor of “renaming”.</li>
+<li><em>Code Shrinking</em> or <em>Tree Shaking</em> refers to the removal of unused classes and members from your application or library, primarily to reduce its size.</li>
+<li><em>Minification</em>, as in <code class="inline-code">minifyEnabled</code>, is sometimes used to describe the combination of Shrinking and Renaming for the purpose of reducing the size of an application or library.</li>
+</ul>
+<p>In addition to Renaming and Code Shrinking, R8 also performs <em>Optimization</em>, which rewrites code to improve its performance and further reduce its size.<br>The Android Gradle Plugin also performs <em>Resource Shrinking</em>, which reduces the size of resources in a similar manner to the way that Code Shrinking reduces the size of applications or libraries.<br>This is not a feature of R8 itself, but they are related processes; the Android Gradle Plugin requires that you enable a code shrinker to shrink resources.</p>
+<h2 id="General Rules"><span class="prefix"></span><span class="content">General Rules</span><span class="suffix"></span></h2><table>
+<thead>
+<tr>
+<th>Rule</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code class="inline-code">-allowaccessmodification</code></td>
+<td>Allows R8 to change access modifiers, enabling additional optimizations and additional reorganizations to packages in which classes are contained. (<a href="pg_man#allowaccessmodification">ProGuard docs</a>)</td>
+</tr>
+<tr>
+<td><code class="inline-code">-assumenosideeffects &lt;class-spec&gt;</code></td>
+<td>Informs R8 it can safely remove calls to the specified <a href="#class_spec">method(s)</a> during optimization. If the method returns a value that appears to be used, the call may not be removed. Note that this rule is ignored if <code class="inline-code">-dontoptimize</code> is also configured. (<a href="pg_man#assumenosideeffects">ProGuard docs</a>)</td>
+</tr>
+<tr>
+<td><code class="inline-code">-dontobfuscate</code></td>
+<td>Do not apply renaming, regardless of other configuration. (<a href="pg_man#dontobfuscate">ProGuard docs</a>)</td>
+</tr>
+<tr>
+<td><code class="inline-code">-dontoptimize</code></td>
+<td>Do not optimize the code, regardless of other configuration. This is part of the <a href="#rules_note">default</a> configuration. (<a href="pg_man#dontoptimize">ProGuard docs</a>)</td>
+</tr>
+<tr>
+<td><code class="inline-code">-dontshrink</code></td>
+<td>Do not remove any classes, methods, or fields, regardless of other configuration. (<a href="pg_man#dontshrink">ProGuard docs</a>)</td>
+</tr>
+<tr>
+<td><code class="inline-code">-include &lt;filename&gt;</code></td>
+<td>Include configuration from file with filename <code class="inline-code">filename</code>. (<a href="pg_man#at">ProGuard docs</a>)</td>
+</tr>
+<tr>
+<td><code class="inline-code">-keepattributes [&lt;filter&gt;]</code></td>
+<td>Allows you to specify supported Java&amp;trade; <a href="pg_man/attributes">attributes</a> for R8 to retain in the code. Unlike ProGuard, R8 does not respect rules regarding <code class="inline-code">Synthetic</code>, <code class="inline-code">Deprecated</code>, or <code class="inline-code">MethodParameters</code> and will remove these attributes regardless of what is configured in <code class="inline-code">-keepattributes</code>. Also, for class version 50 (Java 6), R8 will keep a <code class="inline-code">StackMapTable</code> attribute only if <code class="inline-code">StackMapTable</code> is covered by <code class="inline-code">-keepattributes</code>; it is always kept for later class versions. (<a href="pg_man#keepattributes">ProGuard docs</a>) (<a href="itg/130421335">See issue</a>)</td>
+</tr>
+<tr>
+<td><code class="inline-code">-printconfiguration [&lt;file&gt;]</code></td>
+<td>Outputs the used configuration rules to the specified file, or to stdout if there is no file specified. Note that if you specify a file, every build of a variant using this rule will overwrite that file. (<a href="pg_man#printconfiguration">ProGuard docs</a>)</td>
+</tr>
+<tr>
+<td><code class="inline-code">-printseeds [&lt;filename&gt;]</code></td>
+<td>Outputs a list of the classes, methods, and fields which match the <a href="#keep_rules">keep rules</a> to the specified file, or to stdout if there is no file specified. Note that if you specify a file, every build of a variant using this rule will overwrite that file. Note that unlike ProGuard, R8 will <strong>not</strong> automatically output a build&#x2F;outputs&#x2F;mapping[&#x2F;{flavorName}]&#x2F;{buildType}&#x2F;seeds.txt file. (<a href="pg_man#printseeds">ProGuard docs</a>)</td>
+</tr>
+<tr>
+<td><code class="inline-code">-printusage [&lt;filename&gt;]</code></td>
+<td>Outputs a list of the classes, methods, and fields which were removed during <a href="#keep_rules">shrinking</a> to the specified file, or to stdout if there is no file specified. Note that if you specify a file, every build of a variant using this rule will overwrite that file. Note that unlike ProGuard, R8 will <strong>not</strong> automatically output a build&#x2F;outputs&#x2F;mapping[&#x2F;{flavorName}]&#x2F;{buildType}&#x2F;usage.txt file. (<a href="pg_man#printusage">ProGuard docs</a>)</td>
+</tr>
+</tbody></table>
+<p><a name="keep_rules"></a></p>
+<h2 id="Keep Rules"><span class="prefix"></span><span class="content">Keep Rules</span><span class="suffix"></span></h2><p>Application of shrinking and renaming is configured by using the <code class="inline-code">-keep*</code> rules.<br>These rules are configured by proving a <a href="#class_spec">class specification</a> and optional <a href="#modifiers">modifiers</a>.</p>
+<table>
+<thead>
+<tr>
+<th>Rule (and Arguments)</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code class="inline-code">-keep[,&lt;modifier&gt;[...]] &lt;class-spec&gt;</code></td>
+<td>Exclude matching classes, and matching members if specified, from shrinking, optimization, and renaming. Shrinking exclusion on the class means that members will not be removed but does not prevent members from being renamed. Specifying members will prevent them from being renamed if present. (<a href="pg_man#keep">ProGuard docs</a>)</td>
+</tr>
+<tr>
+<td><code class="inline-code">-keepclassmembers[,&lt;modifier&gt;[...]] &lt;class-spec&gt;</code></td>
+<td>Exclude matching members in matching classes from shrinking, optimization, and renaming. (<a href="pg_man#keepclassmembers">ProGuard docs</a>)</td>
+</tr>
+<tr>
+<td><code class="inline-code">-keepclasseswithmembers[,&lt;modifier&gt;[...]] &lt;class-spec&gt;</code></td>
+<td>Exclude matching classes and matching members from shrinking, optimization, and renaming if the corresponding class has all of the specified members. (<a href="pg_man#keepclasseswithmembers">ProGuard docs</a>)</td>
+</tr>
+<tr>
+<td><code class="inline-code">-keepnames[,&lt;modifier&gt;[...]] &lt;class-spec&gt;</code></td>
+<td>Prevent matching classes, and matching members if specified, from being renamed. (<a href="pg_man#keepnames">ProGuard docs</a>)</td>
+</tr>
+<tr>
+<td><code class="inline-code">-keepclassmembernames[,&lt;modifier&gt;[...]] &lt;class-spec&gt;</code></td>
+<td>Prevent any matching members from being renamed in matching classes. (<a href="pg_man#keepclassmembernames">ProGuard docs</a>)</td>
+</tr>
+<tr>
+<td><code class="inline-code">-keepclasseswithmembernames[,&lt;modifier&gt;[...]] &lt;class-spec&gt;</code></td>
+<td>Prevent matching classes and matching members from being renamed if the corresponding class contains all of the specified members. This does not prevent matching members from being removed by shrinking (ProGuard would also prevent the specified members from being removed). (<a href="pg_man#keepclasseswithmembernames">ProGuard docs</a>)</td>
+</tr>
+<tr>
+<td><code class="inline-code">-whyareyoukeeping &lt;class-spec&gt;</code></td>
+<td>Log details about why particular classes and members were maintained in the output. (<a href="pg_man#whyareyoukeeping">ProGuard docs</a>)</td>
+</tr>
+<tr>
+<td><code class="inline-code">-if &lt;class-spec&gt; &lt;one-keep-rule&gt;</code></td>
+<td>Conditionally apply one keep rule. If class members are specified, the class and all specified members must match. Otherwise, only the class need match. Class specification in the keep rule can contain back references to wildcards in the <code class="inline-code">-if</code> class specification. (<a href="pg_man#if">ProGuard docs</a>)</td>
+</tr>
+</tbody></table>
+<p><a name="modifiers"></a><br>Keep rule modifiers:</p>
+<table>
+<thead>
+<tr>
+<th>Modifier</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code class="inline-code">allowshrinking</code></td>
+<td>Allow the target(s) of the rule to be removed by shrinking. (<a href="pg_man#allowshrinking">ProGuard docs</a>)</td>
+</tr>
+<tr>
+<td><code class="inline-code">allowoptimization</code></td>
+<td>Allow the target(s) of the rule to be optimized. (<a href="pg_man#allowoptimization">ProGuard docs</a>)</td>
+</tr>
+<tr>
+<td><code class="inline-code">allowobfuscation</code></td>
+<td>Allow the target(s) of the rule to be renamed. Adding this modifier to one of the <code class="inline-code">-keep*names</code> rules causes that rule to have no effect. (<a href="pg_man#allowobfuscation">ProGuard docs</a>)</td>
+</tr>
+<tr>
+<td><code class="inline-code">includedescriptorclasses</code></td>
+<td>Prevent specified field types, method return types, and method parameter types from being renamed. This preserves field and method signatures (post type-erasure, e.g. this does not preserve generic types). (<a href="pg_man#includedescriptorclasses">ProGuard docs</a>)</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>Note:</strong> It is not clear what optimization R8 does, or how much control over that process is provided through the <code class="inline-code">-keep*</code> rules and the <code class="inline-code">allowoptimization</code> modifier.</p>
+</blockquote>
+<p><a name="class_spec"></a></p>
+<h3 id="Class Specification"><span class="prefix"></span><span class="content">Class Specification</span><span class="suffix"></span></h3><p>Several of the rules accept a class specification (<code class="inline-code">class-spec</code>) which is a specification of classes and members that has a Java-like syntax.<br>For example:</p>
+<pre><code class="inline-code">-keepclassmembernames public class some.path.to.MyClass &#123;
+    int intField;
+    android.content.Context getApplicationContext();
+    public static String *;
+&#125;
+</code></pre>
+<p>The syntax has strong support for filtering classes, methods, and fields.<br>The syntax supports <code class="inline-code">class</code> (classes), <code class="inline-code">interface</code> (interfaces), <code class="inline-code">enum</code> (enumerations), and <code class="inline-code">@interface</code> (annotations).<br>The special symbol <code class="inline-code">&lt;init&gt;</code> is used to represent the name of a class’s constructor.</p>
+<h4 id="Wildcards and Special Characters"><span class="prefix"></span><span class="content">Wildcards and Special Characters</span><span class="suffix"></span></h4><p>The syntax also supports wildcards and negation using special characters:</p>
+<ul>
+<li><code class="inline-code">!</code> negates the condition described by the subsequent specification. Can be used with <a href="#class-spec-modifiers">modifiers</a> and with the <code class="inline-code">class</code>, <code class="inline-code">interface</code>, <code class="inline-code">enum</code>, and <code class="inline-code">@interface</code> keywords.</li>
+<li><code class="inline-code">*</code> a sequence of zero or more characters, other than package separators (<code class="inline-code">.</code>), when used with other symbols in a pattern. Matches any reference type when used alone (this is not supported in all contexts in ProGuard).</li>
+<li><code class="inline-code">**</code> a sequence of zero or more characters, including package separators (<code class="inline-code">.</code>), when used with other symbols in a pattern. Matches any reference type when used alone (does not match primitive types or <code class="inline-code">void</code>).</li>
+<li><code class="inline-code">***</code> a sequence of zero or more characters, including package separators (<code class="inline-code">.</code>), when used with other symbols in a pattern. Matches any reference type, primitive type, or <code class="inline-code">void</code> when used alone.</li>
+<li><code class="inline-code">%</code> matches any primitive type (does not match <code class="inline-code">void</code>) when used alone.</li>
+<li><code class="inline-code">?</code> matches any one character.</li>
+<li><code class="inline-code">&lt;integer&gt;</code> integer (starting at 1) referencing the value that matched a wildcard used earlier in the specification.<br>For <code class="inline-code">-if</code>-predicated <code class="inline-code">-keep*</code> rules, the index can reference any earlier wildcard match in the specification for either part.<br>Neither R8 nor ProGuard seem to handle back references in the presence of wildcards in both the class name and class member names.<br>R8 does not appear to handle back references within member specifications.</li>
+<li><code class="inline-code">...</code> matches any number of arguments when used within parentheses (<code class="inline-code">(</code> and <code class="inline-code">)</code>) of a method specification.</li>
+</ul>
+<p>For example:</p>
+<pre><code class="inline-code">-keepclassmembernames class * &#123; long *UUID; &#125; # don&#39;t rename long-valued fields ending with UUID in classes
+</code></pre>
+<p>Several other useful constructs are recognized in the class specification:</p>
+<ul>
+<li><code class="inline-code">&lt;fields&gt;;</code> is a special string representing all fields</li>
+<li><code class="inline-code">&lt;methods&gt;;</code> is a special string representing all methods</li>
+</ul>
+<blockquote>
+<p><strong>Note:</strong> There are some differences between how the filter syntax is interpreted by R8 and ProGuard.<br>For example, <code class="inline-code">*;</code> represents all fields and methods in both, but only R8 recognizes <code class="inline-code">* *;</code> (all fields) and <code class="inline-code">* *(...);</code> (all methods).</p>
+</blockquote>
+<p><a name="class-spec-modifiers"></a></p>
+<h4 id="Modifiers"><span class="prefix"></span><span class="content">Modifiers</span><span class="suffix"></span></h4><p>You can use the following modifier keywords to narrow down wildcards used in class specifications:</p>
+<div class="modifier-table"></div>
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Class</th>
+<th>Method</th>
+<th>Field</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code class="inline-code">abstract</code></td>
+<td>✓</td>
+<td>✓</td>
+<td></td>
+</tr>
+<tr>
+<td><code class="inline-code">final</code></td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+<tr>
+<td><code class="inline-code">native</code></td>
+<td></td>
+<td>✓</td>
+<td></td>
+</tr>
+<tr>
+<td><code class="inline-code">private</code></td>
+<td></td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+<tr>
+<td><code class="inline-code">protected</code></td>
+<td></td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+<tr>
+<td><code class="inline-code">public</code></td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+<tr>
+<td><code class="inline-code">static</code></td>
+<td></td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+<tr>
+<td><code class="inline-code">strictfp</code></td>
+<td></td>
+<td>✓</td>
+<td></td>
+</tr>
+<tr>
+<td><code class="inline-code">synchronized</code></td>
+<td></td>
+<td>✓</td>
+<td></td>
+</tr>
+<tr>
+<td><code class="inline-code">transient</code></td>
+<td></td>
+<td></td>
+<td>✓</td>
+</tr>
+<tr>
+<td><code class="inline-code">volatile</code></td>
+<td></td>
+<td></td>
+<td>✓</td>
+</tr>
+</tbody></table>
+<p>If multiple modifiers are used together on a single expression, then in most cases only classes, methods, or fields that match all of the applied modifiers will be matched.<br>However, if mutually exclusive modifiers are applied (e.g., <code class="inline-code">private</code> and <code class="inline-code">protected</code>), classes, method, and fields that match either of the mutually exclusive modifiers may be matched.</p>
+<p>For example:</p>
+<pre><code class="inline-code">-keep public class * &#123; # All public classes
+    public static *; # All public static fields in those classes
+    public protected abstract *(...); # All public or protected abstract methods in those classes
+&#125;
+</code></pre>
+<h4 id="Subtype Matching and Annotated Matching"><span class="prefix"></span><span class="content">Subtype Matching and Annotated Matching</span><span class="suffix"></span></h4><p>There are two powerful constructs that can be used with class filtering: subtype matching and annotated matching.</p>
+<p>Specify either <code class="inline-code">extends &lt;type-name&gt;</code> or <code class="inline-code">implements &lt;interface-name&gt;</code> to match types that either extend or implement another type.<br>For example, <code class="inline-code">-keep class * implements some.particular.SpecialInterface</code> will match all classes that implement <code class="inline-code">SpecialInterface</code>.<br>Note that <code class="inline-code">extends</code> and <code class="inline-code">implements</code> can be used interchangeably.</p>
+<p>Specify an annotation on the type filter to indicate that only types that are annotated with that annotation should match the filter.<br>For example, <code class="inline-code">-keep @some.package.SomeAnnotation interface *</code> will match all interfaces that are annotated with <code class="inline-code">@SomeAnnotation</code>.</p>
+<h2 id="Renaming Configuration"><span class="prefix"></span><span class="content">Renaming Configuration</span><span class="suffix"></span></h2><p>There are several rules which control the naming of classes, methods, and fields:</p>
+<table>
+<thead>
+<tr>
+<th>Rule</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code class="inline-code">-keeppackagenames [&lt;filter&gt;]</code></td>
+<td>Don’t rename packages which match the <a href="pg_man#filter">filter</a>. (<a href="pg_man#keeppackagenames">ProGuard docs</a>)</td>
+</tr>
+<tr>
+<td><code class="inline-code">-flattenpackagehierarchy [&lt;name&gt;]</code></td>
+<td>When renaming a class, move the package containing the class to a common base package with the specified name, or to the default package if no name is specified. Using <a href="#general-rules"><code class="inline-code">-allowaccessmodification</code></a> increases the number of classes which can be moved to a new package. (<a href="pg_man#flattenpackagehierarchy">ProGuard docs</a>) (<a href="#flat_repack_note">See note</a>)</td>
+</tr>
+<tr>
+<td><code class="inline-code">-repackageclasses [&lt;name&gt;]</code></td>
+<td>When renaming a class, move it to the named package, or to the default package if no package is named. <em>(Overrides <code class="inline-code">-flattenpackagehierarchy</code>)</em>  Using <a href="#general-rules"><code class="inline-code">-allowaccessmodification</code></a> increases the number of classes which can be moved to a new package. (<a href="pg_man#repackageclasses">ProGuard docs</a>) (<a href="#flat_repack_note">See note</a>)</td>
+</tr>
+<tr>
+<td><code class="inline-code">-overloadaggressively</code></td>
+<td>Use the same name as much as possible, even if it may not be allowed by the source language. (<a href="pg_man#overloadaggressively">ProGuard docs</a>)</td>
+</tr>
+<tr>
+<td><code class="inline-code">-adaptclassstrings [&lt;filter&gt;]</code></td>
+<td>Update strings containing class names to use the new names. This can be <a href="pg_man#filter">filtered</a> to only look for strings in certain classes. (<a href="pg_man#adaptclassstrings">ProGuard docs</a>)</td>
+</tr>
+<tr>
+<td><code class="inline-code">-adaptresourcefilenames [&lt;filter&gt;]</code></td>
+<td>Rename Java resource files to match renamed classes. This can be <a href="pg_man#filter">filtered</a> to look at particular files. (<a href="pg_man#adaptresourcefilenames">ProGuard docs</a>)</td>
+</tr>
+<tr>
+<td><code class="inline-code">-adaptresourcefilecontents [&lt;filter&gt;]</code></td>
+<td>Update Java resource file contents to match renamed classes. This can be <a href="pg_man#filter">filtered</a> to look at particular files. (<a href="pg_man#adaptresourcefilecontents">ProGuard docs</a>)</td>
+</tr>
+</tbody></table>
+<p><a name="flat_repack_note"></a></p>
+<h4 id="Flatten vs. Repackage"><span class="prefix"></span><span class="content">Flatten vs. Repackage</span><span class="suffix"></span></h4><p>There is a subtle difference between <code class="inline-code">-flattenpackagehierarchy</code> and <code class="inline-code">-repackageclasses</code>.<br><code class="inline-code">-repackageclasses</code> moves the classes into a single package.<br><code class="inline-code">-flattenpackagehierarchy</code> renames the packages to be based on the name, keeping classes in their own package.</p>
+<p>Given three classes:</p>
+<ul>
+<li><code class="inline-code">com.example.packageOne.ClassOne</code></li>
+<li><code class="inline-code">com.example.packageOne.subPackageOne.ClassTwo</code></li>
+<li><code class="inline-code">com.example.packageTwo.ClassThree</code></li>
+</ul>
+<p><code class="inline-code">-repackageclasses &quot;go.here&quot;</code> will result in:</p>
+<pre><code class="inline-code">com.example.packageOne.ClassOne -&gt; go.here.a:
+com.example.packageOne.subPackageOne.ClassTwo -&gt; go.here.b:
+com.example.packageTwo.ClassThree -&gt; go.here.c:
+</code></pre>
+<p><code class="inline-code">-flattenpackagehierarchy &quot;go.here&quot;</code> will result in:</p>
+<pre><code class="inline-code">com.example.packageOne.ClassOne -&gt; go.here.a.a:
+com.example.packageOne.subPackageOne.ClassTwo -&gt; go.here.b.a:
+com.example.packageTwo.ClassThree -&gt; go.here.c.a:
+</code></pre>
+<h3 id="Dictionaries"><span class="prefix"></span><span class="content">Dictionaries</span><span class="suffix"></span></h3><p>R8 will provide new names by cycling through the English alphabet.<br>By using dictionaries, it is possible to control, to a degree, how R8 will determine the new names for classes, methods, and fields.</p>
+<table>
+<thead>
+<tr>
+<th>Rule</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code class="inline-code">-classobfuscationdictionary &lt;filename&gt;</code></td>
+<td>Use the specified <a href="#dict_file">file</a> to find new names for classes. (<a href="pg_man#classobfuscationdictionary">ProGuard docs</a>)</td>
+</tr>
+<tr>
+<td><code class="inline-code">-obfuscationdictionary &lt;filename&gt;</code></td>
+<td>Use the specified <a href="#dict_file">file</a> to find new names for methods and fields. (<a href="pg_man#obfuscationdictionary">ProGuard docs</a>)</td>
+</tr>
+<tr>
+<td><code class="inline-code">-packageobfuscationdictionary &lt;filename&gt;</code></td>
+<td>Use the specified <a href="#dict_file">file</a> to find new names for packages. (<a href="pg_man#packageobfuscationdictionary">ProGuard docs</a>)</td>
+</tr>
+</tbody></table>
+<p><a name="dict_file"></a></p>
+<h4 id="Dictionary Files"><span class="prefix"></span><span class="content">Dictionary Files</span><span class="suffix"></span></h4><p>The dictionary files contain lists of unique names separated by whitespace or punctuation.<br>A <code class="inline-code">#</code> can be used to specify a comment.<br>The filename specified should be relative to the directory containing the rules file.<br>The names must consist of characters allowed for Java identifiers.</p>
+<pre><code class="inline-code">a1, a2, a3 #A few identifiers
+class package for while do if else switch goto this null #Reserved word identifiers
+#Identifiers on their own lines
+q
+w
+e
+r
+t
+y
+</code></pre>
+<h3 id="Mapping Files"><span class="prefix"></span><span class="content">Mapping Files</span><span class="suffix"></span></h3><p>Map files contain direct links between the original and new names of classes, methods, and fields.</p>
+<table>
+<thead>
+<tr>
+<th>Rule</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code class="inline-code">-applymapping &lt;filename&gt;</code></td>
+<td>Use the specified map for renaming. (<a href="pg_man#applymapping">ProGuard docs</a>)</td>
+</tr>
+<tr>
+<td><code class="inline-code">-printmapping [&lt;filename&gt;]</code></td>
+<td>Print a mapping from the original to the new names to the specified file, or to stdout if there is no file specified.  (<a href="pg_man#printmapping">ProGuard docs</a>) (<a href="#printmapping">See note</a>)</td>
+</tr>
+</tbody></table>
+<p><a name="printmapping"></a></p>
+<h4 id="-printmapping"><span class="prefix"></span><span class="content">-printmapping</span><span class="suffix"></span></h4><p>Regardless of the <code class="inline-code">-printmapping</code> rule, maps will always be output to a variant specific file (e.g.<code class="inline-code">build/outputs/mapping[/r8][/&#123;flavorName&#125;]/&#123;buildType&#125;/mapping.txt</code>).<br>If <code class="inline-code">-printmapping</code> is configured to print to a file in a configuration that is used by more than one variant, the configured file will be overwritten to reflect whichever variant built last.</p>
+<h2 id="Unsupported Rules"><span class="prefix"></span><span class="content">Unsupported Rules</span><span class="suffix"></span></h2><p>Some ProGuard rules are unsupported by R8 and will not be honored.</p>
+<p>The following rules will cause R8 to issue an error:</p>
+<ul>
+<li><code class="inline-code">-microedition</code></li>
+<li><code class="inline-code">-skipnonpubliclibraryclasses</code></li>
+<li><code class="inline-code">includecode</code> (modifier used with <code class="inline-code">-keep*</code> rules) (<a href="itg/73801028">See issue</a>)</li>
+</ul>
+<p>The following rules will cause R8 to issue a warning message:</p>
+<ul>
+<li><code class="inline-code">-optimizationpasses</code> (enabled by <code class="inline-code">proguard-android-optimize.txt</code>)</li>
+<li><code class="inline-code">-optimizations</code></li>
+</ul>
+<p>The following rules are ignored:</p>
+<ul>
+<li><code class="inline-code">-addconfigurationdebugging</code></li>
+<li><code class="inline-code">-android</code></li>
+<li><code class="inline-code">-assumenoescapingparameters</code></li>
+<li><code class="inline-code">-assumenoexternalreturnvalues</code></li>
+<li><code class="inline-code">-assumenoexternalsideefffects</code></li>
+<li><code class="inline-code">-dontpreverify</code></li>
+<li><code class="inline-code">-dontskipnonpubliclibraryclasses</code></li>
+<li><code class="inline-code">-dontskipnonpubliclibraryclassmembers</code></li>
+<li><code class="inline-code">-dontusemixedcaseclassnames</code></li>
+<li><code class="inline-code">-dump</code></li>
+<li><code class="inline-code">-forceprocessing</code></li>
+<li><code class="inline-code">-keepparameternames</code></li>
+<li><code class="inline-code">-mergeinterfacesaggressively</code></li>
+<li><code class="inline-code">-outjars</code></li>
+<li><code class="inline-code">-target</code></li>
+<li><code class="inline-code">-useuniqueclassmembernames</code></li>
+<li><code class="inline-code">-verbose</code></li>
+</ul>
+<h3 id="Not Applicable"><span class="prefix"></span><span class="content">Not Applicable</span><span class="suffix"></span></h3><p>R8 is designed for use with Android projects.<br>However, some rules it supports are not applicable in Android projects:</p>
+<table>
+<thead>
+<tr>
+<th>Rule</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code class="inline-code">-keepdirectories [&lt;filter&gt;]</code></td>
+<td>Keep directory entries in the output jar or zip file. (<a href="pg_man#keepdirectories">ProGuard rules</a>)</td>
+</tr>
+</tbody></table>
+<h2 id="Troubleshooting"><span class="prefix"></span><span class="content">Troubleshooting</span><span class="suffix"></span></h2><p>This section describes some issues that you might encounter when trying to use R8.<br>You might also find details about your issue in the <a target="_blank" rel="noopener" href="https://developer.android.com/studio/build/shrink-code#troubleshoot">Android Studio User Guide</a>, the <a target="_blank" rel="noopener" href="https://r8.googlesource.com/r8/+/refs/heads/master/compatibility-faq.md">R8 Compatibility FAQ</a>, or <a target="_blank" rel="noopener" href="https://www.guardsquare.com/en/products/proguard/manual/troubleshooting">ProGuard’s Troubleshooting page</a>.</p>
+<p>If you cannot find a solution to your problem, or if you otherwise encounter incorrect behavior, you can <a target="_blank" rel="noopener" href="https://issuetracker.google.com/issues/new?component=326788&template=1025938">report a bug</a> with the Google team.</p>
+<h3 id="ProGuard appears to be running instead of R8"><span class="prefix"></span><span class="content">ProGuard appears to be running instead of R8</span><span class="suffix"></span></h3><p>Make sure that you do not have <code class="inline-code">android.enableR8=false</code> in your <code class="inline-code">gradle.properties</code> file.</p>
+<blockquote>
+<p><strong>Note:</strong> If you are using a version of the Android Gradle Plugin prior to 3.4, you will need to set <code class="inline-code">android.enableR8=true</code> in your <code class="inline-code">gradle.properties</code> file to enable R8.</p>
+</blockquote>
+<h3 id="D8: Unsupported option: -skipnonpubliclibraryclasses"><span class="prefix"></span><span class="content">D8: Unsupported option: -skipnonpubliclibraryclasses</span><span class="suffix"></span></h3><p>This rule is <a href="#unsupported-rules">unsupported in R8</a>.<br>Remove it from your configuration.</p>
+<h3 id="Custom rules don’t appear to be used"><span class="prefix"></span><span class="content">Custom rules don’t appear to be used</span><span class="suffix"></span></h3><p>Make sure that any rule file that you want to use is properly configured in your Gradle build script with <code class="inline-code">proguardFiles</code>.<br>Relative paths configured in your Gradle build script should be relative to the application or library module for which you would like the rules to apply.<br>See the <a target="_blank" rel="noopener" href="https://developer.android.com/studio/build/shrink-code">Android Studio User Guide</a> for details.</p>
+<blockquote>
+<p><strong>Note:</strong> The Android Gradle Plugin will not error or warn you if it cannot locate the specified file.</p>
+</blockquote>
+<h3 id="The rule [some rule] uses extends but actually matches implements"><span class="prefix"></span><span class="content">The rule [some rule] uses extends but actually matches implements</span><span class="suffix"></span></h3><p>R8 issues this warning if you use an <code class="inline-code">extends</code> rule to match descendents of an interface rather than <code class="inline-code">implements</code>, regardless of whether the descendents you’re trying to match are classes or interfaces.<br>If the specified rule is a custom rule that you have created, you can update the rule to use <code class="inline-code">implements</code> rather than <code class="inline-code">extends</code>.<br>However, some libraries, including Android support libraries, contain rules that will produce this warning.<br>Unfortunately, there is no easy way to resolve or suppress the warning in that case.</p>
+
+                </div>
+            </section>
+        </div>
+        <input id="copy-input" style="position: absolute; left: -1000px; z-index: -1000;">
+
+    
+
+</div>
+                <!-- 
+                    <div class="post_pre_next">
+    
+    
+        <a href="/2023/06/29/proguard-4/">下一篇: 
+            ProGuard 进阶系列（四）访问者模式
+        </a>
+    
+</div>
+
+
+                 -->
+                <div class="footer">
+    <span>Copyright © 2023 大罗说事</span>
+</div>
+
+<!-- 
+<link rel="stylesheet" href="/css/highlight.default.css">
+ -->
+<style type="text/css" id="atom-one-dark">pre code.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 12px;
+  font-size: 12px;
+}
+/*
+
+Atom One Dark by Daniel Gamage
+Original One Dark Syntax theme from https://github.com/atom/one-dark-syntax
+
+base:    #282c34
+mono-1:  #abb2bf
+mono-2:  #818896
+mono-3:  #5c6370
+hue-1:   #56b6c2
+hue-2:   #61aeee
+hue-3:   #c678dd
+hue-4:   #98c379
+hue-5:   #e06c75
+hue-5-2: #be5046
+hue-6:   #d19a66
+hue-6-2: #e6c07b
+
+*/
+
+.hljs {
+  color: #abb2bf;
+  background: #282c34;
+}
+
+.hljs-comment,
+.hljs-quote {
+  color: #5c6370;
+  font-style: italic;
+}
+
+.hljs-doctag,
+.hljs-keyword,
+.hljs-formula {
+  color: #c678dd;
+}
+
+.hljs-section,
+.hljs-name,
+.hljs-selector-tag,
+.hljs-deletion,
+.hljs-subst {
+  color: #e06c75;
+}
+
+.hljs-literal {
+  color: #56b6c2;
+}
+
+.hljs-string,
+.hljs-regexp,
+.hljs-addition,
+.hljs-attribute,
+.hljs-meta .hljs-string {
+  color: #98c379;
+}
+
+.hljs-attr,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-type,
+.hljs-selector-class,
+.hljs-selector-attr,
+.hljs-selector-pseudo,
+.hljs-number {
+  color: #d19a66;
+}
+
+.hljs-symbol,
+.hljs-bullet,
+.hljs-link,
+.hljs-meta,
+.hljs-selector-id,
+.hljs-title {
+  color: #61aeee;
+}
+
+.hljs-built_in,
+.hljs-title.class_,
+.hljs-class .hljs-title {
+  color: #e6c07b;
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-strong {
+  font-weight: bold;
+}
+
+.hljs-link {
+  text-decoration: underline;
+}
+
+</style>
+<style type="text/css" id="code-theme">pre::before {
+    content: '';
+    display: block;
+    background: url("http://pinned.github.io/img/mac_style.svg");
+    height: 30px;
+    width: 100%;
+    background-size: 40px;
+    background-repeat: no-repeat;
+    background-color: #282c34;
+    margin-bottom: -7px;
+    border-radius: 5px;
+    background-position: 10px 10px;
+}
+
+pre code {
+    border-radius: 5px;
+}</style>
+
+<script src="/js/highlight.min.js"></script>
+
+
+<script src="/js/highlightjs-line-numbers.js"></script>
+
+
+<script src="/js/juice.js"></script>
+
+
+<script src="/js/copy_wechat.js"></script>
+
+
+<script>
+    hljs.highlightAll();
+    // window.onload = function() {
+    //     // 判断是否为手机浏览器
+    //     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+    //     if (!isMobile) {
+    //         fetch('https://pinned.github.io/bing-daily-picture/index.json')
+    //             .then(response => response.text())
+    //             .then(data => {
+    //                 var result = JSON.parse(data)
+    //                 var count = result.images.length
+    //                 const index = Math.floor(Math.random() * count);
+    //                 document.getElementById("bing-bg").src = "https://cn.bing.com" + result.images[index].url;
+    //             }); // 返回的结果
+    //     } 
+    // }    
+</script>
+
+            </div>
+        </div>
+    </body>
+</html>
