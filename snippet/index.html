@@ -730,6 +730,11 @@ thead {
 &lt;/style&gt;
 </code></pre>
 <p>在使用的时候，只需将不需要动画的Activity的<code class="inline-code">style</code>设置成这个就可以了</p>
+<h1><span class="prefix"></span><span class="content">TextView之代码设置DrawableLeft</span><span class="suffix"></span></h1><pre><code class="java">Drawable drawable = getResources().getDrawable(R.drawable.drawable);  
+/// 这一步必须要做,否则不会显示.  
+drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());  
+myTextview.setCompoundDrawables(drawable,null,null,null);
+</code></pre>
 <h1><span class="prefix"></span><span class="content">Android 按两次返回键退出应用程序</span><span class="suffix"></span></h1><pre><code class="java">public boolean onKeyDown(int keyCode, KeyEvent event) &#123;
     if (keyCode == KeyEvent.KEYCODE_BACK) &#123;
         if ((System.currentTimeMillis() - mExitTime) &gt; 2000) &#123;
@@ -745,18 +750,18 @@ thead {
     return super.onKeyDown(keyCode, event);
 &#125;
 </code></pre>
-<h1><span class="prefix"></span><span class="content">SD Card的大小和容量</span><span class="suffix"></span></h1><pre><code class="java">StatFs stat = new StatFs(Environment.getExternalStorageDirectory().getPath());
-long sdAvailSize = (long)stat.getAvailableBlocks()
-               * (long)stat.getBlockSize();
-long sdTotalSize =  (long)stat.getBlockCount()
-                * (long)stat.getBlockSize()
-</code></pre>
 <h1><span class="prefix"></span><span class="content">在`values`中定义id</span><span class="suffix"></span></h1><p>在<code class="inline-code">values</code>文件夹中创建<code class="inline-code">ids.xml</code>文件， 文件目录为：<code class="inline-code">values/ids.xml</code></p>
 <p>我们有时候，会在代码中定义一个组件，如<code class="inline-code">TextView</code>,但是我们想给他设置一个Id，又不知道该设置一个<br>什么值比较好，就可以用上术方法来定义一个<code class="inline-code">id</code>, 具体代码如下:</p>
 <pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
 &lt;values&gt;
 &lt;item name=&quot;custom_item_id&quot; type=&quot;id&quot;&gt;&lt;/item&gt;
 &lt;/values&gt;
+</code></pre>
+<h1><span class="prefix"></span><span class="content">SD Card的大小和容量</span><span class="suffix"></span></h1><pre><code class="java">StatFs stat = new StatFs(Environment.getExternalStorageDirectory().getPath());
+long sdAvailSize = (long)stat.getAvailableBlocks()
+               * (long)stat.getBlockSize();
+long sdTotalSize =  (long)stat.getBlockCount()
+                * (long)stat.getBlockSize()
 </code></pre>
 <h1><span class="prefix"></span><span class="content">gradle打包的时候，自动重命名APK文件</span><span class="suffix"></span></h1><pre><code class="bash">android.applicationVariants.all &#123; variant -&gt;
     variant.outputs.each &#123; output -&gt;
@@ -768,13 +773,27 @@ long sdTotalSize =  (long)stat.getBlockCount()
     &#125;
 &#125;
 </code></pre>
-<h1><span class="prefix"></span><span class="content">Android string.xml中的占位符</span><span class="suffix"></span></h1><pre><code class="xml">&lt;!-- .2f表示的是保留三位小数的浮点数  --&gt;
-&lt;string name=&quot;book&quot;&gt;书名 (字符串)%1$s,作者(字符串)%2$s,编号(整数)%3$d,价格(浮点型)：%4$.2f&lt;/string&gt;
+<h1><span class="prefix"></span><span class="content">Android文字颜色选择器</span><span class="suffix"></span></h1><pre><code class="xml">//在这个地方，应该使用
+//android:textColor=&quot;@drawable/text_color&quot;
+
+// text_color.xml
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;selector xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;
+    &lt;item android:state_pressed=&quot;true&quot; android:color=&quot;@color/click_blue_color&quot;&gt;&lt;/item&gt;
+    &lt;item android:color=&quot;@color/blue_color&quot;&gt;&lt;/item&gt;
+&lt;/selector&gt;
 </code></pre>
-<h1><span class="prefix"></span><span class="content">TextView之代码设置DrawableLeft</span><span class="suffix"></span></h1><pre><code class="java">Drawable drawable = getResources().getDrawable(R.drawable.drawable);  
-/// 这一步必须要做,否则不会显示.  
-drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());  
-myTextview.setCompoundDrawables(drawable,null,null,null);
+<h1><span class="prefix"></span><span class="content">格式化文件容量代码</span><span class="suffix"></span></h1><pre><code class="java">public static String formatSize(long size) &#123;
+    if (size &lt; 1024) &#123;
+        return String.format(&quot;%dByte&quot;, size);
+    &#125; else if (size &lt; 1024 * 1024) &#123;
+        return String.format(&quot;%.2fKb&quot;, size / 1024f);
+    &#125; else if (size &lt; 1024 * 1024 * 1024) &#123;
+        return String.format(&quot;%.2fMb&quot;, size / 1024f / 1024f);
+    &#125; else &#123;
+        return String.format(&quot;%.2fGb&quot;, size / 1024f / 1024f / 1024f);
+    &#125;
+&#125;
 </code></pre>
 <h1><span class="prefix"></span><span class="content">Android TextView 设置字体大小</span><span class="suffix"></span></h1><pre><code class="java">/**
  * Set the default text size to the given value, interpreted as &quot;scaled
@@ -826,27 +845,8 @@ private void setRawTextSize(float size) &#123;
 </code></pre>
 <p>以上代码是<code class="inline-code">Android TextView</code>设置字体的源码。可以看出来，使用<code class="inline-code">setTextSize(float size)</code>的时候，默认单位为<code class="inline-code">sp</code></p>
 <p>如果你自己从<code class="inline-code">xml</code>中读的时候，最好使用<code class="inline-code">setTextSize(int unit, float size)</code>这个方法。</p>
-<h1><span class="prefix"></span><span class="content">格式化文件容量代码</span><span class="suffix"></span></h1><pre><code class="java">public static String formatSize(long size) &#123;
-    if (size &lt; 1024) &#123;
-        return String.format(&quot;%dByte&quot;, size);
-    &#125; else if (size &lt; 1024 * 1024) &#123;
-        return String.format(&quot;%.2fKb&quot;, size / 1024f);
-    &#125; else if (size &lt; 1024 * 1024 * 1024) &#123;
-        return String.format(&quot;%.2fMb&quot;, size / 1024f / 1024f);
-    &#125; else &#123;
-        return String.format(&quot;%.2fGb&quot;, size / 1024f / 1024f / 1024f);
-    &#125;
-&#125;
-</code></pre>
-<h1><span class="prefix"></span><span class="content">Android文字颜色选择器</span><span class="suffix"></span></h1><pre><code class="xml">//在这个地方，应该使用
-//android:textColor=&quot;@drawable/text_color&quot;
-
-// text_color.xml
-&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;selector xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;
-    &lt;item android:state_pressed=&quot;true&quot; android:color=&quot;@color/click_blue_color&quot;&gt;&lt;/item&gt;
-    &lt;item android:color=&quot;@color/blue_color&quot;&gt;&lt;/item&gt;
-&lt;/selector&gt;
+<h1><span class="prefix"></span><span class="content">Android string.xml中的占位符</span><span class="suffix"></span></h1><pre><code class="xml">&lt;!-- .2f表示的是保留三位小数的浮点数  --&gt;
+&lt;string name=&quot;book&quot;&gt;书名 (字符串)%1$s,作者(字符串)%2$s,编号(整数)%3$d,价格(浮点型)：%4$.2f&lt;/string&gt;
 </code></pre>
 <h1><span class="prefix"></span><span class="content">Android 混淆记录</span><span class="suffix"></span></h1><pre><code class="bash">--keep class cn.knero.model.*&#123;
     public &lt;methods&gt;; // 不混淆public的方法
@@ -924,6 +924,10 @@ if (inputType == 129) &#123;
 </code></pre>
 <p>参考：</p>
 <p>  <a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/14054364/how-to-assign-padding-to-listview-item-divider-line?answertab=active#tab-top">How to assign padding to Listview item divider line</a></p>
+<h1><span class="prefix"></span><span class="content">Android TextView setTextSize</span><span class="suffix"></span></h1><p>Android TextView 在设置TextSize 值很大的时候，会报如下错误<code class="inline-code">Font size too large to fit in cache</code>。 修改方法如下：</p>
+<pre><code class="java">TextView bigText = (TextView) findViewById(R.id.bigtext);
+bigText.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+</code></pre>
 <h1><span class="prefix"></span><span class="content">获取Logcat信息</span><span class="suffix"></span></h1><pre><code class="java">private void getLogcat( final LogcatListener listener ) &#123;
 
     new Thread() &#123;
@@ -971,10 +975,6 @@ if (inputType == 129) &#123;
 &#125;
 
 ```java
-</code></pre>
-<h1><span class="prefix"></span><span class="content">Android TextView setTextSize</span><span class="suffix"></span></h1><p>Android TextView 在设置TextSize 值很大的时候，会报如下错误<code class="inline-code">Font size too large to fit in cache</code>。 修改方法如下：</p>
-<pre><code class="java">TextView bigText = (TextView) findViewById(R.id.bigtext);
-bigText.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
 </code></pre>
 </div>
     
