@@ -747,7 +747,7 @@ notification.flags|=Notification.FLAG_SHOW_LIGHTS;
 notificationManager.notify(notificationId, notification);
 </code></pre>
 <p>和上一个例子不同的是，这一个Notification跳转的位置并不是<code class="inline-code">OtherActiivty</code>，<br>而是直接跳转到<code class="inline-code">MainActivity</code>.</p>
-<p><strong>问题</strong><br>非常不幸的事，他并不能够正常接收么Intent传过来的参数。至于为什么，我也不知道。<br>如您知道这个的具体原因请告知我(邮箱：<a href="mailto:&#x6c;&#111;&#x76;&#101;&#x63;&#108;&#x75;&#x6f;&#64;&#x67;&#109;&#97;&#105;&#108;&#x2e;&#99;&#x6f;&#x6d;">&#x6c;&#111;&#x76;&#101;&#x63;&#108;&#x75;&#x6f;&#64;&#x67;&#109;&#97;&#105;&#108;&#x2e;&#99;&#x6f;&#x6d;</a>)。</p>
+<p><strong>问题</strong><br>非常不幸的事，他并不能够正常接收么Intent传过来的参数。至于为什么，我也不知道。<br>如您知道这个的具体原因请告知我(邮箱：<a href="mailto:&#x6c;&#x6f;&#118;&#101;&#x63;&#x6c;&#117;&#x6f;&#64;&#x67;&#109;&#x61;&#x69;&#x6c;&#46;&#99;&#111;&#x6d;">&#x6c;&#x6f;&#118;&#101;&#x63;&#x6c;&#117;&#x6f;&#64;&#x67;&#109;&#x61;&#x69;&#x6c;&#46;&#99;&#111;&#x6d;</a>)。</p>
 <p><strong>解决办法</strong></p>
 <p>虽然不知道是什么原因造成了这个问题，但是最终还是找到了解决方案：</p>
 <p>解决方法如下：</p>
@@ -762,8 +762,14 @@ protected void onNewIntent(Intent intent) &#123;
 <p><strong>参考资料</strong></p>
 <p>[1] <a target="_blank" rel="noopener" href="http://www.cnblogs.com/zenfly/archive/2012/02/10/2345196.html">onNewIntent调用时机</a></p>
 
-                </div>
+                    <hr/>
+            </div>
             </section>
+        </div>
+        <div style="margin: auto;">
+            <div>
+                <img src="https://moe-counter.glitch.me/get/@pinned_blog_Android之Notification的使用（二）?theme=moebooru" style="margin: 0 auto;" referrerpolicy="no-referrer">
+            </div>
         </div>
         <input id="copy-input" style="position: absolute; left: -1000px; z-index: -1000;">
 

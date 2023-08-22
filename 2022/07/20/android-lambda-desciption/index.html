@@ -968,8 +968,14 @@ private void generateFactoryMethod() &#123;
 <p><img src="https://img-blog.csdnimg.cn/855cad054761409fa063dc903bc4b1ff.png" alt="生成的 LabdaTest$$Lambda$1.class" referrerpolicy="no-referrer"></p>
 <h2 id="4. 思考"><span class="prefix"></span><span class="content">4. 思考</span><span class="suffix"></span></h2><p>有了上面的脱糖流程，既然可以在编译时，就能实现 lambda 的逻辑，为什么还要添加 <code class="inline-code">invokedynamic</code> 指令呢？ 这不得不提 Java 是一种静态类型语言，所有的东西都是在编译时都已经确定好了，静态类型的语言在运行相对效率更高，但灵活性就有所降低。而 <code class="inline-code">invokedynamic</code> 的设计就是让 JVM 可以更加的灵活，让基于 JVM 的语言设计者，可以有更多的自由度。</p>
 
-                </div>
+                    <hr/>
+            </div>
             </section>
+        </div>
+        <div style="margin: auto;">
+            <div>
+                <img src="https://moe-counter.glitch.me/get/@pinned_blog_在 Android 中使用 Lambda 的原理解析?theme=moebooru" style="margin: 0 auto;" referrerpolicy="no-referrer">
+            </div>
         </div>
         <input id="copy-input" style="position: absolute; left: -1000px; z-index: -1000;">
 
