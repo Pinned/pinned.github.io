@@ -714,6 +714,21 @@ thead {
     
     
     <div class="post">
+        <a class="post-title" href="/2022/10/13/java-string-encoding/">深入理解 Java 字符串编码</a>
+        <div class="post-except">
+            
+                近期在工作中，遇到了一段历史代码，在代码中，将一个字符串进行加密，得到一个 byte 数组， 在代码中，这个 byte 数组 需要存储到 文件中，但代码却是用这个 byte 数组 创建了一个 String ，然后在将 String 写入到文件中。 聪明的你应该发现问题了，byte 数组 直接转成 String 会有问题，一般的处理方法是将 byte 数组 使用 Base64 编码，然后将编码后的字符串写入文件中，在使用的时候，先使用 Base64 解码。
+可是，为什么 byt
+            
+            <a class="read-more" href="/2022/10/13/java-string-encoding/"> ... </a>
+        </div>
+        <div class="post-date">2022.10.13</div>
+    </div>
+    
+    
+    
+    
+    <div class="post">
         <a class="post-title" href="/2022/10/01/android-proguard-multi-module/">深入 Android 混淆实践：多模块打包爬坑之旅</a>
         <div class="post-except">
             
@@ -848,21 +863,6 @@ HTTP协议以明文方式发送内容，不提供任何方式的数据加密，�
     </div>
     
     
-    
-    
-    <div class="post">
-        <a class="post-title" href="/2017/10/15/gradlew%20source%20analyze/">gradlew 源码分析</a>
-        <div class="post-except">
-            
-                gradlew 源码分析使用Android Studio 新建一个项目，会默认使用gradle编译项目。在编译的时候可以使用：gradle assembleRelease, 当然，如果没有安装gradle的时候，也可以使用项目文件夹下面的gradlew进行编译。
-可以看到gradlew是一个shell脚本，他读取了系统的一些环境变量，并运行了gradle&#x2F;wrapper&#x2F;gradle-wrapper.jar文件的org.gradle.wrapper.Gra
-            
-            <a class="read-more" href="/2017/10/15/gradlew%20source%20analyze/"> ... </a>
-        </div>
-        <div class="post-date">2017.10.15</div>
-    </div>
-    
-    
 </div>
 
 <div class="paginator">
@@ -871,7 +871,7 @@ HTTP协议以明文方式发送内容，不提供任何方式的数据加密，�
 
                 <!--  -->
                 <div class="footer">
-    <span>Copyright © 2023 大罗说事</span>
+    <span>Copyright © 2024 大罗说事</span>
 </div>
 
 <!-- 

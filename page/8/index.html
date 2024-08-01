@@ -714,6 +714,25 @@ thead {
     
     
     <div class="post">
+        <a class="post-title" href="/2015/01/15/textview-url-lickify/">TextView 高亮URL地址，并实现跳转</a>
+        <div class="post-except">
+            
+                Android TextView 使用TextView的使用中，存在很多高级功能。比如高亮URL地址、电话号码等
+使用方法：
+TextView tempText = new TextView(context);
+tempText.setText(&quot;www.baidu.com&quot;);
+tempText.setAutoLinkMask(Linkify.WEB_URLS);
+tempText.setMovementMethod(LinkMovementMethod
+            
+            <a class="read-more" href="/2015/01/15/textview-url-lickify/"> ... </a>
+        </div>
+        <div class="post-date">2015.01.15</div>
+    </div>
+    
+    
+    
+    
+    <div class="post">
         <a class="post-title" href="/2014/12/30/android-best-practices/">Best practices in Android development</a>
         <div class="post-except">
             
@@ -722,28 +741,6 @@ thead {
             <a class="read-more" href="/2014/12/30/android-best-practices/"> ... </a>
         </div>
         <div class="post-date">2014.12.30</div>
-    </div>
-    
-    
-    
-    
-    <div class="post">
-        <a class="post-title" href="/2014/12/24/android-studio-using/">Android Studio 使用记录（一）</a>
-        <div class="post-except">
-            
-                在使用Android Studio 的时候，不小心手贱。把View内的自动提示和自动引入加入了ignore列表中去了。
-有关这个问题，也不知道怎么在度娘那儿搜索。
-没有办法，只有自己去慢慢找。虽然不认识几个英文。但是最终还是给我找到了。
-解决办法：
-Android Studio -&gt; [Setting] -&gt; [Editer] -&gt; [Auto Import]
-
-如下图所示：
-
-
-            
-            <a class="read-more" href="/2014/12/24/android-studio-using/"> ... </a>
-        </div>
-        <div class="post-date">2014.12.24</div>
     </div>
     
     
@@ -770,6 +767,28 @@ feature&#x2F;branch_test
 
             
             <a class="read-more" href="/2014/12/24/git-checkout/"> ... </a>
+        </div>
+        <div class="post-date">2014.12.24</div>
+    </div>
+    
+    
+    
+    
+    <div class="post">
+        <a class="post-title" href="/2014/12/24/android-studio-using/">Android Studio 使用记录（一）</a>
+        <div class="post-except">
+            
+                在使用Android Studio 的时候，不小心手贱。把View内的自动提示和自动引入加入了ignore列表中去了。
+有关这个问题，也不知道怎么在度娘那儿搜索。
+没有办法，只有自己去慢慢找。虽然不认识几个英文。但是最终还是给我找到了。
+解决办法：
+Android Studio -&gt; [Setting] -&gt; [Editer] -&gt; [Auto Import]
+
+如下图所示：
+
+
+            
+            <a class="read-more" href="/2014/12/24/android-studio-using/"> ... </a>
         </div>
         <div class="post-date">2014.12.24</div>
     </div>
@@ -868,26 +887,6 @@ Android Vol
     
     
     <div class="post">
-        <a class="post-title" href="/2014/11/04/butterknife-useing/">Andorid UI注入工具的使用(ButterKnife)</a>
-        <div class="post-except">
-            
-                一个Android项目中，必不可少有很多UI，并且Activity要控制这些UI，当然，我们会用到以下代码:
-// 获取View的引用
-Button mBtn = (Button) this.findViewById(R.id.btn);
-// 给Button添加事件
-mBtn.setOnClickListener(new OnClickListener() &#123;
-    @Override
-    public void onClick(View view) &#1
-            
-            <a class="read-more" href="/2014/11/04/butterknife-useing/"> ... </a>
-        </div>
-        <div class="post-date">2014.11.04</div>
-    </div>
-    
-    
-    
-    
-    <div class="post">
         <a class="post-title" href="/2014/11/04/eclipse-shutdown/">Ubuntu-14.04下Eclipse闪退解决办法</a>
         <div class="post-except">
             
@@ -908,19 +907,20 @@ mBtn.setOnClickListener(new OnClickListener() &#123;
     
     
     <div class="post">
-        <a class="post-title" href="/2014/11/03/NullPointException%20Analysis/">Android 项目中出现的奇葩bug, 数据NullPointExcption</a>
+        <a class="post-title" href="/2014/11/04/butterknife-useing/">Andorid UI注入工具的使用(ButterKnife)</a>
         <div class="post-except">
             
-                问题描述在一个自定义的Form表单中，有各种控件，如文本输入框，时间选择器，城市选择器等。在使用城市选择器的时候，城市的数据存储在List中在定义的时候，我使用如下代码定义：
-private List&lt;CityNode&gt; mCitys = null;
-
-经过数据初始化过后，在构造方法中使用mCitys是正常的，但是在其它方法中使用，mCitys便成了空值.
-这个结果让我非常的费解。
-解决问题一开始出现了这个空指针异常，排查了好久，根本就找不到任何原因，因为代码本身
+                一个Android项目中，必不可少有很多UI，并且Activity要控制这些UI，当然，我们会用到以下代码:
+// 获取View的引用
+Button mBtn = (Button) this.findViewById(R.id.btn);
+// 给Button添加事件
+mBtn.setOnClickListener(new OnClickListener() &#123;
+    @Override
+    public void onClick(View view) &#1
             
-            <a class="read-more" href="/2014/11/03/NullPointException%20Analysis/"> ... </a>
+            <a class="read-more" href="/2014/11/04/butterknife-useing/"> ... </a>
         </div>
-        <div class="post-date">2014.11.03</div>
+        <div class="post-date">2014.11.04</div>
     </div>
     
     
@@ -932,7 +932,7 @@ private List&lt;CityNode&gt; mCitys = null;
 
                 <!--  -->
                 <div class="footer">
-    <span>Copyright © 2023 大罗说事</span>
+    <span>Copyright © 2024 大罗说事</span>
 </div>
 
 <!-- 
