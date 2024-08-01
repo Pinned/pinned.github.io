@@ -1,5 +1,5 @@
 ---
-title: Android 中compileSdk、minSdk、targetSdk 是干什么用的？.md
+title: Android 中compileSdk、minSdk、targetSdk 是干什么用的?
 category: 安卓
 tags: Android
 
