@@ -744,31 +744,6 @@ long sdTotalSize =  (long)stat.getBlockCount()
 <h1><span class="prefix"></span><span class="content">Android string.xml中的占位符</span><span class="suffix"></span></h1><pre><code class="xml">&lt;!-- .2f表示的是保留三位小数的浮点数  --&gt;
 &lt;string name=&quot;book&quot;&gt;书名 (字符串)%1$s,作者(字符串)%2$s,编号(整数)%3$d,价格(浮点型)：%4$.2f&lt;/string&gt;
 </code></pre>
-<h1><span class="prefix"></span><span class="content">Android 按两次返回键退出应用程序</span><span class="suffix"></span></h1><pre><code class="java">public boolean onKeyDown(int keyCode, KeyEvent event) &#123;
-    if (keyCode == KeyEvent.KEYCODE_BACK) &#123;
-        if ((System.currentTimeMillis() - mExitTime) &gt; 2000) &#123;
-            Object mHelperUtils;
-            Toast.makeText(this, &quot;再按一次退出程序&quot;, Toast.LENGTH_SHORT).show();
-            mExitTime = System.currentTimeMillis();
-
-        &#125; else &#123;
-            finish();
-        &#125;
-        return true;
-    &#125;
-    return super.onKeyDown(keyCode, event);
-&#125;
-</code></pre>
-<h1><span class="prefix"></span><span class="content">gradle打包的时候，自动重命名APK文件</span><span class="suffix"></span></h1><pre><code class="bash">android.applicationVariants.all &#123; variant -&gt;
-    variant.outputs.each &#123; output -&gt;
-        def outputFile = output.outputFile
-        if (outputFile != null &amp;&amp; outputFile.name.endsWith(&#39;.apk&#39;)) &#123;
-            def fileName = outputFile.name.replace(&quot;.apk&quot;, &quot;-$&#123;defaultConfig.versionName&#125;-$&#123; defaultConfig.versionCode&#125;.apk&quot;)
-            output.outputFile = new File(outputFile.parent, fileName)
-        &#125;
-    &#125;
-&#125;
-</code></pre>
 <h1><span class="prefix"></span><span class="content">在`values`中定义id</span><span class="suffix"></span></h1><p>在<code class="inline-code">values</code>文件夹中创建<code class="inline-code">ids.xml</code>文件， 文件目录为：<code class="inline-code">values/ids.xml</code></p>
 <p>我们有时候，会在代码中定义一个组件，如<code class="inline-code">TextView</code>,但是我们想给他设置一个Id，又不知道该设置一个<br>什么值比较好，就可以用上术方法来定义一个<code class="inline-code">id</code>, 具体代码如下:</p>
 <pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
@@ -786,6 +761,31 @@ long sdTotalSize =  (long)stat.getBlockCount()
     &#125; else &#123;
         return String.format(&quot;%.2fGb&quot;, size / 1024f / 1024f / 1024f);
     &#125;
+&#125;
+</code></pre>
+<h1><span class="prefix"></span><span class="content">gradle打包的时候，自动重命名APK文件</span><span class="suffix"></span></h1><pre><code class="bash">android.applicationVariants.all &#123; variant -&gt;
+    variant.outputs.each &#123; output -&gt;
+        def outputFile = output.outputFile
+        if (outputFile != null &amp;&amp; outputFile.name.endsWith(&#39;.apk&#39;)) &#123;
+            def fileName = outputFile.name.replace(&quot;.apk&quot;, &quot;-$&#123;defaultConfig.versionName&#125;-$&#123; defaultConfig.versionCode&#125;.apk&quot;)
+            output.outputFile = new File(outputFile.parent, fileName)
+        &#125;
+    &#125;
+&#125;
+</code></pre>
+<h1><span class="prefix"></span><span class="content">Android 按两次返回键退出应用程序</span><span class="suffix"></span></h1><pre><code class="java">public boolean onKeyDown(int keyCode, KeyEvent event) &#123;
+    if (keyCode == KeyEvent.KEYCODE_BACK) &#123;
+        if ((System.currentTimeMillis() - mExitTime) &gt; 2000) &#123;
+            Object mHelperUtils;
+            Toast.makeText(this, &quot;再按一次退出程序&quot;, Toast.LENGTH_SHORT).show();
+            mExitTime = System.currentTimeMillis();
+
+        &#125; else &#123;
+            finish();
+        &#125;
+        return true;
+    &#125;
+    return super.onKeyDown(keyCode, event);
 &#125;
 </code></pre>
 <h1><span class="prefix"></span><span class="content">Android文字颜色选择器</span><span class="suffix"></span></h1><pre><code class="xml">//在这个地方，应该使用
@@ -879,24 +879,6 @@ if (inputType == 129) &#123;
     mPswEdit.setInputType(129);
 &#125;
 </code></pre>
-<h1><span class="prefix"></span><span class="content">Android 截取EditText输入的Emoji表情</span><span class="suffix"></span></h1><pre><code class="java">public String subInputText(String inputText,int index) &#123;
-    int unicode = Character.codePointAt(text, index);
-    int skip = Character.charCount(unicode);
-    mInputSquares[textCount++].setText(text.substring(index, index+skip));
-&#125;
-</code></pre>
-<h1><span class="prefix"></span><span class="content">XML 实现 ListView divider margin</span><span class="suffix"></span></h1><pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;inset xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
-    android:insetLeft=&quot;50dp&quot;
-    android:insetRight=&quot;50dp&quot; &gt;
-    &lt;shape&gt;
-        &lt;solid android:color=&quot;@color/orange&quot; /&gt;
-        &lt;corners android:radius=&quot;2.0dip&quot; /&gt;
-    &lt;/shape&gt;
-&lt;/inset&gt;
-</code></pre>
-<p>参考：</p>
-<p>  <a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/14054364/how-to-assign-padding-to-listview-item-divider-line?answertab=active#tab-top">How to assign padding to Listview item divider line</a></p>
 <h1><span class="prefix"></span><span class="content">Android 混淆记录</span><span class="suffix"></span></h1><pre><code class="bash">--keep class cn.knero.model.*&#123;
     public &lt;methods&gt;; // 不混淆public的方法
 &#125;
@@ -924,6 +906,24 @@ if (inputType == 129) &#123;
     public android.view.View onLoading();
 &#125;
 </code></pre>
+<h1><span class="prefix"></span><span class="content">Android 截取EditText输入的Emoji表情</span><span class="suffix"></span></h1><pre><code class="java">public String subInputText(String inputText,int index) &#123;
+    int unicode = Character.codePointAt(text, index);
+    int skip = Character.charCount(unicode);
+    mInputSquares[textCount++].setText(text.substring(index, index+skip));
+&#125;
+</code></pre>
+<h1><span class="prefix"></span><span class="content">XML 实现 ListView divider margin</span><span class="suffix"></span></h1><pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;inset xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    android:insetLeft=&quot;50dp&quot;
+    android:insetRight=&quot;50dp&quot; &gt;
+    &lt;shape&gt;
+        &lt;solid android:color=&quot;@color/orange&quot; /&gt;
+        &lt;corners android:radius=&quot;2.0dip&quot; /&gt;
+    &lt;/shape&gt;
+&lt;/inset&gt;
+</code></pre>
+<p>参考：</p>
+<p>  <a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/14054364/how-to-assign-padding-to-listview-item-divider-line?answertab=active#tab-top">How to assign padding to Listview item divider line</a></p>
 <h1><span class="prefix"></span><span class="content">Android TextView setTextSize</span><span class="suffix"></span></h1><p>Android TextView 在设置TextSize 值很大的时候，会报如下错误<code class="inline-code">Font size too large to fit in cache</code>。 修改方法如下：</p>
 <pre><code class="java">TextView bigText = (TextView) findViewById(R.id.bigtext);
 bigText.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
