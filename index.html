@@ -714,23 +714,40 @@ thead {
     
     
     <div class="post">
-        <a class="post-title" href="/2023/08/09/java-function-patten-study/">函数式编程：尾调优化</a>
+        <a class="post-title" href="/2024/08/09/java-function-patten-study/">函数式编程：尾调优化</a>
         <div class="post-except">
             
-                在函数式编程中， 函数是一等公民，实现中，会有很多代码都使用递归进行实现。在编写优雅代码的过程中，也会引入一定的风险：栈溢出。为了解决这个问题， 为函数式编程风格的语言都会提供「尾调优化（Tail Call Optimization, TCO）」的特性。
+                在函数式编程中， 函数是一等公民，实现中，会有很多代码都使用递归进行实现。在编写优雅代码的过程中，也会引入一定的风险：栈溢出。为了解决这个问题， 作为函数式编程风格的语言都会提供「尾调优化（Tail Call Optimization, TCO）」的特性。
 什么是尾调用?尾调用（Tail Call）指的是一个函数的最后一条语句是一个返回调用函数的语句，这个函数调用可以是对另一个函数的调用，也可以是对自身的调用。举个例子：
-fun methodA(data:String): St
+fun methodA(data:String): S
             
-            <a class="read-more" href="/2023/08/09/java-function-patten-study/"> ... </a>
+            <a class="read-more" href="/2024/08/09/java-function-patten-study/"> ... </a>
         </div>
-        <div class="post-date">2023.08.09</div>
+        <div class="post-date">2024.08.09</div>
     </div>
     
     
     
     
     <div class="post">
-        <a class="post-title" href="/2023/08/01/android-targetsdk-compilesdk-minsdk%20copy/">Android 中compileSdk、minSdk、targetSdk 是干什么用的?</a>
+        <a class="post-title" href="/2024/08/09/android-jdk-configuration/">你不会到现在还不知道 Android 中的那些 JDK 配置吧？</a>
+        <div class="post-except">
+            
+                在做 Android 应用开发时，不可避免的要使用到 JDK 。在众多版本的 JDK 中， 项目代码的编译会使用哪个版本，开发者要如何指定使用的 JDK  版本？选择和指定 JDK 是一个非常重要的步骤，它会影响整个开发过程。
+不论你在源码是用  Java 进行编写的，还是使用 Kotlin，或者是两者都有使用。在整个项目开发迭代周期中，都会有很多地方会涉及到  JDK 版本：
+
+Android Studio 的 JDK「工欲善其事，必先利其器」， Android Studi
+            
+            <a class="read-more" href="/2024/08/09/android-jdk-configuration/"> ... </a>
+        </div>
+        <div class="post-date">2024.08.09</div>
+    </div>
+    
+    
+    
+    
+    <div class="post">
+        <a class="post-title" href="/2024/08/01/android-targetsdk-compilesdk-minsdk%20copy/">Android 中compileSdk、minSdk、targetSdk 是干什么用的?</a>
         <div class="post-except">
             
                 作为多年 Android 开发的老司机， compileSdk 、minSdk、targetSdk 都是经常见到，但其具体含义是什么？ 它们都是在什么场景下去使用的。 回想起来还真不太能说得清楚。 
@@ -738,9 +755,9 @@ fun methodA(data:String): St
 
 在如此多的版本迭代更新的过程中，Android 操作系统中不断引入新的接口，也不断的对 App 添加一些新的限制
             
-            <a class="read-more" href="/2023/08/01/android-targetsdk-compilesdk-minsdk%20copy/"> ... </a>
+            <a class="read-more" href="/2024/08/01/android-targetsdk-compilesdk-minsdk%20copy/"> ... </a>
         </div>
-        <div class="post-date">2023.08.01</div>
+        <div class="post-date">2024.08.01</div>
     </div>
     
     
@@ -847,22 +864,6 @@ NV21 中图片数据编码首先，让我们来谈
             <a class="read-more" href="/2023/05/23/java-class-file-format/"> ... </a>
         </div>
         <div class="post-date">2023.05.23</div>
-    </div>
-    
-    
-    
-    
-    <div class="post">
-        <a class="post-title" href="/2023/02/25/git-principle-analysis-02/">Git 必知必会：原理剖析（二）</a>
-        <div class="post-except">
-            
-                书接上文，在上一篇文章记录Git 必知必会：原理解析 中记录了 Git 原理中的一部分信息，但在后续的学习过程中，还有部分内容需要记录，但有了此篇内容。
-一、Git 中的引用从上面的 Git 仓库树目录存储结构图中，可以看到，通过 commit 的 SHA-1 值，我们就一步一步查看所有的提交记录，以及项目中的文件内容。但 40 位的字符串几乎不可能记忆下来，也没有什么实质性的意义。那如果我们能给这些值取上一个别名，那是不是就能够很容易找到以及使用了。
-在 Git 中，此功能
-            
-            <a class="read-more" href="/2023/02/25/git-principle-analysis-02/"> ... </a>
-        </div>
-        <div class="post-date">2023.02.25</div>
     </div>
     
     

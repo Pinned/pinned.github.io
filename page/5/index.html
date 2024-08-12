@@ -714,6 +714,28 @@ thead {
     
     
     <div class="post">
+        <a class="post-title" href="/2015/05/11/svn-to-git/">SVN迁移到GIT</a>
+        <div class="post-except">
+            
+                通过git svn clone将一个SVN项目克隆成一个git版本库
+# 参数--no-metadata表示阻止git导出SVN包含的一些无用信息
+git svn clone svn://localhost/proj/ --no-metadata
+
+提交到git库
+git remote add origin git@localhost/proj.git
+git push --set-upstream origin master
+
+
+            
+            <a class="read-more" href="/2015/05/11/svn-to-git/"> ... </a>
+        </div>
+        <div class="post-date">2015.05.11</div>
+    </div>
+    
+    
+    
+    
+    <div class="post">
         <a class="post-title" href="/2015/05/11/android-aidl-server/">Android Service学习之AIDL, Parcelable和远程服务</a>
         <div class="post-except">
             
@@ -817,9 +839,6 @@ MAC安装Rails
         </div>
         <div class="post-date">2015.04.10</div>
     </div>
-    
-    
-    
     
     
 </div>

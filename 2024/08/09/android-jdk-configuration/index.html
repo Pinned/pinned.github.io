@@ -5,7 +5,7 @@
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
     <link rel="alternate icon" type="image/png" href="/img/favicon.png">
     
-        <title>函数式编程：尾调优化 </title>
+        <title>你不会到现在还不知道 Android 中的那些 JDK 配置吧？ </title>
         
 <link rel="stylesheet" href="/css/toc.css">
 
@@ -698,139 +698,93 @@ thead {
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
             <h4 id="go-top">目录</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%B0%BE%E8%B0%83%E7%94%A8?"><span class="post-toc-text">什么是尾调用?</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Kotlin%E4%B8%AD%E7%9A%84%E5%B0%BE%E9%80%92%E5%BD%92%E4%BC%98%E5%8C%96"><span class="post-toc-text">Kotlin中的尾递归优化</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E9%80%92%E5%BD%92%E4%BC%98%E5%8C%96%EF%BC%9ATrampolining"><span class="post-toc-text">递归优化：Trampolining</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Android%20Studio%20%E7%9A%84%20JDK"><span class="post-toc-text">Android Studio 的 JDK</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Gradle%20%E4%BD%BF%E7%94%A8%E7%9A%84%20JDK%20%E7%89%88%E6%9C%AC"><span class="post-toc-text">Gradle 使用的 JDK 版本</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Java%20%E4%B8%8E%20Kotlin%20%E4%B8%AD%20JDK%20%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="post-toc-text">Java 与 Kotlin 中 JDK 的配置</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%9C%A8%20Android%20%E4%B8%AD%E5%8F%AF%E4%BB%A5%E8%B0%83%E7%94%A8%E5%93%AA%E4%BA%9B%20Java%20API%20?"><span class="post-toc-text">在 Android 中可以调用哪些 Java API ?</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%86%99%E5%9C%A8%E6%9C%80%E5%90%8E"><span class="post-toc-text">写在最后</span></a></li></ol>
         </nav>
     </aside>
 
             <div class="paper-main">
                 
                     <div class="post-header">
-    <p class="post-title">函数式编程：尾调优化</p>
+    <p class="post-title">你不会到现在还不知道 Android 中的那些 JDK 配置吧？</p>
 </div>
                 
                 <div class="post-main">
 
     
         <div class="post-meta">
-            <a class='author' href="/">罗昭成</a> <span id="clipboardbtn">2023年08月09日</span>
+            <a class='author' href="/">罗昭成</a> <span id="clipboardbtn">2024年08月09日</span>
         </div>
         <div id="copy-post-content">
             <section id="beautiful">
             <div class="post-md" >
-                    <p>在函数式编程中， 函数是一等公民，实现中，会有很多代码都使用递归进行实现。在编写优雅代码的过程中，也会引入一定的风险：栈溢出。为了解决这个问题， 为函数式编程风格的语言都会提供「尾调优化（Tail Call Optimization, TCO）」的特性。</p>
-<h2 id="什么是尾调用?"><span class="prefix"></span><span class="content">什么是尾调用?</span><span class="suffix"></span></h2><p>尾调用（Tail Call）指的是一个函数的最后一条语句是一个返回调用函数的语句，这个函数调用可以是对另一个函数的调用，也可以是对自身的调用。举个例子：</p>
-<pre><code class="kotlin">fun methodA(data:String): String &#123;
-  println(&quot;methodA Called&quot;)
-  methodB(data)
-  return methodC(data)
-&#125;
-</code></pre>
-<p>在上述代码中， <code class="inline-code">methodB</code> 与 <code class="inline-code">methodC</code> 都是函数调用，其中 <code class="inline-code">methodC</code> 是 <code class="inline-code">methodA</code> 返回前运行的最后代码，也就是所说的尾调用。如果最后这个调用函数是它自己，我们也称之为尾递归。</p>
-<h2 id="Kotlin中的尾递归优化"><span class="prefix"></span><span class="content">Kotlin中的尾递归优化</span><span class="suffix"></span></h2><p>kotlin 是一种基于 JVM 的语言，它也支持函数式编程的思想。但是 JVM 因为其安全性限制，运行的程序无法操纵调用栈。基于常规的 JVM 方法调用，仅支持尾递归优化。</p>
-<p>先来看一个简单的例子， 一个求和算法， 输入任一数字N，算出「1 ~ N」 所有数字的和：</p>
-<pre><code class="kotlin">fun sum(n: Int): Int &#123;
-    if (n == 1) &#123;
-        return n;
-    &#125; else &#123;
-        return n + sum(n - 1);
-    &#125;
-&#125;
-</code></pre>
-<p>代码使用递归的方式实现了求和算法，但是根据定义，这种写法是尾递归调用吗？当然不是。要将他改成尾递归调用，需要对代码进行调整， 示例代码如下：</p>
-<pre><code class="kotlin">fun sum(n: Int, result: Int): Int &#123;
-    if (n == 0) &#123;
-        return result;
-    &#125; else &#123;
-        return sum(n-1, n + result);
-    &#125;
-&#125;
-</code></pre>
-<p>此时进行测试调用，当 N &#x3D; 10000 时，运行会出现如下错误：</p>
-<p><img src="https://img-blog.csdnimg.cn/41309f7a6d69435d89f64d72cc96ccf0.png" alt="StackOverflowError" referrerpolicy="no-referrer"></p>
-<p>这个符合预期，出现了栈溢出。在 kotlin 中需要使用 <code class="inline-code">tailrec</code> 在申明当前方法为尾递归调用，需要进行优化，代码修改后运行结果如下：</p>
-<p><img src="https://img-blog.csdnimg.cn/3df99983c4274f7e8a08382a90fd856c.png" alt="Run Success" referrerpolicy="no-referrer"></p>
-<p>问题来了，尾递归优化是如何实现的呢？</p>
-<p>反编译编译后的 class 文件，可以看到，kotlin 在编译时，对代码进行了处理，将递归调用修改成了循环调用：</p>
-<p> <img src="https://img-blog.csdnimg.cn/2b7b0d725ef74daaa1ba44cd2069cca0.png" alt="反编译后的结果" referrerpolicy="no-referrer"></p>
-<h2 id="递归优化：Trampolining"><span class="prefix"></span><span class="content">递归优化：Trampolining</span><span class="suffix"></span></h2><p>对于上面的这个例子，要将他改成循环的形式也很简单，相信大多数开发都都能快速的完成，编译器也能很容易的完成上述转换。但在真实的开发场景中，要将一个复杂的递归改写成一个尾递归调用也不一定很容易，有没有简单的方法，可以将的递归算法都改写，以解决栈溢出的问题呢？</p>
-<p>解决栈溢出的方法就是不用栈，而是将代码执行从递归栈修改为循环执行。在业界有一个叫做 <code class="inline-code">Trampolines</code> 的思想，就是用来实现转换的。它的核心思想是将递归调用转换为循环迭代，并在每次迭代中更新函数参数，而不是进行实际的递归调用。</p>
-<p>还是上面所说的例子，求和：</p>
-<pre><code class="java">fun sum(n: Int): Int &#123;
-    if (n == 1) &#123;
-        return n;
-    &#125; else &#123;
-        return n + sum(n - 1);
-    &#125;
-&#125;
-</code></pre>
-<p>使用 <code class="inline-code">Trampolines</code> 技术，先定义几个辅助类，代码如下：</p>
-<pre><code class="kotlin">sealed class Trampolines&lt;out T&gt; &#123;
-    abstract fun &lt;U&gt; flatMap(executor: (T) -&gt; U): Trampolines&lt;U&gt;
-    data class Done&lt;out T&gt;(
-        val t: T
-    ) : Trampolines&lt;T&gt;() &#123;
-        override fun &lt;U&gt; flatMap(executor: (T) -&gt; U): Trampolines&lt;U&gt; &#123;
-            return Done(executor(t))
-        &#125;
-    &#125;
-
-    data class Suspend&lt;out T&gt;(
-        val suspension: () -&gt; Trampolines&lt;T&gt;
-    ) : Trampolines&lt;T&gt;() &#123;
-        override fun &lt;U&gt; flatMap(executor: (T) -&gt; U): Trampolines&lt;U&gt; &#123;
-            return Suspend(fun(): Trampolines&lt;U&gt; &#123;
-                return this.suspension().flatMap(executor)
-            &#125;)
-        &#125;
-    &#125;
-
-    fun execute(): T &#123;
-        var temp = this
-        while (true) &#123;
-            when (temp) &#123;
-                is Suspend -&gt; &#123;
-                    temp = temp.suspension()
-                &#125;
-                is Done -&gt; &#123;
-                    return temp.t
-                &#125;
-            &#125;
-        &#125;
-    &#125;
-&#125;
-</code></pre>
-<p>求和算法也需要进行改写，代码改变后如下：</p>
-<pre><code class="kotlin">fun sum(num: Int): Trampolines&lt;Int&gt; &#123;
-    if (num == 0) &#123;
-        return Trampolines.Done(0)
-    &#125; else &#123;
-        return Trampolines.Suspend(fun(): Trampolines&lt;Int&gt; &#123;
-            return sum(num - 1).flatMap(fun(result: Int): Int &#123;
-                return result + num
-            &#125;)
-        &#125;)
-    &#125;
-&#125;
-
-fun main() &#123;
-    println(sum(10000).execute())
-&#125;
-</code></pre>
-<p>看不懂？ 没关系，一行一行分析。 先来看一下 <code class="inline-code">sum</code> 这个方法，此时的写法与原来的递归写法差不多，完全符合函数式的风格。在来分析一下执行的逻辑：</p>
+                    <p>在做 Android 应用开发时，不可避免的要使用到 JDK 。在众多版本的 JDK 中， 项目代码的编译会使用哪个版本，开发者要如何指定使用的 JDK  版本？选择和指定 JDK 是一个非常重要的步骤，它会影响整个开发过程。</p>
+<p>不论你在源码是用  Java 进行编写的，还是使用 Kotlin，或者是两者都有使用。在整个项目开发迭代周期中，都会有很多地方会涉及到  JDK 版本：</p>
+<p><img src="https://img-blog.csdnimg.cn/c6fce0972a6240d1b0884febf0ef737f.png" alt="JDK 关系图" referrerpolicy="no-referrer"></p>
+<h2 id="Android Studio 的 JDK"><span class="prefix"></span><span class="content">Android Studio 的 JDK</span><span class="suffix"></span></h2><p>「工欲善其事，必先利其器」， Android Studio 是我们的开发利器，它的运行需要使用 JDK 环境。 在运行 Android Stduio  的时候， 会按照以下顺序去查找 JVM  运行时环境：</p>
 <ol>
-<li><strong>传入的 num 为 0</strong></li>
+<li><p><strong>STUDIO_JDK</strong>: 环境变量配置 JDK 路径，官方不建议配置</p>
+</li>
+<li><p><strong>studio.jdk</strong>： 与 Android Studio 打包在一起， 在 Android Studio 的目录下（PS：我没有找到）</p>
+</li>
+<li><p><strong>JBR</strong>: JetBrains Runtime ， 与 Android Studio 打包在一起，在新版本的安装目录下有这个文件夹。 官方推荐使用这个版本，Android Studio 是在这个版本下进行测试的，并且可能还存在一些特殊的优化用于支持 Android Studio 的某些增强功能。 </p>
+</li>
+<li><p><strong>JDK_HOME</strong>: 环境变量</p>
+</li>
+<li><p><strong>JAVA_HOME</strong>：环境变量</p>
+</li>
+<li><p><strong>PATH</strong>： 在 PATH 环境变量中指定的 java 可执行文件</p>
+</li>
 </ol>
-<p>此时拿到的是 <code class="inline-code">Done</code> 的对象，调用 <code class="inline-code">execute</code> 的时候，直接返回 0 </p>
+<p>只要你没有配置 <strong>STUDIO_JDK</strong> 环境变量，当前 Android Studio 默认应该都是使用 <strong>JBR</strong> 中的 Java </p>
+<p><img src="https://img-blog.csdnimg.cn/81dc21c6e3944cc8950d4c5e065cc5c3.png" alt="Android Studio 目录下的 JBR 文件夹" referrerpolicy="no-referrer"></p>
+<h2 id="Gradle 使用的 JDK 版本"><span class="prefix"></span><span class="content">Gradle 使用的 JDK 版本</span><span class="suffix"></span></h2><p>Android 应用程序进行编译时，都会使用 Gradle 进行编译。 基于 Android Studio 有两种方式可以编译 Android 应用程序：</p>
+<ol>
+<li>在 Android Studio 中直接点  <font color="green">▶︎</font> 运行</li>
+</ol>
+<p>这两种运行方式，使用的 JDK 版本可能会存在不一致的情况。点  <font color="green">▶︎</font> 运行时，是使用 Android Studio 中设置的值 JDK 来运行：</p>
+<p><img src="https://img-blog.csdnimg.cn/ff39a4ffa017464e852ee8ae6e3ee5c8.png" alt="Android Studio 中 gradle 的设置" referrerpolicy="no-referrer"></p>
+<p>在默认情况下，会直接使用 jbr 的版本。当然，你也可以手动配置为 <code class="inline-code">JAVA_HOME</code> 或者是 <code class="inline-code">GRADLE_LOCAL_JAVA_HOME</code>。 这个地方的配置最终会存储到 <code class="inline-code">.idea/gradle.xml</code> 文件中去，在 Android Studio 启动时会去读取这个文件。 </p>
+<p><img src="https://img-blog.csdnimg.cn/8d673842e2764f3f9d9fa5006cd59e53.png" alt="gradleJVM 的存储信息" referrerpolicy="no-referrer"></p>
+<p>关于 Gralde JDK 的配置，官方建议使用 <code class="inline-code">GRADLE_LOCAL_JAVA_HOME</code> 配置，这个宏定义会优先使用在 <code class="inline-code">properties</code> 文件中定义的 <code class="inline-code">java.home</code> 变量，如果没找到会使用 JBR。 </p>
+<blockquote>
+<p>需要注意的是， 这个 JDK 除了用于 Gradle 本身运行以外，还会用于我们自定插件以及包含在 <code class="inline-code">buildSrc</code> 下面的代码编译与运行。例如我们在使用 Android Gradle Tools 的版本为 8.x 时，此时就需要将 JDK 设置成 17 及以上的版本，否则就会编译报错 ：</p>
+<p><img src="https://img-blog.csdnimg.cn/7bc84abcb02749f38610747a70e3d683.png" alt="报错信息" referrerpolicy="no-referrer"></p>
+</blockquote>
 <ol start="2">
-<li>**传入的 num 大于 0 时，如 3 **</li>
+<li>在 Terminal 终端使用命令进行运行</li>
 </ol>
-<p>此时会直接返回一个 <code class="inline-code">Suspend</code> 对象， 并没有进行递归调用。调用 <code class="inline-code">execute</code> 方法时，才开始执行。此时在把视线移到 <code class="inline-code">execute</code> 方法里面，此时执行的是 <code class="inline-code">temp.suspension()</code> 的逻辑，即下面这个方法：</p>
-<pre><code class="kotlin">fun(): Trampolines&lt;Int&gt; &#123;
-    return sum(num - 1).flatMap(fun(result: Int): Int &#123; return result + num&#125;)
+<p>这种方式就行简单了，因为运行是在终端，则会直接使用环境变量中定义的 JAVA_HOME 来运行。 </p>
+<blockquote>
+<p>如果在编译的时候，使用了不用的 JDK 版本或者是 Gradle 版本， 会导致创建更多的守护进程，因此也会占用更多的 CPU 和内存</p>
+</blockquote>
+<h2 id="Java 与 Kotlin 中 JDK 的配置"><span class="prefix"></span><span class="content">Java 与 Kotlin 中 JDK 的配置</span><span class="suffix"></span></h2><p>在进行 Java 源代码编译时，默认情况下，会直接使用 Gradle 所用的 JDK 版本。但在不同的环境中，可能使用的 JDK 版本存在不一致，我们可以通 Gradle 提供的 toolchain 来指定 JDK 的版本， 如果不存在，会直接下载配置中的版本：</p>
+<pre><code class="groovy">java &#123;
+    toolchain &#123;
+        languageVersion = JavaLanguageVersion.of(17)
+    &#125;
 &#125;
 </code></pre>
-<p>这个方法干的第一件事是调用了 <code class="inline-code">sum(num - 1)</code> ，依然返回一个 <code class="inline-code">Suspend</code> 对象，在这个对象中存储了一个叫 <code class="inline-code">suspension</code> 的方法，紧接着调用 <code class="inline-code">flatMap</code> 方法又会返回一个新的 <code class="inline-code">Suspend</code> 对象，在这个 <code class="inline-code">Suspend</code> 对象中，可以访问到 <code class="inline-code">suspension</code> 方法。用这种对象链式的方法，将计算从递归转换成循环了，<code class="inline-code">num = 3</code> 的执行情况如下图：</p>
-<p><img src="https://img-blog.csdnimg.cn/a553b9f1b1cb4dd097b8d7b6fcfd1d22.png" alt="调用链路还原图" referrerpolicy="no-referrer"></p>
+<p>在不同的 Java 版本中，会存在不同的语法，比如 <code class="inline-code">lambda</code> 表达式只能在 Java 1.8 的版本及以上版本使用， 同时， Java 中还有一些功能是需要特定的库进行支持的。因此，我们可以通过 <code class="inline-code">sourceCompatibility</code> 指定使用 Java 的版本， 来保证源代码编译期间可以进行正常编译。</p>
+<pre><code class="groovy">android &#123;
+    compileOptions &#123;
+        sourceCompatibility JavaVersion.VERSION_17
+    &#125;
+&#125;
+</code></pre>
+<p>同时，在执行编译时，还可以指定输出的 <code class="inline-code">class</code> 文件使用哪个版本的文件格式。针对 Java 代码，使用 <code class="inline-code">targetCompatibility</code> 字段进行指定，而 Kotlin 使用 <code class="inline-code">jvmTarget</code> 字段进行指定。</p>
+<pre><code class="groovy">android &#123;
+    compileOptions &#123;
+        targetCompatibility JavaVersion.VERSION_17
+    &#125;
+    kotlinOptions &#123;
+        jvmTarget &#39;17&#39;
+    &#125;
+&#125;
+</code></pre>
+<h2 id="在 Android 中可以调用哪些 Java API ?"><span class="prefix"></span><span class="content">在 Android 中可以调用哪些 Java API ?</span><span class="suffix"></span></h2><p>代码除了在编译时需要关注 JDK 版本，在运行时也需要关注代码中使用的 Java API 。虽然在写代码的时候，使用的是 Java 的语法，但其运行时并不是 JVM ， 因此有一些 Java 的 API 在 Android 中并无法运行。 在 Android  SDK 中，定义了很多 Java 库函数实现的 API ，在绝大多数时后，开发者根本感知不到它的区别。我们可以通过 <code class="inline-code">compileSdk</code> 来指定当前 Andorid 项目支持的 Java API 的范围，具体信息如下图：</p>
+<p><img src="https://img-blog.csdnimg.cn/757f5c2064054832abe77fadc3c2cf14.png" alt="Android 支持的 Java API 的范围" referrerpolicy="no-referrer"></p>
+<p>Android  项目中除了配置 <code class="inline-code">compileSdk</code> ， 还需要配置 <code class="inline-code">minSdk</code> 指定当前 APP 运行的最低手机版本，当代码中使用了高版本中方法（如 <code class="inline-code">String.isBlank()</code>  等 JDK 11 才提供的），就会导致低版本无法使用。此时为了兼容，R8 在编译的过程中，会对代码进行脱糖处理，将其转换成低版本就可用的代码。</p>
+<h2 id="写在最后"><span class="prefix"></span><span class="content">写在最后</span><span class="suffix"></span></h2><p>JDK 是在代码开发过程中经常会遇到的配置，如果版本不对，搞不好就会出现一些莫名其妙的错误，了解编译运行过程中的 JDK 版本，有助于更好的解决实际开发中遇到的问题。</p>
 
                     <hr/>
             </div>
@@ -838,7 +792,7 @@ fun main() &#123;
         </div>
         <div style="margin: auto;">
             <div>
-                <img src="https://moe-counter.glitch.me/get/@pinned_blog_函数式编程：尾调优化?theme=moebooru" style="margin: 0 auto;" referrerpolicy="no-referrer">
+                <img src="https://moe-counter.glitch.me/get/@pinned_blog_你不会到现在还不知道 Android 中的那些 JDK 配置吧？?theme=moebooru" style="margin: 0 auto;" referrerpolicy="no-referrer">
             </div>
         </div>
         <input id="copy-input" style="position: absolute; left: -1000px; z-index: -1000;">
@@ -849,8 +803,12 @@ fun main() &#123;
                 <!-- 
                     <div class="post_pre_next">
     
+        <div class="post-pre">
+            <a href="/2024/08/09/java-function-patten-study/">上一篇: 函数式编程：尾调优化</a>
+        </div>
     
-        <a href="/2023/08/01/android-targetsdk-compilesdk-minsdk%20copy/">下一篇: 
+    
+        <a href="/2024/08/01/android-targetsdk-compilesdk-minsdk%20copy/">下一篇: 
             Android 中compileSdk、minSdk、targetSdk 是干什么用的?
         </a>
     
