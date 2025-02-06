@@ -724,7 +724,7 @@ thead {
 <li>需要对一个对象结构中的对象进行很多不同且不相关的操作，为避免这些操作“污染”这些对象的类，也不希望在增加新操作时修改这些类。 如读取 Class 文件中的方法、属性等信息。</li>
 </ol>
 <p>在来看一下访问者模式的类图：</p>
-<p><img src="https://img-blog.csdnimg.cn/0647baeb4471484fb7264b6f5b9a038d.png" alt="访问者模式类图" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/0647baeb4471484fb7264b6f5b9a038d.png" alt="访问者模式类图" referrerpolicy="no-referrer"></p>
 <p>介绍一下，类图中最重要的两个角色：</p>
 <ul>
 <li><p><strong>Visitor</strong>：接口或者抽象类，定义对 <code class="inline-code">Element</code> 的访问行为，<code class="inline-code">visit</code> 方法的参数为要访问的 <code class="inline-code">Element</code>。理论上，它的方法数与要访问的 <code class="inline-code">Element</code> 个数一致。因此，访问者模式要求的类型要稳定，如果经常添加、移除 <code class="inline-code">Element</code>，必然会导致频繁地修改 <code class="inline-code">Visitor</code> 接口，如果出现这种情况，则说明不适合使用访问者模式。</p>
@@ -734,7 +734,7 @@ thead {
 </ul>
 <p>看到这里，依然很抽象，但是我相信应该有一个大体的了解，为了更好的理解这个模式，下面将从 ProGuard中对 class 文件的部分操作，还原访问者模式的诞生过程。</p>
 <h2 id="二、访问者模式的诞生过程"><span class="prefix"></span><span class="content">二、访问者模式的诞生过程</span><span class="suffix"></span></h2><p>要想更好的理解访问者模式，还是得从真实案例入手。在 ProGuard 中， 主要操作的是 Class 文件，而 Class 文件的格式非常固定，Oracle 文档中，对 Class 文件定义如下：</p>
-<p><img src="https://img-blog.csdnimg.cn/000d5946f8774a7a9e7e414e4a8513ed.png" alt="ClassFile 的定义" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/000d5946f8774a7a9e7e414e4a8513ed.png" alt="ClassFile 的定义" referrerpolicy="no-referrer"></p>
 <p>并且在 ProGuard 的执行过程中，可能会源源不断的增加对 <code class="inline-code">ClassFile</code> 的操作。 这就很好的对应上了使用访问者模式的两个条件。</p>
 <p>先来思考一下，在 ProGuard 中，对 Class 文件的操作有哪些？ </p>
 <ol>
@@ -848,7 +848,7 @@ public class VisitorV2 &#123;
 <pre><code class="java">reader.readFromResource(constant);
 </code></pre>
 <p>此行代码编译会报错，报错如下：</p>
-<p><img src="https://img-blog.csdnimg.cn/102ca55c0e454a74b3f682443f8faabb.png" alt="编译报错信息" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/102ca55c0e454a74b3f682443f8faabb.png" alt="编译报错信息" referrerpolicy="no-referrer"></p>
 <p>这是为什么呢？</p>
 <p>要解释这个问题，先说一下 Java 中的多态，它是一种动态绑定，在运行时可以获取对象的具体类型，然后在运行其实际类型对应的方法。我们就是希望代码在运行的时候，能够像多态那样，在运行时能够根据参数类型去调不同的 <code class="inline-code">readFromResource</code> 方法。然而在代码实现中使用的是函数重载，它是一种静态绑定。代码在编译时并不能识别对象的具体类型，因此上面代码编译时就会出现「找不到合适的方法」这个错误。</p>
 <p>解决办法就是访问者模式的精髓，先来看一下代码：</p>
@@ -1030,7 +1030,7 @@ class Writer implements Visitor &#123;
 
                  -->
                 <div class="footer">
-    <span>Copyright © 2024 大罗说事</span>
+    <span>Copyright © 2025 大罗说事</span>
 </div>
 
 <!-- 

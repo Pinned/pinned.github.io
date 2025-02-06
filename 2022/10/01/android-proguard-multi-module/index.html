@@ -768,7 +768,7 @@ public class DeviceUtils &#123;
 <p> 因为 <code class="inline-code">setup</code> 与 <code class="inline-code">addTestMethod</code> 的签名不一样， 在混淆的时候，可以使用相同的方法名，所以最终混淆出来的方法为 <code class="inline-code">void a()</code> 和 <code class="inline-code">void a(Context val)</code> 。</p>
 </blockquote>
 <h2 id="二、ProGuard 混淆规则：-flattenpackagehierarchy"><span class="prefix"></span><span class="content">二、ProGuard 混淆规则：-flattenpackagehierarchy</span><span class="suffix"></span></h2><p>之所以要使用这个关键字，是因为模块在打包生成 aar 或者 jar 包时，无法感知到其它与此模块无关的模块，生成混淆文件是可能会存在冲突的。这么说，可能不太能理解，为了能搞清楚冲突是怎么来的，先来看一个混淆的例子，在我的项目中，有三个类，类结构如下图所示：</p>
-<p><img src="https://img-blog.csdnimg.cn/13c65f57773446878b251420503f1af4.png" alt="代码结构" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/13c65f57773446878b251420503f1af4.png" alt="代码结构" referrerpolicy="no-referrer"></p>
 <p>因为这只是三个类文件，并没有被调用到，如果我要对它们进行混淆，我需要去调优化，所以混淆配置如下：</p>
 <pre><code class="java">-dontshrink
 -keep public class com.example.build.DeviceUtils &#123;
@@ -804,7 +804,7 @@ com.example.build.inner.test.TestInnerClass -&gt; a.a.a.a.b.a:
 <p>多个模块使用同一个  <code class="inline-code">keep-same-proguard.txt</code> 文件， 我们可以将此文件放置到项目根目录下面，方便所有项目访问使用。编译时，模块间直接使用源码依赖即可。</p>
 <p>在上述配置中，编译出来的 SDK 满足了混淆的需求，也可以正常使用，一切都是那么的美好。</p>
 <p>直到有一天，我们修改了那几个要共用的类，导致在 <code class="inline-code">keep-same-proguard.txt</code> 中的配置不能和新的代码匹配。但其引发的错误需要打 Release 包运行，才能发现。如果是一个新同学，可能需要花很久的时间，才能找到问题的根源。 每一次代码的变更都可能会引发 Crash ， 这是一个非常严重的问题，要如何解决它呢？</p>
-<p><img src="https://img-blog.csdnimg.cn/7965c336f339406abf8ee606ab148e7c.png" alt="一脸懵" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/7965c336f339406abf8ee606ab148e7c.png" alt="一脸懵" referrerpolicy="no-referrer"></p>
 <p>再来细看一下， <code class="inline-code">keep-same-proguard.txt</code> 生成的方式：</p>
 <ol>
 <li><p>在本地编译 Release 包，获取编译产物中的 <code class="inline-code">build/outputs/mapping/release/mapping.txt</code> 文件</p>
@@ -815,7 +815,7 @@ com.example.build.inner.test.TestInnerClass -&gt; a.a.a.a.b.a:
 </li>
 </ol>
 <p>如果内部暴露的 API 不只在一个<code class="inline-code">模块</code> 里面，你需要重复执行上面1， 2步骤，直到将所有的映射信息都更新完成。在本地开发时，很少会有人将混淆打开，本地几乎感知不到这个配置的存在。如果新同事来开发，不知道需要处理这个关系，上述步骤是很容易被遗忘掉，出现问题并花很多时间去排查，这非常容易引起同事们骂声。</p>
-<p><img src="https://img-blog.csdnimg.cn/86eede62876b487eb504d30c779bb74b.png" alt="在代码里下毒" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/86eede62876b487eb504d30c779bb74b.png" alt="在代码里下毒" referrerpolicy="no-referrer"></p>
 <p>刚刚我们提到，这个<code class="inline-code">映射关系</code> 就是 ProGuard 生成的 <code class="inline-code">mapping</code> 文件内容，里面分为三部份： <code class="inline-code">类名</code>、<code class="inline-code">变量名</code>、<code class="inline-code">方法名</code>。规则也可以简单的理解为，把这三部分名字，转换成随机生成的字符即可。因此，我们可以将上述步骤用脚本自动化，在编译时在去生成这个 <code class="inline-code">keep-same-proguard.txt</code> ，这就解决了 <code class="inline-code">类</code> 变化引起的问题。</p>
 <h2 id="四、这时，Gradle就该上场了"><span class="prefix"></span><span class="content">四、这时，Gradle就该上场了</span><span class="suffix"></span></h2><p>当我们决定使用自动化脚本来生成文件时，Gradle 就是我们必备的利器。为了便于朋友们更好地理解后面的内容，我先介绍一下后面写自动化脚本中涉及的 Gradle 任务相关的基础知识，如果你对 Gradle 很熟悉，可直接跳过。</p>
 <p><strong>1. Gradle 任务创建</strong></p>
@@ -872,12 +872,12 @@ public Task doLast(final String actionName, final Action&lt;? super Task&gt; act
 <p><strong>4. buildSrc 目录</strong></p>
 <p>在我们编写脚本文件时，可以创建一个独立的工程项目来进行代码编写以及代码管理，但是在开发过程中，会有一些打包调试的工作，独立项目相对会麻烦一些。而在 Gradle 的项目中，可直接在当前项目中，创建 <code class="inline-code">buildSrc</code> 文件夹，用来存放编写的代码 。使用时，在 build.gradle 中，可直接 <code class="inline-code">import</code>  并使用。</p>
 <p>调试也是在编写 Gradle 脚本中，必不可少的手段，要想调试 Gradle 脚本，首先在项目运行的配置中添加<code class="inline-code">Remote JVM Debug</code> 如下图所示：</p>
-<p><img src="https://img-blog.csdnimg.cn/833ac442940740f292fd5f59d82341f1.png" alt="调试设置" referrerpolicy="no-referrer"> </p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/833ac442940740f292fd5f59d82341f1.png" alt="调试设置" referrerpolicy="no-referrer"> </p>
 <p>配置好上面的信息后，在控制台执行编译脚本，添加 debug 参数，如下：</p>
 <pre><code class="shell">./gradlew assembleDebug -Dorg.gradle.daemon=false -Dorg.gradle.debug=true 
 </code></pre>
 <p>运行后，控制点会启动 Gradle ，并开始执行，在正式执行编译任务是，会等待 Debug 的链接过来，这时候，点击 Debug 的图标就可以愉快地进行调试了。</p>
-<p><img src="https://img-blog.csdnimg.cn/5e51cec793cb47989e143bb436919eae.png" alt="可爱的小虫子图标" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/5e51cec793cb47989e143bb436919eae.png" alt="可爱的小虫子图标" referrerpolicy="no-referrer"></p>
 <h2 id="五、插件的编写与实现"><span class="prefix"></span><span class="content">五、插件的编写与实现</span><span class="suffix"></span></h2><p>读到此处，我相信大家都对 Gradle 都有一定的了解，对于生成 <code class="inline-code">keep-same-proguard.txt</code> 也肯定有了一定的想法。文章前半段有提到，<code class="inline-code">keep-same-proguard.txt</code> 中的内容为<code class="inline-code">类名</code>、<code class="inline-code">变量名</code>、<code class="inline-code">方法名</code> 的映射关系，而这些信息我们都可以从编译后的 <code class="inline-code">class</code> 文件中获取到。</p>
 <p>为了更好的复用，此处将定义一个插件，在 <code class="inline-code">buildSrc</code> 目录下，创建一个 <code class="inline-code">Plugin</code> ， 示例如下：</p>
 <pre><code class="java">package com.android.tools.build;
@@ -1131,7 +1131,7 @@ public class Son extends Person implements Walkable &#123;
 
                  -->
                 <div class="footer">
-    <span>Copyright © 2024 大罗说事</span>
+    <span>Copyright © 2025 大罗说事</span>
 </div>
 
 <!-- 

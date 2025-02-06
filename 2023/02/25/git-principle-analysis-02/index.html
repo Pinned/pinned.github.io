@@ -763,7 +763,7 @@ tagger &lt;username&gt; &lt;email&gt; &lt;timestamp&gt;
 
 &lt;tag comment message&gt;
 </code></pre>
-<p>最后，在来看一下，我本地创建的两个不同的 Tag，如下图所示： <img src="https://img-blog.csdnimg.cn/753bffcdc0864bcd88fefeb1d3ed4225.png" alt="两种不同的 Tag 对比" referrerpolicy="no-referrer"></p>
+<p>最后，在来看一下，我本地创建的两个不同的 Tag，如下图所示： <img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/753bffcdc0864bcd88fefeb1d3ed4225.png" alt="两种不同的 Tag 对比" referrerpolicy="no-referrer"></p>
 <h2 id="二、Git 文件打包"><span class="prefix"></span><span class="content">二、Git 文件打包</span><span class="suffix"></span></h2><p>在我们写代码的时候，某些原文件会出现频繁的更改，从前面 blob 创建过程，我们知道，每一个版本的文件都会重新创建。为了更好的理解这个过程，创建一个 Git 项目，里面仅放了一个简单的 txt 文件：</p>
 <ol>
 <li>我使用了本文的第一版内容，使用命令将此文件添加到 Git 后，会生成第一个 blob : <code class="inline-code">7e/5968ece2093c89df8e63ff6e72fff759cc5b74</code> ，此时，此文件大约 7.8KB。</li>
@@ -771,9 +771,9 @@ tagger &lt;username&gt; &lt;email&gt; &lt;timestamp&gt;
 </ol>
 <p>通过上面的步骤，在磁盘中，相当于保存了两个几乎完全相同的文件。如果 Git 只完整保存其中一个，在保存另一个 blob 与之前版本的差异内容，岂不是更好？</p>
 <p>事实上，Git 的做法与我们的想法一致。Git 在最初往磁盘中存储对象时，使用的格式被称为“松散”对象格式。但是为了更加高效的管理文件，Git 会时不时将这些对象打包在一起形成为一个新二进制文件。当然，我们可以通过 <code class="inline-code">git gc</code> 命令来触发，如下所示：</p>
-<p><img src="https://img-blog.csdnimg.cn/7633ded1ec4e48e2bd92bacaee9ea22f.png" alt="Git GC 示例" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/7633ded1ec4e48e2bd92bacaee9ea22f.png" alt="Git GC 示例" referrerpolicy="no-referrer"></p>
 <p>经过打包后的文件大小也会变小：</p>
-<p><img src="https://img-blog.csdnimg.cn/a7825aca54834f2ba5ceff5ec64c762a.png" alt="pack file 文件大小" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/a7825aca54834f2ba5ceff5ec64c762a.png" alt="pack file 文件大小" referrerpolicy="no-referrer"></p>
 <h2 id="三、Git LFS 协议"><span class="prefix"></span><span class="content">三、Git LFS 协议</span><span class="suffix"></span></h2><blockquote>
 <p>此部分主要内容来源于官方文档： <a target="_blank" rel="noopener" href="https://github.com/git-lfs/git-lfs/blob/main/docs/api/batch.md">https://github.com/git-lfs/git-lfs/blob/main/docs/api/batch.md</a></p>
 </blockquote>
@@ -790,7 +790,7 @@ Content-Type: application/vnd.git-lfs+json; charset=utf-8
 <li><strong>hash_algo：</strong> Git LFS 在本地计算大文件使用的 hash 算法，默认为 sha256</li>
 </ul>
 <p>而 response 的内容中，也会将 Git LFS 需要的信息下发下来，会将 request 中的 objects 的 CDN 地址，以及访问需要的 token 等信息进行下发，用于后续的请求，下面来看一下我对 LFS 下载数据抓包的过程：</p>
-<p><img src="https://img-blog.csdnimg.cn/b111f8d66c764d0db733780ad6db78dd.png" alt="LFS 下载抓包示例" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/b111f8d66c764d0db733780ad6db78dd.png" alt="LFS 下载抓包示例" referrerpolicy="no-referrer"></p>
 <p>更多细节信息，请参考官方文档。</p>
 
                     <hr/>
@@ -824,7 +824,7 @@ Content-Type: application/vnd.git-lfs+json; charset=utf-8
 
                  -->
                 <div class="footer">
-    <span>Copyright © 2024 大罗说事</span>
+    <span>Copyright © 2025 大罗说事</span>
 </div>
 
 <!-- 

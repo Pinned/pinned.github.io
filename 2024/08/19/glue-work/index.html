@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+    <link rel="alternate icon" type="image/png" href="/img/favicon.png">
+    
+        <title>Glue work </title>
+        
+<link rel="stylesheet" href="/css/toc.css">
+
+    
+    <style type="text/css" id="reset">@charset "utf-8";
+
+*,
+*::before,
+*::after
+{
+    box-sizing: border-box;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+figure,
+blockquote,
+dl,
+dd
+{
+    margin: 0;
+}
+
+ul,
+ol
+{
+    list-style: none;
+}
+
+ul
+{
+    padding-inline-start: 0;
+}
+
+html,
+body
+{
+    scroll-behavior: smooth;
+}
+
+a:not([class])
+{
+    text-decoration-skip-ink: auto;
+}
+
+img,
+picture
+{
+    width: auto;
+    max-width: 100%;
+    display: block;
+}
+
+input,
+button,
+textarea,
+select
+{
+    font: inherit;
+}
+
+@media (prefers-reduced-motion: reduce)
+{
+    html:focus-within
+    {
+        scroll-behavior: auto;
+    }
+}</style>
+    <style type="text/css" id="style">@charset "utf-8";
+
+p {
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    text-align: justify;
+}
+
+body {
+    font-family: "PingFang SC", BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serifhtml, body;
+    font-size: 16px;
+    line-height: 1.75;
+    letter-spacing: 0.6px;
+    color: #666;
+    background: #F0F0F0;
+}
+
+a {
+    text-decoration: none;
+    color: #000;
+}
+
+
+
+@media screen and (max-width: 480px) {
+    body {
+        background: #fff;
+    }
+
+    .paper {
+        padding: 4vw;
+    }
+
+    .paper-main {
+        width: 100%;
+        margin: 0 auto;
+        padding: 30px 1vw 12px;
+        background: #fff;
+    }
+}
+
+@media screen and (min-width: 481px) {
+    .paper {
+        padding: 4vw;
+    }
+
+    .paper-main {
+        width: 900px;
+        margin: 0 auto;
+        padding: 62px 3vw 24px;
+        background: #fff;
+        border-radius: 24px;
+    }
+}
+
+.header {
+    padding-bottom: 48px;
+    margin-bottom: 48px;
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: center;
+}
+
+.logo {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #000;
+    margin-bottom: 16px;
+    flex: 0 0 100%;
+}
+
+.nav {
+    margin: 0 0 4px;
+    flex: 0 0 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: center;
+}
+
+.nav li {
+    padding: 2px 0;
+    margin-right: 24px;
+}
+
+.nav li:last-of-type {
+    margin-right: 0;
+}
+
+.nav li a {
+    color: #000;
+    opacity: .6;
+    transition: opacity ease-in-out .5s;
+}
+
+.nav li a:hover {
+    opacity: 1;
+    transition: opacity ease-in-out .5s;
+}
+
+.post-header {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: center;
+}
+
+.post-header .post-title {
+    font-size: 1.375rem;
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+    line-height: 1;
+}
+
+.post-list {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: stretch;
+}
+
+.post {
+    width: 100%;
+    padding-bottom: 48px;
+    margin-bottom: 48px;
+    border-bottom: 1px dashed #ddd;
+}
+
+.post-title {
+    display: inline-block;
+    font-size: 1.6rem;
+    font-weight: 600;
+    line-height: 1.5;
+    margin-bottom: 12px;
+    color: #000;
+    /*transition: color ease-in-out .5s;*/
+}
+
+.post-title:hover {
+    color: #04077e;
+    transition: color ease-in-out .5s;
+}
+
+.post-except {
+    word-break: break-all;
+    margin-bottom: 12px;
+    text-align: justify;
+}
+
+.read-more {
+    padding: 0 4px;
+    color: #04077e;
+}
+
+.read-more:before,
+.read-more:after {
+    display: inline-block;
+    transition: transform ease-in-out .5s;
+}
+
+.read-more:before {
+    content: "{ ";
+}
+
+.read-more:after {
+    content: " }";
+}
+
+.read-more:hover:before {
+    transform: translateX(-4px);
+    transition: transform ease-in-out .25s;
+}
+
+.read-more:hover:after {
+    transform: translateX(4px);
+    transition: transform ease-in-out .25s;
+}
+
+.post-date {
+    font-size: 0.875rem;
+    color: #aaa;
+}
+
+.paginator {
+    font-size: 0.875rem;
+    width: 100%;
+    margin: 0 auto 24px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.paginator * {
+    display: block;
+    padding: 8px 16px;
+    border-radius: 18px;
+    background: #fff;
+    border: 1px solid #eee;
+}
+
+.paginator .space {
+    display: block;
+    padding: 8px 16px;
+    border-radius: 18px;
+    background: #fff;
+    border: none;
+}
+
+.paginator a {
+    margin: 4px;
+    color: #666;
+    transition: color ease-in-out .5s;
+}
+
+.paginator a:hover {
+    color: #04077e;
+    transition: color ease-in-out .5s;
+}
+
+.paginator .current {
+    color: #04077e;
+    border: 1px solid #04077e;
+}
+
+.footer {
+    padding: 24px 0;
+    font-size: 0.875rem;
+    color: #aaa;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-content: center;
+}
+
+.footer span {
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.footer a {
+    color: #aaa;
+    transition: color ease-in-out .5s;
+}
+
+.footer a:hover {
+    color: #04077e;
+    transition: color ease-in-out .5s;
+}
+
+.post-main {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.post-main-title {
+    flex: 0 0 100%;
+    margin-bottom: 12px;
+    font-size: 1.6rem;
+    font-weight: 600;
+    line-height: 1.5;
+    color: #000;
+}
+
+.post-meta {
+    font-size: 0.875rem;
+    color: #aaa;
+    flex: 0 0 100%;
+    margin-bottom: 32px;
+}
+
+.author {
+    color: #576b95;
+}
+
+.archive {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-content: normal;
+}
+
+.archive li {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-content: center;
+    padding: 12px 0;
+}
+
+.archive li:nth-child(odd) {
+    background: #fafafa;
+}
+
+.archive li:nth-child(even) {
+    background: #fff;
+}
+
+.archive li span {
+    width: 108px;
+    color: #666;
+}
+
+.archive-main {
+    flex: 0 1 calc(100% - 108px);
+}
+
+.archive-title {
+    color: #000;
+    /*transition: color ease-in-out .5s;*/
+}
+
+.archive-title:hover {
+    color: #04077e;
+    transition: color ease-in-out .5s;
+}
+
+.post-image-caption {
+    margin-top: 5px;
+    text-align: center;
+    color: #888;
+    font-size: 0.85rem;
+    display: block;
+}
+
+#clipboardbtn {
+    cursor: pointer;
+}
+
+#bing-bg {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    filter: blur(10px);
+    object-fit: cover;
+  }
+#go-top {
+    cursor: pointer;
+}
+
+#beautiful {
+    font-family: "PingFang SC", BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serifhtml, body;
+    font-size: 16px;
+    line-height: 1.75;
+    letter-spacing: 0.6px;
+}</style>
+    <style type="text/css" id="markdown">@charset "utf-8";
+
+#copy-post-content,
+#beautiful,
+.post-md
+{
+    width: 100%;
+    letter-spacing: 0;
+}
+
+.post-md h1,
+.post-md h2,
+.post-md h3,
+.post-md h4,
+.post-md h5,
+.post-md h6
+{
+    color: #000;
+}
+/* 一级标题 */
+.post-md h1  {
+    display:block;
+    border-bottom: 4px solid rgb(33, 33, 34);
+    font-size: 1rem;
+}
+  
+/* 一级标题内容 */
+.post-md h1  .content {
+    display: flex;
+    color: rgb(33, 33, 34);
+    font-size: 1rem;
+}
+  
+  
+/* 一级标题后缀 */
+.post-md h1  .suffix {
+    display: flex;
+    box-sizing: border-box;
+    width: 20px;
+    height: 10px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    background: RGBA(33, 33, 34, .5);
+    color: rgb(255, 255, 255);
+    font-size: 16px;
+    letter-spacing: 0.544px;
+    justify-content: flex-end;
+    box-sizing: border-box !important;
+    overflow-wrap: break-word !important;
+    float: right;
+    margin-top: -10px;
+}
+
+/* 二级标题 */
+.post-md h2 {
+    margin: 10px auto;
+    height: 40px;
+    background-color: rgb(251, 251, 251);
+    border-bottom: 1px solid rgb(246, 246, 246);
+    box-sizing: border-box;
+    font-size: 1rem;
+}
+
+/* 二级标题内容 */
+.post-md h2 .content {
+    display: inline-block;
+    width: auto;
+    height: 40px;
+    background-color: rgb(33, 33, 34);
+    border-bottom-right-radius:100px;
+    color: rgb(255, 255, 255);
+    padding-right: 30px;
+    padding-left: 20px;
+    font-size: 1rem;
+    line-height: 40px;
+}
+
+/* 三级标题 */
+.post-md h3 {
+    margin: 20px auto 5px;
+    border-top: 1px solid rgb(221, 221, 221);
+    box-sizing: border-box;
+    font-size: 1rem;
+}
+  
+/* 三级标题内容 */
+.post-md h3 .content {
+    margin-top: -1px;
+    padding-top: 6px;
+    padding-right: 5px;
+    padding-left: 5px;
+    font-size: 1rem;
+    border-top: 2px solid rgb(33, 33, 34);
+    display: inline-block;
+    line-height: 1.1;
+}
+.post-md h4
+{
+    font-size: 1rem;
+    line-height: 1.2;
+    padding: 16px 0;
+}
+.post-md h5
+{
+    font-size: 0.83rem;
+    line-height: 1.2;
+    padding: 14px 0;
+}
+.post-md h6
+{
+    font-size: 0.67rem;
+    line-height: 1.2;
+    padding: 12px 0;
+}
+.post-md a
+{
+    color: #61aeee;
+    box-shadow: 0 2px 0 #ccc;
+    transition: color ease-in-out .65s, box-shadow ease-in-out .65s;
+}
+.post-md a:hover
+{
+    color: #04077e;
+    box-shadow: 0 2px 0 #04077e;
+    transition: color ease-in-out .65s, box-shadow ease-in-out .65s;
+}
+.post-md strong
+{
+    font-weight: 700;
+}
+.post-md em
+{
+    font-style: italic;
+}
+.post-md kbd
+{
+    padding: 2px 4px;
+    border-radius: 2px;
+    background: #eee;
+    border: 1px solid #ddd;
+}
+.post-md ol
+{
+    list-style: decimal;
+    padding-left: 24px;
+}
+.post-md ul
+{
+    list-style: disc;
+    padding-left: 24px;
+}
+.post-md img
+{
+    border-radius: 4px;
+}
+.post-md hr
+{
+    border: none;
+    height: 1px;
+    background: #ccc;
+    margin: 24px 0;
+}
+
+.post-md p,
+.post-md blockquote
+{
+    width: 100%;
+    padding: 7px 0;
+}
+.post-md blockquote
+{
+    border-left: 2px solid #ddd;
+    padding-left: 12px;
+    word-wrap: break-word;
+}
+
+.post-md .video-container
+{
+    background: #000;
+    border-radius: 4px;
+    overflow: hidden;
+}
+.post-md iframe,
+.post-md .video-container iframe
+{
+    width: 100%;
+    height: 100vh;
+    max-height: 360px;
+    margin: 12px 0;
+}
+
+.post-md table {
+    padding: 0;
+    word-break: initial;
+    width: 100%;
+    page-break-inside: auto;
+    border-spacing:0px;
+    border: 0.5px solid #dfe2e5;
+}
+.post-md table tr {
+    border: 0.5px solid #dfe2e5;
+    margin: 0;
+    padding: 0;
+}
+.post-md table tr:nth-child(2n),
+thead {
+    background-color: #f8f8f8;
+}
+.post-md table th {
+    font-weight: bold;
+    border: 0.5px solid #dfe2e5;
+    border-bottom: 0;
+    margin: 0;
+    padding: 6px 13px;
+}
+.post-md table td {
+    border: 0.5px solid #dfe2e5;
+    margin: 0;
+    padding: 6px 13px;
+}
+.post-md table th:first-child,
+.post-md table td:first-child {
+    margin-top: 0;
+}
+.post-md table th:last-child,
+.post-md table td:last-child {
+    margin-bottom: 0;
+}
+
+
+.inline-code
+{
+    border-radius: 4px;
+    background:rgba(27,31,35,.05);
+    padding: 2px 4px;
+    color: rgb(0, 112, 96);
+    font-size: 1rem;
+    margin-left: 1px;
+    margin-right: 1px;
+}
+
+.post-md .hljs-ln-numbers
+{
+    opacity: .5;
+    padding-right: 12px;
+}
+</style>
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body>
+        <img id="bing-bg" src="" referrerpolicy="no-referrer" />
+        <div class="paper">
+            
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4 id="go-top">目录</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%B8%80%E3%80%81%E5%BC%A0%E4%B8%89%E7%9A%84%E6%88%90%E9%95%BF%E4%B9%8B%E8%B7%AF"><span class="post-toc-text">一、张三的成长之路</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%BA%8C%E3%80%81%E6%99%8B%E5%8D%87%E5%9B%B0%E5%A2%83%EF%BC%9A%E8%83%BD%E5%8A%9B%E4%B8%8E%E5%88%B6%E5%BA%A6%E7%9A%84%E7%A2%B0%E6%92%9E"><span class="post-toc-text">二、晋升困境：能力与制度的碰撞</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%B8%89%E3%80%81%E8%81%9A%E7%84%A6%E6%A0%B8%E5%BF%83%EF%BC%8C%E9%81%BF%E5%85%8D%E8%81%8C%E4%B8%9A%E8%BF%B7%E5%A4%B1"><span class="post-toc-text">三、聚焦核心，避免职业迷失</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%9B%9B%E3%80%81%E8%B4%A1%E7%8C%AE%E4%B8%8E%E6%88%90%E9%95%BF%EF%BC%8C%E5%A6%82%E4%BD%95%E6%8A%89%E6%8B%A9"><span class="post-toc-text">四、贡献与成长，如何抉择</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1.%20%E6%B2%9F%E9%80%9A"><span class="post-toc-text">1. 沟通</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2.%20%E5%A4%B4%E8%A1%94"><span class="post-toc-text">2. 头衔</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3.%20%E5%8C%85%E8%A3%85"><span class="post-toc-text">3. 包装</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4.%20%E5%81%9C%E6%AD%A2%E5%81%9A%E2%80%9C%E9%BB%8F%E5%90%88%E5%89%82%E2%80%9D%E5%B7%A5%E4%BD%9C"><span class="post-toc-text">4. 停止做“黏合剂”工作</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%BA%94%E3%80%81%E6%8C%81%E7%BB%AD%E5%AD%A6%E4%B9%A0%EF%BC%8C%E6%8C%81%E7%BB%AD%E8%BF%9B%E6%AD%A5"><span class="post-toc-text">五、持续学习，持续进步</span></a></li></ol>
+        </nav>
+    </aside>
+
+            <div class="paper-main">
+                
+                    <div class="post-header">
+    <p class="post-title">Glue work</p>
+</div>
+                
+                <div class="post-main">
+
+    
+        <div class="post-meta">
+            <a class='author' href="/">罗昭成</a> <span id="clipboardbtn">2024年08月19日</span>
+        </div>
+        <div id="copy-post-content">
+            <section id="beautiful">
+            <div class="post-md" >
+                    <p>你是一位工作多年的程序员， 你在公司的职位是”软件工程师”，用国内常说的职级体系来看，你是一个 P6，一线干活写代码的大头兵。 但在你日常工作内容中，并没有太多时间去写代码，你似乎大部分时间都在开会，不停的开会。你希望能够有时间停下来写代码，但似乎有更多的工作需要你来做，比如：</p>
+<ul>
+<li>给刚毕业的校招生讲解业务知识，帮助他们更好的解决工作中的问题</li>
+<li>与其它合作团队沟通、对齐，帮助团队成员梳理工作内容，解决问题</li>
+<li>认真阅读团队成员的技术方案文档，给他们提各种名样意见和建议，防止项目上线后出现问题</li>
+<li>像一个客服一样，积极的为客户们解答疑问，排查问题出现原因</li>
+<li>帮其他人「擦屁股」想方案，确保项目不会出现异常</li>
+</ul>
+<p>这些工作，我称之为“黏合剂”工作，原则上它们都不是一个软件工程师的本职工作。它们让你忙得不可交，没有时间写代码，也没有时间学习，但一周工作下来，到写周总结的时候，仿佛你什么写没有干。认真思考一下，你在团队中是不是或多或少的在做着这些事情呢？如果你没有做，那你们团队是谁在做这些事情呢？ </p>
+<p>当然，如果没有人干这些事情，而专注于写他们自己的代码，团队的项目可能会乱成一团，一些项目也可能会出现一次次的延期。团队中的每一位资深人员都应该知道这些琐碎的工作，对于团队的发展至关重要，他们也知道，这些工作大多数情况下对自己「升职加薪」没有太大的帮助。如果你能有条不紊地管理着这些项事务，确保每一项工作都得以高效完成，通过这些“黏合剂”工作可以培养强大的技术领导能力。但是，如果处理不好，它可能会对你的职业生崖造成影响，最终离开这个行业。</p>
+<p>“黏合剂”工作到底要不要干，要怎么干？先来看一个小故事：</p>
+<h2 id="一、张三的成长之路"><span class="prefix"></span><span class="content">一、张三的成长之路</span><span class="suffix"></span></h2><p>今天是张三入职「驴厂」的第一天，怀着激动而忐忑的心情。她已经毕业了好几年，在软件开发的工作上已经积累了丰富的项目经验，但是这毕竟是国内数一数二的大厂，她对自己的技术能力有一些不太自信，但是她非常喜欢这份工作，也相信以自己的能力可以干好工作。</p>
+<p>部门的项目经过多年的「积累」，虽然有大量的系统设计文档，但其中夹杂着不少黑话，使得文档难以理解，阅读起来往往感到困惑。代码也同样如此，堆积多年的兼容逻辑导致代码变更显得异常复杂，她的第一个需求做了很长的时间才成功上线。这其实是一个很正常的现象，部门内的同事虽然都很友好，但她们都忙于自己的事情，无暇顾及，也没有给她任何帮助、对她表示安慰。以致于张三觉得自己能力不太好，工作太慢、需要太多帮助，她开始害怕试用期无法正常通过。</p>
+<p>不久后，她完成了一项工作，得到了客户的极度好评：客户需要捞取用户的使用数据报表，按理来说，系统中应该提供对应的功能，方便客户自行查询，但团队工作量中并没有把这项工作列到未来待实现的功能中。而张三花了几天时间，将客户需要的数据整理清楚并提供给客户，这让客户非常满意。除此之外，她将此次获取数据的方法和步骤记录在了团队的文档中，并分享给团队同事，这让团队成员在处理此类问题时，效率得到了极大的提升，方便了同事们的工作，客户对我们的工作也很满意。</p>
+<p>张三按部就班地进行着每天的工作，直到有一天，部门项目出现了一个棘手的问题，但当时并没有找到太好的解决方案。经过内部讨论，团队得出了一个初步的方案。与此同时，张三向隔壁团队的同事咨询了相关内容，发现他们有不同的解决思路。于是，张三组织了一次会议，邀请了自己团队的系统设计师和隔壁团队的同事。她在会议中提出了许多关键问题，并经过充分讨论后，两个团队决定合作，共同打造一个更好的产品。会议结束后，张三整理了会议纪要并发送给所有参与者，以确保每个人都对达成的共识有一致的理解。经过开发，最终很好的解决了客户的问题，提升了公司的收益。</p>
+<p>时间慢慢流逝，张三逐渐成为团队中的资深成员。随着新成员的不断加入，她想起自己刚入职时的艰难经历，于是组织同事编写了一些新人入职文档，并建立了一个「新人落地计划」，为新成员配备导师，帮助他们更快融入团队。</p>
+<p>随着对业务的深入了解，张三发现代码库中严重缺乏单元测试。为此，她召集了一些经验丰富的老员工，持续推动改进，制定了编码规范和代码合入流程。现在，所有代码都有了更完善的测试、更高的可读性和更强的可靠性。</p>
+<p>随着她解决的问题越来越多，张三在团队中的地位逐渐提升，部门负责人也开始通过她来了解团队的情况。有一天，团队里那个「优秀的程序员」负责的项目出现了延期，可能无法按时交付给客户，老板让张三去调查情况。张三花了很多时间去了解事情的来龙去脉，发现「优秀的程序员」的项目需要从另一个团队的服务中获取信息，但经过三周的讨论仍未达成共识。于是，张三带着「优秀的程序员」与另一个团队的人进行面对面的交流，很快解决了这个问题。最终，「优秀的程序员」完成了所有功能，项目按时交付，张三在项目正常推进中做出了巨大的贡献，但所有功劳都归到了那个「优秀的程序员」身上。</p>
+<p>两年时间就这样过去了。张三不断对自己发誓，一定要抽时间写更多的代码，但每天总有更重要的事情出现，她的日程被排得满满当当：</p>
+<blockquote>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/212b4982b30e9d8ff1d85f082a75a201.png" alt="忙碌的日程" referrerpolicy="no-referrer"></p>
+</blockquote>
+<p>团队成员已经开始将她视为非正式的负责人。她对团队中的一切了如指掌，能够发现系统设计中的问题，并提出有效的解决方案。她经常需要与团队成员进行一对一的沟通，并指导所有新成员。她唯一的空闲时间是在会议之间的一两个小时，然而要在这短暂的时间内专注于写代码，几乎是不可能的。不过，她并不担心自己的发展，因为每个人都告诉她，她的工作非常出色，而且她始终能够获得最好的绩效。经过两年多的成长，她觉得自己已经达到了一个新的高度。</p>
+<p>然而，在公司的晋升流程中，提拔的往往是那些代码写得好的人，比如前面提到的“系统设计师”和“优秀的程序员”，而张三却没有被提拔。</p>
+<p>尽管张三帮助了客户，制定了编码规范，协助同事评审系统设计文档，虽然我们都知道并不是所有的技术工作都需要亲自写代码，但老板依然会告诉你：</p>
+<blockquote>
+<p>你的项目还没上线。</p>
+<p>你没写多少代码。</p>
+<p>你还没有足够的影响力。</p>
+<p>你的沟通能力很强。</p>
+<p>你的软技能非常出色，只是我们不认为你是一名<strong>合格的工程师</strong>。</p>
+<p>要不要考虑做项目经理呢？</p>
+</blockquote>
+<h2 id="二、晋升困境：能力与制度的碰撞"><span class="prefix"></span><span class="content">二、晋升困境：能力与制度的碰撞</span><span class="suffix"></span></h2><p>故事中的晋升机制对张三真的公平吗？张三在每个项目的关键节点上，都是承担着最具影响力的工作。没有她，许多项目可能根本无法按时交付。她是将整个团队和所有项目紧密联系在一起的“黏合剂”。在过去的两年里，她在技术领导力方面快速成长，表现得非常出色：她不仅深入理解项目中的问题，还非常了解团队成员的需求，引入标准、优化设计，极大地提升了效率。虽然她在编码能力上的提升相对有限。</p>
+<p><strong>我们该如何看待这种情况呢？她可以晋升为高级工程师吗？</strong></p>
+<p>是不是觉得按能力应该晋升，但按制度却不该晋升，这种矛盾感很正常！我在不同场合问过很多次这个问题，得到的答案也五花八门。还有人认为答案显而易见，根本不需要提出这个问题（尽管他们的答案并不一致）。</p>
+<p>但有一件事我确信无疑：她的老板在这件事上负有一定的责任，他们对工作内容没有进行良好的沟通。张三每年都获得了非常高的绩效评估。她坚信自己正迈向晋升为高级工程师的道路。而且，她确实承担并解决了我对高级甚至资深工程师所期望的那些工作和问题。她的领导能力毫无疑问是非常出色的。然而，这家公司并不认为这些工作足以让她晋升，至少在好的这个级别是不行的。虽然他们没有明确说出来，但他们真正看重的是代码或其他可量化的技术成果。而她的老板却从未告知她，她所做的这些工作并不足以支撑晋升。老板可能只是欣慰有人愿意承担这些“黏合剂”工作，因为这些工作确实需要有人来做。</p>
+<p>“黏合剂”工作往往是项目成功与否的关键。通常这些工作由项目经理来完成，但在没有项目经理的团队中会发生什么呢？在一些团队里，老板会主动承担这部分工作。而在更多的团队中，这些任务往往由愿意做的人来承担，或者由那些被默认为应该自愿承担这类工作的人来负责。</p>
+<h2 id="三、聚焦核心，避免职业迷失"><span class="prefix"></span><span class="content">三、聚焦核心，避免职业迷失</span><span class="suffix"></span></h2><p>上述内容并不是说你的所有工作都必须直接有助于晋升。对于个人成长而言，培养软技能和拓展视野确实是有益的。在工作中，每个人都应该公平地分担一些“脏活累活”。然而，你的大部分工作应该聚焦在核心 KPI 上。如果有人长期偏离核心工作，这实际上会对他们的职业发展产生负面影响。而如果你作为他们的老板却放任这种情况发生，那你实际上是在让他们无意中伤害自己的职业生涯。</p>
+<p>在日常工作中，工作内容往往如“汝之蜜糖，彼之砒霜”。对你的晋升不利的工作，可能对其他人的晋升却非常有利。比如，一个工程师组织了一次团建活动，不论办得多出色，都不太可能被视为晋升的依据。但如果这个人是 HRBP 呢？那么这项工作可能就是他们的核心职责。</p>
+<p>对于那些对任何人来说确实不利于晋升的工作，它们应当被公平分配。这类工作需要像团队的其他工作一样被跟踪，并且需要有计划地进行分配。如果这些工作只是由随便谁来接手，那就无法保证公平分配。花点时间想一想，你的团队中哪些人承担了这些不利于晋升的工作?</p>
+<p>好了，现在让我们把视线再次回到张三身上。有人建议她转岗到一个能够将这些工作转化为晋升助力的职位。在我的工作中，我见过很多次类似的情况：传递的信息往往是“你在做不利于晋升的工作，所以换个职位吧”。我很少看到有人强调“那么就调整一下你的工作内容”或者“改变一下你呈现工作成果的方式”。</p>
+<p>我们来谈谈换岗位的问题。我读过很多关于是否应该选择某个岗位的文章。大多数文章都是由那些已经在做这份工作的人撰写的，讨论你是否适合这份工作，似乎只要你能够胜任某件事，就意味着你必须去做这件事一样。他们会说：</p>
+<ul>
+<li>你擅长处理反馈吗？你喜欢指导别人吗？你喜欢与人打交道吗？那你就应该做项目经理。</li>
+<li>你能站在客户的角度思考问题吗？那么，你就应该做产品经理。</li>
+</ul>
+<p>但这种刻板的思维方式就像游乐场的那些标志：“你必须达到这个身高才能乘坐过山车。”可是，我的身高够了，就意味着我必须去坐过山车吗？我具备很好的社交能力，我就一定要成为项目经理吗？但那可并不是我想做的事哇！</p>
+<p>在我看来，如果你编写代码，你就会逐渐变得更擅长编程；如果你管理人，你就会变得更擅长管理。所以，关键是你想在哪些方面提升自己？你想获得哪些技能？这不在于你已经具备了什么技能，而在于你希望自己将来拥有的技能。毕竟，我们大多数能力都是在工作中学来的。</p>
+<p>我见过很多人从未认真考虑过他们真正想要的工作，因为他们觉得自己还不具备那份工作的所有技能。许多计算机科学专业的大学生告诉我，他们没有申请过任何编程相关的工作，因为他们觉得自己的编程能力还不够强。他们最终选择了一个自己并不想要的工作岗位，因为他们害怕去尝试自己真正想要的职位，或者因为别人告诉他们，他们在另一个岗位上会表现得更好。</p>
+<p>我建议大家要有意识地做出选择。选择一个能让你感到成功、快乐、为之自豪，并且能教给你所需技能的工作岗位。去做一份让你感到兴奋的工作。你会在这份工作中不断学习，并逐渐成为高手。大多数情况下，我们在第一天并不能把工作做到完美，大部分能力都是在工作中学会的。不过，当你尝试转向非工程类的工作时，你需要确保自己拥有扎实的技术背景，因为一旦你的工作经历中出现“项目经理”这样的词汇，很多人会带有偏见，立即假设你不擅长技术。我见过很多人接受了这样的 offer，结果发现自己被安排去做非技术性的管理工作或项目经理岗位，逐渐远离了软件开发这个行业。而当他们想重新回到原来的开发者岗位时，却发现自己无法再被雇用到之前的级别，即使离开开发工作并没有多久。就好像他们的技能已经消失了一样。他们不得不以比离开时更低的级别回归，因为人们不再相信他们有能力胜任原来的工作。</p>
+<p>在此我建议大家，不要告诉别人他们“不够技术”，面是具体说明你希望他们掌握哪些知识。比如：</p>
+<ul>
+<li>你需要在设计会议中理解并参与技术讨论</li>
+<li>我们的高级工程师都是系统设计师，你需要学习分布式系统的课程</li>
+</ul>
+<p>否则，你基本上只是在说：“你看起来不像个工程师。能不能让自己更像工程师一点？”</p>
+<h2 id="四、贡献与成长，如何抉择"><span class="prefix"></span><span class="content">四、贡献与成长，如何抉择</span><span class="suffix"></span></h2><p>两年前，张三作为一名中级工程师加入公司。从那时起，她一直在帮团队填补空白，帮助团队和组织取得成功。然而，在晋升场上，她却被告知没有技术成就。</p>
+<p>我不确定她的正确职业选择是什么，但她希望得到晋升。假设她决定继续走工程师的道路，成为一名高级工程师，事实上，她的工作内容大部分已经是高级工程师的职责。然而，她却频繁地听到“技术不够”的评价。如果你是“黏合剂”，你该怎么做？如果你在管理一个“黏合剂”，你又该怎么做？作为一个过来人，我有四个建议：</p>
+<h3 id="1. 沟通"><span class="prefix"></span><span class="content">1. 沟通</span><span class="suffix"></span></h3><p>张三应该尽早与她的老板进行一次早已该进行的职业对话。她应该问一些直截了当的问题，比如：</p>
+<ul>
+<li>我会在下一轮晋升吗？</li>
+<li>我需要做哪些工作才能晋升？</li>
+<li>这些工作是否符合高级工程师的标准？</li>
+</ul>
+<p>她的老板也需要基于对职业发展路径的理解，诚实而直接地回答她的问题。他们需要就目标达成一致，制定一个明确的计划，并定期检查进展，确保他们仍然在正确的轨道上。</p>
+<h3 id="2. 头衔"><span class="prefix"></span><span class="content">2. 头衔</span><span class="suffix"></span></h3><p>想办法获得一个合适的职位头衔。如果她和她的老板都希望她继续承担大量的“黏合剂”工作，是否可以考虑给她一个能够提升技术信誉的头衔？比如让她担任技术负责人之类的职位。通常，人们期望负责人会做大量的“黏合剂”工作，这样的头衔也能更好地反映她的贡献。可能有些人在读到这里时会想，头衔无所谓。也许你不需要它们，但是朋友们，这并不意味着每个人不需要。这个世界存在着各种各样的刻板印象，如果你是一个白人或亚洲男性，别人默认会认为你擅长编程。即使你昨天刚毕业，拿的是法律学位，但人们仍然认为你会编程。一个合适的职位头衔可以节省我们大量的时间和精力，不必花时间证明自己资历。它还能让我们有更多的自由去做“黏合剂”工作，而不必担心别人会认为我们“技术不够”。请记住头衔非常重要。</p>
+<h3 id="3. 包装"><span class="prefix"></span><span class="content">3. 包装</span><span class="suffix"></span></h3><p>张三在工作中， 通过她的努力和技术判断，让项目得以实现。但她依然需要将她的成果进行一定包装、然后表达出来， 让团队所有人都知道她的影响力。如果你作为一个管理者，看到了类似的情况，你也应该公开表达你的赞赏，表扬同事的领导能力。</p>
+<p>与此同时，还需要将自己在工作中的材料整理出来，如方案设计文档、会议纪要以及那些解决问题的关键事项，将这些材料作为晋升陈述材料。不过，即使有了这些材料，也可能仍然无法顺利晋升。</p>
+<h3 id="4. 停止做“黏合剂”工作"><span class="prefix"></span><span class="content">4. 停止做“黏合剂”工作</span><span class="suffix"></span></h3><p>为了更好地晋升，我会建议大家放下那些对公司、部门更重要的事情，严格按照职位阶梯的要求去工作，做更多容易量化的工作，一些大家都认可的“技术性”工作：</p>
+<ul>
+<li>写一堆代码</li>
+<li>写一些任何人都能写的设计文档</li>
+<li>去优化系统的性能，优化数据库</li>
+</ul>
+<p>即使这些工作可能有团队中更适合的人来做，或者因为技能生疏导致你比别人做得慢，也依然需要去做。</p>
+<p>编码工作非常耗时且需要高度专注，通常需要大块的时间才能真正投入其中。因此，在晋升通过之前，不要参与面试、不要参与组织团建，停止所有与团队建设相关的事情。最重要的是：不要去挽救那些即将被搁置的事情。</p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/4dafa87079f7b8cb896249772c03a8e9.png" alt="相对轻松的忙碌时间" referrerpolicy="no-referrer"></p>
+<p>只有当你的日程变成这样的状态时，你才能拥有大段的空白时间，专注于编写代码、撰写设计文档等工作。当你逐项完成这些任务时，它会形成一个良性循环，不断提升你的编码能力和撰写设计文档的能力。</p>
+<blockquote>
+<p>这个过程就是<strong>学习</strong>。我们大多数的学习都是在工作中发生的。每当工作中遇到问题，你在 Stack Overflow 上搜索查找到答案时，你都会学到一些东西，这个过程是你反复进行的。但对于那些不常反复做的事情，就必须积极主动地去学习才能真正掌握。</p>
+</blockquote>
+<h2 id="五、持续学习，持续进步"><span class="prefix"></span><span class="content">五、持续学习，持续进步</span><span class="suffix"></span></h2><p>对于那些喜欢做“黏合剂”工作的人，我也建议你们继续提升自己的技术能力。如果你一直只做“黏合剂”工作，你最终只会在“黏合剂”方面变得更擅长，而技术能力可能会停滞不前，这会影响你未来的职业发展。对核心技术技能的学习，几乎是不可能让人后悔的事情。</p>
+<p>在我们所在的行业里，很少有人真正讨论学习的重要性。我们大脑中的技术知识，都是通过某种方式学到的，但我们往往会忽略学习过程中我们投入了大量的时间。</p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/c064832e6e2b058600ef56e039da6df1.png" alt="每日学习安排" referrerpolicy="no-referrer"></p>
+<p>如果你是一位资深开发人员，我建议你向团队的初级员工分享你的学习内容和学习方法。我们中的一些人有幸能够拥有学习的空闲时间，而另一些人则因为各种工作事项，几乎没有任何时间学习。在这里，我想强调的是，你需要意识到在工作时间学习是可以的——而且是正常的；对于管理者来说，将中级员工培养成高级员工也是一项非常有价值的投资。永远不要浪费任何让人们学习的机会。</p>
+<p>在工作中，如果你总是替某人做某件事，表面上看似是在保护他们，实际上你是在剥夺他们的学习机会。如果有些工作你已经非常熟悉如何做，那么你应该尝试将这些任务分配给那些能够从中受益的人。让他们在日程表上划出时间来学习，并在他们学习的过程中给予支持。这样不仅能帮助他们成长，还能为团队培养更多的能力。</p>
+<p>我那位出色的同事 Polina 有一些很好的建议，关于她在面对别人试图把她推向 “项目经理” 工作时的应对方式：</p>
+<blockquote>
+<p>同事&#x2F;老板：“你应该做这件事，因为你在沟通方面非常出色。”</p>
+<p>她会回答：“是的，只要我投入时间，我就能擅长，与具体事项无关。你应该看看我在系统设计方面的表现。”</p>
+</blockquote>
+<p>所以，当她专注于设计系统时，沟通的事情便需要由其他同事去处理。她通过这样做，创造了一个学习机会，让其他同事也能提升他们的沟通能力。如果你是一名管理者，我建议你帮助团队中那些不擅长“黏合剂”的人也投入到相应的工作中。</p>
+<p>还记得故事中的「优秀程序员」和「系统设计师」吗？他们之所以能够顺利完成工作，是因为张三帮助「优秀程序员」进行沟通，并为「系统设计师」梳理了他所构建的系统如何与公司正在构建的其他系统集成。我不认为这两位算是真正的高级工程师。而且，如果有人继续为他们做这些「黏合剂」工作，他们永远也学不会如何成为真正的高级工程师。</p>
+<p>我们的技能并不是固定不变的，你可以擅长很多事情，也可以选择做任何事情。对于那些要求你承担超出公平份额且无法晋升的工作，要敢于拒绝，把你的精力投入到你真正想要做的事情上。</p>
+
+                    <hr/>
+            </div>
+            </section>
+        </div>
+        <div style="margin: auto;">
+            <div>
+                <img src="https://moe-counter.glitch.me/get/@pinned_blog_Glue work?theme=moebooru" style="margin: 0 auto;" referrerpolicy="no-referrer">
+            </div>
+        </div>
+        <input id="copy-input" style="position: absolute; left: -1000px; z-index: -1000;">
+
+    
+
+</div>
+                <!-- 
+                    <div class="post_pre_next">
+    
+    
+        <a href="/2024/08/12/android-jdk-configuration/">下一篇: 
+            你不会到现在还不知道 Android 中的那些 JDK 配置吧？
+        </a>
+    
+</div>
+
+
+                 -->
+                <div class="footer">
+    <span>Copyright © 2025 大罗说事</span>
+</div>
+
+<!-- 
+<link rel="stylesheet" href="/css/highlight.default.css">
+ -->
+<style type="text/css" id="atom-one-dark">pre code.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 12px;
+  font-size: 12px;
+}
+/*
+
+Atom One Dark by Daniel Gamage
+Original One Dark Syntax theme from https://github.com/atom/one-dark-syntax
+
+base:    #282c34
+mono-1:  #abb2bf
+mono-2:  #818896
+mono-3:  #5c6370
+hue-1:   #56b6c2
+hue-2:   #61aeee
+hue-3:   #c678dd
+hue-4:   #98c379
+hue-5:   #e06c75
+hue-5-2: #be5046
+hue-6:   #d19a66
+hue-6-2: #e6c07b
+
+*/
+
+.hljs {
+  color: #abb2bf;
+  background: #282c34;
+}
+
+.hljs-comment,
+.hljs-quote {
+  color: #5c6370;
+  font-style: italic;
+}
+
+.hljs-doctag,
+.hljs-keyword,
+.hljs-formula {
+  color: #c678dd;
+}
+
+.hljs-section,
+.hljs-name,
+.hljs-selector-tag,
+.hljs-deletion,
+.hljs-subst {
+  color: #e06c75;
+}
+
+.hljs-literal {
+  color: #56b6c2;
+}
+
+.hljs-string,
+.hljs-regexp,
+.hljs-addition,
+.hljs-attribute,
+.hljs-meta .hljs-string {
+  color: #98c379;
+}
+
+.hljs-attr,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-type,
+.hljs-selector-class,
+.hljs-selector-attr,
+.hljs-selector-pseudo,
+.hljs-number {
+  color: #d19a66;
+}
+
+.hljs-symbol,
+.hljs-bullet,
+.hljs-link,
+.hljs-meta,
+.hljs-selector-id,
+.hljs-title {
+  color: #61aeee;
+}
+
+.hljs-built_in,
+.hljs-title.class_,
+.hljs-class .hljs-title {
+  color: #e6c07b;
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-strong {
+  font-weight: bold;
+}
+
+.hljs-link {
+  text-decoration: underline;
+}
+
+</style>
+<style type="text/css" id="code-theme">pre::before {
+    content: '';
+    display: block;
+    background: url("http://pinned.github.io/img/mac_style.svg");
+    height: 30px;
+    width: 100%;
+    background-size: 40px;
+    background-repeat: no-repeat;
+    background-color: #282c34;
+    margin-bottom: -7px;
+    border-radius: 5px;
+    background-position: 10px 10px;
+}
+
+pre code {
+    border-radius: 5px;
+}</style>
+
+<script src="/js/highlight.min.js"></script>
+
+
+<script src="/js/highlightjs-line-numbers.js"></script>
+
+
+<script src="/js/juice.js"></script>
+
+
+<script src="/js/copy_wechat.js"></script>
+
+
+<script>
+    hljs.highlightAll();
+    // window.onload = function() {
+    //     // 判断是否为手机浏览器
+    //     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+    //     if (!isMobile) {
+    //         fetch('https://pinned.github.io/bing-daily-picture/index.json')
+    //             .then(response => response.text())
+    //             .then(data => {
+    //                 var result = JSON.parse(data)
+    //                 var count = result.images.length
+    //                 const index = Math.floor(Math.random() * count);
+    //                 document.getElementById("bing-bg").src = "https://cn.bing.com" + result.images[index].url;
+    //             }); // 返回的结果
+    //     } 
+    // }    
+</script>
+
+            </div>
+        </div>
+    </body>
+</html>

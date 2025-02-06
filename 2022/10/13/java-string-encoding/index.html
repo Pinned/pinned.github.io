@@ -763,10 +763,10 @@ thead {
 <li>字符 <code class="inline-code">🎃</code>：它的 <code class="inline-code">Unicode</code> 编码为 <code class="inline-code">U+01F383</code>，在 UTF-8 格式下，需要 <code class="inline-code">4 byte</code> 才能够存储，将 <code class="inline-code">0xD83C</code> 转换为二进制为 <code class="inline-code">00000001</code> 和 <code class="inline-code">11110011</code> <code class="inline-code">10000011</code>，因此在 UTF-8 编码格式中，数据为 <code class="inline-code">11110000</code> <code class="inline-code">10011111</code> <code class="inline-code">10001110</code> <code class="inline-code">10000011</code>。</li>
 </ul>
 <p>通过上面的例子，可以大体了解其编码过程，下图将  <code class="inline-code">🎃</code> 从 <code class="inline-code">Unicode</code> 编码转换成 <code class="inline-code">UTF-8</code> 编码的转化图，可以更好的理解转换过程。</p>
-<p><img src="https://img-blog.csdnimg.cn/ca4c6e51326b428ba9ad818c968d2e82.png" alt="UTF-8编码过程" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/ca4c6e51326b428ba9ad818c968d2e82.png" alt="UTF-8编码过程" referrerpolicy="no-referrer"></p>
 <p>相信读到这里，大家对计算机系统中字符编码有了初步的了解。下面紧接着来看看在 Java 中，String 相关的一些细节。</p>
 <h2 id="2. String 中字符是如何存储的？"><span class="prefix"></span><span class="content">2. String 中字符是如何存储的？</span><span class="suffix"></span></h2><p>在 Java 中，String 类定义在 <code class="inline-code">java.lang</code> 这 个包下面，在 <code class="inline-code">Intellij IDEA</code> 直接跳转，就可以看到  <code class="inline-code">String</code> 的源码，下图截取了一部分内容：</p>
-<p><img src="https://img-blog.csdnimg.cn/69399bb46d874926ac137af67892f854.png" alt="String 类" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/69399bb46d874926ac137af67892f854.png" alt="String 类" referrerpolicy="no-referrer"></p>
 <p>从图中 <code class="inline-code">value</code> 的注释可以看到， String 内部存储数据是用 <code class="inline-code">char</code> 数组来表示的。</p>
 <blockquote>
 <p> PS： 上图截图内容为 JDK 1.8 版本，在 1.9 过后的版本中，已经将 <code class="inline-code">char</code> 数组改为 <code class="inline-code">byte</code> 数组来存储数据。如有兴趣可以参看知乎这篇回答：jdk9为何要将String的底层实现由char[]改成了byte[]? (<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/447224628/answer/1824574900">https://www.zhihu.com/question/447224628/answer/1824574900</a>)</p>
@@ -778,24 +778,24 @@ thead {
 String createStr = new String(data);
 </code></pre>
 <p>断点运行进去，在下图中，高亮行中，会调用 <code class="inline-code">StringCoding.decode</code> 去解码对应的 <code class="inline-code">bytes</code> 。</p>
-<p><img src="https://img-blog.csdnimg.cn/1a1de76a888a4b05acfe27fcca751b7b.png" alt="String 构造方法" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/1a1de76a888a4b05acfe27fcca751b7b.png" alt="String 构造方法" referrerpolicy="no-referrer"></p>
 <p>在 <code class="inline-code">StringCoding</code> 中，使用当前默认的编码格式去进行解码，在我的机器上，默认使用的是 <code class="inline-code">UTF-8</code>， 因此，在调试中，可以看到使用的是 <code class="inline-code">UTF_8</code> 和 <code class="inline-code">UTF_8$Decoder</code> 去进行解码。</p>
-<p><img src="https://img-blog.csdnimg.cn/e6fbd7e701b6403f983bc8007df58c77.png" alt="decode" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/e6fbd7e701b6403f983bc8007df58c77.png" alt="decode" referrerpolicy="no-referrer"></p>
 <p>进一步跟进去，会跟到 <code class="inline-code">UTF_8.java</code> 这个类，这个类在 <code class="inline-code">rt.jar</code> 包中，JDK 中默认不包含其源代码，为了更好的调试，可以参看<strong>「 附录：如何在 IDEA 中查看与调试 rt.jar 中的源码 」</strong> 。</p>
-<p><img src="https://img-blog.csdnimg.cn/cc4a2b7b8b354a1dba489ed441897909.png" alt="Decode byte 的逻辑" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/cc4a2b7b8b354a1dba489ed441897909.png" alt="Decode byte 的逻辑" referrerpolicy="no-referrer"></p>
 <p>从代码中可以看到， UTF-8 的解码过程，按照<code class="inline-code">一个byte</code>、<code class="inline-code">两个byte</code>、<code class="inline-code">三个byte</code>、<code class="inline-code">四个byte</code> 分别去计算，此计算方式与<strong>「 字符串编码 」</strong>中讲到的映射关系一致。到此，基本了解 <code class="inline-code">byte 数组</code> 到 <code class="inline-code">String</code> 的过程。也可以清晰的理解到，在创建 <code class="inline-code">String</code> 的过程中，传过来的 <code class="inline-code">byte 数组</code> 就是对应编码的二进制数据。</p>
 <p>重点来了，如果传过来的 <code class="inline-code">byte 数组</code> 中的编码并不是按照  UTF-8 编码规则来的数组，会是什么样的结果呢？我也做了一个测试，测试代码如下：</p>
 <pre><code class="java">byte[] data = new byte[]&#123;(byte) 0b10011111, (byte) 0b10001110, (byte) 0b10000011&#125;;
 String createStr = new String(data);
 </code></pre>
-<p><img src="https://img-blog.csdnimg.cn/34719390793a4d1eaf07bff5d083511b.png" alt="无法解码时的逻辑" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/34719390793a4d1eaf07bff5d083511b.png" alt="无法解码时的逻辑" referrerpolicy="no-referrer"></p>
 <p>代码中，第一个 <code class="inline-code">byte</code> 为 <code class="inline-code">0b10011111</code> ，这个数不满足前面的判断规则， 会直接进入 <code class="inline-code">else</code>  中，就将直接将当前字符设置成 <code class="inline-code">65533</code> 这个字符，从而丢掉了真实的 <code class="inline-code">byte</code> 数据。当然，除了第一个 <code class="inline-code">byte</code> 有问题，其它 <code class="inline-code">byte</code> 有问题时，也会使用 <code class="inline-code">65533</code> 来进行替换，有兴趣的同学可以去尝试看看对应的代码。</p>
 <p>最后，在回到文章开始的那个问题，<code class="inline-code">byte 数组</code> 在创建 <code class="inline-code">String</code> 时，如果 <code class="inline-code">byte</code> 中的数据不符合 <code class="inline-code">UTF-8</code> 的规则，原始数据会被丢掉，也就导致 <code class="inline-code">new String(data)</code>  中传入的 <code class="inline-code">data</code> 与 <code class="inline-code">getBytes()</code> 拿到的二进制不一致，因此，在处理 <code class="inline-code">byte 数组</code> 数据时，需要先进行 <code class="inline-code">Base64</code> 编码处理。</p>
 <h2 id="总结"><span class="prefix"></span><span class="content">总结</span><span class="suffix"></span></h2><p>初入计算机行业时，也曾被各种不同的编码格式搞得头大，但也从未去了解过其底层设计原理。本文以 UTF-8 以及 Java 内部 String 处理的机制着手，对计算机中编解码的细节作了一定的了解，希望给读者朋友们带来一定的启发，如果有什么新奇的想法，也欢迎与我沟通交流。</p>
 <h2 id="附录：如何在 IDEA 中查看与调试 rt.jar 中的源码"><span class="prefix"></span><span class="content">附录：如何在 IDEA 中查看与调试 rt.jar 中的源码</span><span class="suffix"></span></h2><p>前面所提到的字符串编码，在 Java 中，用于实现编码是 <code class="inline-code">Charset</code> 相关的类， 其源代码在 <code class="inline-code">rt.jar</code> 中。JDK 中默认不包含对应的源码，在调试的时候，可以去 openjdk 中去把下载下来，我当前使用的版本为 JDK 8，下载地址为：<a target="_blank" rel="noopener" href="http://hg.openjdk.java.net/jdk8u/jdk8u-dev/jdk/">http://hg.openjdk.java.net/jdk8u/jdk8u-dev/jdk/</a> ， 点击下图中的 zip ，即可下载。</p>
-<p><img src="https://img-blog.csdnimg.cn/ae23a74bd82a47b5b74af9f1c0b9d67c.png" alt="JDK 下载" referrerpolicy="no-referrer"> </p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/ae23a74bd82a47b5b74af9f1c0b9d67c.png" alt="JDK 下载" referrerpolicy="no-referrer"> </p>
 <p>下载完成后，在 <code class="inline-code">Intellij IDEA</code> 中为 JDK 添加 <code class="inline-code">sourcepath</code> 后，就可以非常愉快的调试看代码了，具体设置步骤可以看下图红框圈出来的部分。</p>
-<p><img src="https://img-blog.csdnimg.cn/823739724b1542a9862a1b75e2bc9fe5.png" alt="Sorcepath 添加示例" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/823739724b1542a9862a1b75e2bc9fe5.png" alt="Sorcepath 添加示例" referrerpolicy="no-referrer"></p>
 
                     <hr/>
             </div>
@@ -828,7 +828,7 @@ String createStr = new String(data);
 
                  -->
                 <div class="footer">
-    <span>Copyright © 2024 大罗说事</span>
+    <span>Copyright © 2025 大罗说事</span>
 </div>
 
 <!-- 

@@ -720,7 +720,7 @@ thead {
                     <p>Java 诞生多年，因此在网络上，有关 Java Class 文件格式解析的文章有很多，但他们大多数都是在列举《Java 虚拟机》中定义的格式，通读下来，好像所有的东西都讲清楚了，但是我个人好像并没有看懂，不知道定义的这些东西到底是用来存储什么东西的。本文仍然是在讲《Java 虚拟机》中定义的 Class 文件的格式，但会更多的从一个应用开发者的角度，将字节码文件中定义的字段与原始的 Java 代码信息进行一些关联，让应用开发者能够更好的理解其中的内容。当然，文中也存在部分知识点，不太常用或者我也没有了解清楚的，可能会一笔带过。当然，作为经久不衰的 Java ，其强大之处远不是一篇文章能讲清楚的，文中肯定会有疏漏的地方，如果你对其内容感兴趣，可以有针对性的进行深入研究。当然，本文内容近 1.6 万字，也很枯燥，建议大体浏览一遍即可，无需太过深究，如以后遇到相关问题后，在回来查阅即可。 下面为本文正文内容：</p>
 <p>Java 诞生快 20 年，能够一直保持良好的兼容性，其 Class 文件结构的稳定性起到了很重要的作用。在我们现在使用的 Class 文件中，其结构定义绝大部分都是在 1997 年发布的第一版 《Java 虚拟机规范》中就已经定义好了。虽然定义的时间距今已经 20 多年过去， Java 发展经历十多个大版本的迭代 以及无数字小的更新，最开始定义好的各项细节几乎没有出现任何改变。</p>
 <p>Class 文件是一组以 8 个比特位为基础的二进制流，各个数据项都是按照固定的顺序紧密的排列在一起。先来看下一整体结构，以及每一个字段的长度信息如下：</p>
-<p><img src="https://img-blog.csdnimg.cn/d79ecce9d3c541a2a9b6c7b1c57f539c.png" alt="Class 文件格式" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/d79ecce9d3c541a2a9b6c7b1c57f539c.png" alt="Class 文件格式" referrerpolicy="no-referrer"></p>
 <h2 id="一、Magic Number 魔数"><span class="prefix"></span><span class="content">一、Magic Number 魔数</span><span class="suffix"></span></h2><p>魔数， 如魔法一样神奇的数字。当我们写代码时，都建议不要使用魔数，因为它在你刚写完代码的时候只有“你和上帝”知道是什么意思，但过一段时间后，就只有“上帝”知道了。而为了区分文件格式，在文件内容的开头，都会使用一些魔数，用于标记和识别文件。如常见的 JPEG 的格式，文件头为 <code class="inline-code">FFD8FF</code>。在 Java 的字节码文件中，其魔数为 <code class="inline-code">CAFEBABE</code>，它是一个4字节的标识符，用于表明该文件是一个 Java 字节码文件。Java 虚拟机可以通过魔数来判断该文件是否为一个有效的 Java 字节码文件，如果不是，则无法被正确加载并执行。</p>
 <p>而关于 <code class="inline-code">CAFEBABE</code> 这个魔数的起源，还有一些小故事，Java 创始人 James Gosling 曾透露：</p>
 <blockquote>
@@ -847,7 +847,7 @@ class ClassFormat &#123;
 &#125;
 </code></pre>
 <p>在这段代码中，我们使用了常见的基本数据类型，它们都有各自的初始化值。在执行 Javac 进行编译的过程中，会将代码中的一些值放入常量区，而一另外一些不会。先说结论，上面示例中的代码中，<code class="inline-code">finalVerbose</code>、<code class="inline-code">strVerbose</code> 和以 <code class="inline-code">V2</code> 结尾的变量的初始值都会写入常量池。</p>
-<p><img src="https://img-blog.csdnimg.cn/66c503414a1d4cd2a175c19510defe22.png" alt="基本数据类型中写入到常量池中的变量" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/66c503414a1d4cd2a175c19510defe22.png" alt="基本数据类型中写入到常量池中的变量" referrerpolicy="no-referrer"></p>
 <p>编译后，使用  <code class="inline-code">javap -v ClassFormat</code> 查看常量池，具体内容如上图所示，图中圈出来的是我们在 Java 代码中定义的值，这些需要放在常量池满足以下条件：</p>
 <ul>
 <li>定义变量时，有 final 修饰的值，如   <code class="inline-code">public final int finalVerbose = 1</code>，此时数字 <code class="inline-code">1</code> 就会放到常量池中。</li>
@@ -869,7 +869,7 @@ class ClassFormat &#123;
 #19 = Utf8               verboseV2
 </code></pre>
 <p>其中 <code class="inline-code">#1</code> 表示常量池中的第一个常量，此处为一个 <code class="inline-code">Methodref</code> ， 即一个方法的引用，根据 《Java虚拟机规范》中的描述，他有两个字段，分别指向此方法所属的类，和方法的名称和类型描述，此例中为 <code class="inline-code">java.lang.Object</code> 的 <code class="inline-code">&lt;init&gt;()</code> 方法，按其结构绘制图如下：</p>
-<p><img src="https://img-blog.csdnimg.cn/7f248f41b0a34e76b771162fbe39bb46.png" alt="Objct 的 &lt;init&gt; 方法引用" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/7f248f41b0a34e76b771162fbe39bb46.png" alt="Objct 的 &lt;init&gt; 方法引用" referrerpolicy="no-referrer"></p>
 <p>需要注意的是，我们在类中定义的方法，只有在被调用时，才会生成 <code class="inline-code">Methodref</code> 引用。用于表示方法引用的还有一个常量类型： <code class="inline-code">InterfaceMethodref</code>，此常量用来标记为接口的方法，例如下面代码中的 <code class="inline-code">commonMethod</code> 的调用：</p>
 <pre><code class="java">public interface CommonInterface &#123;
     public void commonMethod();
@@ -890,7 +890,7 @@ class ClassFormat &#123;
 </code></pre>
 <p>编译后，便会生成一个 <code class="inline-code">InterfaceMethodref</code>，其结构与 <code class="inline-code">Methodref</code> 一致，其指向的类名为 <code class="inline-code">CommonInterface</code>。</p>
 <p>与方法对应的便是我们常用的变量，与之不同的是，在代码中定义的类变量以及属性变量，都会生成一个 <code class="inline-code">Fieldref</code> 属性，其结构与 <code class="inline-code">Methodref</code> 一致，此例中的 <code class="inline-code">#17</code> 便是代码中的 <code class="inline-code">public int verboseV2 = 32768;</code>。按其结构绘制图如下：</p>
-<p><img src="https://img-blog.csdnimg.cn/d5b804750e1d4322ac4f9fc52aaf817b.png" alt="Fieldref 结构图" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/d5b804750e1d4322ac4f9fc52aaf817b.png" alt="Fieldref 结构图" referrerpolicy="no-referrer"></p>
 <p>上述常量池中信息除了上述两个字段以外，还有 <code class="inline-code">Class</code>、<code class="inline-code">Utf8</code> 以及 <code class="inline-code">NameAndType</code>， 它们分别用来表示类常量、<code class="inline-code">Utf8</code> 常量以及描述方法&#x2F;字段名称和类型的常量。</p>
 <p><code class="inline-code">Utf8</code> 常量应该是常量池中使用最多的字段，在代码中定义的 <code class="inline-code">变量名</code>、<code class="inline-code">方法名</code> 都会以该常量的形式将名称存储在常量池中，当在进行 <code class="inline-code">javac</code> 编译时，可添加参数 <code class="inline-code">-g:vars</code>让方法参数名称、局部变量名称也存储在常量池中。</p>
 <p>内容到这儿，在 Java 1.2 中定义的 11 个基本常量类型已经完全涉及到了。在后续的 JDK 版本中，随着功能升级，也新增了其它常量。</p>
@@ -906,7 +906,7 @@ interface TestLambdaInterface &#123;
 &#125;
 </code></pre>
 <p>根据这几个常量的结构，可以生成如下关联关系图：</p>
-<p><img src="https://img-blog.csdnimg.cn/21bd26f1d79e4bea9366a042bc3c1c89.png" alt="InvokeDynamic 相关常量结构" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/21bd26f1d79e4bea9366a042bc3c1c89.png" alt="InvokeDynamic 相关常量结构" referrerpolicy="no-referrer"></p>
 <p>上述代码，在 JVM 中进行执行时，首先会找到常量池中 <code class="inline-code">#7</code> 的常量，通过它指向的 <code class="inline-code">bootstrapMethod</code> ，JVM 会调用这个引导方法，并将参数值传递给引导方法。从而获得一个 CallSite 对象，此对象中包含被真实执行的方法句柄，最终调用到真实的方法。动态调用方法在 Groovy 中使用比较多，有兴趣可使用 Groovy 进行深度研究。此处是用于动态方法调用，与之对应还有动动变量，在 JDK 11 的版本中，添加了 <code class="inline-code">CONSTANT_Dynamic_info</code>，用于实现动态变量的逻辑，但对于 Java 语言， 暂未找到使用此指令实现的逻辑。</p>
 <p>在 Java 9 中引入了模块系统，用来组织和管理代码，从而使得应用程序更加安全、可维护和高效。这两个常量分别为 <code class="inline-code">CONSTANT_Module_info</code> 和  <code class="inline-code">CONSTANT_Package_info</code>，分别用来存储模块信息与包信息，并且他们仅能用于 <code class="inline-code">module-info.java</code> 中。先来看以下代码：</p>
 <pre><code class="java">// module-info.java
@@ -1017,7 +1017,7 @@ module JavaClassFileStructure &#123;
 <p>传送门， 常量池结构: <a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/specs/jvms/se14/html/jvms-4.html#jvms-4.4">https://docs.oracle.com/javase/specs/jvms/se14/html/jvms-4.html#jvms-4.4</a></p>
 </blockquote>
 <p>看到这里，在 Class 文件中定义的常量结构，基本上都了解清楚了。在回到上一层的结构：</p>
-<p><img src="https://img-blog.csdnimg.cn/d24d1a41b28840e1817046603b929c0c.png" alt="常量池在 Class 文件中的格式" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/d24d1a41b28840e1817046603b929c0c.png" alt="常量池在 Class 文件中的格式" referrerpolicy="no-referrer"></p>
 <p>常量池是一个表类型的数据项目，常量池中常量的数量也是不固定的，因此在常量池的入口是一个 2 字节数据，代表常量池中常量的数量。在这里需要注意的是，常量的索引是从 index 为 1 开始的。因此，常量池中的常量个数加 1 后为 <code class="inline-code">constant_pool_count</code>。</p>
 <blockquote>
 <p>注：在 Class 文件格式规范制定之时，设计者将第 0 项常量空出来是有特殊考虑的，这样做的目的在于，如果后面某些指向常量池的索引值的数据在<strong>特定情况下</strong>需要表达”不引用任何一个常量池项目”的含义，可以把索引值设置为 0 来表示。</p>
@@ -1085,9 +1085,9 @@ module JavaClassFileStructure &#123;
 &#125;
 </code></pre>
 <p>中的结构如下图所示： </p>
-<p><img src="https://img-blog.csdnimg.cn/75a87b2bb74c41a98be376cefbfc00e5.png" alt="this、super、interface 的引用" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/75a87b2bb74c41a98be376cefbfc00e5.png" alt="this、super、interface 的引用" referrerpolicy="no-referrer"></p>
 <h2 id="六、字段集合"><span class="prefix"></span><span class="content">六、字段集合</span><span class="suffix"></span></h2><p>在使用 Java 语言编写代码时，变量有三种，一种是类级别变量，如 <code class="inline-code">public static int staticVerbose = 1;</code> ，第二种是实例变量，如 <code class="inline-code">public int verbose = 2;</code> ，还有一个是局部变量，如定义在方法代码块中的变量。前两种变量从 Class 文件的角度来看，他们并没有太大的区别 ，变量编译后，编译后都会放到字段集合中进行存储。而局部变量不会放到字段集合中去。与常量池类似，字段集合也是一个表结构，下图为字段的结构表：</p>
-<p><img src="https://img-blog.csdnimg.cn/5261b1f8777344f3add6e1972dccd4b1.png" alt="字段结构" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/5261b1f8777344f3add6e1972dccd4b1.png" alt="字段结构" referrerpolicy="no-referrer"></p>
 <p>从图中可以看到，每一个字段信息中包含有 5 个字段，属性是一个嵌套的表结构。从上到下，第一个是 <code class="inline-code">access_flags</code>，里面存储着字段修饰符，它与类中的 <code class="inline-code">access_flags</code> 值是非常类似的，都是使用两个字节的数据类型，但他们之间值范围有略微的差别，字段可以设置的标志位和含义如下所示：</p>
 <table>
 <thead>
@@ -1161,12 +1161,12 @@ module JavaClassFileStructure &#123;
 &#125;
 </code></pre>
 <p>上述代码会生成一个内部类，名叫  <code class="inline-code">ClassFormat$1.class</code> 的文件，而编译器为了解决内部类能访问外部类的信息，实现相互访问，编译器会生成一个变量用于支持这种情况。针对这种情况，我们来看一下，其中生成的类结构信息，如下图所示：</p>
-<p><img src="https://img-blog.csdnimg.cn/76b4882b1ee441c794f365b996a626aa.png" alt="ACC_SYNTHETIC 示例" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/76b4882b1ee441c794f365b996a626aa.png" alt="ACC_SYNTHETIC 示例" referrerpolicy="no-referrer"></p>
 <p>从图中可以看到，在 <code class="inline-code">ClassFormat$1</code>  中有一个名叫 <code class="inline-code">this$0</code> 的字段，类型为 <code class="inline-code">com.example.clazz.format.ClassFormat</code> ， 此字段就是由编译器生成，因此其访问标识符中有 <code class="inline-code">ACC_SYNTHETIC</code> 。</p>
 <p>在访问标识符后面，紧接着的两个字段分别会 <code class="inline-code">name_index</code>、<code class="inline-code">descriptor_index</code> ，各占两个字节，它们将指向常量池中的字段，上例中，<code class="inline-code">name_index</code> 的值为 5 ，即指向了常量池中第五个常量，其类型为 Utf8 ，存储的值为 <code class="inline-code">this$0</code>，<code class="inline-code">descriptor_index</code> 的值为 6， 类型同样为 Utf8，存储的值为 <code class="inline-code">Lcom/example/clazz/format/classFormat;</code>。</p>
 <p>紧随其后的便是字段的属性表数据，属性表是一个非常复杂的结构，并且字段、方法、类都有对应的属性，此处先跳过属性的内容，后文中将进行统一梳理。</p>
 <h2 id="七、方法表"><span class="prefix"></span><span class="content">七、方法表</span><span class="suffix"></span></h2><p>与字段表类似，整个方法字段的结构体与字段结构体一模一样，方法的结构体如下：</p>
-<p><img src="https://img-blog.csdnimg.cn/f6eecfad09914bbfa74ecece9afb71fe.png" alt="方法表结构体" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/f6eecfad09914bbfa74ecece9afb71fe.png" alt="方法表结构体" referrerpolicy="no-referrer"></p>
 <p>虽然结构体中字段定义一样，但其值包含的内容与范围还是有一些区别的，先看 <code class="inline-code">access_flags</code> ，此字段依然是用来定义其访问修饰符的，包含信息如下：</p>
 <table>
 <thead>
@@ -1250,7 +1250,7 @@ class ClassFormat implements GenericInterface&lt;String&gt; &#123;
 &#125;
 </code></pre>
 <p>代码中，<code class="inline-code">testBridgeMethod</code> 返回的是一个泛型，在 ClassFormat 中使用的具体类型为 <code class="inline-code">String</code>，将此代码进行编译，编译后的产物  <code class="inline-code">ClassFormat.class</code> 文件中会生成一个 <code class="inline-code">bridge</code> 的方法，因此编译器会在此方法中加入 <code class="inline-code">ACC_BRIDGE</code> 和 <code class="inline-code">ACC_SYNTHETIC</code> 这两个方法修饰符。最终 <code class="inline-code">ClassFormat.class</code> 方法表结构如下所示：</p>
-<p><img src="https://img-blog.csdnimg.cn/d6182265993b42b898d945f23a249b08.png" alt="ACC_BRIDGE方法示例" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/d6182265993b42b898d945f23a249b08.png" alt="ACC_BRIDGE方法示例" referrerpolicy="no-referrer"></p>
 <p>从结构中可以看到，在 <code class="inline-code">ClassFormat.class</code> 文件中的方法表里面有两个方法，用 Java 代码表示如下所示：</p>
 <pre><code class="java">public String testBridgeMethod()&#123;
     return null;
@@ -1265,7 +1265,7 @@ public Object testBridgeMethod() &#123;
 <p>另一个访问标志位 <code class="inline-code">ACC_STRICT</code> 也很少用到，在 java 中有一个关键字 <code class="inline-code">strictfp</code> 与之对应。在虚拟机执行时，浮点运算有两种运行模式：严格浮点模式和非严格浮点模式。当我们执行严格浮点运算时，在所有的Java虚拟机实现上运行结果都是精确相等的。需要注意的是，在 Java 17 及以后，此关键字已经不在使用了。</p>
 <p>在访问标识符后面，紧接着的四个字段信息<code class="inline-code">name_index</code>、<code class="inline-code">descriptor_index</code>、<code class="inline-code">attributes_count</code>、<code class="inline-code">attributes</code> 与字段表中的格式一致，在此处就不在赘述。 </p>
 <h2 id="八、属性表"><span class="prefix"></span><span class="content">八、属性表</span><span class="suffix"></span></h2><p>属性表（attribute_info） 在 Class 文件中用于多处地方，在 Class 文件最末尾是属性表，在字段（field_info）和方法（method_info）里面也都包含属性表。与Class文件中其他的数据项要求严格的顺序、长度和内容不同，属性表中的限制稍微宽松一些，不再要求各个属性表具有严格顺序，并且《Java虚拟机规范》允许只要不与已有属性名重复，任何人实现的编译器都可以向属性表中写入自己定义的属性信息，Java虚拟机运行时会忽略掉它不认识的属性。先来看一下属性字段中定义的结构：</p>
-<p><img src="https://img-blog.csdnimg.cn/35f2e37352124c33a3effd928bfb41eb.png" alt="属性结构体" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/35f2e37352124c33a3effd928bfb41eb.png" alt="属性结构体" referrerpolicy="no-referrer"></p>
 <p>到目前为止，一共定义了 30 个属性，信息如下：</p>
 <table>
 <thead>
@@ -1489,7 +1489,7 @@ public Object testBridgeMethod() &#123;
 &#125;
 </code></pre>
 <p>最终生成的字段信息中，会包含一个 <code class="inline-code">ConstantValue</code> 的属性，下图为 <code class="inline-code">STATIC_CONSTANT_STRING</code> 的关联关系图，可以更清晰的看清楚其关系：</p>
-<p><img src="https://img-blog.csdnimg.cn/af07f0bdf8ac4f9aa6ddd4e40a1ae7b0.png" alt="ConstantValue 关联关系" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/af07f0bdf8ac4f9aa6ddd4e40a1ae7b0.png" alt="ConstantValue 关联关系" referrerpolicy="no-referrer"></p>
 <p><code class="inline-code">ConstantValue</code> 的作用是通知虚拟机自动为静态变量赋值，对于非静态变量虚拟机会自动忽略此常量值。上例中的 <code class="inline-code">CONSTANT_STRING</code> 与 <code class="inline-code">STATIC_CONSTANT_STRING</code> 都包含有 <code class="inline-code">ConstantValue</code> 的属性，这是  Java 编译器做的事，但《Java虚拟机规范》中仅要求使用 ACC_STATIC 标志的 <code class="inline-code">STATIC_CONSTANT_STRING</code> 中的 <code class="inline-code">ConstantValue</code> 属性。</p>
 <h3 id="2. Code"><span class="prefix"></span><span class="content">2. Code</span><span class="suffix"></span></h3><p>我们编写的 Java 代码中的方法，经过编译器编译后，会生成字节码指令，这此指令会直接存储在 <code class="inline-code">Code</code> 属性中。但是并非所有的方法都会有  <code class="inline-code">Code</code> 属性，如 <code class="inline-code">abstract</code> 修饰的抽象方法就没有 <code class="inline-code">Code</code> 属性。先来看一下 <code class="inline-code">Code</code> 属性的结构：</p>
 <table>
@@ -1571,7 +1571,7 @@ public Object testBridgeMethod() &#123;
 &#125;
 </code></pre>
 <p>对于这样一个空的类， javac 在编译的时候，会为他添加一个默认的构造方法，此方法比较简单，就以他为例，看看 <code class="inline-code">code</code> 中都包含哪些信息。按照前面所说的结构，可以解析出来 <code class="inline-code">code_length</code> 为 5，也就是 <code class="inline-code">code</code> 块中的内容为 5 byte 。紧接着按位读取，首先读入的指令是 <code class="inline-code">0x2a</code>，其助记符为 <code class="inline-code">aload_0</code>，此指令的含义是将第 0 个变量槽中为引用类型的本地变量推送到操作数栈顶，在其后无操作数。第二个读入的指令为 <code class="inline-code">0xb7</code> ，其助记符为 <code class="inline-code">invokespecial</code>，此指令的作用是以栈顶的引用类型所指向的对象作为方法的接收者，调用对象的实例构造器方法、私有方法或者是其父类的方法，在其后会有两个字节的 <code class="inline-code">index</code> ， 指向常量池中类型为 <code class="inline-code">CONSTANT_MethodRef</code> 的常量，在此处指向的是 <code class="inline-code">java.lang.Object</code> 的 <code class="inline-code">&lt;init&gt;</code> 方法。在其后读入的指令是 <code class="inline-code">0xb1</code>，其助记符为 <code class="inline-code">return</code>，在此处返回值为 <code class="inline-code">void</code>。此构造方法生成的的结构图如下：</p>
-<p><img src="https://img-blog.csdnimg.cn/99462550093a4c52bd3613e300d44a9f.png" alt="构造方法的 Code 结构" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/99462550093a4c52bd3613e300d44a9f.png" alt="构造方法的 Code 结构" referrerpolicy="no-referrer"></p>
 </li>
 <li><p><code class="inline-code">exception_table</code> 在字节码指令之后，用于存储此方法的显示异常处理表。异常表并非所有的 <code class="inline-code">code</code> 字段中都含有，仅代码中有显式处理异常的才会有，即有 <code class="inline-code">try&#123; &#125; catch(Exception e)&#123;&#125;</code> 的代码。先来看一下它的结构：</p>
 <table>
@@ -1731,7 +1731,7 @@ public Object testBridgeMethod() &#123;
 &#125;
 </code></pre>
 <p>编译后，生成的 <code class="inline-code">Exceptions</code> 属性结构如下图所示：</p>
-<p><img src="https://img-blog.csdnimg.cn/9669be5a29fd4cc38f0950d840f557b4.png" alt="方法抛出异常申明结构图" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/9669be5a29fd4cc38f0950d840f557b4.png" alt="方法抛出异常申明结构图" referrerpolicy="no-referrer"></p>
 <p>可以看到，在 <code class="inline-code">Exceptions</code> 属性中，有两个元素，分别是 <code class="inline-code">IOException</code> 和 <code class="inline-code">ClassNotFoundException</code>，它们都是对常量池中的 <code class="inline-code">CONSTANT_Class_info</code> 常量的引用。</p>
 <h3 id="5. LineNumberTable"><span class="prefix"></span><span class="content">5. LineNumberTable</span><span class="suffix"></span></h3><p><code class="inline-code">LineNumberTable</code> 属性中存储的是 Java 代码中的行号信息，使用它们，可以将Class 文件中的字节码指令与  Java 源文件中的代码关联起来。当我们将  Java 源代码编译成字节码时，每行代码都会被编译成一段二进制字节码指令，并且这些指令在字节码文件中是按照顺序排列的。编译时，编译器会为每个指令记录下它在源代码中的行号，当代码运行时发生异常时，就可以根据行号定位到源代码中出错的地方。下面表格中为 <code class="inline-code">LineNumberTable</code> 属性结构：</p>
 <table>
@@ -1882,7 +1882,7 @@ LineNumberTable:
 </tbody></table>
 <p>在 JDK 5 引入泛型后，新增了 <code class="inline-code">LocalVeriableTypeTable</code>，此属性与<code class="inline-code">LocalVariableTable</code> 及其相似，只是它用来修饰的是泛型变量，在此处就不在赘述了。 </p>
 <h3 id="7. InnerClasses"><span class="prefix"></span><span class="content">7. InnerClasses</span><span class="suffix"></span></h3><p><code class="inline-code">InnerClasses</code> 属性是用来记录内部类与宿主类之间的关联关系的。 当我们在代码中定义内部类的时候，编译器会为当前类以及它的内部类上添加  <code class="inline-code">InnerClasses</code> 属性。</p>
-<p><img src="https://img-blog.csdnimg.cn/3b1b4f5366754207b288e2b5939ef5b5.png" alt="InnerClasses 属性结构" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/3b1b4f5366754207b288e2b5939ef5b5.png" alt="InnerClasses 属性结构" referrerpolicy="no-referrer"></p>
 <p>在此结构中， <code class="inline-code">inner_class_info_index</code> 和 <code class="inline-code">outer_class_info_index</code> 指向了常量池中 <code class="inline-code">CONSTANT_Class_info</code> 型常量的索引，分别代表内部类和宿主类。<code class="inline-code">inner_name_index</code> 是指向了内部类名称的索引，为 <code class="inline-code">CONSTANT_Utf8_info</code> 类型。</p>
 <p>需要注意的是，<code class="inline-code">outer_class_info_index</code> 在局部类、匿名类中，它的值为 0 。同时，在匿名类中，<code class="inline-code">inner_name_index</code> 也为 0 。</p>
 <p>下面是我创建的内部类的测试代码：</p>
@@ -1892,7 +1892,7 @@ LineNumberTable:
 &#125;
 </code></pre>
 <p>编译后，生成的 <code class="inline-code">InnerClasses</code> 属性结构如下图所示：</p>
-<p><img src="https://img-blog.csdnimg.cn/51442a70658f4aa184b7b3d2e981adf9.png" alt="InnerClasses 结构" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/51442a70658f4aa184b7b3d2e981adf9.png" alt="InnerClasses 结构" referrerpolicy="no-referrer"></p>
 <h3 id="8. EnclosingMethod"><span class="prefix"></span><span class="content">8. EnclosingMethod</span><span class="suffix"></span></h3><p><code class="inline-code">EnclosingMethod</code> 属性是在 Class 文件结构的属性块中，他是一个定长的属性。在 Java 中，局部类（LocalClass） 与匿名内部类的 Class 文件中，必须包含 <code class="inline-code">EnclosingMethod</code> 属性值。</p>
 <p>匿名内部类是非常常见，但在写代码时，去很少有使用局部类。局部类一种特殊的内部类， 它定义在一个代码块中（如方法、构造函数、初始化块等）而不是类的主体中，它只在该代码块中可见，对于外部代码块是不可见的。 示例如下：</p>
 <pre><code class="java">public class EnclosingMethodExample &#123;
@@ -1937,7 +1937,7 @@ LineNumberTable:
 </tr>
 </tbody></table>
 <p>上述 <code class="inline-code">EnclosingMethodExample$1A.class</code>  文件中，属性字段中的第二个属性（下标为 1 的那个）便是 <code class="inline-code">EnclosingMethod</code>  属性，其关联结构如下图所示：</p>
-<p><img src="https://img-blog.csdnimg.cn/1f0ce4a561cc4511be2af9b45bb9f0ec.png" alt="EnclosingMethod 结构图" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/1f0ce4a561cc4511be2af9b45bb9f0ec.png" alt="EnclosingMethod 结构图" referrerpolicy="no-referrer"></p>
 <p>通过属性表，可以看到此局部类在 <code class="inline-code">EnclosinMethodExample.setup</code> 方法中。</p>
 <h3 id="9. Synthetic"><span class="prefix"></span><span class="content">9. Synthetic</span><span class="suffix"></span></h3><p>Synthetic 是用来修饰类、方法、变量，表示它们不是由  Java 源代码直接产生，而是由编译器生成。它是一个标志类型的布尔属性，因此其结构中的 <code class="inline-code">infos </code> 长度为 0 ，因此它的内容总共只有 6 个字节，结构如下：</p>
 <table>
@@ -1968,7 +1968,7 @@ LineNumberTable:
 &#125;
 </code></pre>
 <p>最后生成的类结构图如下所示：</p>
-<p><img src="https://img-blog.csdnimg.cn/298672ef8cbe47daa7f1db0afbdb52bc.png" alt="$VALUES字段结构" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/298672ef8cbe47daa7f1db0afbdb52bc.png" alt="$VALUES字段结构" referrerpolicy="no-referrer"></p>
 <h3 id="10. Signature"><span class="prefix"></span><span class="content">10. Signature</span><span class="suffix"></span></h3><p>在 Java 1.5 后的版本中， Java 支持了泛型，而这个 <code class="inline-code">Signature</code> 属性就是用来记录类、方法、变量中的类型变量（Type Variable） 或者参与化类型（Parameterized Type）。<code class="inline-code">Signature</code> 是一个固定长度的属性值，结构非常简单，结构如下表：</p>
 <table>
 <thead>
@@ -2001,7 +2001,7 @@ LineNumberTable:
 &#125;
 </code></pre>
 <p>最终生成的 Class 文件中的，这两个字段的属性块中，都会有一个 <code class="inline-code">Signature</code> 的结构，其中 <code class="inline-code">typeVariable</code>  的签名信息为 <code class="inline-code">TT;</code> ，另一个为 <code class="inline-code">Ljava/util/Map&lt;Ljava/lang/String;Ljava/lang/Integer;&gt;;</code>，详细信息如下图所示：</p>
-<p><img src="https://img-blog.csdnimg.cn/e23dc2127daf46d0a08f0925b5c22371.png" alt="Signature 结构示例图" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/e23dc2127daf46d0a08f0925b5c22371.png" alt="Signature 结构示例图" referrerpolicy="no-referrer"></p>
 <h3 id="11. SourceFile&#x2F;SourceDebugExtension"><span class="prefix"></span><span class="content">11. SourceFile&#x2F;SourceDebugExtension</span><span class="suffix"></span></h3><p>这个属性是用来记录生成 此 Class 文件的源文件名称，此属性的结构是固定长度，结构如下：</p>
 <table>
 <thead>
@@ -2028,7 +2028,7 @@ LineNumberTable:
 </tr>
 </tbody></table>
 <p>在使用  Java 的过程中，大部份情况下，类名与文件名是一致的，但是诸如内部类等时会出现例外。此参数对于 Class 文件来说，是一个非必须参数 ，当使用 javac 编译时添加  <code class="inline-code">-g:none</code> 时，生成 Class 文件时，会去掉 <code class="inline-code">SourceFile</code> 等调试信息，可以减少程序体积并提高性能，但是需要注意的时，如果去掉后，出现异常时，不会输出错误代码对应的文件名。最后，下图为 <code class="inline-code">ClassFormat.class</code> 文件中的 <code class="inline-code">SourceFile</code> 属性结构：</p>
-<p><img src="https://img-blog.csdnimg.cn/84b691f6eee04de0883c9f89195c8d5b.png" alt="ClassFormat.class 文件中的 SourceFile 属性" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/84b691f6eee04de0883c9f89195c8d5b.png" alt="ClassFormat.class 文件中的 SourceFile 属性" referrerpolicy="no-referrer"></p>
 <p>除了 <code class="inline-code">SourceFile</code> 属性，在 JDK 5 时，为了方便在编译器和动态生成的 Class 中加入供程序员使用的自定义内容，新增了 <code class="inline-code">SourceDebugExtension</code> 属性用于存储额外的代码调试信息。典型的场景是在进行 JSP 文件调试时，无法通过 Java 堆栈来定位到 JSP 文件的行号。此时就可以用到 <code class="inline-code">SourceDebugExtension</code>  属性，它的结构如下：</p>
 <table>
 <thead>
@@ -2081,7 +2081,7 @@ LineNumberTable:
 <li><strong>RUNTIME：</strong>在 Class 文件中存在， 在运行时 JVM 会加载进来，运行时可获取到</li>
 </ul>
 <p>根据定义，可以知道 <code class="inline-code">SOURCE</code> 类型的是无法写入到 Class 文件中的， 而 <code class="inline-code">CLASS</code> 与 <code class="inline-code">RUTIME</code> 的区别是一个可以在运行时使用，一个不可以。在 Class 文件中，也根据这个不同定义了 <code class="inline-code">RuntimeVisibleAnnotations</code> 和 <code class="inline-code">RuntimeInvisibleAnnotations</code>，他们俩的结构一致， 结构相对比较复杂，结构图如下：</p>
-<p><img src="https://img-blog.csdnimg.cn/7cf8e622508b498d8f30dc2d2d15a431.png" alt="RuntimeVisibleAnnotations 的结构图" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/7cf8e622508b498d8f30dc2d2d15a431.png" alt="RuntimeVisibleAnnotations 的结构图" referrerpolicy="no-referrer"></p>
 <p>针对这两类注解，<code class="inline-code">attribute_name_index</code> 指向的是值为 <code class="inline-code">RuntimeVisibleAnnotations</code> 或 <code class="inline-code">RuntimeInvisibleAnnotations</code> 的 <code class="inline-code">CONSTANT_Utf8_info</code> 常量值索引。针对 Runtime 的注解，前面刚提到的的 Deprecated 也是是运行时的，但是他并不包含值。除了它，我还定义了一个包含值的运行时注解，代码如下：</p>
 <pre><code class="java">@Retention(RUNTIME)
 @Target(&#123;METHOD, PARAMETER, FIELD, LOCAL_VARIABLE, ANNOTATION_TYPE&#125;)
@@ -2107,10 +2107,10 @@ public class VerboseAttributes &#123;
 &#125;
 </code></pre>
 <p>这段代码最终生成的字段属性相关的关系如下图所示：</p>
-<p><img src="https://img-blog.csdnimg.cn/d700a092cd5b4017a282daf069d84c5e.png" alt="字段属性结构" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/d700a092cd5b4017a282daf069d84c5e.png" alt="字段属性结构" referrerpolicy="no-referrer"></p>
 <p>从 Class 结构中的定义中，可以看到，注解里面定义的 Vaule 只能使用常量。终于从底层知道为什么以前写注解的时候，注解值只能为常量了。</p>
 <h3 id="14. ParameterAnnotations"><span class="prefix"></span><span class="content">14. ParameterAnnotations</span><span class="suffix"></span></h3><p>在方法中，参数的注解与写到方法上的注解还有一点区别，在《Java虚拟机规范》里面还定义了另外两个 <code class="inline-code">RuntimeVisibleParameterAnnotations</code> 和 <code class="inline-code">RuntimeInvisibleParameterAnnotations</code>，用来描述方法参数的结构， 结构如下图所示：</p>
-<p><img src="https://img-blog.csdnimg.cn/31c40a8f013941de838b017869a01f5a.png" alt="ParameterAnnotations 结构" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/31c40a8f013941de838b017869a01f5a.png" alt="ParameterAnnotations 结构" referrerpolicy="no-referrer"></p>
 <p>可以看到，在最上层，会有一个多参数的数组结构，而每一个参数对应的注解信息与前面的 <code class="inline-code">RuntimeVisibleAnnotations</code> 的逻辑一致。在代码中添加如下方法：</p>
 <pre><code class="java">@Deprecated
 public void setValue(@IntRange(from = 40, to = 60) int value, @IntRange(from = 20, to = 30) int other) &#123;
@@ -2118,7 +2118,7 @@ public void setValue(@IntRange(from = 40, to = 60) int value, @IntRange(from = 2
 &#125;
 </code></pre>
 <p>最终编译生成的 Class 文件中，方法体中关于注解生成的结构图如下所示：</p>
-<p><img src="https://img-blog.csdnimg.cn/124804a700d94e2597317670dd709588.png" alt="参数注解图形" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/124804a700d94e2597317670dd709588.png" alt="参数注解图形" referrerpolicy="no-referrer"></p>
 <h3 id="15. AnnotationDefault"><span class="prefix"></span><span class="content">15. AnnotationDefault</span><span class="suffix"></span></h3><p>在自定义注解时，某些注解元素会存在默认值，在使用的时候不进行设置就可以直接使用，如下代码中的注解定义：</p>
 <pre><code class="java">@Retention(CLASS)
 @Target(&#123;METHOD, PARAMETER, FIELD, LOCAL_VARIABLE, ANNOTATION_TYPE, TYPE&#125;)
@@ -2136,9 +2136,9 @@ public @interface IntRange &#123;
 </code></pre>
 <p>在这段代码中， <code class="inline-code">from</code> 指定默认值为 <code class="inline-code">Long.MIN_VALUE</code>，<code class="inline-code">to</code> 指定默认值为 <code class="inline-code">Long.MAX_VALUE</code> 。</p>
 <p>根据《Java虚拟机规范》中的定义，注解中的元素默认值会被存储在名为 <code class="inline-code">AnnotationDefault</code> 的注解属性中，上述代码最终生成的结构如下所示：</p>
-<p><img src="https://img-blog.csdnimg.cn/5624c0ce1d244f96a61e98c69128e27e.png" alt="AnnotationDefault 结构" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/5624c0ce1d244f96a61e98c69128e27e.png" alt="AnnotationDefault 结构" referrerpolicy="no-referrer"></p>
 <h3 id="16. TypeAnnotations"><span class="prefix"></span><span class="content">16. TypeAnnotations</span><span class="suffix"></span></h3><p>在 JDK 8 的版本中，进一步加强了 Java 语言的注解使用范围，添加 <code class="inline-code">TYPE_USE</code> 和 <code class="inline-code">TYPE_PARAMETER</code> 两个注解，在之前，Java 中的注解只能用于类、方法、变量等成员上，而不能用于泛型类型上。加入这两个注解，使得注解可以用于更加丰富的场景中。与其它注解类似，它也分为运行时可见与运行时不可见，即  <code class="inline-code">RuntimeVisibleTypeAnnotations</code> 和 <code class="inline-code">RuntimeInvisibleTypeAnnotations</code> 两个属性。其结构与 <code class="inline-code">RuntimeVisibleAnnotations</code> 略有区别，下图为其结构：</p>
-<p><img src="https://img-blog.csdnimg.cn/7012754561254c42b0d8ce8a44c59f85.png" alt="TypeAnnotations 的结构" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/7012754561254c42b0d8ce8a44c59f85.png" alt="TypeAnnotations 的结构" referrerpolicy="no-referrer"></p>
 <p>图中加粗的 <code class="inline-code">target_info</code> 也是一个符合类型，有兴趣的同学可以参考《Java 虚拟机规范》。下面列举一个例子，其中 <code class="inline-code">A、B、C、D</code> 四个注解除名称外都一样，具体代码如下：</p>
 <pre><code class="java">@Retention(RetentionPolicy.RUNTIME)
 @Target(&#123;ElementType.TYPE_USE&#125;)
@@ -2148,7 +2148,7 @@ public @interface IntRange &#123;
 public @A Map&lt;@B ? extends @C String, @D List&lt;@E Object&gt;&gt; verbose;
 </code></pre>
 <p>最后，生成出来的结构图如下所示：</p>
-<p><img src="https://img-blog.csdnimg.cn/8e41e2a7847747c1857018d2d60ab3bc.png" alt="复杂的 TypeAnnotation 结构" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/8e41e2a7847747c1857018d2d60ab3bc.png" alt="复杂的 TypeAnnotation 结构" referrerpolicy="no-referrer"></p>
 <h3 id="17. NestHost 和 NestMembers"><span class="prefix"></span><span class="content">17. NestHost 和 NestMembers</span><span class="suffix"></span></h3><p><code class="inline-code">NestHost</code> 和 <code class="inline-code">NestMembers</code> 是 Java 11 引入的新特性，用于支持嵌套类的访问控制。在 Java 11 之前，判断一个类是否为嵌套类主要通过查看其访问修饰符和包名来确定。这些属性的引入使得 JVM 能够更好地进行嵌套类的访问控制，从而提高了代码的安全性和性能。先来看一下段示例代码：</p>
 <pre><code class="java">public class InnerClassExample &#123;
     public class InnerClassDemo &#123;   
@@ -2212,8 +2212,8 @@ public @A Map&lt;@B ? extends @C String, @D List&lt;@E Object&gt;&gt; verbose;
 </tr>
 </tbody></table>
 <p>将示例中的代码编译后生成如下结构：</p>
-<p><img src="https://img-blog.csdnimg.cn/5287ae4b9c2d4a47aba2d1c308943853.png" alt="InnerClassExample 的属性结构" referrerpolicy="no-referrer"></p>
-<p><img src="https://img-blog.csdnimg.cn/d4d242eddc4b420cad717918eb0858db.png" alt="InnerClassExample$InnerClassDemo 的属性结构" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/5287ae4b9c2d4a47aba2d1c308943853.png" alt="InnerClassExample 的属性结构" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/d4d242eddc4b420cad717918eb0858db.png" alt="InnerClassExample$InnerClassDemo 的属性结构" referrerpolicy="no-referrer"></p>
 <h3 id="18. Record"><span class="prefix"></span><span class="content">18. Record</span><span class="suffix"></span></h3><p>使用<code class="inline-code">String</code>、<code class="inline-code">Integer</code>等类型的时候，这些类型都是不变类，一个不变类具有以下特点：</p>
 <ol>
 <li>定义class时使用<code class="inline-code">final</code>，无法派生子类；</li>
@@ -2242,18 +2242,18 @@ public @A Map&lt;@B ? extends @C String, @D List&lt;@E Object&gt;&gt; verbose;
 </code></pre>
 <p>此类与前面手写的那个类一样，字段都会标记成 <code class="inline-code">final</code> ，编译器还自动为我们创建了构造方法，和字段名同名的方法，以及覆写<code class="inline-code">toString()</code>、<code class="inline-code">equals()</code>和<code class="inline-code">hashCode()</code>方法。使用一行代码就实现了一个不变类。</p>
 <p>此类编译会生成 <code class="inline-code">Record</code> 属性，结构如下：</p>
-<p><img src="https://img-blog.csdnimg.cn/7058de03af6745609d51ca43bd13f504.png" alt="属性字段格式" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/7058de03af6745609d51ca43bd13f504.png" alt="属性字段格式" referrerpolicy="no-referrer"></p>
 <p>上面的示例代码，编译后，生成的属性 <code class="inline-code">Record</code> 的结构如下图所示：</p>
-<p><img src="https://img-blog.csdnimg.cn/eed56d8d026c425696c7b7468e16a55e.png" alt="Record 属性结构" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/eed56d8d026c425696c7b7468e16a55e.png" alt="Record 属性结构" referrerpolicy="no-referrer"></p>
 <h3 id="19. MethodParameters"><span class="prefix"></span><span class="content">19. MethodParameters</span><span class="suffix"></span></h3><p><code class="inline-code">MethodParameters</code> 是在 JDK 8 时新加入到 Class 文件格式中的，字段是放到方法块中的属性字段里面，是一个变长属性。<code class="inline-code">MethodParameters</code> 的作用是记录方法的各个形参名称和信息。</p>
 <p>在虚拟机中，执行代码时，给参数用什么名字对计算机来说没有任何区别。因此在 JDK 8 之前，基于存储空间考虑，Class 文件中默认并不存储任何方法参数名称。但没有名字就会引起如下问题：</p>
-<p><img src="https://img-blog.csdnimg.cn/0f52731ae3944dabacf4a61c081c85fd.png" alt="左图 Class 文件包含 MethodParameters, 右图不包含" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/0f52731ae3944dabacf4a61c081c85fd.png" alt="左图 Class 文件包含 MethodParameters, 右图不包含" referrerpolicy="no-referrer"></p>
 <p>上图中右边部分是不带参数的反编译结果，方法中的参数全部变成了 <code class="inline-code">var1</code>、<code class="inline-code">var2</code> 中这种无用的字段，那别人在调用的时候，就必须得通过 JavaDoc 才能知道每一个参数的含义，使用起来很不方便。</p>
 <p>在我本地 IDE 编译时，默认输出的代码依然是不带 <code class="inline-code">MethodParameters</code> 属性的。在编译时需要添加 <code class="inline-code">-parameters</code> 参数，示例命令如下：</p>
 <pre><code class="shell">javac -parameters  MethodParameter.java	
 </code></pre>
 <p>当然，在 IntelliJ IDEA 中也可以添加对应参数，如下图所示：</p>
-<p><img src="https://img-blog.csdnimg.cn/e6102575dd7a46ada6bd6281899f095e.png" alt="添加参数示例" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/e6102575dd7a46ada6bd6281899f095e.png" alt="添加参数示例" referrerpolicy="no-referrer"></p>
 <p>通过上述设置，编译出来的代码可以生成 <code class="inline-code">MethodParameters</code> 参数了。在来看一下它的结构：</p>
 <table>
 <thead>
@@ -2305,7 +2305,7 @@ public @A Map&lt;@B ? extends @C String, @D List&lt;@E Object&gt;&gt; verbose;
 </tr>
 </tbody></table>
 <p>针对刚提到的代码 <code class="inline-code">public MethodParameter(String name, int age, String hometown) &#123;&#125;</code> 生成后的结构如下所示：</p>
-<p><img src="https://img-blog.csdnimg.cn/45cca0731c5f4f1cb169e4bca81b9859.png" alt="Method Parameters 结构" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/45cca0731c5f4f1cb169e4bca81b9859.png" alt="Method Parameters 结构" referrerpolicy="no-referrer"></p>
 <h3 id="20. BootstrapMethods"><span class="prefix"></span><span class="content">20. BootstrapMethods</span><span class="suffix"></span></h3><p><code class="inline-code">BootstrapMethods</code> 属性是在 JDK 7 时增加的，用于保存 <code class="inline-code">invokedynamic</code> 指令引用的引导方法限定符。在 《Java虚拟机规范》 中规定，如果常量池中出现 <code class="inline-code">CONSTANT_InvokeDynamic_info</code> 类型的常量时，那么类文件的属性中必须存在 <code class="inline-code">BootstrapMethod</code> 属性。<code class="inline-code">BootstrapMethod</code>  结构如下：</p>
 <table>
 <thead>
@@ -2369,7 +2369,7 @@ public @A Map&lt;@B ? extends @C String, @D List&lt;@E Object&gt;&gt; verbose;
 &#125;
 </code></pre>
 <p>最终生成的结构图如下：</p>
-<p><img src="https://img-blog.csdnimg.cn/9f8a3a8bc03244a5a18d4bfb886bb6fb.png" alt="BootstrapMethods 的结构图" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/9f8a3a8bc03244a5a18d4bfb886bb6fb.png" alt="BootstrapMethods 的结构图" referrerpolicy="no-referrer"></p>
 <h3 id="21. 模块化相关属性"><span class="prefix"></span><span class="content">21. 模块化相关属性</span><span class="suffix"></span></h3><p>JDK 9 发布了一个非常重要的功能，那就是 Java 的模块化，模块化描述文件 <code class="inline-code">module-info.java</code> 最终也会编译成独立的 Class 文件来存储，Class 文件属性中扩展了 <code class="inline-code">Module</code> 、<code class="inline-code">ModulePackages</code> 和 <code class="inline-code">ModuleMainClass</code>  三个属性用于支持 Java 模块化的相关功能。其属性结构也相对较复杂，但模块化功能在开发中基本没有使用过，在此也不过多赘述，其结构信息，如你感兴趣，可以去查阅 《Java 虚拟机规范》。</p>
 <h3 id="22. PermittedSubclasses"><span class="prefix"></span><span class="content">22. PermittedSubclasses</span><span class="suffix"></span></h3><p>在 Java 17 正式发布了 Sealed Classes， 翻译为密封类、封闭类。代表该类&#x2F;接口是一个封闭的类&#x2F;接口，只有许可的类&#x2F;接口才能继承或实现该类&#x2F;接口。如果是 <code class="inline-code">sealed</code> 修饰的类，就会有 <code class="inline-code">PermittedSubclasses</code> 属性。</p>
 <p>在没有封闭类之前，Java 控制类继承有两种方式：</p>
@@ -2414,7 +2414,7 @@ public @A Map&lt;@B ? extends @C String, @D List&lt;@E Object&gt;&gt; verbose;
 &#125;
 </code></pre>
 <p>最终生成的结构图如下：</p>
-<p><img src="https://img-blog.csdnimg.cn/9abb34b869a240c1a88b4d7c1ac148ac.png" alt="PermittedSubclasses 属性结构" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/9abb34b869a240c1a88b4d7c1ac148ac.png" alt="PermittedSubclasses 属性结构" referrerpolicy="no-referrer"></p>
 
                     <hr/>
             </div>
@@ -2447,7 +2447,7 @@ public @A Map&lt;@B ? extends @C String, @D List&lt;@E Object&gt;&gt; verbose;
 
                  -->
                 <div class="footer">
-    <span>Copyright © 2024 大罗说事</span>
+    <span>Copyright © 2025 大罗说事</span>
 </div>
 
 <!-- 

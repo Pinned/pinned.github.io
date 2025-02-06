@@ -714,6 +714,28 @@ thead {
     
     
     <div class="post">
+        <a class="post-title" href="/2015/05/12/android-update-sdk-no-ui/">Android 用命令行更新SDK</a>
+        <div class="post-except">
+            
+                基本使用在使用桌面系统的时候，我们都是用的SDK Manager, 如果现在要你部署一台CI服务器呢。
+我擦，ssh上去，没有界面，怎么破。
+查找了一下，Android SDK更新是支持命令的
+如下：
+android update sdk --no-ui
+
+上面的方法虽然可以更新SDK，但是他会把所有的内容都下载下来，很明显我们并不想这样子。
+查看命令帮助可以看到有一个--filter属性，如下使用
+android update sdk --filter &lt;compon
+            
+            <a class="read-more" href="/2015/05/12/android-update-sdk-no-ui/"> ... </a>
+        </div>
+        <div class="post-date">2015.05.12</div>
+    </div>
+    
+    
+    
+    
+    <div class="post">
         <a class="post-title" href="/2015/05/11/svn-to-git/">SVN迁移到GIT</a>
         <div class="post-except">
             
@@ -823,24 +845,6 @@ set nu!
     </div>
     
     
-    
-    
-    <div class="post">
-        <a class="post-title" href="/2015/04/10/mac-os-x-yomesite-install-rails/">Mac OS X Yosemite 安装 Rails</a>
-        <div class="post-except">
-            
-                参考文章：Install Ruby on Rails · Mac OS X Yosemite
-在安装过程中，出现错误，有关错误信息可以查看下面这一篇博客，但是他的解决办法没有解决问题：
-MAC安装Rails
-最后的解决办法就是先将ruby 升级到最新版本，然后就可以顺利安装rails了。在此记录一下。
-
-            
-            <a class="read-more" href="/2015/04/10/mac-os-x-yomesite-install-rails/"> ... </a>
-        </div>
-        <div class="post-date">2015.04.10</div>
-    </div>
-    
-    
 </div>
 
 <div class="paginator">
@@ -849,7 +853,7 @@ MAC安装Rails
 
                 <!--  -->
                 <div class="footer">
-    <span>Copyright © 2024 大罗说事</span>
+    <span>Copyright © 2025 大罗说事</span>
 </div>
 
 <!-- 

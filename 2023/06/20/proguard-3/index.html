@@ -718,10 +718,10 @@ thead {
             <section id="beautiful">
             <div class="post-md" >
                     <p>书接<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/CqizzHNTXMquZVh1rT6F9A">上文</a>，当我们从用户的配置文件中读取到所有的配置信息后，下一步便是将配置中的指定的类文件进行读取，构建需要混淆的 Java 类文件的语法树。在阅读类文件之前，先来看一下<strong>输入输出参数</strong>中的内容，我使用的是一个 Android 项目的输出产物，使用 <code class="inline-code">-injars</code>、<code class="inline-code">-outjars</code>、<code class="inline-code">-libraryjars</code> 指定了相关的信息，运行起来，这些信息会放到 <code class="inline-code">Configuration</code> 中，具体信息看下图：</p>
-<p><img src="https://img-blog.csdnimg.cn/f7778aaaed4c484bb6f2ed4e60a88351.png" alt="programJars 与 libraryJars" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/f7778aaaed4c484bb6f2ed4e60a88351.png" alt="programJars 与 libraryJars" referrerpolicy="no-referrer"></p>
 <p>Java 代码源文件在编译后会转换成 Class 文件，格式定义是固定的，可以使用 ASM 等开源工具进行读取和解析，本文将分析 ProGuard 中，是如何进行类文件读取的。</p>
 <p>让我们把目光拉回到 ProGuard 的 <code class="inline-code">main</code> 方法中：</p>
-<p><img src="https://img-blog.csdnimg.cn/48d7c8c4fdc049adbda004fb8daafbc5.png" alt="ProGuard 的 Main 函数代码" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/48d7c8c4fdc049adbda004fb8daafbc5.png" alt="ProGuard 的 Main 函数代码" referrerpolicy="no-referrer"></p>
 <p>从代码中可以看到，配置信息解析结束后，就会执行 ProGuard 的 <code class="inline-code">execute</code> 方法。继续执行下去，除去一些前置校验的操作，下一步便是本文关注的 <code class="inline-code">readInput</code>，读取 Class 文件的内容。</p>
 <pre><code class="java">private void readInput() throws Exception &#123;
   // Fill the program class pool and the library class pool.
@@ -808,9 +808,9 @@ private DataEntryReader wrapInJarReader(DataEntryReader reader,
 &#125;
 </code></pre>
 <p>在代码中，创建 <code class="inline-code">reader</code> 的时候构建了一个嵌套的结构，此处以 Android 项目中，生成的 <code class="inline-code">R.jar</code> 文件为例，其执行创建过程如下（执行路径参考红色部分）：</p>
-<p><img src="https://img-blog.csdnimg.cn/e8b0978143134cd999fb48559693ad74.png" alt="Reader 创建流程" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/e8b0978143134cd999fb48559693ad74.png" alt="Reader 创建流程" referrerpolicy="no-referrer"></p>
 <p> 为了验证最后的产物结构，调试可以查看最终生成的 <code class="inline-code">DataEntryReader</code> 的结构信息截图如下， 可以与上面创建的图进行对照理解：</p>
-<p><img src="https://img-blog.csdnimg.cn/c0f2566b9eb840de8edb41a3688a5b48.png" alt="DataEntryReader 示例" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/c0f2566b9eb840de8edb41a3688a5b48.png" alt="DataEntryReader 示例" referrerpolicy="no-referrer"></p>
 <p>当你理解 <code class="inline-code">Reader</code> 的创建逻辑后，可能会有和我一样的困惑，为什么此处需要使用嵌套的结构呢？既然已经知道文件格式了，为什么不直接创建对应的 <code class="inline-code">JarReader</code> 呢？按照我个人的理解，代码可能会这样子写：</p>
 <pre><code class="java">// 此处非项目中源代码，仅个人思路。
 public DataEntryReader createDataEntryReader(ClassPathEntry classPathEntry, DataEntryReader reader) &#123;
@@ -828,7 +828,7 @@ public DataEntryReader createDataEntryReader(ClassPathEntry classPathEntry, Data
 &#125;
 </code></pre>
 <p>但经过多方查证，在读取文件的时候，可能会出现嵌套的问题，拿 Android 来说，在 <code class="inline-code">aar</code> 格式的文件中，会存在有 <code class="inline-code">jar</code> 格式的文件 <code class="inline-code">classes.jar</code> ， 示例如下：</p>
-<p><img src="https://img-blog.csdnimg.cn/0ff9418da911444c93db09f8f1d148b0.png" alt="example.aar 文件列表" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/0ff9418da911444c93db09f8f1d148b0.png" alt="example.aar 文件列表" referrerpolicy="no-referrer"></p>
 <p>因此，在读取内容的时候，还需要一个可以读取 <code class="inline-code">jar</code> 文件的  <code class="inline-code">Reader</code> 。虽然源代码中那样写可以正常执行逻辑，但我觉得它可能还是不够优雅，也许是我没有看懂原作者的用意，如你对此有不同的理解，欢迎与我交流。</p>
 <p>继续回到源代码，当 <code class="inline-code">Reader</code> 创建成功后，会直接调用 <code class="inline-code">source</code> 的 <code class="inline-code">pumpDataEntries</code> 方法，实现文件解析与类文件读取，从源码中可以看到，在 <code class="inline-code">pumpDataEntries</code> 中，是直接调用前面使用工厂模式创建出来的 <code class="inline-code">Reader</code> 实例中的 <code class="inline-code">read</code> 方法：</p>
 <pre><code class="java">public void pumpDataEntries(DataEntryReader dataEntryReader) throws IOException &#123;
@@ -869,11 +869,11 @@ private void readFiles(File file, DataEntryReader dataEntryReader) throws IOExce
 &#125;
 </code></pre>
 <p>在本例中，<code class="inline-code">R.jar</code> 文件包含的内容如下图所示：</p>
-<p><img src="https://img-blog.csdnimg.cn/5ac1871cce14457b840bb2d2b8a69d18.png" alt="R.jar 文件内容" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/5ac1871cce14457b840bb2d2b8a69d18.png" alt="R.jar 文件内容" referrerpolicy="no-referrer"></p>
 <p>当读取到此文件的第一个 <code class="inline-code">ZipEntry</code> ： <code class="inline-code">com/example/demo/R$style.class</code> 文件时，源码会调用<code class="inline-code">dataEntryReader</code> 去读取内容，根据前面创建<code class="inline-code">Reader</code> 的流程，可以知道当前的 <code class="inline-code">dataEntryReader</code> 是 <code class="inline-code">FilteredDataEntryReader</code> ，它在执行读取时，会根据当前文件的后缀名去处理，如果后缀名匹配， 则会使用 <code class="inline-code">acceptedDataEntryReader</code> 去处理，反之会使用 <code class="inline-code">rejectedDataEntryReader</code> 去读取文件：</p>
-<p><img src="https://img-blog.csdnimg.cn/f4dee61fbf884074a15895bc28636fbe.png" alt="FilteredDataEntryReader 读取" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/f4dee61fbf884074a15895bc28636fbe.png" alt="FilteredDataEntryReader 读取" referrerpolicy="no-referrer"></p>
 <p>因此，<code class="inline-code">com/example/demo/R$style.class</code> 文件的读取会一直嵌套调用，直到可以处理 <code class="inline-code">class</code> 文件的 <code class="inline-code">ClassReader</code> ，文件读取逻辑如下（图中红色部分）：</p>
-<p><img src="https://img-blog.csdnimg.cn/545ab19e73fd41dfae8fe477341b440d.png" alt="文件读取嵌套逻辑" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/545ab19e73fd41dfae8fe477341b440d.png" alt="文件读取嵌套逻辑" referrerpolicy="no-referrer"></p>
 <h2 id="二、CLASS 文件的读取与解析"><span class="prefix"></span><span class="content">二、CLASS 文件的读取与解析</span><span class="suffix"></span></h2><p>在之前的文章 《<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/WDgwfkijoUpI70P8JVlSAQ">深入 Android 混淆实践：多模块打包爬坑之旅</a> 》中，使用了 <code class="inline-code">ASM</code> 去解析 <code class="inline-code">class</code> 文件，而在 ProGuard 中，自己实现了一套，源代码在开源库 <a target="_blank" rel="noopener" href="https://github.com/Guardsquare/proguard-core">proguard-core</a> 中。</p>
 <p>Java 的 <code class="inline-code">class</code> 文件格式在 JVM 规范中，有明确的定义，不论是在开源库 <code class="inline-code">ASM</code> 中，还是在 <code class="inline-code">proguard-core</code> 中，实现对 <code class="inline-code">class</code> 文件的读取与处理，都使用了访问者模式，有关访问者模式，将在后面的文章进行详细的讲解。下面在来看看 <code class="inline-code">ClassReader</code> 里面干了些什么事情。</p>
 <pre><code class="java">public void read(DataEntry dataEntry) throws IOException &#123;
@@ -909,7 +909,7 @@ private void readFiles(File file, DataEntryReader dataEntryReader) throws IOExce
 &#125;
 </code></pre>
 <p>代码中，通过访问者模式，触发 <code class="inline-code">ProgramClassReader</code>  从输入数据流中读取 <code class="inline-code">class</code> 文件的内容。此处读取的逻辑相对比较简单，按照 <code class="inline-code">class</code> 格式定义，按字节读取就可以了。我将 <code class="inline-code">CLASS</code> 格式的定义和读取代码做了一个截图，可以对比看看，加深理解。</p>
-<p><img src="https://img-blog.csdnimg.cn/bddd4984a28e4cd0ab76560213ff7d08.png" alt="class文件读取逻辑，左测为读取代码，右测为代码结构" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/bddd4984a28e4cd0ab76560213ff7d08.png" alt="class文件读取逻辑，左测为读取代码，右测为代码结构" referrerpolicy="no-referrer"></p>
 <h2 id="结语"><span class="prefix"></span><span class="content">结语</span><span class="suffix"></span></h2><p>在本文的开头，提到的 <code class="inline-code">AppView</code> 就是用来存储类数据的，代码逻辑会将输入参数中的 <code class="inline-code">programJars</code> 和 <code class="inline-code">libraryJars</code> 里包含的所有类解析出来，构建生成 <code class="inline-code">ProgramClass</code>，分别存储在 <code class="inline-code">AppView</code> 这个类中的 <code class="inline-code">programClassPool</code> 以及<code class="inline-code">libraryClassPool</code> 中， 用于后续混淆使用。当然，除了 <code class="inline-code">class</code> 文件，还存在一些资源文件的读取逻辑，如果你感兴趣，可以去翻翻源码。</p>
 <p>以上为 ProGuard 中 Java 类文件的读取与解析的内容，如果本文中有描述得不清楚或不对的地方，欢迎各位朋友一起交流讨论。</p>
 
@@ -944,7 +944,7 @@ private void readFiles(File file, DataEntryReader dataEntryReader) throws IOExce
 
                  -->
                 <div class="footer">
-    <span>Copyright © 2024 大罗说事</span>
+    <span>Copyright © 2025 大罗说事</span>
 </div>
 
 <!-- 

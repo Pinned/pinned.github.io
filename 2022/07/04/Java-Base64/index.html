@@ -724,15 +724,15 @@ thead {
 <p>在计算机世界中，3 个 Byte 的二进制数据相当于 24 个 Bit ， 因此在编码时需要对应 4 个 Base64 的字符来表示。</p>
 <p>Base64 的可打印字符集包含了字母 <code class="inline-code">A-Z</code>、<code class="inline-code">a-Z</code>、数字 <code class="inline-code">0-9</code>， 这样就有了 26 个字符，另外两个在不同的系统中可能会不同，我们一般使用的为 <code class="inline-code">+</code> 、 <code class="inline-code">/</code>，在 URL Safe 的模式下为 <code class="inline-code">-</code>、<code class="inline-code">_</code></p>
 <p><strong>Base64 码表：</strong></p>
-<p><img src="https://img-blog.csdnimg.cn/6d10a3f876b844448e60bda6bb5c64fb.png" alt="Base64 码表" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/6d10a3f876b844448e60bda6bb5c64fb.png" alt="Base64 码表" referrerpolicy="no-referrer"></p>
 <h2 id="Base64 转换"><span class="prefix"></span><span class="content">Base64 转换</span><span class="suffix"></span></h2><p>我们将 byte 数组中的每一个 byte 都转换成 8 位 bit， 组成一串二进制数据，然后按 6 位进行分割，再将每 6 位转换成一个 bit ，将转换后的 bit 作为 index ，去码表中查找对应显示的字符。</p>
 <p>编码示例如下： </p>
-<p><img src="https://img-blog.csdnimg.cn/4a1b6af183234bf18309ee139172b35c.png" alt="编码示例" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/4a1b6af183234bf18309ee139172b35c.png" alt="编码示例" referrerpolicy="no-referrer"></p>
 <p>如上图所示，将 <code class="inline-code">LZC</code> 转换成 Base64 编码的可打印的字符串为 <code class="inline-code">TFpD</code>。 从这个示例可以看出来，刚好可以将 3 个 byte 转成 4 个 byte。</p>
 <p>聪明的你可能已经发现存在的问题，如果要编码的原始 <code class="inline-code">byte[]</code> 的长度不能被三整除应该怎么处理呢？ </p>
 <p>在码表中，除了编码中用到的 64 个字符，在末尾还有一个填充字符： <code class="inline-code">=</code> ，用来填充不足的位数。</p>
 <p>举例说明:</p>
-<p><img src="https://img-blog.csdnimg.cn/638de894feb84899b016394d0f61ee69.png" alt="Padding 处理" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/638de894feb84899b016394d0f61ee69.png" alt="Padding 处理" referrerpolicy="no-referrer"></p>
 <h2 id="Base64 encode 代码实现（Java 版）"><span class="prefix"></span><span class="content">Base64 encode 代码实现（Java 版）</span><span class="suffix"></span></h2><ol>
 <li>将现有的 3 个 byte <code class="inline-code">a, b, c</code>编码成 Base64 的串</li>
 </ol>
@@ -792,7 +792,7 @@ System.out.println(new String(result));
 <p>从代码中，可以看到前文所述的转换步骤。 但在计算 <code class="inline-code">index2</code> 以及 <code class="inline-code">index3</code> 的时候，还是有点绕，有没有更好的计算方式呢？ </p>
 <p>在 <code class="inline-code">JDK</code> 的 Base64 的实现中，看到了一种新的实现方式。 在 <code class="inline-code">Java</code> 中，一个 <code class="inline-code">int</code> 型的数占 4 个 <code class="inline-code">byte</code> ，因此可以将要转换的 <code class="inline-code">3 位 byte</code> 放在一个 <code class="inline-code">int</code> 数据中。</p>
 <p>如下图所示，将 <code class="inline-code">LZC</code> 三个 byte 放入一个 int 型变量中去： </p>
-<p><img src="https://img-blog.csdnimg.cn/e86cb6a83f91418aa0cefbc2334fa577.png" alt="int 型变量存储三个 byte" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/e86cb6a83f91418aa0cefbc2334fa577.png" alt="int 型变量存储三个 byte" referrerpolicy="no-referrer"></p>
 <p>代码实现：</p>
 <pre><code class="java">byte a = &#39;L&#39;;
 byte b = &#39;Z&#39;;
@@ -856,7 +856,7 @@ System.out.println(new String(result));
 
                  -->
                 <div class="footer">
-    <span>Copyright © 2024 大罗说事</span>
+    <span>Copyright © 2025 大罗说事</span>
 </div>
 
 <!-- 

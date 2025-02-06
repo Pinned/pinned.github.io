@@ -719,7 +719,7 @@ thead {
             <div class="post-md" >
                     <p>作为多年 Android 开发的老司机， <code class="inline-code">compileSdk</code> 、<code class="inline-code">minSdk</code>、<code class="inline-code">targetSdk</code> 都是经常见到，但其具体含义是什么？ 它们都是在什么场景下去使用的。 回想起来还真不太能说得清楚。 </p>
 <h2 id="背景"><span class="prefix"></span><span class="content">背景</span><span class="suffix"></span></h2><p>要想说清楚它们是干什么的，那就不得不说一下主角 Android 操作系统。Android 操作系统在 2008 年发布了第一个版本，到今年已经发布了几十个版本：</p>
-<p><img src="https://img-blog.csdnimg.cn/6c779843416e4334b72567061848ed8c.png" alt="Android 版本历史（图源维基百科）" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/6c779843416e4334b72567061848ed8c.png" alt="Android 版本历史（图源维基百科）" referrerpolicy="no-referrer"></p>
 <p>在如此多的版本迭代更新的过程中，Android 操作系统中不断引入新的接口，也不断的对 App 添加一些新的限制。在这不断迭代的过程中，对于开发者来说，就会面临以下问题：</p>
 <ul>
 <li>虽然开发者希望自己的 App 可以触达到更多的用户，但开发的 App 不可能对所有手机都进行支持。</li>
@@ -729,17 +729,17 @@ thead {
 <h2 id="minSdk"><span class="prefix"></span><span class="content">minSdk</span><span class="suffix"></span></h2><p>Android 系统的更新，会逐步引入更多的新功能，这此功能不仅是软件上的，还有硬件上的更新。随着新版本的发布，老系统的用户也会越来越少。而针对低版本系统的功能开发者，可能会有非常多的兼容或者优化的处理。举一个例子（系统越老，手机也就越老，内存、CPU 等硬件也就越差）：比如我现在有一个很复杂的页面，其页面嵌套层级比较大，此页面在高版本手机中可以正常渲染，但在 Android 2.3  的系统中，却加载非常慢，甚至加载不出来。 为了能让 2.3 版本的系统中能够支持这个页面的显示，可能需要付出很大的努力，甚至于去重写布局，才能让页面渲染出来。</p>
 <p>就如这个例子，为了那百分之零点几的用户去做兼容处理，对于一个资源有限的开发团队来说，是一件很不值当的事情。不再支持老版本的系统，可以让有限的资源去做更多的新功能的开发。 </p>
 <p>为此，在项目中我们可以使用 <code class="inline-code">minSdk</code> 去指定当前项目支持的最低版本。编译产物 APK 文件中的 <code class="inline-code">AndroidManifest.xml</code> 文件中会标明最小支持的系统版本。 在安装时，如果当前系统版本不支持，则不能进行安装。</p>
-<p><img src="https://img-blog.csdnimg.cn/34ea9cab78ce4f08b25be10e2759bbae.png" alt="APK 中 minSdkVersion 字段" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/34ea9cab78ce4f08b25be10e2759bbae.png" alt="APK 中 minSdkVersion 字段" referrerpolicy="no-referrer"></p>
 <h2 id="compileSdk"><span class="prefix"></span><span class="content">compileSdk</span><span class="suffix"></span></h2><p>顾名思义，这个东西是用来指定当前编译环境的。作为老司机，你可能还配置过 <code class="inline-code">buildToolsVersion</code> ，这个也是在编译过程中需要用到的东西。</p>
 <p>先来看一下 Android 官方给出的编译过程图：</p>
-<p><img src="https://img-blog.csdnimg.cn/4c80e24292114740934229a282fe811f.png" alt="Android 编译流程" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/4c80e24292114740934229a282fe811f.png" alt="Android 编译流程" referrerpolicy="no-referrer"></p>
 <p> 整个过程比较复杂，我们只看其中的一部分内容，下面是 <code class="inline-code">javac</code> 编译的部分：</p>
-<p><img src="https://img-blog.csdnimg.cn/338570ab4da74829a2a043644d186b57.png" alt="Class 文件编译过程" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/338570ab4da74829a2a043644d186b57.png" alt="Class 文件编译过程" referrerpolicy="no-referrer"></p>
 <p>图中可以看到， <code class="inline-code">javac</code> 编译的过程，会将 <code class="inline-code">java</code> 代码转换成 <code class="inline-code">class</code> 文件。 在编译的过程中，有一个非常重要的东西，那就是 <code class="inline-code">android.jar</code> 文件，此文件为当前使用的 <code class="inline-code">Android SDK</code> 。使用 SDK Manager 可以下载不同版本的 SDK ，如下图所示：</p>
-<p><img src="https://img-blog.csdnimg.cn/13c53ab1ce4348749c2c61cc9c612049.png" alt="SDK 目录" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/13c53ab1ce4348749c2c61cc9c612049.png" alt="SDK 目录" referrerpolicy="no-referrer"></p>
 <p>因此，我们在 <code class="inline-code">build.gradle</code> 文件中定义的 <code class="inline-code">compileSdkVersion</code> 简单理解就是用来指定 <code class="inline-code">android.jar</code> 的版本的。</p>
 <p>当 Android Gradle Tools 版本为 <code class="inline-code">3.0.0</code> 及以上版本，另一个与编译相关的参数 <code class="inline-code">buildToolsVersion</code> 可以不用在设置了。如在 Android Gradle Tools 7.3.0 的版本中，默认使用的为 <code class="inline-code">30.0.3</code> 的版本：</p>
-<p><img src="https://img-blog.csdnimg.cn/2ea8a91fe17845fdb4eb9aa2354dce3d.png" alt="默认 Build Tools 版本" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/2ea8a91fe17845fdb4eb9aa2354dce3d.png" alt="默认 Build Tools 版本" referrerpolicy="no-referrer"></p>
 <blockquote>
 <p>官方文档传送门：</p>
 <p><a target="_blank" rel="noopener" href="https://developer.android.com/build/releases/past-releases/agp-7-3-0-release-notes?hl=zh-cn">Android Gradle Tools 7.3 Release Note</a></p>
@@ -780,7 +780,7 @@ thead {
 
                  -->
                 <div class="footer">
-    <span>Copyright © 2024 大罗说事</span>
+    <span>Copyright © 2025 大罗说事</span>
 </div>
 
 <!-- 

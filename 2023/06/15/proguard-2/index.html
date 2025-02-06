@@ -719,7 +719,7 @@ thead {
             <div class="post-md" >
                     <p>书接<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/LlJja-Sw47xwNB4Woj969g">上文</a>，从开源库中把代码下载到本地后，就可以在 <code class="inline-code">IDE</code> 中进行运行了。从 <code class="inline-code">main</code> 方法入手，可以看到 ProGuard 执行的第一步就是去解析参数。本文的内容主要分析源码中我们配置的规则解析的实现。</p>
 <p>在上一篇文章末尾，在 <code class="inline-code">IDE</code> 中，添加了 <code class="inline-code">@/Users/xxx/debug_proguard.pro</code> 作为函数运行的入参，将配置文件的路径传递给 ProGuard 使用。先来看一下 Main 函数中的代码：</p>
-<p><img src="https://img-blog.csdnimg.cn/a6e28e1f98e44ec8ba32e84fcd692e56.png" alt="ProGuard 的 Main 函数代码" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/a6e28e1f98e44ec8ba32e84fcd692e56.png" alt="ProGuard 的 Main 函数代码" referrerpolicy="no-referrer"></p>
 <p>从这几行代码可以看出，ProGuard 的大体运行逻辑。在代码 518 行中，通过入参 <code class="inline-code">args</code> 和 <code class="inline-code">系统属性配置</code> 创建了一个配置解析器 <code class="inline-code">ConfigurationParser</code> ，随后调用其 <code class="inline-code">parse</code> 方法，解析传入的参数，并将结果放到 <code class="inline-code">configuration</code> 中，以供后续混淆逻辑使用。</p>
 <h2 id="try-with-resources 语法"><span class="prefix"></span><span class="content">try-with-resources 语法</span><span class="suffix"></span></h2><p>在代码 518 行处，创建 <code class="inline-code">ConfigurationParser</code> 时，使用了 Java 1.7 中提供的 <code class="inline-code">try-with-resources</code> 语法。此语法可以帮助我们关闭流。举个例子，我们现在需要从一个文件中读取第一行内容。在 Java 1.7 之前，代码将会如下：</p>
 <pre><code class="java">static String readFirstLineFromFile(String path) throws IOException &#123;
@@ -742,7 +742,7 @@ thead {
 </code></pre>
 <p>这样，代码能精简很多，<code class="inline-code">close</code> 也不会因为开发者的疏忽而被遗漏。</p>
 <h2 id="配置读取"><span class="prefix"></span><span class="content">配置读取</span><span class="suffix"></span></h2><p>为了更好地理解整个读取与解析的内容，我画了一个简单的流程图。在 ProGuard 中读取配置文件的逻辑中，会按照一个个<code class="inline-code">单词</code> 为单位进行读取，根据代码中的流程，绘制如下流程图，能够更好地理解代码内容。</p>
-<p><img src="https://img-blog.csdnimg.cn/51cc52159c484cfa9d3e6e401cb2a2b4.png" alt="解析流程图" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/51cc52159c484cfa9d3e6e401cb2a2b4.png" alt="解析流程图" referrerpolicy="no-referrer"></p>
 <p>根据上面的流程图，在来看源码实现。首先是 <code class="inline-code">ConfigurationParser</code> 的构造方法，实现代码如下：</p>
 <pre><code class="java">public ConfigurationParser(String[] args, Properties properties) throws IOException &#123;
   this(args, null, properties);
@@ -759,7 +759,7 @@ public ConfigurationParser(WordReader reader, Properties properties) throws IOEx
 &#125;
 </code></pre>
 <p>在构造方法中，使用入参中的 <code class="inline-code">args</code> 和 <code class="inline-code">系统属性配置</code> 创建了一个 <code class="inline-code">ArgumentWordReader</code>。顾名思义，它是用来读取运行代码时传入的程序参数的。</p>
-<p><img src="https://img-blog.csdnimg.cn/7ccab00b50914784a3d233be63380dcc.png" alt="WordReader 类图" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/7ccab00b50914784a3d233be63380dcc.png" alt="WordReader 类图" referrerpolicy="no-referrer"></p>
 <p>在 <code class="inline-code">WordReader</code> 的设计中，内容读取是按行读取的。在 <code class="inline-code">LineWordReader</code> 和 <code class="inline-code">FileWordReader</code> 中，直接使用 <code class="inline-code">LineNumberReader</code> 按行读取。而对于 <code class="inline-code">ArgumentWordReader</code>，实现逻辑会更简单一些，直接将前面提到的 <code class="inline-code">args</code> 数组中的每一个 <code class="inline-code">String</code> 作为一行字符串处理。</p>
 <p>接下来，在看构造方法的最末尾：调用了 <code class="inline-code">readNextWord()</code> 方法，此为流程中<code class="inline-code">开始读取下一个单词</code>，也是为了获取第一个 「单词」。来看一下代码是如何实现的：</p>
 <pre><code class="java">private void readNextWord() throws IOException &#123;
@@ -865,7 +865,7 @@ private boolean isNonStartDelimiter(char character) &#123;
 <p>此处的 <code class="inline-code">FileWordReader</code> 和 <code class="inline-code">ArgumentWordReader</code> 的核心逻辑基本相似。在 <code class="inline-code">FileWordReader</code> 中，<code class="inline-code">nextLine</code> 方法从指定的文件中读取真实的数据行，而文件行读取使用的是 JDK 中的 <code class="inline-code">LineNumberReader</code>。逻辑不复杂，有兴趣的朋友可自行查阅原文。</p>
 <h2 id="配置解析"><span class="prefix"></span><span class="content">配置解析</span><span class="suffix"></span></h2><p>从文件中读取到配置信息后，需要解析当前的「单词」，并按照固定的逻辑进行处理。在前面的内容中，已经涉及到了配置解析。在 ProGuard 中，有许多配置和不同的规则，可以通过查看源代码来了解。在 ProGuard 中，配置规则分为多个类别。下面将从 <strong>输入&#x2F;输出选项</strong> 和 <strong>-keep 选项</strong> 这两个部分进行分析，以点带面，了解 ProGuard 中配置解析的逻辑。</p>
 <h3 id="输入&#x2F;输出选项"><span class="prefix"></span><span class="content">输入&#x2F;输出选项</span><span class="suffix"></span></h3><p>先来看 <code class="inline-code">-injars</code> 、<code class="inline-code">-outjars</code> 、<code class="inline-code">-libraryjars</code> 的实现，当读取到这几个单词时，解析的执行如下：</p>
-<p><img src="https://img-blog.csdnimg.cn/31699938925e44f0b1b647b70f075ffd.png" alt="jars 相关解析" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/31699938925e44f0b1b647b70f075ffd.png" alt="jars 相关解析" referrerpolicy="no-referrer"></p>
 <p>可以看到，这三个参数的解析，都是调用的 <code class="inline-code">parseClassPathArgument</code>  来实现的，且 <code class="inline-code">-injars</code> 和<code class="inline-code">-outjars</code> 都是放在 <code class="inline-code">configuration.programJars</code> 中的。 以 Android 的项目为例，编译结束时，会生成 <code class="inline-code">R.jar</code> 文件，以及一个 <code class="inline-code">classes</code> 文件夹，因此 <code class="inline-code">-injars</code> 的配置如下：</p>
 <pre><code class="inline-code">-injars /project_dir/build/intermediates/compile_r_class_jar/release/R.jar
 -injars /project_dir/build/intermediates/javac/release/classes
@@ -898,11 +898,11 @@ private boolean isNonStartDelimiter(char character) &#123;
 &#125;
 </code></pre>
 <h3 id="-keep 选项"><span class="prefix"></span><span class="content">-keep 选项</span><span class="suffix"></span></h3><p>在写 ProGuard 规则中， keep 的规则是相对比较复杂的，根据个人的理解，将 keep 的解析规则用 EBNF 进行描述，如下所示，能够更好的理解其逻辑。</p>
-<p><img src="https://img-blog.csdnimg.cn/d562482881344613a65e95dda7070d24.png" alt="ProGuard EBNF 描述" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/d562482881344613a65e95dda7070d24.png" alt="ProGuard EBNF 描述" referrerpolicy="no-referrer"></p>
 <p>解析思路与 <strong>输入&#x2F;输出选项</strong> 类似，先根据当前的单词判断是否为 <code class="inline-code">keep_keywords</code> ，代码如下：</p>
-<p><img src="https://img-blog.csdnimg.cn/cda15d9c3677485fa2f415a6602c21df.png" alt="keep 解析分支代码" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/cda15d9c3677485fa2f415a6602c21df.png" alt="keep 解析分支代码" referrerpolicy="no-referrer"></p>
 <p>从代码中可以看到，所有 <code class="inline-code">keep_keywords</code> 的解析都调用到了 <code class="inline-code">parseKeepClassSpecificationArguments</code> 中，些方法的解析逻辑，与 EBNF 中描述的基本一致，先看代码执行的流程图：</p>
-<p><img src="https://img-blog.csdnimg.cn/10a1ee034279420085a4bbae34075ec8.png" alt="解析 Keep 后的描述符" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/10a1ee034279420085a4bbae34075ec8.png" alt="解析 Keep 后的描述符" referrerpolicy="no-referrer"></p>
 <p>代码中实现逻辑与上述流程图一致， 源码如下：</p>
 <pre><code class="java">while (true) &#123;
     // 1. 读取 -keep 后的单词，
@@ -938,7 +938,7 @@ private boolean isNonStartDelimiter(char character) &#123;
 ClassSpecification classSpecification = parseClassSpecificationArguments(false, true, false);
 </code></pre>
 <p>有前面的 EBNF 描述以及流程图，代码逻辑看起来就会非常的简单。紧接着是解析 <code class="inline-code">class_specification</code> ，先来看一下它的 EBNF 描述，如下图所示：</p>
-<p><img src="https://img-blog.csdnimg.cn/92c85753402543db909f59466abf0a5e.png" alt="class EBNF 描述" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/92c85753402543db909f59466abf0a5e.png" alt="class EBNF 描述" referrerpolicy="no-referrer"></p>
 <blockquote>
 <p>PS： 在 ProGuard 的使用文档中，也有描述 class_specification 的信息，但是并非是 EBNF 格式，有兴趣的同学可以看看： <a target="_blank" rel="noopener" href="https://www.guardsquare.com/manual/configuration/usage#classspecification">https://www.guardsquare.com/manual/configuration/usage#classspecification</a></p>
 </blockquote>
@@ -977,10 +977,10 @@ public boolean isJavaIdentifier(String word) &#123;
 &#125;
 </code></pre>
 <p>看完标识符的匹配规则，在来看完整定义的 <code class="inline-code">annotation_name</code>、<code class="inline-code">class_name</code> 等名称的读取逻辑，在代码中，都会调用到 <code class="inline-code">parseCommaSeparatedList</code> 里面去，顾名思义，此方法会根据 <code class="inline-code">,</code> 解析一个列表出来，直接看代码：</p>
-<p><img src="https://img-blog.csdnimg.cn/a11a816ba74b4d92ad7b0df66e95e6b1.png" alt="annotation type 读取" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/a11a816ba74b4d92ad7b0df66e95e6b1.png" alt="annotation type 读取" referrerpolicy="no-referrer"></p>
 <p>代码中仅保留了关键代码，从注释中可以看到，拿到「单词」后，会先检查是否为一个合法标识符，如果符合，就添加到列表中去，并读取下一个「单词」，如果是 <code class="inline-code">,</code> 会继续上述逻辑进行添加，反之返回列表。</p>
 <p>在回到上层的解析逻辑中来，根据 EBNF 的描述， 需要先判断是否有 <code class="inline-code">annotation_type</code>  和  <code class="inline-code">access_flag</code>， 这一块的逻辑如下： </p>
-<p><img src="https://img-blog.csdnimg.cn/d85b15eb96b749f285c3e4321d1ec084.png" alt="annotation type 解析" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/d85b15eb96b749f285c3e4321d1ec084.png" alt="annotation type 解析" referrerpolicy="no-referrer"></p>
 <p>其中当解析到当前单词为 <code class="inline-code">@</code> 时，会去解析 <code class="inline-code">annotation_name</code> 的列表， 并且重新用 <code class="inline-code">,</code> 拼接成一个字符串存储起来。 剩下的 <code class="inline-code">access_flag</code> 就简单多了，直接使用一个 <code class="inline-code">int</code> 型的值，按位将存起来就可以了，当然，我们还需要注意 <code class="inline-code">!</code> ，因此，在存储的时候，会有两个变量：</p>
 <pre><code class="java">if (!negated) &#123;
   requiredSetClassAccessFlags |= accessFlag;
@@ -989,9 +989,9 @@ public boolean isJavaIdentifier(String word) &#123;
 &#125;
 </code></pre>
 <p>后面的 <code class="inline-code">class_name</code> 、<code class="inline-code">extends</code>  等逻辑读取就比较简单了，如下：</p>
-<p><img src="https://img-blog.csdnimg.cn/526aa022c9d1486f9163f1be6b178e1a.png" alt="解析 ClassName 以及 extends 父类" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/526aa022c9d1486f9163f1be6b178e1a.png" alt="解析 ClassName 以及 extends 父类" referrerpolicy="no-referrer"></p>
 <p>当父类相关信息解析完成后，下一步便是解析方法和变量相关的信息，也就是 EBNF 中描述 <code class="inline-code">field_specification</code> 和 <code class="inline-code">method_specification</code> 的内容。在 ProGuard 中，这两部份类容统一放到了 <code class="inline-code">parseMemberSpecificationArguments</code> 中去实现了，先来看一下代码逻辑： </p>
-<p><img src="https://img-blog.csdnimg.cn/24b901de74524b1b8d8a312a4d246bdd.png" alt="类成员解析入口" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/24b901de74524b1b8d8a312a4d246bdd.png" alt="类成员解析入口" referrerpolicy="no-referrer"></p>
 <p>剩下解析类成员的逻辑与前面类解析的逻辑相似，按照 EBNF 格式进行解析即可， 感兴趣的同学可以自行阅读源码。</p>
 <h2 id="结语"><span class="prefix"></span><span class="content">结语</span><span class="suffix"></span></h2><p>ProGuard 配置文件解析是非常重要的一部分内容，在 ProGuard 后续的执行逻辑中，会经常使用到本文中解析出来配置信息，可从官方文档详细了解一下各配置选项的作用级使用方法，以便能更好的理解后面的内容。在解析配置文件中，提到的 EBNF 是描述计算机编程语言的上下文无关文法的符号表示法，在编程语言开发中可能会经常遇到，此语法不复杂，可以去百科上读一读，相信你会有很多的收获。</p>
 
@@ -1026,7 +1026,7 @@ public boolean isJavaIdentifier(String word) &#123;
 
                  -->
                 <div class="footer">
-    <span>Copyright © 2024 大罗说事</span>
+    <span>Copyright © 2025 大罗说事</span>
 </div>
 
 <!-- 

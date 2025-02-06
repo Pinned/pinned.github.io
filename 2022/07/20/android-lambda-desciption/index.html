@@ -750,7 +750,7 @@ class JvmInstruction &#123;
 <p>代码很简单，此处重点看一下编译生成的 <code class="inline-code">CLASS</code> 文件的格式， 通过命令可以输出方法以及方法调用指令， 命令如下：</p>
 <pre><code class="shell">javap -c -p JvmInstruction
 </code></pre>
-<p><img src="https://img-blog.csdnimg.cn/969bbfb8a2314d498083188ce3be6257.png" alt="JvmInstruction 中方法列表及调用栈信息" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/969bbfb8a2314d498083188ce3be6257.png" alt="JvmInstruction 中方法列表及调用栈信息" referrerpolicy="no-referrer"></p>
 <p>从上面的截图中，可以看到：</p>
 <ol>
 <li>代码中的 <code class="inline-code">JvmInstruction.run();</code> 编译后变成图中 11 行的 <code class="inline-code">invokestatic #2</code>。</li>
@@ -773,15 +773,15 @@ class JvmInstruction &#123;
 <pre><code class="shell">javap -c -p LambdaTest
 </code></pre>
 <p>得到如下结果：</p>
-<p><img src="https://img-blog.csdnimg.cn/f54ea5042f364961b949bc428a91618f.png" alt="CLASS 中的方法列表" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/f54ea5042f364961b949bc428a91618f.png" alt="CLASS 中的方法列表" referrerpolicy="no-referrer"></p>
 <p>在上述代码与编译后的字节码中，我们可以看到，代码中的 lambda 表达式变成了字节码中的 <code class="inline-code">11</code> 行，即 <code class="inline-code">0: invokedynamic #2,  0</code>。当然，从这个字节码中，可以看到，除了代码中写的 <code class="inline-code">main</code> 方法，<code class="inline-code">System.out.println(&quot;test&quot;)</code> 被放到了 <code class="inline-code">lambda$main$0()</code> 这个私有的静态方法中去了。</p>
 <p>为了更好的看清楚 <code class="inline-code">invokedynamic</code> 的执行逻辑，可以通过：</p>
 <pre><code class="shell">javap -v LambdaTest
 </code></pre>
 <p>输出CLASS 文件中的常量池等信息，因文件里面的内容信息较多，省略了一些不需要关注的点，如下图所示：</p>
-<p><img src="https://img-blog.csdnimg.cn/c3a95e1118d7495ea86f888364c62f9a.png" alt="CLASS 详细信息" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/c3a95e1118d7495ea86f888364c62f9a.png" alt="CLASS 详细信息" referrerpolicy="no-referrer"></p>
 <p>根据上面的信息，可以看到，整个逻辑如下图所示：</p>
-<p><img src="https://img-blog.csdnimg.cn/a0a28f6ffd564c1c8d513e233561b6a5.png" alt="Lambda 表达式的整个过程 " referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/a0a28f6ffd564c1c8d513e233561b6a5.png" alt="Lambda 表达式的整个过程 " referrerpolicy="no-referrer"></p>
 <p>如前文所示，在执行 <code class="inline-code">InvokeDynamic</code> 指令会调用 BootstapMethods，返回一个 CallSite 对象，对应代码在 rt.jar 中。</p>
 <blockquote>
 <p>PS: BootstapMethods 中，第一次执行时，会生成 <code class="inline-code">LambdaTest$$Lambda$1</code> 的 class，可以通过参数  <strong>-Djdk.internal.lambda.dumpProxyClasses</strong> 将生成的 class 缓存下来。</p>
@@ -850,7 +850,7 @@ class JvmInstruction &#123;
 </code></pre>
 <p>因此， <code class="inline-code">runable.run();</code> 相当于调用了 <code class="inline-code">LambdaTest$$Lambda$1().run()</code>，而在生成的这个 <code class="inline-code">class</code> 文件中，又调用了 <code class="inline-code">LambdaTest.lambda$main$0()</code>。</p>
 <h2 id="3. Lambda 表达式脱糖（Desugaring）"><span class="prefix"></span><span class="content">3. Lambda 表达式脱糖（Desugaring）</span><span class="suffix"></span></h2><p>前面讲到了 Lambda 在高版本 JVM 中，使用 InvokeDynamic 指令，得以在运行时，执行 Lambda 表达式，那针对 Android 来讲，低版本 Android OS 无法执行，要怎么样处理呢？答案是脱糖。</p>
-<p><img src="https://img-blog.csdnimg.cn/e308940a26dc4d00b5c2b4ede7191d1b.png" alt="Android 中 Java 文件变成 Dex 的过程" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/e308940a26dc4d00b5c2b4ede7191d1b.png" alt="Android 中 Java 文件变成 Dex 的过程" referrerpolicy="no-referrer"></p>
 <p>在 D8&#x2F;R8 中，进行了 class 文件到 Dex 文件的优化，并且在这一步完成了脱糖。脱糖的实现思路是什么样子的？ 本文以开源库的 retrolambda 为例分析，脱糖的过程。</p>
 <blockquote>
 <p>PS： R8 将 Proguard 整合，故没有单独的 Proguard 流程。</p>
@@ -964,8 +964,8 @@ private void generateFactoryMethod() &#123;
 &#125;
 </code></pre>
 <h3 id="3.5 结果"><span class="prefix"></span><span class="content">3.5 结果</span><span class="suffix"></span></h3><p>为了更清晰地理解结果，此处使用 <code class="inline-code">java -c -p </code> 将 class 文件中所有的方法都打印出来，如下图所示：</p>
-<p><img src="https://img-blog.csdnimg.cn/b68bfa4e3a1b4c3b8b61fdad736eff12.png" alt="脱糖后的 LambdaTest.class" referrerpolicy="no-referrer"></p>
-<p><img src="https://img-blog.csdnimg.cn/855cad054761409fa063dc903bc4b1ff.png" alt="生成的 LabdaTest$$Lambda$1.class" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/b68bfa4e3a1b4c3b8b61fdad736eff12.png" alt="脱糖后的 LambdaTest.class" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/855cad054761409fa063dc903bc4b1ff.png" alt="生成的 LabdaTest$$Lambda$1.class" referrerpolicy="no-referrer"></p>
 <h2 id="4. 思考"><span class="prefix"></span><span class="content">4. 思考</span><span class="suffix"></span></h2><p>有了上面的脱糖流程，既然可以在编译时，就能实现 lambda 的逻辑，为什么还要添加 <code class="inline-code">invokedynamic</code> 指令呢？ 这不得不提 Java 是一种静态类型语言，所有的东西都是在编译时都已经确定好了，静态类型的语言在运行相对效率更高，但灵活性就有所降低。而 <code class="inline-code">invokedynamic</code> 的设计就是让 JVM 可以更加的灵活，让基于 JVM 的语言设计者，可以有更多的自由度。</p>
 
                     <hr/>
@@ -999,7 +999,7 @@ private void generateFactoryMethod() &#123;
 
                  -->
                 <div class="footer">
-    <span>Copyright © 2024 大罗说事</span>
+    <span>Copyright © 2025 大罗说事</span>
 </div>
 
 <!-- 

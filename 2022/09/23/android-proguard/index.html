@@ -720,7 +720,7 @@ thead {
                     <p>使用 Java 编写的源代码在编译时会生成 <code class="inline-code">CLASS</code> 文件，而 <code class="inline-code">CLASS</code> 字节码的规则非常的标准，按照对应的格式能够很好的反编译出原代码。市面上也存在很多很好用的工具，来帮助我们进行反编译并阅读 <code class="inline-code">CLASS</code> 中的代码逻辑。为了更好的保护代码安全，混淆是最容易做的一件事情。</p>
 <p>针对 java 的混淆，有一个开源项目 <a target="_blank" rel="noopener" href="https://github.com/Guardsquare/proguard">ProGuard</a> 就是常用的混淆工具。他可以对代码进行 <code class="inline-code">压缩</code>、<code class="inline-code">优化</code> 、<code class="inline-code">混淆</code>。本文将基于在使用过程中，用到的知识点进行记录。</p>
 <h2 id="ProGuard 工作流程"><span class="prefix"></span><span class="content">ProGuard 工作流程</span><span class="suffix"></span></h2><p>在 ProGuard 执行的过程中，有 <code class="inline-code">shrink</code>、<code class="inline-code">optimize</code>、<code class="inline-code">obfuscate</code> 、<code class="inline-code">preverify</code> 四个步骤，每一个步骤的执行都是可选的，我们可以根据想要的流程去进行配置，但此四个步骤执行的顺序是固定的，不可更改的。</p>
-<p><img src="https://img-blog.csdnimg.cn/b948011a4512492393971baace169df9.png" alt="ProGuard 工作流程" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/b948011a4512492393971baace169df9.png" alt="ProGuard 工作流程" referrerpolicy="no-referrer"></p>
 <ul>
 <li><strong>shrink</strong>  检查并删除没有使用的类、字段、方法、属性。</li>
 <li><strong>optimize</strong> 优化字节码，移除无用指令，或者进行指令优化。</li>
@@ -753,7 +753,7 @@ thead {
 <p>我当前使用的是 4.1.0 版本的 Gradle ，所以最终的产物地址为： </p>
 <p><code class="inline-code">build/intermediates/proguard-files/proguard-android-optimize.txt-4.1.0</code></p>
 <p>第二步，就是在指定的文件中，按照指定的配置将对应的配置写入到文件中。</p>
-<p><img src="https://img-blog.csdnimg.cn/f12a5826f59748b09058678a4616a4e6.png" alt="proguard-android-optimize 生成" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/f12a5826f59748b09058678a4616a4e6.png" alt="proguard-android-optimize 生成" referrerpolicy="no-referrer"></p>
 <p>从上图中的代码可以看到，在生成 proguard 的配置文件时，将 gradle.jar 中 <code class="inline-code">proguard-haader.txt</code>，  <code class="inline-code">proguard-optimizations.txt</code>， <code class="inline-code">proguard-common.txt</code> 按顺序写入目标文件。</p>
 <h3 id="2. Android Proguard 的默认配置解析"><span class="prefix"></span><span class="content">2. Android Proguard 的默认配置解析</span><span class="suffix"></span></h3><p>在默认配置中，写有 Android 中最长用的混淆规则。从这些规则中，也可以学习到一些之前不会注意到的知识点</p>
 <h4 id="2.1 <code class="inline-code">-keepattributes *Annotation*</code>"><span class="prefix"></span><span class="content">2.1 <code class="inline-code">-keepattributes *Annotation*</code></span><span class="suffix"></span></h4><p>根据 <a target="_blank" rel="noopener" href="https://www.guardsquare.com/manual/configuration/attributes">ProGuard 官方文档</a>文档解释，<code class="inline-code">*</code> 是用来匹配属性名称的通配符，<code class="inline-code">*Annotation*</code> 会匹配到诸如： <code class="inline-code">RuntimeVisibleAnnotations</code>， <code class="inline-code">RuntimeInvisibleAnnotations</code> 等。  </p>
@@ -834,7 +834,7 @@ outputs:
 </code></pre>
 <p>有兴趣的同学，也可以去看一下这个 Task 的原码，看看 aapt_rules.txt 文件的生成流程。 </p>
 <h3 id="4. 其它有用配置"><span class="prefix"></span><span class="content">4. 其它有用配置</span><span class="suffix"></span></h3><h4 id="4.1 将混淆类移动到指定包中"><span class="prefix"></span><span class="content">4.1 将混淆类移动到指定包中</span><span class="suffix"></span></h4><p>本文中，混淆使用的是 R8 ， 而 R8 在混淆的时候，默认情况下，混淆后的类，会被放到根目录下，如下图所示：</p>
-<p><img src="https://img-blog.csdnimg.cn/18bc36212e484d6181c1da9080a12015.png" alt="R8 输出默认 mapping" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/18bc36212e484d6181c1da9080a12015.png" alt="R8 输出默认 mapping" referrerpolicy="no-referrer"></p>
 <p>但在做 SDK 的时候，我们打包的是 aar 文件，这种直接放在跟目录下， 可能会出现与其它 <code class="inline-code">aar</code> 的混淆类冲突，所以可以将混淆类移动到指定包中去。</p>
 <ul>
 <li><code class="inline-code">-flattenpackagehierarchy packageName</code></li>
@@ -868,9 +868,9 @@ com.example.build.inner.sub.SubClass -&gt; com.exampe.a1.k:
 &#125;
 </code></pre>
 <p>通过如上配置，就可以把<code class="inline-code">android.util.Log</code> 的调用删掉，为了更有体感，我写了个示例，在没有删除 Log 时， 编译结果如下：</p>
-<p><img src="https://img-blog.csdnimg.cn/83d662a27d0741fd9ebc579afca84269.png" alt="删除前的结果" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/83d662a27d0741fd9ebc579afca84269.png" alt="删除前的结果" referrerpolicy="no-referrer"></p>
 <p>添加对应删除的 ProGuard 规则后，结果如下图所示：</p>
-<p><img src="https://img-blog.csdnimg.cn/8904344995054bedaea388019330a5fe.png" alt="删除后的结果" referrerpolicy="no-referrer"></p>
+<p><img src="https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/8904344995054bedaea388019330a5fe.png" alt="删除后的结果" referrerpolicy="no-referrer"></p>
 <p>可以看到，编译后的 class 文件中，已经将 <code class="inline-code">Log.d</code> 的调用删除掉了，但是需要注意的是，代码中的 <code class="inline-code">&quot;A&quot; + info + &quot;B&quot;</code> 会被保留下来， 因为 ProGuard 无法判断此处代码删除是否对业务逻辑有影响，所以被保留了下来。</p>
 <h4 id="4.3 keep 类，但不允许混淆"><span class="prefix"></span><span class="content">4.3 keep 类，但不允许混淆</span><span class="suffix"></span></h4><p>在混淆的过程中， 第一步为 <code class="inline-code">shrink</code> ， 在执行过程中，会将未使用的类、方法、变量等进行优化删除，但如果你输出的是 SDK， 有一些接口类是不会被调用的。当然，你可以直接将接口类进行 <code class="inline-code">keep</code> ， 这样 <code class="inline-code">shrink</code> 的时候，就不会删除对应的类了。但如果你和我一样，即要不删除类，但是又希望混淆类名字，你可以进行如下配置实现：</p>
 <pre><code class="inline-code">-keep,allowobfuscation class com.example.TestApi &#123;*;&#125;
@@ -908,7 +908,7 @@ com.example.build.inner.sub.SubClass -&gt; com.exampe.a1.k:
 
                  -->
                 <div class="footer">
-    <span>Copyright © 2024 大罗说事</span>
+    <span>Copyright © 2025 大罗说事</span>
 </div>
 
 <!-- 
