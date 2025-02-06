@@ -8,7 +8,7 @@ tags: Java
 
 不论你在源码是用  Java 进行编写的，还是使用 Kotlin，或者是两者都有使用。在整个项目开发迭代周期中，都会有很多地方会涉及到  JDK 版本：
 
-![JDK 关系图](https://img-blog.csdnimg.cn/c6fce0972a6240d1b0884febf0ef737f.png)
+![JDK 关系图](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/c6fce0972a6240d1b0884febf0ef737f.png)
 
 
 
@@ -28,7 +28,7 @@ tags: Java
 
 只要你没有配置 **STUDIO_JDK** 环境变量，当前 Android Studio 默认应该都是使用 **JBR** 中的 Java 
 
-![Android Studio 目录下的 JBR 文件夹](https://img-blog.csdnimg.cn/81dc21c6e3944cc8950d4c5e065cc5c3.png)
+![Android Studio 目录下的 JBR 文件夹](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/81dc21c6e3944cc8950d4c5e065cc5c3.png)
 
 ## Gradle 使用的 JDK 版本
 
@@ -38,17 +38,17 @@ Android 应用程序进行编译时，都会使用 Gradle 进行编译。 基于
 
 这两种运行方式，使用的 JDK 版本可能会存在不一致的情况。点  <font color="green">▶︎</font> 运行时，是使用 Android Studio 中设置的值 JDK 来运行：
 
-![Android Studio 中 gradle 的设置](https://img-blog.csdnimg.cn/ff39a4ffa017464e852ee8ae6e3ee5c8.png)
+![Android Studio 中 gradle 的设置](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/ff39a4ffa017464e852ee8ae6e3ee5c8.png)
 
 在默认情况下，会直接使用 jbr 的版本。当然，你也可以手动配置为 `JAVA_HOME` 或者是 `GRADLE_LOCAL_JAVA_HOME`。 这个地方的配置最终会存储到 `.idea/gradle.xml` 文件中去，在 Android Studio 启动时会去读取这个文件。 
 
-![gradleJVM 的存储信息](https://img-blog.csdnimg.cn/8d673842e2764f3f9d9fa5006cd59e53.png)
+![gradleJVM 的存储信息](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/8d673842e2764f3f9d9fa5006cd59e53.png)
 
 关于 Gralde JDK 的配置，官方建议使用 `GRADLE_LOCAL_JAVA_HOME` 配置，这个宏定义会优先使用在 `properties` 文件中定义的 `java.home` 变量，如果没找到会使用 JBR。 
 
 > 需要注意的是， 这个 JDK 除了用于 Gradle 本身运行以外，还会用于我们自定插件以及包含在 `buildSrc` 下面的代码编译与运行。例如我们在使用 Android Gradle Tools 的版本为 8.x 时，此时就需要将 JDK 设置成 17 及以上的版本，否则就会编译报错 ：
 >
-> ![报错信息](https://img-blog.csdnimg.cn/7bc84abcb02749f38610747a70e3d683.png)
+> ![报错信息](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/7bc84abcb02749f38610747a70e3d683.png)
 
 
 
@@ -101,7 +101,7 @@ android {
 
 代码除了在编译时需要关注 JDK 版本，在运行时也需要关注代码中使用的 Java API 。虽然在写代码的时候，使用的是 Java 的语法，但其运行时并不是 JVM ， 因此有一些 Java 的 API 在 Android 中并无法运行。 在 Android  SDK 中，定义了很多 Java 库函数实现的 API ，在绝大多数时后，开发者根本感知不到它的区别。我们可以通过 `compileSdk` 来指定当前 Andorid 项目支持的 Java API 的范围，具体信息如下图：
 
-![Android 支持的 Java API 的范围](https://img-blog.csdnimg.cn/757f5c2064054832abe77fadc3c2cf14.png)
+![Android 支持的 Java API 的范围](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/757f5c2064054832abe77fadc3c2cf14.png)
 
 Android  项目中除了配置 `compileSdk` ， 还需要配置 `minSdk` 指定当前 APP 运行的最低手机版本，当代码中使用了高版本中方法（如 `String.isBlank()`  等 JDK 11 才提供的），就会导致低版本无法使用。此时为了兼容，R8 在编译的过程中，会对代码进行脱糖处理，将其转换成低版本就可用的代码。
 

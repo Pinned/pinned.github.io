@@ -47,7 +47,7 @@ class JvmInstruction {
 javap -c -p JvmInstruction
 ```
 
-![JvmInstruction 中方法列表及调用栈信息](https://img-blog.csdnimg.cn/969bbfb8a2314d498083188ce3be6257.png)
+![JvmInstruction 中方法列表及调用栈信息](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/969bbfb8a2314d498083188ce3be6257.png)
 
 从上面的截图中，可以看到：
 
@@ -87,7 +87,7 @@ javap -c -p LambdaTest
 
 得到如下结果：
 
-![CLASS 中的方法列表](https://img-blog.csdnimg.cn/f54ea5042f364961b949bc428a91618f.png)
+![CLASS 中的方法列表](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/f54ea5042f364961b949bc428a91618f.png)
 
 在上述代码与编译后的字节码中，我们可以看到，代码中的 lambda 表达式变成了字节码中的 `11` 行，即 `0: invokedynamic #2,  0`。当然，从这个字节码中，可以看到，除了代码中写的 `main` 方法，`System.out.println("test")` 被放到了 `lambda$main$0()` 这个私有的静态方法中去了。
 
@@ -99,11 +99,11 @@ javap -v LambdaTest
 
 输出CLASS 文件中的常量池等信息，因文件里面的内容信息较多，省略了一些不需要关注的点，如下图所示：
 
-![CLASS 详细信息](https://img-blog.csdnimg.cn/c3a95e1118d7495ea86f888364c62f9a.png)
+![CLASS 详细信息](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/c3a95e1118d7495ea86f888364c62f9a.png)
 
 根据上面的信息，可以看到，整个逻辑如下图所示：
 
-![Lambda 表达式的整个过程 ](https://img-blog.csdnimg.cn/a0a28f6ffd564c1c8d513e233561b6a5.png)
+![Lambda 表达式的整个过程 ](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/a0a28f6ffd564c1c8d513e233561b6a5.png)
 
 如前文所示，在执行 `InvokeDynamic` 指令会调用 BootstapMethods，返回一个 CallSite 对象，对应代码在 rt.jar 中。
 
@@ -183,7 +183,7 @@ public InnerClassLambdaMetafactory(MethodHandles.Lookup caller,
 
 前面讲到了 Lambda 在高版本 JVM 中，使用 InvokeDynamic 指令，得以在运行时，执行 Lambda 表达式，那针对 Android 来讲，低版本 Android OS 无法执行，要怎么样处理呢？答案是脱糖。
 
-![Android 中 Java 文件变成 Dex 的过程](https://img-blog.csdnimg.cn/e308940a26dc4d00b5c2b4ede7191d1b.png)
+![Android 中 Java 文件变成 Dex 的过程](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/e308940a26dc4d00b5c2b4ede7191d1b.png)
 
 在 D8/R8 中，进行了 class 文件到 Dex 文件的优化，并且在这一步完成了脱糖。脱糖的实现思路是什么样子的？ 本文以开源库的 retrolambda 为例分析，脱糖的过程。
 
@@ -327,9 +327,9 @@ private void generateFactoryMethod() {
 
 为了更清晰地理解结果，此处使用 `java -c -p ` 将 class 文件中所有的方法都打印出来，如下图所示：
 
-![脱糖后的 LambdaTest.class](https://img-blog.csdnimg.cn/b68bfa4e3a1b4c3b8b61fdad736eff12.png)
+![脱糖后的 LambdaTest.class](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/b68bfa4e3a1b4c3b8b61fdad736eff12.png)
 
-![生成的 LabdaTest$$Lambda$1.class](https://img-blog.csdnimg.cn/855cad054761409fa063dc903bc4b1ff.png)
+![生成的 LabdaTest$$Lambda$1.class](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/855cad054761409fa063dc903bc4b1ff.png)
 
 
 

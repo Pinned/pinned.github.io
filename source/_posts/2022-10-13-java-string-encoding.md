@@ -32,7 +32,7 @@ tags: Java
 
 通过上面的例子，可以大体了解其编码过程，下图将  `🎃` 从 `Unicode` 编码转换成 `UTF-8` 编码的转化图，可以更好的理解转换过程。
 
-![UTF-8编码过程](https://img-blog.csdnimg.cn/ca4c6e51326b428ba9ad818c968d2e82.png)
+![UTF-8编码过程](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/ca4c6e51326b428ba9ad818c968d2e82.png)
 
 相信读到这里，大家对计算机系统中字符编码有了初步的了解。下面紧接着来看看在 Java 中，String 相关的一些细节。
 
@@ -42,7 +42,7 @@ tags: Java
 
 在 Java 中，String 类定义在 `java.lang` 这 个包下面，在 `Intellij IDEA` 直接跳转，就可以看到  `String` 的源码，下图截取了一部分内容：
 
-![String 类](https://img-blog.csdnimg.cn/69399bb46d874926ac137af67892f854.png)
+![String 类](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/69399bb46d874926ac137af67892f854.png)
 
 从图中 `value` 的注释可以看到， String 内部存储数据是用 `char` 数组来表示的。
 
@@ -65,15 +65,15 @@ String createStr = new String(data);
 
 断点运行进去，在下图中，高亮行中，会调用 `StringCoding.decode` 去解码对应的 `bytes` 。
 
-![String 构造方法](https://img-blog.csdnimg.cn/1a1de76a888a4b05acfe27fcca751b7b.png)
+![String 构造方法](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/1a1de76a888a4b05acfe27fcca751b7b.png)
 
 在 `StringCoding` 中，使用当前默认的编码格式去进行解码，在我的机器上，默认使用的是 `UTF-8`， 因此，在调试中，可以看到使用的是 `UTF_8` 和 `UTF_8$Decoder` 去进行解码。
 
-![decode](https://img-blog.csdnimg.cn/e6fbd7e701b6403f983bc8007df58c77.png)
+![decode](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/e6fbd7e701b6403f983bc8007df58c77.png)
 
 进一步跟进去，会跟到 `UTF_8.java` 这个类，这个类在 `rt.jar` 包中，JDK 中默认不包含其源代码，为了更好的调试，可以参看**「 附录：如何在 IDEA 中查看与调试 rt.jar 中的源码 」** 。
 
-![Decode byte 的逻辑](https://img-blog.csdnimg.cn/cc4a2b7b8b354a1dba489ed441897909.png)
+![Decode byte 的逻辑](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/cc4a2b7b8b354a1dba489ed441897909.png)
 
 从代码中可以看到， UTF-8 的解码过程，按照`一个byte`、`两个byte`、`三个byte`、`四个byte` 分别去计算，此计算方式与**「 字符串编码 」**中讲到的映射关系一致。到此，基本了解 `byte 数组` 到 `String` 的过程。也可以清晰的理解到，在创建 `String` 的过程中，传过来的 `byte 数组` 就是对应编码的二进制数据。
 
@@ -84,7 +84,7 @@ byte[] data = new byte[]{(byte) 0b10011111, (byte) 0b10001110, (byte) 0b10000011
 String createStr = new String(data);
 ```
 
-![无法解码时的逻辑](https://img-blog.csdnimg.cn/34719390793a4d1eaf07bff5d083511b.png)
+![无法解码时的逻辑](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/34719390793a4d1eaf07bff5d083511b.png)
 
 代码中，第一个 `byte` 为 `0b10011111` ，这个数不满足前面的判断规则， 会直接进入 `else`  中，就将直接将当前字符设置成 `65533` 这个字符，从而丢掉了真实的 `byte` 数据。当然，除了第一个 `byte` 有问题，其它 `byte` 有问题时，也会使用 `65533` 来进行替换，有兴趣的同学可以去尝试看看对应的代码。
 
@@ -100,9 +100,9 @@ String createStr = new String(data);
 
 前面所提到的字符串编码，在 Java 中，用于实现编码是 `Charset` 相关的类， 其源代码在 `rt.jar` 中。JDK 中默认不包含对应的源码，在调试的时候，可以去 openjdk 中去把下载下来，我当前使用的版本为 JDK 8，下载地址为：http://hg.openjdk.java.net/jdk8u/jdk8u-dev/jdk/ ， 点击下图中的 zip ，即可下载。
 
-![JDK 下载](https://img-blog.csdnimg.cn/ae23a74bd82a47b5b74af9f1c0b9d67c.png) 
+![JDK 下载](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/ae23a74bd82a47b5b74af9f1c0b9d67c.png) 
 
 下载完成后，在 `Intellij IDEA` 中为 JDK 添加 `sourcepath` 后，就可以非常愉快的调试看代码了，具体设置步骤可以看下图红框圈出来的部分。
 
-![Sorcepath 添加示例](https://img-blog.csdnimg.cn/823739724b1542a9862a1b75e2bc9fe5.png)
+![Sorcepath 添加示例](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/823739724b1542a9862a1b75e2bc9fe5.png)
 

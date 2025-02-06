@@ -90,7 +90,7 @@ tagger <username> <email> <timestamp>
 
 ```
 
-最后，在来看一下，我本地创建的两个不同的 Tag，如下图所示： ![两种不同的 Tag 对比](https://img-blog.csdnimg.cn/753bffcdc0864bcd88fefeb1d3ed4225.png)
+最后，在来看一下，我本地创建的两个不同的 Tag，如下图所示： ![两种不同的 Tag 对比](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/753bffcdc0864bcd88fefeb1d3ed4225.png)
 
 
 ## 二、Git 文件打包
@@ -104,11 +104,11 @@ tagger <username> <email> <timestamp>
 
 事实上，Git 的做法与我们的想法一致。Git 在最初往磁盘中存储对象时，使用的格式被称为“松散”对象格式。但是为了更加高效的管理文件，Git 会时不时将这些对象打包在一起形成为一个新二进制文件。当然，我们可以通过 `git gc` 命令来触发，如下所示：
 
-![Git GC 示例](https://img-blog.csdnimg.cn/7633ded1ec4e48e2bd92bacaee9ea22f.png)
+![Git GC 示例](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/7633ded1ec4e48e2bd92bacaee9ea22f.png)
 
 经过打包后的文件大小也会变小：
 
-![pack file 文件大小](https://img-blog.csdnimg.cn/a7825aca54834f2ba5ceff5ec64c762a.png)
+![pack file 文件大小](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/a7825aca54834f2ba5ceff5ec64c762a.png)
 
 ## 三、Git LFS 协议
 > 此部分主要内容来源于官方文档： https://github.com/git-lfs/git-lfs/blob/main/docs/api/batch.md
@@ -130,6 +130,6 @@ Content-Type: application/vnd.git-lfs+json; charset=utf-8
 
 而 response 的内容中，也会将 Git LFS 需要的信息下发下来，会将 request 中的 objects 的 CDN 地址，以及访问需要的 token 等信息进行下发，用于后续的请求，下面来看一下我对 LFS 下载数据抓包的过程：
 
-![LFS 下载抓包示例](https://img-blog.csdnimg.cn/b111f8d66c764d0db733780ad6db78dd.png)
+![LFS 下载抓包示例](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/b111f8d66c764d0db733780ad6db78dd.png)
 
 更多细节信息，请参考官方文档。

@@ -10,7 +10,7 @@ tags: Android Image
 
 首先，让我们来谈谈 NV21。在 Android 中，相机返回的图像格式默认使用的是 NV21，它属于 YUV420SP。YUV 是一种常见的颜色编码方法，经常用于影像处理的逻辑中。其中，**Y** 表示明亮度，**U** 和 **V** 表示色度和浓度。YUV 模型有很多种编码方式，其中 YUV420P 和 YUV420SP 最为常见。YUV420P 采用平面存储方式，即将 Y、U、V 三个分量分开存储，处理起来较为方便。而 YUV420SP 则采用分离存储方式，即将 Y 分量存储在一块连续的内存中，而 U 和 V 分量则交替存储在另一块连续内存中，有关这两种编码方式的区别，请参见下图：
 
-![YUV420P 与 YUV420SP 的区别](https://img-blog.csdnimg.cn/3dfefc789ece48a2bb73e17363a4d6a1.png)
+![YUV420P 与 YUV420SP 的区别](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/3dfefc789ece48a2bb73e17363a4d6a1.png)
 
  YUV420P 与 YUV420SP 主要在 UV 的编码方式上。但是采样都是一样的数据。名字中的 `P` 与 `SP` 代表如下含义：
 
@@ -21,7 +21,7 @@ YUV 的发明，是由于彩色电视与黑白电视的过渡时期。黑白电�
 
 讲了半天的 YUV，那么这个 YUV 和 RGB 编码的 bitmap 有什么关系呢？
 
-![摸不着头脑](https://img-blog.csdnimg.cn/20211201001533871.png)
+![摸不着头脑](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/20211201001533871.png)
 
 
 
@@ -44,7 +44,7 @@ width * height * size(ARGB)
 
 ARGB_8888 很好理解，全量存储了 Alpha、Red 、Green、Blue。每一个值都取 0~255 的值。那么问题来了，在 RGB_565 中，R、G、B 三个颜色分量所占的位数都不够去存储全量的数据，所以在转换的过程中一定会存在数据丢失。 在实际的操作中，通常使用的办法就是将低位数据直接进行丢弃，这样 R/B 两通道分别能表示为 0 ~ 248 , 中间值间隔为 8 。 Green 能够显示更多信息。RGB_888 与 RGB_565 映射示例如下， 其中 RGB_888 的数据就被丢弃掉了：
 
-![RGB_565 与 RGB_888 映射关系](https://img-blog.csdnimg.cn/20211204101817139.png)
+![RGB_565 与 RGB_888 映射关系](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/20211204101817139.png)
 
 
 
@@ -76,7 +76,7 @@ B = Y + 2.03211 * (U - 128)
 
 众所周知，Android 从相机中输出的图像是横向的。为了能够正常播放视频，需要将 NV21 格式的图像旋转 270 度。由于 Y 与像素点的对应关系为 1:1，因此旋转后的图像格式如下所示：
 
-![YUV420SP 旋转 270 度 ](https://img-blog.csdnimg.cn/449c347f1c0647969c33e9dd18eaaae3.png)
+![YUV420SP 旋转 270 度 ](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/449c347f1c0647969c33e9dd18eaaae3.png)
 
 如上图，所以旋转的代码如下： 
 
@@ -113,7 +113,7 @@ public byte[] rotate270(byte[] original, int width, int height) {
 
 在使用 Bitmap 时，我们可以使用 Matrix 进行缩放。那么，现在只有一个 NV21 的图片数据，要如何进行缩放呢？根据前面的内容，我们可以很容易地想到，直接对 NV21 的数据进行固定间隔取样就可以实现图像的缩放。根据缩放的比例，取对应点的 YUV 值。如下图所示，将 8 x 4 的图转换成 4 x 2 的大小：
 
-![YUV 缩放](https://img-blog.csdnimg.cn/246dd71fcf9c45c9bfbc98bfe3b4df51.png)
+![YUV 缩放](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/246dd71fcf9c45c9bfbc98bfe3b4df51.png)
 
 当想明白这个图后，代码就很简单了，示例代码如下：
 

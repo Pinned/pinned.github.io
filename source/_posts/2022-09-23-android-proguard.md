@@ -13,7 +13,7 @@ tags: Android Proguard
 
 在 ProGuard 执行的过程中，有 `shrink`、`optimize`、`obfuscate` 、`preverify` 四个步骤，每一个步骤的执行都是可选的，我们可以根据想要的流程去进行配置，但此四个步骤执行的顺序是固定的，不可更改的。
 
-![ProGuard 工作流程](https://img-blog.csdnimg.cn/b948011a4512492393971baace169df9.png)
+![ProGuard 工作流程](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/b948011a4512492393971baace169df9.png)
 
 + **shrink**  检查并删除没有使用的类、字段、方法、属性。
 + **optimize** 优化字节码，移除无用指令，或者进行指令优化。
@@ -61,7 +61,7 @@ FileUtils.join(
 
 第二步，就是在指定的文件中，按照指定的配置将对应的配置写入到文件中。
 
-![proguard-android-optimize 生成](https://img-blog.csdnimg.cn/f12a5826f59748b09058678a4616a4e6.png)
+![proguard-android-optimize 生成](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/f12a5826f59748b09058678a4616a4e6.png)
 
 从上图中的代码可以看到，在生成 proguard 的配置文件时，将 gradle.jar 中 `proguard-haader.txt`，  `proguard-optimizations.txt`， `proguard-common.txt` 按顺序写入目标文件。
 
@@ -189,7 +189,7 @@ outputs:
 
 本文中，混淆使用的是 R8 ， 而 R8 在混淆的时候，默认情况下，混淆后的类，会被放到根目录下，如下图所示：
 
-![R8 输出默认 mapping](https://img-blog.csdnimg.cn/18bc36212e484d6181c1da9080a12015.png)
+![R8 输出默认 mapping](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/18bc36212e484d6181c1da9080a12015.png)
 
 但在做 SDK 的时候，我们打包的是 aar 文件，这种直接放在跟目录下， 可能会出现与其它 `aar` 的混淆类冲突，所以可以将混淆类移动到指定包中去。
 
@@ -235,11 +235,11 @@ com.example.build.inner.sub.SubClass -> com.exampe.a1.k:
 
 通过如上配置，就可以把`android.util.Log` 的调用删掉，为了更有体感，我写了个示例，在没有删除 Log 时， 编译结果如下：
 
-![删除前的结果](https://img-blog.csdnimg.cn/83d662a27d0741fd9ebc579afca84269.png)
+![删除前的结果](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/83d662a27d0741fd9ebc579afca84269.png)
 
 添加对应删除的 ProGuard 规则后，结果如下图所示：
 
-![删除后的结果](https://img-blog.csdnimg.cn/8904344995054bedaea388019330a5fe.png)
+![删除后的结果](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/8904344995054bedaea388019330a5fe.png)
 
 可以看到，编译后的 class 文件中，已经将 `Log.d` 的调用删除掉了，但是需要注意的是，代码中的 `"A" + info + "B"` 会被保留下来， 因为 ProGuard 无法判断此处代码删除是否对业务逻辑有影响，所以被保留了下来。
 

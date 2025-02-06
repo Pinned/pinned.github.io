@@ -48,13 +48,13 @@ DVM 的基本思想与 JVM 大体相同，但是在早期，Android 的智能手
 
 从前面可以看到， AOT 和 JIT 的优缺点是反过来的，因此 Google 将这两种方式进行了结合，搞了一个混合编译的方案。ART 下的 JIT 架构如下：
 
-![AOT+JIT 架构](https://img-blog.csdnimg.cn/6374c0794d554ed481e471398bd97a40.png)
+![AOT+JIT 架构](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/6374c0794d554ed481e471398bd97a40.png)
 
 
 
 从整个流程可以看到， 未经过编译的代码，如果是非热点代码，会直接进行解释执行，如果是热点代码，会经过 JIT 编译成机器码，再进行执行。JIT编译而来的机器码是存储到内存中的，不是在硬盘上。所以，在应用重新启动时，所有的热点代码也都需要使用 JIT 重新编译成机器码。代码在整个 ART 虚拟机中的执行流程如下图所示：
 
-![JIT 工作流程](https://img-blog.csdnimg.cn/55b4f782f5b943b1a00c6f7e9e01dae5.png)
+![JIT 工作流程](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/55b4f782f5b943b1a00c6f7e9e01dae5.png)
 
 在上图中，可以看到，没有经过编译的函数调用，在首次执行的时候，会直接使用 JIT 解释执行，并且会对相应的代码执行进行采样，统计出热点代码，并将统计出来的信息存放到 `/data/misc/profiles/cur/0/packageName/primary.prof` 下，这个文件有什么用呢？ 在上图中，可以看到了 JIT 的整个运行流程，但没有 .oat 文件编译生成的流程。既然是  AOT 与 JIT 混合模式，那肯定还是有 AOT 相关的流程， AOT 编译的守护进程会在设备空闲以及充电的时候，使用生成的 `primary.prof` 文件进行部分代码编译。
 

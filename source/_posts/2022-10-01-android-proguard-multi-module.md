@@ -75,7 +75,7 @@ com.example.build.DeviceUtils -> a.a.a.x:
 
 之所以要使用这个关键字，是因为模块在打包生成 aar 或者 jar 包时，无法感知到其它与此模块无关的模块，生成混淆文件是可能会存在冲突的。这么说，可能不太能理解，为了能搞清楚冲突是怎么来的，先来看一个混淆的例子，在我的项目中，有三个类，类结构如下图所示：
 
-![代码结构](https://img-blog.csdnimg.cn/13c65f57773446878b251420503f1af4.png)
+![代码结构](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/13c65f57773446878b251420503f1af4.png)
 
 因为这只是三个类文件，并没有被调用到，如果我要对它们进行混淆，我需要去调优化，所以混淆配置如下：
 
@@ -131,7 +131,7 @@ com.example.build.inner.test.TestInnerClass -> a.a.a.a.b.a:
 
 直到有一天，我们修改了那几个要共用的类，导致在 `keep-same-proguard.txt` 中的配置不能和新的代码匹配。但其引发的错误需要打 Release 包运行，才能发现。如果是一个新同学，可能需要花很久的时间，才能找到问题的根源。 每一次代码的变更都可能会引发 Crash ， 这是一个非常严重的问题，要如何解决它呢？
 
-![一脸懵](https://img-blog.csdnimg.cn/7965c336f339406abf8ee606ab148e7c.png)
+![一脸懵](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/7965c336f339406abf8ee606ab148e7c.png)
 
 再来细看一下， `keep-same-proguard.txt` 生成的方式：
 
@@ -143,7 +143,7 @@ com.example.build.inner.test.TestInnerClass -> a.a.a.a.b.a:
 
 如果内部暴露的 API 不只在一个`模块` 里面，你需要重复执行上面1， 2步骤，直到将所有的映射信息都更新完成。在本地开发时，很少会有人将混淆打开，本地几乎感知不到这个配置的存在。如果新同事来开发，不知道需要处理这个关系，上述步骤是很容易被遗忘掉，出现问题并花很多时间去排查，这非常容易引起同事们骂声。
 
-![在代码里下毒](https://img-blog.csdnimg.cn/86eede62876b487eb504d30c779bb74b.png)
+![在代码里下毒](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/86eede62876b487eb504d30c779bb74b.png)
 
 刚刚我们提到，这个`映射关系` 就是 ProGuard 生成的 `mapping` 文件内容，里面分为三部份： `类名`、`变量名`、`方法名`。规则也可以简单的理解为，把这三部分名字，转换成随机生成的字符即可。因此，我们可以将上述步骤用脚本自动化，在编译时在去生成这个 `keep-same-proguard.txt` ，这就解决了 `类` 变化引起的问题。
 
@@ -227,7 +227,7 @@ doFirst 是将 Action 添加到列表的第 0 位，而 doLast 是直接添加�
 
 调试也是在编写 Gradle 脚本中，必不可少的手段，要想调试 Gradle 脚本，首先在项目运行的配置中添加`Remote JVM Debug` 如下图所示：
 
-![调试设置](https://img-blog.csdnimg.cn/833ac442940740f292fd5f59d82341f1.png) 
+![调试设置](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/833ac442940740f292fd5f59d82341f1.png) 
 
 配置好上面的信息后，在控制台执行编译脚本，添加 debug 参数，如下：
 
@@ -237,7 +237,7 @@ doFirst 是将 Action 添加到列表的第 0 位，而 doLast 是直接添加�
 
 运行后，控制点会启动 Gradle ，并开始执行，在正式执行编译任务是，会等待 Debug 的链接过来，这时候，点击 Debug 的图标就可以愉快地进行调试了。
 
-![可爱的小虫子图标](https://img-blog.csdnimg.cn/5e51cec793cb47989e143bb436919eae.png)
+![可爱的小虫子图标](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/5e51cec793cb47989e143bb436919eae.png)
 
 ## 五、插件的编写与实现
 

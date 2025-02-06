@@ -11,7 +11,7 @@ tags: Android
 
 要想说清楚它们是干什么的，那就不得不说一下主角 Android 操作系统。Android 操作系统在 2008 年发布了第一个版本，到今年已经发布了几十个版本：
 
-![Android 版本历史（图源维基百科）](https://img-blog.csdnimg.cn/6c779843416e4334b72567061848ed8c.png)
+![Android 版本历史（图源维基百科）](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/6c779843416e4334b72567061848ed8c.png)
 
 在如此多的版本迭代更新的过程中，Android 操作系统中不断引入新的接口，也不断的对 App 添加一些新的限制。在这不断迭代的过程中，对于开发者来说，就会面临以下问题：
 
@@ -29,7 +29,7 @@ Android 系统的更新，会逐步引入更多的新功能，这此功能不仅
 
 为此，在项目中我们可以使用 `minSdk` 去指定当前项目支持的最低版本。编译产物 APK 文件中的 `AndroidManifest.xml` 文件中会标明最小支持的系统版本。 在安装时，如果当前系统版本不支持，则不能进行安装。
 
-![APK 中 minSdkVersion 字段](https://img-blog.csdnimg.cn/34ea9cab78ce4f08b25be10e2759bbae.png)
+![APK 中 minSdkVersion 字段](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/34ea9cab78ce4f08b25be10e2759bbae.png)
 
 ## compileSdk
 
@@ -37,21 +37,21 @@ Android 系统的更新，会逐步引入更多的新功能，这此功能不仅
 
 先来看一下 Android 官方给出的编译过程图：
 
-![Android 编译流程](https://img-blog.csdnimg.cn/4c80e24292114740934229a282fe811f.png)
+![Android 编译流程](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/4c80e24292114740934229a282fe811f.png)
 
  整个过程比较复杂，我们只看其中的一部分内容，下面是 `javac` 编译的部分：
 
-![Class 文件编译过程](https://img-blog.csdnimg.cn/338570ab4da74829a2a043644d186b57.png)
+![Class 文件编译过程](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/338570ab4da74829a2a043644d186b57.png)
 
 图中可以看到， `javac` 编译的过程，会将 `java` 代码转换成 `class` 文件。 在编译的过程中，有一个非常重要的东西，那就是 `android.jar` 文件，此文件为当前使用的 `Android SDK` 。使用 SDK Manager 可以下载不同版本的 SDK ，如下图所示：
 
-![SDK 目录](https://img-blog.csdnimg.cn/13c53ab1ce4348749c2c61cc9c612049.png)
+![SDK 目录](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/13c53ab1ce4348749c2c61cc9c612049.png)
 
 因此，我们在 `build.gradle` 文件中定义的 `compileSdkVersion` 简单理解就是用来指定 `android.jar` 的版本的。
 
 当 Android Gradle Tools 版本为 `3.0.0` 及以上版本，另一个与编译相关的参数 `buildToolsVersion` 可以不用在设置了。如在 Android Gradle Tools 7.3.0 的版本中，默认使用的为 `30.0.3` 的版本：
 
-![默认 Build Tools 版本](https://img-blog.csdnimg.cn/2ea8a91fe17845fdb4eb9aa2354dce3d.png)
+![默认 Build Tools 版本](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/2ea8a91fe17845fdb4eb9aa2354dce3d.png)
 
 > 官方文档传送门：
 >

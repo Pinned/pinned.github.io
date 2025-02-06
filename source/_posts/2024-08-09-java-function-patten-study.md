@@ -54,17 +54,17 @@ fun sum(n: Int, result: Int): Int {
 
 此时进行测试调用，当 N = 10000 时，运行会出现如下错误：
 
-![StackOverflowError](https://img-blog.csdnimg.cn/41309f7a6d69435d89f64d72cc96ccf0.png)
+![StackOverflowError](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/41309f7a6d69435d89f64d72cc96ccf0.png)
 
 这个符合预期，出现了栈溢出。在 kotlin 中需要使用 `tailrec` 在申明当前方法为尾递归调用，需要进行优化，代码修改后运行结果如下：
 
-![Run Success](https://img-blog.csdnimg.cn/3df99983c4274f7e8a08382a90fd856c.png)
+![Run Success](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/3df99983c4274f7e8a08382a90fd856c.png)
 
 问题来了，尾递归优化是如何实现的呢？
 
 反编译编译后的 class 文件，可以看到，kotlin 在编译时，对代码进行了处理，将递归调用修改成了循环调用：
 
- ![反编译后的结果](https://img-blog.csdnimg.cn/2b7b0d725ef74daaa1ba44cd2069cca0.png)
+ ![反编译后的结果](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/2b7b0d725ef74daaa1ba44cd2069cca0.png)
 
 
 
@@ -163,7 +163,7 @@ fun(): Trampolines<Int> {
 
 这个方法干的第一件事是调用了 `sum(num - 1)` ，依然返回一个 `Suspend` 对象，在这个对象中存储了一个叫 `suspension` 的方法，紧接着调用 `flatMap` 方法又会返回一个新的 `Suspend` 对象，在这个 `Suspend` 对象中，可以访问到 `suspension` 方法。用这种对象链式的方法，将计算从递归转换成循环了，`num = 3` 的执行情况如下图：
 
-![调用链路还原图](https://img-blog.csdnimg.cn/a553b9f1b1cb4dd097b8d7b6fcfd1d22.png)
+![调用链路还原图](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/a553b9f1b1cb4dd097b8d7b6fcfd1d22.png)
 
 ## 结语
 

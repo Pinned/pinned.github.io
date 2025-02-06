@@ -57,15 +57,15 @@ git clone git@gitcode.net:mirrors/Guardsquare/proguard.git
 
 首先，要运行代码，就需要找到 `main()` 方法所在的类，才能执行运行。在第一节的内容中，使用 `java -jar proguard.jar` 就可以执行，从 jar 包中的 `MANIFEST.MF` 文件中，可以看到， `main()`  方法在 `proguard.ProGuard` 中， 如下图所示：
 
-![proguard.jar 中的 MANIFEST.MF 文件](https://img-blog.csdnimg.cn/fd527c280bca4c7d85f0017749a1080a.png)
+![proguard.jar 中的 MANIFEST.MF 文件](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/fd527c280bca4c7d85f0017749a1080a.png)
 
 在源码中，我们也能看到 `proguard/ProGuard.java` 的类中，正好有一个 `main()` 方法。在 `Intellij IDEA` 可以直接运行此 `main` 方法:
 
-![在 Intellij IDEA 直接运行](https://img-blog.csdnimg.cn/74acc10c353c4299a59bce7c62ffd902.png)
+![在 Intellij IDEA 直接运行](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/74acc10c353c4299a59bce7c62ffd902.png)
 
 如果直接点击绿色的 <font color="green">▶︎</font> ，运行肯定会报错。在这里，我们还需要手动将第一部分中使用的 `debug_proguard.pro` 文件路径放到参数列表中去，具体操作方法如下图所示：
 
-![Intellij IDEA 中参数配置](https://img-blog.csdnimg.cn/8f48291cc59f42ff973fa31f3c03fd9c.png)
+![Intellij IDEA 中参数配置](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/8f48291cc59f42ff973fa31f3c03fd9c.png)
 
 配置完成后，直接点击 `Intellij IDEA` 中的  <font color="green">▶︎</font> ，输出的产物与用命令行执行出来的结果一致。 
 

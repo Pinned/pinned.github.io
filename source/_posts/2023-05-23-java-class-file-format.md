@@ -10,7 +10,7 @@ Java 诞生快 20 年，能够一直保持良好的兼容性，其 Class 文件�
 
 Class 文件是一组以 8 个比特位为基础的二进制流，各个数据项都是按照固定的顺序紧密的排列在一起。先来看下一整体结构，以及每一个字段的长度信息如下：
 
-![Class 文件格式](https://img-blog.csdnimg.cn/d79ecce9d3c541a2a9b6c7b1c57f539c.png)
+![Class 文件格式](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/d79ecce9d3c541a2a9b6c7b1c57f539c.png)
 
 
 
@@ -85,7 +85,7 @@ class ClassFormat {
 
 在这段代码中，我们使用了常见的基本数据类型，它们都有各自的初始化值。在执行 Javac 进行编译的过程中，会将代码中的一些值放入常量区，而一另外一些不会。先说结论，上面示例中的代码中，`finalVerbose`、`strVerbose` 和以 `V2` 结尾的变量的初始值都会写入常量池。
 
-![基本数据类型中写入到常量池中的变量](https://img-blog.csdnimg.cn/66c503414a1d4cd2a175c19510defe22.png)
+![基本数据类型中写入到常量池中的变量](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/66c503414a1d4cd2a175c19510defe22.png)
 
 编译后，使用  `javap -v ClassFormat` 查看常量池，具体内容如上图所示，图中圈出来的是我们在 Java 代码中定义的值，这些需要放在常量池满足以下条件：
 
@@ -112,7 +112,7 @@ class ClassFormat {
 
 其中 `#1` 表示常量池中的第一个常量，此处为一个 `Methodref` ， 即一个方法的引用，根据 《Java虚拟机规范》中的描述，他有两个字段，分别指向此方法所属的类，和方法的名称和类型描述，此例中为 `java.lang.Object` 的 `<init>()` 方法，按其结构绘制图如下：
 
-![Objct 的 <init> 方法引用](https://img-blog.csdnimg.cn/7f248f41b0a34e76b771162fbe39bb46.png)
+![Objct 的 <init> 方法引用](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/7f248f41b0a34e76b771162fbe39bb46.png)
 
 需要注意的是，我们在类中定义的方法，只有在被调用时，才会生成 `Methodref` 引用。用于表示方法引用的还有一个常量类型： `InterfaceMethodref`，此常量用来标记为接口的方法，例如下面代码中的 `commonMethod` 的调用：
 
@@ -139,7 +139,7 @@ class ClassFormat {
 
 与方法对应的便是我们常用的变量，与之不同的是，在代码中定义的类变量以及属性变量，都会生成一个 `Fieldref` 属性，其结构与 `Methodref` 一致，此例中的 `#17` 便是代码中的 `public int verboseV2 = 32768;`。按其结构绘制图如下：
 
-![Fieldref 结构图](https://img-blog.csdnimg.cn/d5b804750e1d4322ac4f9fc52aaf817b.png)
+![Fieldref 结构图](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/d5b804750e1d4322ac4f9fc52aaf817b.png)
 
 上述常量池中信息除了上述两个字段以外，还有 `Class`、`Utf8` 以及 `NameAndType`， 它们分别用来表示类常量、`Utf8` 常量以及描述方法/字段名称和类型的常量。
 
@@ -163,7 +163,7 @@ interface TestLambdaInterface {
 
 根据这几个常量的结构，可以生成如下关联关系图：
 
-![InvokeDynamic 相关常量结构](https://img-blog.csdnimg.cn/21bd26f1d79e4bea9366a042bc3c1c89.png)
+![InvokeDynamic 相关常量结构](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/21bd26f1d79e4bea9366a042bc3c1c89.png)
 
 上述代码，在 JVM 中进行执行时，首先会找到常量池中 `#7` 的常量，通过它指向的 `bootstrapMethod` ，JVM 会调用这个引导方法，并将参数值传递给引导方法。从而获得一个 CallSite 对象，此对象中包含被真实执行的方法句柄，最终调用到真实的方法。动态调用方法在 Groovy 中使用比较多，有兴趣可使用 Groovy 进行深度研究。此处是用于动态方法调用，与之对应还有动动变量，在 JDK 11 的版本中，添加了 `CONSTANT_Dynamic_info`，用于实现动态变量的逻辑，但对于 Java 语言， 暂未找到使用此指令实现的逻辑。
 
@@ -210,7 +210,7 @@ module JavaClassFileStructure {
 
 看到这里，在 Class 文件中定义的常量结构，基本上都了解清楚了。在回到上一层的结构：
 
-![常量池在 Class 文件中的格式](https://img-blog.csdnimg.cn/d24d1a41b28840e1817046603b929c0c.png)
+![常量池在 Class 文件中的格式](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/d24d1a41b28840e1817046603b929c0c.png)
 
 常量池是一个表类型的数据项目，常量池中常量的数量也是不固定的，因此在常量池的入口是一个 2 字节数据，代表常量池中常量的数量。在这里需要注意的是，常量的索引是从 index 为 1 开始的。因此，常量池中的常量个数加 1 后为 `constant_pool_count`。
 
@@ -253,7 +253,7 @@ public class ClassFormat implements Serializable, Cloneable {
 
 中的结构如下图所示： 
 
-![this、super、interface 的引用](https://img-blog.csdnimg.cn/75a87b2bb74c41a98be376cefbfc00e5.png)
+![this、super、interface 的引用](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/75a87b2bb74c41a98be376cefbfc00e5.png)
 
 
 
@@ -261,7 +261,7 @@ public class ClassFormat implements Serializable, Cloneable {
 
 在使用 Java 语言编写代码时，变量有三种，一种是类级别变量，如 `public static int staticVerbose = 1;` ，第二种是实例变量，如 `public int verbose = 2;` ，还有一个是局部变量，如定义在方法代码块中的变量。前两种变量从 Class 文件的角度来看，他们并没有太大的区别 ，变量编译后，编译后都会放到字段集合中进行存储。而局部变量不会放到字段集合中去。与常量池类似，字段集合也是一个表结构，下图为字段的结构表：
 
-![字段结构](https://img-blog.csdnimg.cn/5261b1f8777344f3add6e1972dccd4b1.png)
+![字段结构](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/5261b1f8777344f3add6e1972dccd4b1.png)
 
 从图中可以看到，每一个字段信息中包含有 5 个字段，属性是一个嵌套的表结构。从上到下，第一个是 `access_flags`，里面存储着字段修饰符，它与类中的 `access_flags` 值是非常类似的，都是使用两个字节的数据类型，但他们之间值范围有略微的差别，字段可以设置的标志位和含义如下所示：
 
@@ -299,7 +299,7 @@ class ClassFormat {
 
 上述代码会生成一个内部类，名叫  `ClassFormat$1.class` 的文件，而编译器为了解决内部类能访问外部类的信息，实现相互访问，编译器会生成一个变量用于支持这种情况。针对这种情况，我们来看一下，其中生成的类结构信息，如下图所示：
 
-![ACC_SYNTHETIC 示例](https://img-blog.csdnimg.cn/76b4882b1ee441c794f365b996a626aa.png)
+![ACC_SYNTHETIC 示例](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/76b4882b1ee441c794f365b996a626aa.png)
 
 从图中可以看到，在 `ClassFormat$1`  中有一个名叫 `this$0` 的字段，类型为 `com.example.clazz.format.ClassFormat` ， 此字段就是由编译器生成，因此其访问标识符中有 `ACC_SYNTHETIC` 。
 
@@ -313,7 +313,7 @@ class ClassFormat {
 
 与字段表类似，整个方法字段的结构体与字段结构体一模一样，方法的结构体如下：
 
-![方法表结构体](https://img-blog.csdnimg.cn/f6eecfad09914bbfa74ecece9afb71fe.png)
+![方法表结构体](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/f6eecfad09914bbfa74ecece9afb71fe.png)
 
 虽然结构体中字段定义一样，但其值包含的内容与范围还是有一些区别的，先看 `access_flags` ，此字段依然是用来定义其访问修饰符的，包含信息如下：
 
@@ -349,7 +349,7 @@ class ClassFormat implements GenericInterface<String> {
 
 代码中，`testBridgeMethod` 返回的是一个泛型，在 ClassFormat 中使用的具体类型为 `String`，将此代码进行编译，编译后的产物  `ClassFormat.class` 文件中会生成一个 `bridge` 的方法，因此编译器会在此方法中加入 `ACC_BRIDGE` 和 `ACC_SYNTHETIC` 这两个方法修饰符。最终 `ClassFormat.class` 方法表结构如下所示：
 
-![ACC_BRIDGE方法示例](https://img-blog.csdnimg.cn/d6182265993b42b898d945f23a249b08.png)
+![ACC_BRIDGE方法示例](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/d6182265993b42b898d945f23a249b08.png)
 
 从结构中可以看到，在 `ClassFormat.class` 文件中的方法表里面有两个方法，用 Java 代码表示如下所示：
 
@@ -376,7 +376,7 @@ public Object testBridgeMethod() {
 
 属性表（attribute_info） 在 Class 文件中用于多处地方，在 Class 文件最末尾是属性表，在字段（field_info）和方法（method_info）里面也都包含属性表。与Class文件中其他的数据项要求严格的顺序、长度和内容不同，属性表中的限制稍微宽松一些，不再要求各个属性表具有严格顺序，并且《Java虚拟机规范》允许只要不与已有属性名重复，任何人实现的编译器都可以向属性表中写入自己定义的属性信息，Java虚拟机运行时会忽略掉它不认识的属性。先来看一下属性字段中定义的结构：
 
-![属性结构体](https://img-blog.csdnimg.cn/35f2e37352124c33a3effd928bfb41eb.png)
+![属性结构体](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/35f2e37352124c33a3effd928bfb41eb.png)
 
 到目前为止，一共定义了 30 个属性，信息如下：
 
@@ -436,7 +436,7 @@ class ClassFormat {
 
 最终生成的字段信息中，会包含一个 `ConstantValue` 的属性，下图为 `STATIC_CONSTANT_STRING` 的关联关系图，可以更清晰的看清楚其关系：
 
-![ConstantValue 关联关系](https://img-blog.csdnimg.cn/af07f0bdf8ac4f9aa6ddd4e40a1ae7b0.png)
+![ConstantValue 关联关系](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/af07f0bdf8ac4f9aa6ddd4e40a1ae7b0.png)
 
 `ConstantValue` 的作用是通知虚拟机自动为静态变量赋值，对于非静态变量虚拟机会自动忽略此常量值。上例中的 `CONSTANT_STRING` 与 `STATIC_CONSTANT_STRING` 都包含有 `ConstantValue` 的属性，这是  Java 编译器做的事，但《Java虚拟机规范》中仅要求使用 ACC_STATIC 标志的 `STATIC_CONSTANT_STRING` 中的 `ConstantValue` 属性。
 
@@ -484,7 +484,7 @@ class ClassFormat {
 
   对于这样一个空的类， javac 在编译的时候，会为他添加一个默认的构造方法，此方法比较简单，就以他为例，看看 `code` 中都包含哪些信息。按照前面所说的结构，可以解析出来 `code_length` 为 5，也就是 `code` 块中的内容为 5 byte 。紧接着按位读取，首先读入的指令是 `0x2a`，其助记符为 `aload_0`，此指令的含义是将第 0 个变量槽中为引用类型的本地变量推送到操作数栈顶，在其后无操作数。第二个读入的指令为 `0xb7` ，其助记符为 `invokespecial`，此指令的作用是以栈顶的引用类型所指向的对象作为方法的接收者，调用对象的实例构造器方法、私有方法或者是其父类的方法，在其后会有两个字节的 `index` ， 指向常量池中类型为 `CONSTANT_MethodRef` 的常量，在此处指向的是 `java.lang.Object` 的 `<init>` 方法。在其后读入的指令是 `0xb1`，其助记符为 `return`，在此处返回值为 `void`。此构造方法生成的的结构图如下：
 
-  ![构造方法的 Code 结构](https://img-blog.csdnimg.cn/99462550093a4c52bd3613e300d44a9f.png)
+  ![构造方法的 Code 结构](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/99462550093a4c52bd3613e300d44a9f.png)
 
 + `exception_table` 在字节码指令之后，用于存储此方法的显示异常处理表。异常表并非所有的 `code` 字段中都含有，仅代码中有显式处理异常的才会有，即有 `try{ } catch(Exception e){}` 的代码。先来看一下它的结构：
 
@@ -603,7 +603,7 @@ public void config() throws IOException, InterruptedException {
 
 编译后，生成的 `Exceptions` 属性结构如下图所示：
 
-![方法抛出异常申明结构图](https://img-blog.csdnimg.cn/9669be5a29fd4cc38f0950d840f557b4.png)
+![方法抛出异常申明结构图](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/9669be5a29fd4cc38f0950d840f557b4.png)
 
 可以看到，在 `Exceptions` 属性中，有两个元素，分别是 `IOException` 和 `ClassNotFoundException`，它们都是对常量池中的 `CONSTANT_Class_info` 常量的引用。
 
@@ -693,7 +693,7 @@ LineNumberTable:
 
 `InnerClasses` 属性是用来记录内部类与宿主类之间的关联关系的。 当我们在代码中定义内部类的时候，编译器会为当前类以及它的内部类上添加  `InnerClasses` 属性。
 
-![InnerClasses 属性结构](https://img-blog.csdnimg.cn/3b1b4f5366754207b288e2b5939ef5b5.png)
+![InnerClasses 属性结构](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/3b1b4f5366754207b288e2b5939ef5b5.png)
 
 在此结构中， `inner_class_info_index` 和 `outer_class_info_index` 指向了常量池中 `CONSTANT_Class_info` 型常量的索引，分别代表内部类和宿主类。`inner_name_index` 是指向了内部类名称的索引，为 `CONSTANT_Utf8_info` 类型。
 
@@ -710,7 +710,7 @@ public class InnerClassExample {
 
 编译后，生成的 `InnerClasses` 属性结构如下图所示：
 
-![InnerClasses 结构](https://img-blog.csdnimg.cn/51442a70658f4aa184b7b3d2e981adf9.png)
+![InnerClasses 结构](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/51442a70658f4aa184b7b3d2e981adf9.png)
 
 
 
@@ -745,7 +745,7 @@ EnclosingMethod 属性结构也非常的简单，在结构中，包含两个指�
 
 上述 `EnclosingMethodExample$1A.class`  文件中，属性字段中的第二个属性（下标为 1 的那个）便是 `EnclosingMethod`  属性，其关联结构如下图所示：
 
-![EnclosingMethod 结构图](https://img-blog.csdnimg.cn/1f0ce4a561cc4511be2af9b45bb9f0ec.png)
+![EnclosingMethod 结构图](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/1f0ce4a561cc4511be2af9b45bb9f0ec.png)
 
 
 
@@ -775,7 +775,7 @@ enum TestEnum {
 
 最后生成的类结构图如下所示：
 
-![$VALUES字段结构](https://img-blog.csdnimg.cn/298672ef8cbe47daa7f1db0afbdb52bc.png)
+![$VALUES字段结构](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/298672ef8cbe47daa7f1db0afbdb52bc.png)
 
 ### 10. Signature
 
@@ -798,7 +798,7 @@ public class VerboseSignature<T> {
 
 最终生成的 Class 文件中的，这两个字段的属性块中，都会有一个 `Signature` 的结构，其中 `typeVariable`  的签名信息为 `TT;` ，另一个为 `Ljava/util/Map<Ljava/lang/String;Ljava/lang/Integer;>;`，详细信息如下图所示：
 
-![Signature 结构示例图](https://img-blog.csdnimg.cn/e23dc2127daf46d0a08f0925b5c22371.png)
+![Signature 结构示例图](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/e23dc2127daf46d0a08f0925b5c22371.png)
 
 
 
@@ -814,7 +814,7 @@ public class VerboseSignature<T> {
 
 在使用  Java 的过程中，大部份情况下，类名与文件名是一致的，但是诸如内部类等时会出现例外。此参数对于 Class 文件来说，是一个非必须参数 ，当使用 javac 编译时添加  `-g:none` 时，生成 Class 文件时，会去掉 `SourceFile` 等调试信息，可以减少程序体积并提高性能，但是需要注意的时，如果去掉后，出现异常时，不会输出错误代码对应的文件名。最后，下图为 `ClassFormat.class` 文件中的 `SourceFile` 属性结构：
 
-![ClassFormat.class 文件中的 SourceFile 属性](https://img-blog.csdnimg.cn/84b691f6eee04de0883c9f89195c8d5b.png)
+![ClassFormat.class 文件中的 SourceFile 属性](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/84b691f6eee04de0883c9f89195c8d5b.png)
 
 除了 `SourceFile` 属性，在 JDK 5 时，为了方便在编译器和动态生成的 Class 中加入供程序员使用的自定义内容，新增了 `SourceDebugExtension` 属性用于存储额外的代码调试信息。典型的场景是在进行 JSP 文件调试时，无法通过 Java 堆栈来定位到 JSP 文件的行号。此时就可以用到 `SourceDebugExtension`  属性，它的结构如下：
 
@@ -845,7 +845,7 @@ public class VerboseSignature<T> {
 
 根据定义，可以知道 `SOURCE` 类型的是无法写入到 Class 文件中的， 而 `CLASS` 与 `RUTIME` 的区别是一个可以在运行时使用，一个不可以。在 Class 文件中，也根据这个不同定义了 `RuntimeVisibleAnnotations` 和 `RuntimeInvisibleAnnotations`，他们俩的结构一致， 结构相对比较复杂，结构图如下：
 
-![RuntimeVisibleAnnotations 的结构图](https://img-blog.csdnimg.cn/7cf8e622508b498d8f30dc2d2d15a431.png)
+![RuntimeVisibleAnnotations 的结构图](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/7cf8e622508b498d8f30dc2d2d15a431.png)
 
 
 
@@ -879,7 +879,7 @@ public class VerboseAttributes {
 
 这段代码最终生成的字段属性相关的关系如下图所示：
 
-![字段属性结构](https://img-blog.csdnimg.cn/d700a092cd5b4017a282daf069d84c5e.png)
+![字段属性结构](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/d700a092cd5b4017a282daf069d84c5e.png)
 
 
 
@@ -889,7 +889,7 @@ public class VerboseAttributes {
 
 在方法中，参数的注解与写到方法上的注解还有一点区别，在《Java虚拟机规范》里面还定义了另外两个 `RuntimeVisibleParameterAnnotations` 和 `RuntimeInvisibleParameterAnnotations`，用来描述方法参数的结构， 结构如下图所示：
 
-![ParameterAnnotations 结构](https://img-blog.csdnimg.cn/31c40a8f013941de838b017869a01f5a.png)
+![ParameterAnnotations 结构](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/31c40a8f013941de838b017869a01f5a.png)
 
 可以看到，在最上层，会有一个多参数的数组结构，而每一个参数对应的注解信息与前面的 `RuntimeVisibleAnnotations` 的逻辑一致。在代码中添加如下方法：
 
@@ -902,7 +902,7 @@ public void setValue(@IntRange(from = 40, to = 60) int value, @IntRange(from = 2
 
 最终编译生成的 Class 文件中，方法体中关于注解生成的结构图如下所示：
 
-![参数注解图形](https://img-blog.csdnimg.cn/124804a700d94e2597317670dd709588.png)
+![参数注解图形](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/124804a700d94e2597317670dd709588.png)
 
 ### 15. AnnotationDefault
 
@@ -928,7 +928,7 @@ public @interface IntRange {
 
 根据《Java虚拟机规范》中的定义，注解中的元素默认值会被存储在名为 `AnnotationDefault` 的注解属性中，上述代码最终生成的结构如下所示：
 
-![AnnotationDefault 结构](https://img-blog.csdnimg.cn/5624c0ce1d244f96a61e98c69128e27e.png)
+![AnnotationDefault 结构](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/5624c0ce1d244f96a61e98c69128e27e.png)
 
 
 
@@ -936,7 +936,7 @@ public @interface IntRange {
 
 在 JDK 8 的版本中，进一步加强了 Java 语言的注解使用范围，添加 `TYPE_USE` 和 `TYPE_PARAMETER` 两个注解，在之前，Java 中的注解只能用于类、方法、变量等成员上，而不能用于泛型类型上。加入这两个注解，使得注解可以用于更加丰富的场景中。与其它注解类似，它也分为运行时可见与运行时不可见，即  `RuntimeVisibleTypeAnnotations` 和 `RuntimeInvisibleTypeAnnotations` 两个属性。其结构与 `RuntimeVisibleAnnotations` 略有区别，下图为其结构：
 
-![TypeAnnotations 的结构](https://img-blog.csdnimg.cn/7012754561254c42b0d8ce8a44c59f85.png)
+![TypeAnnotations 的结构](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/7012754561254c42b0d8ce8a44c59f85.png)
 
 图中加粗的 `target_info` 也是一个符合类型，有兴趣的同学可以参考《Java 虚拟机规范》。下面列举一个例子，其中 `A、B、C、D` 四个注解除名称外都一样，具体代码如下：
 
@@ -951,7 +951,7 @@ public @A Map<@B ? extends @C String, @D List<@E Object>> verbose;
 
 最后，生成出来的结构图如下所示：
 
-![复杂的 TypeAnnotation 结构](https://img-blog.csdnimg.cn/8e41e2a7847747c1857018d2d60ab3bc.png)
+![复杂的 TypeAnnotation 结构](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/8e41e2a7847747c1857018d2d60ab3bc.png)
 
 ### 17. NestHost 和 NestMembers
 
@@ -985,11 +985,11 @@ public class InnerClassExample {
 
 将示例中的代码编译后生成如下结构：
 
-![InnerClassExample 的属性结构](https://img-blog.csdnimg.cn/5287ae4b9c2d4a47aba2d1c308943853.png)
+![InnerClassExample 的属性结构](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/5287ae4b9c2d4a47aba2d1c308943853.png)
 
 
 
-![InnerClassExample$InnerClassDemo 的属性结构](https://img-blog.csdnimg.cn/d4d242eddc4b420cad717918eb0858db.png)
+![InnerClassExample$InnerClassDemo 的属性结构](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/d4d242eddc4b420cad717918eb0858db.png)
 
 ### 18. Record 
 
@@ -1029,11 +1029,11 @@ public record Person(String name, int age, String hometown) {
 
 此类编译会生成 `Record` 属性，结构如下：
 
-![属性字段格式](https://img-blog.csdnimg.cn/7058de03af6745609d51ca43bd13f504.png)
+![属性字段格式](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/7058de03af6745609d51ca43bd13f504.png)
 
 上面的示例代码，编译后，生成的属性 `Record` 的结构如下图所示：
 
-![Record 属性结构](https://img-blog.csdnimg.cn/eed56d8d026c425696c7b7468e16a55e.png)
+![Record 属性结构](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/eed56d8d026c425696c7b7468e16a55e.png)
 
 ### 19. MethodParameters
 
@@ -1041,7 +1041,7 @@ public record Person(String name, int age, String hometown) {
 
 在虚拟机中，执行代码时，给参数用什么名字对计算机来说没有任何区别。因此在 JDK 8 之前，基于存储空间考虑，Class 文件中默认并不存储任何方法参数名称。但没有名字就会引起如下问题：
 
-![左图 Class 文件包含 MethodParameters, 右图不包含](https://img-blog.csdnimg.cn/0f52731ae3944dabacf4a61c081c85fd.png)
+![左图 Class 文件包含 MethodParameters, 右图不包含](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/0f52731ae3944dabacf4a61c081c85fd.png)
 
 上图中右边部分是不带参数的反编译结果，方法中的参数全部变成了 `var1`、`var2` 中这种无用的字段，那别人在调用的时候，就必须得通过 JavaDoc 才能知道每一个参数的含义，使用起来很不方便。
 
@@ -1053,7 +1053,7 @@ javac -parameters  MethodParameter.java
 
 当然，在 IntelliJ IDEA 中也可以添加对应参数，如下图所示：
 
-![添加参数示例](https://img-blog.csdnimg.cn/e6102575dd7a46ada6bd6281899f095e.png)
+![添加参数示例](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/e6102575dd7a46ada6bd6281899f095e.png)
 
 通过上述设置，编译出来的代码可以生成 `MethodParameters` 参数了。在来看一下它的结构：
 
@@ -1073,7 +1073,7 @@ javac -parameters  MethodParameter.java
 
 针对刚提到的代码 `public MethodParameter(String name, int age, String hometown) {}` 生成后的结构如下所示：
 
-![Method Parameters 结构](https://img-blog.csdnimg.cn/45cca0731c5f4f1cb169e4bca81b9859.png)
+![Method Parameters 结构](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/45cca0731c5f4f1cb169e4bca81b9859.png)
 
 ### 20. BootstrapMethods
 
@@ -1107,7 +1107,7 @@ public void print() {
 
 最终生成的结构图如下：
 
-![BootstrapMethods 的结构图](https://img-blog.csdnimg.cn/9f8a3a8bc03244a5a18d4bfb886bb6fb.png)
+![BootstrapMethods 的结构图](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/9f8a3a8bc03244a5a18d4bfb886bb6fb.png)
 
 ### 21. 模块化相关属性
 
@@ -1143,5 +1143,5 @@ public sealed interface SealedClassInterface
 
 最终生成的结构图如下：
 
-![PermittedSubclasses 属性结构](https://img-blog.csdnimg.cn/9abb34b869a240c1a88b4d7c1ac148ac.png)
+![PermittedSubclasses 属性结构](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/9abb34b869a240c1a88b4d7c1ac148ac.png)
 

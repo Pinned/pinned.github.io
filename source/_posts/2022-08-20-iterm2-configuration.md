@@ -130,7 +130,7 @@ plugins=(
 
 在使用终端的时候，我喜欢能够一眼直接看到当前的路径。而 `oh-my-zsh` 默认使用的是 `robbyrussell`。经过测试，我想要的主题是 `apple`，只需要在 `.zshrc` 中配置对应主题为 apple 就可以，示例如下：
 
-![主题修改示例](https://img-blog.csdnimg.cn/cdf5701da677489d8effbe2a15b8b9fb.png)
+![主题修改示例](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/cdf5701da677489d8effbe2a15b8b9fb.png)
 
 
 
@@ -182,7 +182,7 @@ base64_encode () {
 
 使用如下：
 
-![base64 编码示例](https://img-blog.csdnimg.cn/7000c6905d684d48baf6de60afb5a97e.png)
+![base64 编码示例](https://raw.githubusercontent.com/Pinned/pinned.github.io/refs/heads/awesome-picture/7000c6905d684d48baf6de60afb5a97e.png)
 
 
 
