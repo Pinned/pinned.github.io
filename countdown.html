@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>倒计时计算工具</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .calculator-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 500px;
+            width: 100%;
+        }
+        .card-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 20px 20px 0 0 !important;
+            padding: 25px;
+        }
+        .result-box {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 20px;
+            display: none;
+        }
+        .result-box.show {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .time-display {
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-align: center;
+            margin: 15px 0;
+        }
+        .btn-calculate {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            padding: 12px 40px;
+            font-size: 1.1rem;
+            transition: transform 0.2s;
+        }
+        .btn-calculate:hover {
+            transform: scale(1.05);
+        }
+        label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        .input-group-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            font-weight: bold;
+        }
+        .btn-adjust {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            color: white;
+            font-weight: bold;
+            padding: 8px 15px;
+        }
+        .btn-adjust:hover {
+            opacity: 0.9;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator-card">
+        <div class="card-header">
+            <h1 class="text-center mb-0">⏰ 倒计时计算工具</h1>
+        </div>
+        <div class="card-body p-4">
+            <form id="countdownForm">
+                <!-- 任务完成日期 -->
+                <div class="mb-4">
+                    <label for="targetDate" class="form-label">任务完成日期</label>
+                    <div class="input-group">
+                        <button type="button" class="btn btn-adjust" onclick="adjustDate(-1)">-</button>
+                        <input type="date" class="form-control form-control-lg text-center" id="targetDate" required>
+                        <button type="button" class="btn btn-adjust" onclick="adjustDate(1)">+</button>
+                    </div>
+                </div>
+
+                <!-- 任务完成时间 -->
+                <div class="mb-4">
+                    <label class="form-label">任务完成时间</label>
+                    <div class="row g-2">
+                        <!-- 小时调整 -->
+                        <div class="col-6">
+                            <label class="form-label small text-muted">小时</label>
+                            <div class="input-group">
+                                <button type="button" class="btn btn-adjust" onclick="adjustHour(-1)">-</button>
+                                <input type="number" class="form-control form-control-lg text-center" id="targetHour" min="0" max="23" value="7" required>
+                                <button type="button" class="btn btn-adjust" onclick="adjustHour(1)">+</button>
+                            </div>
+                        </div>
+                        <!-- 分钟调整 -->
+                        <div class="col-6">
+                            <label class="form-label small text-muted">分钟</label>
+                            <div class="input-group">
+                                <button type="button" class="btn btn-adjust" onclick="adjustMinute(-1)">-</button>
+                                <input type="number" class="form-control form-control-lg text-center" id="targetMinute" min="0" max="59" value="0" required>
+                                <button type="button" class="btn btn-adjust" onclick="adjustMinute(1)">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 任务执行时长 -->
+                <div class="mb-4">
+                    <label for="taskDuration" class="form-label">任务执行时长（分钟）</label>
+                    <div class="input-group">
+                        <button type="button" class="btn btn-adjust" onclick="adjustDuration(-5)">-5</button>
+                        <button type="button" class="btn btn-adjust" onclick="adjustDuration(-1)">-1</button>
+                        <input type="number" class="form-control form-control-lg text-center" id="taskDuration" value="30" min="1" required>
+                        <button type="button" class="btn btn-adjust" onclick="adjustDuration(1)">+1</button>
+                        <button type="button" class="btn btn-adjust" onclick="adjustDuration(5)">+5</button>
+                    </div>
+                </div>
+
+                <!-- 减去执行时间开关 -->
+                <div class="mb-4">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="subtractExecutionTime" checked>
+                        <label class="form-check-label" for="subtractExecutionTime">
+                            减去执行时间
+                        </label>
+                    </div>
+                    <small class="text-muted">开启时，倒计时会自动减去任务执行时长</small>
+                </div>
+
+                <!-- 计算按钮 -->
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary btn-calculate">
+                        🧮 开始计算
+                    </button>
+                </div>
+            </form>
+
+            <!-- 结果显示 -->
+            <div id="resultBox" class="result-box">
+                <h4 class="text-center mb-3">📊 计算结果</h4>
+                <div class="text-center mb-3">
+                    <small>需要开始时间</small>
+                    <div id="startTime" class="fs-5 fw-bold"></div>
+                </div>
+                <hr class="border-white">
+                <div class="text-center">
+                    <small>需要设置的倒计时</small>
+                    <div id="countdown" class="time-display"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // 设置默认时间为明天早上7点
+        function setDefaultDateTime() {
+            const tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            tomorrow.setHours(7, 0, 0, 0);
+
+            const year = tomorrow.getFullYear();
+            const month = String(tomorrow.getMonth() + 1).padStart(2, '0');
+            const day = String(tomorrow.getDate()).padStart(2, '0');
+
+            document.getElementById('targetDate').value = `${year}-${month}-${day}`;
+            document.getElementById('targetHour').value = '7';
+            document.getElementById('targetMinute').value = '0';
+        }
+
+        // 调整日期（天数）
+        function adjustDate(days) {
+            const dateInput = document.getElementById('targetDate');
+            const currentDate = new Date(dateInput.value);
+            currentDate.setDate(currentDate.getDate() + days);
+
+            const year = currentDate.getFullYear();
+            const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+            const day = String(currentDate.getDate()).padStart(2, '0');
+
+            dateInput.value = `${year}-${month}-${day}`;
+        }
+
+        // 调整小时
+        function adjustHour(change) {
+            const hourInput = document.getElementById('targetHour');
+            let newHour = parseInt(hourInput.value) + change;
+
+            // 处理跨天情况
+            if (newHour >= 24) {
+                newHour = 0;
+                adjustDate(1); // 日期加1天
+            } else if (newHour < 0) {
+                newHour = 23;
+                adjustDate(-1); // 日期减1天
+            }
+
+            hourInput.value = newHour;
+        }
+
+        // 调整分钟
+        function adjustMinute(change) {
+            const minuteInput = document.getElementById('targetMinute');
+            const hourInput = document.getElementById('targetHour');
+            let newMinute = parseInt(minuteInput.value) + change;
+
+            // 处理分钟进位/借位
+            if (newMinute >= 60) {
+                newMinute = 0;
+                adjustHour(1); // 小时加1
+            } else if (newMinute < 0) {
+                newMinute = 59;
+                adjustHour(-1); // 小时减1
+            }
+
+            minuteInput.value = newMinute;
+        }
+
+        // 调整执行时长（分钟）
+        function adjustDuration(minutes) {
+            const durationInput = document.getElementById('taskDuration');
+            let newValue = parseInt(durationInput.value) + minutes;
+
+            // 确保不小于1
+            if (newValue < 1) newValue = 1;
+
+            durationInput.value = newValue;
+        }
+
+        // 格式化时间显示
+        function formatTime(hours, minutes, seconds) {
+            let result = [];
+            if (hours > 0) result.push(`${hours}小时`);
+            if (minutes > 0) result.push(`${minutes}分钟`);
+            if (seconds > 0) result.push(`${seconds}秒`);
+            return result.join(' ');
+        }
+
+        // 格式化日期时间
+        function formatDateTime(date) {
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            const hours = String(date.getHours()).padStart(2, '0');
+            const minutes = String(date.getMinutes()).padStart(2, '0');
+            return `${year}年${month}月${day}日 ${hours}:${minutes}`;
+        }
+
+        // 计算倒计时
+        function calculateCountdown(event) {
+            event.preventDefault();
+
+            const targetDateStr = document.getElementById('targetDate').value;
+            const targetHour = parseInt(document.getElementById('targetHour').value);
+            const targetMinute = parseInt(document.getElementById('targetMinute').value);
+            const taskDuration = parseInt(document.getElementById('taskDuration').value);
+            const subtractExecutionTime = document.getElementById('subtractExecutionTime').checked;
+
+            if (!targetDateStr || isNaN(targetHour) || isNaN(targetMinute) || !taskDuration) {
+                alert('请填写完整信息');
+                return;
+            }
+
+            // 组合日期和时间
+            const targetTimeStr = `${String(targetHour).padStart(2, '0')}:${String(targetMinute).padStart(2, '0')}`;
+            const targetDateTime = new Date(`${targetDateStr}T${targetTimeStr}`);
+
+            // 计算任务开始时间
+            let startDateTime;
+            if (subtractExecutionTime) {
+                // 开启开关：任务开始时间 = 完成时间 - 执行时长
+                startDateTime = new Date(targetDateTime.getTime() - taskDuration * 60 * 1000);
+            } else {
+                // 关闭开关：任务开始时间 = 完成时间（不减去执行时长）
+                startDateTime = new Date(targetDateTime.getTime());
+            }
+
+            // 当前时间
+            const now = new Date();
+
+            // 倒计时时长 = 开始时间 - 当前时间
+            const countdownMs = startDateTime.getTime() - now.getTime();
+
+            if (countdownMs < 0) {
+                alert('任务开始时间已过！请重新设置。');
+                return;
+            }
+
+            // 转换为小时、分钟、秒
+            const totalSeconds = Math.floor(countdownMs / 1000);
+            const hours = Math.floor(totalSeconds / 3600);
+            const minutes = Math.floor((totalSeconds % 3600) / 60);
+            const seconds = totalSeconds % 60;
+
+            // 显示结果
+            document.getElementById('startTime').textContent = formatDateTime(startDateTime);
+            document.getElementById('countdown').textContent = formatTime(hours, minutes, seconds);
+            document.getElementById('resultBox').classList.add('show');
+        }
+
+        // 初始化
+        setDefaultDateTime();
+        document.getElementById('countdownForm').addEventListener('submit', calculateCountdown);
+    </script>
+</body>
+</html>
