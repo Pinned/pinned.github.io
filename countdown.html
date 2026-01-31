@@ -27,21 +27,25 @@
             border-radius: 20px 20px 0 0 !important;
             padding: 25px;
         }
-        .result-box {
+        .modal-content {
+            border-radius: 20px;
+            border: none;
+        }
+        .modal-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 20px 20px 0 0;
+            border: none;
+        }
+        .modal-header .btn-close {
+            filter: brightness(0) invert(1);
+        }
+        .result-content {
             background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             color: white;
             border-radius: 15px;
             padding: 30px;
-            margin-top: 20px;
-            display: none;
-        }
-        .result-box.show {
-            display: block;
-            animation: fadeIn 0.5s;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
+            margin: 20px 0;
         }
         .time-display {
             font-size: 2.5rem;
@@ -155,18 +159,32 @@
                     </button>
                 </div>
             </form>
+        </div>
+    </div>
 
-            <!-- 结果显示 -->
-            <div id="resultBox" class="result-box">
-                <h4 class="text-center mb-3">📊 计算结果</h4>
-                <div class="text-center mb-3">
-                    <small>需要开始时间</small>
-                    <div id="startTime" class="fs-5 fw-bold"></div>
+    <!-- 结果弹框 -->
+    <div class="modal fade" id="resultModal" tabindex="-1" aria-labelledby="resultModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="resultModalLabel">📊 计算结果</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="关闭"></button>
                 </div>
-                <hr class="border-white">
-                <div class="text-center">
-                    <small>需要设置的倒计时</small>
-                    <div id="countdown" class="time-display"></div>
+                <div class="modal-body">
+                    <div class="result-content">
+                        <div class="text-center mb-3">
+                            <small>需要开始时间</small>
+                            <div id="startTime" class="fs-5 fw-bold mt-2"></div>
+                        </div>
+                        <hr class="border-white">
+                        <div class="text-center">
+                            <small>需要设置的倒计时</small>
+                            <div id="countdown" class="time-display"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
                 </div>
             </div>
         </div>
@@ -316,7 +334,10 @@
             // 显示结果
             document.getElementById('startTime').textContent = formatDateTime(startDateTime);
             document.getElementById('countdown').textContent = formatTime(hours, minutes, seconds);
-            document.getElementById('resultBox').classList.add('show');
+
+            // 显示弹框
+            const resultModal = new bootstrap.Modal(document.getElementById('resultModal'));
+            resultModal.show();
         }
 
         // 初始化
